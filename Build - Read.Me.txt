@@ -1,0 +1,18 @@
+Requirements:
+ 
+  - .NET 4.5
+  - StyleCop version 4.7.45.0 (http://stylecop.codeplex.com/)
+
+If running on a 64 bit machine, run the PowerShell (x86) executable otherwise the StyleCop.targets won't be found.
+
+** By default, the build will run in release mode and run all tests:
+
+	.\build.ps1
+
+** To also build the NuGet package you must specify the version:
+
+	.\build-nuget.ps1 -version X.X.X
+
+** To also push it to NuGet.org after creating the .nupkg you must supply push true:
+
+	.\build-nuget.ps1 -version X.X.X -push $true
