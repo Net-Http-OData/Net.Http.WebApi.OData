@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SingleValueNode.cs" company="MicroLite">
-// Copyright 2012-2013 Trevor Pilley
+// <copyright file="SingleValueNode.cs" company="Project Contributors">
+// Copyright 2012-2013 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
