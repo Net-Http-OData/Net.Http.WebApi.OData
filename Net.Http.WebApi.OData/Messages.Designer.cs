@@ -61,6 +61,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;endswith&apos; function is not supported by this service..
+        /// </summary>
+        internal static string EndsWithFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("EndsWithFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The $filter query option is not supported by this service..
         /// </summary>
         internal static string FilterQueryOptionNotSupported {
@@ -138,6 +147,24 @@ namespace Net.Http.WebApi.OData {
         internal static string SkipRawValueInvalid {
             get {
                 return ResourceManager.GetString("SkipRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;startswith&apos; function is not supported by this service..
+        /// </summary>
+        internal static string StartsWithFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("StartsWithFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;substringof&apos; function is not supported by this service..
+        /// </summary>
+        internal static string SubstringOfFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("SubstringOfFunctionNotSupported", resourceCulture);
             }
         }
         

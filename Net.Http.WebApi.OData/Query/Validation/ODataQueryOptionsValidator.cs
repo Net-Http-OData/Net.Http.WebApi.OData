@@ -25,9 +25,14 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.Filter != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter) != AllowedQueryOptions.Filter)
+            if (queryOptions.Filter != null)
             {
-                throw new ODataException(Messages.FilterQueryOptionNotSupported);
+                if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter) != AllowedQueryOptions.Filter)
+                {
+                    throw new ODataException(Messages.FilterQueryOptionNotSupported);
+                }
+
+                ValidateFunctions(queryOptions.Filter.RawValue, validationSettings);
             }
 
             if (queryOptions.Format != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
@@ -58,6 +63,27 @@ namespace Net.Http.WebApi.OData.Query.Validation
             if (queryOptions.Top != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
                 throw new ODataException(Messages.TopQueryOptionNotSupported);
+            }
+        }
+
+        private static void ValidateFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
+        {
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.EndsWith) != AllowedFunctions.EndsWith
+                && rawFilterValue.Contains("endswith("))
+            {
+                throw new ODataException(Messages.EndsWithFunctionNotSupported);
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.StartsWith) != AllowedFunctions.StartsWith
+                && rawFilterValue.Contains("startswith("))
+            {
+                throw new ODataException(Messages.StartsWithFunctionNotSupported);
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.SubstringOf) != AllowedFunctions.SubstringOf
+                && rawFilterValue.Contains("substringof("))
+            {
+                throw new ODataException(Messages.SubstringOfFunctionNotSupported);
             }
         }
     }

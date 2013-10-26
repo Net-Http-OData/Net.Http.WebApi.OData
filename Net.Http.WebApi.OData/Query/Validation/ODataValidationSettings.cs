@@ -18,6 +18,15 @@ namespace Net.Http.WebApi.OData.Query.Validation
     public sealed class ODataValidationSettings
     {
         /// <summary>
+        /// Gets or sets the allowed functions.
+        /// </summary>
+        public AllowedFunctions AllowedFunctions
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the allowed query options.
         /// </summary>
         public AllowedQueryOptions AllowedQueryOptions
