@@ -221,5 +221,14 @@ namespace Net.Http.WebApi.OData {
                 return ResourceManager.GetString("UnknownQueryOption", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;year&apos; function is not supported by this service..
+        /// </summary>
+        internal static string YearFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("YearFunctionNotSupported", resourceCulture);
+            }
+        }
     }
 }

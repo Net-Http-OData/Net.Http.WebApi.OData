@@ -48,6 +48,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'ToUpper' function is allowed in the $filter query option.
         /// </summary>
-        ToUpper = 5
+        ToUpper = 5,
+
+        /// <summary>
+        /// Specifies that the 'Year' function is allowed in the $filter query option.
+        /// </summary>
+        Year = 6
     }
 }

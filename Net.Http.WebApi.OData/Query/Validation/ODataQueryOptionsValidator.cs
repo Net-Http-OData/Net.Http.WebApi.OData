@@ -97,6 +97,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.ToUpperFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
+                && rawFilterValue.Contains("year("))
+            {
+                throw new ODataException(Messages.YearFunctionNotSupported);
+            }
         }
     }
 }

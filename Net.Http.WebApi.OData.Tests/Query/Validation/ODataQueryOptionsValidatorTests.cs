@@ -203,6 +203,45 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheYearFunctionAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=year(BirthDate) eq 1971"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.YearFunctionNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheYearFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=year(BirthDate) eq 1971"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Year
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
