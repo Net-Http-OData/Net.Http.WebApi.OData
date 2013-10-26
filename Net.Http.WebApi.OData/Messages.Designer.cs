@@ -106,6 +106,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;month&apos; function is not supported by this service..
+        /// </summary>
+        internal static string MonthFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("MonthFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If specified, the $orderby direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {

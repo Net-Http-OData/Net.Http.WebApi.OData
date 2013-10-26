@@ -103,6 +103,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.YearFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Month) != AllowedFunctions.Month
+                && rawFilterValue.Contains("month("))
+            {
+                throw new ODataException(Messages.MonthFunctionNotSupported);
+            }
         }
     }
 }
