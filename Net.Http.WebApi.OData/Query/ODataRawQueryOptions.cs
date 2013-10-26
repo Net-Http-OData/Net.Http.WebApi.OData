@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// A class which contains the raw request values.
@@ -32,45 +33,51 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("rawQuery");
             }
 
-            var pieces = rawQuery.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
+            var queryOptions = rawQuery.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var piece in pieces)
+            foreach (var queryOption in queryOptions)
             {
-                if (piece.StartsWith("$expand=", StringComparison.Ordinal))
+                if (queryOption.StartsWith("$expand=", StringComparison.Ordinal))
                 {
-                    this.Expand = piece;
+                    this.Expand = queryOption;
                 }
-                else if (piece.StartsWith("$filter=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$filter=", StringComparison.Ordinal))
                 {
-                    this.Filter = piece;
+                    this.Filter = queryOption;
                 }
-                else if (piece.StartsWith("$format=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$format=", StringComparison.Ordinal))
                 {
-                    this.Format = piece;
+                    this.Format = queryOption;
                 }
-                else if (piece.StartsWith("$inlinecount=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$inlinecount=", StringComparison.Ordinal))
                 {
-                    this.InlineCount = piece;
+                    this.InlineCount = queryOption;
                 }
-                else if (piece.StartsWith("$orderby=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$orderby=", StringComparison.Ordinal))
                 {
-                    this.OrderBy = piece;
+                    this.OrderBy = queryOption;
                 }
-                else if (piece.StartsWith("$select=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$select=", StringComparison.Ordinal))
                 {
-                    this.Select = piece;
+                    this.Select = queryOption;
                 }
-                else if (piece.StartsWith("$skip=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$skip=", StringComparison.Ordinal))
                 {
-                    this.Skip = piece;
+                    this.Skip = queryOption;
                 }
-                else if (piece.StartsWith("$skiptoken=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
                 {
-                    this.SkipToken = piece;
+                    this.SkipToken = queryOption;
                 }
-                else if (piece.StartsWith("$top=", StringComparison.Ordinal))
+                else if (queryOption.StartsWith("$top=", StringComparison.Ordinal))
                 {
-                    this.Top = piece;
+                    this.Top = queryOption;
+                }
+                else if (queryOption.StartsWith("$", StringComparison.Ordinal))
+                {
+                    var message = string.Format(CultureInfo.InvariantCulture, Messages.UnknownQueryOption, queryOption);
+
+                    throw new ODataException(message);
                 }
             }
         }

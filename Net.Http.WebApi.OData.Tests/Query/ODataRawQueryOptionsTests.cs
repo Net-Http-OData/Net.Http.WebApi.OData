@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query
 {
+    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
@@ -70,68 +71,23 @@
             }
         }
 
-        public class WhenCallingConstructorWithAllQueryOptionsButIncorrectlyCased
+        public class WhenCallingConstructorWithAnUnknownQueryOptionWhichDoesNotStartsWithADollar
         {
-            private readonly ODataRawQueryOptions rawQueryOptions;
-
-            public WhenCallingConstructorWithAllQueryOptionsButIncorrectlyCased()
-            {
-                this.rawQueryOptions = new ODataRawQueryOptions(
-                    "$Expand=*&$Filter=Name eq 'Fred'&$Format=json&$InlineCount=allpages&$OrderBy=Name&$Select=Name,Id&$Skip=10&$Skiptoken=5&$Top=25");
-            }
-
             [Fact]
-            public void ExpandShouldBeNull()
+            public void AnODataExceptionShouldNotBeThrown()
             {
-                Assert.Null(this.rawQueryOptions.Expand);
+                Assert.DoesNotThrow(() => new ODataRawQueryOptions("wibble=*"));
             }
+        }
 
+        public class WhenCallingConstructorWithAnUnknownQueryOptionWhichStartsWithADollar
+        {
             [Fact]
-            public void FilterShouldBeNull()
+            public void AnODataExceptionShouldBeThrown()
             {
-                Assert.Null(this.rawQueryOptions.Filter);
-            }
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("$wibble=*"));
 
-            [Fact]
-            public void FormatShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.Format);
-            }
-
-            [Fact]
-            public void InlineCountShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.InlineCount);
-            }
-
-            [Fact]
-            public void OrderByShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.OrderBy);
-            }
-
-            [Fact]
-            public void SelectShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.Select);
-            }
-
-            [Fact]
-            public void SkipShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.Skip);
-            }
-
-            [Fact]
-            public void SkipTokenShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.SkipToken);
-            }
-
-            [Fact]
-            public void TopShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.Top);
+                Assert.Equal(string.Format(Messages.UnknownQueryOption, "$wibble=*"), exception.Message);
             }
         }
 

@@ -132,4 +132,7 @@
   <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
     <value>The specified $top value exceeds the maximum allowed value of '{0}'</value>
   </data>
+  <data name="UnknownQueryOption" xml:space="preserve">
+    <value>The query option '{0}' is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top</value>
+  </data>
 </root>
