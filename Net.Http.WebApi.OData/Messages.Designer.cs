@@ -61,6 +61,33 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The $filter query option is not supported by this service..
+        /// </summary>
+        internal static string FilterQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("FilterQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The $format query option is not supported by this service..
+        /// </summary>
+        internal static string FormatQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("FormatQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The $inlinecount query option is not supported by this service..
+        /// </summary>
+        internal static string InlineCountQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("InlineCountQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If specified, the $inlinecount value must be either &apos;allpages&apos; or &apos;none&apos;..
         /// </summary>
         internal static string InlineCountRawValueInvalid {
@@ -70,11 +97,38 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the $order by direction must be either &apos;asc&apos; or &apos;desc&apos;..
+        ///   Looks up a localized string similar to If specified, the $orderby direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {
             get {
                 return ResourceManager.GetString("OrderByPropertyRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The $orderby query option is not supported by this service..
+        /// </summary>
+        internal static string OrderByQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("OrderByQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The $select query option is not supported by this service..
+        /// </summary>
+        internal static string SelectQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("SelectQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The $skip query option is not supported by this service..
+        /// </summary>
+        internal static string SkipQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("SkipQueryOptionNotSupported", resourceCulture);
             }
         }
         
@@ -84,6 +138,15 @@ namespace Net.Http.WebApi.OData {
         internal static string SkipRawValueInvalid {
             get {
                 return ResourceManager.GetString("SkipRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The $top query option is not supported by this service..
+        /// </summary>
+        internal static string TopQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("TopQueryOptionNotSupported", resourceCulture);
             }
         }
         

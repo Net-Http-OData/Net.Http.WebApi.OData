@@ -25,9 +25,39 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
+            if (queryOptions.Filter != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter) != AllowedQueryOptions.Filter)
+            {
+                throw new ODataException(Messages.FilterQueryOptionNotSupported);
+            }
+
             if (queryOptions.Format != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
             {
-                throw new ODataException();
+                throw new ODataException(Messages.FormatQueryOptionNotSupported);
+            }
+
+            if (queryOptions.InlineCount != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
+            {
+                throw new ODataException(Messages.InlineCountQueryOptionNotSupported);
+            }
+
+            if (queryOptions.OrderBy != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.OrderBy) != AllowedQueryOptions.OrderBy)
+            {
+                throw new ODataException(Messages.OrderByQueryOptionNotSupported);
+            }
+
+            if (queryOptions.Select != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Select) != AllowedQueryOptions.Select)
+            {
+                throw new ODataException(Messages.SelectQueryOptionNotSupported);
+            }
+
+            if (queryOptions.Skip != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip) != AllowedQueryOptions.Skip)
+            {
+                throw new ODataException(Messages.SkipQueryOptionNotSupported);
+            }
+
+            if (queryOptions.Top != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
+            {
+                throw new ODataException(Messages.TopQueryOptionNotSupported);
             }
         }
     }

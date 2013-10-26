@@ -117,14 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FilterQueryOptionNotSupported" xml:space="preserve">
+    <value>The $filter query option is not supported by this service.</value>
+  </data>
+  <data name="FormatQueryOptionNotSupported" xml:space="preserve">
+    <value>The $format query option is not supported by this service.</value>
+  </data>
+  <data name="InlineCountQueryOptionNotSupported" xml:space="preserve">
+    <value>The $inlinecount query option is not supported by this service.</value>
+  </data>
   <data name="InlineCountRawValueInvalid" xml:space="preserve">
     <value>If specified, the $inlinecount value must be either 'allpages' or 'none'.</value>
   </data>
   <data name="OrderByPropertyRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $order by direction must be either 'asc' or 'desc'.</value>
+    <value>If specified, the $orderby direction must be either 'asc' or 'desc'.</value>
+  </data>
+  <data name="OrderByQueryOptionNotSupported" xml:space="preserve">
+    <value>The $orderby query option is not supported by this service.</value>
+  </data>
+  <data name="SelectQueryOptionNotSupported" xml:space="preserve">
+    <value>The $select query option is not supported by this service.</value>
+  </data>
+  <data name="SkipQueryOptionNotSupported" xml:space="preserve">
+    <value>The $skip query option is not supported by this service.</value>
   </data>
   <data name="SkipRawValueInvalid" xml:space="preserve">
     <value>If specified, the $skip value must be a positive integer.</value>
+  </data>
+  <data name="TopQueryOptionNotSupported" xml:space="preserve">
+    <value>The $top query option is not supported by this service.</value>
   </data>
   <data name="TopRawValueInvalid" xml:space="preserve">
     <value>If specified, the $top value must be a positive integer.</value>
