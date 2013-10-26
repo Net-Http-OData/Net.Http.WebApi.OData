@@ -169,6 +169,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;tolower&apos; function is not supported by this service..
+        /// </summary>
+        internal static string ToLowerFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("ToLowerFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The $top query option is not supported by this service..
         /// </summary>
         internal static string TopQueryOptionNotSupported {

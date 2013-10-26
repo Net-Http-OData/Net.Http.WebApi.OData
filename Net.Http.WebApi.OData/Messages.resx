@@ -153,6 +153,9 @@
   <data name="SubstringOfFunctionNotSupported" xml:space="preserve">
     <value>The 'substringof' function is not supported by this service.</value>
   </data>
+  <data name="ToLowerFunctionNotSupported" xml:space="preserve">
+    <value>The 'tolower' function is not supported by this service.</value>
+  </data>
   <data name="TopQueryOptionNotSupported" xml:space="preserve">
     <value>The $top query option is not supported by this service.</value>
   </data>

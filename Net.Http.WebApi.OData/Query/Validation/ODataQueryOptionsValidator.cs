@@ -85,6 +85,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.SubstringOfFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.ToLower) != AllowedFunctions.ToLower
+                && rawFilterValue.Contains("tolower("))
+            {
+                throw new ODataException(Messages.ToLowerFunctionNotSupported);
+            }
         }
     }
 }

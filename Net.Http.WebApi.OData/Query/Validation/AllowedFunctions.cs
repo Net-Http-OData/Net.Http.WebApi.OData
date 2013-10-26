@@ -38,6 +38,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'SubstringOf' function is allowed in the $filter query option.
         /// </summary>
-        SubstringOf = 3
+        SubstringOf = 3,
+
+        /// <summary>
+        /// Specifies that the 'ToLower' function is allowed in the $filter query option.
+        /// </summary>
+        ToLower = 4
     }
 }
