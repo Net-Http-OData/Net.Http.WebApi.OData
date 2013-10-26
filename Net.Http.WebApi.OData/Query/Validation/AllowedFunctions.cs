@@ -38,31 +38,31 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'SubstringOf' function is allowed in the $filter query option.
         /// </summary>
-        SubstringOf = 3,
+        SubstringOf = 4,
 
         /// <summary>
         /// Specifies that the 'ToLower' function is allowed in the $filter query option.
         /// </summary>
-        ToLower = 4,
+        ToLower = 8,
 
         /// <summary>
         /// Specifies that the 'ToUpper' function is allowed in the $filter query option.
         /// </summary>
-        ToUpper = 5,
+        ToUpper = 16,
 
         /// <summary>
         /// Specifies that the 'Year' function is allowed in the $filter query option.
         /// </summary>
-        Year = 6,
+        Year = 32,
 
         /// <summary>
         /// Specifies that the 'Month' function is allowed in the $filter query option.
         /// </summary>
-        Month = 7,
+        Month = 64,
 
         /// <summary>
         /// Specifies that the 'Day' function is allowed in the $filter query option.
         /// </summary>
-        Day = 8
+        Day = 128
     }
 }
