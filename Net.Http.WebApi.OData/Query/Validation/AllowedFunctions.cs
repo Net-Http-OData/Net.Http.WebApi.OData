@@ -43,6 +43,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'ToLower' function is allowed in the $filter query option.
         /// </summary>
-        ToLower = 4
+        ToLower = 4,
+
+        /// <summary>
+        /// Specifies that the 'ToUpper' function is allowed in the $filter query option.
+        /// </summary>
+        ToUpper = 5
     }
 }

@@ -91,6 +91,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.ToLowerFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.ToUpper) != AllowedFunctions.ToUpper
+                && rawFilterValue.Contains("toupper("))
+            {
+                throw new ODataException(Messages.ToUpperFunctionNotSupported);
+            }
         }
     }
 }

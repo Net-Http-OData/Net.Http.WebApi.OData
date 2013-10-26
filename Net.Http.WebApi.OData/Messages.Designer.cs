@@ -205,6 +205,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;toupper&apos; function is not supported by this service..
+        /// </summary>
+        internal static string ToUpperFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("ToUpperFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top.
         /// </summary>
         internal static string UnknownQueryOption {
