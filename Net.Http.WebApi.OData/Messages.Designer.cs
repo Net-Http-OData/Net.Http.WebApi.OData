@@ -61,6 +61,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;day&apos; function is not supported by this service..
+        /// </summary>
+        internal static string DayFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("DayFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;endswith&apos; function is not supported by this service..
         /// </summary>
         internal static string EndsWithFunctionNotSupported {

@@ -58,6 +58,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'Month' function is allowed in the $filter query option.
         /// </summary>
-        Month = 7
+        Month = 7,
+
+        /// <summary>
+        /// Specifies that the 'Day' function is allowed in the $filter query option.
+        /// </summary>
+        Day = 8
     }
 }

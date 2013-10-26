@@ -109,6 +109,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.MonthFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Day) != AllowedFunctions.Day
+                && rawFilterValue.Contains("day("))
+            {
+                throw new ODataException(Messages.DayFunctionNotSupported);
+            }
         }
     }
 }

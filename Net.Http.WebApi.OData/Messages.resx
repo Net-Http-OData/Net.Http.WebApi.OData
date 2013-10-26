@@ -171,6 +171,9 @@
   <data name="UnknownQueryOption" xml:space="preserve">
     <value>The query option '{0}' is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top</value>
   </data>
+  <data name="DayFunctionNotSupported" xml:space="preserve">
+    <value>The 'day' function is not supported by this service.</value>
+  </data>
   <data name="MonthFunctionNotSupported" xml:space="preserve">
     <value>The 'month' function is not supported by this service.</value>
   </data>
