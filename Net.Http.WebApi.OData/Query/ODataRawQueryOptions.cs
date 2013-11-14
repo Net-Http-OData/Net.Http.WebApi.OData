@@ -21,6 +21,7 @@ namespace Net.Http.WebApi.OData.Query
     public sealed class ODataRawQueryOptions
     {
         private static readonly char[] QuerySeparators = new[] { '&' };
+        private readonly string rawQuery;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataRawQueryOptions"/> class.
@@ -33,7 +34,13 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("rawQuery");
             }
 
-            var queryOptions = rawQuery.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
+            this.rawQuery = rawQuery;
+
+            var start = rawQuery.Length > 0 ? 1 : 0;
+            var length = rawQuery.Length > 0 ? rawQuery.Length - 1 : 0;
+            var query = rawQuery.Substring(start, length);
+
+            var queryOptions = query.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var queryOption in queryOptions)
             {
@@ -161,6 +168,17 @@ namespace Net.Http.WebApi.OData.Query
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.rawQuery;
         }
     }
 }

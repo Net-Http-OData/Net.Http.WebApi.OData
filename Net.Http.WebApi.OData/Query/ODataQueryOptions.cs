@@ -35,11 +35,7 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("request");
             }
 
-            var unescapedQuery = Uri.UnescapeDataString(request.RequestUri.Query);
-
-            var start = unescapedQuery.Length > 0 ? 1 : 0;
-            var length = unescapedQuery.Length > 0 ? unescapedQuery.Length - 1 : 0;
-            var rawQuery = unescapedQuery.Substring(start, length);
+            var rawQuery = Uri.UnescapeDataString(request.RequestUri.Query);
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
