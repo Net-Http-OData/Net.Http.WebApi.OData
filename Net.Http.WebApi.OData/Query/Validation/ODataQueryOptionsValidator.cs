@@ -121,6 +121,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.TrimFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Length) != AllowedFunctions.Length
+                && rawFilterValue.Contains("length("))
+            {
+                throw new ODataException(Messages.LengthFunctionNotSupported);
+            }
         }
     }
 }

@@ -180,6 +180,9 @@
   <data name="YearFunctionNotSupported" xml:space="preserve">
     <value>The 'year' function is not supported by this service.</value>
   </data>
+  <data name="LengthFunctionNotSupported" xml:space="preserve">
+    <value>The 'length' function is not supported by this service.</value>
+  </data>
   <data name="TrimFunctionNotSupported" xml:space="preserve">
     <value>The 'trim' function is not supported by this service.</value>
   </data>

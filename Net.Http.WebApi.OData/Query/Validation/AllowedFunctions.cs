@@ -68,6 +68,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'Trim' function is allowed in the $filter query option.
         /// </summary>
-        Trim = 256
+        Trim = 256,
+
+        /// <summary>
+        /// Specifies that the 'Length' function is allowed in the $filter query option.
+        /// </summary>
+        Length = 512
     }
 }
