@@ -127,6 +127,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.LengthFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Round) != AllowedFunctions.Round
+                && rawFilterValue.Contains("round("))
+            {
+                throw new ODataException(Messages.RoundFunctionNotSupported);
+            }
         }
     }
 }

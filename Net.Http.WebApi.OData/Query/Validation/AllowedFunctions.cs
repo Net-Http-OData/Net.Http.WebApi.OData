@@ -73,6 +73,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'Length' function is allowed in the $filter query option.
         /// </summary>
-        Length = 512
+        Length = 512,
+
+        /// <summary>
+        /// Specifies that the 'Round' function is allowed in the $filter query option.
+        /// </summary>
+        Round = 1024
     }
 }

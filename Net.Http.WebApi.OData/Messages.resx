@@ -183,6 +183,9 @@
   <data name="LengthFunctionNotSupported" xml:space="preserve">
     <value>The 'length' function is not supported by this service.</value>
   </data>
+  <data name="RoundFunctionNotSupported" xml:space="preserve">
+    <value>The 'round' function is not supported by this service.</value>
+  </data>
   <data name="TrimFunctionNotSupported" xml:space="preserve">
     <value>The 'trim' function is not supported by this service.</value>
   </data>
