@@ -32,7 +32,9 @@ namespace Net.Http.WebApi.OData.Query.Validation
                     throw new ODataException(Messages.FilterQueryOptionNotSupported);
                 }
 
-                ValidateFunctions(queryOptions.Filter.RawValue, validationSettings);
+                ValidateStringFunctions(queryOptions.Filter.RawValue, validationSettings);
+                ValidateDateFunctions(queryOptions.Filter.RawValue, validationSettings);
+                ValidateNumberFunctions(queryOptions.Filter.RawValue, validationSettings);
             }
 
             if (queryOptions.Format != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
@@ -66,7 +68,49 @@ namespace Net.Http.WebApi.OData.Query.Validation
             }
         }
 
-        private static void ValidateFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
+        private static void ValidateDateFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
+        {
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
+                && rawFilterValue.Contains("year("))
+            {
+                throw new ODataException(Messages.YearFunctionNotSupported);
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Month) != AllowedFunctions.Month
+                && rawFilterValue.Contains("month("))
+            {
+                throw new ODataException(Messages.MonthFunctionNotSupported);
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Day) != AllowedFunctions.Day
+                && rawFilterValue.Contains("day("))
+            {
+                throw new ODataException(Messages.DayFunctionNotSupported);
+            }
+        }
+
+        private static void ValidateNumberFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
+        {
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Round) != AllowedFunctions.Round
+                && rawFilterValue.Contains("round("))
+            {
+                throw new ODataException(Messages.RoundFunctionNotSupported);
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Ceiling) != AllowedFunctions.Ceiling
+                && rawFilterValue.Contains("ceiling("))
+            {
+                throw new ODataException(Messages.CeilingFunctionNotSupported);
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Floor) != AllowedFunctions.Floor
+                && rawFilterValue.Contains("floor("))
+            {
+                throw new ODataException(Messages.FloorFunctionNotSupported);
+            }
+        }
+
+        private static void ValidateStringFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
         {
             if ((validationSettings.AllowedFunctions & AllowedFunctions.EndsWith) != AllowedFunctions.EndsWith
                 && rawFilterValue.Contains("endswith("))
@@ -98,24 +142,6 @@ namespace Net.Http.WebApi.OData.Query.Validation
                 throw new ODataException(Messages.ToUpperFunctionNotSupported);
             }
 
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
-                && rawFilterValue.Contains("year("))
-            {
-                throw new ODataException(Messages.YearFunctionNotSupported);
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Month) != AllowedFunctions.Month
-                && rawFilterValue.Contains("month("))
-            {
-                throw new ODataException(Messages.MonthFunctionNotSupported);
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Day) != AllowedFunctions.Day
-                && rawFilterValue.Contains("day("))
-            {
-                throw new ODataException(Messages.DayFunctionNotSupported);
-            }
-
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Trim) != AllowedFunctions.Trim
                 && rawFilterValue.Contains("trim("))
             {
@@ -126,18 +152,6 @@ namespace Net.Http.WebApi.OData.Query.Validation
                 && rawFilterValue.Contains("length("))
             {
                 throw new ODataException(Messages.LengthFunctionNotSupported);
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Round) != AllowedFunctions.Round
-                && rawFilterValue.Contains("round("))
-            {
-                throw new ODataException(Messages.RoundFunctionNotSupported);
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Ceiling) != AllowedFunctions.Ceiling
-                && rawFilterValue.Contains("ceiling("))
-            {
-                throw new ODataException(Messages.CeilingFunctionNotSupported);
             }
         }
     }

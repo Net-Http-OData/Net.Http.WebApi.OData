@@ -97,6 +97,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;floor&apos; function is not supported by this service..
+        /// </summary>
+        internal static string FloorFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("FloorFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The $format query option is not supported by this service..
         /// </summary>
         internal static string FormatQueryOptionNotSupported {

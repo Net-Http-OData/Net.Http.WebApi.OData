@@ -83,6 +83,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'Ceiling' function is allowed in the $filter query option.
         /// </summary>
-        Ceiling = 2048
+        Ceiling = 2048,
+
+        /// <summary>
+        /// Specifies that the 'Floor' function is allowed in the $filter query option.
+        /// </summary>
+        Floor = 4096
     }
 }

@@ -183,6 +183,9 @@
   <data name="CeilingFunctionNotSupported" xml:space="preserve">
     <value>The 'ceiling' function is not supported by this service.</value>
   </data>
+  <data name="FloorFunctionNotSupported" xml:space="preserve">
+    <value>The 'floor' function is not supported by this service.</value>
+  </data>
   <data name="LengthFunctionNotSupported" xml:space="preserve">
     <value>The 'length' function is not supported by this service.</value>
   </data>
