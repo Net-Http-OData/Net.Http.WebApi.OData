@@ -63,6 +63,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'Day' function is allowed in the $filter query option.
         /// </summary>
-        Day = 128
+        Day = 128,
+
+        /// <summary>
+        /// Specifies that the 'Trim' function is allowed in the $filter query option.
+        /// </summary>
+        Trim = 256
     }
 }

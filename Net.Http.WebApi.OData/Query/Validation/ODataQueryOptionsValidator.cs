@@ -115,6 +115,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.DayFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Trim) != AllowedFunctions.Trim
+                && rawFilterValue.Contains("trim("))
+            {
+                throw new ODataException(Messages.TrimFunctionNotSupported);
+            }
         }
     }
 }

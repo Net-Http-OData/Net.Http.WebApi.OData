@@ -232,6 +232,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;trim&apos; function is not supported by this service..
+        /// </summary>
+        internal static string TrimFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("TrimFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top.
         /// </summary>
         internal static string UnknownQueryOption {
