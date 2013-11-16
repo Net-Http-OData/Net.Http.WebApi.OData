@@ -61,6 +61,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;ceiling&apos; function is not supported by this service..
+        /// </summary>
+        internal static string CeilingFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("CeilingFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;day&apos; function is not supported by this service..
         /// </summary>
         internal static string DayFunctionNotSupported {

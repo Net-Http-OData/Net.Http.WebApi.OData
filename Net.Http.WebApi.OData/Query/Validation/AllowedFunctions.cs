@@ -78,6 +78,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'Round' function is allowed in the $filter query option.
         /// </summary>
-        Round = 1024
+        Round = 1024,
+
+        /// <summary>
+        /// Specifies that the 'Ceiling' function is allowed in the $filter query option.
+        /// </summary>
+        Ceiling = 2048
     }
 }

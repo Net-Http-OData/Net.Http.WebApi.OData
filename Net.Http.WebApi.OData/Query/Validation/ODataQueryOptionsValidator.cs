@@ -133,6 +133,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.RoundFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Ceiling) != AllowedFunctions.Ceiling
+                && rawFilterValue.Contains("ceiling("))
+            {
+                throw new ODataException(Messages.CeilingFunctionNotSupported);
+            }
         }
     }
 }
