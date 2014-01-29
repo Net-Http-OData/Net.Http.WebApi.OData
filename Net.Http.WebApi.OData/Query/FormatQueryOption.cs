@@ -35,9 +35,10 @@ namespace Net.Http.WebApi.OData.Query
 
             this.RawValue = rawValue;
 
-            var pieces = rawValue.Split('=');
+            var equals = rawValue.IndexOf('=') + 1;
+            var value = rawValue.Substring(equals, rawValue.Length - equals);
 
-            switch (pieces[1])
+            switch (value)
             {
                 case "atom":
                     this.MediaTypeHeaderValue = new MediaTypeHeaderValue("application/atom+xml");
@@ -52,7 +53,7 @@ namespace Net.Http.WebApi.OData.Query
                     break;
 
                 default:
-                    this.MediaTypeHeaderValue = new MediaTypeHeaderValue(pieces[1]);
+                    this.MediaTypeHeaderValue = new MediaTypeHeaderValue(value);
                     break;
             }
         }

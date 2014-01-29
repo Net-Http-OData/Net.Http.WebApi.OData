@@ -35,8 +35,9 @@ namespace Net.Http.WebApi.OData.Query
 
             this.RawValue = rawValue;
 
-            var pieces = rawValue.Split('=');
-            var properties = pieces[1].Split(',').Select(raw => new OrderByProperty(raw)).ToArray();
+            var equals = rawValue.IndexOf('=') + 1;
+            var properties = rawValue.Substring(equals, rawValue.Length - equals).Split(',').Select(raw => new OrderByProperty(raw)).ToArray();
+
             this.Properties = properties;
         }
 

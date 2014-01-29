@@ -34,9 +34,10 @@ namespace Net.Http.WebApi.OData.Query
 
             this.RawValue = rawValue;
 
-            var pieces = rawValue.Split('=');
+            var equals = rawValue.IndexOf('=') + 1;
+            var value = rawValue.Substring(equals, rawValue.Length - equals);
 
-            switch (pieces[1])
+            switch (value)
             {
                 case "allpages":
                     this.InlineCount = InlineCount.AllPages;
