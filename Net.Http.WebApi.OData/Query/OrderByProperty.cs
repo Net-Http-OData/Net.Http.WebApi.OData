@@ -34,12 +34,17 @@ namespace Net.Http.WebApi.OData.Query
 
             this.RawValue = rawValue;
 
-            var pieces = rawValue.Split(' ');
-            this.Name = pieces[0];
+            var space = rawValue.IndexOf(' ');
 
-            if (pieces.Length == 2)
+            if (space == -1)
             {
-                switch (pieces[1])
+                this.Name = rawValue;
+            }
+            else
+            {
+                this.Name = rawValue.Substring(0, space);
+
+                switch (rawValue.Substring(space + 1, rawValue.Length - (space + 1)))
                 {
                     case "asc":
                         this.Direction = OrderByDirection.Ascending;
