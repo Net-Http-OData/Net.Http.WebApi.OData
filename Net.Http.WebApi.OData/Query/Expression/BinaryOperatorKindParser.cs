@@ -43,7 +43,7 @@ namespace Net.Http.WebApi.OData.Query.Expression
                     return BinaryOperatorKind.Or;
 
                 default:
-                    throw new ODataException(operatorType);
+                    throw new ODataException("The operator type '" + operatorType + "' is not currently supported.");
             }
         }
     }
