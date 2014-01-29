@@ -21,6 +21,8 @@ namespace Net.Http.WebApi.OData.Query
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
     public sealed class SelectQueryOption
     {
+        private static readonly char[] Comma = new[] { ',' };
+
         /// <summary>
         /// Initialises a new instance of the <see cref="SelectQueryOption"/> class.
         /// </summary>
@@ -35,7 +37,7 @@ namespace Net.Http.WebApi.OData.Query
             this.RawValue = rawValue;
 
             var equals = rawValue.IndexOf('=') + 1;
-            var properties = rawValue.Substring(equals, rawValue.Length - equals).Split(',');
+            var properties = rawValue.Substring(equals, rawValue.Length - equals).Split(Comma);
 
             this.Properties = properties;
         }
