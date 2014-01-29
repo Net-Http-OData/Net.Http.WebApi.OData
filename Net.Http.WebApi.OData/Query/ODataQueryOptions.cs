@@ -23,6 +23,13 @@ namespace Net.Http.WebApi.OData.Query
     {
         private readonly ODataRawQueryOptions rawValues;
         private readonly HttpRequestMessage request;
+        private FilterQueryOption filter;
+        private FormatQueryOption format;
+        private InlineCountQueryOption inlineCount;
+        private OrderByQueryOption orderBy;
+        private SelectQueryOption select;
+        private SkipQueryOption skip;
+        private TopQueryOption top;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataQueryOptions"/> class.
@@ -39,41 +46,6 @@ namespace Net.Http.WebApi.OData.Query
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
-
-            if (this.rawValues.Filter != null)
-            {
-                this.Filter = new FilterQueryOption(this.rawValues.Filter);
-            }
-
-            if (this.rawValues.Format != null)
-            {
-                this.Format = new FormatQueryOption(this.rawValues.Format);
-            }
-
-            if (this.rawValues.InlineCount != null)
-            {
-                this.InlineCount = new InlineCountQueryOption(this.rawValues.InlineCount);
-            }
-
-            if (this.rawValues.OrderBy != null)
-            {
-                this.OrderBy = new OrderByQueryOption(this.rawValues.OrderBy);
-            }
-
-            if (this.rawValues.Select != null)
-            {
-                this.Select = new SelectQueryOption(this.rawValues.Select);
-            }
-
-            if (this.rawValues.Skip != null)
-            {
-                this.Skip = new SkipQueryOption(this.rawValues.Skip);
-            }
-
-            if (this.rawValues.Top != null)
-            {
-                this.Top = new TopQueryOption(this.rawValues.Top);
-            }
         }
 
         /// <summary>
@@ -81,8 +53,15 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public FilterQueryOption Filter
         {
-            get;
-            private set;
+            get
+            {
+                if (this.filter == null && this.rawValues.Filter != null)
+                {
+                    this.filter = new FilterQueryOption(this.rawValues.Filter);
+                }
+
+                return this.filter;
+            }
         }
 
         /// <summary>
@@ -90,8 +69,15 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public FormatQueryOption Format
         {
-            get;
-            private set;
+            get
+            {
+                if (this.format == null && this.rawValues.Format != null)
+                {
+                    this.format = new FormatQueryOption(this.rawValues.Format);
+                }
+
+                return this.format;
+            }
         }
 
         /// <summary>
@@ -99,8 +85,15 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public InlineCountQueryOption InlineCount
         {
-            get;
-            private set;
+            get
+            {
+                if (this.inlineCount == null && this.rawValues.InlineCount != null)
+                {
+                    this.inlineCount = new InlineCountQueryOption(this.rawValues.InlineCount);
+                }
+
+                return this.inlineCount;
+            }
         }
 
         /// <summary>
@@ -108,8 +101,15 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public OrderByQueryOption OrderBy
         {
-            get;
-            private set;
+            get
+            {
+                if (this.orderBy == null && this.rawValues.OrderBy != null)
+                {
+                    this.orderBy = new OrderByQueryOption(this.rawValues.OrderBy);
+                }
+
+                return this.orderBy;
+            }
         }
 
         /// <summary>
@@ -139,8 +139,15 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public SelectQueryOption Select
         {
-            get;
-            private set;
+            get
+            {
+                if (this.select == null && this.rawValues.Select != null)
+                {
+                    this.select = new SelectQueryOption(this.rawValues.Select);
+                }
+
+                return this.select;
+            }
         }
 
         /// <summary>
@@ -148,8 +155,15 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public SkipQueryOption Skip
         {
-            get;
-            private set;
+            get
+            {
+                if (this.skip == null && this.rawValues.Skip != null)
+                {
+                    this.skip = new SkipQueryOption(this.rawValues.Skip);
+                }
+
+                return this.skip;
+            }
         }
 
         /// <summary>
@@ -157,8 +171,15 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public TopQueryOption Top
         {
-            get;
-            private set;
+            get
+            {
+                if (this.top == null && this.rawValues.Top != null)
+                {
+                    this.top = new TopQueryOption(this.rawValues.Top);
+                }
+
+                return this.top;
+            }
         }
     }
 }
