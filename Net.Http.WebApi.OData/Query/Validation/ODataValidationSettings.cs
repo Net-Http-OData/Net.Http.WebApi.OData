@@ -12,11 +12,29 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validation
 {
+    using System;
+
     /// <summary>
-    /// A class which validates the values in <see cref="ODataQueryOptions"/>.
+    /// A struct which defines the validation settings to use when validating values in <see cref="ODataQueryOptions"/>.
     /// </summary>
-    public sealed class ODataValidationSettings
+    public struct ODataValidationSettings : IEquatable<ODataValidationSettings>
     {
+        /// <summary>
+        /// Gets the paging options for when no paging is required.
+        /// </summary>
+        public static ODataValidationSettings None
+        {
+            get
+            {
+                return new ODataValidationSettings
+                {
+                    AllowedFunctions = AllowedFunctions.None,
+                    AllowedQueryOptions = AllowedQueryOptions.None,
+                    MaxTop = 0
+                };
+            }
+        }
+
         /// <summary>
         /// Gets or sets the allowed functions.
         /// </summary>
@@ -37,12 +55,82 @@ namespace Net.Http.WebApi.OData.Query.Validation
 
         /// <summary>
         /// Gets or sets the max value allowed in the $top query option.
-        /// This is used to ensure that 'paged' queries do not return excessive results on each call.
         /// </summary>
+        /// <remarks>
+        /// This is used to ensure that 'paged' queries do not return excessive results on each call.
+        /// </remarks>
         public int MaxTop
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Checks whether two separate ODataValidationSettings instances are not equal.
+        /// </summary>
+        /// <param name="settings1">The validation settings to check.</param>
+        /// <param name="settings2">The validation settings to check against.</param>
+        /// <returns><c>true</c> if the instances are not considered equal; otherwise, <c>false</c>.</returns>
+        public static bool operator !=(ODataValidationSettings settings1, ODataValidationSettings settings2)
+        {
+            return !settings1.Equals(settings2);
+        }
+
+        /// <summary>
+        /// Checks whether two separate ODataValidationSettings instances are equal.
+        /// </summary>
+        /// <param name="settings1">The validation settings to check.</param>
+        /// <param name="settings2">The validation settings to check against.</param>
+        /// <returns><c>true</c> if the instances are considered equal; otherwise, <c>false</c>.</returns>
+        public static bool operator ==(ODataValidationSettings settings1, ODataValidationSettings settings2)
+        {
+            return settings1.Equals(settings2);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            var other = obj as ODataValidationSettings?;
+
+            if (other == null)
+            {
+                return false;
+            }
+
+            return this.Equals(other.Value);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="ODataValidationSettings" /> is equal to this instance.
+        /// </summary>
+        /// <param name="other">The <see cref="ODataValidationSettings"/> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="PagingOptions" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Equals(ODataValidationSettings other)
+        {
+            return other.AllowedFunctions == this.AllowedFunctions
+                && other.AllowedQueryOptions == this.AllowedQueryOptions
+                && other.MaxTop == this.MaxTop;
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return this.AllowedFunctions.GetHashCode()
+                ^ this.AllowedQueryOptions.GetHashCode()
+                ^ this.MaxTop.GetHashCode();
         }
     }
 }
