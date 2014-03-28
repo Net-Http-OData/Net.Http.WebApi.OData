@@ -111,7 +111,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// </summary>
         /// <param name="other">The <see cref="ODataValidationSettings"/> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="PagingOptions" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="ODataValidationSettings" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(ODataValidationSettings other)
         {
