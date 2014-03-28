@@ -20,7 +20,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
     public struct ODataValidationSettings : IEquatable<ODataValidationSettings>
     {
         /// <summary>
-        /// Gets the paging options for when no paging is required.
+        /// Gets the validation settings for when no OData queries are allowed.
         /// </summary>
         public static ODataValidationSettings None
         {
