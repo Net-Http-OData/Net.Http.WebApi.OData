@@ -37,32 +37,38 @@ namespace Net.Http.WebApi.OData.Query.Validation
                 ValidateNumberFunctions(queryOptions.Filter.RawValue, validationSettings);
             }
 
-            if (queryOptions.Format != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
+            if (queryOptions.Format != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
             {
                 throw new ODataException(Messages.FormatQueryOptionNotSupported);
             }
 
-            if (queryOptions.InlineCount != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
+            if (queryOptions.InlineCount != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
             {
                 throw new ODataException(Messages.InlineCountQueryOptionNotSupported);
             }
 
-            if (queryOptions.OrderBy != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.OrderBy) != AllowedQueryOptions.OrderBy)
+            if (queryOptions.OrderBy != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.OrderBy) != AllowedQueryOptions.OrderBy)
             {
                 throw new ODataException(Messages.OrderByQueryOptionNotSupported);
             }
 
-            if (queryOptions.Select != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Select) != AllowedQueryOptions.Select)
+            if (queryOptions.Select != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Select) != AllowedQueryOptions.Select)
             {
                 throw new ODataException(Messages.SelectQueryOptionNotSupported);
             }
 
-            if (queryOptions.Skip != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip) != AllowedQueryOptions.Skip)
+            if (queryOptions.Skip != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip) != AllowedQueryOptions.Skip)
             {
                 throw new ODataException(Messages.SkipQueryOptionNotSupported);
             }
 
-            if (queryOptions.Top != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
+            if (queryOptions.Top != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
                 throw new ODataException(Messages.TopQueryOptionNotSupported);
             }
