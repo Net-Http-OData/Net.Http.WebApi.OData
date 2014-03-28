@@ -8,13 +8,13 @@
     <description>A library which makes it easy to consume an OData Query with ASP.NET WebApi.</description>
     <releaseNotes>See https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki/Release-Notes/ for a summary of changes made in this release of the package.</releaseNotes>
     <language>en-GB</language>
-    <projectUrl>http://microliteorm.wordpress.com/</projectUrl>
-    <licenseUrl>http://microliteorm.wordpress.com/license/</licenseUrl>
-    <copyright>Copyright 2013 Project Contributors</copyright>
+    <projectUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/</projectUrl>
+    <licenseUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/blob/master/License.txt</licenseUrl>
+    <copyright>Copyright 2013 - 2014 Project Contributors</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>ASP.NET WebApi OData</tags>
     <dependencies>
-      <dependency id="Microsoft.AspNet.WebApi.Client" version="" />
+      <dependency id="Microsoft.AspNet.WebApi.Client" version="4.0.20710" />
     </dependencies>
   </metadata>
   <files>
