@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Net.Http.WebApi.OData Rules" Description="Net.Http.WebApi.OData Custom Rules." ToolsVersion="10.0">
+<RuleSet Name="Net.Http.WebApi.OData Rules" Description="Net.Http.WebApi.OData Custom Rules." ToolsVersion="12.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1000" Action="Error" />
@@ -88,7 +88,6 @@
     <Rule Id="CA1415" Action="Error" />
     <Rule Id="CA1500" Action="Error" />
     <Rule Id="CA1501" Action="Error" />
-    <Rule Id="CA1502" Action="Error" />
     <Rule Id="CA1504" Action="Error" />
     <Rule Id="CA1505" Action="Error" />
     <Rule Id="CA1506" Action="Error" />
@@ -97,8 +96,6 @@
     <Rule Id="CA1700" Action="Error" />
     <Rule Id="CA1701" Action="Error" />
     <Rule Id="CA1702" Action="Error" />
-    <Rule Id="CA1703" Action="Error" />
-    <Rule Id="CA1704" Action="Error" />
     <Rule Id="CA1707" Action="Error" />
     <Rule Id="CA1708" Action="Error" />
     <Rule Id="CA1709" Action="Error" />
@@ -184,7 +181,6 @@
     <Rule Id="CA2200" Action="Error" />
     <Rule Id="CA2201" Action="Error" />
     <Rule Id="CA2202" Action="Error" />
-    <Rule Id="CA2204" Action="Error" />
     <Rule Id="CA2205" Action="Error" />
     <Rule Id="CA2207" Action="Error" />
     <Rule Id="CA2208" Action="Error" />
@@ -219,6 +215,5 @@
     <Rule Id="CA2240" Action="Error" />
     <Rule Id="CA2241" Action="Error" />
     <Rule Id="CA2242" Action="Error" />
-    <Rule Id="CA2243" Action="Error" />
   </Rules>
 </RuleSet>
