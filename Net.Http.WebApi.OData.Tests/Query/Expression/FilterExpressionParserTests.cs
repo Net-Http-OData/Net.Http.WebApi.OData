@@ -747,6 +747,30 @@
             }
         }
 
+        public class ParsePropertyEqNullValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyEqNullValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("MiddleName eq null");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("null", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeValueShouldBeNull()
+            {
+                Assert.Null(((ConstantNode)this.node.Right).Value);
+            }
+        }
+
         public class ParsePropertyEqSingleValueExpression
         {
             private readonly BinaryOperatorNode node;

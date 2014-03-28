@@ -89,6 +89,9 @@ namespace Net.Http.WebApi.OData.Query.Expression
                 case "true":
                     return true;
 
+                case "null":
+                    return null;
+
                 default:
                     if (DoubleRegex.IsMatch(literalValue))
                     {
