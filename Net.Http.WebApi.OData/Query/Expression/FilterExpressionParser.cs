@@ -19,11 +19,11 @@ namespace Net.Http.WebApi.OData.Query.Expression
     internal static class FilterExpressionParser
     {
         private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o" };
-        private static readonly Regex DecimalRegex = new Regex(@"^\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex DoubleRegex = new Regex(@"^\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex DecimalRegex = new Regex(@"^(-)?\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex DoubleRegex = new Regex(@"^(-)?\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex FunctionCallRegex = new Regex(@"^(?<Function>[a-z/]*)\(((?<Property>[A-Za-z/]*)(, '?(?<Argument>[^'\(\)]*)'?)?\)|('(?<Argument>[^'\(\)]*)')?, (?<Property>[A-Za-z/]*)\)) (?<Operator>eq|ne|gt|ge|lt|le) (?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex PropertyAccessRegex = new Regex("^(?<Property>[A-Za-z/]*) (?<Operator>eq|ne|gt|ge|lt|le) (?<DataType>datetime|guid)?(?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex SingleRegex = new Regex(@"^\d+.\d+(f|F)$", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex SingleRegex = new Regex(@"^(-)?\d+.\d+(f|F)$", RegexOptions.Compiled | RegexOptions.Singleline);
 
         internal static QueryNode Parse(string filterValue)
         {

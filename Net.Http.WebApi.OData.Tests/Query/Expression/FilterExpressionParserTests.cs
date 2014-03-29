@@ -747,6 +747,126 @@
             }
         }
 
+        public class ParsePropertyEqNegativeDecimalValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyEqNegativeDecimalValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq -1234.567M");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("-1234.567M", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(-1234.567M, ((ConstantNode)this.node.Right).Value);
+            }
+
+            [Fact]
+            public void TheRightNodeValueShouldBeADecimal()
+            {
+                Assert.IsType<Decimal>(((ConstantNode)this.node.Right).Value);
+            }
+        }
+
+        public class ParsePropertyEqNegativeDoubleValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyEqNegativeDoubleValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq -1234.567D");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("-1234.567D", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(-1234.567D, ((ConstantNode)this.node.Right).Value);
+            }
+
+            [Fact]
+            public void TheRightNodeValueShouldBeADouble()
+            {
+                Assert.IsType<Double>(((ConstantNode)this.node.Right).Value);
+            }
+        }
+
+        public class ParsePropertyEqNegativeIntValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyEqNegativeIntValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq -1234");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("-1234", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(-1234, ((ConstantNode)this.node.Right).Value);
+            }
+
+            [Fact]
+            public void TheRightNodeValueShouldBeAnInt32()
+            {
+                Assert.IsType<int>(((ConstantNode)this.node.Right).Value);
+            }
+        }
+
+        public class ParsePropertyEqNegativeSingleValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyEqNegativeSingleValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq -1234.567F");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("-1234.567F", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(-1234.567F, ((ConstantNode)this.node.Right).Value);
+            }
+
+            [Fact]
+            public void TheRightNodeValueShouldBeASingle()
+            {
+                Assert.IsType<Single>(((ConstantNode)this.node.Right).Value);
+            }
+        }
+
         public class ParsePropertyEqNullValueExpression
         {
             private readonly BinaryOperatorNode node;
