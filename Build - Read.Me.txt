@@ -1,7 +1,9 @@
 Requirements:
  
+  - Visual Studio 2010 or later
   - .NET 4.5
-  - StyleCop version 4.7.45.0 (http://stylecop.codeplex.com/)
+  - StyleCop version 4.7.49 - ensure that MSBuild integration is selected when installed (http://stylecop.codeplex.com/)
+  - Git 1.9.0 (http://git-scm.com/download/win)
 
 If running on a 64 bit machine, run the PowerShell (x86) executable otherwise the StyleCop.targets won't be found.
 
