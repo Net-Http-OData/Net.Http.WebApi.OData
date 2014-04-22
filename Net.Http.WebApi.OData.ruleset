@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Net.Http.WebApi.OData Rules" Description="Net.Http.WebApi.OData Custom Rules." ToolsVersion="12.0">
+<RuleSet Name="Copy of Net.Http.WebApi.OData Rules" Description="Net.Http.WebApi.OData Custom Rules." ToolsVersion="11.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1000" Action="Error" />
@@ -21,6 +21,7 @@
     <Rule Id="CA1017" Action="Error" />
     <Rule Id="CA1018" Action="Error" />
     <Rule Id="CA1019" Action="Error" />
+    <Rule Id="CA1020" Action="None" />
     <Rule Id="CA1021" Action="Error" />
     <Rule Id="CA1023" Action="Error" />
     <Rule Id="CA1024" Action="Error" />
