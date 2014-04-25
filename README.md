@@ -11,3 +11,7 @@ To use it in your own Web API, firstly install the nuget package `Install-Packag
     }
 
 To find out more, head over to the [Wiki](https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki) and see how easy it is to use!
+
+_Supported .NET Framework Versions_
+
+The NuGet Package contains binaries compiled against 4.0 and 4.5.
