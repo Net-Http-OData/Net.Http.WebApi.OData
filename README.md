@@ -14,4 +14,7 @@ To find out more, head over to the [Wiki](https://github.com/TrevorPilley/Net.Ht
 
 _Supported .NET Framework Versions_
 
-The NuGet Package contains binaries compiled against 4.0 and 4.5.
+The NuGet Package contains binaries compiled against:
+
+* .NET 4.0 (Full)
+* .NET 4.5
