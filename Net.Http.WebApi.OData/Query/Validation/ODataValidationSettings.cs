@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
     /// <summary>
     /// A struct which defines the validation settings to use when validating values in <see cref="ODataQueryOptions"/>.
     /// </summary>
-    public struct ODataValidationSettings : IEquatable<ODataValidationSettings>
+    public sealed class ODataValidationSettings : IEquatable<ODataValidationSettings>
     {
         /// <summary>
         /// Gets the validation settings for when no OData queries are allowed.
@@ -96,14 +96,14 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// </returns>
         public override bool Equals(object obj)
         {
-            var other = obj as ODataValidationSettings?;
+            var other = obj as ODataValidationSettings;
 
             if (other == null)
             {
                 return false;
             }
 
-            return this.Equals(other.Value);
+            return this.Equals(other);
         }
 
         /// <summary>
