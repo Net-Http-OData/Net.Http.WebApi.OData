@@ -195,4 +195,7 @@
   <data name="TrimFunctionNotSupported" xml:space="preserve">
     <value>The 'trim' function is not supported by this service.</value>
   </data>
+  <data name="HourFunctionNotSupported" xml:space="preserve">
+    <value>The 'hour' function is not supported by this service.</value>
+  </data>
 </root>

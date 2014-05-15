@@ -88,6 +88,11 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <summary>
         /// Specifies that the 'Floor' function is allowed in the $filter query option.
         /// </summary>
-        Floor = 4096
+        Floor = 4096,
+
+        /// <summary>
+        /// Specifies that the 'Hour' function is allowed in the $filter query option.
+        /// </summary>
+        Hour = 8192,
     }
 }
