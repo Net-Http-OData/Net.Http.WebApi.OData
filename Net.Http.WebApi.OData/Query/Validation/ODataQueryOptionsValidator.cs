@@ -105,6 +105,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.MinuteFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Second) != AllowedFunctions.Second
+                && rawFilterValue.Contains("second("))
+            {
+                throw new ODataException(Messages.SecondFunctionNotSupported);
+            }
         }
 
         private static void ValidateNumberFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
