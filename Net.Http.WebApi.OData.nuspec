@@ -12,7 +12,7 @@
     <licenseUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/blob/master/License.txt</licenseUrl>
     <copyright>Copyright 2013 - 2014 Project Contributors</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <tags>ASP.NET WebApi OData</tags>
+    <tags>OData Parser WebApi ASP.NET</tags>
     <dependencies>
       <dependency id="Microsoft.AspNet.WebApi.Client" version="4.0.20710" />
     </dependencies>
