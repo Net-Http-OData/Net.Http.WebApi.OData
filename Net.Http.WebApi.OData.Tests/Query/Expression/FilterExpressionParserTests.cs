@@ -1739,11 +1739,11 @@
             }
         }
 
-        public class ParseSubstringofFunctionExpression
+        public class ParseSubstringOfFunctionExpression
         {
             private readonly BinaryOperatorNode node;
 
-            public ParseSubstringofFunctionExpression()
+            public ParseSubstringOfFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("substringof('Hayes', Name) eq true");
 
