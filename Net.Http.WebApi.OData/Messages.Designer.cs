@@ -259,6 +259,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;substring&apos; function is not supported by this service..
+        /// </summary>
+        internal static string SubstringFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("SubstringFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;substringof&apos; function is not supported by this service..
         /// </summary>
         internal static string SubstringOfFunctionNotSupported {

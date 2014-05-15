@@ -189,6 +189,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.ReplaceFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Substring) != AllowedFunctions.Substring
+                && rawFilterValue.Contains("substring("))
+            {
+                throw new ODataException(Messages.SubstringFunctionNotSupported);
+            }
         }
     }
 }

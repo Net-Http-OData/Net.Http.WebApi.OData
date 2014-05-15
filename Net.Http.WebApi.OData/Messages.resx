@@ -210,4 +210,7 @@
   <data name="ReplaceFunctionNotSupported" xml:space="preserve">
     <value>The 'replace' function is not supported by this service.</value>
   </data>
+  <data name="SubstringFunctionNotSupported" xml:space="preserve">
+    <value>The 'substring' function is not supported by this service.</value>
+  </data>
 </root>

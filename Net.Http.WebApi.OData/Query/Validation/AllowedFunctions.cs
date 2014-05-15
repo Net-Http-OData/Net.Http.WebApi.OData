@@ -114,5 +114,10 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// Specifies that the 'Replace' function is allowed in the $filter query option.
         /// </summary>
         Replace = 131072,
+
+        /// <summary>
+        /// Specifies that the 'Substring' function is allowed in the $filter query option.
+        /// </summary>
+        Substring = 262144,
     }
 }
