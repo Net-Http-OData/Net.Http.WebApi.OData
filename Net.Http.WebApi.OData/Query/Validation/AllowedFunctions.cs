@@ -104,5 +104,10 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// Specifies that the 'Second' function is allowed in the $filter query option.
         /// </summary>
         Second = 32768,
+
+        /// <summary>
+        /// Specifies that the 'IndexOf' function is allowed in the $filter query option.
+        /// </summary>
+        IndexOf = 65536,
     }
 }

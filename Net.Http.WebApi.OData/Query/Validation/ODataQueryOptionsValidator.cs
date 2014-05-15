@@ -177,6 +177,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.LengthFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.IndexOf) != AllowedFunctions.IndexOf
+                && rawFilterValue.Contains("indexof("))
+            {
+                throw new ODataException(Messages.IndexOfFunctionNotSupported);
+            }
         }
     }
 }

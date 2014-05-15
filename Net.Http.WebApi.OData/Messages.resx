@@ -198,6 +198,9 @@
   <data name="HourFunctionNotSupported" xml:space="preserve">
     <value>The 'hour' function is not supported by this service.</value>
   </data>
+  <data name="IndexOfFunctionNotSupported" xml:space="preserve">
+    <value>The 'indexof' function is not supported by this service.</value>
+  </data>
   <data name="MinuteFunctionNotSupported" xml:space="preserve">
     <value>The 'minute' function is not supported by this service.</value>
   </data>

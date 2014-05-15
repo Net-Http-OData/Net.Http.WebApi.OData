@@ -124,6 +124,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;indexof&apos; function is not supported by this service..
+        /// </summary>
+        internal static string IndexOfFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("IndexOfFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The $inlinecount query option is not supported by this service..
         /// </summary>
         internal static string InlineCountQueryOptionNotSupported {
