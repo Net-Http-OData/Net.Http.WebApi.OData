@@ -196,6 +196,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;replace&apos; function is not supported by this service..
+        /// </summary>
+        internal static string ReplaceFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("ReplaceFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;round&apos; function is not supported by this service..
         /// </summary>
         internal static string RoundFunctionNotSupported {

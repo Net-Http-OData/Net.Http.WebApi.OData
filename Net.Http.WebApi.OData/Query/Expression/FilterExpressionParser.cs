@@ -21,7 +21,7 @@ namespace Net.Http.WebApi.OData.Query.Expression
         private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o" };
         private static readonly Regex DecimalRegex = new Regex(@"^(-)?\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex DoubleRegex = new Regex(@"^(-)?\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex FunctionCallRegex = new Regex(@"^(?<Function>[a-z/]*)\(((?<Property>[A-Za-z/]*)(, '?(?<Argument>[^'\(\)]*)'?)?\)|('(?<Argument>[^'\(\)]*)')?, (?<Property>[A-Za-z/]*)\)) (?<Operator>eq|ne|gt|ge|lt|le) (?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex FunctionCallRegex = new Regex(@"^(?<Function>[a-z/]*)\(((?<Property>[A-Za-z/]*)(, '?(?<Argument>[^'\(\)]*)'?)*\)|('(?<Argument>[^'\(\)]*)')?, (?<Property>[A-Za-z/]*)\)) (?<Operator>eq|ne|gt|ge|lt|le) (?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex PropertyAccessRegex = new Regex("^(?<Property>[A-Za-z/]*) (?<Operator>eq|ne|gt|ge|lt|le) (?<DataType>datetime|guid)?(?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex SingleRegex = new Regex(@"^(-)?\d+.\d+(f|F)$", RegexOptions.Compiled | RegexOptions.Singleline);
 
@@ -142,16 +142,32 @@ namespace Net.Http.WebApi.OData.Query.Expression
             {
                 var function = functionCallMatch.Groups["Function"].Value;
                 var propertyName = functionCallMatch.Groups["Property"].Value;
-                var argumentLiteral = functionCallMatch.Groups["Argument"].Value;
+                var argumentCaptures = functionCallMatch.Groups["Argument"].Captures;
                 var operatorType = functionCallMatch.Groups["Operator"].Value;
                 var valueLiteral = functionCallMatch.Groups["Value"].Value;
 
                 var propertyNode = new SingleValuePropertyAccessNode(propertyName);
-                var argumentConstantNode = new ConstantNode(argumentLiteral, GetValue(string.Empty, argumentLiteral));
+                var arguments = new QueryNode[argumentCaptures.Count > 0 ? argumentCaptures.Count + 1 : 2];
 
-                var arguments = function == "substringof"
-                    ? new QueryNode[] { argumentConstantNode, propertyNode }
-                    : new QueryNode[] { propertyNode, argumentConstantNode };
+                if (function == "substringof")
+                {
+                    arguments[0] = new ConstantNode(argumentCaptures[0].Value, GetValue(string.Empty, argumentCaptures[0].Value));
+                    arguments[1] = propertyNode;
+                }
+                else
+                {
+                    arguments[0] = propertyNode;
+
+                    if (argumentCaptures.Count == 0)
+                    {
+                        arguments[1] = new ConstantNode(string.Empty, string.Empty);
+                    }
+
+                    for (int i = 0; i < argumentCaptures.Count; i++)
+                    {
+                        arguments[i + 1] = new ConstantNode(argumentCaptures[i].Value, GetValue(string.Empty, argumentCaptures[i].Value));
+                    }
+                }
 
                 var functionNode = new SingleValueFunctionCallNode(function, arguments);
                 var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);

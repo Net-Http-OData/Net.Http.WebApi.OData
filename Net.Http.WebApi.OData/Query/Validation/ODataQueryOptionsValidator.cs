@@ -183,6 +183,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.IndexOfFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Replace) != AllowedFunctions.Replace
+                && rawFilterValue.Contains("replace("))
+            {
+                throw new ODataException(Messages.ReplaceFunctionNotSupported);
+            }
         }
     }
 }

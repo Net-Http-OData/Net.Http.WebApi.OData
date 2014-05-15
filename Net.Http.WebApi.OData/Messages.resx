@@ -207,4 +207,7 @@
   <data name="SecondFunctionNotSupported" xml:space="preserve">
     <value>The 'second' function is not supported by this service.</value>
   </data>
+  <data name="ReplaceFunctionNotSupported" xml:space="preserve">
+    <value>The 'replace' function is not supported by this service.</value>
+  </data>
 </root>

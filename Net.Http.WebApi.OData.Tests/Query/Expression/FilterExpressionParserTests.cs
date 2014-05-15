@@ -1575,6 +1575,102 @@
             }
         }
 
+        public class ParseReplaceFunctionExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParseReplaceFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheLeftNodeFirstArgumentShouldBeThePropertyNode()
+            {
+                Assert.IsType<SingleValuePropertyAccessNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[0]);
+            }
+
+            [Fact]
+            public void TheLeftNodeFirstArgumentShouldContainThePropertyName()
+            {
+                var queryNode = (SingleValuePropertyAccessNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[0];
+
+                Assert.Equal("CompanyName", queryNode.PropertyName);
+            }
+
+            [Fact]
+            public void TheLeftNodeSecondArgumentShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[1]);
+            }
+
+            [Fact]
+            public void TheLeftNodeSecondArgumentShouldContainTheConstantValue()
+            {
+                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[1];
+
+                Assert.Equal(" ", queryNode.Value);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldBeTheSingleValueFunctionCallNode()
+            {
+                Assert.IsType<SingleValueFunctionCallNode>(this.node.Left);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldContainTheFunctionName()
+            {
+                Assert.Equal("replace", ((SingleValueFunctionCallNode)this.node.Left).Name);
+            }
+
+            [Fact]
+            public void TheLeftNodeThirdArgumentShouldContainTheConstantValue()
+            {
+                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[2];
+
+                Assert.Equal("", queryNode.Value);
+            }
+
+            [Fact]
+            public void TheLeftNodeThridArgumentShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[2]);
+            }
+
+            [Fact]
+            public void TheNodeReturnedShouldBeABinaryOperatorNode()
+            {
+                Assert.NotNull(this.node);
+            }
+
+            [Fact]
+            public void TheOperatorKindShouldBeEqual()
+            {
+                Assert.Equal(BinaryOperatorKind.Equal, this.node.OperatorKind);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(this.node.Right);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("AlfredsFutterkiste", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal("AlfredsFutterkiste", ((ConstantNode)this.node.Right).Value);
+            }
+        }
+
         public class ParseRoundFunctionExpression
         {
             private readonly BinaryOperatorNode node;
