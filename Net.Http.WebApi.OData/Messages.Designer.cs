@@ -151,6 +151,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;minute&apos; function is not supported by this service..
+        /// </summary>
+        internal static string MinuteFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("MinuteFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;month&apos; function is not supported by this service..
         /// </summary>
         internal static string MonthFunctionNotSupported {

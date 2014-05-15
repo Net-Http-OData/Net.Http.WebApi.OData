@@ -242,6 +242,45 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheMinuteFunctionAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=minute(BirthDate) eq 8"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.MinuteFunctionNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheMinuteFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=minute(BirthDate) eq 8"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Minute
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheMonthFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(

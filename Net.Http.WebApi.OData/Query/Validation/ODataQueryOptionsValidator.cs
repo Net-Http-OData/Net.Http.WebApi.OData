@@ -99,6 +99,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
             {
                 throw new ODataException(Messages.HourFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Minute) != AllowedFunctions.Minute
+                && rawFilterValue.Contains("minute("))
+            {
+                throw new ODataException(Messages.MinuteFunctionNotSupported);
+            }
         }
 
         private static void ValidateNumberFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
