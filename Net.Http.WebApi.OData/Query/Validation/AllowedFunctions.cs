@@ -99,5 +99,10 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// Specifies that the 'Minute' function is allowed in the $filter query option.
         /// </summary>
         Minute = 16384,
+
+        /// <summary>
+        /// Specifies that the 'Second' function is allowed in the $filter query option.
+        /// </summary>
+        Second = 32768,
     }
 }

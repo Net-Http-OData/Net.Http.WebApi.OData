@@ -196,6 +196,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;second&apos; function is not supported by this service..
+        /// </summary>
+        internal static string SecondFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("SecondFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The $select query option is not supported by this service..
         /// </summary>
         internal static string SelectQueryOptionNotSupported {

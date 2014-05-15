@@ -201,4 +201,7 @@
   <data name="MinuteFunctionNotSupported" xml:space="preserve">
     <value>The 'minute' function is not supported by this service.</value>
   </data>
+  <data name="SecondFunctionNotSupported" xml:space="preserve">
+    <value>The 'second' function is not supported by this service.</value>
+  </data>
 </root>
