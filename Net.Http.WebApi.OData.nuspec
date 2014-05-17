@@ -6,7 +6,7 @@
     <authors>Trevor Pilley and Project Contributors</authors>
     <owners>Trevor Pilley</owners>
     <description>A library which makes it easy to consume an OData Query with ASP.NET WebApi.</description>
-    <releaseNotes>See https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki/Release-Notes/ for a summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>See https://github.com/TrevorPilley/Net.Http.WebApi.OData/releases for a summary of changes made in this release of the package.</releaseNotes>
     <language>en-GB</language>
     <projectUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/</projectUrl>
     <licenseUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/blob/master/License.txt</licenseUrl>
