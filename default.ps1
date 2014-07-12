@@ -17,7 +17,6 @@ Task Clean {
     $outDir = $build.BuildDir
     Remove-Item -force -recurse $outDir -ErrorAction SilentlyContinue
   }
-  Remove-Item -force -recurse $helpDir -ErrorAction SilentlyContinue
   Write-Host
 }
 
