@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6EEBEA
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData", "Net.Http.WebApi.OData\Net.Http.WebApi.OData.NET40.csproj", "{67FBEB32-944E-4022-8B80-5589762B2B05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData", "Net.Http.WebApi.OData\Net.Http.WebApi.OData.NET45.csproj", "{67FBEB32-944E-4022-8B80-5589762B2B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData.Tests", "Net.Http.WebApi.OData.Tests\Net.Http.WebApi.OData.Tests.NET40.csproj", "{0BDC1EA9-0521-49C7-A0DF-199395419476}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData.Tests", "Net.Http.WebApi.OData.Tests\Net.Http.WebApi.OData.Tests.NET45.csproj", "{0BDC1EA9-0521-49C7-A0DF-199395419476}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
