@@ -124,16 +124,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Net.Http.WebApi.OData-net40\Net.Http.WebApi.OData.NET40.csproj">
-      <Project>{67fbeb32-944e-4022-8b80-5589762b2b05}</Project>
-      <Name>Net.Http.WebApi.OData</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">
       <Link>Net.Http.WebApi.OData.snk</Link>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Net.Http.WebApi.OData-net40\Net.Http.WebApi.OData.NET40.csproj">
+      <Project>{67fbeb32-944e-4022-8b80-5589762b2b05}</Project>
+      <Name>Net.Http.WebApi.OData.NET40</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
