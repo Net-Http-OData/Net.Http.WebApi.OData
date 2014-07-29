@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
     using System;
 
     /// <summary>
-    /// A struct which defines the validation settings to use when validating values in <see cref="ODataQueryOptions"/>.
+    /// A class which defines the validation settings to use when validating values in <see cref="ODataQueryOptions"/>.
     /// </summary>
     public sealed class ODataValidationSettings : IEquatable<ODataValidationSettings>
     {
