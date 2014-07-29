@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Net.Http.WebApi.OData.Tests")]
-[assembly: AssemblyCopyright("Copyright 2012-2013 Net.Http.WebApi.OData Project Contributors all rights reserved.")]
+[assembly: AssemblyCopyright("Copyright 2012 - 2014 Project Contributors all rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ba32e0a7-6b0f-43cc-ab3f-5291ea18cd9e")]
+[assembly: Guid("7f187fc1-f03b-46d0-b6b9-74e21af20eac")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("2.1.0.0")]
-[assembly: AssemblyVersion("2.1.0.0")]
-[assembly: AssemblyFileVersion("2.1.2.0")]
+// [assembly: AssemblyVersion("4.2.0.0")]
+[assembly: AssemblyVersion("4.2.0.0")]
+[assembly: AssemblyFileVersion("4.2.3.0")]
