@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NDepend AppName="New Net.Http.WebApi.OData" Platform="DotNet">
-  <OutputDir KeepXmlFiles="False">C:\Source\GitHub\Net.Http.WebApi.OData\NDependOut1</OutputDir>
+  <OutputDir KeepXmlFiles="False">C:\Source\GitHub\Net.Http.WebApi.OData\NDependOut</OutputDir>
   <Assemblies>
     <Name>Net.Http.WebApi.OData</Name>
   </Assemblies>
