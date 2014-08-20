@@ -21,7 +21,7 @@ namespace Net.Http.WebApi.OData.Query
     public enum AllowedFunctions
     {
         /// <summary>
-        /// Specifies that no functions are allowed.
+        /// Specifies that no functions are allowed in the $filter query option.
         /// </summary>
         None = 0,
 
@@ -119,5 +119,25 @@ namespace Net.Http.WebApi.OData.Query
         /// Specifies that the 'Substring' function is allowed in the $filter query option.
         /// </summary>
         Substring = 262144,
+
+        /// <summary>
+        /// Specifies that all string functions are allowed in the $filter query option.
+        /// </summary>
+        AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace,
+
+        /// <summary>
+        /// Specifies that all date/time functions are allowed in the $filter query option.
+        /// </summary>
+        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second,
+
+        /// <summary>
+        /// Specifies that all math functions are allowed in the $filter query option.
+        /// </summary>
+        AllMathFunctions = Round | Floor | Ceiling,
+
+        /// <summary>
+        /// Specifies that all functions are allowed in the $filter query option.
+        /// </summary>
+        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions
     }
 }
