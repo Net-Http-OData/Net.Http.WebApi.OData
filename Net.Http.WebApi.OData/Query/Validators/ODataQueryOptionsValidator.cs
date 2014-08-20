@@ -77,6 +77,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
         private static void ValidateDateFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
         {
+            if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
+                || validationSettings.AllowedFunctions == AllowedFunctions.AllDateTimeFunctions)
+            {
+                return;
+            }
+
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
                 && rawFilterValue.Contains("year("))
             {
@@ -167,6 +173,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
         private static void ValidateMathFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
         {
+            if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
+                || validationSettings.AllowedFunctions == AllowedFunctions.AllMathFunctions)
+            {
+                return;
+            }
+
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Round) != AllowedFunctions.Round
                 && rawFilterValue.Contains("round("))
             {
@@ -188,6 +200,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
         private static void ValidateStringFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
         {
+            if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
+                || validationSettings.AllowedFunctions == AllowedFunctions.AllStringFunctions)
+            {
+                return;
+            }
+
             if ((validationSettings.AllowedFunctions & AllowedFunctions.EndsWith) != AllowedFunctions.EndsWith
                 && rawFilterValue.Contains("endswith("))
             {
