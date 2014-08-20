@@ -34,7 +34,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
                 ValidateStringFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateDateFunctions(queryOptions.Filter.RawValue, validationSettings);
-                ValidateNumberFunctions(queryOptions.Filter.RawValue, validationSettings);
+                ValidateMathFunctions(queryOptions.Filter.RawValue, validationSettings);
             }
 
             if (queryOptions.Format != null
@@ -113,7 +113,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
         }
 
-        private static void ValidateNumberFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
+        private static void ValidateMathFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
         {
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Round) != AllowedFunctions.Round
                 && rawFilterValue.Contains("round("))
