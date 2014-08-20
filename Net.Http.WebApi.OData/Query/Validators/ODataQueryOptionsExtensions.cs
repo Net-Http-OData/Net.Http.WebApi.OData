@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query.Validation
+namespace Net.Http.WebApi.OData.Query.Validators
 {
     using Net.Http.WebApi.OData.Query;
 

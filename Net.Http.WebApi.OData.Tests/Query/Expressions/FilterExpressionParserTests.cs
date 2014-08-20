@@ -1,8 +1,8 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Expression
+﻿namespace Net.Http.WebApi.Tests.OData.Query.Expressions
 {
     using System;
     using Net.Http.WebApi.OData;
-    using Net.Http.WebApi.OData.Query.Expression;
+    using Net.Http.WebApi.OData.Query.Expressions;
     using Xunit;
 
     public class FilterExpressionParserTests

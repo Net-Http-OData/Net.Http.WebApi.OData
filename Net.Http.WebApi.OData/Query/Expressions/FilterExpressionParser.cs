@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query.Expression
+namespace Net.Http.WebApi.OData.Query.Expressions
 {
     using System;
     using System.Globalization;

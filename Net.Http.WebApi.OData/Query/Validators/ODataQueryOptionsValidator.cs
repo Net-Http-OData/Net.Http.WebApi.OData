@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query.Validation
+namespace Net.Http.WebApi.OData.Query.Validators
 {
     /// <summary>
     /// A class which validates ODataQueryOptions based upon the ODataValidationSettings.

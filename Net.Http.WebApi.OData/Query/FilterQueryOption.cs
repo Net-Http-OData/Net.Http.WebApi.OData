@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
-    using Net.Http.WebApi.OData.Query.Expression;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     /// <summary>
     /// A class containing deserialised values from the $filter query option.

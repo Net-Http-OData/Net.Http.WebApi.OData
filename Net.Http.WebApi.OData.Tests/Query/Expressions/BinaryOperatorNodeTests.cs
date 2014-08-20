@@ -1,6 +1,6 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Expression
+﻿namespace Net.Http.WebApi.Tests.OData.Query.Expressions
 {
-    using Net.Http.WebApi.OData.Query.Expression;
+    using Net.Http.WebApi.OData.Query.Expressions;
     using Xunit;
 
     public class BinaryOperatorNodeTests

@@ -64,23 +64,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expression\BinaryOperatorKindParserTests.cs">
-      <Link>Query\Expression\BinaryOperatorKindParserTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorKindParserTests.cs">
+      <Link>Query\Expressions\BinaryOperatorKindParserTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expression\BinaryOperatorNodeTests.cs">
-      <Link>Query\Expression\BinaryOperatorNodeTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorNodeTests.cs">
+      <Link>Query\Expressions\BinaryOperatorNodeTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expression\ConstantNodeTests.cs">
-      <Link>Query\Expression\ConstantNodeTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\ConstantNodeTests.cs">
+      <Link>Query\Expressions\ConstantNodeTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expression\FilterExpressionParserTests.cs">
-      <Link>Query\Expression\FilterExpressionParserTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\FilterExpressionParserTests.cs">
+      <Link>Query\Expressions\FilterExpressionParserTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expression\SingleValueFunctionCallNodeTests.cs">
-      <Link>Query\Expression\SingleValueFunctionCallNodeTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValueFunctionCallNodeTests.cs">
+      <Link>Query\Expressions\SingleValueFunctionCallNodeTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expression\SingleValuePropertyAccessNodeTests.cs">
-      <Link>Query\Expression\SingleValuePropertyAccessNodeTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValuePropertyAccessNodeTests.cs">
+      <Link>Query\Expressions\SingleValuePropertyAccessNodeTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterQueryOptionTests.cs">
       <Link>Query\FilterQueryOptionTests.cs</Link>
@@ -112,14 +112,14 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\TopQueryOptionTests.cs">
       <Link>Query\TopQueryOptionTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validation\ODataQueryOptionsValidatorTests.cs">
-      <Link>Query\Validation\ODataQueryOptionsValidatorTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validators\ODataQueryOptionsValidatorTests.cs">
+      <Link>Query\Validators\ODataQueryOptionsValidatorTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validation\SkipQueryOptionValidatorTests.cs">
-      <Link>Query\Validation\SkipQueryOptionValidatorTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validators\SkipQueryOptionValidatorTests.cs">
+      <Link>Query\Validators\SkipQueryOptionValidatorTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validation\TopQueryOptionValidatorTests.cs">
-      <Link>Query\Validation\TopQueryOptionValidatorTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validators\TopQueryOptionValidatorTests.cs">
+      <Link>Query\Validators\TopQueryOptionValidatorTests.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

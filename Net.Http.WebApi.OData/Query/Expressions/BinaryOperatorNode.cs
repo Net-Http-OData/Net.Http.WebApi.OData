@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query.Expression
+namespace Net.Http.WebApi.OData.Query.Expressions
 {
     /// <summary>
     /// A QueryNode which represents a binary operator with a left and right branch.

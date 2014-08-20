@@ -1,9 +1,9 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Validation
+﻿namespace Net.Http.WebApi.Tests.OData.Query.Validators
 {
     using System.Net.Http;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
-    using Net.Http.WebApi.OData.Query.Validation;
+    using Net.Http.WebApi.OData.Query.Validators;
     using Xunit;
 
     public class ODataQueryOptionsValidatorTests

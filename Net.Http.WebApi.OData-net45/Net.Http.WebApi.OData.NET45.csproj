@@ -77,35 +77,41 @@
     <Compile Include="..\Net.Http.WebApi.OData\ODataException.cs">
       <Link>ODataException.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\BinaryOperatorKind.cs">
-      <Link>Query\Expression\BinaryOperatorKind.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedFunctions.cs">
+      <Link>Query\AllowedFunctions.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\BinaryOperatorKindParser.cs">
-      <Link>Query\Expression\BinaryOperatorKindParser.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedQueryOptions.cs">
+      <Link>Query\AllowedQueryOptions.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\BinaryOperatorNode.cs">
-      <Link>Query\Expression\BinaryOperatorNode.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKind.cs">
+      <Link>Query\Expressions\BinaryOperatorKind.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\ConstantNode.cs">
-      <Link>Query\Expression\ConstantNode.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKindParser.cs">
+      <Link>Query\Expressions\BinaryOperatorKindParser.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\FilterExpressionParser.cs">
-      <Link>Query\Expression\FilterExpressionParser.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorNode.cs">
+      <Link>Query\Expressions\BinaryOperatorNode.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\QueryNode.cs">
-      <Link>Query\Expression\QueryNode.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs">
+      <Link>Query\Expressions\ConstantNode.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\QueryNodeKind.cs">
-      <Link>Query\Expression\QueryNodeKind.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\FilterExpressionParser.cs">
+      <Link>Query\Expressions\FilterExpressionParser.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\SingleValueFunctionCallNode.cs">
-      <Link>Query\Expression\SingleValueFunctionCallNode.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\QueryNode.cs">
+      <Link>Query\Expressions\QueryNode.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\SingleValueNode.cs">
-      <Link>Query\Expression\SingleValueNode.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\QueryNodeKind.cs">
+      <Link>Query\Expressions\QueryNodeKind.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expression\SingleValuePropertyAccessNode.cs">
-      <Link>Query\Expression\SingleValuePropertyAccessNode.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValueFunctionCallNode.cs">
+      <Link>Query\Expressions\SingleValueFunctionCallNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValueNode.cs">
+      <Link>Query\Expressions\SingleValueNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValuePropertyAccessNode.cs">
+      <Link>Query\Expressions\SingleValuePropertyAccessNode.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\FilterQueryOption.cs">
       <Link>Query\FilterQueryOption.cs</Link>
@@ -131,6 +137,9 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\ODataRawQueryOptions.cs">
       <Link>Query\ODataRawQueryOptions.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ODataValidationSettings.cs">
+      <Link>Query\ODataValidationSettings.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\OrderByDirection.cs">
       <Link>Query\OrderByDirection.cs</Link>
     </Compile>
@@ -149,26 +158,17 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\TopQueryOption.cs">
       <Link>Query\TopQueryOption.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Validation\AllowedFunctions.cs">
-      <Link>Query\Validation\AllowedFunctions.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\ODataQueryOptionsExtensions.cs">
+      <Link>Query\Validators\ODataQueryOptionsExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Validation\AllowedQueryOptions.cs">
-      <Link>Query\Validation\AllowedQueryOptions.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\ODataQueryOptionsValidator.cs">
+      <Link>Query\Validators\ODataQueryOptionsValidator.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Validation\ODataQueryOptionsExtensions.cs">
-      <Link>Query\Validation\ODataQueryOptionsExtensions.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\SkipQueryOptionValidator.cs">
+      <Link>Query\Validators\SkipQueryOptionValidator.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Validation\ODataQueryOptionsValidator.cs">
-      <Link>Query\Validation\ODataQueryOptionsValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Validation\ODataValidationSettings.cs">
-      <Link>Query\Validation\ODataValidationSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Validation\SkipQueryOptionValidator.cs">
-      <Link>Query\Validation\SkipQueryOptionValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Validation\TopQueryOptionValidator.cs">
-      <Link>Query\Validation\TopQueryOptionValidator.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\TopQueryOptionValidator.cs">
+      <Link>Query\Validators\TopQueryOptionValidator.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
