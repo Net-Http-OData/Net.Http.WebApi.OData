@@ -4,6 +4,9 @@
     <BooleanProperty Name="WriteCache">False</BooleanProperty>
     <StringProperty Name="Culture">en-GB</StringProperty>
     <CollectionProperty Name="RecognizedWords">
+      <Value>eq</Value>
+      <Value>ge</Value>
+      <Value>gt</Value>
       <Value>Guid</Value>
     </CollectionProperty>
   </GlobalSettings>

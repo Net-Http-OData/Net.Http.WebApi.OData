@@ -80,6 +80,9 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedFunctions.cs">
       <Link>Query\AllowedFunctions.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedLogicalOperators.cs">
+      <Link>Query\AllowedLogicalOperators.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedQueryOptions.cs">
       <Link>Query\AllowedQueryOptions.cs</Link>
     </Compile>

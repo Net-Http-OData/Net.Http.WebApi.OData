@@ -35,6 +35,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 ValidateStringFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateDateFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateMathFunctions(queryOptions.Filter.RawValue, validationSettings);
+                ValidateLogicalOperators(queryOptions.Filter.RawValue, validationSettings);
             }
 
             if (queryOptions.Format != null
@@ -110,6 +111,57 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 && rawFilterValue.Contains("second("))
             {
                 throw new ODataException(Messages.SecondFunctionNotSupported);
+            }
+        }
+
+        private static void ValidateLogicalOperators(string rawFilterValue, ODataValidationSettings validationSettings)
+        {
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.And) != AllowedLogicalOperators.And
+                && rawFilterValue.Contains(" and "))
+            {
+                throw new ODataException(Messages.AndOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Or) != AllowedLogicalOperators.Or
+                && rawFilterValue.Contains(" or "))
+            {
+                throw new ODataException(Messages.OrOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Equal) != AllowedLogicalOperators.Equal
+                && rawFilterValue.Contains(" eq "))
+            {
+                throw new ODataException(Messages.EqualsOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.NotEqual) != AllowedLogicalOperators.NotEqual
+                && rawFilterValue.Contains(" ne "))
+            {
+                throw new ODataException(Messages.NotEqualsOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThan) != AllowedLogicalOperators.GreaterThan
+                && rawFilterValue.Contains(" gt "))
+            {
+                throw new ODataException(Messages.GreaterThanOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThanOrEqual) != AllowedLogicalOperators.GreaterThanOrEqual
+                && rawFilterValue.Contains(" ge "))
+            {
+                throw new ODataException(Messages.GreaterThanOrEqualsOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThan) != AllowedLogicalOperators.LessThan
+                && rawFilterValue.Contains(" lt "))
+            {
+                throw new ODataException(Messages.LessThanOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThanOrEqual) != AllowedLogicalOperators.LessThanOrEqual
+                && rawFilterValue.Contains(" le "))
+            {
+                throw new ODataException(Messages.LessThanOrEqualsOperatorNotSupported);
             }
         }
 

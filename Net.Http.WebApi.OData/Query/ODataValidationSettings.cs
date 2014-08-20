@@ -29,6 +29,7 @@ namespace Net.Http.WebApi.OData.Query
                 return new ODataValidationSettings
                 {
                     AllowedFunctions = AllowedFunctions.None,
+                    AllowedLogicalOperators = AllowedLogicalOperators.None,
                     AllowedQueryOptions = AllowedQueryOptions.None,
                     MaxTop = 0
                 };
@@ -39,6 +40,15 @@ namespace Net.Http.WebApi.OData.Query
         /// Gets or sets the allowed functions.
         /// </summary>
         public AllowedFunctions AllowedFunctions
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the allowed logical operators.
+        /// </summary>
+        public AllowedLogicalOperators AllowedLogicalOperators
         {
             get;
             set;

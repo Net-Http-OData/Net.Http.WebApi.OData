@@ -213,4 +213,28 @@
   <data name="SubstringFunctionNotSupported" xml:space="preserve">
     <value>The 'substring' function is not supported by this service.</value>
   </data>
+  <data name="AndOperatorNotSupported" xml:space="preserve">
+    <value>The 'and' operator is not supported by this service.</value>
+  </data>
+  <data name="EqualsOperatorNotSupported" xml:space="preserve">
+    <value>The 'eq' operator is not supported by this service.</value>
+  </data>
+  <data name="GreaterThanOperatorNotSupported" xml:space="preserve">
+    <value>The 'gt' operator is not supported by this service.</value>
+  </data>
+  <data name="GreaterThanOrEqualsOperatorNotSupported" xml:space="preserve">
+    <value>The 'ge' operator is not supported by this service.</value>
+  </data>
+  <data name="LessThanOperatorNotSupported" xml:space="preserve">
+    <value>The 'lt' operator is not supported by this service.</value>
+  </data>
+  <data name="LessThanOrEqualsOperatorNotSupported" xml:space="preserve">
+    <value>The 'le' operator is not supported by this service.</value>
+  </data>
+  <data name="NotEqualsOperatorNotSupported" xml:space="preserve">
+    <value>The 'ne' operator is not supported by this service.</value>
+  </data>
+  <data name="OrOperatorNotSupported" xml:space="preserve">
+    <value>The 'or' operator is not supported by this service.</value>
+  </data>
 </root>

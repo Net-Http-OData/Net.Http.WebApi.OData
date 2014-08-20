@@ -61,6 +61,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;and&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string AndOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("AndOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;ceiling&apos; function is not supported by this service..
         /// </summary>
         internal static string CeilingFunctionNotSupported {
@@ -88,6 +97,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;eq&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string EqualsOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("EqualsOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The $filter query option is not supported by this service..
         /// </summary>
         internal static string FilterQueryOptionNotSupported {
@@ -111,6 +129,24 @@ namespace Net.Http.WebApi.OData {
         internal static string FormatQueryOptionNotSupported {
             get {
                 return ResourceManager.GetString("FormatQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;gt&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string GreaterThanOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("GreaterThanOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;ge&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string GreaterThanOrEqualsOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("GreaterThanOrEqualsOperatorNotSupported", resourceCulture);
             }
         }
         
@@ -160,6 +196,24 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;lt&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string LessThanOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("LessThanOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;le&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string LessThanOrEqualsOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("LessThanOrEqualsOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;minute&apos; function is not supported by this service..
         /// </summary>
         internal static string MinuteFunctionNotSupported {
@@ -178,6 +232,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;ne&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string NotEqualsOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("NotEqualsOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If specified, the $orderby direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {
@@ -192,6 +255,15 @@ namespace Net.Http.WebApi.OData {
         internal static string OrderByQueryOptionNotSupported {
             get {
                 return ResourceManager.GetString("OrderByQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;or&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string OrOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("OrOperatorNotSupported", resourceCulture);
             }
         }
         

@@ -97,6 +97,9 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\ODataRawQueryOptionsTests.cs">
       <Link>Query\ODataRawQueryOptionsTests.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\ODataValidationSettingsTests.cs">
+      <Link>Query\ODataValidationSettingsTests.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\OrderByPropertyTests.cs">
       <Link>Query\OrderByPropertyTests.cs</Link>
     </Compile>
