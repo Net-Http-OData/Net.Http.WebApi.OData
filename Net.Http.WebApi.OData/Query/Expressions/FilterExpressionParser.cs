@@ -22,7 +22,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         private static readonly Regex DecimalRegex = new Regex(@"^(-)?\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex DoubleRegex = new Regex(@"^(-)?\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex FunctionCallRegex = new Regex(@"^(?<Function>[a-z/]*)\(((?<Property>[A-Za-z/]*)(, '?(?<Argument>[^'\(\),]*)'?)*\)|('?(?<Argument>[^'\(\)]*)'?)?, (?<Property>[A-Za-z/]*)\)) (?<Operator>eq|ne|gt|ge|lt|le) (?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex PropertyAccessRegex = new Regex(@"^(?<Property>[A-Za-z/]*)? ?(?<Operator>eq|ne|gt|ge|lt|le|add|sub|mul|div|mod) (?<DataType>datetime|guid)?(?:'?)((?<Value>[^']*)(?:'?)|(?<Value>[^'\s]*)(?:'?) (?<Comparison>.*)?)$", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex PropertyAccessRegex = new Regex(@"^((?<Property>[A-Za-z/]*)? ?(?<Operator>eq|ne|gt|ge|lt|le) (?<DataType>datetime|guid)?(?:'?)(?<Value>[^']*)(?:'?)|(?<Property>[A-Za-z/]*) (?<Operator>add|sub|mul|div|mod) (?<Value>-?\d*\.?\d*[mMdDfF]?) (?<Comparison>.*)?)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex SingleRegex = new Regex(@"^(-)?\d+.\d+(f|F)$", RegexOptions.Compiled | RegexOptions.Singleline);
 
         internal static QueryNode Parse(string filterValue)

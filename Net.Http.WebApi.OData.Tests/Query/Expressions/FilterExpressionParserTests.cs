@@ -753,13 +753,13 @@
             }
         }
 
-        public class ParsePropertyAddValueExpression
+        public class ParsePropertyAddDecimalValueExpression
         {
             private readonly BinaryOperatorNode node;
 
-            public ParsePropertyAddValueExpression()
+            public ParsePropertyAddDecimalValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Price add 2.45M eq '5.00M'");
+                var queryNode = FilterExpressionParser.Parse("Price add 2.45M eq 5.00M");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -837,13 +837,97 @@
             }
         }
 
+        public class ParsePropertyAddIntegerValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyAddIntegerValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Quantity add 10 eq 15");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheLeftNodeOperatorKindShouldBeAdd()
+            {
+                Assert.Equal(BinaryOperatorKind.Add, ((BinaryOperatorNode)this.node.Left).OperatorKind);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldBeABinaryOperatorNode()
+            {
+                Assert.IsType<BinaryOperatorNode>(this.node.Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldBeASingleValuePropertyAccessNode()
+            {
+                Assert.IsType<SingleValuePropertyAccessNode>(((BinaryOperatorNode)this.node.Left).Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldHaveTheCorrectPropertyName()
+            {
+                Assert.Equal("Quantity", ((SingleValuePropertyAccessNode)(((BinaryOperatorNode)this.node.Left).Left)).PropertyName);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldBeAConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((BinaryOperatorNode)this.node.Left).Right);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("10", ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(10, ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).Value);
+            }
+
+            [Fact]
+            public void TheNodeReturnedShouldBeABinaryOperatorNode()
+            {
+                Assert.NotNull(this.node);
+            }
+
+            [Fact]
+            public void TheOperatorKindShouldBeEqual()
+            {
+                Assert.Equal(BinaryOperatorKind.Equal, this.node.OperatorKind);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(this.node.Right);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("15", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(15, ((ConstantNode)this.node.Right).Value);
+            }
+        }
+
         public class ParsePropertyDivValueExpression
         {
             private readonly BinaryOperatorNode node;
 
             public ParsePropertyDivValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Price div 2.45M eq '5.00M'");
+                var queryNode = FilterExpressionParser.Parse("Price div 2.45M eq 5.00M");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -1695,7 +1779,7 @@
 
             public ParsePropertyModValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Price mod 2.45M eq '5.00M'");
+                var queryNode = FilterExpressionParser.Parse("Price mod 2.45M eq 5.00M");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -1779,7 +1863,7 @@
 
             public ParsePropertyMulValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Price mul 2.45M eq '5.00M'");
+                var queryNode = FilterExpressionParser.Parse("Price mul 2.45M eq 5.00M");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -1917,7 +2001,7 @@
 
             public ParsePropertySubValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Price sub 2.45M eq '5.00M'");
+                var queryNode = FilterExpressionParser.Parse("Price sub 2.45M eq 5.00M");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
