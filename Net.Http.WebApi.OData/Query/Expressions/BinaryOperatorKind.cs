@@ -61,5 +61,30 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// The binary operator is less than or equal.
         /// </summary>
         LessThanOrEqual = 8,
+
+        /// <summary>
+        /// The binary operator is add.
+        /// </summary>
+        Add = 9,
+
+        /// <summary>
+        /// The binary operator is subtract.
+        /// </summary>
+        Subtract = 10,
+
+        /// <summary>
+        /// The binary operator is multiply.
+        /// </summary>
+        Multiply = 11,
+
+        /// <summary>
+        /// The binary operator is divide.
+        /// </summary>
+        Divide = 12,
+
+        /// <summary>
+        /// The binary operator is modulo.
+        /// </summary>
+        Modulo = 13
     }
 }

@@ -753,6 +753,174 @@
             }
         }
 
+        public class ParsePropertyAddValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyAddValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Price add 2.45M eq '5.00M'");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheLeftNodeOperatorKindShouldBeAdd()
+            {
+                Assert.Equal(BinaryOperatorKind.Add, ((BinaryOperatorNode)this.node.Left).OperatorKind);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldBeABinaryOperatorNode()
+            {
+                Assert.IsType<BinaryOperatorNode>(this.node.Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldBeASingleValuePropertyAccessNode()
+            {
+                Assert.IsType<SingleValuePropertyAccessNode>(((BinaryOperatorNode)this.node.Left).Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldHaveTheCorrectPropertyName()
+            {
+                Assert.Equal("Price", ((SingleValuePropertyAccessNode)(((BinaryOperatorNode)this.node.Left).Left)).PropertyName);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldBeAConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((BinaryOperatorNode)this.node.Left).Right);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("2.45M", ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(2.45M, ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).Value);
+            }
+
+            [Fact]
+            public void TheNodeReturnedShouldBeABinaryOperatorNode()
+            {
+                Assert.NotNull(this.node);
+            }
+
+            [Fact]
+            public void TheOperatorKindShouldBeEqual()
+            {
+                Assert.Equal(BinaryOperatorKind.Equal, this.node.OperatorKind);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(this.node.Right);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("5.00M", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(5.00M, ((ConstantNode)this.node.Right).Value);
+            }
+        }
+
+        public class ParsePropertyDivValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyDivValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Price div 2.45M eq '5.00M'");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheLeftNodeOperatorKindShouldBeDivide()
+            {
+                Assert.Equal(BinaryOperatorKind.Divide, ((BinaryOperatorNode)this.node.Left).OperatorKind);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldBeABinaryOperatorNode()
+            {
+                Assert.IsType<BinaryOperatorNode>(this.node.Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldBeASingleValuePropertyAccessNode()
+            {
+                Assert.IsType<SingleValuePropertyAccessNode>(((BinaryOperatorNode)this.node.Left).Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldHaveTheCorrectPropertyName()
+            {
+                Assert.Equal("Price", ((SingleValuePropertyAccessNode)(((BinaryOperatorNode)this.node.Left).Left)).PropertyName);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldBeAConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((BinaryOperatorNode)this.node.Left).Right);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("2.45M", ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(2.45M, ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).Value);
+            }
+
+            [Fact]
+            public void TheNodeReturnedShouldBeABinaryOperatorNode()
+            {
+                Assert.NotNull(this.node);
+            }
+
+            [Fact]
+            public void TheOperatorKindShouldBeEqual()
+            {
+                Assert.Equal(BinaryOperatorKind.Equal, this.node.OperatorKind);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(this.node.Right);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("5.00M", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(5.00M, ((ConstantNode)this.node.Right).Value);
+            }
+        }
+
         public class ParsePropertyEqDateHourMinuteValueExpression
         {
             private readonly BinaryOperatorNode node;
@@ -1521,6 +1689,174 @@
             }
         }
 
+        public class ParsePropertyModValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyModValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Price mod 2.45M eq '5.00M'");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheLeftNodeOperatorKindShouldBeModulo()
+            {
+                Assert.Equal(BinaryOperatorKind.Modulo, ((BinaryOperatorNode)this.node.Left).OperatorKind);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldBeABinaryOperatorNode()
+            {
+                Assert.IsType<BinaryOperatorNode>(this.node.Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldBeASingleValuePropertyAccessNode()
+            {
+                Assert.IsType<SingleValuePropertyAccessNode>(((BinaryOperatorNode)this.node.Left).Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldHaveTheCorrectPropertyName()
+            {
+                Assert.Equal("Price", ((SingleValuePropertyAccessNode)(((BinaryOperatorNode)this.node.Left).Left)).PropertyName);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldBeAConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((BinaryOperatorNode)this.node.Left).Right);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("2.45M", ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(2.45M, ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).Value);
+            }
+
+            [Fact]
+            public void TheNodeReturnedShouldBeABinaryOperatorNode()
+            {
+                Assert.NotNull(this.node);
+            }
+
+            [Fact]
+            public void TheOperatorKindShouldBeEqual()
+            {
+                Assert.Equal(BinaryOperatorKind.Equal, this.node.OperatorKind);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(this.node.Right);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("5.00M", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(5.00M, ((ConstantNode)this.node.Right).Value);
+            }
+        }
+
+        public class ParsePropertyMulValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertyMulValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Price mul 2.45M eq '5.00M'");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheLeftNodeOperatorKindShouldBeMultiply()
+            {
+                Assert.Equal(BinaryOperatorKind.Multiply, ((BinaryOperatorNode)this.node.Left).OperatorKind);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldBeABinaryOperatorNode()
+            {
+                Assert.IsType<BinaryOperatorNode>(this.node.Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldBeASingleValuePropertyAccessNode()
+            {
+                Assert.IsType<SingleValuePropertyAccessNode>(((BinaryOperatorNode)this.node.Left).Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldHaveTheCorrectPropertyName()
+            {
+                Assert.Equal("Price", ((SingleValuePropertyAccessNode)(((BinaryOperatorNode)this.node.Left).Left)).PropertyName);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldBeAConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((BinaryOperatorNode)this.node.Left).Right);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("2.45M", ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(2.45M, ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).Value);
+            }
+
+            [Fact]
+            public void TheNodeReturnedShouldBeABinaryOperatorNode()
+            {
+                Assert.NotNull(this.node);
+            }
+
+            [Fact]
+            public void TheOperatorKindShouldBeEqual()
+            {
+                Assert.Equal(BinaryOperatorKind.Equal, this.node.OperatorKind);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(this.node.Right);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("5.00M", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(5.00M, ((ConstantNode)this.node.Right).Value);
+            }
+        }
+
         public class ParsePropertyNeValueExpression
         {
             private readonly BinaryOperatorNode node;
@@ -1572,6 +1908,90 @@
             public void TheRightNodeShouldContainTheValue()
             {
                 Assert.Equal("John", ((ConstantNode)this.node.Right).Value);
+            }
+        }
+
+        public class ParsePropertySubValueExpression
+        {
+            private readonly BinaryOperatorNode node;
+
+            public ParsePropertySubValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Price sub 2.45M eq '5.00M'");
+
+                this.node = queryNode as BinaryOperatorNode;
+            }
+
+            [Fact]
+            public void TheLeftNodeOperatorKindShouldBeSubtract()
+            {
+                Assert.Equal(BinaryOperatorKind.Subtract, ((BinaryOperatorNode)this.node.Left).OperatorKind);
+            }
+
+            [Fact]
+            public void TheLeftNodeShouldBeABinaryOperatorNode()
+            {
+                Assert.IsType<BinaryOperatorNode>(this.node.Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldBeASingleValuePropertyAccessNode()
+            {
+                Assert.IsType<SingleValuePropertyAccessNode>(((BinaryOperatorNode)this.node.Left).Left);
+            }
+
+            [Fact]
+            public void TheLeftNodesLeftNodeShouldHaveTheCorrectPropertyName()
+            {
+                Assert.Equal("Price", ((SingleValuePropertyAccessNode)(((BinaryOperatorNode)this.node.Left).Left)).PropertyName);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldBeAConstantNode()
+            {
+                Assert.IsType<ConstantNode>(((BinaryOperatorNode)this.node.Left).Right);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("2.45M", ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheLeftNodesRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(2.45M, ((ConstantNode)((BinaryOperatorNode)this.node.Left).Right).Value);
+            }
+
+            [Fact]
+            public void TheNodeReturnedShouldBeABinaryOperatorNode()
+            {
+                Assert.NotNull(this.node);
+            }
+
+            [Fact]
+            public void TheOperatorKindShouldBeEqual()
+            {
+                Assert.Equal(BinaryOperatorKind.Equal, this.node.OperatorKind);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldBeTheConstantNode()
+            {
+                Assert.IsType<ConstantNode>(this.node.Right);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheLiteralText()
+            {
+                Assert.Equal("5.00M", ((ConstantNode)this.node.Right).LiteralText);
+            }
+
+            [Fact]
+            public void TheRightNodeShouldContainTheValue()
+            {
+                Assert.Equal(5.00M, ((ConstantNode)this.node.Right).Value);
             }
         }
 

@@ -42,6 +42,21 @@ namespace Net.Http.WebApi.OData.Query.Expressions
                 case "or":
                     return BinaryOperatorKind.Or;
 
+                case "add":
+                    return BinaryOperatorKind.Add;
+
+                case "sub":
+                    return BinaryOperatorKind.Subtract;
+
+                case "mul":
+                    return BinaryOperatorKind.Multiply;
+
+                case "div":
+                    return BinaryOperatorKind.Divide;
+
+                case "mod":
+                    return BinaryOperatorKind.Modulo;
+
                 default:
                     throw new ODataException("The operator type '" + operatorType + "' is not currently supported.");
             }

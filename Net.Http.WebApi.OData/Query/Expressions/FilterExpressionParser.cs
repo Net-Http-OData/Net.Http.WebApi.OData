@@ -22,7 +22,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         private static readonly Regex DecimalRegex = new Regex(@"^(-)?\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex DoubleRegex = new Regex(@"^(-)?\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex FunctionCallRegex = new Regex(@"^(?<Function>[a-z/]*)\(((?<Property>[A-Za-z/]*)(, '?(?<Argument>[^'\(\),]*)'?)*\)|('?(?<Argument>[^'\(\)]*)'?)?, (?<Property>[A-Za-z/]*)\)) (?<Operator>eq|ne|gt|ge|lt|le) (?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex PropertyAccessRegex = new Regex("^(?<Property>[A-Za-z/]*) (?<Operator>eq|ne|gt|ge|lt|le) (?<DataType>datetime|guid)?(?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex PropertyAccessRegex = new Regex(@"^(?<Property>[A-Za-z/]*)? ?(?<Operator>eq|ne|gt|ge|lt|le|add|sub|mul|div|mod) (?<DataType>datetime|guid)?(?:'?)((?<Value>[^']*)(?:'?)|(?<Value>[^'\s]*)(?:'?) (?<Comparison>.*)?)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex SingleRegex = new Regex(@"^(-)?\d+.\d+(f|F)$", RegexOptions.Compiled | RegexOptions.Singleline);
 
         internal static QueryNode Parse(string filterValue)
@@ -118,65 +118,98 @@ namespace Net.Http.WebApi.OData.Query.Expressions
             }
         }
 
+        private static SingleValueNode ParseSingleValueFunctionCall(Match functionCallMatch)
+        {
+            var function = functionCallMatch.Groups["Function"].Value;
+            var propertyName = functionCallMatch.Groups["Property"].Value;
+            var argumentCaptures = functionCallMatch.Groups["Argument"].Captures;
+            var operatorType = functionCallMatch.Groups["Operator"].Value;
+            var valueLiteral = functionCallMatch.Groups["Value"].Value;
+
+            var propertyNode = new SingleValuePropertyAccessNode(propertyName);
+            var arguments = new QueryNode[argumentCaptures.Count > 0 ? argumentCaptures.Count + 1 : 2];
+
+            if (function == "substringof")
+            {
+                arguments[0] = new ConstantNode(argumentCaptures[0].Value, GetValue(string.Empty, argumentCaptures[0].Value));
+                arguments[1] = propertyNode;
+            }
+            else
+            {
+                arguments[0] = propertyNode;
+
+                if (argumentCaptures.Count == 0)
+                {
+                    arguments[1] = new ConstantNode(string.Empty, string.Empty);
+                }
+
+                for (int i = 0; i < argumentCaptures.Count; i++)
+                {
+                    arguments[i + 1] = new ConstantNode(argumentCaptures[i].Value, GetValue(string.Empty, argumentCaptures[i].Value));
+                }
+            }
+
+            var functionNode = new SingleValueFunctionCallNode(function, arguments);
+            var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
+            var valueConstantNode = new ConstantNode(valueLiteral, GetValue(string.Empty, valueLiteral));
+
+            return new BinaryOperatorNode(functionNode, operatorKind, valueConstantNode);
+        }
+
         private static SingleValueNode ParseSingleValueNode(string expression)
         {
             var propertyAccessMatch = PropertyAccessRegex.Match(expression);
 
             if (propertyAccessMatch.Success)
             {
-                var propertyName = propertyAccessMatch.Groups["Property"].Value;
-                var operatorType = propertyAccessMatch.Groups["Operator"].Value;
-                var dataType = propertyAccessMatch.Groups["DataType"].Value;
-                var value = propertyAccessMatch.Groups["Value"].Value;
-
-                var propertyNode = new SingleValuePropertyAccessNode(propertyName);
-                var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
-                var valueConstantNode = new ConstantNode(value, GetValue(dataType, value));
-
-                return new BinaryOperatorNode(propertyNode, operatorKind, valueConstantNode);
+                return ParseSingleValuePropertyAccess(propertyAccessMatch);
             }
 
             var functionCallMatch = FunctionCallRegex.Match(expression);
 
             if (functionCallMatch.Success)
             {
-                var function = functionCallMatch.Groups["Function"].Value;
-                var propertyName = functionCallMatch.Groups["Property"].Value;
-                var argumentCaptures = functionCallMatch.Groups["Argument"].Captures;
-                var operatorType = functionCallMatch.Groups["Operator"].Value;
-                var valueLiteral = functionCallMatch.Groups["Value"].Value;
-
-                var propertyNode = new SingleValuePropertyAccessNode(propertyName);
-                var arguments = new QueryNode[argumentCaptures.Count > 0 ? argumentCaptures.Count + 1 : 2];
-
-                if (function == "substringof")
-                {
-                    arguments[0] = new ConstantNode(argumentCaptures[0].Value, GetValue(string.Empty, argumentCaptures[0].Value));
-                    arguments[1] = propertyNode;
-                }
-                else
-                {
-                    arguments[0] = propertyNode;
-
-                    if (argumentCaptures.Count == 0)
-                    {
-                        arguments[1] = new ConstantNode(string.Empty, string.Empty);
-                    }
-
-                    for (int i = 0; i < argumentCaptures.Count; i++)
-                    {
-                        arguments[i + 1] = new ConstantNode(argumentCaptures[i].Value, GetValue(string.Empty, argumentCaptures[i].Value));
-                    }
-                }
-
-                var functionNode = new SingleValueFunctionCallNode(function, arguments);
-                var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
-                var valueConstantNode = new ConstantNode(valueLiteral, GetValue(string.Empty, valueLiteral));
-
-                return new BinaryOperatorNode(functionNode, operatorKind, valueConstantNode);
+                return ParseSingleValueFunctionCall(functionCallMatch);
             }
 
             throw new ODataException("The expression '" + expression + "' is not currently supported.");
+        }
+
+        private static SingleValueNode ParseSingleValuePropertyAccess(Match propertyAccessMatch)
+        {
+            SingleValueNode result = null;
+
+            var propertyName = propertyAccessMatch.Groups["Property"].Value;
+            var operatorType = propertyAccessMatch.Groups["Operator"].Value;
+            var dataType = propertyAccessMatch.Groups["DataType"].Value;
+            var value = propertyAccessMatch.Groups["Value"].Value;
+
+            var propertyNode = new SingleValuePropertyAccessNode(propertyName);
+            var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
+            var valueConstantNode = new ConstantNode(value, GetValue(dataType, value));
+
+            result = new BinaryOperatorNode(propertyNode, operatorKind, valueConstantNode);
+
+            var comparison = propertyAccessMatch.Groups["Comparison"].Value;
+
+            if (!string.IsNullOrEmpty(comparison))
+            {
+                var comparisonMatch = PropertyAccessRegex.Match(comparison);
+
+                if (comparisonMatch.Success)
+                {
+                    var rightOperatorType = comparisonMatch.Groups["Operator"].Value;
+                    var rightDataType = comparisonMatch.Groups["DataType"].Value;
+                    var rightValue = comparisonMatch.Groups["Value"].Value;
+
+                    var rightOperatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(rightOperatorType);
+                    var rightValueConstantNode = new ConstantNode(rightValue, GetValue(rightDataType, rightValue));
+
+                    result = new BinaryOperatorNode(result, rightOperatorKind, rightValueConstantNode);
+                }
+            }
+
+            return result;
         }
 
         private static bool PreceededByAnd(string filterValue, int position)
