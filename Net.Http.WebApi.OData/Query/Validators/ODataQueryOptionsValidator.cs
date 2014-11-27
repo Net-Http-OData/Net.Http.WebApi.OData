@@ -36,6 +36,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 ValidateDateFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateMathFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateLogicalOperators(queryOptions.Filter.RawValue, validationSettings);
+                ValidateArithmeticOperators(queryOptions.Filter.RawValue, validationSettings);
             }
 
             if (queryOptions.Format != null
@@ -72,6 +73,44 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
                 throw new ODataException(Messages.TopQueryOptionNotSupported);
+            }
+        }
+
+        private static void ValidateArithmeticOperators(string rawFilterValue, ODataValidationSettings validationSettings)
+        {
+            if (validationSettings.AllowedArithmeticOperators == AllowedArithmeticOperators.All)
+            {
+                return;
+            }
+
+            if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Add) != AllowedArithmeticOperators.Add
+                && rawFilterValue.Contains(" add "))
+            {
+                throw new ODataException(Messages.AddOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Divide) != AllowedArithmeticOperators.Divide
+                && rawFilterValue.Contains(" div "))
+            {
+                throw new ODataException(Messages.DivideOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Modulo) != AllowedArithmeticOperators.Modulo
+                && rawFilterValue.Contains(" mod "))
+            {
+                throw new ODataException(Messages.ModuloOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Multiply) != AllowedArithmeticOperators.Multiply
+                && rawFilterValue.Contains(" mul "))
+            {
+                throw new ODataException(Messages.MultiplyOperatorNotSupported);
+            }
+
+            if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Subtract) != AllowedArithmeticOperators.Subtract
+                && rawFilterValue.Contains(" sub "))
+            {
+                throw new ODataException(Messages.SubtractOperatorNotSupported);
             }
         }
 
@@ -122,6 +161,11 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
         private static void ValidateLogicalOperators(string rawFilterValue, ODataValidationSettings validationSettings)
         {
+            if (validationSettings.AllowedLogicalOperators == AllowedLogicalOperators.All)
+            {
+                return;
+            }
+
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.And) != AllowedLogicalOperators.And
                 && rawFilterValue.Contains(" and "))
             {

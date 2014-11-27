@@ -68,6 +68,11 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that the $format query option may be used.
         /// </summary>
-        Format = 256
+        Format = 256,
+
+        /// <summary>
+        /// Specifies that all query options may be used.
+        /// </summary>
+        All = Select | Filter | Expand | Skip | Top | SkipToken | OrderBy | InlineCount | Format,
     }
 }

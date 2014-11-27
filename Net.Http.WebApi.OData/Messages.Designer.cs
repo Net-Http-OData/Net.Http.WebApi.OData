@@ -61,6 +61,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;add&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string AddOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("AddOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;and&apos; operator is not supported by this service..
         /// </summary>
         internal static string AndOperatorNotSupported {
@@ -84,6 +93,15 @@ namespace Net.Http.WebApi.OData {
         internal static string DayFunctionNotSupported {
             get {
                 return ResourceManager.GetString("DayFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;div&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string DivideOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("DivideOperatorNotSupported", resourceCulture);
             }
         }
         
@@ -223,11 +241,29 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;mod&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string ModuloOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("ModuloOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;month&apos; function is not supported by this service..
         /// </summary>
         internal static string MonthFunctionNotSupported {
             get {
                 return ResourceManager.GetString("MonthFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;mul&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string MultiplyOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("MultiplyOperatorNotSupported", resourceCulture);
             }
         }
         
@@ -345,6 +381,15 @@ namespace Net.Http.WebApi.OData {
         internal static string SubstringOfFunctionNotSupported {
             get {
                 return ResourceManager.GetString("SubstringOfFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;sub&apos; operator is not supported by this service..
+        /// </summary>
+        internal static string SubtractOperatorNotSupported {
+            get {
+                return ResourceManager.GetString("SubtractOperatorNotSupported", resourceCulture);
             }
         }
         

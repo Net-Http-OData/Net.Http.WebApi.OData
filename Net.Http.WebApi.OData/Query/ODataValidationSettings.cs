@@ -22,18 +22,46 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the validation settings for when no OData queries are allowed.
         /// </summary>
+        public static ODataValidationSettings All
+        {
+            get
+            {
+                return new ODataValidationSettings
+                {
+                    AllowedArithmeticOperators = AllowedArithmeticOperators.All,
+                    AllowedFunctions = AllowedFunctions.AllFunctions,
+                    AllowedLogicalOperators = AllowedLogicalOperators.All,
+                    AllowedQueryOptions = AllowedQueryOptions.All,
+                    MaxTop = 100
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets the validation settings for when no OData queries are allowed.
+        /// </summary>
         public static ODataValidationSettings None
         {
             get
             {
                 return new ODataValidationSettings
                 {
+                    AllowedArithmeticOperators = AllowedArithmeticOperators.None,
                     AllowedFunctions = AllowedFunctions.None,
                     AllowedLogicalOperators = AllowedLogicalOperators.None,
                     AllowedQueryOptions = AllowedQueryOptions.None,
                     MaxTop = 0
                 };
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the allowed arithmetic operators.
+        /// </summary>
+        public AllowedArithmeticOperators AllowedArithmeticOperators
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -125,7 +153,9 @@ namespace Net.Http.WebApi.OData.Query
         /// </returns>
         public bool Equals(ODataValidationSettings other)
         {
-            return other.AllowedFunctions == this.AllowedFunctions
+            return other.AllowedArithmeticOperators == this.AllowedArithmeticOperators
+                && other.AllowedFunctions == this.AllowedFunctions
+                && other.AllowedLogicalOperators == this.AllowedLogicalOperators
                 && other.AllowedQueryOptions == this.AllowedQueryOptions
                 && other.MaxTop == this.MaxTop;
         }
@@ -138,7 +168,9 @@ namespace Net.Http.WebApi.OData.Query
         /// </returns>
         public override int GetHashCode()
         {
-            return this.AllowedFunctions.GetHashCode()
+            return this.AllowedArithmeticOperators.GetHashCode()
+                ^ this.AllowedFunctions.GetHashCode()
+                ^ this.AllowedLogicalOperators.GetHashCode()
                 ^ this.AllowedQueryOptions.GetHashCode()
                 ^ this.MaxTop.GetHashCode();
         }

@@ -237,4 +237,19 @@
   <data name="OrOperatorNotSupported" xml:space="preserve">
     <value>The 'or' operator is not supported by this service.</value>
   </data>
+  <data name="AddOperatorNotSupported" xml:space="preserve">
+    <value>The 'add' operator is not supported by this service.</value>
+  </data>
+  <data name="DivideOperatorNotSupported" xml:space="preserve">
+    <value>The 'div' operator is not supported by this service.</value>
+  </data>
+  <data name="ModuloOperatorNotSupported" xml:space="preserve">
+    <value>The 'mod' operator is not supported by this service.</value>
+  </data>
+  <data name="MultiplyOperatorNotSupported" xml:space="preserve">
+    <value>The 'mul' operator is not supported by this service.</value>
+  </data>
+  <data name="SubtractOperatorNotSupported" xml:space="preserve">
+    <value>The 'sub' operator is not supported by this service.</value>
+  </data>
 </root>

@@ -80,6 +80,9 @@
     <Compile Include="..\Net.Http.WebApi.OData\ODataException.cs">
       <Link>ODataException.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedArithmeticOperators.cs">
+      <Link>Query\AllowedArithmeticOperators.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedFunctions.cs">
       <Link>Query\AllowedFunctions.cs</Link>
     </Compile>

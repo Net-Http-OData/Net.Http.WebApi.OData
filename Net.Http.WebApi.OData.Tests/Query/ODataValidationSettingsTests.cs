@@ -5,9 +5,50 @@ namespace Net.Http.WebApi.Tests.OData.Query.Validators
 
     public class ODataValidationSettingsTests
     {
+        public class All
+        {
+            private readonly ODataValidationSettings all = ODataValidationSettings.All;
+
+            [Fact]
+            public void SetsAllowedArithmeticOperatorsToAll()
+            {
+                Assert.Equal(AllowedArithmeticOperators.All, this.all.AllowedArithmeticOperators);
+            }
+
+            [Fact]
+            public void SetsAllowedFunctionsTAllFunctions()
+            {
+                Assert.Equal(AllowedFunctions.AllFunctions, this.all.AllowedFunctions);
+            }
+
+            [Fact]
+            public void SetsAllowedLogicalOperatorsToAll()
+            {
+                Assert.Equal(AllowedLogicalOperators.All, this.all.AllowedLogicalOperators);
+            }
+
+            [Fact]
+            public void SetsAllowedQueryOptionsToAll()
+            {
+                Assert.Equal(AllowedQueryOptions.All, this.all.AllowedQueryOptions);
+            }
+
+            [Fact]
+            public void SetsMaxTopToOneHundred()
+            {
+                Assert.Equal(100, this.all.MaxTop);
+            }
+        }
+
         public class None
         {
             private readonly ODataValidationSettings none = ODataValidationSettings.None;
+
+            [Fact]
+            public void SetsAllowedArithmeticOperatorsToNone()
+            {
+                Assert.Equal(AllowedArithmeticOperators.None, this.none.AllowedArithmeticOperators);
+            }
 
             [Fact]
             public void SetsAllowedFunctionsToNone()
