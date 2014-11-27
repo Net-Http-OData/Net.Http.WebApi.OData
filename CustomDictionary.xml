@@ -8,6 +8,7 @@
       <Word>Api</Word>
       <Word>Asc</Word>
       <Word>Desc</Word>
+      <Word>mul</Word>
     </Recognized>
     <Deprecated>
       <Term PreferredAlternate=""></Term>

@@ -8,6 +8,47 @@
 
     public class ODataQueryOptionsValidatorTests
     {
+        public class WhenTheFilterQueryOptionContainsTheAddOperatorAddItIsNotSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price add 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.None,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.AddOperatorNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheAddOperatorAddItIsSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price add 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.Add,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheAndOperatorAndItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -16,7 +57,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -38,7 +78,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.And | AllowedLogicalOperators.Equal
             };
 
@@ -129,6 +168,47 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheDivideOperatorDivideItIsNotSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price div 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.None,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.DivideOperatorNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheDivideOperatorDivideItIsSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price div 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.Divide,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheEndsWithFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -177,7 +257,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -199,7 +278,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.Equal
             };
 
@@ -258,7 +336,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -280,7 +357,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.GreaterThan
             };
 
@@ -299,7 +375,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -321,7 +396,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.GreaterThanOrEqual
             };
 
@@ -460,7 +534,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -482,7 +555,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.LessThan
             };
 
@@ -501,7 +573,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -523,7 +594,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.LessThanOrEqual
             };
 
@@ -574,6 +644,47 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheModuloOperatorModuloItIsNotSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price mod 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.None,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.ModuloOperatorNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheModuloOperatorModuloItIsSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price mod 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.Modulo,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheMonthFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -614,6 +725,47 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheMultiplyOperatorMultiplyItIsNotSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price mul 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.None,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.MultiplyOperatorNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheMultiplyOperatorMultiplyItIsSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price mul 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.Multiply,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheNotEqualsOperatorNotEqualsItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -622,7 +774,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -644,7 +795,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.NotEqual
             };
 
@@ -663,7 +813,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
@@ -685,7 +834,6 @@
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None,
                 AllowedLogicalOperators = AllowedLogicalOperators.Or | AllowedLogicalOperators.Equal
             };
 
@@ -927,6 +1075,47 @@
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
                 AllowedFunctions = AllowedFunctions.SubstringOf,
                 AllowedLogicalOperators = AllowedLogicalOperators.Equal
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheSubtractOperatorSubtractItIsNotSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price sub 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.None,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.SubtractOperatorNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheSubtractOperatorSubtractItIsSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=Price sub 100 eq 150"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.Subtract,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
             };
 
             [Fact]
