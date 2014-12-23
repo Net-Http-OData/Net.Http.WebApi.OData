@@ -20,7 +20,7 @@ namespace Net.Http.WebApi.OData.Query
     public sealed class ODataValidationSettings : IEquatable<ODataValidationSettings>
     {
         /// <summary>
-        /// Gets the validation settings for when no OData queries are allowed.
+        /// Gets the validation settings for when all OData queries are allowed.
         /// </summary>
         public static ODataValidationSettings All
         {
