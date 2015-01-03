@@ -1,66 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Net.Http.WebApi.OData.Query.Expression.BinaryOperatorNode">
-    <Position X="0.5" Y="4" Width="2.75" />
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorKindParser">
+    <Position X="11.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKindParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode">
+    <Position X="3.75" Y="4.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAQAAAAACACAAAAAAAA=</HashCode>
-      <FileName>Query\Expression\BinaryOperatorNode.cs</FileName>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.Expression.ConstantNode">
-    <Position X="4" Y="4" Width="1.5" />
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.ConstantNode">
+    <Position X="6.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAA=</HashCode>
-      <FileName>Query\Expression\ConstantNode.cs</FileName>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.Expression.FilterExpressionParser">
-    <Position X="12" Y="0.5" Width="2.25" />
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.FilterExpressionParser">
+    <Position X="14.25" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAIAkAAAAAAAAAAAAAAAAhAgEBAAAAABBAAAA=</HashCode>
-      <FileName>Query\Expression\FilterExpressionParser.cs</FileName>
+      <HashCode>QAAgAAAAIAkAAAAAAAAAAAAAAAAhAgEBAAABABBAAAE=</HashCode>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\FilterExpressionParser.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.Expression.QueryNode">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.QueryNode">
+    <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Query\Expression\QueryNode.cs</FileName>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\QueryNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.Expression.SingleValueFunctionCallNode">
-    <Position X="6.25" Y="4" Width="2.25" />
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode">
+    <Position X="8.5" Y="4.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>Query\Expression\SingleValueFunctionCallNode.cs</FileName>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\SingleValueFunctionCallNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.Expression.SingleValueNode">
-    <Position X="5.25" Y="2.25" Width="1.5" />
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.SingleValueNode">
+    <Position X="5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Query\Expression\SingleValueNode.cs</FileName>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\SingleValueNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.Expression.SingleValuePropertyAccessNode">
-    <Position X="9.25" Y="4" Width="2.5" />
+  <Class Name="Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode">
+    <Position X="0.5" Y="4.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>Query\Expression\SingleValuePropertyAccessNode.cs</FileName>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\SingleValuePropertyAccessNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="Net.Http.WebApi.OData.Query.Expression.BinaryOperatorKind">
-    <Position X="0.5" Y="6.5" Width="1.75" />
+  <Enum Name="Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorKind">
+    <Position X="11.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ICAAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAAQVAACA=</HashCode>
-      <FileName>Query\Expression\BinaryOperatorKind.cs</FileName>
+      <HashCode>ICIAAAAAAQAAAAAAgAADAAAAAAAAAAAgAAAACQVAACA=</HashCode>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKind.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Net.Http.WebApi.OData.Query.Expression.QueryNodeKind">
-    <Position X="7.25" Y="0.5" Width="2" />
+  <Enum Name="Net.Http.WebApi.OData.Query.Expressions.QueryNodeKind">
+    <Position X="7.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgIAAAAAAAAAAAACAAAAgAAAAAAAEAAAA=</HashCode>
-      <FileName>Query\Expression\QueryNodeKind.cs</FileName>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\QueryNodeKind.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
