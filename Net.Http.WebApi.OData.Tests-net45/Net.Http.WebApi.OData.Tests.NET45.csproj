@@ -71,14 +71,14 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\ConstantNodeTests.cs">
       <Link>Query\Expressions\ConstantNodeTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\FilterExpressionParserTests.cs">
-      <Link>Query\Expressions\FilterExpressionParserTests.cs</Link>
-    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValueFunctionCallNodeTests.cs">
       <Link>Query\Expressions\SingleValueFunctionCallNodeTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValuePropertyAccessNodeTests.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNodeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests.cs">
+      <Link>Query\FilterExpressionParserTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterQueryOptionTests.cs">
       <Link>Query\FilterQueryOptionTests.cs</Link>

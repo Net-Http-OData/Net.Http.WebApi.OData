@@ -107,9 +107,6 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs">
       <Link>Query\Expressions\ConstantNode.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\FilterExpressionParser.cs">
-      <Link>Query\Expressions\FilterExpressionParser.cs</Link>
-    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\QueryNode.cs">
       <Link>Query\Expressions\QueryNode.cs</Link>
     </Compile>
@@ -124,6 +121,9 @@
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValuePropertyAccessNode.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\FilterExpressionParser.cs">
+      <Link>Query\FilterExpressionParser.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\FilterQueryOption.cs">
       <Link>Query\FilterQueryOption.cs</Link>
@@ -187,6 +187,9 @@
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">
       <Link>Net.Http.WebApi.OData.snk</Link>
+    </None>
+    <None Include="..\Net.Http.WebApi.OData\Query\Expressions\_QueryNodes.cd">
+      <Link>Query\Expressions\_QueryNodes.cd</Link>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

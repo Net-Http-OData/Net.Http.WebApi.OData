@@ -10,11 +10,12 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query.Expressions
+namespace Net.Http.WebApi.OData.Query
 {
     using System;
     using System.Globalization;
     using System.Text.RegularExpressions;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class FilterExpressionParser
     {
