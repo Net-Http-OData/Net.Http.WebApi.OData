@@ -18,8 +18,14 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         {
             switch (operatorType)
             {
+                case "add":
+                    return BinaryOperatorKind.Add;
+
                 case "and":
                     return BinaryOperatorKind.And;
+
+                case "div":
+                    return BinaryOperatorKind.Divide;
 
                 case "eq":
                     return BinaryOperatorKind.Equal;
@@ -36,26 +42,20 @@ namespace Net.Http.WebApi.OData.Query.Expressions
                 case "lt":
                     return BinaryOperatorKind.LessThan;
 
+                case "mul":
+                    return BinaryOperatorKind.Multiply;
+
+                case "mod":
+                    return BinaryOperatorKind.Modulo;
+
                 case "ne":
                     return BinaryOperatorKind.NotEqual;
 
                 case "or":
                     return BinaryOperatorKind.Or;
 
-                case "add":
-                    return BinaryOperatorKind.Add;
-
                 case "sub":
                     return BinaryOperatorKind.Subtract;
-
-                case "mul":
-                    return BinaryOperatorKind.Multiply;
-
-                case "div":
-                    return BinaryOperatorKind.Divide;
-
-                case "mod":
-                    return BinaryOperatorKind.Modulo;
 
                 default:
                     throw new ODataException("The operator type '" + operatorType + "' is not currently supported.");
