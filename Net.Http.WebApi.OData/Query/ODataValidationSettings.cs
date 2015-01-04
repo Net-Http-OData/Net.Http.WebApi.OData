@@ -111,7 +111,12 @@ namespace Net.Http.WebApi.OData.Query
         /// <returns><c>true</c> if the instances are not considered equal; otherwise, <c>false</c>.</returns>
         public static bool operator !=(ODataValidationSettings settings1, ODataValidationSettings settings2)
         {
-            return !settings1.Equals(settings2);
+            if (settings1 != null && settings2 != null)
+            {
+                return !settings1.Equals(settings2);
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -122,7 +127,12 @@ namespace Net.Http.WebApi.OData.Query
         /// <returns><c>true</c> if the instances are considered equal; otherwise, <c>false</c>.</returns>
         public static bool operator ==(ODataValidationSettings settings1, ODataValidationSettings settings2)
         {
-            return settings1.Equals(settings2);
+            if (settings1 != null && settings2 != null)
+            {
+                return settings1.Equals(settings2);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -153,6 +163,11 @@ namespace Net.Http.WebApi.OData.Query
         /// </returns>
         public bool Equals(ODataValidationSettings other)
         {
+            if (other == null)
+            {
+                return false;
+            }
+
             return other.AllowedArithmeticOperators == this.AllowedArithmeticOperators
                 && other.AllowedFunctions == this.AllowedFunctions
                 && other.AllowedLogicalOperators == this.AllowedLogicalOperators
