@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorKindParser">
-    <Position X="11.75" Y="0.5" Width="2" />
+    <Position X="0.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKindParser.cs</FileName>
@@ -19,13 +19,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.Expressions.FilterExpressionParser">
-    <Position X="14.25" Y="0.5" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>QAAgAAAAIAkAAAAAAAAAAAAAAAAhAgEBAAABABBAAAE=</HashCode>
-      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\FilterExpressionParser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.QueryNode">
@@ -57,7 +50,7 @@
     </TypeIdentifier>
   </Class>
   <Enum Name="Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorKind">
-    <Position X="11.75" Y="1.75" Width="1.5" />
+    <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ICIAAAAAAQAAAAAAgAADAAAAAAAAAAAgAAAACQVAACA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKind.cs</FileName>
