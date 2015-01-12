@@ -68,6 +68,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountCollectionTests.cs">
+      <Link>InlineCountCollectionTests.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorKindParserTests.cs">
       <Link>Query\Expressions\BinaryOperatorKindParserTests.cs</Link>
     </Compile>

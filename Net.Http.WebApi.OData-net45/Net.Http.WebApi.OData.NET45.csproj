@@ -68,6 +68,9 @@
     <Compile Include="..\Net.Http.WebApi.OData\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\InlineCountCollection{T}.cs">
+      <Link>InlineCountCollection{T}.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Messages.Designer.cs">
       <Link>Messages.Designer.cs</Link>
       <AutoGen>True</AutoGen>
