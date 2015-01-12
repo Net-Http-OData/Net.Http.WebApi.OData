@@ -128,6 +128,46 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheConcatAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.ConcatFunctionNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheConcatFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Concat,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheDayFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(

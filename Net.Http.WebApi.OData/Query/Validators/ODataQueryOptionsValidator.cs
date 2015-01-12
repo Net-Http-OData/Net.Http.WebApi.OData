@@ -309,6 +309,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
             {
                 throw new ODataException(Messages.SubstringFunctionNotSupported);
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Concat) != AllowedFunctions.Concat
+                && rawFilterValue.Contains("concat("))
+            {
+                throw new ODataException(Messages.ConcatFunctionNotSupported);
+            }
         }
     }
 }

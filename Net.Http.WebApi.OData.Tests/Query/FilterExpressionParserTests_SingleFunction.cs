@@ -34,6 +34,39 @@ namespace Net.Http.WebApi.Tests.OData.Query
             }
 
             [Fact]
+            public void ParseConcatFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("concat(concat(City, ', '), Country) eq 'Berlin, Germany'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
+                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.Equal("concat", nodeLeft.Name);
+                Assert.Equal(2, nodeLeft.Arguments.Count);
+                Assert.IsType<SingleValueFunctionCallNode>(nodeLeft.Arguments[0]);
+                var nodeLeftArg0 = (SingleValueFunctionCallNode)nodeLeft.Arguments[0];
+                Assert.Equal("concat", nodeLeftArg0.Name);
+                Assert.Equal(2, nodeLeftArg0.Arguments.Count);
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftArg0.Arguments[0]);
+                Assert.Equal("City", ((SingleValuePropertyAccessNode)nodeLeftArg0.Arguments[0]).PropertyName);
+                Assert.IsType<ConstantNode>(nodeLeftArg0.Arguments[1]);
+                Assert.Equal(", ", ((ConstantNode)nodeLeftArg0.Arguments[1]).Value);
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Arguments[1]);
+                var nodeLeftArg1 = (SingleValuePropertyAccessNode)nodeLeft.Arguments[1];
+                Assert.Equal("Country", nodeLeftArg1.PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                var nodeRight = (ConstantNode)node.Right;
+                Assert.Equal("Berlin, Germany", nodeRight.LiteralText);
+            }
+
+            [Fact]
             public void ParseDayFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("day(BirthDate) eq 8");

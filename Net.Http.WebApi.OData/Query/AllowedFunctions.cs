@@ -121,9 +121,14 @@ namespace Net.Http.WebApi.OData.Query
         Substring = 262144,
 
         /// <summary>
+        /// Specifies that the 'Concat' function is allowed in the $filter query option.
+        /// </summary>
+        Concat = 524288,
+
+        /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
-        AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace,
+        AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
 
         /// <summary>
         /// Specifies that all date/time functions are allowed in the $filter query option.

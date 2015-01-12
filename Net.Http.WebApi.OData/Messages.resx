@@ -252,4 +252,7 @@
   <data name="SubtractOperatorNotSupported" xml:space="preserve">
     <value>The 'sub' operator is not supported by this service.</value>
   </data>
+  <data name="ConcatFunctionNotSupported" xml:space="preserve">
+    <value>The 'concat' function is not supported by this service.</value>
+  </data>
 </root>
