@@ -83,8 +83,14 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValuePropertyAccessNodeTests.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNodeTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests.cs">
-      <Link>Query\FilterExpressionParserTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests_ComplexExpressions.cs">
+      <Link>Query\FilterExpressionParserTests_ComplexExpressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests_SingleFunction.cs">
+      <Link>Query\FilterExpressionParserTests_SingleFunction.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests_SingleProperty.cs">
+      <Link>Query\FilterExpressionParserTests_SingleProperty.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterQueryOptionTests.cs">
       <Link>Query\FilterQueryOptionTests.cs</Link>

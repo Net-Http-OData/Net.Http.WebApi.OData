@@ -13,244 +13,313 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
-    using System.Text.RegularExpressions;
     using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class FilterExpressionParser
     {
         private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o" };
-        private static readonly Regex DecimalRegex = new Regex(@"^(-)?\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex DoubleRegex = new Regex(@"^(-)?\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex FunctionCallRegex = new Regex(@"^(?<Function>[a-z/]*)\(((?<Property>[A-Za-z/]*)(, '?(?<Argument>[^'\(\),]*)'?)*\)|('?(?<Argument>[^'\(\)]*)'?)?, (?<Property>[A-Za-z/]*)\)) (?<Operator>eq|ne|gt|ge|lt|le) (?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex PropertyAccessRegex = new Regex(@"^((?<Property>[A-Za-z/]*)? ?(?<Operator>eq|ne|gt|ge|lt|le) (?<DataType>datetime|guid)?(?:'?)(?<Value>[^']*)(?:'?)|(?<Property>[A-Za-z/]*) (?<Operator>add|sub|mul|div|mod) (?<Value>-?\d*\.?\d*[mMdDfF]?) (?<Comparison>.*)?)$", RegexOptions.Compiled | RegexOptions.Singleline);
-        private static readonly Regex SingleRegex = new Regex(@"^(-)?\d+.\d+(f|F)$", RegexOptions.Compiled | RegexOptions.Singleline);
 
         internal static QueryNode Parse(string filterValue)
         {
-            QueryNode parent = null;
+            var parserImpl = new FilterExpressionParserImpl();
+            var queryNode = parserImpl.Parse(new Lexer(filterValue));
 
-            int workingEndPosition = filterValue.Length;
+            return queryNode;
+        }
 
-            for (int i = filterValue.Length; i > 0; i--)
+        private class FilterExpressionParserImpl
+        {
+            private readonly Queue<Token> tokens = new Queue<Token>();
+            private SingleValueNode rootNode;
+
+            public FilterExpressionParserImpl()
             {
-                if (i < 4)
-                {
-                    var singleValueNode = ParseSingleValueNode(filterValue.Substring(i - i, workingEndPosition));
+            }
 
-                    if (parent == null)
+            public SingleValueNode Parse(Lexer lexer)
+            {
+                while (lexer.MoveNext())
+                {
+                    var token = lexer.Current;
+
+                    if (token.TokenType == TokenType.And)
                     {
-                        parent = singleValueNode;
+                        this.UpdateExpressionTree(BinaryOperatorKind.And);
+                    }
+                    else if (token.TokenType == TokenType.Or)
+                    {
+                        this.UpdateExpressionTree(BinaryOperatorKind.Or);
                     }
                     else
                     {
-                        ((BinaryOperatorNode)parent).Left = singleValueNode;
+                        this.tokens.Enqueue(token);
                     }
-
-                    break;
                 }
 
-                if (PreceededByAnd(filterValue, i))
+                this.UpdateExpressionTree(BinaryOperatorKind.None);
+
+                return this.rootNode;
+            }
+
+            private static object GetValue(Token token)
+            {
+                string literalValue;
+
+                switch (token.TokenType)
                 {
-                    var singleValueNode = ParseSingleValueNode(filterValue.Substring(i, workingEndPosition - i));
+                    case TokenType.Decimal:
+                        literalValue = token.Value.Remove(token.Value.Length - 1, 1);
+                        return decimal.Parse(literalValue, CultureInfo.InvariantCulture);
 
-                    UpdateExpressionTree(ref parent, BinaryOperatorKind.And, singleValueNode);
+                    case TokenType.Double:
+                        literalValue = token.Value.Remove(token.Value.Length - 1, 1);
+                        return double.Parse(literalValue, CultureInfo.InvariantCulture);
 
-                    workingEndPosition = i - 5;
-                }
-                else if (PreceededByOr(filterValue, i))
-                {
-                    var singleValueNode = ParseSingleValueNode(filterValue.Substring(i, workingEndPosition - i));
+                    case TokenType.False:
+                        return false;
 
-                    UpdateExpressionTree(ref parent, BinaryOperatorKind.Or, singleValueNode);
+                    case TokenType.Single:
+                        literalValue = token.Value.Remove(token.Value.Length - 1, 1);
+                        return float.Parse(literalValue, CultureInfo.InvariantCulture);
 
-                    workingEndPosition = i - 4;
+                    case TokenType.Integer:
+                        return int.Parse(token.Value, CultureInfo.InvariantCulture);
+
+                    case TokenType.Null:
+                        return null;
+
+                    case TokenType.DateTime:
+                        literalValue = token.Value.Trim('\'');
+                        return DateTime.ParseExact(literalValue, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                    case TokenType.Guid:
+                        literalValue = token.Value.Trim('\'');
+                        return Guid.ParseExact(literalValue, "D");
+
+                    case TokenType.String:
+                        return token.Value.Trim('\'');
+
+                    case TokenType.True:
+                        return true;
+
+                    default:
+                        throw new NotSupportedException(token.TokenType.ToString());
                 }
             }
 
-            return parent;
-        }
-
-        private static object GetValue(string dataType, string literalValue)
-        {
-            switch (dataType)
+            private SingleValueNode ParseSingleValueFunctionCall()
             {
-                case "datetime":
-                    return DateTime.ParseExact(literalValue, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                BinaryOperatorNode binaryNode = null;
+                SingleValueFunctionCallNode node = null;
 
-                case "guid":
-                    return Guid.ParseExact(literalValue, "D");
-            }
+                var stack = new Stack<SingleValueFunctionCallNode>();
 
-            switch (literalValue)
-            {
-                case "false":
-                    return false;
+                while (this.tokens.Count > 0)
+                {
+                    var token = this.tokens.Dequeue();
 
-                case "true":
-                    return true;
-
-                case "null":
-                    return null;
-
-                default:
-                    if (DoubleRegex.IsMatch(literalValue))
+                    switch (token.TokenType)
                     {
-                        return double.Parse(literalValue.Remove(literalValue.Length - 1, 1), CultureInfo.InvariantCulture);
+                        case TokenType.OpenParentheses:
+                            stack.Push(node);
+                            break;
+
+                        case TokenType.CloseParentheses:
+                            var lastNode = stack.Pop();
+
+                            if (stack.Count > 0)
+                            {
+                                stack.Peek().Arguments.Add(lastNode);
+                            }
+                            else
+                            {
+                                if (binaryNode != null)
+                                {
+                                    binaryNode.Right = lastNode;
+                                }
+                                else
+                                {
+                                    node = lastNode;
+                                }
+                            }
+
+                            break;
+
+                        case TokenType.FunctionName:
+                            node = new SingleValueFunctionCallNode(token.Value, new List<QueryNode>());
+                            break;
+
+                        case TokenType.LogicalOperator:
+                            binaryNode = new BinaryOperatorNode
+                            {
+                                Left = node,
+                                OperatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value)
+                            };
+                            break;
+
+                        case TokenType.PropertyName:
+                            if (stack.Count > 0)
+                            {
+                                stack.Peek().Arguments.Add(new SingleValuePropertyAccessNode(token.Value));
+                            }
+                            else
+                            {
+                                binaryNode.Right = new SingleValuePropertyAccessNode(token.Value);
+                            }
+
+                            break;
+
+                        case TokenType.Decimal:
+                        case TokenType.Double:
+                        case TokenType.False:
+                        case TokenType.Single:
+                        case TokenType.Integer:
+                        case TokenType.DateTime:
+                        case TokenType.Guid:
+                        case TokenType.String:
+                        case TokenType.Null:
+                        case TokenType.True:
+                            if (stack.Count > 0)
+                            {
+                                node.Arguments.Add(new ConstantNode(token.Value.Trim('\''), GetValue(token)));
+                            }
+                            else
+                            {
+                                binaryNode.Right = new ConstantNode(token.Value.Trim('\''), GetValue(token));
+                            }
+
+                            break;
                     }
-
-                    if (DecimalRegex.IsMatch(literalValue))
-                    {
-                        return decimal.Parse(literalValue.Remove(literalValue.Length - 1, 1), CultureInfo.InvariantCulture);
-                    }
-
-                    if (SingleRegex.IsMatch(literalValue))
-                    {
-                        return float.Parse(literalValue.Remove(literalValue.Length - 1, 1), CultureInfo.InvariantCulture);
-                    }
-
-                    int integerValue;
-                    if (int.TryParse(literalValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out integerValue))
-                    {
-                        return integerValue;
-                    }
-
-                    return literalValue;
-            }
-        }
-
-        private static SingleValueNode ParseSingleValueFunctionCall(Match functionCallMatch)
-        {
-            var function = functionCallMatch.Groups["Function"].Value;
-            var propertyName = functionCallMatch.Groups["Property"].Value;
-            var argumentCaptures = functionCallMatch.Groups["Argument"].Captures;
-            var operatorType = functionCallMatch.Groups["Operator"].Value;
-            var valueLiteral = functionCallMatch.Groups["Value"].Value;
-
-            var propertyNode = new SingleValuePropertyAccessNode(propertyName);
-            var arguments = new QueryNode[argumentCaptures.Count > 0 ? argumentCaptures.Count + 1 : 2];
-
-            if (function == "substringof")
-            {
-                arguments[0] = new ConstantNode(argumentCaptures[0].Value, GetValue(string.Empty, argumentCaptures[0].Value));
-                arguments[1] = propertyNode;
-            }
-            else
-            {
-                arguments[0] = propertyNode;
-
-                if (argumentCaptures.Count == 0)
-                {
-                    arguments[1] = new ConstantNode(string.Empty, string.Empty);
                 }
 
-                for (int i = 0; i < argumentCaptures.Count; i++)
+                if (binaryNode != null)
                 {
-                    arguments[i + 1] = new ConstantNode(argumentCaptures[i].Value, GetValue(string.Empty, argumentCaptures[i].Value));
+                    return binaryNode;
                 }
+
+                return node;
             }
 
-            var functionNode = new SingleValueFunctionCallNode(function, arguments);
-            var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
-            var valueConstantNode = new ConstantNode(valueLiteral, GetValue(string.Empty, valueLiteral));
-
-            return new BinaryOperatorNode(functionNode, operatorKind, valueConstantNode);
-        }
-
-        private static SingleValueNode ParseSingleValueNode(string expression)
-        {
-            var propertyAccessMatch = PropertyAccessRegex.Match(expression);
-
-            if (propertyAccessMatch.Success)
+            private SingleValueNode ParseSingleValueNode()
             {
-                return ParseSingleValuePropertyAccess(propertyAccessMatch);
-            }
+                SingleValueNode node = null;
 
-            var functionCallMatch = FunctionCallRegex.Match(expression);
-
-            if (functionCallMatch.Success)
-            {
-                return ParseSingleValueFunctionCall(functionCallMatch);
-            }
-
-            throw new ODataException("The expression '" + expression + "' is not currently supported.");
-        }
-
-        private static SingleValueNode ParseSingleValuePropertyAccess(Match propertyAccessMatch)
-        {
-            SingleValueNode result = null;
-
-            var propertyName = propertyAccessMatch.Groups["Property"].Value;
-            var operatorType = propertyAccessMatch.Groups["Operator"].Value;
-            var dataType = propertyAccessMatch.Groups["DataType"].Value;
-            var value = propertyAccessMatch.Groups["Value"].Value;
-
-            var propertyNode = new SingleValuePropertyAccessNode(propertyName);
-            var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
-            var valueConstantNode = new ConstantNode(value, GetValue(dataType, value));
-
-            result = new BinaryOperatorNode(propertyNode, operatorKind, valueConstantNode);
-
-            var comparison = propertyAccessMatch.Groups["Comparison"].Value;
-
-            if (!string.IsNullOrEmpty(comparison))
-            {
-                var comparisonMatch = PropertyAccessRegex.Match(comparison);
-
-                if (comparisonMatch.Success)
+                switch (this.tokens.Peek().TokenType)
                 {
-                    var rightOperatorType = comparisonMatch.Groups["Operator"].Value;
-                    var rightDataType = comparisonMatch.Groups["DataType"].Value;
-                    var rightValue = comparisonMatch.Groups["Value"].Value;
+                    case TokenType.FunctionName:
+                        node = this.ParseSingleValueFunctionCall();
+                        break;
 
-                    var rightOperatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(rightOperatorType);
-                    var rightValueConstantNode = new ConstantNode(rightValue, GetValue(rightDataType, rightValue));
+                    case TokenType.PropertyName:
+                        node = this.ParseSingleValuePropertyAccess();
+                        break;
 
-                    result = new BinaryOperatorNode(result, rightOperatorKind, rightValueConstantNode);
+                    default:
+                        throw new NotSupportedException(this.tokens.Peek().TokenType.ToString());
                 }
+
+                return node;
             }
 
-            return result;
-        }
-
-        private static bool PreceededByAnd(string filterValue, int position)
-        {
-            return filterValue[position - 1] == ' '
-                    && filterValue[position - 2] == 'd'
-                    && filterValue[position - 3] == 'n'
-                    && filterValue[position - 4] == 'a'
-                    && filterValue[position - 5] == ' ';
-        }
-
-        private static bool PreceededByOr(string filterValue, int position)
-        {
-            return filterValue[position - 1] == ' '
-                    && filterValue[position - 2] == 'r'
-                    && filterValue[position - 3] == 'o'
-                    && filterValue[position - 4] == ' ';
-        }
-
-        private static void UpdateExpressionTree(ref QueryNode parent, BinaryOperatorKind binaryOperatorKind, SingleValueNode singleValueNode)
-        {
-            var binaryParent = parent as BinaryOperatorNode;
-
-            if (binaryParent != null)
+            private SingleValueNode ParseSingleValuePropertyAccess()
             {
-                binaryParent.Left = singleValueNode;
+                SingleValueNode result = null;
 
-                parent = new BinaryOperatorNode
+                SingleValueNode leftNode = null;
+                BinaryOperatorKind operatorKind = BinaryOperatorKind.None;
+                SingleValueNode rightNode = null;
+
+                while (this.tokens.Count > 0)
                 {
-                    OperatorKind = binaryOperatorKind,
-                    Right = binaryParent
-                };
+                    var token = this.tokens.Dequeue();
+
+                    switch (token.TokenType)
+                    {
+                        case TokenType.ArithmeticOperator:
+                        case TokenType.LogicalOperator:
+                            if (operatorKind != BinaryOperatorKind.None)
+                            {
+                                result = new BinaryOperatorNode(leftNode, operatorKind, rightNode);
+                                leftNode = null;
+                                rightNode = null;
+                            }
+
+                            operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value);
+                            break;
+
+                        case TokenType.PropertyName:
+                            if (leftNode == null)
+                            {
+                                leftNode = new SingleValuePropertyAccessNode(token.Value);
+                            }
+                            else if (rightNode == null)
+                            {
+                                rightNode = new SingleValuePropertyAccessNode(token.Value);
+                            }
+
+                            break;
+
+                        case TokenType.Decimal:
+                        case TokenType.Double:
+                        case TokenType.False:
+                        case TokenType.Single:
+                        case TokenType.Integer:
+                        case TokenType.DateTime:
+                        case TokenType.Guid:
+                        case TokenType.String:
+                        case TokenType.Null:
+                        case TokenType.True:
+                            rightNode = new ConstantNode(token.Value.Trim('\''), GetValue(token));
+                            break;
+                    }
+                }
+
+                result = result == null
+                    ? new BinaryOperatorNode(leftNode, operatorKind, rightNode)
+                    : new BinaryOperatorNode(result, operatorKind, leftNode ?? rightNode);
+
+                return result;
             }
-            else if (parent == null)
+
+            private void UpdateExpressionTree(BinaryOperatorKind binaryOperatorKind)
             {
-                parent = new BinaryOperatorNode
+                SingleValueNode node = this.ParseSingleValueNode();
+
+                if (this.rootNode == null)
                 {
-                    OperatorKind = binaryOperatorKind,
-                    Right = singleValueNode
-                };
+                    if (binaryOperatorKind == BinaryOperatorKind.None)
+                    {
+                        this.rootNode = node;
+                    }
+                    else
+                    {
+                        this.rootNode = new BinaryOperatorNode
+                        {
+                            Left = node,
+                            OperatorKind = binaryOperatorKind
+                        };
+                    }
+                }
+                else
+                {
+                    var binaryParent = (BinaryOperatorNode)this.rootNode;
+
+                    if (binaryParent.Right == null)
+                    {
+                        binaryParent.Right = node;
+                    }
+
+                    if (binaryOperatorKind != BinaryOperatorKind.None)
+                    {
+                        this.rootNode = new BinaryOperatorNode
+                        {
+                            Left = binaryParent,
+                            OperatorKind = binaryOperatorKind,
+                        };
+                    }
+                }
             }
         }
     }

@@ -137,6 +137,9 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\InlineCountQueryOption.cs">
       <Link>Query\InlineCountQueryOption.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Lexer.cs">
+      <Link>Query\Lexer.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\ODataQueryOptions.cs">
       <Link>Query\ODataQueryOptions.cs</Link>
     </Compile>
@@ -166,6 +169,15 @@
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\SkipQueryOption.cs">
       <Link>Query\SkipQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Token.cs">
+      <Link>Query\Token.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\TokenDefinition.cs">
+      <Link>Query\TokenDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\TokenType.cs">
+      <Link>Query\TokenType.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\TopQueryOption.cs">
       <Link>Query\TopQueryOption.cs</Link>
