@@ -85,7 +85,7 @@
         }
 
         [Fact]
-        public void ToBinaryOperatorThrowsODataExceptionForUnsupportedOperatorKind()
+        public void ToBinaryOperatorKindThrowsODataExceptionForUnsupportedOperatorKind()
         {
             Assert.Throws<ODataException>(() => BinaryOperatorKindParser.ToBinaryOperatorKind("wibble"));
         }

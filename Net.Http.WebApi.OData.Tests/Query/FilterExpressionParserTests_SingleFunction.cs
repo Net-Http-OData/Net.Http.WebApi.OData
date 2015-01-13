@@ -295,6 +295,30 @@ namespace Net.Http.WebApi.Tests.OData.Query
             }
 
             [Fact]
+            public void ParseNotEndsWithFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("not endswith(Name, 'ilk')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<UnaryOperatorNode>(queryNode);
+
+                var node = (UnaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValueFunctionCallNode>(node.Operand);
+                var nodeOperand = (SingleValueFunctionCallNode)node.Operand;
+                Assert.Equal("endswith", nodeOperand.Name);
+                Assert.Equal(2, nodeOperand.Arguments.Count);
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeOperand.Arguments[0]);
+                Assert.Equal("Name", ((SingleValuePropertyAccessNode)nodeOperand.Arguments[0]).PropertyName);
+                Assert.IsType<ConstantNode>(nodeOperand.Arguments[1]);
+                Assert.Equal("ilk", ((ConstantNode)nodeOperand.Arguments[1]).LiteralText);
+                Assert.IsType<string>(((ConstantNode)nodeOperand.Arguments[1]).Value);
+                Assert.Equal("ilk", ((ConstantNode)nodeOperand.Arguments[1]).Value);
+
+                Assert.Equal(UnaryOperatorKind.Not, node.OperatorKind);
+            }
+
+            [Fact]
             public void ParseReplaceFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'");

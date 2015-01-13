@@ -86,6 +86,12 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValuePropertyAccessNodeTests.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNodeTests.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\UnaryOperatorKindParserTests.cs">
+      <Link>Query\Expressions\UnaryOperatorKindParserTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\UnaryOperatorNodeTests.cs">
+      <Link>Query\Expressions\UnaryOperatorNodeTests.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests_ComplexExpressions.cs">
       <Link>Query\FilterExpressionParserTests_ComplexExpressions.cs</Link>
     </Compile>

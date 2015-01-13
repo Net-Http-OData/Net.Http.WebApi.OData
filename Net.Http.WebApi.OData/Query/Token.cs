@@ -15,8 +15,8 @@ namespace Net.Http.WebApi.OData.Query
     [System.Diagnostics.DebuggerDisplay("{TokenType}: {Value}")]
     internal struct Token
     {
-        private readonly string value;
         private readonly TokenType tokenType;
+        private readonly string value;
 
         internal Token(string value, TokenType tokenType)
         {
@@ -24,19 +24,19 @@ namespace Net.Http.WebApi.OData.Query
             this.tokenType = tokenType;
         }
 
-        internal string Value
-        {
-            get
-            {
-                return this.value;
-            }
-        }
-
         internal TokenType TokenType
         {
             get
             {
                 return this.tokenType;
+            }
+        }
+
+        internal string Value
+        {
+            get
+            {
+                return this.value;
             }
         }
     }

@@ -119,6 +119,15 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValuePropertyAccessNode.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNode.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorKind.cs">
+      <Link>Query\Expressions\UnaryOperatorKind.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorKindParser.cs">
+      <Link>Query\Expressions\UnaryOperatorKindParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorNode.cs">
+      <Link>Query\Expressions\UnaryOperatorNode.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\FilterExpressionParser.cs">
       <Link>Query\FilterExpressionParser.cs</Link>
     </Compile>

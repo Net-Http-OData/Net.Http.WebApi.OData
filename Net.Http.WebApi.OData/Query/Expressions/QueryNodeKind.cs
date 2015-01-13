@@ -40,6 +40,11 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// The single value function call query node.
         /// </summary>
-        SingleValueFunctionCall = 4
+        SingleValueFunctionCall = 4,
+
+        /// <summary>
+        /// The query node is a unary operator query node.
+        /// </summary>
+        UnaryOperator = 5
     }
 }

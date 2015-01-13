@@ -25,6 +25,7 @@ namespace Net.Http.WebApi.OData.Query
             new TokenDefinition(@"true", TokenType.True),
             new TokenDefinition(@"false", TokenType.False),
             new TokenDefinition(@"null", TokenType.Null),
+            new TokenDefinition(@"not", TokenType.Not),
             new TokenDefinition(@"(eq|ne|gt|ge|lt|le)(?=\s)", TokenType.LogicalOperator),
             new TokenDefinition(@"(-)?\d+(.\d+)?(m|M)", TokenType.Decimal),
             new TokenDefinition(@"(-)?\d+(.\d+)?(d|D)", TokenType.Double),
@@ -42,8 +43,8 @@ namespace Net.Http.WebApi.OData.Query
         };
 
         private readonly string content;
-        private int position;
         private Token current;
+        private int position;
 
         internal Lexer(string content)
         {

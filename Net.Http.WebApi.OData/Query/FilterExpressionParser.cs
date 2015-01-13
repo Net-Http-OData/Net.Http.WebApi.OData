@@ -212,6 +212,12 @@ namespace Net.Http.WebApi.OData.Query
                         node = this.ParseSingleValueFunctionCall();
                         break;
 
+                    case TokenType.Not:
+                        this.tokens.Dequeue();
+                        node = this.ParseSingleValueNode();
+                        node = new UnaryOperatorNode(node, UnaryOperatorKind.Not);
+                        break;
+
                     case TokenType.PropertyName:
                         node = this.ParseSingleValuePropertyAccess();
                         break;
@@ -285,7 +291,7 @@ namespace Net.Http.WebApi.OData.Query
 
             private void UpdateExpressionTree(BinaryOperatorKind binaryOperatorKind)
             {
-                SingleValueNode node = this.ParseSingleValueNode();
+                var node = this.ParseSingleValueNode();
 
                 if (this.rootNode == null)
                 {
