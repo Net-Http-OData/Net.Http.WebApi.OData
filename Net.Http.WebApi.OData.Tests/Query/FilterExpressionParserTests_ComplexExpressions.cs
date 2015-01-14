@@ -80,7 +80,6 @@ namespace Net.Http.WebApi.Tests.OData.Query
                 var node = (BinaryOperatorNode)queryNode;
 
                 var nodeLeft = (BinaryOperatorNode)node.Left;
-
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeft.Left);
@@ -227,6 +226,38 @@ namespace Net.Http.WebApi.Tests.OData.Query
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal(35, ((ConstantNode)nodeRight.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqValueOrYearFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Surname eq 'Smith' or year(BirthDate) eq 1971");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<BinaryOperatorNode>(node.Left);
+                var nodeLeft = (BinaryOperatorNode)node.Left;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Left);
+                Assert.Equal("Surname", ((SingleValuePropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeLeft.Right);
+                Assert.Equal("Smith", ((ConstantNode)nodeLeft.Right).Value);
+
+                Assert.Equal(BinaryOperatorKind.Or, node.OperatorKind);
+
+                Assert.IsType<BinaryOperatorNode>(node.Right);
+                var nodeRight = (BinaryOperatorNode)node.Right;
+                Assert.IsType<SingleValueFunctionCallNode>(nodeRight.Left);
+                Assert.Equal("year", ((SingleValueFunctionCallNode)nodeRight.Left).Name);
+                var rightNodeLeft = (SingleValueFunctionCallNode)nodeRight.Left;
+                Assert.IsType<SingleValuePropertyAccessNode>(rightNodeLeft.Arguments[0]);
+                Assert.Equal("BirthDate", ((SingleValuePropertyAccessNode)rightNodeLeft.Arguments[0]).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeRight.Right);
+                Assert.Equal(1971, ((ConstantNode)nodeRight.Right).Value);
             }
         }
     }
