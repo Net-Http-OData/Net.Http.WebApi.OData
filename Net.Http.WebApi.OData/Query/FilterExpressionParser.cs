@@ -302,24 +302,12 @@ namespace Net.Http.WebApi.OData.Query
                 }
                 else
                 {
-                    var binaryParent = this.rootNode as BinaryOperatorNode;
-
-                    if (binaryParent != null)
+                    this.rootNode = new BinaryOperatorNode
                     {
-                        if (binaryParent.Right == null)
-                        {
-                            binaryParent.Right = node;
-                        }
-                        else
-                        {
-                            this.rootNode = new BinaryOperatorNode
-                            {
-                                Left = this.rootNode,
-                                OperatorKind = this.nextBinaryOperatorKind,
-                                Right = node
-                            };
-                        }
-                    }
+                        Left = this.rootNode,
+                        OperatorKind = this.nextBinaryOperatorKind,
+                        Right = node
+                    };
                 }
             }
         }
