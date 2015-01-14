@@ -74,7 +74,7 @@ namespace Net.Http.WebApi.OData.Query
                     if (tokenDefinition.Ignore)
                     {
                         this.position += match.Length;
-                        i = 0;
+                        i = -1;
                         continue;
                     }
 
