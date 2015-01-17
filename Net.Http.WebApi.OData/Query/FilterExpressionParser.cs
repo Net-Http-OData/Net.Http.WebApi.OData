@@ -32,6 +32,7 @@ namespace Net.Http.WebApi.OData.Query
         private class FilterExpressionParserImpl
         {
             private readonly Queue<Token> tokens = new Queue<Token>();
+            private int groupingDepth;
             private BinaryOperatorKind nextBinaryOperatorKind = BinaryOperatorKind.None;
             private SingleValueNode rootNode;
 
@@ -221,6 +222,12 @@ namespace Net.Http.WebApi.OData.Query
                         node = new UnaryOperatorNode(node, UnaryOperatorKind.Not);
                         break;
 
+                    case TokenType.OpenParentheses:
+                        this.groupingDepth++;
+                        this.tokens.Dequeue();
+                        node = this.ParseSingleValueNode();
+                        break;
+
                     case TokenType.PropertyName:
                         node = this.ParseSingleValuePropertyAccess();
                         break;
@@ -256,6 +263,10 @@ namespace Net.Http.WebApi.OData.Query
                             }
 
                             operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value);
+                            break;
+
+                        case TokenType.CloseParentheses:
+                            this.groupingDepth--;
                             break;
 
                         case TokenType.PropertyName:
@@ -296,18 +307,83 @@ namespace Net.Http.WebApi.OData.Query
             {
                 var node = this.ParseSingleValueNode();
 
-                if (this.rootNode == null)
+                if (this.groupingDepth == 0)
                 {
-                    this.rootNode = node;
+                    if (this.rootNode == null)
+                    {
+                        this.rootNode = node;
+                    }
+                    else
+                    {
+                        var binaryParent = this.rootNode as BinaryOperatorNode;
+
+                        if (binaryParent != null)
+                        {
+                            while (binaryParent != null && binaryParent.Right != null)
+                            {
+                                binaryParent = binaryParent.Right as BinaryOperatorNode;
+                            }
+
+                            if (binaryParent != null)
+                            {
+                                binaryParent.OperatorKind = this.nextBinaryOperatorKind;
+                                binaryParent.Right = node;
+                            }
+                            else
+                            {
+                                this.rootNode = new BinaryOperatorNode
+                                {
+                                    Left = this.rootNode,
+                                    OperatorKind = this.nextBinaryOperatorKind,
+                                    Right = node
+                                };
+                            }
+                        }
+                        else
+                        {
+                            this.rootNode = new BinaryOperatorNode
+                            {
+                                Left = this.rootNode,
+                                OperatorKind = this.nextBinaryOperatorKind,
+                                Right = node
+                            };
+                        }
+                    }
                 }
                 else
                 {
-                    this.rootNode = new BinaryOperatorNode
+                    if (this.rootNode == null)
                     {
-                        Left = this.rootNode,
-                        OperatorKind = this.nextBinaryOperatorKind,
-                        Right = node
-                    };
+                        this.rootNode = new BinaryOperatorNode
+                        {
+                            Left = node
+                        };
+                    }
+                    else
+                    {
+                        var binaryParent = this.rootNode as BinaryOperatorNode;
+
+                        if (binaryParent != null && binaryParent.OperatorKind == BinaryOperatorKind.None)
+                        {
+                            binaryParent.OperatorKind = this.nextBinaryOperatorKind;
+                            binaryParent.Right = new BinaryOperatorNode
+                            {
+                                Left = node
+                            };
+                        }
+                        else
+                        {
+                            this.rootNode = new BinaryOperatorNode
+                            {
+                                Left = this.rootNode,
+                                OperatorKind = this.nextBinaryOperatorKind,
+                                Right = new BinaryOperatorNode
+                                {
+                                    Left = node
+                                }
+                            };
+                        }
+                    }
                 }
             }
         }
