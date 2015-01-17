@@ -36,11 +36,11 @@ namespace Net.Http.WebApi.OData.Query
             private BinaryOperatorKind nextBinaryOperatorKind = BinaryOperatorKind.None;
             private SingleValueNode rootNode;
 
-            public FilterExpressionParserImpl()
+            internal FilterExpressionParserImpl()
             {
             }
 
-            public SingleValueNode Parse(Lexer lexer)
+            internal SingleValueNode Parse(Lexer lexer)
             {
                 while (lexer.MoveNext())
                 {
