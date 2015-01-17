@@ -65,9 +65,6 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountCollectionTests.cs">
       <Link>InlineCountCollectionTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorKindParserTests.cs">
-      <Link>Query\Expressions\BinaryOperatorKindParserTests.cs</Link>
-    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorNodeTests.cs">
       <Link>Query\Expressions\BinaryOperatorNodeTests.cs</Link>
     </Compile>
@@ -80,20 +77,8 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValuePropertyAccessNodeTests.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNodeTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\UnaryOperatorKindParserTests.cs">
-      <Link>Query\Expressions\UnaryOperatorKindParserTests.cs</Link>
-    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\UnaryOperatorNodeTests.cs">
       <Link>Query\Expressions\UnaryOperatorNodeTests.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests_ComplexExpressions.cs">
-      <Link>Query\FilterExpressionParserTests_ComplexExpressions.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests_SingleFunction.cs">
-      <Link>Query\FilterExpressionParserTests_SingleFunction.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterExpressionParserTests_SingleProperty.cs">
-      <Link>Query\FilterExpressionParserTests_SingleProperty.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterQueryOptionTests.cs">
       <Link>Query\FilterQueryOptionTests.cs</Link>
@@ -118,6 +103,21 @@
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\OrderByQueryOptionTests.cs">
       <Link>Query\OrderByQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\BinaryOperatorKindParserTests.cs">
+      <Link>Query\Parsers\BinaryOperatorKindParserTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_SingleFunction.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_SingleFunction.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_SingleProperty.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_SingleProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\UnaryOperatorKindParserTests.cs">
+      <Link>Query\Parsers\UnaryOperatorKindParserTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\SelectQueryOptionTests.cs">
       <Link>Query\SelectQueryOptionTests.cs</Link>
