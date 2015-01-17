@@ -29,7 +29,7 @@ namespace Net.Http.WebApi.OData.Query
             return queryNode;
         }
 
-        private class FilterExpressionParserImpl
+        private sealed class FilterExpressionParserImpl
         {
             private readonly Queue<Token> tokens = new Queue<Token>();
             private int groupingDepth;
