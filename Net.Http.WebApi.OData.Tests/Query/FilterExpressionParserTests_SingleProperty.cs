@@ -359,6 +359,25 @@ namespace Net.Http.WebApi.Tests.OData.Query
             }
 
             [Fact]
+            public void ParsePropertyEqPropertyExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Forename eq Surname");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("Forename", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Right);
+                Assert.Equal("Surname", ((SingleValuePropertyAccessNode)node.Right).PropertyName);
+            }
+
+            [Fact]
             public void ParsePropertyEqStringValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Name eq 'Milk'");
