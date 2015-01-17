@@ -35,6 +35,6 @@ namespace Net.Http.WebApi.OData.Query
         FunctionName,
         DataType,
         PropertyName,
-        Not,
+        UnaryOperator,
     }
 }

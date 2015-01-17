@@ -25,7 +25,7 @@ namespace Net.Http.WebApi.OData.Query
             new TokenDefinition(@"true", TokenType.True),
             new TokenDefinition(@"false", TokenType.False),
             new TokenDefinition(@"null", TokenType.Null),
-            new TokenDefinition(@"not(?=\s)", TokenType.Not),
+            new TokenDefinition(@"not(?=\s)", TokenType.UnaryOperator),
             new TokenDefinition(@"(eq|ne|gt|ge|lt|le)(?=\s)", TokenType.LogicalOperator),
             new TokenDefinition(@"(-)?\d+(.\d+)?(m|M)", TokenType.Decimal),
             new TokenDefinition(@"(-)?\d+(.\d+)?(d|D)", TokenType.Double),

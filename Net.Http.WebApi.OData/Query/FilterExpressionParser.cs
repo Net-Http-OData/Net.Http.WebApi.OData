@@ -216,10 +216,10 @@ namespace Net.Http.WebApi.OData.Query
                         node = this.ParseSingleValueFunctionCall();
                         break;
 
-                    case TokenType.Not:
-                        this.tokens.Dequeue();
+                    case TokenType.UnaryOperator:
+                        var token = this.tokens.Dequeue();
                         node = this.ParseSingleValueNode();
-                        node = new UnaryOperatorNode(node, UnaryOperatorKind.Not);
+                        node = new UnaryOperatorNode(node, UnaryOperatorKindParser.ToUnaryOperatorKind(token.Value));
                         break;
 
                     case TokenType.OpenParentheses:
