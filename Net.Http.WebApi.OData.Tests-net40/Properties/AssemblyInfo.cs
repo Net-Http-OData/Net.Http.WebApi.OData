@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Net.Http.WebApi.OData.Tests")]
-[assembly: AssemblyCopyright("Copyright 2012 - 2014 Project Contributors all rights reserved.")]
+[assembly: AssemblyCopyright("Copyright 2012 - 2015 Project Contributors all rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

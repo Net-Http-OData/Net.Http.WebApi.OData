@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Project Contributors")]
 [assembly: AssemblyProduct("Net.Http.WebApi.OData")]
-[assembly: AssemblyCopyright("Copyright 2012 - 2014 Net.Http.WebApi.OData Project Contributors all rights reserved.")]
+[assembly: AssemblyCopyright("Copyright 2012 - 2015 Project Contributors all rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
