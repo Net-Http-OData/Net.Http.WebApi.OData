@@ -2588,7 +2588,7 @@ let name = !t.IsNested  ? t.Name : t.Name.Substring(t.Name.LastIndexOf('+') + 1,
 where name[0] != 'I'
 select t
 ]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Abstract base class should be suffixed with 'Base'</Name>
+      <Query Active="False" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Abstract base class should be suffixed with 'Base'</Name>
 warnif count > 0 from t in Application.Types where 
   t.IsAbstract && 
   t.IsClass &&
@@ -2675,7 +2675,8 @@ warnif count > 0 from m in Application.Methods where
  !m.IsGeneratedByCompiler &&
  ((!m.IsSpecialName && m.SimpleName.Length > 35) ||
    // Property getter/setter are prefixed with "get_" "set_" of length 4.
-  ( m.IsSpecialName && m.SimpleName.Length - 4 > 35))
+  ( m.IsSpecialName && m.SimpleName.Length - 4 > 35)) &&
+ m.ParentType.Name != "Messages"
 
 select new { m, m.SimpleName }
 
