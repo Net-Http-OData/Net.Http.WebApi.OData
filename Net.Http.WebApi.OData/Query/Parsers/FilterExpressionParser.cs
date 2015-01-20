@@ -23,8 +23,21 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
         internal static QueryNode Parse(string filterValue)
         {
+            var content = filterValue;
+
+            if (content[0] == '(' && content[content.Length - 1] == ')')
+            {
+                var firstOpen = content.IndexOf('(', 1, content.Length - 1);
+                var firstClose = content.IndexOf(')', 1, content.Length - 1);
+
+                if (firstOpen < firstClose)
+                {
+                    content = content.Substring(1, content.Length - 2);
+                }
+            }
+
             var parserImpl = new FilterExpressionParserImpl();
-            var queryNode = parserImpl.Parse(new Lexer(filterValue));
+            var queryNode = parserImpl.Parse(new Lexer(content));
 
             return queryNode;
         }
