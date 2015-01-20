@@ -246,6 +246,43 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(50, ((ConstantNode)node.Right).Value);
             }
 
+            /// <summary>
+            /// Based upon https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/36#issuecomment-70567443.
+            /// </summary>
+            [Fact]
+            public void ParseOuterGroupedExample1()
+            {
+                var queryNode = FilterExpressionParser.Parse("(((FirstName eq 'andrew') and (LastName eq 'davis')) or (FirstName eq 'system'))");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                var nodeLeft = (BinaryOperatorNode)node.Left;
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
+                var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeft.Left);
+                Assert.Equal("FirstName", ((SingleValuePropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
+                Assert.Equal("andrew", ((ConstantNode)nodeLeftLeft.Right).Value);
+                Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
+                var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftRight.Left);
+                Assert.Equal("LastName", ((SingleValuePropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
+                Assert.Equal("davis", ((ConstantNode)nodeLeftRight.Right).Value);
+
+                Assert.Equal(BinaryOperatorKind.Or, node.OperatorKind);
+
+                var nodeRight = (BinaryOperatorNode)node.Right;
+                var nodeRightLeft = (SingleValuePropertyAccessNode)nodeRight.Left;
+                Assert.Equal("FirstName", ((SingleValuePropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
+                var nodeRightRight = (ConstantNode)nodeRight.Right;
+                Assert.Equal("system", ((ConstantNode)nodeRight.Right).Value);
+            }
+
             [Fact]
             public void ParseOuterGroupedPropertyEqValueAndGroupedPropertyEqValueOrPropertyEqValueExpression()
             {
