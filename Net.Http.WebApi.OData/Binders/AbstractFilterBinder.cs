@@ -49,11 +49,11 @@ namespace Net.Http.WebApi.OData
                     break;
 
                 case QueryNodeKind.SingleValuePropertyAccess:
-                    this.BindPropertyAccessQueryNode((SingleValuePropertyAccessNode)node);
+                    this.BindSingleValuePropertyAccessNode((SingleValuePropertyAccessNode)node);
                     break;
 
                 case QueryNodeKind.UnaryOperator:
-                    this.BindUnaryOperator((UnaryOperatorNode)node);
+                    this.BindUnaryOperatorNode((UnaryOperatorNode)node);
                     break;
 
                 default:
@@ -74,21 +74,21 @@ namespace Net.Http.WebApi.OData
         protected abstract void BindConstantNode(ConstantNode constantNode);
 
         /// <summary>
-        /// Binds the specified <see cref="SingleValuePropertyAccessNode"/>.
-        /// </summary>
-        /// <param name="singleValuePropertyAccessNode">The <see cref="SingleValuePropertyAccessNode"/> to bind.</param>
-        protected abstract void BindPropertyAccessQueryNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode);
-
-        /// <summary>
         /// Binds the specified <see cref="SingleValueFunctionCallNode"/>.
         /// </summary>
         /// <param name="singleValueFunctionCallNode">The <see cref="SingleValueFunctionCallNode"/> to bind.</param>
         protected abstract void BindSingleValueFunctionCallNode(SingleValueFunctionCallNode singleValueFunctionCallNode);
 
         /// <summary>
+        /// Binds the specified <see cref="SingleValuePropertyAccessNode"/>.
+        /// </summary>
+        /// <param name="singleValuePropertyAccessNode">The <see cref="SingleValuePropertyAccessNode"/> to bind.</param>
+        protected abstract void BindSingleValuePropertyAccessNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode);
+
+        /// <summary>
         /// Binds the specified <see cref="UnaryOperatorNode"/>.
         /// </summary>
         /// <param name="unaryOperatorNode">The <see cref="UnaryOperatorNode"/> to bind.</param>
-        protected abstract void BindUnaryOperator(UnaryOperatorNode unaryOperatorNode);
+        protected abstract void BindUnaryOperatorNode(UnaryOperatorNode unaryOperatorNode);
     }
 }
