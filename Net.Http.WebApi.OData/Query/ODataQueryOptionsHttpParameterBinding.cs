@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="ODataQueryOptionsHttpParameterBinding"/> class.
         /// </summary>
         /// <param name="parameterDescriptor">The parameter descriptor.</param>
-        public ODataQueryOptionsHttpParameterBinding(HttpParameterDescriptor parameterDescriptor)
+        internal ODataQueryOptionsHttpParameterBinding(HttpParameterDescriptor parameterDescriptor)
             : base(parameterDescriptor)
         {
         }

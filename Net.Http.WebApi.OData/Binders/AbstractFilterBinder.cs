@@ -57,7 +57,7 @@ namespace Net.Http.WebApi.OData
                     break;
 
                 default:
-                    throw new NotSupportedException("Nodes of type '" + node.Kind + "' are not supported");
+                    throw new NotSupportedException("Nodes of type '" + node.Kind.ToString() + "' are not supported");
             }
         }
 

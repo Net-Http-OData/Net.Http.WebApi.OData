@@ -60,7 +60,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return BinaryOperatorKind.Subtract;
 
                 default:
-                    throw new ODataException("The operator type '" + operatorType + "' is not currently supported.");
+                    throw new ODataException("The operator type '" + operatorType.ToString() + "' is not currently supported.");
             }
         }
     }
