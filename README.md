@@ -16,5 +16,5 @@ _Supported .NET Framework Versions_
 
 The NuGet Package contains binaries compiled against:
 
-* .NET 4.0 (Full) and Microsoft.AspNet.WebApi.Core 4.0.20710
+* .NET 4.0 (Client Profile) and Microsoft.AspNet.WebApi.Core 4.0.20710
 * .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.0
