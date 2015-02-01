@@ -32,7 +32,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(@"(-)?\d+(.\d+)?(f|F)", TokenType.Single),
             new TokenDefinition(@"(-)?\d+", TokenType.Integer),
             new TokenDefinition(@"(add|sub|mul|div|mod)(?=\s)", TokenType.ArithmeticOperator),
-            new TokenDefinition(@"(datetime|guid)", TokenType.DataType),
+            new TokenDefinition(@"(datetime|guid)", TokenType.DataType, ignore: true),
             new TokenDefinition(@"\w+(?=\()", TokenType.FunctionName),
             new TokenDefinition(@",(?=\s?)", TokenType.Comma),
             new TokenDefinition(@"\w+", TokenType.PropertyName),
