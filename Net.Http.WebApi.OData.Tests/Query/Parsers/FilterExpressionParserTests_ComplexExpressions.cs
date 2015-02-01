@@ -29,6 +29,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
+                Assert.IsType<BinaryOperatorNode>(node.Right);
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
                 var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
@@ -136,6 +137,45 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal(35, ((ConstantNode)nodeRight.Right).Value);
+            }
+
+            [Fact]
+            public void ParseGroupedPropertyEqValueOrPropertyEqValueAndFunctionCall()
+            {
+                var queryNode = FilterExpressionParser.Parse("(Surname eq 'Smith' or Surname eq 'Smythe') and endswith(CompanyName, 'Futterkiste')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<BinaryOperatorNode>(node.Left);
+                var nodeLeft = (BinaryOperatorNode)node.Left;
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
+                var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeft.Left);
+                Assert.Equal("Surname", ((SingleValuePropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
+                Assert.Equal("Smith", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
+                Assert.Equal(BinaryOperatorKind.Or, nodeLeft.OperatorKind);
+                var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftRight.Left);
+                Assert.Equal("Surname", ((SingleValuePropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeLeftRight.Right);
+                Assert.Equal("Smythe", ((ConstantNode)nodeLeftRight.Right).LiteralText);
+
+                Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
+
+                Assert.IsType<SingleValueFunctionCallNode>(node.Right);
+                var nodeRight = (SingleValueFunctionCallNode)node.Right;
+                Assert.Equal("endswith", nodeRight.Name);
+                Assert.Equal(2, nodeRight.Arguments.Count);
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeRight.Arguments[0]);
+                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeRight.Arguments[0]).PropertyName);
+                Assert.IsType<ConstantNode>(nodeRight.Arguments[1]);
+                Assert.Equal("Futterkiste", ((ConstantNode)nodeRight.Arguments[1]).LiteralText);
             }
 
             [Fact]
