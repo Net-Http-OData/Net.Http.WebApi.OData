@@ -21,21 +21,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
     {
         internal static QueryNode Parse(string filterValue)
         {
-            var content = filterValue;
-
-            if (content[0] == '(' && content[content.Length - 1] == ')')
-            {
-                var firstOpen = content.IndexOf('(', 1, content.Length - 1);
-                var firstClose = content.IndexOf(')', 1, content.Length - 1);
-
-                if (firstOpen < firstClose)
-                {
-                    content = content.Substring(1, content.Length - 2);
-                }
-            }
-
             var parserImpl = new FilterExpressionParserImpl();
-            var queryNode = parserImpl.Parse(new Lexer(content));
+            var queryNode = parserImpl.Parse(new Lexer(filterValue));
 
             return queryNode;
         }
@@ -44,10 +31,10 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         {
             private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o" };
 
+            private readonly Stack<SingleValueNode> nodeStack = new Stack<SingleValueNode>();
             private readonly Queue<Token> tokens = new Queue<Token>();
             private int groupingDepth;
             private BinaryOperatorKind nextBinaryOperatorKind = BinaryOperatorKind.None;
-            private SingleValueNode rootNode;
 
             internal FilterExpressionParserImpl()
             {
@@ -59,25 +46,28 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 {
                     var token = lexer.Current;
 
-                    if (token.TokenType == TokenType.And)
+                    switch (token.TokenType)
                     {
-                        this.UpdateExpressionTree();
-                        this.nextBinaryOperatorKind = BinaryOperatorKind.And;
-                    }
-                    else if (token.TokenType == TokenType.Or)
-                    {
-                        this.UpdateExpressionTree();
-                        this.nextBinaryOperatorKind = BinaryOperatorKind.Or;
-                    }
-                    else
-                    {
-                        this.tokens.Enqueue(token);
+                        case TokenType.And:
+                            this.nextBinaryOperatorKind = BinaryOperatorKind.And;
+                            this.UpdateExpressionTree();
+                            break;
+
+                        case TokenType.Or:
+                            this.nextBinaryOperatorKind = BinaryOperatorKind.Or;
+                            this.UpdateExpressionTree();
+                            break;
+
+                        default:
+                            this.tokens.Enqueue(token);
+                            break;
                     }
                 }
 
+                this.nextBinaryOperatorKind = BinaryOperatorKind.None;
                 this.UpdateExpressionTree();
 
-                return this.rootNode;
+                return this.nodeStack.Pop();
             }
 
             private static object GetValue(Token token)
@@ -140,10 +130,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     switch (token.TokenType)
                     {
                         case TokenType.OpenParentheses:
+                            this.groupingDepth++;
                             stack.Push(node);
                             break;
 
                         case TokenType.CloseParentheses:
+                            this.groupingDepth--;
                             var lastNode = stack.Pop();
 
                             if (stack.Count > 0)
@@ -318,41 +310,74 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
             private void UpdateExpressionTree()
             {
+                var initialGroupingDepth = this.groupingDepth;
+
                 var node = this.ParseSingleValueNode();
 
-                if (this.rootNode == null)
+                if (this.groupingDepth == initialGroupingDepth)
                 {
-                    this.rootNode = node;
-                    return;
-                }
-
-                var binaryParent = this.rootNode as BinaryOperatorNode;
-
-                while (binaryParent != null && binaryParent.Right != null)
-                {
-                    binaryParent = binaryParent.Right as BinaryOperatorNode;
-                }
-
-                if (binaryParent != null)
-                {
-                    binaryParent.OperatorKind = this.nextBinaryOperatorKind;
-                    binaryParent.Right = node;
-                    return;
-                }
-
-                var rightNode = this.groupingDepth == 0
-                    ? node
-                    : new BinaryOperatorNode
+                    if (this.nodeStack.Count == 0)
                     {
-                        Left = node
-                    };
+                        if (this.nextBinaryOperatorKind == BinaryOperatorKind.None)
+                        {
+                            this.nodeStack.Push(node);
+                        }
+                        else
+                        {
+                            this.nodeStack.Push(new BinaryOperatorNode(node, this.nextBinaryOperatorKind, null));
+                        }
+                    }
+                    else
+                    {
+                        var leftNode = this.nodeStack.Pop();
 
-                this.rootNode = new BinaryOperatorNode
+                        var binaryNode = leftNode as BinaryOperatorNode;
+
+                        if (binaryNode != null && binaryNode.Right == null)
+                        {
+                            binaryNode.Right = node;
+
+                            if (this.nextBinaryOperatorKind != BinaryOperatorKind.None)
+                            {
+                                binaryNode = new BinaryOperatorNode(binaryNode, this.nextBinaryOperatorKind, null);
+                            }
+                        }
+                        else
+                        {
+                            binaryNode = new BinaryOperatorNode(leftNode, this.nextBinaryOperatorKind, node);
+                        }
+
+                        this.nodeStack.Push(binaryNode);
+                    }
+                }
+                else if (this.groupingDepth > initialGroupingDepth)
                 {
-                    Left = this.rootNode,
-                    OperatorKind = this.nextBinaryOperatorKind,
-                    Right = rightNode
-                };
+                    this.nodeStack.Push(new BinaryOperatorNode(node, this.nextBinaryOperatorKind, null));
+                }
+                else if (this.groupingDepth < initialGroupingDepth)
+                {
+                    var binaryNode = (BinaryOperatorNode)this.nodeStack.Pop();
+                    binaryNode.Right = node;
+
+                    if (this.nextBinaryOperatorKind == BinaryOperatorKind.None)
+                    {
+                        this.nodeStack.Push(binaryNode);
+
+                        while (this.nodeStack.Count > 1)
+                        {
+                            var rightNode = this.nodeStack.Pop();
+
+                            var binaryParent = (BinaryOperatorNode)this.nodeStack.Pop();
+                            binaryParent.Right = rightNode;
+
+                            this.nodeStack.Push(binaryParent);
+                        }
+                    }
+                    else
+                    {
+                        this.nodeStack.Push(new BinaryOperatorNode(binaryNode, this.nextBinaryOperatorKind, null));
+                    }
+                }
             }
         }
     }
