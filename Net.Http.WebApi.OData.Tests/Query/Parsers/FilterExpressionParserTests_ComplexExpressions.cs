@@ -188,6 +188,38 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void Parse_XsubY_gt_Z()
+            {
+                var queryNode = FilterExpressionParser.Parse("(Price sub 5) gt 10");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                //    == Expected Tree Structure ==
+                //          ------ gt ------
+                //         |                |
+                //    --- sub ---           10
+                //   |           |
+                // Price         5
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                // node.Left = (Price sub 5)
+                Assert.IsType<BinaryOperatorNode>(node.Left);
+                var nodeLeft = (BinaryOperatorNode)node.Left;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Left);
+                Assert.Equal(BinaryOperatorKind.Subtract, nodeLeft.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeLeft.Right);
+                Assert.Equal("5", ((ConstantNode)nodeLeft.Right).LiteralText);
+
+                Assert.Equal(BinaryOperatorKind.GreaterThan, node.OperatorKind);
+
+                // node.Right = 10
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("10", ((ConstantNode)node.Right).LiteralText);
+            }
+
+            [Fact]
             public void ParseFunctionCallAndGroupedPropertyEqValueOrPropertyEqValue()
             {
                 var queryNode = FilterExpressionParser.Parse("endswith(CompanyName, 'Futterkiste') and (Surname eq 'Smith' or Surname eq 'Smythe')");
