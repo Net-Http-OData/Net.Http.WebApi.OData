@@ -24,11 +24,10 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// Initialises a new instance of the <see cref="SingleValueFunctionCallNode"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <param name="arguments">The arguments.</param>
-        public SingleValueFunctionCallNode(string name, IList<QueryNode> arguments)
+        public SingleValueFunctionCallNode(string name)
         {
             this.Name = name;
-            this.Arguments = arguments;
+            this.Arguments = new List<QueryNode>();
         }
 
         /// <summary>

@@ -21,13 +21,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Initialises a new instance of the <see cref="BinaryOperatorNode"/> class.
         /// </summary>
-        public BinaryOperatorNode()
-        {
-        }
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="BinaryOperatorNode"/> class.
-        /// </summary>
         /// <param name="left">The left query node.</param>
         /// <param name="operatorKind">Kind of the operator.</param>
         /// <param name="right">The right query node.</param>

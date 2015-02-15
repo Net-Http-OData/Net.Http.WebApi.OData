@@ -7,19 +7,24 @@
     {
         public class WhenConstructed
         {
-            private readonly QueryNode[] arguments = new[] { new ConstantNode("1", 1), new ConstantNode("true", true) };
             private readonly string functionName = "substringof";
             private readonly SingleValueFunctionCallNode node;
 
             public WhenConstructed()
             {
-                this.node = new SingleValueFunctionCallNode(this.functionName, arguments);
+                this.node = new SingleValueFunctionCallNode(this.functionName);
             }
 
             [Fact]
-            public void TheArgumentsPropertyIsSet()
+            public void TheArgumentsCollectionIsEmpty()
             {
-                Assert.Equal(this.arguments, this.node.Arguments);
+                Assert.Empty(this.node.Arguments);
+            }
+
+            [Fact]
+            public void TheArgumentsCollectionIsNotNull()
+            {
+                Assert.NotNull(this.node.Arguments);
             }
 
             [Fact]

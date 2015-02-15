@@ -162,15 +162,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.FunctionName:
-                            node = new SingleValueFunctionCallNode(token.Value, new List<QueryNode>());
+                            node = new SingleValueFunctionCallNode(token.Value);
                             break;
 
                         case TokenType.LogicalOperator:
-                            binaryNode = new BinaryOperatorNode
-                            {
-                                Left = node,
-                                OperatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value)
-                            };
+                            binaryNode = new BinaryOperatorNode(node, BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value), null);
                             break;
 
                         case TokenType.PropertyName:

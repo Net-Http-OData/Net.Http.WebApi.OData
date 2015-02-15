@@ -41,39 +41,5 @@
                 Assert.Equal(this.right, this.node.Right);
             }
         }
-
-        public class WhenConstructedWithDefaultConstructor
-        {
-            private readonly BinaryOperatorNode node;
-
-            public WhenConstructedWithDefaultConstructor()
-            {
-                this.node = new BinaryOperatorNode();
-            }
-
-            [Fact]
-            public void TheKindIsQueryNodeKindBinaryOperator()
-            {
-                Assert.Equal(QueryNodeKind.BinaryOperator, this.node.Kind);
-            }
-
-            [Fact]
-            public void TheLeftPropertyIsNull()
-            {
-                Assert.Null(this.node.Left);
-            }
-
-            [Fact]
-            public void TheOperatorKindIsBinaryOperatorKindNone()
-            {
-                Assert.Equal(BinaryOperatorKind.None, this.node.OperatorKind);
-            }
-
-            [Fact]
-            public void TheRightPropertyIsNull()
-            {
-                Assert.Null(this.node.Right);
-            }
-        }
     }
 }
