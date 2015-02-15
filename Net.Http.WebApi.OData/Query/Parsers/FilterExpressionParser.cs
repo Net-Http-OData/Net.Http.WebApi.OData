@@ -70,46 +70,51 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 return this.nodeStack.Pop();
             }
 
-            private static object GetValue(Token token)
+            private static ConstantNode ParseConstantNode(Token token)
             {
-                string literalValue;
-
                 switch (token.TokenType)
                 {
                     case TokenType.Decimal:
-                        literalValue = token.Value.Remove(token.Value.Length - 1, 1);
-                        return decimal.Parse(literalValue, CultureInfo.InvariantCulture);
+                        var decimalText = token.Value.Remove(token.Value.Length - 1, 1);
+                        var decimalValue = decimal.Parse(decimalText, CultureInfo.InvariantCulture);
+                        return new ConstantNode(token.Value, decimalValue);
 
                     case TokenType.Double:
-                        literalValue = token.Value.Remove(token.Value.Length - 1, 1);
-                        return double.Parse(literalValue, CultureInfo.InvariantCulture);
+                        var doubleText = token.Value.Remove(token.Value.Length - 1, 1);
+                        var doubleValue = double.Parse(doubleText, CultureInfo.InvariantCulture);
+                        return new ConstantNode(token.Value, doubleValue);
 
                     case TokenType.False:
-                        return false;
+                        return new ConstantNode(token.Value, false);
 
                     case TokenType.Single:
-                        literalValue = token.Value.Remove(token.Value.Length - 1, 1);
-                        return float.Parse(literalValue, CultureInfo.InvariantCulture);
+                        var singleText = token.Value.Remove(token.Value.Length - 1, 1);
+                        var singleValue = float.Parse(singleText, CultureInfo.InvariantCulture);
+                        return new ConstantNode(token.Value, singleValue);
 
                     case TokenType.Integer:
-                        return int.Parse(token.Value, CultureInfo.InvariantCulture);
+                        var integerValue = int.Parse(token.Value, CultureInfo.InvariantCulture);
+                        return new ConstantNode(token.Value, integerValue);
 
                     case TokenType.Null:
-                        return null;
+                        return new ConstantNode(token.Value, null);
 
                     case TokenType.DateTime:
-                        literalValue = token.Value.Trim('\'');
-                        return DateTime.ParseExact(literalValue, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                        var dateText = token.Value.Trim('\'');
+                        var dateValue = DateTime.ParseExact(dateText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                        return new ConstantNode(dateText, dateValue);
 
                     case TokenType.Guid:
-                        literalValue = token.Value.Trim('\'');
-                        return Guid.ParseExact(literalValue, "D");
+                        var guidText = token.Value.Trim('\'');
+                        var guidValue = Guid.ParseExact(guidText, "D");
+                        return new ConstantNode(guidText, guidValue);
 
                     case TokenType.String:
-                        return token.Value.Trim('\'');
+                        var stringText = token.Value.Trim('\'').Replace("''", "'");
+                        return new ConstantNode(stringText, stringText);
 
                     case TokenType.True:
-                        return true;
+                        return new ConstantNode(token.Value, true);
 
                     default:
                         throw new NotSupportedException(token.TokenType.ToString());
@@ -192,11 +197,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.True:
                             if (stack.Count > 0)
                             {
-                                node.Arguments.Add(new ConstantNode(token.Value.Trim('\''), GetValue(token)));
+                                node.Arguments.Add(ParseConstantNode(token));
                             }
                             else
                             {
-                                binaryNode.Right = new ConstantNode(token.Value.Trim('\''), GetValue(token));
+                                binaryNode.Right = ParseConstantNode(token);
                             }
 
                             break;
@@ -296,7 +301,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.String:
                         case TokenType.Null:
                         case TokenType.True:
-                            rightNode = new ConstantNode(token.Value.Trim('\''), GetValue(token));
+                            rightNode = ParseConstantNode(token);
                             break;
                     }
                 }

@@ -399,6 +399,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqStringValueWithQuoteCharacterExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Name eq 'O''Brien'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("Name", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("O'Brien", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<string>(((ConstantNode)node.Right).Value);
+                Assert.Equal("O'Brien", ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqTrueValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Deleted eq true");

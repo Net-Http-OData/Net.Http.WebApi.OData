@@ -38,7 +38,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(@"\w+", TokenType.PropertyName),
             new TokenDefinition(@"'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d{7}(Z|-\d{2}:\d{2}))?)?)?'", TokenType.DateTime),
             new TokenDefinition(@"'[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'", TokenType.Guid),
-            new TokenDefinition(@"'[^']*'", TokenType.String),
+            new TokenDefinition(@"'(?:''|[^']*)*'", TokenType.String),
             new TokenDefinition(@"\s", TokenType.Whitespace, ignore: true)
         };
 
