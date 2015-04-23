@@ -71,6 +71,9 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountCollectionTests.cs">
       <Link>InlineCountCollectionTests.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountTests.cs">
+      <Link>InlineCountTests.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorNodeTests.cs">
       <Link>Query\Expressions\BinaryOperatorNodeTests.cs</Link>
     </Compile>

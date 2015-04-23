@@ -66,6 +66,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
@@ -79,6 +80,9 @@
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\InlineCountCollection{T}.cs">
       <Link>InlineCountCollection{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\InlineCount{T}.cs">
+      <Link>InlineCount{T}.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Messages.Designer.cs">
       <Link>Messages.Designer.cs</Link>
