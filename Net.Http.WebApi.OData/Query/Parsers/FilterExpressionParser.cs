@@ -100,9 +100,14 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         return new ConstantNode(token.Value, null);
 
                     case TokenType.DateTime:
-                        var dateText = token.Value.Trim('\'');
-                        var dateValue = DateTime.ParseExact(dateText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                        return new ConstantNode(dateText, dateValue);
+                        var dateTimeText = token.Value.Trim('\'');
+                        var dateTimeValue = DateTime.ParseExact(dateTimeText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                        return new ConstantNode(dateTimeText, dateTimeValue);
+
+                    case TokenType.DateTimeOffset:
+                        var dateTimeOffsetText = token.Value.Trim('\'');
+                        var dateTimeOffsetValue = DateTimeOffset.Parse(dateTimeOffsetText, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                        return new ConstantNode(dateTimeOffsetText, dateTimeOffsetValue);
 
                     case TokenType.Guid:
                         var guidText = token.Value.Trim('\'');
@@ -187,6 +192,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Single:
                         case TokenType.Integer:
                         case TokenType.DateTime:
+                        case TokenType.DateTimeOffset:
                         case TokenType.Guid:
                         case TokenType.String:
                         case TokenType.Null:
@@ -293,6 +299,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Single:
                         case TokenType.Integer:
                         case TokenType.DateTime:
+                        case TokenType.DateTimeOffset:
                         case TokenType.Guid:
                         case TokenType.String:
                         case TokenType.Null:

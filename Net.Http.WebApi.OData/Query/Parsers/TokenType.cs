@@ -30,6 +30,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         Integer,
         Single,
         DateTime,
+        DateTimeOffset,
         Guid,
         String,
         FunctionName,
