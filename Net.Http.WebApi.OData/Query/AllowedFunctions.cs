@@ -131,6 +131,11 @@ namespace Net.Http.WebApi.OData.Query
         IsOf = 1048576,
 
         /// <summary>
+        /// Specifies that the 'Cast' function is allowed in the $filter query option.
+        /// </summary>
+        Cast = 2097152,
+
+        /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
         AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
@@ -148,6 +153,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all functions are allowed in the $filter query option.
         /// </summary>
-        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions | IsOf
+        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions | IsOf | Cast
     }
 }

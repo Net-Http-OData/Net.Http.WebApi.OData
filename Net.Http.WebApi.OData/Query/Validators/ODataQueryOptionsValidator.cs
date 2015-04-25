@@ -32,12 +32,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
                     throw new ODataException(Messages.FilterQueryOptionNotSupported);
                 }
 
+                ValidateFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateStringFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateDateFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateMathFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateLogicalOperators(queryOptions.Filter.RawValue, validationSettings);
                 ValidateArithmeticOperators(queryOptions.Filter.RawValue, validationSettings);
-                ValidateFunctions(queryOptions.Filter.RawValue, validationSettings);
             }
 
             if (queryOptions.Format != null
@@ -74,20 +74,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
                 throw new ODataException(Messages.TopQueryOptionNotSupported);
-            }
-        }
-
-        private static void ValidateFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
-        {
-            if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions)
-            {
-                return;
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.IsOf) != AllowedFunctions.IsOf
-                && rawFilterValue.Contains("isof("))
-            {
-                throw new ODataException(Messages.IsOfFunctionNotSupported);
             }
         }
 
@@ -171,6 +157,26 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 && rawFilterValue.Contains("second("))
             {
                 throw new ODataException(Messages.SecondFunctionNotSupported);
+            }
+        }
+
+        private static void ValidateFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
+        {
+            if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions)
+            {
+                return;
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Cast) != AllowedFunctions.Cast
+                && rawFilterValue.Contains("cast("))
+            {
+                throw new ODataException(Messages.CastFunctionNotSupported);
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.IsOf) != AllowedFunctions.IsOf
+                && rawFilterValue.Contains("isof("))
+            {
+                throw new ODataException(Messages.IsOfFunctionNotSupported);
             }
         }
 

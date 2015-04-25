@@ -88,6 +88,46 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheCastAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=cast(Age, 'Edm.Int64') eq 20"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.CastFunctionNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheCastFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=cast(Age, 'Edm.Int64') eq 20"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Cast,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheCeilingFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(

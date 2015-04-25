@@ -258,4 +258,7 @@
   <data name="IsOfFunctionNotSupported" xml:space="preserve">
     <value>The 'isof' function is not supported by this service.</value>
   </data>
+  <data name="CastFunctionNotSupported" xml:space="preserve">
+    <value>The 'cast' function is not supported by this service.</value>
+  </data>
 </root>
