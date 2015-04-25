@@ -37,5 +37,6 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         DataType,
         PropertyName,
         UnaryOperator,
+        Time
     }
 }

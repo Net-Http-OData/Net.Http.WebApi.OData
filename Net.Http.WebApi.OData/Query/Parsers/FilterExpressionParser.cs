@@ -118,6 +118,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         var stringText = token.Value.Trim('\'').Replace("''", "'");
                         return new ConstantNode(token.Value, stringText);
 
+                    case TokenType.Time:
+                        var timeSpanText = token.Value.Trim('\'');
+                        var timeSpanValue = TimeSpan.Parse(timeSpanText, CultureInfo.InvariantCulture);
+                        return new ConstantNode(timeSpanText, timeSpanValue);
+
                     case TokenType.True:
                         return new ConstantNode(token.Value, true);
 
@@ -196,6 +201,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Guid:
                         case TokenType.String:
                         case TokenType.Null:
+                        case TokenType.Time:
                         case TokenType.True:
                             if (stack.Count > 0)
                             {
@@ -303,6 +309,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Guid:
                         case TokenType.String:
                         case TokenType.Null:
+                        case TokenType.Time:
                         case TokenType.True:
                             rightNode = ParseConstantNode(token);
                             break;

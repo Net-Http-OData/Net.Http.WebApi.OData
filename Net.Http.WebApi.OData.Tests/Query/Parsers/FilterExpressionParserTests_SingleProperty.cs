@@ -441,6 +441,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqTimeValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq time'13:20:00'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("LastUpdated", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("13:20:00", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new TimeSpan(13, 20, 0), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqTrueValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Deleted eq true");
