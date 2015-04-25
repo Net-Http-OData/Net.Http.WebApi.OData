@@ -145,7 +145,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Arguments.Add(lastNode);
+                                stack.Peek().Parameters.Add(lastNode);
                             }
                             else
                             {
@@ -172,7 +172,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.PropertyName:
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Arguments.Add(new SingleValuePropertyAccessNode(token.Value));
+                                stack.Peek().Parameters.Add(new SingleValuePropertyAccessNode(token.Value));
                             }
                             else
                             {
@@ -193,7 +193,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.True:
                             if (stack.Count > 0)
                             {
-                                node.Arguments.Add(ParseConstantNode(token));
+                                node.Parameters.Add(ParseConstantNode(token));
                             }
                             else
                             {

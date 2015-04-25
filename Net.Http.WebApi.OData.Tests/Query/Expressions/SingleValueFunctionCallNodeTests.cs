@@ -5,6 +5,30 @@
 
     public class SingleValueFunctionCallNodeTests
     {
+        public class WhenAddingAParameter
+        {
+            private readonly SingleValueFunctionCallNode node;
+            private readonly QueryNode parameter = new ConstantNode("Hi", "Hi");
+
+            public WhenAddingAParameter()
+            {
+                this.node = new SingleValueFunctionCallNode("substringof");
+                this.node.Parameters.Add(parameter);
+            }
+
+            [Fact]
+            public void TheParameterExistsInTheArgumentsCollection()
+            {
+                Assert.Contains(parameter, node.Parameters);
+            }
+
+            [Fact]
+            public void TheParameterExistsInTheParameterCollection()
+            {
+                Assert.Contains(parameter, node.Parameters);
+            }
+        }
+
         public class WhenConstructed
         {
             private readonly string functionName = "substringof";
@@ -18,19 +42,31 @@
             [Fact]
             public void TheArgumentsCollectionIsEmpty()
             {
-                Assert.Empty(this.node.Arguments);
+                Assert.Empty(this.node.Parameters);
             }
 
             [Fact]
             public void TheArgumentsCollectionIsNotNull()
             {
-                Assert.NotNull(this.node.Arguments);
+                Assert.NotNull(this.node.Parameters);
             }
 
             [Fact]
             public void TheKindIsQueryNodeKindSingleValueFunctionCall()
             {
                 Assert.Equal(QueryNodeKind.SingleValueFunctionCall, this.node.Kind);
+            }
+
+            [Fact]
+            public void TheParametersCollectionIsEmpty()
+            {
+                Assert.Empty(this.node.Parameters);
+            }
+
+            [Fact]
+            public void TheParametersCollectionIsNotNull()
+            {
+                Assert.NotNull(this.node.Parameters);
             }
 
             [Fact]
