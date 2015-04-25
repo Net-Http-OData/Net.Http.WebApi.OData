@@ -505,6 +505,64 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             /// <summary>
+            /// Issue #49 - InvalidOperationException: Stack Empty thrown by FilterExpressionParser with nested grouping.
+            /// </summary>
+            [Fact]
+            public void ParseNestedGrouping()
+            {
+                var queryNode = FilterExpressionParser.Parse("(Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59') and ((Enabled eq true and substringof('John', FirstName) eq true) or (Enabled eq true and substringof('Smi', LastName) eq true))");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                //                  == Expected Tree Structure ==
+                //              ---------------- and ------------------
+                //             |                                       |
+                //       ---- and ----                     ----------- or ------------
+                //      |             |                   |                           |
+                // --- ge ---    --- le ---         ---- and ----                --- and ---
+                // |         |   |        |         |            |              |           |
+                //                              --- eq ---   --- eq ---    --- eq ---   --- eq ---
+                //                             |         |  |          |  |         |  |          |
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<BinaryOperatorNode>(node.Left);
+                var nodeLeft = (BinaryOperatorNode)node.Left;
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
+                var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
+                Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeft.OperatorKind);
+                Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
+                var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
+                Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRight.OperatorKind);
+
+                Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
+
+                Assert.IsType<BinaryOperatorNode>(node.Right);
+                var nodeRight = (BinaryOperatorNode)node.Right;
+                Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
+                var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
+                Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Left);
+                var nodeRightLeftLeft = (BinaryOperatorNode)nodeRightLeft.Left;
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftLeft.OperatorKind);
+                Assert.Equal(BinaryOperatorKind.And, nodeRightLeft.OperatorKind);
+                Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Right);
+                var nodeRightLeftRight = (BinaryOperatorNode)nodeRightLeft.Right;
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftRight.OperatorKind);
+                Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
+                Assert.IsType<BinaryOperatorNode>(nodeRight.Right);
+                var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
+                Assert.IsType<BinaryOperatorNode>(nodeRightRight.Left);
+                var nodeRightRightLeft = (BinaryOperatorNode)nodeRightLeft.Left;
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRightRightLeft.OperatorKind);
+                Assert.Equal(BinaryOperatorKind.And, nodeRightRight.OperatorKind);
+                Assert.IsType<BinaryOperatorNode>(nodeRightRight.Right);
+                var nodeRightRightRight = (BinaryOperatorNode)nodeRightLeft.Right;
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRightRightRight.OperatorKind);
+            }
+
+            /// <summary>
             /// Based upon https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/36#issuecomment-70567443.
             /// </summary>
             [Fact]

@@ -151,21 +151,25 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                         case TokenType.CloseParentheses:
                             this.groupingDepth--;
-                            var lastNode = stack.Pop();
 
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Parameters.Add(lastNode);
-                            }
-                            else
-                            {
-                                if (binaryNode != null)
+                                var lastNode = stack.Pop();
+
+                                if (stack.Count > 0)
                                 {
-                                    binaryNode.Right = lastNode;
+                                    stack.Peek().Parameters.Add(lastNode);
                                 }
                                 else
                                 {
-                                    node = lastNode;
+                                    if (binaryNode != null)
+                                    {
+                                        binaryNode.Right = lastNode;
+                                    }
+                                    else
+                                    {
+                                        node = lastNode;
+                                    }
                                 }
                             }
 
