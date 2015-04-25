@@ -111,7 +111,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                     case TokenType.String:
                         var stringText = token.Value.Trim('\'').Replace("''", "'");
-                        return new ConstantNode(stringText, stringText);
+                        return new ConstantNode(token.Value, stringText);
 
                     case TokenType.True:
                         return new ConstantNode(token.Value, true);

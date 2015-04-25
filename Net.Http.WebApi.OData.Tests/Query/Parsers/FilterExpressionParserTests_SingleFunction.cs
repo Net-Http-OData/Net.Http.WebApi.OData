@@ -23,7 +23,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
                 Assert.Equal("Age", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
-                Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.Equal("'Edm.Int64'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
                 Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[1]).Value);
             }
@@ -83,7 +83,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 Assert.IsType<ConstantNode>(node.Right);
                 var nodeRight = (ConstantNode)node.Right;
-                Assert.Equal("Berlin, Germany", nodeRight.LiteralText);
+                Assert.Equal("'Berlin, Germany'", nodeRight.LiteralText);
             }
 
             [Fact]
@@ -128,7 +128,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
                 Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
-                Assert.Equal("Futterkiste", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
+                Assert.Equal("'Futterkiste'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
                 Assert.Equal("Futterkiste", ((ConstantNode)nodeLeft.Parameters[1]).Value);
 
@@ -155,7 +155,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
                 Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
-                Assert.Equal("Futterkiste", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.Equal("'Futterkiste'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
                 Assert.Equal("Futterkiste", ((ConstantNode)node.Parameters[1]).Value);
             }
@@ -227,7 +227,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
                 Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
-                Assert.Equal("lfreds", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
+                Assert.Equal("'lfreds'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
                 Assert.Equal("lfreds", ((ConstantNode)nodeLeft.Parameters[1]).Value);
 
@@ -331,7 +331,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeOperand.Parameters[0]);
                 Assert.Equal("Name", ((SingleValuePropertyAccessNode)nodeOperand.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeOperand.Parameters[1]);
-                Assert.Equal("ilk", ((ConstantNode)nodeOperand.Parameters[1]).LiteralText);
+                Assert.Equal("'ilk'", ((ConstantNode)nodeOperand.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeOperand.Parameters[1]).Value);
                 Assert.Equal("ilk", ((ConstantNode)nodeOperand.Parameters[1]).Value);
 
@@ -355,18 +355,18 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
                 Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
-                Assert.Equal(" ", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
+                Assert.Equal("' '", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
                 Assert.Equal(" ", ((ConstantNode)nodeLeft.Parameters[1]).Value);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[2]);
-                Assert.Equal("", ((ConstantNode)nodeLeft.Parameters[2]).LiteralText);
+                Assert.Equal("''", ((ConstantNode)nodeLeft.Parameters[2]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[2]).Value);
                 Assert.Equal("", ((ConstantNode)nodeLeft.Parameters[2]).Value);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("AlfredsFutterkiste", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'AlfredsFutterkiste'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("AlfredsFutterkiste", ((ConstantNode)node.Right).Value);
             }
@@ -438,7 +438,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
                 Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
-                Assert.Equal("Alfr", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
+                Assert.Equal("'Alfr'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
                 Assert.Equal("Alfr", ((ConstantNode)nodeLeft.Parameters[1]).Value);
 
@@ -465,7 +465,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
                 Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
-                Assert.Equal("Alfr", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.Equal("'Alfr'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
                 Assert.Equal("Alfr", ((ConstantNode)node.Parameters[1]).Value);
             }
@@ -494,7 +494,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("lfreds Futterkiste", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'lfreds Futterkiste'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("lfreds Futterkiste", ((ConstantNode)node.Right).Value);
             }
@@ -527,7 +527,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("lf", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'lf'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("lf", ((ConstantNode)node.Right).Value);
             }
@@ -547,7 +547,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("substringof", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("Alfreds", ((ConstantNode)nodeLeft.Parameters[0]).LiteralText);
+                Assert.Equal("'Alfreds'", ((ConstantNode)nodeLeft.Parameters[0]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[0]).Value);
                 Assert.Equal("Alfreds", ((ConstantNode)nodeLeft.Parameters[0]).Value);
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[1]);
@@ -574,7 +574,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("substringof", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
                 Assert.IsType<ConstantNode>(node.Parameters[0]);
-                Assert.Equal("Alfreds", ((ConstantNode)node.Parameters[0]).LiteralText);
+                Assert.Equal("'Alfreds'", ((ConstantNode)node.Parameters[0]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[0]).Value);
                 Assert.Equal("Alfreds", ((ConstantNode)node.Parameters[0]).Value);
                 Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[1]);
@@ -601,7 +601,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("alfreds futterkiste", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'alfreds futterkiste'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("alfreds futterkiste", ((ConstantNode)node.Right).Value);
             }
@@ -626,7 +626,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("ALFREDS FUTTERKISTE", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'ALFREDS FUTTERKISTE'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("ALFREDS FUTTERKISTE", ((ConstantNode)node.Right).Value);
             }

@@ -393,7 +393,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("Milk", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'Milk'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("Milk", ((ConstantNode)node.Right).Value);
             }
@@ -414,7 +414,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("O'Brien", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'O''Brien'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("O'Brien", ((ConstantNode)node.Right).Value);
             }
@@ -456,7 +456,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("Milk", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'Milk'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("Milk", ((ConstantNode)node.Right).Value);
             }
@@ -477,7 +477,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.GreaterThan, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("Milk", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'Milk'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("Milk", ((ConstantNode)node.Right).Value);
             }
@@ -498,7 +498,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("Milk", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'Milk'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("Milk", ((ConstantNode)node.Right).Value);
             }
@@ -519,7 +519,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.LessThan, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("Milk", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'Milk'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("Milk", ((ConstantNode)node.Right).Value);
             }
@@ -596,7 +596,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.NotEqual, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("Milk", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'Milk'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("Milk", ((ConstantNode)node.Right).Value);
             }
