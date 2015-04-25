@@ -9,6 +9,26 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
         public class SingleValueFunctionCallTests
         {
             [Fact]
+            public void ParseIsOfFunctionWithExpressionAndTypeExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("isof(Age, 'Edm.Int64')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+
+                var node = (SingleValueFunctionCallNode)queryNode;
+
+                Assert.Equal("isof", node.Name);
+                Assert.Equal(2, node.Parameters.Count);
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
+                Assert.Equal("Age", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
+                Assert.IsType<ConstantNode>(node.Parameters[1]);
+                Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
+                Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[1]).Value);
+            }
+
+            [Fact]
             public void ParseCeilingFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("ceiling(Freight) eq 32");

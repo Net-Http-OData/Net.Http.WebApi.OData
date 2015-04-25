@@ -37,6 +37,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 ValidateMathFunctions(queryOptions.Filter.RawValue, validationSettings);
                 ValidateLogicalOperators(queryOptions.Filter.RawValue, validationSettings);
                 ValidateArithmeticOperators(queryOptions.Filter.RawValue, validationSettings);
+                ValidateFunctions(queryOptions.Filter.RawValue, validationSettings);
             }
 
             if (queryOptions.Format != null
@@ -73,6 +74,20 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
                 throw new ODataException(Messages.TopQueryOptionNotSupported);
+            }
+        }
+
+        private static void ValidateFunctions(string rawFilterValue, ODataValidationSettings validationSettings)
+        {
+            if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions)
+            {
+                return;
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.IsOf) != AllowedFunctions.IsOf
+                && rawFilterValue.Contains("isof("))
+            {
+                throw new ODataException(Messages.IsOfFunctionNotSupported);
             }
         }
 

@@ -126,6 +126,11 @@ namespace Net.Http.WebApi.OData.Query
         Concat = 524288,
 
         /// <summary>
+        /// Specifies that the 'IsOf' function is allowed in the $filter query option.
+        /// </summary>
+        IsOf = 1048576,
+
+        /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
         AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
@@ -143,6 +148,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all functions are allowed in the $filter query option.
         /// </summary>
-        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions
+        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions | IsOf
     }
 }

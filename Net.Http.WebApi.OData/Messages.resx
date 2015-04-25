@@ -255,4 +255,7 @@
   <data name="ConcatFunctionNotSupported" xml:space="preserve">
     <value>The 'concat' function is not supported by this service.</value>
   </data>
+  <data name="IsOfFunctionNotSupported" xml:space="preserve">
+    <value>The 'isof' function is not supported by this service.</value>
+  </data>
 </root>
