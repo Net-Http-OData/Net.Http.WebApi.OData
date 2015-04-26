@@ -75,14 +75,14 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 switch (token.TokenType)
                 {
                     case TokenType.DateTime:
-                        var dateTimeText = token.Value.Trim('\'');
+                        var dateTimeText = token.Value.Substring(9, token.Value.Length - 10);
                         var dateTimeValue = DateTime.ParseExact(dateTimeText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                        return ConstantNode.DateTime(dateTimeText, dateTimeValue);
+                        return ConstantNode.DateTime(token.Value, dateTimeValue);
 
                     case TokenType.DateTimeOffset:
-                        var dateTimeOffsetText = token.Value.Trim('\'');
+                        var dateTimeOffsetText = token.Value.Substring(15, token.Value.Length - 16);
                         var dateTimeOffsetValue = DateTimeOffset.Parse(dateTimeOffsetText, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                        return ConstantNode.DateTimeOffset(dateTimeOffsetText, dateTimeOffsetValue);
+                        return ConstantNode.DateTimeOffset(token.Value, dateTimeOffsetValue);
 
                     case TokenType.Decimal:
                         var decimalText = token.Value.Substring(0, token.Value.Length - 1);
@@ -98,9 +98,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         return ConstantNode.Boolean(token.Value, false);
 
                     case TokenType.Guid:
-                        var guidText = token.Value.Trim('\'');
+                        var guidText = token.Value.Substring(5, token.Value.Length - 6);
                         var guidValue = Guid.ParseExact(guidText, "D");
-                        return ConstantNode.Guid(guidText, guidValue);
+                        return ConstantNode.Guid(token.Value, guidValue);
 
                     case TokenType.Int32:
                         var int32Value = int.Parse(token.Value, CultureInfo.InvariantCulture);
@@ -124,9 +124,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         return ConstantNode.String(token.Value, stringText);
 
                     case TokenType.Time:
-                        var timeSpanText = token.Value.Trim('\'');
+                        var timeSpanText = token.Value.Substring(5, token.Value.Length - 6);
                         var timeSpanValue = TimeSpan.Parse(timeSpanText, CultureInfo.InvariantCulture);
-                        return ConstantNode.Time(timeSpanText, timeSpanValue);
+                        return ConstantNode.Time(token.Value, timeSpanValue);
 
                     case TokenType.True:
                         return ConstantNode.Boolean(token.Value, true);

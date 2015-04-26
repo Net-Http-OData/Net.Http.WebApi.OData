@@ -81,7 +81,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("2013-06-18T09:30", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("datetime'2013-06-18T09:30'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTime(2013, 6, 18, 9, 30, 0), ((ConstantNode)node.Right).Value);
             }
@@ -102,7 +102,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("2013-06-18", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("datetime'2013-06-18'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTime(2013, 6, 18), ((ConstantNode)node.Right).Value);
             }
@@ -123,7 +123,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("2002-10-10T17:00:00Z", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("datetimeoffset'2002-10-10T17:00:00Z'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2002, 10, 10, 17, 0, 0, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
             }
@@ -144,7 +144,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("2013-06-18T09:30:20", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("datetime'2013-06-18T09:30:20'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTime(2013, 6, 18, 9, 30, 20), ((ConstantNode)node.Right).Value);
             }
@@ -186,7 +186,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("0D01B09B-38CD-4C53-AA04-181371087A00", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("guid'0D01B09B-38CD-4C53-AA04-181371087A00'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<Guid>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new Guid("0D01B09B-38CD-4C53-AA04-181371087A00"), ((ConstantNode)node.Right).Value);
             }
@@ -498,7 +498,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("13:20:00", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("time'13:20:00'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new TimeSpan(13, 20, 0), ((ConstantNode)node.Right).Value);
             }

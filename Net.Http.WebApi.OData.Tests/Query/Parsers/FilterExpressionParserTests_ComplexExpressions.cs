@@ -41,7 +41,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeft.Left);
                 Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftLeft.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeft.OperatorKind);
-                Assert.Equal("2015-02-06T00:00:00", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
 
@@ -51,7 +51,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftRight.Left);
                 Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftRight.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRight.OperatorKind);
-                Assert.Equal("2015-02-06T23:59:59", ((ConstantNode)nodeLeftRight.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
@@ -128,7 +128,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeftLeft.Left);
                 Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftLeftLeft.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeftLeft.OperatorKind);
-                Assert.Equal("2015-02-06T00:00:00", ((ConstantNode)nodeLeftLeftLeft.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeftLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeftLeft.OperatorKind);
 
@@ -138,7 +138,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeftRight.Left);
                 Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftLeftRight.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftLeftRight.OperatorKind);
-                Assert.Equal("2015-02-06T23:59:59", ((ConstantNode)nodeLeftLeftRight.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftLeftRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
 

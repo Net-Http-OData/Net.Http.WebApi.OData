@@ -35,7 +35,6 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         Guid,
         String,
         FunctionName,
-        DataType,
         PropertyName,
         UnaryOperator,
         Time
