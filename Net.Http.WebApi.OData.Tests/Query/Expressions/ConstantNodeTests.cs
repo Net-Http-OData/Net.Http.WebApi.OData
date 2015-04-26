@@ -286,6 +286,41 @@
             }
         }
 
+        public class Int64Value
+        {
+            private readonly ConstantNode node;
+
+            public Int64Value()
+            {
+                this.node = ConstantNode.Int64("64L", 64L);
+            }
+
+            [Fact]
+            public void TheEdmTypeIsSet()
+            {
+                Assert.Equal(EdmType.Int64, this.node.EdmType);
+            }
+
+            [Fact]
+            public void TheKindIsQueryNodeKindConstant()
+            {
+                Assert.Equal(QueryNodeKind.Constant, this.node.Kind);
+            }
+
+            [Fact]
+            public void TheLiteralTextPropertyIsSet()
+            {
+                Assert.Equal("64L", this.node.LiteralText);
+            }
+
+            [Fact]
+            public void TheValuePropertyIsSet()
+            {
+                Assert.IsType<long>(this.node.Value);
+                Assert.Equal(64L, this.node.Value);
+            }
+        }
+
         public class NullValue
         {
             private readonly ConstantNode node;

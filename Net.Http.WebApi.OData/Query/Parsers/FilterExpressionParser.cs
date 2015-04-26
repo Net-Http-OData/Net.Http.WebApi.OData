@@ -92,9 +92,13 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         var singleValue = float.Parse(singleText, CultureInfo.InvariantCulture);
                         return ConstantNode.Single(token.Value, singleValue);
 
-                    case TokenType.Integer:
-                        var integerValue = int.Parse(token.Value, CultureInfo.InvariantCulture);
-                        return ConstantNode.Int32(token.Value, integerValue);
+                    case TokenType.Int32:
+                        var int32Value = int.Parse(token.Value, CultureInfo.InvariantCulture);
+                        return ConstantNode.Int32(token.Value, int32Value);
+
+                    case TokenType.Int64:
+                        var int64Value = long.Parse(token.Value.Substring(0, token.Value.Length - 1), CultureInfo.InvariantCulture);
+                        return ConstantNode.Int64(token.Value, int64Value);
 
                     case TokenType.Null:
                         return ConstantNode.Null;
@@ -199,7 +203,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Double:
                         case TokenType.False:
                         case TokenType.Single:
-                        case TokenType.Integer:
+                        case TokenType.Int32:
+                        case TokenType.Int64:
                         case TokenType.DateTime:
                         case TokenType.DateTimeOffset:
                         case TokenType.Guid:
@@ -307,7 +312,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Double:
                         case TokenType.False:
                         case TokenType.Single:
-                        case TokenType.Integer:
+                        case TokenType.Int32:
+                        case TokenType.Int64:
                         case TokenType.DateTime:
                         case TokenType.DateTimeOffset:
                         case TokenType.Guid:

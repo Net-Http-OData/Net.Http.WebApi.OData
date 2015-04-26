@@ -255,7 +255,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
-            public void ParsePropertyEqNegativeIntValueExpression()
+            public void ParsePropertyEqNegativeInt32ValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Amount eq -1234");
 
@@ -273,6 +273,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("-1234", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<int>(((ConstantNode)node.Right).Value);
                 Assert.Equal(-1234, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqNegativeInt64ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq -1234L");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("-1234L", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<long>(((ConstantNode)node.Right).Value);
+                Assert.Equal(-1234L, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -359,7 +380,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
-            public void ParsePropertyEqPositiveIntValueExpression()
+            public void ParsePropertyEqPositiveInt32ValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Amount eq 1234");
 
@@ -377,6 +398,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("1234", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<int>(((ConstantNode)node.Right).Value);
                 Assert.Equal(1234, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqPositiveInt64ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq 1234L");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("1234L", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<long>(((ConstantNode)node.Right).Value);
+                Assert.Equal(1234L, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

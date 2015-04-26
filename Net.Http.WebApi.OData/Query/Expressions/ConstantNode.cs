@@ -162,6 +162,17 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
+        /// Gets a ConstantNode which represents a 64 bit signed integer value.
+        /// </summary>
+        /// <param name="literalText">The literal text.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>A ConstantNode representing a 64 bit signed integer value.</returns>
+        public static ConstantNode Int64(string literalText, long value)
+        {
+            return new ConstantNode(EdmType.Int64, literalText, value);
+        }
+
+        /// <summary>
         /// Gets a ConstantNode which represents a float value.
         /// </summary>
         /// <param name="literalText">The literal text.</param>
