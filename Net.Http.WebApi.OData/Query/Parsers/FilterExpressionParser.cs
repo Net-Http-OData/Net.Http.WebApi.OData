@@ -74,35 +74,6 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             {
                 switch (token.TokenType)
                 {
-                    case TokenType.Decimal:
-                        var decimalText = token.Value.Remove(token.Value.Length - 1, 1);
-                        var decimalValue = decimal.Parse(decimalText, CultureInfo.InvariantCulture);
-                        return ConstantNode.Decimal(token.Value, decimalValue);
-
-                    case TokenType.Double:
-                        var doubleText = token.Value.Remove(token.Value.Length - 1, 1);
-                        var doubleValue = double.Parse(doubleText, CultureInfo.InvariantCulture);
-                        return ConstantNode.Double(token.Value, doubleValue);
-
-                    case TokenType.False:
-                        return ConstantNode.Boolean(token.Value, false);
-
-                    case TokenType.Single:
-                        var singleText = token.Value.Remove(token.Value.Length - 1, 1);
-                        var singleValue = float.Parse(singleText, CultureInfo.InvariantCulture);
-                        return ConstantNode.Single(token.Value, singleValue);
-
-                    case TokenType.Int32:
-                        var int32Value = int.Parse(token.Value, CultureInfo.InvariantCulture);
-                        return ConstantNode.Int32(token.Value, int32Value);
-
-                    case TokenType.Int64:
-                        var int64Value = long.Parse(token.Value.Substring(0, token.Value.Length - 1), CultureInfo.InvariantCulture);
-                        return ConstantNode.Int64(token.Value, int64Value);
-
-                    case TokenType.Null:
-                        return ConstantNode.Null;
-
                     case TokenType.DateTime:
                         var dateTimeText = token.Value.Trim('\'');
                         var dateTimeValue = DateTime.ParseExact(dateTimeText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
@@ -113,10 +84,40 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         var dateTimeOffsetValue = DateTimeOffset.Parse(dateTimeOffsetText, CultureInfo.InvariantCulture, DateTimeStyles.None);
                         return ConstantNode.DateTimeOffset(dateTimeOffsetText, dateTimeOffsetValue);
 
+                    case TokenType.Decimal:
+                        var decimalText = token.Value.Substring(0, token.Value.Length - 1);
+                        var decimalValue = decimal.Parse(decimalText, CultureInfo.InvariantCulture);
+                        return ConstantNode.Decimal(token.Value, decimalValue);
+
+                    case TokenType.Double:
+                        var doubleText = token.Value.Substring(0, token.Value.Length - 1);
+                        var doubleValue = double.Parse(doubleText, CultureInfo.InvariantCulture);
+                        return ConstantNode.Double(token.Value, doubleValue);
+
+                    case TokenType.False:
+                        return ConstantNode.Boolean(token.Value, false);
+
                     case TokenType.Guid:
                         var guidText = token.Value.Trim('\'');
                         var guidValue = Guid.ParseExact(guidText, "D");
                         return ConstantNode.Guid(guidText, guidValue);
+
+                    case TokenType.Int32:
+                        var int32Value = int.Parse(token.Value, CultureInfo.InvariantCulture);
+                        return ConstantNode.Int32(token.Value, int32Value);
+
+                    case TokenType.Int64:
+                        var int64Text = token.Value.Substring(0, token.Value.Length - 1);
+                        var int64Value = long.Parse(int64Text, CultureInfo.InvariantCulture);
+                        return ConstantNode.Int64(token.Value, int64Value);
+
+                    case TokenType.Null:
+                        return ConstantNode.Null;
+
+                    case TokenType.Single:
+                        var singleText = token.Value.Substring(0, token.Value.Length - 1);
+                        var singleValue = float.Parse(singleText, CultureInfo.InvariantCulture);
+                        return ConstantNode.Single(token.Value, singleValue);
 
                     case TokenType.String:
                         var stringText = token.Value.Trim('\'').Replace("''", "'");
