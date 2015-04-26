@@ -10,7 +10,7 @@
             private readonly BinaryOperatorKind binaryOperatorKind = BinaryOperatorKind.And;
             private readonly SingleValueNode left = new SingleValuePropertyAccessNode("Name");
             private readonly BinaryOperatorNode node;
-            private readonly SingleValueNode right = new ConstantNode("Fred", "Fred");
+            private readonly SingleValueNode right = ConstantNode.String("Fred", "Fred");
 
             public WhenConstructed()
             {

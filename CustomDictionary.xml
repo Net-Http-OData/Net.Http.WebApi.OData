@@ -9,6 +9,7 @@
       <Word>Asc</Word>
       <Word>Concat</Word>
       <Word>Desc</Word>
+      <Word>Edm</Word>
       <Word>mul</Word>
     </Recognized>
     <Deprecated>

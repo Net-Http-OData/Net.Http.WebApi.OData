@@ -77,54 +77,54 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     case TokenType.Decimal:
                         var decimalText = token.Value.Remove(token.Value.Length - 1, 1);
                         var decimalValue = decimal.Parse(decimalText, CultureInfo.InvariantCulture);
-                        return new ConstantNode(token.Value, decimalValue);
+                        return ConstantNode.Decimal(token.Value, decimalValue);
 
                     case TokenType.Double:
                         var doubleText = token.Value.Remove(token.Value.Length - 1, 1);
                         var doubleValue = double.Parse(doubleText, CultureInfo.InvariantCulture);
-                        return new ConstantNode(token.Value, doubleValue);
+                        return ConstantNode.Double(token.Value, doubleValue);
 
                     case TokenType.False:
-                        return new ConstantNode(token.Value, false);
+                        return ConstantNode.Boolean(token.Value, false);
 
                     case TokenType.Single:
                         var singleText = token.Value.Remove(token.Value.Length - 1, 1);
                         var singleValue = float.Parse(singleText, CultureInfo.InvariantCulture);
-                        return new ConstantNode(token.Value, singleValue);
+                        return ConstantNode.Single(token.Value, singleValue);
 
                     case TokenType.Integer:
                         var integerValue = int.Parse(token.Value, CultureInfo.InvariantCulture);
-                        return new ConstantNode(token.Value, integerValue);
+                        return ConstantNode.Int32(token.Value, integerValue);
 
                     case TokenType.Null:
-                        return new ConstantNode(token.Value, null);
+                        return ConstantNode.Null;
 
                     case TokenType.DateTime:
                         var dateTimeText = token.Value.Trim('\'');
                         var dateTimeValue = DateTime.ParseExact(dateTimeText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                        return new ConstantNode(dateTimeText, dateTimeValue);
+                        return ConstantNode.DateTime(dateTimeText, dateTimeValue);
 
                     case TokenType.DateTimeOffset:
                         var dateTimeOffsetText = token.Value.Trim('\'');
                         var dateTimeOffsetValue = DateTimeOffset.Parse(dateTimeOffsetText, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                        return new ConstantNode(dateTimeOffsetText, dateTimeOffsetValue);
+                        return ConstantNode.DateTimeOffset(dateTimeOffsetText, dateTimeOffsetValue);
 
                     case TokenType.Guid:
                         var guidText = token.Value.Trim('\'');
                         var guidValue = Guid.ParseExact(guidText, "D");
-                        return new ConstantNode(guidText, guidValue);
+                        return ConstantNode.Guid(guidText, guidValue);
 
                     case TokenType.String:
                         var stringText = token.Value.Trim('\'').Replace("''", "'");
-                        return new ConstantNode(token.Value, stringText);
+                        return ConstantNode.String(token.Value, stringText);
 
                     case TokenType.Time:
                         var timeSpanText = token.Value.Trim('\'');
                         var timeSpanValue = TimeSpan.Parse(timeSpanText, CultureInfo.InvariantCulture);
-                        return new ConstantNode(timeSpanText, timeSpanValue);
+                        return ConstantNode.Time(timeSpanText, timeSpanValue);
 
                     case TokenType.True:
-                        return new ConstantNode(token.Value, true);
+                        return ConstantNode.Boolean(token.Value, true);
 
                     default:
                         throw new NotSupportedException(token.TokenType.ToString());

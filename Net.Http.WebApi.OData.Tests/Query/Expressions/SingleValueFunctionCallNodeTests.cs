@@ -8,7 +8,7 @@
         public class WhenAddingAParameter
         {
             private readonly SingleValueFunctionCallNode node;
-            private readonly QueryNode parameter = new ConstantNode("Hi", "Hi");
+            private readonly QueryNode parameter = ConstantNode.String("Hi", "Hi");
 
             public WhenAddingAParameter()
             {

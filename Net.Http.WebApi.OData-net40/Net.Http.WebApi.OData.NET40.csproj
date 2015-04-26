@@ -114,6 +114,9 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs">
       <Link>Query\Expressions\ConstantNode.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\EdmType.cs">
+      <Link>Query\Expressions\EdmType.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\QueryNode.cs">
       <Link>Query\Expressions\QueryNode.cs</Link>
     </Compile>
