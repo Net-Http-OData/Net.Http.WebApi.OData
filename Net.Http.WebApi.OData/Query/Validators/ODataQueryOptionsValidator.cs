@@ -40,6 +40,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 ValidateArithmeticOperators(queryOptions.Filter.RawValue, validationSettings);
             }
 
+            if (queryOptions.Expand != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Expand) != AllowedQueryOptions.Expand)
+            {
+                throw new ODataException(Messages.ExpandQueryOptionNotSupported);
+            }
+
             if (queryOptions.Format != null
                 && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
             {

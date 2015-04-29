@@ -23,6 +23,7 @@ namespace Net.Http.WebApi.OData.Query
     {
         private readonly ODataRawQueryOptions rawValues;
         private readonly HttpRequestMessage request;
+        private ExpandQueryOption expand;
         private FilterQueryOption filter;
         private FormatQueryOption format;
         private InlineCountQueryOption inlineCount;
@@ -46,6 +47,22 @@ namespace Net.Http.WebApi.OData.Query
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
+        }
+
+        /// <summary>
+        /// Gets the expand query option.
+        /// </summary>
+        public ExpandQueryOption Expand
+        {
+            get
+            {
+                if (this.expand == null && this.rawValues.Expand != null)
+                {
+                    this.expand = new ExpandQueryOption(this.rawValues.Expand);
+                }
+
+                return this.expand;
+            }
         }
 
         /// <summary>

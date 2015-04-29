@@ -142,6 +142,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The $expand query option is not supported by this service..
+        /// </summary>
+        internal static string ExpandQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("ExpandQueryOptionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The $filter query option is not supported by this service..
         /// </summary>
         internal static string FilterQueryOptionNotSupported {

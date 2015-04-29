@@ -261,4 +261,7 @@
   <data name="CastFunctionNotSupported" xml:space="preserve">
     <value>The 'cast' function is not supported by this service.</value>
   </data>
+  <data name="ExpandQueryOptionNotSupported" xml:space="preserve">
+    <value>The $expand query option is not supported by this service.</value>
+  </data>
 </root>

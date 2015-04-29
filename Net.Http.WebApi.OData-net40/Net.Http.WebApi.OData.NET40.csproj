@@ -105,6 +105,9 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedQueryOptions.cs">
       <Link>Query\AllowedQueryOptions.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ExpandQueryOption.cs">
+      <Link>Query\ExpandQueryOption.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKind.cs">
       <Link>Query\Expressions\BinaryOperatorKind.cs</Link>
     </Compile>
