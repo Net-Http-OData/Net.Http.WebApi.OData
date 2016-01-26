@@ -43,7 +43,7 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("request");
             }
 
-            var rawQuery = Uri.UnescapeDataString(request.RequestUri.Query);
+            var rawQuery = Uri.UnescapeDataString(request.RequestUri.Query).Replace('+', ' ');
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
