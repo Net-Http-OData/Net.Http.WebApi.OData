@@ -44,6 +44,7 @@ namespace Net.Http.WebApi.OData.Query
             }
 
             var rawQuery = Uri.UnescapeDataString(request.RequestUri.Query);
+            rawQuery = rawQuery.Replace('+', ' ');
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
