@@ -215,7 +215,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.True:
                             if (stack.Count > 0)
                             {
-                                node.Parameters.Add(ParseConstantNode(token));
+                                stack.Peek().Parameters.Add(ParseConstantNode(token));
                             }
                             else
                             {

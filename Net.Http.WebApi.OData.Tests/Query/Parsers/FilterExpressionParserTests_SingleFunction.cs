@@ -526,6 +526,32 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("lfreds Futterkiste", ((ConstantNode)node.Right).Value);
             }
 
+            /// <summary>
+            /// Issue #57 - Nested function call parsing error.
+            /// </summary>
+            [Fact]
+            public void ParseSubstringFunctionExpressionWithOneArgumentWhichIsAlsoAFunction()
+            {
+                var queryNode = FilterExpressionParser.Parse("substring(tolower(Name), 'Paul')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+
+                var node = (SingleValueFunctionCallNode)queryNode;
+                Assert.Equal("substring", node.Name);
+                Assert.Equal(2, node.Parameters.Count);
+                Assert.IsType<SingleValueFunctionCallNode>(node.Parameters[0]);
+
+                var firstParameter = (SingleValueFunctionCallNode)node.Parameters[0];
+                Assert.Equal("tolower", firstParameter.Name);
+                Assert.Equal(1, firstParameter.Parameters.Count);
+                Assert.IsType<SingleValuePropertyAccessNode>(firstParameter.Parameters[0]);
+                Assert.Equal("Name", ((SingleValuePropertyAccessNode)firstParameter.Parameters[0]).PropertyName);
+
+                Assert.IsType<ConstantNode>(node.Parameters[1]);
+                Assert.Equal("'Paul'", ((ConstantNode)node.Parameters[1]).LiteralText);
+            }
+
             [Fact]
             public void ParseSubstringFunctionExpressionWithTwoArguments()
             {
