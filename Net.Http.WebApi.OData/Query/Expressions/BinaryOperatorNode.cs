@@ -52,12 +52,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
-        /// Gets or sets the kind of the operator.
+        /// Gets the kind of the operator.
         /// </summary>
         public BinaryOperatorKind OperatorKind
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
