@@ -332,7 +332,17 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     }
                     else
                     {
-                        this.nodeStack.Push(new BinaryOperatorNode(binaryNode, this.nextBinaryOperatorKind, null));
+                        if (this.groupingDepth == 0 && this.nodeStack.Count > 0)
+                        {
+                            var binaryParent = (BinaryOperatorNode)this.nodeStack.Pop();
+                            binaryParent.Right = binaryNode;
+
+                            this.nodeStack.Push(new BinaryOperatorNode(binaryParent, this.nextBinaryOperatorKind, null));
+                        }
+                        else
+                        {
+                            this.nodeStack.Push(new BinaryOperatorNode(binaryNode, this.nextBinaryOperatorKind, null));
+                        }
                     }
                 }
             }

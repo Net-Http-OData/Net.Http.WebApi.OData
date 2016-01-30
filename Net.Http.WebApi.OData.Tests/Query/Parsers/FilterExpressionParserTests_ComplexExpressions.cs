@@ -8,6 +8,80 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
     {
         public class ComplexExpressionTests
         {
+            /// <summary>
+            /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/55 - Grouped parsing error
+            /// </summary>
+            [Fact]
+            public void Parse_GroupedA_AndGroupedBandC_AndGroupedD()
+            {
+                var queryNode = FilterExpressionParser.Parse("(CustomerId eq 9) and (Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59') and (Status eq 1)");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                //                             == Expected Tree Structure ==
+                //                         ----------------- and -------------------
+                //                        |                                         |
+                //              -------- and --------                          --- eq ---
+                //             |                     |                        |          |
+                //         --- eq ---           --- and ---
+                //        |          |         |           |
+                //                        --- ge ---   --- le ---
+                //                       |          |  |          |
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                // node.Left = (CustomerId eq 9) and (Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59')
+                Assert.IsType<BinaryOperatorNode>(node.Left);
+                var nodeLeft = (BinaryOperatorNode)node.Left;
+
+                // node.Left.Left = (CustomerId eq 9)
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
+                var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeft.Left);
+                Assert.Equal("CustomerId", ((SingleValuePropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
+                Assert.Equal("9", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
+
+                // node.Left.Right = (Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59')
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
+                var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
+
+                Assert.IsType<BinaryOperatorNode>(nodeLeftRight.Left);
+                var nodeLeftRightLeft = (BinaryOperatorNode)nodeLeftRight.Left;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftRightLeft.Left);
+                Assert.Equal("Created", ((SingleValuePropertyAccessNode)nodeLeftRightLeft.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftRightLeft.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeLeftRightLeft.Right);
+                Assert.Equal("datetime'2015-03-01T00:00:00'", ((ConstantNode)nodeLeftRightLeft.Right).LiteralText);
+
+                Assert.Equal(BinaryOperatorKind.And, nodeLeftRight.OperatorKind);
+
+                Assert.IsType<BinaryOperatorNode>(nodeLeftRight.Right);
+                var nodeLeftRightRight = (BinaryOperatorNode)nodeLeftRight.Right;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftRightRight.Left);
+                Assert.Equal("Created", ((SingleValuePropertyAccessNode)nodeLeftRightRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRightRight.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeLeftRightRight.Right);
+                Assert.Equal("datetime'2015-03-31T23:59:59'", ((ConstantNode)nodeLeftRightRight.Right).LiteralText);
+
+                Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
+
+                // node.Right = (Status eq 1)
+                Assert.IsType<BinaryOperatorNode>(node.Right);
+                var nodeRight = (BinaryOperatorNode)node.Right;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeRight.Left);
+                Assert.Equal("Status", ((SingleValuePropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
+                Assert.IsType<ConstantNode>(nodeRight.Right);
+                Assert.Equal("1", ((ConstantNode)nodeRight.Right).LiteralText);
+            }
+
             [Fact]
             public void Parse_GroupedAandBandC_And_GroupedDorEorF()
             {
