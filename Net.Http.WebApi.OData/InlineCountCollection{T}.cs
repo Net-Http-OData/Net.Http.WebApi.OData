@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData
     /// A class which is used to return results with an inline count.
     /// </summary>
     /// <typeparam name="T">The type of item contained in the collection.</typeparam>
-    [System.Obsolete("This class has been replaced by the InlineCount<T> class and will be removed in a future release.")]
+    [System.Obsolete("This class has been replaced by the InlineCount<T> class and will be removed in version 4.0.0 of Net.Http.WebApi.OData.")]
     public sealed class InlineCountCollection<T> : IEnumerable<T>
     {
         private readonly IList<T> items;
