@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.ConstantNode">
-    <Position X="2.5" Y="4.75" Width="1.5" />
+    <Position X="2.5" Y="4.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQBgAAgAQAAAAQCAIAACBIQAEAIgAAAAAQA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,9 +22,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode">
-    <Position X="4.25" Y="4.75" Width="2.25" />
+    <Position X="4.5" Y="4.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAIIAAAAAAAAA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\SingleValueFunctionCallNode.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -36,14 +36,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode">
-    <Position X="6.75" Y="4.75" Width="2.5" />
+    <Position X="7" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\SingleValuePropertyAccessNode.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode">
-    <Position X="9.5" Y="4.75" Width="1.75" />
+    <Position X="9.75" Y="4.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorNode.cs</FileName>
@@ -68,6 +68,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorKind.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Net.Http.WebApi.OData.Query.Expressions.EdmType">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAQAgABgAQAAAAACAJAACBAQAEEIAAAAAAQA=</HashCode>
+      <FileName>C:\Source\GitHub\Net.Http.WebApi.OData\Net.Http.WebApi.OData\Query\Expressions\EdmType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
