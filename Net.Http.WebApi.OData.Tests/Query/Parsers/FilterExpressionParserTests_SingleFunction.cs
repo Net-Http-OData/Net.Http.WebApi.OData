@@ -527,7 +527,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             /// <summary>
-            /// Issue #57 - Nested function call parsing error.
+            /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/57 - Nested function call parsing error.
             /// </summary>
             [Fact]
             public void ParseSubstringFunctionExpressionWithOneArgumentWhichIsAlsoAFunction()

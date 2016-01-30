@@ -8,94 +8,8 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
     {
         public class ComplexExpressionTests
         {
-            /// <summary>
-            /// Based upon https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/40
-            /// </summary>
             [Fact]
-            public void Parse_XandY_And_AorBorC()
-            {
-                var queryNode = FilterExpressionParser.Parse("(Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59') and (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')");
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                //                  == Expected Tree Structure ==
-                //              --------------- and -----------------
-                //             |                                     |
-                //       ---- and ----                     --------- or ---------
-                //      |             |                   |                      |
-                // --- ge ---    --- le ---          ---- or ----           --- eq ---
-                // |         |   |        |         |            |         |          |
-                //                              --- eq ---   --- eq ---
-                //                             |         |  |          |
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                // node.Left = (Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59')
-                Assert.IsType<BinaryOperatorNode>(node.Left);
-                var nodeLeft = (BinaryOperatorNode)node.Left;
-
-                // node.Left.Left = Date ge datetime'2015-02-06T00:00:00'
-                Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
-                var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftLeft.Left).PropertyName);
-                Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeft.OperatorKind);
-                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
-
-                Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
-
-                // node.Left.Right = Date le datetime'2015-02-06T23:59:59'
-                Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
-                var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftRight.Left).PropertyName);
-                Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRight.OperatorKind);
-                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftRight.Right).LiteralText);
-
-                Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
-
-                // node.Right = (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')
-                Assert.IsType<BinaryOperatorNode>(node.Right);
-                var nodeRight = (BinaryOperatorNode)node.Right;
-
-                // node.Right.Left = Level eq 'WARN' or Level eq 'ERROR'
-                Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
-                var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
-
-                // node.Right.Left.Left = Level eq 'WARN'
-                Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Left);
-                var nodeRightLeftLeft = (BinaryOperatorNode)nodeRightLeft.Left;
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeRightLeftLeft.Left);
-                Assert.Equal("Level", ((SingleValuePropertyAccessNode)nodeRightLeftLeft.Left).PropertyName);
-                Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftLeft.OperatorKind);
-                Assert.Equal("'WARN'", ((ConstantNode)nodeRightLeftLeft.Right).LiteralText);
-                Assert.Equal("WARN", ((ConstantNode)nodeRightLeftLeft.Right).Value);
-
-                Assert.Equal(BinaryOperatorKind.Or, nodeRightLeft.OperatorKind);
-
-                // node.Right.Left.Right = Level eq 'ERROR'
-                Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Right);
-                var nodeRightLeftRight = (BinaryOperatorNode)nodeRightLeft.Right;
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeRightLeftRight.Left);
-                Assert.Equal("Level", ((SingleValuePropertyAccessNode)nodeRightLeftRight.Left).PropertyName);
-                Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftRight.OperatorKind);
-                Assert.Equal("'ERROR'", ((ConstantNode)nodeRightLeftRight.Right).LiteralText);
-                Assert.Equal("ERROR", ((ConstantNode)nodeRightLeftRight.Right).Value);
-
-                Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
-
-                // node.Right.Right = Level eq 'FATAL'
-                Assert.IsType<BinaryOperatorNode>(nodeRight.Right);
-                var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Level", ((SingleValuePropertyAccessNode)nodeRightRight.Left).PropertyName);
-                Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
-                Assert.Equal("'FATAL'", ((ConstantNode)nodeRightRight.Right).LiteralText);
-            }
-
-            [Fact]
-            public void Parse_XandYandZ_And_AorBorC()
+            public void Parse_GroupedAandBandC_And_GroupedDorEorF()
             {
                 var queryNode = FilterExpressionParser.Parse("(Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59' and CustomerId eq 122134) and (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')");
 
@@ -149,6 +63,92 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("CustomerId", ((SingleValuePropertyAccessNode)nodeLeftRight.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("122134", ((ConstantNode)nodeLeftRight.Right).LiteralText);
+
+                Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
+
+                // node.Right = (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')
+                Assert.IsType<BinaryOperatorNode>(node.Right);
+                var nodeRight = (BinaryOperatorNode)node.Right;
+
+                // node.Right.Left = Level eq 'WARN' or Level eq 'ERROR'
+                Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
+                var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
+
+                // node.Right.Left.Left = Level eq 'WARN'
+                Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Left);
+                var nodeRightLeftLeft = (BinaryOperatorNode)nodeRightLeft.Left;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeRightLeftLeft.Left);
+                Assert.Equal("Level", ((SingleValuePropertyAccessNode)nodeRightLeftLeft.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftLeft.OperatorKind);
+                Assert.Equal("'WARN'", ((ConstantNode)nodeRightLeftLeft.Right).LiteralText);
+                Assert.Equal("WARN", ((ConstantNode)nodeRightLeftLeft.Right).Value);
+
+                Assert.Equal(BinaryOperatorKind.Or, nodeRightLeft.OperatorKind);
+
+                // node.Right.Left.Right = Level eq 'ERROR'
+                Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Right);
+                var nodeRightLeftRight = (BinaryOperatorNode)nodeRightLeft.Right;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeRightLeftRight.Left);
+                Assert.Equal("Level", ((SingleValuePropertyAccessNode)nodeRightLeftRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftRight.OperatorKind);
+                Assert.Equal("'ERROR'", ((ConstantNode)nodeRightLeftRight.Right).LiteralText);
+                Assert.Equal("ERROR", ((ConstantNode)nodeRightLeftRight.Right).Value);
+
+                Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
+
+                // node.Right.Right = Level eq 'FATAL'
+                Assert.IsType<BinaryOperatorNode>(nodeRight.Right);
+                var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeRightRight.Left);
+                Assert.Equal("Level", ((SingleValuePropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
+                Assert.Equal("'FATAL'", ((ConstantNode)nodeRightRight.Right).LiteralText);
+            }
+
+            /// <summary>
+            /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/40 - Grouping doesn't support (x and y) and (a or b or c)
+            /// </summary>
+            [Fact]
+            public void Parse_GroupedXandY_And_GroupedAorBorC()
+            {
+                var queryNode = FilterExpressionParser.Parse("(Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59') and (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                //                  == Expected Tree Structure ==
+                //              --------------- and -----------------
+                //             |                                     |
+                //       ---- and ----                     --------- or ---------
+                //      |             |                   |                      |
+                // --- ge ---    --- le ---          ---- or ----           --- eq ---
+                // |         |   |        |         |            |         |          |
+                //                              --- eq ---   --- eq ---
+                //                             |         |  |          |
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                // node.Left = (Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59')
+                Assert.IsType<BinaryOperatorNode>(node.Left);
+                var nodeLeft = (BinaryOperatorNode)node.Left;
+
+                // node.Left.Left = Date ge datetime'2015-02-06T00:00:00'
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
+                var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftLeft.Left);
+                Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeft.OperatorKind);
+                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
+
+                Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
+
+                // node.Left.Right = Date le datetime'2015-02-06T23:59:59'
+                Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
+                var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
+                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftRight.Left);
+                Assert.Equal("Date", ((SingleValuePropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRight.OperatorKind);
+                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
@@ -505,7 +505,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             /// <summary>
-            /// Issue #49 - InvalidOperationException: Stack Empty thrown by FilterExpressionParser with nested grouping.
+            /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/49 - InvalidOperationException: Stack Empty thrown by FilterExpressionParser with nested grouping.
             /// </summary>
             [Fact]
             public void ParseNestedGrouping()
@@ -563,7 +563,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             /// <summary>
-            /// Based upon https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/36#issuecomment-70567443.
+            /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/36#issuecomment-70567443.
             /// </summary>
             [Fact]
             public void ParseOuterGroupedExample1()
