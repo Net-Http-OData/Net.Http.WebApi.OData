@@ -16,6 +16,15 @@
         }
 
         [Fact]
+        public void NullValueIsSingleton()
+        {
+            var node1 = ConstantNode.Null;
+            var node2 = ConstantNode.Null;
+
+            Assert.Same(node1, node2);
+        }
+
+        [Fact]
         public void TrueValueIsSingleton()
         {
             var node1 = ConstantNode.True;

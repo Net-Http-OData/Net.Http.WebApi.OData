@@ -49,7 +49,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
-        /// Gets the ConstantNode which represents a null value.
+        /// Gets the ConstantNode which represents a value of null.
         /// </summary>
         public static ConstantNode Null
         {
