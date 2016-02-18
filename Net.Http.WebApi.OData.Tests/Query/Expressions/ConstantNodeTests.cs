@@ -6,6 +6,24 @@
 
     public class ConstantNodeTests
     {
+        [Fact]
+        public void FalseValueIsSingleton()
+        {
+            var node1 = ConstantNode.False;
+            var node2 = ConstantNode.False;
+
+            Assert.Same(node1, node2);
+        }
+
+        [Fact]
+        public void TrueValueIsSingleton()
+        {
+            var node1 = ConstantNode.True;
+            var node2 = ConstantNode.True;
+
+            Assert.Same(node1, node2);
+        }
+
         public class BooleanFalseValue
         {
             private readonly ConstantNode node;
@@ -213,6 +231,41 @@
             {
                 Assert.IsType<double>(this.node.Value);
                 Assert.Equal(2.029d, this.node.Value);
+            }
+        }
+
+        public class FalseValue
+        {
+            private readonly ConstantNode node;
+
+            public FalseValue()
+            {
+                this.node = ConstantNode.False;
+            }
+
+            [Fact]
+            public void TheEdmTypeIsSet()
+            {
+                Assert.Equal(EdmType.Boolean, this.node.EdmType);
+            }
+
+            [Fact]
+            public void TheKindIsQueryNodeKindConstant()
+            {
+                Assert.Equal(QueryNodeKind.Constant, this.node.Kind);
+            }
+
+            [Fact]
+            public void TheLiteralTextPropertyIsSet()
+            {
+                Assert.Equal("false", this.node.LiteralText);
+            }
+
+            [Fact]
+            public void TheValuePropertyIsSet()
+            {
+                Assert.IsType<bool>(this.node.Value);
+                Assert.False((bool)this.node.Value);
             }
         }
 
@@ -457,6 +510,41 @@
             {
                 Assert.IsType<TimeSpan>(this.node.Value);
                 Assert.Equal(new TimeSpan(13, 20, 0), this.node.Value);
+            }
+        }
+
+        public class TrueValue
+        {
+            private readonly ConstantNode node;
+
+            public TrueValue()
+            {
+                this.node = ConstantNode.True;
+            }
+
+            [Fact]
+            public void TheEdmTypeIsSet()
+            {
+                Assert.Equal(EdmType.Boolean, this.node.EdmType);
+            }
+
+            [Fact]
+            public void TheKindIsQueryNodeKindConstant()
+            {
+                Assert.Equal(QueryNodeKind.Constant, this.node.Kind);
+            }
+
+            [Fact]
+            public void TheLiteralTextPropertyIsSet()
+            {
+                Assert.Equal("true", this.node.LiteralText);
+            }
+
+            [Fact]
+            public void TheValuePropertyIsSet()
+            {
+                Assert.IsType<bool>(this.node.Value);
+                Assert.True((bool)this.node.Value);
             }
         }
     }

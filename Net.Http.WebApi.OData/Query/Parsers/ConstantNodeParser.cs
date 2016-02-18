@@ -45,7 +45,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.Double(token.Value, doubleValue);
 
                 case TokenType.False:
-                    return ConstantNode.Boolean(token.Value, false);
+                    return ConstantNode.False;
 
                 case TokenType.Guid:
                     var guidText = token.Value.Substring(5, token.Value.Length - 6);
@@ -79,7 +79,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.Time(token.Value, timeSpanValue);
 
                 case TokenType.True:
-                    return ConstantNode.Boolean(token.Value, true);
+                    return ConstantNode.True;
 
                 default:
                     throw new NotSupportedException(token.TokenType.ToString());

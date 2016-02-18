@@ -20,7 +20,9 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     [System.Diagnostics.DebuggerDisplay("{LiteralText}")]
     public sealed class ConstantNode : SingleValueNode
     {
+        private static ConstantNode falseConstantNode = new ConstantNode(EdmType.Binary, "false", false);
         private static ConstantNode nullConstantNode = new ConstantNode(EdmType.Null, "null", null);
+        private static ConstantNode trueConstantNode = new ConstantNode(EdmType.Binary, "true", true);
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ConstantNode" /> class.
@@ -36,6 +38,17 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
+        /// Gets the ConstantNode which represents a value of false.
+        /// </summary>
+        public static ConstantNode False
+        {
+            get
+            {
+                return falseConstantNode;
+            }
+        }
+
+        /// <summary>
         /// Gets the ConstantNode which represents a null value.
         /// </summary>
         public static ConstantNode Null
@@ -43,6 +56,17 @@ namespace Net.Http.WebApi.OData.Query.Expressions
             get
             {
                 return nullConstantNode;
+            }
+        }
+
+        /// <summary>
+        /// Gets the ConstantNode which represents a value of true.
+        /// </summary>
+        public static ConstantNode True
+        {
+            get
+            {
+                return trueConstantNode;
             }
         }
 
@@ -90,6 +114,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a boolean value.</returns>
+        [Obsolete("Use ConstantNode.False or ConstantNode.True instead, this will be removed in version 4.0.0 of Net.Http.WebApi.OData.")]
         public static ConstantNode Boolean(string literalText, bool value)
         {
             return new ConstantNode(EdmType.Boolean, literalText, value);
