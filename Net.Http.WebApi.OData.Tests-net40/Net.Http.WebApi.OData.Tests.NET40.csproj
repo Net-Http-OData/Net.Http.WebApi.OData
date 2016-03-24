@@ -59,9 +59,11 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.XML" />
     <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
@@ -70,6 +72,9 @@
   <ItemGroup>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountCollectionTests.cs">
       <Link>InlineCountCollectionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountSerializationTests.cs">
+      <Link>InlineCountSerializationTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountTests.cs">
       <Link>InlineCountTests.cs</Link>
