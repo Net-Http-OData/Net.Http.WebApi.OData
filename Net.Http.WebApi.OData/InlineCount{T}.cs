@@ -21,7 +21,10 @@ namespace Net.Http.WebApi.OData
     [System.Runtime.Serialization.DataContract]
     public sealed class InlineCount<T>
     {
+        [System.Runtime.Serialization.DataMember(Name = "__count", Order = 0)]
         private readonly int count;
+
+        [System.Runtime.Serialization.DataMember(Name = "results", Order = 1)]
         private readonly IList<T> results;
 
         /// <summary>
@@ -38,7 +41,6 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Gets the total result count.
         /// </summary>
-        [System.Runtime.Serialization.DataMember(Name = "__count", Order = 0)]
         public int Count
         {
             get
@@ -50,7 +52,6 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Gets the results.
         /// </summary>
-        [System.Runtime.Serialization.DataMember(Name = "results", Order = 1)]
         public IEnumerable<T> Results
         {
             get
