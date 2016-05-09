@@ -51,7 +51,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         internal Lexer(string content)
         {
             this.content = content;
-            this.position = 0;
+            this.position = content.IndexOf('=') + 1;
             this.current = default(Token);
         }
 

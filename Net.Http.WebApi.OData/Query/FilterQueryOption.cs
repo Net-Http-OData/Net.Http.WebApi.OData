@@ -33,10 +33,8 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("rawValue");
             }
 
-            this.RawValue = rawValue;
-
-            var equals = rawValue.IndexOf('=') + 1;
-            this.Expression = FilterExpressionParser.Parse(rawValue.Substring(equals, rawValue.Length - equals));
+            this.RawValue = rawValue;            
+            this.Expression = FilterExpressionParser.Parse(rawValue);
         }
 
         /// <summary>
