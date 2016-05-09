@@ -20,9 +20,9 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     [System.Diagnostics.DebuggerDisplay("{LiteralText}")]
     public sealed class ConstantNode : SingleValueNode
     {
-        private static ConstantNode falseConstantNode = new ConstantNode(EdmType.Boolean, "false", false);
-        private static ConstantNode nullConstantNode = new ConstantNode(EdmType.Null, "null", null);
-        private static ConstantNode trueConstantNode = new ConstantNode(EdmType.Boolean, "true", true);
+        private static readonly ConstantNode FalseConstantNode = new ConstantNode(EdmType.Boolean, "false", false);
+        private static readonly ConstantNode NullConstantNode = new ConstantNode(EdmType.Null, "null", null);
+        private static readonly ConstantNode TrueConstantNode = new ConstantNode(EdmType.Boolean, "true", true);
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ConstantNode" /> class.
@@ -44,7 +44,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         {
             get
             {
-                return falseConstantNode;
+                return FalseConstantNode;
             }
         }
 
@@ -55,7 +55,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         {
             get
             {
-                return nullConstantNode;
+                return NullConstantNode;
             }
         }
 
@@ -66,7 +66,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         {
             get
             {
-                return trueConstantNode;
+                return TrueConstantNode;
             }
         }
 
