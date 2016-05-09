@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
     internal static class ConstantNodeParser
     {
-        private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o" };
+        private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o", "yyyy-MM-ddTHH:mm:ss.fffZ" };
 
         internal static ConstantNode ParseConstantNode(Token token)
         {

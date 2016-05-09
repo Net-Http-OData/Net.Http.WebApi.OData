@@ -35,7 +35,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(@"(add|sub|mul|div|mod)(?=\s)", TokenType.ArithmeticOperator),
             new TokenDefinition(@"\w+(?=\()", TokenType.FunctionName),
             new TokenDefinition(@",(?=\s?)", TokenType.Comma),
-            new TokenDefinition(@"datetime'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d{7}(Z|-\d{2}:\d{2}))?)?)?'", TokenType.DateTime),
+            new TokenDefinition(@"datetime'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d{1,12}(Z|-\d{2}:\d{2}))?)?)?'", TokenType.DateTime),
             new TokenDefinition(@"datetimeoffset'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(Z|-\d{2}:\d{2}))?)?'", TokenType.DateTimeOffset),
             new TokenDefinition(@"time'\d{2}:\d{2}:\d{2}'", TokenType.Time),
             new TokenDefinition(@"guid'[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'", TokenType.Guid),

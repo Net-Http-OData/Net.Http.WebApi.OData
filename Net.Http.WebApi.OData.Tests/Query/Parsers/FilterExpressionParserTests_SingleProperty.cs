@@ -108,6 +108,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqDateTimeMomentJsIsoStringFormatValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Created eq datetime'2013-02-04T22:44:30.652Z'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("Created", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetime'2013-02-04T22:44:30.652Z'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTime(2013, 2, 4, 22, 44, 30, 652), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqDateTimeOffsetValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("LastUpdated eq datetimeoffset'2002-10-10T17:00:00Z'");
