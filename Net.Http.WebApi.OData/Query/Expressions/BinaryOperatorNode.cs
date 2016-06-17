@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="BinaryOperatorNode.cs" company="Project Contributors">
-// Copyright 2012-2013 Project Contributors
+// Copyright 2012 - 2016 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,13 +18,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     [System.Diagnostics.DebuggerDisplay("{Left} {OperatorKind} {Right}")]
     public sealed class BinaryOperatorNode : SingleValueNode
     {
-        /// <summary>
-        /// Initialises a new instance of the <see cref="BinaryOperatorNode"/> class.
-        /// </summary>
-        public BinaryOperatorNode()
-        {
-        }
-
         /// <summary>
         /// Initialises a new instance of the <see cref="BinaryOperatorNode"/> class.
         /// </summary>
@@ -59,12 +52,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
-        /// Gets or sets the kind of the operator.
+        /// Gets the kind of the operator.
         /// </summary>
         public BinaryOperatorKind OperatorKind
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>

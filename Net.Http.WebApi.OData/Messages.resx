@@ -252,4 +252,16 @@
   <data name="SubtractOperatorNotSupported" xml:space="preserve">
     <value>The 'sub' operator is not supported by this service.</value>
   </data>
+  <data name="ConcatFunctionNotSupported" xml:space="preserve">
+    <value>The 'concat' function is not supported by this service.</value>
+  </data>
+  <data name="IsOfFunctionNotSupported" xml:space="preserve">
+    <value>The 'isof' function is not supported by this service.</value>
+  </data>
+  <data name="CastFunctionNotSupported" xml:space="preserve">
+    <value>The 'cast' function is not supported by this service.</value>
+  </data>
+  <data name="ExpandQueryOptionNotSupported" xml:space="preserve">
+    <value>The $expand query option is not supported by this service.</value>
+  </data>
 </root>

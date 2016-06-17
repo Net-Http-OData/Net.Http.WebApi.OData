@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataQueryOptionsHttpParameterBinding.cs" company="Project Contributors">
-// Copyright 2012-2013 Project Contributors
+// Copyright 2012 - 2016 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="ODataQueryOptionsHttpParameterBinding"/> class.
         /// </summary>
         /// <param name="parameterDescriptor">The parameter descriptor.</param>
-        public ODataQueryOptionsHttpParameterBinding(HttpParameterDescriptor parameterDescriptor)
+        internal ODataQueryOptionsHttpParameterBinding(HttpParameterDescriptor parameterDescriptor)
             : base(parameterDescriptor)
         {
         }

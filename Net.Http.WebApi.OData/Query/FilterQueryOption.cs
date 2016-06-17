@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="FilterQueryOption.cs" company="Project Contributors">
-// Copyright 2012-2013 Project Contributors
+// Copyright 2012 - 2016 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@ namespace Net.Http.WebApi.OData.Query
 {
     using System;
     using Net.Http.WebApi.OData.Query.Expressions;
+    using Net.Http.WebApi.OData.Query.Parsers;
 
     /// <summary>
     /// A class containing deserialised values from the $filter query option.
@@ -32,10 +33,8 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("rawValue");
             }
 
-            this.RawValue = rawValue;
-
-            var equals = rawValue.IndexOf('=') + 1;
-            this.Expression = FilterExpressionParser.Parse(rawValue.Substring(equals, rawValue.Length - equals));
+            this.RawValue = rawValue;            
+            this.Expression = FilterExpressionParser.Parse(rawValue);
         }
 
         /// <summary>

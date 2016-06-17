@@ -79,11 +79,29 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;cast&apos; function is not supported by this service..
+        /// </summary>
+        internal static string CastFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("CastFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;ceiling&apos; function is not supported by this service..
         /// </summary>
         internal static string CeilingFunctionNotSupported {
             get {
                 return ResourceManager.GetString("CeilingFunctionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;concat&apos; function is not supported by this service..
+        /// </summary>
+        internal static string ConcatFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("ConcatFunctionNotSupported", resourceCulture);
             }
         }
         
@@ -120,6 +138,15 @@ namespace Net.Http.WebApi.OData {
         internal static string EqualsOperatorNotSupported {
             get {
                 return ResourceManager.GetString("EqualsOperatorNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The $expand query option is not supported by this service..
+        /// </summary>
+        internal static string ExpandQueryOptionNotSupported {
+            get {
+                return ResourceManager.GetString("ExpandQueryOptionNotSupported", resourceCulture);
             }
         }
         
@@ -201,6 +228,15 @@ namespace Net.Http.WebApi.OData {
         internal static string InlineCountRawValueInvalid {
             get {
                 return ResourceManager.GetString("InlineCountRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;isof&apos; function is not supported by this service..
+        /// </summary>
+        internal static string IsOfFunctionNotSupported {
+            get {
+                return ResourceManager.GetString("IsOfFunctionNotSupported", resourceCulture);
             }
         }
         

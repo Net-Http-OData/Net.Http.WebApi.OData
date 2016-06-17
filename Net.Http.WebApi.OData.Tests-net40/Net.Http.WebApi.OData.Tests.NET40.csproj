@@ -59,17 +59,28 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.XML" />
     <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorKindParserTests.cs">
-      <Link>Query\Expressions\BinaryOperatorKindParserTests.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountCollectionTests.cs">
+      <Link>InlineCountCollectionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountSerializationTests.cs">
+      <Link>InlineCountSerializationTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountTests.cs">
+      <Link>InlineCountTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\ExpandQueryOptionTests.cs">
+      <Link>Query\ExpandQueryOptionTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorNodeTests.cs">
       <Link>Query\Expressions\BinaryOperatorNodeTests.cs</Link>
@@ -77,14 +88,14 @@
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\ConstantNodeTests.cs">
       <Link>Query\Expressions\ConstantNodeTests.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\FilterExpressionParserTests.cs">
-      <Link>Query\Expressions\FilterExpressionParserTests.cs</Link>
-    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValueFunctionCallNodeTests.cs">
       <Link>Query\Expressions\SingleValueFunctionCallNodeTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValuePropertyAccessNodeTests.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNodeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\UnaryOperatorNodeTests.cs">
+      <Link>Query\Expressions\UnaryOperatorNodeTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterQueryOptionTests.cs">
       <Link>Query\FilterQueryOptionTests.cs</Link>
@@ -109,6 +120,21 @@
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\OrderByQueryOptionTests.cs">
       <Link>Query\OrderByQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\BinaryOperatorKindParserTests.cs">
+      <Link>Query\Parsers\BinaryOperatorKindParserTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_SingleFunction.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_SingleFunction.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_SingleProperty.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_SingleProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\UnaryOperatorKindParserTests.cs">
+      <Link>Query\Parsers\UnaryOperatorKindParserTests.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\SelectQueryOptionTests.cs">
       <Link>Query\SelectQueryOptionTests.cs</Link>

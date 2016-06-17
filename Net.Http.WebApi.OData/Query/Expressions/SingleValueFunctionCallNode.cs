@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="SingleValueFunctionCallNode.cs" company="Project Contributors">
-// Copyright 2012-2013 Project Contributors
+// Copyright 2012 - 2016 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,20 +24,22 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// Initialises a new instance of the <see cref="SingleValueFunctionCallNode"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <param name="arguments">The arguments.</param>
-        public SingleValueFunctionCallNode(string name, IList<QueryNode> arguments)
+        public SingleValueFunctionCallNode(string name)
         {
             this.Name = name;
-            this.Arguments = arguments;
+            this.Parameters = new List<QueryNode>();
         }
 
         /// <summary>
         /// Gets the arguments for the function call.
         /// </summary>
+        [System.Obsolete("Use the Parameters property instead")]
         public IList<QueryNode> Arguments
         {
-            get;
-            private set;
+            get
+            {
+                return this.Parameters;
+            }
         }
 
         /// <summary>
@@ -55,6 +57,15 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// Gets the name of the function.
         /// </summary>
         public string Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the parameters for the function call.
+        /// </summary>
+        public IList<QueryNode> Parameters
         {
             get;
             private set;

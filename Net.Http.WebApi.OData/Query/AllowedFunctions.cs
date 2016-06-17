@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="AllowedFunctions.cs" company="Project Contributors">
-// Copyright 2012-2013 Project Contributors
+// Copyright 2012 - 2016 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -121,9 +121,24 @@ namespace Net.Http.WebApi.OData.Query
         Substring = 262144,
 
         /// <summary>
+        /// Specifies that the 'Concat' function is allowed in the $filter query option.
+        /// </summary>
+        Concat = 524288,
+
+        /// <summary>
+        /// Specifies that the 'IsOf' function is allowed in the $filter query option.
+        /// </summary>
+        IsOf = 1048576,
+
+        /// <summary>
+        /// Specifies that the 'Cast' function is allowed in the $filter query option.
+        /// </summary>
+        Cast = 2097152,
+
+        /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
-        AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace,
+        AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
 
         /// <summary>
         /// Specifies that all date/time functions are allowed in the $filter query option.
@@ -138,6 +153,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all functions are allowed in the $filter query option.
         /// </summary>
-        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions
+        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions | IsOf | Cast
     }
 }

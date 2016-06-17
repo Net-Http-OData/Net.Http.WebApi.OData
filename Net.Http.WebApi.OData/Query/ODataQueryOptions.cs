@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataQueryOptions.cs" company="Project Contributors">
-// Copyright 2012-2013 Project Contributors
+// Copyright 2012 - 2016 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ namespace Net.Http.WebApi.OData.Query
     {
         private readonly ODataRawQueryOptions rawValues;
         private readonly HttpRequestMessage request;
+        private ExpandQueryOption expand;
         private FilterQueryOption filter;
         private FormatQueryOption format;
         private InlineCountQueryOption inlineCount;
@@ -43,9 +44,26 @@ namespace Net.Http.WebApi.OData.Query
             }
 
             var rawQuery = Uri.UnescapeDataString(request.RequestUri.Query);
+            rawQuery = rawQuery.Replace('+', ' ');
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
+        }
+
+        /// <summary>
+        /// Gets the expand query option.
+        /// </summary>
+        public ExpandQueryOption Expand
+        {
+            get
+            {
+                if (this.expand == null && this.rawValues.Expand != null)
+                {
+                    this.expand = new ExpandQueryOption(this.rawValues.Expand);
+                }
+
+                return this.expand;
+            }
         }
 
         /// <summary>

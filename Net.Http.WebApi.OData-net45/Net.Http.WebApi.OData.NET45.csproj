@@ -59,14 +59,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Net.Http.WebApi.OData\Binders\AbstractFilterBinder.cs">
+      <Link>Binders\AbstractFilterBinder.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\InlineCountCollection{T}.cs">
+      <Link>InlineCountCollection{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\InlineCount{T}.cs">
+      <Link>InlineCount{T}.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Messages.Designer.cs">
       <Link>Messages.Designer.cs</Link>
@@ -89,11 +99,11 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedQueryOptions.cs">
       <Link>Query\AllowedQueryOptions.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ExpandQueryOption.cs">
+      <Link>Query\ExpandQueryOption.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKind.cs">
       <Link>Query\Expressions\BinaryOperatorKind.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKindParser.cs">
-      <Link>Query\Expressions\BinaryOperatorKindParser.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorNode.cs">
       <Link>Query\Expressions\BinaryOperatorNode.cs</Link>
@@ -101,8 +111,8 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs">
       <Link>Query\Expressions\ConstantNode.cs</Link>
     </Compile>
-    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\FilterExpressionParser.cs">
-      <Link>Query\Expressions\FilterExpressionParser.cs</Link>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\EdmType.cs">
+      <Link>Query\Expressions\EdmType.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\QueryNode.cs">
       <Link>Query\Expressions\QueryNode.cs</Link>
@@ -118,6 +128,12 @@
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValuePropertyAccessNode.cs">
       <Link>Query\Expressions\SingleValuePropertyAccessNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorKind.cs">
+      <Link>Query\Expressions\UnaryOperatorKind.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorNode.cs">
+      <Link>Query\Expressions\UnaryOperatorNode.cs</Link>
     </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\FilterQueryOption.cs">
       <Link>Query\FilterQueryOption.cs</Link>
@@ -155,6 +171,30 @@
     <Compile Include="..\Net.Http.WebApi.OData\Query\OrderByQueryOption.cs">
       <Link>Query\OrderByQueryOption.cs</Link>
     </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\BinaryOperatorKindParser.cs">
+      <Link>Query\Parsers\BinaryOperatorKindParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\ConstantNodeParser.cs">
+      <Link>Query\Parsers\ConstantNodeParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\FilterExpressionParser.cs">
+      <Link>Query\Parsers\FilterExpressionParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\Lexer.cs">
+      <Link>Query\Parsers\Lexer.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\Token.cs">
+      <Link>Query\Parsers\Token.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\TokenDefinition.cs">
+      <Link>Query\Parsers\TokenDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\TokenType.cs">
+      <Link>Query\Parsers\TokenType.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\UnaryOperatorKindParser.cs">
+      <Link>Query\Parsers\UnaryOperatorKindParser.cs</Link>
+    </Compile>
     <Compile Include="..\Net.Http.WebApi.OData\Query\SelectQueryOption.cs">
       <Link>Query\SelectQueryOption.cs</Link>
     </Compile>
@@ -181,6 +221,9 @@
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">
       <Link>Net.Http.WebApi.OData.snk</Link>
+    </None>
+    <None Include="..\Net.Http.WebApi.OData\Query\Expressions\_QueryNodes.cd">
+      <Link>Query\Expressions\_QueryNodes.cd</Link>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

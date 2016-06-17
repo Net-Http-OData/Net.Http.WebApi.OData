@@ -2,6 +2,7 @@
 {
     using System.Net.Http;
     using Net.Http.WebApi.OData.Query;
+    using WebApi.OData.Query.Expressions;
     using Xunit;
 
     public class ODataQueryOptionsTests
@@ -15,9 +16,15 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$filter=Name eq 'John'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$top=25");
+                    "http://localhost/api?$filter=Name eq 'John'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$top=25&$expand=Orders");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheExpandOptionShouldBeSet()
+            {
+                Assert.NotNull(this.option.Expand);
             }
 
             [Fact]
@@ -90,6 +97,12 @@
             }
 
             [Fact]
+            public void TheExpandOptionShouldNotBeSet()
+            {
+                Assert.Null(this.option.Expand);
+            }
+
+            [Fact]
             public void TheFilterOptionShouldNotBeSet()
             {
                 Assert.Null(this.option.Filter);
@@ -141,6 +154,69 @@
             public void TheTopPropertyShouldBeNotSet()
             {
                 Assert.Null(this.option.Top);
+            }
+        }
+
+        /// <summary>
+        /// Issue #58 - Plus character in uri should be treated as a space
+        /// </summary>
+        public class WhenCreatedWithPlusSignsInsteadOfSpacesInTheUrl
+        {
+            private readonly HttpRequestMessage httpRequestMessage;
+            private readonly ODataQueryOptions option;
+
+            public WhenCreatedWithPlusSignsInsteadOfSpacesInTheUrl()
+            {
+                this.httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://localhost/api?$filter=Name+eq+'John'&$orderby=Name+asc");
+
+                this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheFilterOptionExpressionShouldBeCorrect()
+            {
+                Assert.IsType<BinaryOperatorNode>(this.option.Filter.Expression);
+
+                var node = (BinaryOperatorNode)this.option.Filter.Expression;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+                Assert.IsType<ConstantNode>(node.Right);
+            }
+
+            [Fact]
+            public void TheFilterOptionShouldBeSet()
+            {
+                Assert.NotNull(this.option.Filter);
+            }
+
+            [Fact]
+            public void TheFilterOptionShouldHaveTheUnescapedRawValue()
+            {
+                Assert.Equal("$filter=Name eq 'John'", this.option.Filter.RawValue);
+            }
+
+            [Fact]
+            public void TheOrderByOptionShouldBeCorrect()
+            {
+                Assert.Equal(1, this.option.OrderBy.Properties.Count);
+                Assert.Equal(OrderByDirection.Ascending, this.option.OrderBy.Properties[0].Direction);
+                Assert.Equal("Name", this.option.OrderBy.Properties[0].Name);
+                Assert.Equal("Name asc", this.option.OrderBy.Properties[0].RawValue);
+            }
+
+            [Fact]
+            public void TheOrderByOptionShouldBeSet()
+            {
+                Assert.NotNull(this.option.OrderBy);
+            }
+
+            [Fact]
+            public void TheOrderByOptionShouldHaveTheUnescapedRawValue()
+            {
+                Assert.Equal("$orderby=Name asc", this.option.OrderBy.RawValue);
             }
         }
     }
