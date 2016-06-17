@@ -14,6 +14,7 @@ namespace Net.Http.WebApi.OData.Query
 {
     using System;
     using System.Net.Http;
+    using System.Web;
 
     /// <summary>
     /// An object which contains the query options in an OData query.
@@ -43,8 +44,7 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("request");
             }
 
-            var rawQuery = Uri.UnescapeDataString(request.RequestUri.Query);
-            rawQuery = rawQuery.Replace('+', ' ');
+            var rawQuery = HttpUtility.UrlDecode(request.RequestUri.Query);
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
