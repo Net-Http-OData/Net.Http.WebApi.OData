@@ -219,5 +219,35 @@
                 Assert.Equal("$orderby=Name asc", this.option.OrderBy.RawValue);
             }
         }
+
+        /// <summary>
+        /// Issue #78 - Cannot send + in the request
+        /// </summary>
+        public class WhenCreatedWithUrlEncodedPlusSignsAndPlusSignsInsteadOfSpacesInTheUrl
+        {
+            private readonly HttpRequestMessage httpRequestMessage;
+            private readonly ODataQueryOptions option;
+
+            public WhenCreatedWithUrlEncodedPlusSignsAndPlusSignsInsteadOfSpacesInTheUrl()
+            {
+                this.httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://localhost/api?$filter=Name+eq+'John'+and+Data+eq+'TG9yZW0gaXBzdW0gZG9s%2Bb3Igc2l0IGF%3D'");
+
+                this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+            
+            [Fact]
+            public void TheFilterOptionShouldBeSet()
+            {
+                Assert.NotNull(this.option.Filter);
+            }
+
+            [Fact]
+            public void TheFilterOptionShouldHaveTheUnescapedRawValue()
+            {
+                Assert.Equal("$filter=Name eq 'John' and Data eq 'TG9yZW0gaXBzdW0gZG9s+b3Igc2l0IGF='", this.option.Filter.RawValue);
+            }
+        }
     }
 }
