@@ -31,67 +31,66 @@ namespace Net.Http.WebApi.OData.Query
         {
             if (rawQuery == null)
             {
-                throw new ArgumentNullException("rawQuery");
+                throw new ArgumentNullException(nameof(rawQuery));
             }
 
             // Any + signs we want in the data should have been encoded as %2B,
             // so do the replace first otherwise we replace legitemate + signs!
-            rawQuery = rawQuery.Replace('+', ' ');
+            this.rawQuery = rawQuery.Replace('+', ' ');
 
-            this.rawQuery = rawQuery;
-
-            var start = rawQuery.Length > 0 ? 1 : 0;
-            var length = rawQuery.Length > 0 ? rawQuery.Length - 1 : 0;
-            var query = rawQuery.Substring(start, length);
-
-            var queryOptions = query.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var queryOption in queryOptions)
+            if (this.rawQuery.Length > 0)
             {
-                // Decode the chunks to prevent splitting the query on an '&' which is actually part of a string value
-                var rawQueryOption = Uri.UnescapeDataString(queryOption);
+                var query = this.rawQuery.Substring(1, this.rawQuery.Length - 1);
 
-                if (rawQueryOption.StartsWith("$expand=", StringComparison.Ordinal))
-                {
-                    this.Expand = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$filter=", StringComparison.Ordinal))
-                {
-                    this.Filter = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$format=", StringComparison.Ordinal))
-                {
-                    this.Format = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$inlinecount=", StringComparison.Ordinal))
-                {
-                    this.InlineCount = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$orderby=", StringComparison.Ordinal))
-                {
-                    this.OrderBy = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$select=", StringComparison.Ordinal))
-                {
-                    this.Select = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$skip=", StringComparison.Ordinal))
-                {
-                    this.Skip = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
-                {
-                    this.SkipToken = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$top=", StringComparison.Ordinal))
-                {
-                    this.Top = rawQueryOption;
-                }
-                else if (rawQueryOption.StartsWith("$", StringComparison.Ordinal))
-                {
-                    var message = string.Format(CultureInfo.InvariantCulture, Messages.UnknownQueryOption, rawQueryOption);
+                var queryOptions = query.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
 
-                    throw new ODataException(message);
+                foreach (var queryOption in queryOptions)
+                {
+                    // Decode the chunks to prevent splitting the query on an '&' which is actually part of a string value
+                    var rawQueryOption = Uri.UnescapeDataString(queryOption);
+
+                    if (rawQueryOption.StartsWith("$select=", StringComparison.Ordinal))
+                    {
+                        this.Select = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$filter=", StringComparison.Ordinal))
+                    {
+                        this.Filter = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$orderby=", StringComparison.Ordinal))
+                    {
+                        this.OrderBy = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$skip=", StringComparison.Ordinal))
+                    {
+                        this.Skip = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$top=", StringComparison.Ordinal))
+                    {
+                        this.Top = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$inlinecount=", StringComparison.Ordinal))
+                    {
+                        this.InlineCount = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$format=", StringComparison.Ordinal))
+                    {
+                        this.Format = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$expand=", StringComparison.Ordinal))
+                    {
+                        this.Expand = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
+                    {
+                        this.SkipToken = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$", StringComparison.Ordinal))
+                    {
+                        var message = string.Format(CultureInfo.InvariantCulture, Messages.UnknownQueryOption, rawQueryOption);
+
+                        throw new ODataException(message);
+                    }
                 }
             }
         }
@@ -102,7 +101,6 @@ namespace Net.Http.WebApi.OData.Query
         public string Expand
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -111,7 +109,6 @@ namespace Net.Http.WebApi.OData.Query
         public string Filter
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -120,7 +117,6 @@ namespace Net.Http.WebApi.OData.Query
         public string Format
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -129,7 +125,6 @@ namespace Net.Http.WebApi.OData.Query
         public string InlineCount
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -138,7 +133,6 @@ namespace Net.Http.WebApi.OData.Query
         public string OrderBy
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -147,7 +141,6 @@ namespace Net.Http.WebApi.OData.Query
         public string Select
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -156,7 +149,6 @@ namespace Net.Http.WebApi.OData.Query
         public string Skip
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -165,7 +157,6 @@ namespace Net.Http.WebApi.OData.Query
         public string SkipToken
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -174,7 +165,6 @@ namespace Net.Http.WebApi.OData.Query
         public string Top
         {
             get;
-            private set;
         }
 
         /// <summary>
