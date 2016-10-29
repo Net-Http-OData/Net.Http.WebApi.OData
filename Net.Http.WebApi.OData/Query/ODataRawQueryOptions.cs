@@ -34,6 +34,10 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException("rawQuery");
             }
 
+            // Any + signs we want in the data should have been encoded as %2B,
+            // so do the replace first otherwise we replace legitemate + signs!
+            rawQuery = rawQuery.Replace('+', ' ');
+
             this.rawQuery = rawQuery;
 
             var start = rawQuery.Length > 0 ? 1 : 0;
@@ -44,45 +48,48 @@ namespace Net.Http.WebApi.OData.Query
 
             foreach (var queryOption in queryOptions)
             {
-                if (queryOption.StartsWith("$expand=", StringComparison.Ordinal))
+                // Decode the chunks to prevent splitting the query on an '&' which is actually part of a string value
+                var rawQueryOption = Uri.UnescapeDataString(queryOption);
+
+                if (rawQueryOption.StartsWith("$expand=", StringComparison.Ordinal))
                 {
-                    this.Expand = queryOption;
+                    this.Expand = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$filter=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$filter=", StringComparison.Ordinal))
                 {
-                    this.Filter = queryOption;
+                    this.Filter = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$format=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$format=", StringComparison.Ordinal))
                 {
-                    this.Format = queryOption;
+                    this.Format = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$inlinecount=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$inlinecount=", StringComparison.Ordinal))
                 {
-                    this.InlineCount = queryOption;
+                    this.InlineCount = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$orderby=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$orderby=", StringComparison.Ordinal))
                 {
-                    this.OrderBy = queryOption;
+                    this.OrderBy = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$select=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$select=", StringComparison.Ordinal))
                 {
-                    this.Select = queryOption;
+                    this.Select = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$skip=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$skip=", StringComparison.Ordinal))
                 {
-                    this.Skip = queryOption;
+                    this.Skip = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
                 {
-                    this.SkipToken = queryOption;
+                    this.SkipToken = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$top=", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$top=", StringComparison.Ordinal))
                 {
-                    this.Top = queryOption;
+                    this.Top = rawQueryOption;
                 }
-                else if (queryOption.StartsWith("$", StringComparison.Ordinal))
+                else if (rawQueryOption.StartsWith("$", StringComparison.Ordinal))
                 {
-                    var message = string.Format(CultureInfo.InvariantCulture, Messages.UnknownQueryOption, queryOption);
+                    var message = string.Format(CultureInfo.InvariantCulture, Messages.UnknownQueryOption, rawQueryOption);
 
                     throw new ODataException(message);
                 }
