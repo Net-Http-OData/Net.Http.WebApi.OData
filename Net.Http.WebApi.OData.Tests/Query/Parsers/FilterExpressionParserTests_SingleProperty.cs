@@ -131,7 +131,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffsetValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("LastUpdated eq datetimeoffset'2002-10-10T17:00:00Z'");
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq datetimeoffset'2002-10-15T17:34:23Z'");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -144,9 +144,9 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2002-10-10T17:00:00Z'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("datetimeoffset'2002-10-15T17:34:23Z'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTimeOffset(2002, 10, 10, 17, 0, 0, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
