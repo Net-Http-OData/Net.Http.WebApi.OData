@@ -2,6 +2,7 @@ properties {
   $projectName = "Net.Http.WebApi.OData"
   $baseDir = Resolve-Path .
   $buildDir = "$baseDir\build"
+  $msbuild = "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
 
   $builds = @(
     @{Name = "NET40"; Constants="NET_4_0"; BuildDir="$buildDir\4.0\"; Framework="v4.0"},
@@ -29,7 +30,7 @@ Task Build -Depends Clean {
     $constants = $build.Constants
     $outDir = $build.BuildDir
     $netVer = $build.Framework
-    Exec { msbuild "$projectName.$name.sln" "/target:Clean;Rebuild" "/property:Configuration=Release;WarningLevel=1;DefineConstants=$constants;OutDir=$outDir;TargetFrameworkVersion=$netVer" /verbosity:quiet }
+    &"$msbuild" "$projectName.$name.sln" "/target:Clean;Rebuild" "/property:Configuration=Release;WarningLevel=1;DefineConstants=$constants;OutDir=$outDir;TargetFrameworkVersion=$netVer" /verbosity:quiet
   }
   Write-Host
 }
