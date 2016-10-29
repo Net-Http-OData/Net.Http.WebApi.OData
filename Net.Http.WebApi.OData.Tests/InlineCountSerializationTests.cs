@@ -68,7 +68,7 @@ namespace Net.Http.WebApi.Tests.OData
 
             Assert.Equal("<InlineCountOfInlineCountSerializationTests.ThingAeZ_PiJ7K xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><__count>12</__count><results xmlns:d2p1=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.Tests.OData\"><d2p1:InlineCountSerializationTests.Thing><d2p1:Name>Coffee</d2p1:Name><d2p1:Total>2.55</d2p1:Total></d2p1:InlineCountSerializationTests.Thing></results></InlineCountOfInlineCountSerializationTests.ThingAeZ_PiJ7K>", result);
         }
-        
+
         [Fact]
         public void XmlSerializationWithSimpleContent()
         {

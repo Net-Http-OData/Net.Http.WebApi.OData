@@ -50,11 +50,14 @@ namespace Net.Http.WebApi.OData.Query
             var parameterValue = new ODataQueryOptions(request);
 
             this.SetValue(actionContext, parameterValue);
-
+#if NET_4_0
             var taskCompletionSource = new TaskCompletionSource<int>();
             taskCompletionSource.SetResult(0);
 
             return taskCompletionSource.Task;
+#else
+            return Task.FromResult(0);
+#endif
         }
     }
 }

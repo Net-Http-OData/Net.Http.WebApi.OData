@@ -94,6 +94,26 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParseContainsFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("contains(CompanyName,'Alfreds')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+
+                var node = (SingleValueFunctionCallNode)queryNode;
+
+                Assert.Equal("contains", node.Name);
+                Assert.Equal(2, node.Parameters.Count);
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
+                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
+                Assert.IsType<ConstantNode>(node.Parameters[1]);
+                Assert.Equal("'Alfreds'", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
+                Assert.Equal("Alfreds", ((ConstantNode)node.Parameters[1]).Value);
+            }
+
+            [Fact]
             public void ParseDayFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("day(BirthDate) eq 8");

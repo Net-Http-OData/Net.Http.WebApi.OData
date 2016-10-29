@@ -30,7 +30,10 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.DateTime(token.Value, dateTimeValue);
 
                 case TokenType.DateTimeOffset:
-                    var dateTimeOffsetText = token.Value.Substring(15, token.Value.Length - 16);
+                    var dateTimeOffsetText = token.Value.StartsWith("datetimeoffset", StringComparison.Ordinal)
+                        ? token.Value.Substring(15, token.Value.Length - 16)
+                        : token.Value;
+
                     var dateTimeOffsetValue = DateTimeOffset.Parse(dateTimeOffsetText, CultureInfo.InvariantCulture, DateTimeStyles.None);
                     return ConstantNode.DateTimeOffset(token.Value, dateTimeOffsetValue);
 
@@ -48,7 +51,10 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.False;
 
                 case TokenType.Guid:
-                    var guidText = token.Value.Substring(5, token.Value.Length - 6);
+                    var guidText = token.Value.Length == 36
+                        ? token.Value
+                        : token.Value.Substring(5, token.Value.Length - 6);
+
                     var guidValue = Guid.ParseExact(guidText, "D");
                     return ConstantNode.Guid(token.Value, guidValue);
 

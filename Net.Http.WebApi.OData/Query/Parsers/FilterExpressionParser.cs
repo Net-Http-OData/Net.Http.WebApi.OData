@@ -224,8 +224,24 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value);
                             break;
 
+                        case TokenType.OpenParentheses:
+                            this.groupingDepth++;
+                            break;
+
                         case TokenType.CloseParentheses:
                             this.groupingDepth--;
+                            break;
+
+                        case TokenType.FunctionName:
+                            if (leftNode == null)
+                            {
+                                leftNode = new SingleValueFunctionCallNode(token.Value);
+                            }
+                            else if (rightNode == null)
+                            {
+                                rightNode = new SingleValueFunctionCallNode(token.Value);
+                            }
+
                             break;
 
                         case TokenType.PropertyName:
