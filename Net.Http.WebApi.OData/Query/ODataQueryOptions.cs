@@ -21,8 +21,6 @@ namespace Net.Http.WebApi.OData.Query
     [ODataQueryOptionsParameterBinding]
     public sealed class ODataQueryOptions
     {
-        private readonly ODataRawQueryOptions rawValues;
-        private readonly HttpRequestMessage request;
         private ExpandQueryOption expand;
         private FilterQueryOption filter;
         private FormatQueryOption format;
@@ -40,11 +38,11 @@ namespace Net.Http.WebApi.OData.Query
         {
             if (request == null)
             {
-                throw new ArgumentNullException("request");
+                throw new ArgumentNullException(nameof(request));
             }
-            
-            this.request = request;
-            this.rawValues = new ODataRawQueryOptions(request.RequestUri.Query);
+
+            this.Request = request;
+            this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
 
         /// <summary>
@@ -54,9 +52,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.expand == null && this.rawValues.Expand != null)
+                if (this.expand == null && this.RawValues.Expand != null)
                 {
-                    this.expand = new ExpandQueryOption(this.rawValues.Expand);
+                    this.expand = new ExpandQueryOption(this.RawValues.Expand);
                 }
 
                 return this.expand;
@@ -70,9 +68,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.filter == null && this.rawValues.Filter != null)
+                if (this.filter == null && this.RawValues.Filter != null)
                 {
-                    this.filter = new FilterQueryOption(this.rawValues.Filter);
+                    this.filter = new FilterQueryOption(this.RawValues.Filter);
                 }
 
                 return this.filter;
@@ -86,9 +84,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.format == null && this.rawValues.Format != null)
+                if (this.format == null && this.RawValues.Format != null)
                 {
-                    this.format = new FormatQueryOption(this.rawValues.Format);
+                    this.format = new FormatQueryOption(this.RawValues.Format);
                 }
 
                 return this.format;
@@ -102,9 +100,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.inlineCount == null && this.rawValues.InlineCount != null)
+                if (this.inlineCount == null && this.RawValues.InlineCount != null)
                 {
-                    this.inlineCount = new InlineCountQueryOption(this.rawValues.InlineCount);
+                    this.inlineCount = new InlineCountQueryOption(this.RawValues.InlineCount);
                 }
 
                 return this.inlineCount;
@@ -118,9 +116,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.orderBy == null && this.rawValues.OrderBy != null)
+                if (this.orderBy == null && this.RawValues.OrderBy != null)
                 {
-                    this.orderBy = new OrderByQueryOption(this.rawValues.OrderBy);
+                    this.orderBy = new OrderByQueryOption(this.RawValues.OrderBy);
                 }
 
                 return this.orderBy;
@@ -132,10 +130,7 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public ODataRawQueryOptions RawValues
         {
-            get
-            {
-                return this.rawValues;
-            }
+            get;
         }
 
         /// <summary>
@@ -143,10 +138,7 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         public HttpRequestMessage Request
         {
-            get
-            {
-                return this.request;
-            }
+            get;
         }
 
         /// <summary>
@@ -156,9 +148,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.select == null && this.rawValues.Select != null)
+                if (this.select == null && this.RawValues.Select != null)
                 {
-                    this.select = new SelectQueryOption(this.rawValues.Select);
+                    this.select = new SelectQueryOption(this.RawValues.Select);
                 }
 
                 return this.select;
@@ -172,9 +164,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.skip == null && this.rawValues.Skip != null)
+                if (this.skip == null && this.RawValues.Skip != null)
                 {
-                    this.skip = new SkipQueryOption(this.rawValues.Skip);
+                    this.skip = new SkipQueryOption(this.RawValues.Skip);
                 }
 
                 return this.skip;
@@ -188,9 +180,9 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.top == null && this.rawValues.Top != null)
+                if (this.top == null && this.RawValues.Top != null)
                 {
-                    this.top = new TopQueryOption(this.rawValues.Top);
+                    this.top = new TopQueryOption(this.RawValues.Top);
                 }
 
                 return this.top;

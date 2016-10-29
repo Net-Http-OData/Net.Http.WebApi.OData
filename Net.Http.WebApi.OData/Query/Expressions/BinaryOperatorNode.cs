@@ -34,13 +34,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the kind of query node.
         /// </summary>
-        public override QueryNodeKind Kind
-        {
-            get
-            {
-                return QueryNodeKind.BinaryOperator;
-            }
-        }
+        public override QueryNodeKind Kind { get; } = QueryNodeKind.BinaryOperator;
 
         /// <summary>
         /// Gets or sets the left query node.
@@ -57,7 +51,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public BinaryOperatorKind OperatorKind
         {
             get;
-            private set;
         }
 
         /// <summary>

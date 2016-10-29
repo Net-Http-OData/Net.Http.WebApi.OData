@@ -32,13 +32,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the kind of query node.
         /// </summary>
-        public override QueryNodeKind Kind
-        {
-            get
-            {
-                return QueryNodeKind.UnaryOperator;
-            }
-        }
+        public override QueryNodeKind Kind { get; } = QueryNodeKind.UnaryOperator;
 
         /// <summary>
         /// Gets the operand of the unary operator.
@@ -46,7 +40,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public SingleValueNode Operand
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -55,7 +48,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public UnaryOperatorKind OperatorKind
         {
             get;
-            private set;
         }
     }
 }

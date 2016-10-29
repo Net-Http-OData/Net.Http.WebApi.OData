@@ -30,13 +30,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the kind of query node.
         /// </summary>
-        public override QueryNodeKind Kind
-        {
-            get
-            {
-                return QueryNodeKind.SingleValuePropertyAccess;
-            }
-        }
+        public override QueryNodeKind Kind { get; } = QueryNodeKind.SingleValuePropertyAccess;
 
         /// <summary>
         /// Gets the name of the property.
@@ -44,7 +38,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public string PropertyName
         {
             get;
-            private set;
         }
     }
 }

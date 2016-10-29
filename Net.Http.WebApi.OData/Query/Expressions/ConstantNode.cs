@@ -20,10 +20,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     [System.Diagnostics.DebuggerDisplay("{LiteralText}")]
     public sealed class ConstantNode : SingleValueNode
     {
-        private static readonly ConstantNode FalseConstantNode = new ConstantNode(EdmType.Boolean, "false", false);
-        private static readonly ConstantNode NullConstantNode = new ConstantNode(EdmType.Null, "null", null);
-        private static readonly ConstantNode TrueConstantNode = new ConstantNode(EdmType.Boolean, "true", true);
-
         /// <summary>
         /// Initialises a new instance of the <see cref="ConstantNode" /> class.
         /// </summary>
@@ -40,35 +36,17 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the ConstantNode which represents a value of false.
         /// </summary>
-        public static ConstantNode False
-        {
-            get
-            {
-                return FalseConstantNode;
-            }
-        }
+        public static ConstantNode False { get; } = new ConstantNode(EdmType.Boolean, "false", false);
 
         /// <summary>
         /// Gets the ConstantNode which represents a value of null.
         /// </summary>
-        public static ConstantNode Null
-        {
-            get
-            {
-                return NullConstantNode;
-            }
-        }
+        public static ConstantNode Null { get; } = new ConstantNode(EdmType.Null, "null", null);
 
         /// <summary>
         /// Gets the ConstantNode which represents a value of true.
         /// </summary>
-        public static ConstantNode True
-        {
-            get
-            {
-                return TrueConstantNode;
-            }
-        }
+        public static ConstantNode True { get; } = new ConstantNode(EdmType.Boolean, "true", true);
 
         /// <summary>
         /// Gets the <see cref="EdmType"/> of the value.
@@ -76,19 +54,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public EdmType EdmType
         {
             get;
-            private set;
         }
 
         /// <summary>
         /// Gets the kind of query node.
         /// </summary>
-        public override QueryNodeKind Kind
-        {
-            get
-            {
-                return QueryNodeKind.Constant;
-            }
-        }
+        public override QueryNodeKind Kind { get; } = QueryNodeKind.Constant;
 
         /// <summary>
         /// Gets the literal text if the constant value.
@@ -96,7 +67,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public string LiteralText
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -105,7 +75,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public object Value
         {
             get;
-            private set;
         }
 
         /// <summary>

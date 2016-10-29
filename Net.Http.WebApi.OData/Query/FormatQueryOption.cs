@@ -30,7 +30,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             if (rawValue == null)
             {
-                throw new ArgumentNullException("rawValue");
+                throw new ArgumentNullException(nameof(rawValue));
             }
 
             this.RawValue = rawValue;
@@ -64,7 +64,6 @@ namespace Net.Http.WebApi.OData.Query
         public MediaTypeHeaderValue MediaTypeHeaderValue
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -73,7 +72,6 @@ namespace Net.Http.WebApi.OData.Query
         public string RawValue
         {
             get;
-            private set;
         }
     }
 }

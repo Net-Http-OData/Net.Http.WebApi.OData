@@ -45,13 +45,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the kind of query node.
         /// </summary>
-        public override QueryNodeKind Kind
-        {
-            get
-            {
-                return QueryNodeKind.SingleValueFunctionCall;
-            }
-        }
+        public override QueryNodeKind Kind { get; } = QueryNodeKind.SingleValueFunctionCall;
 
         /// <summary>
         /// Gets the name of the function.
@@ -59,16 +53,11 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public string Name
         {
             get;
-            private set;
         }
 
         /// <summary>
         /// Gets the parameters for the function call.
         /// </summary>
-        public IList<QueryNode> Parameters
-        {
-            get;
-            private set;
-        }
+        public IList<QueryNode> Parameters { get; } = new List<QueryNode>();
     }
 }

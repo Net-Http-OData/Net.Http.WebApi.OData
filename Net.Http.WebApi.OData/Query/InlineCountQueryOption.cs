@@ -29,7 +29,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             if (rawValue == null)
             {
-                throw new ArgumentNullException("rawValue");
+                throw new ArgumentNullException(nameof(rawValue));
             }
 
             this.RawValue = rawValue;

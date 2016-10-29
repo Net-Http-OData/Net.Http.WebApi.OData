@@ -30,10 +30,10 @@ namespace Net.Http.WebApi.OData.Query
         {
             if (rawValue == null)
             {
-                throw new ArgumentNullException("rawValue");
+                throw new ArgumentNullException(nameof(rawValue));
             }
 
-            this.RawValue = rawValue;            
+            this.RawValue = rawValue;
             this.Expression = FilterExpressionParser.Parse(rawValue);
         }
 
@@ -43,7 +43,6 @@ namespace Net.Http.WebApi.OData.Query
         public QueryNode Expression
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -52,7 +51,6 @@ namespace Net.Http.WebApi.OData.Query
         public string RawValue
         {
             get;
-            private set;
         }
     }
 }
