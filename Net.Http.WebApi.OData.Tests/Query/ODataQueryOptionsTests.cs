@@ -7,6 +7,44 @@
 
     public class ODataQueryOptionsTests
     {
+        /// <summary>
+        /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/85 - Not parsing ampersand in query
+        /// </summary>
+        [Fact]
+        public void Parse_WithAmpersandInQuery()
+        {
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Business?$filter=LegacyId+eq+2139+and+Name+eq+'Pool+Farm+%26+Primrose+Hill+Nursery'&$top=1");
+
+            var option = new ODataQueryOptions(httpRequestMessage);
+            Assert.NotNull(option);
+            Assert.NotNull(option.Filter);
+
+            Assert.NotNull(option.Filter.Expression);
+            Assert.IsType<BinaryOperatorNode>(option.Filter.Expression);
+
+            var node = (BinaryOperatorNode)option.Filter.Expression;
+
+            Assert.IsType<BinaryOperatorNode>(node.Left);
+            var nodeLeft = (BinaryOperatorNode)node.Left;
+            Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Left);
+            Assert.Equal("LegacyId", ((SingleValuePropertyAccessNode)nodeLeft.Left).PropertyName);
+            Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
+            Assert.IsType<ConstantNode>(nodeLeft.Right);
+            Assert.Equal(2139, ((ConstantNode)nodeLeft.Right).Value);
+
+            Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
+
+            Assert.IsType<BinaryOperatorNode>(node.Right);
+            var nodeRight = (BinaryOperatorNode)node.Right;
+            Assert.IsType<SingleValuePropertyAccessNode>(nodeRight.Left);
+            Assert.Equal("Name", ((SingleValuePropertyAccessNode)nodeRight.Left).PropertyName);
+            Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
+            Assert.IsType<ConstantNode>(nodeRight.Right);
+            Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
+        }
+
         public class WhenCreatedWithAllQueryOptions
         {
             private readonly HttpRequestMessage httpRequestMessage;
@@ -156,44 +194,6 @@
                 Assert.Null(this.option.Top);
             }
         }
-        
-        /// <summary>
-        /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/85 - Not parsing ampersand in query
-        /// </summary>
-        [Fact]
-        public void Parse_WithAmpersandInQuery()
-        {
-            var httpRequestMessage = new HttpRequestMessage(
-                HttpMethod.Get,
-                "http://localhost/Business?$filter=LegacyId+eq+2139+and+Name+eq+'Pool+Farm+%26+Primrose+Hill+Nursery'&$top=1");
-
-            var option = new ODataQueryOptions(httpRequestMessage);
-            Assert.NotNull(option);
-            Assert.NotNull(option.Filter);
-            
-            Assert.NotNull(option.Filter.Expression);
-            Assert.IsType<BinaryOperatorNode>(option.Filter.Expression);
-
-            var node = (BinaryOperatorNode)option.Filter.Expression;
-
-            Assert.IsType<BinaryOperatorNode>(node.Left);
-            var nodeLeft = (BinaryOperatorNode)node.Left;
-            Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Left);
-            Assert.Equal("LegacyId", ((SingleValuePropertyAccessNode)nodeLeft.Left).PropertyName);
-            Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
-            Assert.IsType<ConstantNode>(nodeLeft.Right);
-            Assert.Equal(2139, ((ConstantNode)nodeLeft.Right).Value);
-
-            Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
-
-            Assert.IsType<BinaryOperatorNode>(node.Right);
-            var nodeRight = (BinaryOperatorNode)node.Right;
-            Assert.IsType<SingleValuePropertyAccessNode>(nodeRight.Left);
-            Assert.Equal("Name", ((SingleValuePropertyAccessNode)nodeRight.Left).PropertyName);
-            Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
-            Assert.IsType<ConstantNode>(nodeRight.Right);
-            Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
-        }
 
         /// <summary>
         /// Issue #58 - Plus character in uri should be treated as a space
@@ -274,7 +274,7 @@
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
             }
-            
+
             [Fact]
             public void TheFilterOptionShouldBeSet()
             {
