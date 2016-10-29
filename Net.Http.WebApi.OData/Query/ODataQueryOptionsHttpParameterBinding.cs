@@ -55,8 +55,10 @@ namespace Net.Http.WebApi.OData.Query
             taskCompletionSource.SetResult(0);
 
             return taskCompletionSource.Task;
-#else
+#elif NET_4_5
             return Task.FromResult(0);
+#else
+            return Task.CompletedTask;
 #endif
         }
     }
