@@ -4,9 +4,9 @@ properties {
   $buildDir = "$baseDir\build"
 
   $builds = @(
-    @{Name = "NET40"; Constants="NET40"; BuildDir="$buildDir\4.0\"; Framework="v4.0"},
-    @{Name = "NET45"; Constants="NET45"; BuildDir="$buildDir\4.5\"; Framework="v4.5"},
-    @{Name = "NET46"; Constants="NET46"; BuildDir="$buildDir\4.6\"; Framework="v4.6"}
+    @{Name = "NET40"; Constants="NET_4_0"; BuildDir="$buildDir\4.0\"; Framework="v4.0"},
+    @{Name = "NET45"; Constants="NET_4_5"; BuildDir="$buildDir\4.5\"; Framework="v4.5"},
+    @{Name = "NET46"; Constants="NET_4_6"; BuildDir="$buildDir\4.6\"; Framework="v4.6"}
   )
 }
 
