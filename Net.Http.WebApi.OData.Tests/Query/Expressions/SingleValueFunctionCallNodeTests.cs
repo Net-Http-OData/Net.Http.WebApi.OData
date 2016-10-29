@@ -19,7 +19,7 @@
             [Fact]
             public void TheParameterExistsInTheArgumentsCollection()
             {
-                Assert.Contains(parameter, node.Parameters);
+                Assert.Contains(parameter, node.Arguments);
             }
 
             [Fact]
@@ -42,13 +42,13 @@
             [Fact]
             public void TheArgumentsCollectionIsEmpty()
             {
-                Assert.Empty(this.node.Parameters);
+                Assert.Empty(this.node.Arguments);
             }
 
             [Fact]
             public void TheArgumentsCollectionIsNotNull()
             {
-                Assert.NotNull(this.node.Parameters);
+                Assert.NotNull(this.node.Arguments);
             }
 
             [Fact]
