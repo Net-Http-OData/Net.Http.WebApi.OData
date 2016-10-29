@@ -58,7 +58,6 @@ namespace Net.Http.WebApi.OData.Query
         public InlineCount InlineCount
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -67,7 +66,6 @@ namespace Net.Http.WebApi.OData.Query
         public string RawValue
         {
             get;
-            private set;
         }
     }
 }
