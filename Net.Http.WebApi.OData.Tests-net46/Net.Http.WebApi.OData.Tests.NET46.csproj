@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0BDC1EA9-0521-49C7-A0DF-199395419476}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Net.Http.WebApi.OData.Tests</RootNamespace>
+    <AssemblyName>Net.Http.WebApi.OData.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_4_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET_4_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Net.Http.WebApi.OData.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.XML" />
+    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountCollectionTests.cs">
+      <Link>InlineCountCollectionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountSerializationTests.cs">
+      <Link>InlineCountSerializationTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\InlineCountTests.cs">
+      <Link>InlineCountTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\ExpandQueryOptionTests.cs">
+      <Link>Query\ExpandQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\BinaryOperatorNodeTests.cs">
+      <Link>Query\Expressions\BinaryOperatorNodeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\ConstantNodeTests.cs">
+      <Link>Query\Expressions\ConstantNodeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValueFunctionCallNodeTests.cs">
+      <Link>Query\Expressions\SingleValueFunctionCallNodeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\SingleValuePropertyAccessNodeTests.cs">
+      <Link>Query\Expressions\SingleValuePropertyAccessNodeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Expressions\UnaryOperatorNodeTests.cs">
+      <Link>Query\Expressions\UnaryOperatorNodeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FilterQueryOptionTests.cs">
+      <Link>Query\FilterQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\FormatQueryOptionTests.cs">
+      <Link>Query\FormatQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\InlineCountQueryOptionTests.cs">
+      <Link>Query\InlineCountQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\ODataQueryOptionsTests.cs">
+      <Link>Query\ODataQueryOptionsTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\ODataRawQueryOptionsTests.cs">
+      <Link>Query\ODataRawQueryOptionsTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\ODataValidationSettingsTests.cs">
+      <Link>Query\ODataValidationSettingsTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\OrderByPropertyTests.cs">
+      <Link>Query\OrderByPropertyTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\OrderByQueryOptionTests.cs">
+      <Link>Query\OrderByQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\BinaryOperatorKindParserTests.cs">
+      <Link>Query\Parsers\BinaryOperatorKindParserTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_SingleFunction.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_SingleFunction.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\FilterExpressionParserTests_SingleProperty.cs">
+      <Link>Query\Parsers\FilterExpressionParserTests_SingleProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Parsers\UnaryOperatorKindParserTests.cs">
+      <Link>Query\Parsers\UnaryOperatorKindParserTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\SelectQueryOptionTests.cs">
+      <Link>Query\SelectQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\SkipQueryOptionTests.cs">
+      <Link>Query\SkipQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\TopQueryOptionTests.cs">
+      <Link>Query\TopQueryOptionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validators\ODataQueryOptionsValidatorTests.cs">
+      <Link>Query\Validators\ODataQueryOptionsValidatorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validators\SkipQueryOptionValidatorTests.cs">
+      <Link>Query\Validators\SkipQueryOptionValidatorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData.Tests\Query\Validators\TopQueryOptionValidatorTests.cs">
+      <Link>Query\Validators\TopQueryOptionValidatorTests.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Net.Http.WebApi.OData.snk">
+      <Link>Net.Http.WebApi.OData.snk</Link>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Net.Http.WebApi.OData-net46\Net.Http.WebApi.OData.NET46.csproj">
+      <Project>{67fbeb32-944e-4022-8b80-5589762b2b05}</Project>
+      <Name>Net.Http.WebApi.OData.NET46</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

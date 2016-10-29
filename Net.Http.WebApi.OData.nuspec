@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>Net.Http.WebApi.OData</id>
     <version>0.0.0</version>
@@ -10,7 +10,7 @@
     <language>en-GB</language>
     <projectUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/</projectUrl>
     <licenseUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/blob/master/License.txt</licenseUrl>
-    <copyright>Copyright 2012 - 2015 Project Contributors</copyright>
+    <copyright>Copyright 2012 - 2016 Project Contributors</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>OData Parser WebApi ASP.NET</tags>
     <dependencies>
@@ -18,7 +18,10 @@
         <dependency id="Microsoft.AspNet.WebApi.Core" version="[4.0.20710.0,5.0)" />
       </group>
       <group targetFramework="net45">
-        <dependency id="Microsoft.AspNet.WebApi.Core" version="5.0" />
+        <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.0,6.0)" />
+      </group>
+      <group targetFramework="net46">
+        <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.0,6.0)" />
       </group>
     </dependencies>
   </metadata>
@@ -27,5 +30,7 @@
     <file src="..\build\4.0\Net.Http.WebApi.OData.xml" target="lib\net40-client" />
     <file src="..\build\4.5\Net.Http.WebApi.OData.dll" target="lib\net45" />
     <file src="..\build\4.5\Net.Http.WebApi.OData.xml" target="lib\net45" />
+    <file src="..\build\4.6\Net.Http.WebApi.OData.dll" target="lib\net46" />
+    <file src="..\build\4.6\Net.Http.WebApi.OData.xml" target="lib\net46" />
   </files>
 </package>

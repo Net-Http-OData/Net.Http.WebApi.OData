@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67FBEB32-944E-4022-8B80-5589762B2B05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Net.Http.WebApi.OData</RootNamespace>
+    <AssemblyName>Net.Http.WebApi.OData</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <CodeAnalysisCulture>en-GB</CodeAnalysisCulture>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NET_4_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Net.Http.WebApi.OData.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\Net.Http.WebApi.OData.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET_4_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Net.Http.WebApi.OData.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\Net.Http.WebApi.OData.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Net.Http.WebApi.OData.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Net.Http.WebApi.OData\Binders\AbstractFilterBinder.cs">
+      <Link>Binders\AbstractFilterBinder.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\InlineCountCollection{T}.cs">
+      <Link>InlineCountCollection{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\InlineCount{T}.cs">
+      <Link>InlineCount{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Messages.Designer.cs">
+      <Link>Messages.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\ODataException.cs">
+      <Link>ODataException.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedArithmeticOperators.cs">
+      <Link>Query\AllowedArithmeticOperators.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedFunctions.cs">
+      <Link>Query\AllowedFunctions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedLogicalOperators.cs">
+      <Link>Query\AllowedLogicalOperators.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\AllowedQueryOptions.cs">
+      <Link>Query\AllowedQueryOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ExpandQueryOption.cs">
+      <Link>Query\ExpandQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorKind.cs">
+      <Link>Query\Expressions\BinaryOperatorKind.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\BinaryOperatorNode.cs">
+      <Link>Query\Expressions\BinaryOperatorNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\ConstantNode.cs">
+      <Link>Query\Expressions\ConstantNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\EdmType.cs">
+      <Link>Query\Expressions\EdmType.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\QueryNode.cs">
+      <Link>Query\Expressions\QueryNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\QueryNodeKind.cs">
+      <Link>Query\Expressions\QueryNodeKind.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValueFunctionCallNode.cs">
+      <Link>Query\Expressions\SingleValueFunctionCallNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValueNode.cs">
+      <Link>Query\Expressions\SingleValueNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\SingleValuePropertyAccessNode.cs">
+      <Link>Query\Expressions\SingleValuePropertyAccessNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorKind.cs">
+      <Link>Query\Expressions\UnaryOperatorKind.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Expressions\UnaryOperatorNode.cs">
+      <Link>Query\Expressions\UnaryOperatorNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\FilterQueryOption.cs">
+      <Link>Query\FilterQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\FormatQueryOption.cs">
+      <Link>Query\FormatQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\InlineCount.cs">
+      <Link>Query\InlineCount.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\InlineCountQueryOption.cs">
+      <Link>Query\InlineCountQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ODataQueryOptions.cs">
+      <Link>Query\ODataQueryOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ODataQueryOptionsHttpParameterBinding.cs">
+      <Link>Query\ODataQueryOptionsHttpParameterBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ODataQueryOptionsParameterBindingAttribute.cs">
+      <Link>Query\ODataQueryOptionsParameterBindingAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ODataRawQueryOptions.cs">
+      <Link>Query\ODataRawQueryOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\ODataValidationSettings.cs">
+      <Link>Query\ODataValidationSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\OrderByDirection.cs">
+      <Link>Query\OrderByDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\OrderByProperty.cs">
+      <Link>Query\OrderByProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\OrderByQueryOption.cs">
+      <Link>Query\OrderByQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\BinaryOperatorKindParser.cs">
+      <Link>Query\Parsers\BinaryOperatorKindParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\ConstantNodeParser.cs">
+      <Link>Query\Parsers\ConstantNodeParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\FilterExpressionParser.cs">
+      <Link>Query\Parsers\FilterExpressionParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\Lexer.cs">
+      <Link>Query\Parsers\Lexer.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\Token.cs">
+      <Link>Query\Parsers\Token.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\TokenDefinition.cs">
+      <Link>Query\Parsers\TokenDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\TokenType.cs">
+      <Link>Query\Parsers\TokenType.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Parsers\UnaryOperatorKindParser.cs">
+      <Link>Query\Parsers\UnaryOperatorKindParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\SelectQueryOption.cs">
+      <Link>Query\SelectQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\SkipQueryOption.cs">
+      <Link>Query\SkipQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\TopQueryOption.cs">
+      <Link>Query\TopQueryOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\ODataQueryOptionsExtensions.cs">
+      <Link>Query\Validators\ODataQueryOptionsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\ODataQueryOptionsValidator.cs">
+      <Link>Query\Validators\ODataQueryOptionsValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\SkipQueryOptionValidator.cs">
+      <Link>Query\Validators\SkipQueryOptionValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.WebApi.OData\Query\Validators\TopQueryOptionValidator.cs">
+      <Link>Query\Validators\TopQueryOptionValidator.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Net.Http.WebApi.OData.snk">
+      <Link>Net.Http.WebApi.OData.snk</Link>
+    </None>
+    <None Include="..\Net.Http.WebApi.OData\Query\Expressions\_QueryNodes.cd">
+      <Link>Query\Expressions\_QueryNodes.cd</Link>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Net.Http.WebApi.OData\Messages.resx">
+      <Link>Messages.resx</Link>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

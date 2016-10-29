@@ -14,9 +14,14 @@ To use it in your own Web API, firstly install the nuget package `Install-Packag
 
 To find out more, head over to the [Wiki](https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki) and see how easy it is to use!
 
+_Supported OData Versions_
+
+The library currently supports OData 3.0
+
 _Supported .NET Framework Versions_
 
 The NuGet Package contains binaries compiled against:
 
 * .NET 4.0 (Client Profile) and Microsoft.AspNet.WebApi.Core 4.0.20710
 * .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.0
+* .NET 4.6 and Microsoft.AspNet.WebApi.Core 5.0
