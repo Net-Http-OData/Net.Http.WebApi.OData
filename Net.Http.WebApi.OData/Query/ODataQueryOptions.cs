@@ -42,14 +42,9 @@ namespace Net.Http.WebApi.OData.Query
             {
                 throw new ArgumentNullException("request");
             }
-
-            // Any + signs we want in the data should have been encoded as %2B,
-            // so do the replace first otherwise we replace legitemate + signs!
-            var rawQuery = request.RequestUri.Query.Replace('+', ' ');
-            rawQuery = Uri.UnescapeDataString(rawQuery);
-
+            
             this.request = request;
-            this.rawValues = new ODataRawQueryOptions(rawQuery);
+            this.rawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
 
         /// <summary>
