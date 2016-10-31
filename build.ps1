@@ -49,14 +49,6 @@ Remove-Module psake -ErrorAction SilentlyContinue
 
 if ($version)
 {
-	Write-Host "Update NuGet.exe" -ForegroundColor Green
-	& $nuGetExe Update -self
-
-	if (Test-Path "$nuGetExe.old")
-	{
-  		Remove-Item -force "$nuGetExe.old" -ErrorAction SilentlyContinue
-	}
-
 	Write-Host "Pack $nuSpec -> $nuGetPackage" -ForegroundColor Green
 	& $nuGetExe Pack $nuSpec -Version $version -OutputDirectory $buildDir -BasePath $buildDir
 
