@@ -84,10 +84,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a boolean value.</returns>
         [Obsolete("Use ConstantNode.False or ConstantNode.True instead, this will be removed in version 4.0.0 of Net.Http.WebApi.OData.")]
-        public static ConstantNode Boolean(string literalText, bool value)
-        {
-            return new ConstantNode(EdmType.Boolean, literalText, value);
-        }
+        public static ConstantNode Boolean(string literalText, bool value) => new ConstantNode(EdmType.Boolean, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a DateTime value.
@@ -95,10 +92,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a DateTime value.</returns>
-        public static ConstantNode DateTime(string literalText, DateTime value)
-        {
-            return new ConstantNode(EdmType.DateTime, literalText, value);
-        }
+        public static ConstantNode DateTime(string literalText, DateTime value) => new ConstantNode(EdmType.DateTime, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a DateTimeOffset value.
@@ -106,10 +100,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a DateTimeOffset value.</returns>
-        public static ConstantNode DateTimeOffset(string literalText, DateTimeOffset value)
-        {
-            return new ConstantNode(EdmType.DateTimeOffset, literalText, value);
-        }
+        public static ConstantNode DateTimeOffset(string literalText, DateTimeOffset value) => new ConstantNode(EdmType.DateTimeOffset, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a decimal value.
@@ -117,10 +108,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a decimal value.</returns>
-        public static ConstantNode Decimal(string literalText, decimal value)
-        {
-            return new ConstantNode(EdmType.Decimal, literalText, value);
-        }
+        public static ConstantNode Decimal(string literalText, decimal value) => new ConstantNode(EdmType.Decimal, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a double value.
@@ -128,10 +116,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a double value.</returns>
-        public static ConstantNode Double(string literalText, double value)
-        {
-            return new ConstantNode(EdmType.Double, literalText, value);
-        }
+        public static ConstantNode Double(string literalText, double value) => new ConstantNode(EdmType.Double, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a Guid value.
@@ -139,10 +124,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a Guid value.</returns>
-        public static ConstantNode Guid(string literalText, Guid value)
-        {
-            return new ConstantNode(EdmType.Guid, literalText, value);
-        }
+        public static ConstantNode Guid(string literalText, Guid value) => new ConstantNode(EdmType.Guid, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a 32 bit signed integer value.
@@ -150,10 +132,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a 32 bit signed integer value.</returns>
-        public static ConstantNode Int32(string literalText, int value)
-        {
-            return new ConstantNode(EdmType.Int32, literalText, value);
-        }
+        public static ConstantNode Int32(string literalText, int value) => new ConstantNode(EdmType.Int32, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a 64 bit signed integer value.
@@ -161,10 +140,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a 64 bit signed integer value.</returns>
-        public static ConstantNode Int64(string literalText, long value)
-        {
-            return new ConstantNode(EdmType.Int64, literalText, value);
-        }
+        public static ConstantNode Int64(string literalText, long value) => new ConstantNode(EdmType.Int64, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a float value.
@@ -172,10 +148,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a float value.</returns>
-        public static ConstantNode Single(string literalText, float value)
-        {
-            return new ConstantNode(EdmType.Single, literalText, value);
-        }
+        public static ConstantNode Single(string literalText, float value) => new ConstantNode(EdmType.Single, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a string value.
@@ -183,10 +156,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a string value.</returns>
-        public static ConstantNode String(string literalText, string value)
-        {
-            return new ConstantNode(EdmType.String, literalText, value);
-        }
+        public static ConstantNode String(string literalText, string value) => new ConstantNode(EdmType.String, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a time value.
@@ -194,9 +164,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a time value.</returns>
-        public static ConstantNode Time(string literalText, TimeSpan value)
-        {
-            return new ConstantNode(EdmType.Time, literalText, value);
-        }
+        public static ConstantNode Time(string literalText, TimeSpan value) => new ConstantNode(EdmType.Time, literalText, value);
     }
 }
