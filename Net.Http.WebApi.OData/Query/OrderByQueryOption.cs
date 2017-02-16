@@ -55,7 +55,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the properties the query should be ordered by.
         /// </summary>
-        public IList<OrderByProperty> Properties
+        public IReadOnlyList<OrderByProperty> Properties
         {
             get;
         }

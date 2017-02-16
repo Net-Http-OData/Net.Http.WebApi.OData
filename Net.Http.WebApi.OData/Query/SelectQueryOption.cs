@@ -45,7 +45,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the properties to be included in the query.
         /// </summary>
-        public IList<string> Properties
+        public IReadOnlyList<string> Properties
         {
             get;
         }
