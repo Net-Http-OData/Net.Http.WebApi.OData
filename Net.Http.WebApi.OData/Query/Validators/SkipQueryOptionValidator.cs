@@ -24,12 +24,14 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions)
         {
-            if (queryOptions.Skip != null)
+            if (queryOptions.RawValues.Skip == null)
             {
-                if (queryOptions.Skip.Value < 0)
-                {
-                    throw new ODataException(Messages.SkipRawValueInvalid);
-                }
+                return;
+            }
+
+            if (queryOptions.Skip.Value < 0)
+            {
+                throw new ODataException(Messages.SkipRawValueInvalid);
             }
         }
     }

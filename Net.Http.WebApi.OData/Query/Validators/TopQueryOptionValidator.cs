@@ -27,22 +27,24 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.Top != null)
+            if (queryOptions.RawValues.Top == null)
             {
-                if (queryOptions.Top.Value < 0)
-                {
-                    throw new ODataException(Messages.TopRawValueInvalid);
-                }
+                return;
+            }
 
-                if (queryOptions.Top.Value > validationSettings.MaxTop)
-                {
-                    var message = string.Format(
-                        CultureInfo.InvariantCulture,
-                        Messages.TopValueExceedsMaxAllowed,
-                        validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture));
+            if (queryOptions.Top.Value < 0)
+            {
+                throw new ODataException(Messages.TopRawValueInvalid);
+            }
 
-                    throw new ODataException(message);
-                }
+            if (queryOptions.Top.Value > validationSettings.MaxTop)
+            {
+                var message = string.Format(
+                    CultureInfo.InvariantCulture,
+                    Messages.TopValueExceedsMaxAllowed,
+                    validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture));
+
+                throw new ODataException(message);
             }
         }
     }
