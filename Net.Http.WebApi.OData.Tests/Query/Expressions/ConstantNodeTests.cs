@@ -109,7 +109,7 @@
 
             public DateTimeOffsetValue()
             {
-                this.node = ConstantNode.DateTimeOffset("datetimeoffset'2002-10-10T17:00:00Z'", new DateTimeOffset(2002, 10, 10, 17, 00, 00, TimeSpan.Zero));
+                this.node = ConstantNode.DateTimeOffset("datetimeoffset'2002-10-15T17:34:23Z'", new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero));
             }
 
             [Fact]
@@ -127,14 +127,14 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("datetimeoffset'2002-10-10T17:00:00Z'", this.node.LiteralText);
+                Assert.Equal("datetimeoffset'2002-10-15T17:34:23Z'", this.node.LiteralText);
             }
 
             [Fact]
             public void TheValuePropertyIsSet()
             {
                 Assert.IsType<DateTimeOffset>(this.node.Value);
-                Assert.Equal(new DateTimeOffset(2002, 10, 10, 17, 00, 00, TimeSpan.Zero), this.node.Value);
+                Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero), this.node.Value);
             }
         }
 
@@ -144,7 +144,7 @@
 
             public DateTimeValue()
             {
-                this.node = ConstantNode.DateTime("datetime'2000-12-12T12:00'", new DateTime(2000, 12, 12, 12, 0, 0));
+                this.node = ConstantNode.DateTime("datetime'2000-12-18T12:00'", new DateTime(2000, 12, 18, 12, 0, 0));
             }
 
             [Fact]
@@ -162,14 +162,14 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("datetime'2000-12-12T12:00'", this.node.LiteralText);
+                Assert.Equal("datetime'2000-12-18T12:00'", this.node.LiteralText);
             }
 
             [Fact]
             public void TheValuePropertyIsSet()
             {
                 Assert.IsType<DateTime>(this.node.Value);
-                Assert.Equal(new DateTime(2000, 12, 12, 12, 0, 0), this.node.Value);
+                Assert.Equal(new DateTime(2000, 12, 18, 12, 0, 0), this.node.Value);
             }
         }
 
