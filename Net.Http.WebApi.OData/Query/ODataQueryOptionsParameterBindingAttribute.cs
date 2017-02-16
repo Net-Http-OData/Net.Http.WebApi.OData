@@ -30,9 +30,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <returns>
         /// The parameter binding.
         /// </returns>
-        public override HttpParameterBinding GetBinding(HttpParameterDescriptor parameter)
-        {
-            return new ODataQueryOptionsHttpParameterBinding(parameter);
-        }
+        public override HttpParameterBinding GetBinding(HttpParameterDescriptor parameter) => new ODataQueryOptionsHttpParameterBinding(parameter);
     }
 }

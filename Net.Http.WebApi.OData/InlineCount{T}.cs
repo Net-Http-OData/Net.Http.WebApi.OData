@@ -41,23 +41,11 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Gets the total result count.
         /// </summary>
-        public int Count
-        {
-            get
-            {
-                return this.count;
-            }
-        }
+        public int Count => this.count;
 
         /// <summary>
         /// Gets the results.
         /// </summary>
-        public IEnumerable<T> Results
-        {
-            get
-            {
-                return this.results;
-            }
-        }
+        public IEnumerable<T> Results => this.results;
     }
 }
