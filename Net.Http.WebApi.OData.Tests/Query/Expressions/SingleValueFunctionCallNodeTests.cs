@@ -15,13 +15,7 @@
                 this.node = new SingleValueFunctionCallNode("substringof");
                 this.node.Parameters.Add(parameter);
             }
-
-            [Fact]
-            public void TheParameterExistsInTheArgumentsCollection()
-            {
-                Assert.Contains(parameter, node.Arguments);
-            }
-
+            
             [Fact]
             public void TheParameterExistsInTheParameterCollection()
             {
@@ -38,19 +32,7 @@
             {
                 this.node = new SingleValueFunctionCallNode(this.functionName);
             }
-
-            [Fact]
-            public void TheArgumentsCollectionIsEmpty()
-            {
-                Assert.Empty(this.node.Arguments);
-            }
-
-            [Fact]
-            public void TheArgumentsCollectionIsNotNull()
-            {
-                Assert.NotNull(this.node.Arguments);
-            }
-
+            
             [Fact]
             public void TheKindIsQueryNodeKindSingleValueFunctionCall()
             {

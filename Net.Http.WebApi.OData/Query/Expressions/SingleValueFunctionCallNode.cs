@@ -31,18 +31,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
-        /// Gets the arguments for the function call.
-        /// </summary>
-        [System.Obsolete("Use the Parameters property instead")]
-        public IList<QueryNode> Arguments
-        {
-            get
-            {
-                return this.Parameters;
-            }
-        }
-
-        /// <summary>
         /// Gets the kind of query node.
         /// </summary>
         public override QueryNodeKind Kind { get; } = QueryNodeKind.SingleValueFunctionCall;
