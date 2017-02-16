@@ -18,30 +18,30 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         // Also, within those bounds then order by the most common first where possible.
         private static readonly TokenDefinition[] TokenDefinitions = new[]
         {
-            new TokenDefinition(@"\(", TokenType.OpenParentheses),
-            new TokenDefinition(@"\)", TokenType.CloseParentheses),
-            new TokenDefinition(@"and(?=\s)", TokenType.And),
-            new TokenDefinition(@"or(?=\s)", TokenType.Or),
-            new TokenDefinition(@"true", TokenType.True),
-            new TokenDefinition(@"false", TokenType.False),
-            new TokenDefinition(@"null", TokenType.Null),
-            new TokenDefinition(@"not(?=\s)", TokenType.UnaryOperator),
-            new TokenDefinition(@"(eq|ne|gt|ge|lt|le)(?=\s)", TokenType.LogicalOperator),
-            new TokenDefinition(@"datetimeoffset'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(Z|-\d{2}:\d{2}))?)?'", TokenType.DateTimeOffset),
-            new TokenDefinition(@"guid'[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'", TokenType.Guid),
-            new TokenDefinition(@"(-)?\d+(\.\d+)?(m|M)", TokenType.Decimal),
-            new TokenDefinition(@"(-)?\d+(\.\d+)?(d|D)", TokenType.Double),
-            new TokenDefinition(@"(-)?\d+(\.\d+)?(f|F)", TokenType.Single),
-            new TokenDefinition(@"(-)?\d+(l|L)", TokenType.Int64),
-            new TokenDefinition(@"(-)?\d+", TokenType.Int32),
-            new TokenDefinition(@"(add|sub|mul|div|mod)(?=\s)", TokenType.ArithmeticOperator),
-            new TokenDefinition(@"\w+(?=\()", TokenType.FunctionName),
-            new TokenDefinition(@",(?=\s?)", TokenType.Comma),
-            new TokenDefinition(@"datetime'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d{1,12}(Z|-\d{2}:\d{2}))?)?)?'", TokenType.DateTime),
-            new TokenDefinition(@"time'\d{2}:\d{2}:\d{2}'", TokenType.Time),
-            new TokenDefinition(@"\w+", TokenType.PropertyName),
-            new TokenDefinition(@"'(?:''|[^']*)*'", TokenType.String),
-            new TokenDefinition(@"\s", TokenType.Whitespace, ignore: true)
+            new TokenDefinition(TokenType.OpenParentheses,      @"\("),
+            new TokenDefinition(TokenType.CloseParentheses,     @"\)"),
+            new TokenDefinition(TokenType.And,                  @"and(?=\s)"),
+            new TokenDefinition(TokenType.Or,                   @"or(?=\s)"),
+            new TokenDefinition(TokenType.True,                 @"true"),
+            new TokenDefinition(TokenType.False,                @"false"),
+            new TokenDefinition(TokenType.Null,                 @"null"),
+            new TokenDefinition(TokenType.UnaryOperator,        @"not(?=\s)"),
+            new TokenDefinition(TokenType.LogicalOperator,      @"(eq|ne|gt|ge|lt|le)(?=\s)"),
+            new TokenDefinition(TokenType.DateTimeOffset,       @"datetimeoffset'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(Z|-\d{2}:\d{2}))?)?'"),
+            new TokenDefinition(TokenType.Guid,                 @"guid'[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'"),
+            new TokenDefinition(TokenType.Decimal,              @"(-)?\d+(\.\d+)?(m|M)"),
+            new TokenDefinition(TokenType.Double,               @"(-)?\d+(\.\d+)?(d|D)"),
+            new TokenDefinition(TokenType.Single,               @"(-)?\d+(\.\d+)?(f|F)"),
+            new TokenDefinition(TokenType.Int64,                @"(-)?\d+(l|L)"),
+            new TokenDefinition(TokenType.Int32,                @"(-)?\d+"),
+            new TokenDefinition(TokenType.ArithmeticOperator,   @"(add|sub|mul|div|mod)(?=\s)"),
+            new TokenDefinition(TokenType.FunctionName,         @"\w+(?=\()"),
+            new TokenDefinition(TokenType.Comma,                @",(?=\s?)"),
+            new TokenDefinition(TokenType.DateTime,             @"datetime'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d{1,12}(Z|-\d{2}:\d{2}))?)?)?'"),
+            new TokenDefinition(TokenType.Time,                 @"time'\d{2}:\d{2}:\d{2}'"),
+            new TokenDefinition(TokenType.PropertyName,         @"\w+"),
+            new TokenDefinition(TokenType.String,               @"'(?:''|[^']*)*'"),
+            new TokenDefinition(TokenType.Whitespace,           @"\s", ignore: true)
         };
 
         private readonly string content;
@@ -55,13 +55,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             this.current = default(Token);
         }
 
-        internal Token Current
-        {
-            get
-            {
-                return this.current;
-            }
-        }
+        internal Token Current => this.current;
 
         internal bool MoveNext()
         {
@@ -85,7 +79,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         continue;
                     }
 
-                    this.current = new Token(match.Value, tokenDefinition.TokenType);
+                    this.current = tokenDefinition.CreateToken(match);
                     this.position += match.Length;
 
                     return true;

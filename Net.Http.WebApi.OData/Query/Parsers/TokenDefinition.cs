@@ -17,15 +17,17 @@ namespace Net.Http.WebApi.OData.Query.Parsers
     [System.Diagnostics.DebuggerDisplay("{TokenType}: {Regex}")]
     internal struct TokenDefinition
     {
-        internal TokenDefinition(string expression, TokenType tokenType)
-            : this(expression, tokenType, false)
+        private readonly TokenType tokenType;
+
+        internal TokenDefinition(TokenType tokenType, string expression)
+            : this(tokenType, expression, false)
         {
         }
 
-        internal TokenDefinition(string expression, TokenType tokenType, bool ignore)
+        internal TokenDefinition(TokenType tokenType, string expression, bool ignore)
         {
+            this.tokenType = tokenType;
             this.Regex = new Regex(@"\G" + expression, RegexOptions.Singleline);
-            this.TokenType = tokenType;
             this.Ignore = ignore;
         }
 
@@ -39,9 +41,6 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             get;
         }
 
-        internal TokenType TokenType
-        {
-            get;
-        }
+        internal Token CreateToken(Match match) => new Token(match.Value, this.tokenType);
     }
 }
