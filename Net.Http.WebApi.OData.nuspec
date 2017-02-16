@@ -10,7 +10,7 @@
     <language>en-GB</language>
     <projectUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/</projectUrl>
     <licenseUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/blob/master/License.txt</licenseUrl>
-    <copyright>Copyright 2012 - 2016 Project Contributors</copyright>
+    <copyright>Copyright 2012 - 2017 Project Contributors</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>OData Parser WebApi ASP.NET</tags>
     <dependencies>
