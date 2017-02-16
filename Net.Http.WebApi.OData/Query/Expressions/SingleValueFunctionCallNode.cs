@@ -27,7 +27,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public SingleValueFunctionCallNode(string name)
         {
             this.Name = name;
-            this.Parameters = new List<QueryNode>();
         }
 
         /// <summary>
