@@ -1,18 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6EEBEA4E-86B0-4D6B-976A-373CD80B2302}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData", "Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj", "{67FBEB32-944E-4022-8B80-5589762B2B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData.NET45", "Net.Http.WebApi.OData-net45\Net.Http.WebApi.OData.NET45.csproj", "{67FBEB32-944E-4022-8B80-5589762B2B05}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData.Tests.NET45", "Net.Http.WebApi.OData.Tests-net45\Net.Http.WebApi.OData.Tests.NET45.csproj", "{0BDC1EA9-0521-49C7-A0DF-199395419476}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData.Tests", "Net.Http.WebApi.OData.Tests\Net.Http.WebApi.OData.Tests.csproj", "{0BDC1EA9-0521-49C7-A0DF-199395419476}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

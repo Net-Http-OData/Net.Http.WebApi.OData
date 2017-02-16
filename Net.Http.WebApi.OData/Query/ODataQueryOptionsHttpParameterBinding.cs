@@ -22,6 +22,8 @@ namespace Net.Http.WebApi.OData.Query
     /// </summary>
     internal sealed class ODataQueryOptionsHttpParameterBinding : HttpParameterBinding
     {
+        private static readonly Task CompletedTask = Task.FromResult(0);
+
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataQueryOptionsHttpParameterBinding"/> class.
         /// </summary>
@@ -50,16 +52,8 @@ namespace Net.Http.WebApi.OData.Query
             var parameterValue = new ODataQueryOptions(request);
 
             this.SetValue(actionContext, parameterValue);
-#if NET_4_0
-            var taskCompletionSource = new TaskCompletionSource<int>();
-            taskCompletionSource.SetResult(0);
 
-            return taskCompletionSource.Task;
-#elif NET_4_5
-            return Task.FromResult(0);
-#else
-            return Task.CompletedTask;
-#endif
+            return CompletedTask;
         }
     }
 }

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67FBEB32-944E-4022-8B80-5589762B2B05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Net.Http.WebApi.OData</RootNamespace>
+    <AssemblyName>Net.Http.WebApi.OData</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+    <TargetFrameworkProfile />
+    <CodeAnalysisCulture>en-GB</CodeAnalysisCulture>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Net.Http.WebApi.OData.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\Net.Http.WebApi.OData.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Net.Http.WebApi.OData.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\Net.Http.WebApi.OData.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Net.Http.WebApi.OData.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Binders\AbstractFilterBinder.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="InlineCountCollection{T}.cs" />
+    <Compile Include="InlineCount{T}.cs" />
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ODataException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\AllowedArithmeticOperators.cs" />
+    <Compile Include="Query\AllowedFunctions.cs" />
+    <Compile Include="Query\AllowedLogicalOperators.cs" />
+    <Compile Include="Query\AllowedQueryOptions.cs" />
+    <Compile Include="Query\ExpandQueryOption.cs" />
+    <Compile Include="Query\Expressions\BinaryOperatorKind.cs" />
+    <Compile Include="Query\Expressions\BinaryOperatorNode.cs" />
+    <Compile Include="Query\Expressions\ConstantNode.cs" />
+    <Compile Include="Query\Expressions\EdmType.cs" />
+    <Compile Include="Query\Expressions\QueryNode.cs" />
+    <Compile Include="Query\Expressions\QueryNodeKind.cs" />
+    <Compile Include="Query\Expressions\SingleValueFunctionCallNode.cs" />
+    <Compile Include="Query\Expressions\SingleValueNode.cs" />
+    <Compile Include="Query\Expressions\SingleValuePropertyAccessNode.cs" />
+    <Compile Include="Query\Expressions\UnaryOperatorKind.cs" />
+    <Compile Include="Query\Expressions\UnaryOperatorNode.cs" />
+    <Compile Include="Query\FilterQueryOption.cs" />
+    <Compile Include="Query\FormatQueryOption.cs" />
+    <Compile Include="Query\InlineCount.cs" />
+    <Compile Include="Query\InlineCountQueryOption.cs" />
+    <Compile Include="Query\ODataQueryOptions.cs" />
+    <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
+    <Compile Include="Query\ODataQueryOptionsParameterBindingAttribute.cs" />
+    <Compile Include="Query\ODataRawQueryOptions.cs" />
+    <Compile Include="Query\ODataValidationSettings.cs" />
+    <Compile Include="Query\OrderByDirection.cs" />
+    <Compile Include="Query\OrderByProperty.cs" />
+    <Compile Include="Query\OrderByQueryOption.cs" />
+    <Compile Include="Query\Parsers\BinaryOperatorKindParser.cs" />
+    <Compile Include="Query\Parsers\ConstantNodeParser.cs" />
+    <Compile Include="Query\Parsers\FilterExpressionParser.cs" />
+    <Compile Include="Query\Parsers\Lexer.cs" />
+    <Compile Include="Query\Parsers\Token.cs" />
+    <Compile Include="Query\Parsers\TokenDefinition.cs" />
+    <Compile Include="Query\Parsers\TokenType.cs" />
+    <Compile Include="Query\Parsers\UnaryOperatorKindParser.cs" />
+    <Compile Include="Query\SelectQueryOption.cs" />
+    <Compile Include="Query\SkipQueryOption.cs" />
+    <Compile Include="Query\TopQueryOption.cs" />
+    <Compile Include="Query\Validators\ODataQueryOptionsExtensions.cs" />
+    <Compile Include="Query\Validators\ODataQueryOptionsValidator.cs" />
+    <Compile Include="Query\Validators\SkipQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\TopQueryOptionValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Net.Http.WebApi.OData.snk">
+      <Link>Net.Http.WebApi.OData.snk</Link>
+    </None>
+    <None Include="Query\Expressions\_QueryNodes.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

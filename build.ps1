@@ -7,14 +7,11 @@ $projectName = "Net.Http.WebApi.OData"
 
 $scriptPath = Split-Path $MyInvocation.InvocationName
 $buildDir = "$scriptPath\build"
-$nuGetExe = "$scriptPath\.nuget\NuGet.exe"
+$nuGetExe = "$scriptPath\tools\NuGet.exe"
 $nuSpec = "$scriptPath\$projectName.nuspec"
 $nuGetPackage = "$buildDir\$projectName.$version.nupkg"
-$date = Get-Date
-$gitDir = $scriptPath + "\.git"
-$commit = git --git-dir $gitDir rev-list HEAD --count
 
-function UpdateAssemblyInfoFiles ([string] $buildVersion)
+function UpdateAssemblyInfoFiles ([string] $buildVersion, [string] $commit)
 {
 	$assemblyVersionPattern = 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
 	$fileVersionPattern = 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
@@ -37,13 +34,16 @@ function UpdateAssemblyInfoFiles ([string] $buildVersion)
 
 if ($version)
 {
-	UpdateAssemblyInfoFiles($version)
+	$gitDir = $scriptPath + "\.git"
+	$commit = git --git-dir $gitDir rev-list HEAD --count
+
+	UpdateAssemblyInfoFiles -buildVersion $version -commit $commit
 }
 
 # Run the psake build script to create the release binaries
 Import-Module (Join-Path $scriptPath packages\psake.4.6.0\tools\psake.psm1) -ErrorAction SilentlyContinue
 
-Invoke-psake (Join-Path $scriptPath default.ps1)
+Invoke-psake (Join-Path $scriptPath default.ps1) -parameters @{"buildVersion"="$version"}
 
 Remove-Module psake -ErrorAction SilentlyContinue
 
