@@ -1,9 +1,9 @@
 Requirements:
  
   - Visual Studio 2015 or later
-  - .NET 4.5
+  - .NET 4.5 (https://www.microsoft.com/net/targeting)
   - StyleCop version 4.7.54 - ensure that MSBuild integration is selected when installed (http://stylecop.codeplex.com/)
-  - Git 1.9.0 (http://git-scm.com/download/win)
+  - Git 2.11.1 (http://git-scm.com/download/win)
 
 If running on a 64 bit machine, run the PowerShell (x86) executable otherwise the StyleCop.targets won't be found.
 
