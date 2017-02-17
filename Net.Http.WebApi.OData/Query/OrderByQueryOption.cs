@@ -20,7 +20,7 @@ namespace Net.Http.WebApi.OData.Query
     /// A class containing deserialised values from the $order by query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
-    public sealed class OrderByQueryOption
+    public sealed class OrderByQueryOption : QueryOption
     {
         private static readonly char[] Comma = new[] { ',' };
 
@@ -29,14 +29,8 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
         public OrderByQueryOption(string rawValue)
+            : base(rawValue)
         {
-            if (rawValue == null)
-            {
-                throw new ArgumentNullException(nameof(rawValue));
-            }
-
-            this.RawValue = rawValue;
-
             var equals = rawValue.IndexOf('=') + 1;
             var properties = rawValue.Substring(equals, rawValue.Length - equals);
 
@@ -56,14 +50,6 @@ namespace Net.Http.WebApi.OData.Query
         /// Gets the properties the query should be ordered by.
         /// </summary>
         public IReadOnlyList<OrderByProperty> Properties
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the raw request value.
-        /// </summary>
-        public string RawValue
         {
             get;
         }

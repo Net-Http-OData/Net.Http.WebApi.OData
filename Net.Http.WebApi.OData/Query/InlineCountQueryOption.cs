@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Query
     /// A class containing deserialised values from the $inline count query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
-    public sealed class InlineCountQueryOption
+    public sealed class InlineCountQueryOption : QueryOption
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="InlineCountQueryOption"/> class.
@@ -26,14 +26,8 @@ namespace Net.Http.WebApi.OData.Query
         /// <param name="rawValue">The raw request value.</param>
         /// <exception cref="ODataException">Thrown if the raw value is invalid.</exception>
         public InlineCountQueryOption(string rawValue)
+            : base(rawValue)
         {
-            if (rawValue == null)
-            {
-                throw new ArgumentNullException(nameof(rawValue));
-            }
-
-            this.RawValue = rawValue;
-
             var equals = rawValue.IndexOf('=') + 1;
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
@@ -56,14 +50,6 @@ namespace Net.Http.WebApi.OData.Query
         /// Gets the inline count.
         /// </summary>
         public InlineCount InlineCount
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the raw request value.
-        /// </summary>
-        public string RawValue
         {
             get;
         }

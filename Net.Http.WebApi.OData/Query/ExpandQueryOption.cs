@@ -19,7 +19,7 @@ namespace Net.Http.WebApi.OData.Query
     /// A class containing deserialised values from the $expand query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
-    public sealed class ExpandQueryOption
+    public sealed class ExpandQueryOption : QueryOption
     {
         private static readonly char[] Comma = new[] { ',' };
 
@@ -28,14 +28,8 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
         public ExpandQueryOption(string rawValue)
+            : base(rawValue)
         {
-            if (rawValue == null)
-            {
-                throw new ArgumentNullException(nameof(rawValue));
-            }
-
-            this.RawValue = rawValue;
-
             var equals = rawValue.IndexOf('=') + 1;
             var properties = rawValue.Substring(equals, rawValue.Length - equals).Split(Comma);
 
@@ -46,14 +40,6 @@ namespace Net.Http.WebApi.OData.Query
         /// Gets the properties to be included in the query.
         /// </summary>
         public IReadOnlyList<string> Properties
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the raw request value.
-        /// </summary>
-        public string RawValue
         {
             get;
         }

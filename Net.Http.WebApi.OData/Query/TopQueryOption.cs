@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Query
     /// A class containing deserialised values from the $top query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
-    public sealed class TopQueryOption
+    public sealed class TopQueryOption : QueryOption
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="TopQueryOption"/> class.
@@ -26,14 +26,8 @@ namespace Net.Http.WebApi.OData.Query
         /// <param name="rawValue">The raw request value.</param>
         /// <exception cref="ODataException">If supplied, the $top value should be an integer.</exception>
         public TopQueryOption(string rawValue)
+            : base(rawValue)
         {
-            if (rawValue == null)
-            {
-                throw new ArgumentNullException(nameof(rawValue));
-            }
-
-            this.RawValue = rawValue;
-
             var equals = rawValue.IndexOf('=') + 1;
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
@@ -47,14 +41,6 @@ namespace Net.Http.WebApi.OData.Query
             {
                 throw new ODataException(Messages.TopRawValueInvalid);
             }
-        }
-
-        /// <summary>
-        /// Gets the raw request value.
-        /// </summary>
-        public string RawValue
-        {
-            get;
         }
 
         /// <summary>

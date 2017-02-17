@@ -19,7 +19,7 @@ namespace Net.Http.WebApi.OData.Query
     /// A class containing deserialised values from the $format query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
-    public sealed class FormatQueryOption
+    public sealed class FormatQueryOption : QueryOption
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="FormatQueryOption"/> class.
@@ -27,14 +27,8 @@ namespace Net.Http.WebApi.OData.Query
         /// <param name="rawValue">The raw request value.</param>
         /// <exception cref="ODataException">Thrown if the raw value is invalid.</exception>
         public FormatQueryOption(string rawValue)
+            : base(rawValue)
         {
-            if (rawValue == null)
-            {
-                throw new ArgumentNullException(nameof(rawValue));
-            }
-
-            this.RawValue = rawValue;
-
             var equals = rawValue.IndexOf('=') + 1;
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
@@ -62,14 +56,6 @@ namespace Net.Http.WebApi.OData.Query
         /// Gets the media type header value.
         /// </summary>
         public MediaTypeHeaderValue MediaTypeHeaderValue
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the raw request value.
-        /// </summary>
-        public string RawValue
         {
             get;
         }

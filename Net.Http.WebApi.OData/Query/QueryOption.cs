@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="FilterQueryOption.cs" company="Project Contributors">
+// <copyright file="QueryOption.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,29 +13,32 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
-    using Net.Http.WebApi.OData.Query.Expressions;
-    using Net.Http.WebApi.OData.Query.Parsers;
 
     /// <summary>
-    /// A class containing deserialised values from the $filter query option.
+    /// The base class for an OData System Query Option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
-    public sealed class FilterQueryOption : QueryOption
+    public abstract class QueryOption
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="FilterQueryOption"/> class.
+        /// Initialises a new instance of the <see cref="QueryOption"/> class.
         /// </summary>
-        /// <param name="rawValue">The raw request value.</param>
-        public FilterQueryOption(string rawValue)
-            : base(rawValue)
+        /// <param name="rawValue">The raw value.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if raw value is null.</exception>
+        protected QueryOption(string rawValue)
         {
-            this.Expression = FilterExpressionParser.Parse(rawValue);
+            if (rawValue == null)
+            {
+                throw new ArgumentNullException(nameof(rawValue));
+            }
+
+            this.RawValue = rawValue;
         }
 
         /// <summary>
-        /// Gets the expression.
+        /// Gets the raw request value.
         /// </summary>
-        public QueryNode Expression
+        public string RawValue
         {
             get;
         }
