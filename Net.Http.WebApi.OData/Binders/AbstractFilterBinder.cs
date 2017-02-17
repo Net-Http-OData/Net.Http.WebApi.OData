@@ -18,48 +18,38 @@ namespace Net.Http.WebApi.OData
     /// <summary>
     /// A base class for binding a filter expression tree.
     /// </summary>
-    public abstract class AbstractFilterBinder
+    [Obsolete("This class has been replaced by Net.Http.WebApi.OData.Query.Binders.AbstractFilterBinder")]
+    public abstract class AbstractFilterBinder : Query.Binders.AbstractFilterBinder
     {
         /// <summary>
-        /// Binds the specified <see cref="QueryNode"/>.
+        /// Binds the specified <see cref="BinaryOperatorNode" />.
         /// </summary>
-        /// <param name="node">The <see cref="QueryNode"/> to bind.</param>
-        /// <exception cref="System.NotSupportedException">Thrown if the node is not supported.</exception>
-        protected void Bind(QueryNode node)
-        {
-            var singleValueNode = node as SingleValueNode;
+        /// <param name="binaryOperatorNode">The <see cref="BinaryOperatorNode" /> to bind.</param>
+        protected override void Bind(BinaryOperatorNode binaryOperatorNode) => this.BindBinaryOperatorNode(binaryOperatorNode);
 
-            if (singleValueNode == null)
-            {
-                throw new NotSupportedException();
-            }
+        /// <summary>
+        /// Binds the specified <see cref="ConstantNode" />.
+        /// </summary>
+        /// <param name="constantNode">The <see cref="ConstantNode" /> to bind.</param>
+        protected override void Bind(ConstantNode constantNode) => this.BindConstantNode(constantNode);
 
-            switch (node.Kind)
-            {
-                case QueryNodeKind.BinaryOperator:
-                    this.BindBinaryOperatorNode((BinaryOperatorNode)node);
-                    break;
+        /// <summary>
+        /// Binds the specified <see cref="SingleValueFunctionCallNode" />.
+        /// </summary>
+        /// <param name="singleValueFunctionCallNode">The <see cref="SingleValueFunctionCallNode" /> to bind.</param>
+        protected override void Bind(SingleValueFunctionCallNode singleValueFunctionCallNode) => this.BindSingleValueFunctionCallNode(singleValueFunctionCallNode);
 
-                case QueryNodeKind.Constant:
-                    this.BindConstantNode((ConstantNode)node);
-                    break;
+        /// <summary>
+        /// Binds the specified <see cref="SingleValuePropertyAccessNode" />.
+        /// </summary>
+        /// <param name="singleValuePropertyAccessNode">The <see cref="SingleValuePropertyAccessNode" /> to bind.</param>
+        protected override void Bind(SingleValuePropertyAccessNode singleValuePropertyAccessNode) => this.BindSingleValuePropertyAccessNode(singleValuePropertyAccessNode);
 
-                case QueryNodeKind.SingleValueFunctionCall:
-                    this.BindSingleValueFunctionCallNode((SingleValueFunctionCallNode)node);
-                    break;
-
-                case QueryNodeKind.SingleValuePropertyAccess:
-                    this.BindSingleValuePropertyAccessNode((SingleValuePropertyAccessNode)node);
-                    break;
-
-                case QueryNodeKind.UnaryOperator:
-                    this.BindUnaryOperatorNode((UnaryOperatorNode)node);
-                    break;
-
-                default:
-                    throw new NotSupportedException("Nodes of type '" + node.Kind.ToString() + "' are not supported");
-            }
-        }
+        /// <summary>
+        /// Binds the specified <see cref="UnaryOperatorNode" />.
+        /// </summary>
+        /// <param name="unaryOperatorNode">The <see cref="UnaryOperatorNode" /> to bind.</param>
+        protected override void Bind(UnaryOperatorNode unaryOperatorNode) => this.BindUnaryOperatorNode(unaryOperatorNode);
 
         /// <summary>
         /// Binds the specified <see cref="BinaryOperatorNode"/>.
