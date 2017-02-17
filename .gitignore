@@ -4,6 +4,7 @@ obj
 build
 packages
 NDependOut
+.vs
 
 # mstest test results
 TestResults
