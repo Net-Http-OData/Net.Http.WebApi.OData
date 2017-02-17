@@ -15,7 +15,7 @@
                 this.node = new SingleValueFunctionCallNode("substringof");
                 this.node.Parameters.Add(parameter);
             }
-            
+
             [Fact]
             public void TheParameterExistsInTheParameterCollection()
             {
@@ -32,7 +32,7 @@
             {
                 this.node = new SingleValueFunctionCallNode(this.functionName);
             }
-            
+
             [Fact]
             public void TheKindIsQueryNodeKindSingleValueFunctionCall()
             {

@@ -12,7 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
-    using System;
     using Net.Http.WebApi.OData.Query.Expressions;
     using Net.Http.WebApi.OData.Query.Parsers;
 

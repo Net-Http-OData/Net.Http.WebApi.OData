@@ -12,8 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
-    using System;
-
     /// <summary>
     /// A class containing deserialised values from the $skip query option.
     /// </summary>

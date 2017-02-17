@@ -12,7 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
-    using System;
     using System.Net.Http.Headers;
 
     /// <summary>
