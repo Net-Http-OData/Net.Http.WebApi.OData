@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TopQueryOptionValidator.cs" company="Project Contributors">
+// <copyright file="FormatQueryOptionValidator.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +12,10 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validators
 {
-    using System.Globalization;
-
     /// <summary>
-    /// A class which validates the $top query option based upon the <see cref="ODataValidationSettings"/>.
+    /// A class which validates the $format query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>
-    internal static class TopQueryOptionValidator
+    internal static class FormatQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
@@ -27,29 +25,14 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.RawValues.Top == null)
+            if (queryOptions.RawValues.Format == null)
             {
                 return;
             }
 
-            if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
+            if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
             {
-                throw new ODataException(Messages.TopQueryOptionNotSupported);
-            }
-
-            if (queryOptions.Top.Value < 0)
-            {
-                throw new ODataException(Messages.TopRawValueInvalid);
-            }
-
-            if (queryOptions.Top.Value > validationSettings.MaxTop)
-            {
-                var message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    Messages.TopValueExceedsMaxAllowed,
-                    validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture));
-
-                throw new ODataException(message);
+                throw new ODataException(Messages.FormatQueryOptionNotSupported);
             }
         }
     }

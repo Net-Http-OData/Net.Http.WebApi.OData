@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataQueryOptionsValidator.cs" company="Project Contributors">
+// <copyright file="FilterQueryOptionValidator.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +13,9 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     /// <summary>
-    /// A class which validates ODataQueryOptions based upon the ODataValidationSettings.
+    /// A class which validates the $filter query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>
-    internal static class ODataQueryOptionsValidator
+    internal static class FilterQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
@@ -25,62 +25,22 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.Filter != null)
+            if (queryOptions.Filter == null)
             {
-                if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter) != AllowedQueryOptions.Filter)
-                {
-                    throw new ODataException(Messages.FilterQueryOptionNotSupported);
-                }
-
-                ValidateFunctions(queryOptions, validationSettings);
-                ValidateStringFunctions(queryOptions, validationSettings);
-                ValidateDateFunctions(queryOptions, validationSettings);
-                ValidateMathFunctions(queryOptions, validationSettings);
-                ValidateLogicalOperators(queryOptions, validationSettings);
-                ValidateArithmeticOperators(queryOptions, validationSettings);
+                return;
             }
 
-            if (queryOptions.RawValues.Expand != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Expand) != AllowedQueryOptions.Expand)
+            if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter) != AllowedQueryOptions.Filter)
             {
-                throw new ODataException(Messages.ExpandQueryOptionNotSupported);
+                throw new ODataException(Messages.FilterQueryOptionNotSupported);
             }
 
-            if (queryOptions.RawValues.Format != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
-            {
-                throw new ODataException(Messages.FormatQueryOptionNotSupported);
-            }
-
-            if (queryOptions.RawValues.InlineCount != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
-            {
-                throw new ODataException(Messages.InlineCountQueryOptionNotSupported);
-            }
-
-            if (queryOptions.RawValues.OrderBy != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.OrderBy) != AllowedQueryOptions.OrderBy)
-            {
-                throw new ODataException(Messages.OrderByQueryOptionNotSupported);
-            }
-
-            if (queryOptions.RawValues.Select != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Select) != AllowedQueryOptions.Select)
-            {
-                throw new ODataException(Messages.SelectQueryOptionNotSupported);
-            }
-
-            if (queryOptions.RawValues.Skip != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip) != AllowedQueryOptions.Skip)
-            {
-                throw new ODataException(Messages.SkipQueryOptionNotSupported);
-            }
-
-            if (queryOptions.RawValues.Top != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
-            {
-                throw new ODataException(Messages.TopQueryOptionNotSupported);
-            }
+            ValidateFunctions(queryOptions, validationSettings);
+            ValidateStringFunctions(queryOptions, validationSettings);
+            ValidateDateFunctions(queryOptions, validationSettings);
+            ValidateMathFunctions(queryOptions, validationSettings);
+            ValidateLogicalOperators(queryOptions, validationSettings);
+            ValidateArithmeticOperators(queryOptions, validationSettings);
         }
 
         private static void ValidateArithmeticOperators(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
@@ -132,7 +92,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
 
             var rawFilterValue = queryOptions.RawValues.Filter;
-
+            
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
                 && rawFilterValue.Contains("year("))
             {
@@ -288,7 +248,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
 
             var rawFilterValue = queryOptions.RawValues.Filter;
-
+            
             if ((validationSettings.AllowedFunctions & AllowedFunctions.EndsWith) != AllowedFunctions.EndsWith
                 && rawFilterValue.Contains("endswith("))
             {

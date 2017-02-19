@@ -16,7 +16,7 @@ namespace Net.Http.WebApi.OData.Query
     using System.Linq;
 
     /// <summary>
-    /// A class containing deserialised values from the $order by query option.
+    /// A class containing deserialised values from the $orderby query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
     public sealed class OrderByQueryOption : QueryOption

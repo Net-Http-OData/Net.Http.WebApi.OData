@@ -56,7 +56,7 @@ namespace Net.Http.WebApi.OData.Query
         SkipToken = 32,
 
         /// <summary>
-        /// Specifies that the $order by query option may be used.
+        /// Specifies that the $orderby query option may be used.
         /// </summary>
         OrderBy = 64,
 

@@ -8,6 +8,44 @@
 
     public class TopQueryValidatorTests
     {
+        public class WhenTheTopQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=50"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.None
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.TopQueryOptionNotSupported, exception.Message);
+            }
+        }
+
+        public class WhenTheTopQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=50"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Top,
+                MaxTop = 100
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenValidatingAndNoMaxTopIsSetButTheValueIsBelowZero
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -32,6 +70,7 @@
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
+                AllowedQueryOptions = AllowedQueryOptions.Top,
                 MaxTop = 100
             };
 
@@ -66,13 +105,16 @@
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
+                AllowedQueryOptions = AllowedQueryOptions.Top,
                 MaxTop = 100
             };
 
             [Fact]
             public void AnExceptionIsThrown()
             {
-                var exception = Assert.Throws<ODataException>(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                var exception = Assert.Throws<ODataException>(
+                    () => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
                 Assert.Equal(string.Format(Messages.TopValueExceedsMaxAllowed, 100), exception.Message);
             }
         }

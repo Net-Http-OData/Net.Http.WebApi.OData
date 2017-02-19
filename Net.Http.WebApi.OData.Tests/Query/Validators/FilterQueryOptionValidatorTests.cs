@@ -6,45 +6,8 @@
     using Net.Http.WebApi.OData.Query.Validators;
     using Xunit;
 
-    public class ODataQueryOptionsValidatorTests
+    public class FilterQueryOptionValidatorTests
     {
-        public class WhenTheExpandQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$expand=Orders"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.ExpandQueryOptionNotSupported, exception.Message);
-            }
-        }
-
-        public class WhenTheExpandQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$expand=Orders"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Expand
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
         public class WhenTheFilterQueryOptionContainsTheAddOperatorAddItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -61,7 +24,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.AddOperatorNotSupported, exception.Message);
             }
@@ -82,7 +45,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -101,7 +64,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.AndOperatorNotSupported, exception.Message);
             }
@@ -121,7 +84,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -140,7 +103,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.CastFunctionNotSupported, exception.Message);
             }
@@ -161,7 +124,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -180,7 +143,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.CeilingFunctionNotSupported, exception.Message);
             }
@@ -201,7 +164,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -220,7 +183,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.ConcatFunctionNotSupported, exception.Message);
             }
@@ -241,10 +204,10 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-
+        
         public class WhenTheFilterQueryOptionContainsTheDayFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -260,7 +223,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.DayFunctionNotSupported, exception.Message);
             }
@@ -281,7 +244,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -301,7 +264,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.DivideOperatorNotSupported, exception.Message);
             }
@@ -322,7 +285,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -341,7 +304,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.EndsWithFunctionNotSupported, exception.Message);
             }
@@ -362,7 +325,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -381,7 +344,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.EqualsOperatorNotSupported, exception.Message);
             }
@@ -401,7 +364,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -420,7 +383,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.FloorFunctionNotSupported, exception.Message);
             }
@@ -441,10 +404,10 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-
+        
         public class WhenTheFilterQueryOptionContainsTheGreaterThanOperatorGreaterThanItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -460,7 +423,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.GreaterThanOperatorNotSupported, exception.Message);
             }
@@ -480,7 +443,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -499,7 +462,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.GreaterThanOrEqualsOperatorNotSupported, exception.Message);
             }
@@ -519,7 +482,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -538,7 +501,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.HourFunctionNotSupported, exception.Message);
             }
@@ -559,7 +522,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -578,7 +541,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.IndexOfFunctionNotSupported, exception.Message);
             }
@@ -599,7 +562,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -618,7 +581,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.IsOfFunctionNotSupported, exception.Message);
             }
@@ -639,7 +602,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -658,7 +621,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.LengthFunctionNotSupported, exception.Message);
             }
@@ -679,7 +642,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -698,7 +661,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.LessThanOperatorNotSupported, exception.Message);
             }
@@ -718,7 +681,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -737,7 +700,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.LessThanOrEqualsOperatorNotSupported, exception.Message);
             }
@@ -757,10 +720,10 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-
+        
         public class WhenTheFilterQueryOptionContainsTheMinuteFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -776,7 +739,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.MinuteFunctionNotSupported, exception.Message);
             }
@@ -797,7 +760,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -817,7 +780,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.ModuloOperatorNotSupported, exception.Message);
             }
@@ -838,7 +801,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -857,7 +820,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.MonthFunctionNotSupported, exception.Message);
             }
@@ -878,7 +841,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -898,7 +861,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.MultiplyOperatorNotSupported, exception.Message);
             }
@@ -919,7 +882,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -938,7 +901,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.NotEqualsOperatorNotSupported, exception.Message);
             }
@@ -958,10 +921,10 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-
+        
         public class WhenTheFilterQueryOptionContainsTheOrOperatorOrItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -977,7 +940,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.OrOperatorNotSupported, exception.Message);
             }
@@ -997,7 +960,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1016,7 +979,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.ReplaceFunctionNotSupported, exception.Message);
             }
@@ -1037,7 +1000,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1056,7 +1019,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.RoundFunctionNotSupported, exception.Message);
             }
@@ -1077,7 +1040,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1096,7 +1059,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.SecondFunctionNotSupported, exception.Message);
             }
@@ -1117,7 +1080,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1136,7 +1099,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.StartsWithFunctionNotSupported, exception.Message);
             }
@@ -1157,7 +1120,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1176,7 +1139,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.SubstringFunctionNotSupported, exception.Message);
             }
@@ -1197,14 +1160,13 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
         public class WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=substringof('Hayes', Name) eq true"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
@@ -1212,11 +1174,18 @@
                 AllowedFunctions = AllowedFunctions.None
             };
 
+            public WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsNotSpecifiedInAllowedFunctions()
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=substringof('Hayes', Name) eq true");
+
+                this.queryOptions = new ODataQueryOptions(requestMessage);
+            }
+
             [Fact]
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.SubstringOfFunctionNotSupported, exception.Message);
             }
@@ -1224,8 +1193,7 @@
 
         public class WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsSpecifiedInAllowedFunctions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=substringof('Hayes', Name) eq true"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
@@ -1234,13 +1202,20 @@
                 AllowedLogicalOperators = AllowedLogicalOperators.Equal
             };
 
+            public WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsSpecifiedInAllowedFunctions()
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=substringof('Hayes', Name) eq true");
+
+                this.queryOptions = new ODataQueryOptions(requestMessage);
+            }
+
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-
+        
         public class WhenTheFilterQueryOptionContainsTheSubtractOperatorSubtractItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -1257,7 +1232,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.SubtractOperatorNotSupported, exception.Message);
             }
@@ -1278,7 +1253,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1297,7 +1272,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.ToLowerFunctionNotSupported, exception.Message);
             }
@@ -1318,7 +1293,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1337,7 +1312,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.ToUpperFunctionNotSupported, exception.Message);
             }
@@ -1358,7 +1333,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1377,7 +1352,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.TrimFunctionNotSupported, exception.Message);
             }
@@ -1398,7 +1373,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1417,7 +1392,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.YearFunctionNotSupported, exception.Message);
             }
@@ -1438,7 +1413,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -1456,7 +1431,7 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(Messages.FilterQueryOptionNotSupported, exception.Message);
             }
@@ -1476,230 +1451,8 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
-        }
-
-        public class WhenTheFormatQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$format=xml"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.FormatQueryOptionNotSupported, exception.Message);
-            }
-        }
-
-        public class WhenTheFormatQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$format=xml"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Format
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheInlineCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.InlineCountQueryOptionNotSupported, exception.Message);
-            }
-        }
-
-        public class WhenTheInlineCountQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.InlineCount
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheOrderByQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$orderby=Name desc"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.OrderByQueryOptionNotSupported, exception.Message);
-            }
-        }
-
-        public class WhenTheOrderByQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$orderby=Name desc"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.OrderBy
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheSelectQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$select=Name"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.SelectQueryOptionNotSupported, exception.Message);
-            }
-        }
-
-        public class WhenTheSelectQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$select=Name"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Select
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheSkipQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=50"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.SkipQueryOptionNotSupported, exception.Message);
-            }
-        }
-
-        public class WhenTheSkipQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=50"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Skip
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheTopQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=50"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.TopQueryOptionNotSupported, exception.Message);
-            }
-        }
-
-        public class WhenTheTopQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=50"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Top
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
+        }        
     }
 }

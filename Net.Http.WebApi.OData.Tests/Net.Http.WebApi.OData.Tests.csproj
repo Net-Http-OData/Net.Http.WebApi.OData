@@ -66,6 +66,7 @@
     <Compile Include="InlineCountCollectionTests.cs" />
     <Compile Include="InlineCountSerializationTests.cs" />
     <Compile Include="InlineCountTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\ExpandQueryOptionTests.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
     <Compile Include="Query\Expressions\ConstantNodeTests.cs" />
@@ -88,10 +89,14 @@
     <Compile Include="Query\SelectQueryOptionTests.cs" />
     <Compile Include="Query\SkipQueryOptionTests.cs" />
     <Compile Include="Query\TopQueryOptionTests.cs" />
-    <Compile Include="Query\Validators\ODataQueryOptionsValidatorTests.cs" />
+    <Compile Include="Query\Validators\ExpandQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\FilterQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\FormatQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\InlineCountQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\OrderByQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\SelectQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\SkipQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidatorTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">

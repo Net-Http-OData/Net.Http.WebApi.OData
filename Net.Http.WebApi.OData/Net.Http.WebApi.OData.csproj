@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Binders\AbstractFilterBinder.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="InlineCountCollection{T}.cs" />
     <Compile Include="InlineCount{T}.cs" />
     <Compile Include="Messages.Designer.cs">
@@ -118,8 +117,13 @@
     <Compile Include="Query\SelectQueryOption.cs" />
     <Compile Include="Query\SkipQueryOption.cs" />
     <Compile Include="Query\TopQueryOption.cs" />
+    <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\InlineCountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ODataQueryOptionsExtensions.cs" />
-    <Compile Include="Query\Validators\ODataQueryOptionsValidator.cs" />
+    <Compile Include="Query\Validators\OrderByQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\SelectQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SkipQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidator.cs" />
   </ItemGroup>

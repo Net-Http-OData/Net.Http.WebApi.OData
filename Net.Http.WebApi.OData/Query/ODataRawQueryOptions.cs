@@ -128,7 +128,7 @@ namespace Net.Http.WebApi.OData.Query
         }
 
         /// <summary>
-        /// Gets the raw $order by query value from the incoming request Uri if specified.
+        /// Gets the raw $orderby query value from the incoming request Uri if specified.
         /// </summary>
         public string OrderBy
         {

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TopQueryOptionValidator.cs" company="Project Contributors">
+// <copyright file="InlineCountQueryOptionValidator.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +12,12 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validators
 {
-    using System.Globalization;
+    using System;
 
     /// <summary>
-    /// A class which validates the $top query option based upon the <see cref="ODataValidationSettings"/>.
+    /// A class which validates the $inlinecount query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>
-    internal static class TopQueryOptionValidator
+    internal static class InlineCountQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
@@ -27,29 +27,15 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.RawValues.Top == null)
+            if (queryOptions.RawValues.InlineCount == null)
             {
                 return;
             }
 
-            if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
+            if (queryOptions.RawValues.InlineCount != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
             {
-                throw new ODataException(Messages.TopQueryOptionNotSupported);
-            }
-
-            if (queryOptions.Top.Value < 0)
-            {
-                throw new ODataException(Messages.TopRawValueInvalid);
-            }
-
-            if (queryOptions.Top.Value > validationSettings.MaxTop)
-            {
-                var message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    Messages.TopValueExceedsMaxAllowed,
-                    validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture));
-
-                throw new ODataException(message);
+                throw new ODataException(Messages.InlineCountQueryOptionNotSupported);
             }
         }
     }
