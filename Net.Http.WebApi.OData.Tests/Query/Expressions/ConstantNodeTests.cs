@@ -16,6 +16,24 @@
         }
 
         [Fact]
+        public void Int32ZeroValueIsSingleton()
+        {
+            var node1 = ConstantNode.Int32Zero;
+            var node2 = ConstantNode.Int32Zero;
+
+            Assert.Same(node1, node2);
+        }
+
+        [Fact]
+        public void Int64ZeroValueIsSingleton()
+        {
+            var node1 = ConstantNode.Int64Zero;
+            var node2 = ConstantNode.Int64Zero;
+
+            Assert.Same(node1, node2);
+        }
+
+        [Fact]
         public void NullValueIsSingleton()
         {
             var node1 = ConstantNode.Null;
@@ -348,6 +366,40 @@
             }
         }
 
+        public class Int32ZeroValue
+        {
+            private readonly ConstantNode node;
+
+            public Int32ZeroValue()
+            {
+                this.node = ConstantNode.Int32Zero;
+            }
+
+            [Fact]
+            public void TheEdmTypeIsSet()
+            {
+                Assert.Equal(EdmType.Int32, this.node.EdmType);
+            }
+
+            [Fact]
+            public void TheKindIsQueryNodeKindConstant()
+            {
+                Assert.Equal(QueryNodeKind.Constant, this.node.Kind);
+            }
+
+            [Fact]
+            public void TheLiteralTextPropertyIsSet()
+            {
+                Assert.Equal("0", this.node.LiteralText);
+            }
+
+            [Fact]
+            public void TheValuePropertyIsSet()
+            {
+                Assert.Equal(0, this.node.Value);
+            }
+        }
+
         public class Int64Value
         {
             private readonly ConstantNode node;
@@ -380,6 +432,40 @@
             {
                 Assert.IsType<long>(this.node.Value);
                 Assert.Equal(64L, this.node.Value);
+            }
+        }
+
+        public class Int64ZeroValue
+        {
+            private readonly ConstantNode node;
+
+            public Int64ZeroValue()
+            {
+                this.node = ConstantNode.Int64Zero;
+            }
+
+            [Fact]
+            public void TheEdmTypeIsSet()
+            {
+                Assert.Equal(EdmType.Int64, this.node.EdmType);
+            }
+
+            [Fact]
+            public void TheKindIsQueryNodeKindConstant()
+            {
+                Assert.Equal(QueryNodeKind.Constant, this.node.Kind);
+            }
+
+            [Fact]
+            public void TheLiteralTextPropertyIsSet()
+            {
+                Assert.Equal("0L", this.node.LiteralText);
+            }
+
+            [Fact]
+            public void TheValuePropertyIsSet()
+            {
+                Assert.Equal(0L, this.node.Value);
             }
         }
 

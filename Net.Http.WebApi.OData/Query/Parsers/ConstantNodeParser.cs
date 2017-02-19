@@ -53,11 +53,22 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.Guid(token.Value, guidValue);
 
                 case TokenType.Int32:
-                    var int32Value = int.Parse(token.Value, CultureInfo.InvariantCulture);
+                    var int32Text = token.Value;
+                    if (int32Text == "0")
+                    {
+                        return ConstantNode.Int32Zero;
+                    }
+
+                    var int32Value = int.Parse(int32Text, CultureInfo.InvariantCulture);
                     return ConstantNode.Int32(token.Value, int32Value);
 
                 case TokenType.Int64:
                     var int64Text = token.Value.Substring(0, token.Value.Length - 1);
+                    if (int64Text == "0")
+                    {
+                        return ConstantNode.Int64Zero;
+                    }
+
                     var int64Value = long.Parse(int64Text, CultureInfo.InvariantCulture);
                     return ConstantNode.Int64(token.Value, int64Value);
 

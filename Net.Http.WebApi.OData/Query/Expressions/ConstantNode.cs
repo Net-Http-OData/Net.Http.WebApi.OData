@@ -39,6 +39,16 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public static ConstantNode False { get; } = new ConstantNode(EdmType.Boolean, "false", false);
 
         /// <summary>
+        /// Gets the ConstantNode which represents a 32bit integer value of 0.
+        /// </summary>
+        public static ConstantNode Int32Zero { get; } = new ConstantNode(EdmType.Int32, "0", 0);
+
+        /// <summary>
+        /// Gets the ConstantNode which represents a 64bit integer value of 0.
+        /// </summary>
+        public static ConstantNode Int64Zero { get; } = new ConstantNode(EdmType.Int64, "0L", 0L);
+
+        /// <summary>
         /// Gets the ConstantNode which represents a value of null.
         /// </summary>
         public static ConstantNode Null { get; } = new ConstantNode(EdmType.Null, "null", null);

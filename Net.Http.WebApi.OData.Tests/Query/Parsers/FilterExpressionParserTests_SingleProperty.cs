@@ -186,9 +186,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("false", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<bool>(((ConstantNode)node.Right).Value);
-                Assert.False((bool)((ConstantNode)node.Right).Value);
+                Assert.Same(ConstantNode.False, node.Right);
             }
 
             [Fact]
@@ -210,6 +208,44 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("guid'0D01B09B-38CD-4C53-AA04-181371087A00'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<Guid>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new Guid("0D01B09B-38CD-4C53-AA04-181371087A00"), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqInt32ZeroValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq 0");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Same(ConstantNode.Int32Zero, node.Right);
+            }
+
+            [Fact]
+            public void ParsePropertyEqInt64ZeroValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq 0L");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((SingleValuePropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Same(ConstantNode.Int64Zero, node.Right);
             }
 
             [Fact]
@@ -333,8 +369,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("null", ((ConstantNode)node.Right).LiteralText);
-                Assert.Null(((ConstantNode)node.Right).Value);
+                Assert.Same(node.Right, ConstantNode.Null);
             }
 
             [Fact]
@@ -540,9 +575,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("true", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<bool>(((ConstantNode)node.Right).Value);
-                Assert.True((bool)((ConstantNode)node.Right).Value);
+                Assert.Same(ConstantNode.True, node.Right);
             }
 
             [Fact]
