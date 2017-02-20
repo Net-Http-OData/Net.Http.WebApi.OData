@@ -96,7 +96,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                                 if (stack.Count > 0)
                                 {
-                                    stack.Peek().Parameters.Add(lastNode);
+                                    stack.Peek().AddParameter(lastNode);
                                 }
                                 else
                                 {
@@ -126,7 +126,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Parameters.Add(propertyAccessNode);
+                                stack.Peek().AddParameter(propertyAccessNode);
                             }
                             else
                             {
@@ -152,7 +152,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Parameters.Add(constantNode);
+                                stack.Peek().AddParameter(constantNode);
                             }
                             else
                             {

@@ -23,7 +23,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// </summary>
         /// <param name="operand">The operand of the unary operator.</param>
         /// <param name="operatorKind">Kind of the operator.</param>
-        public UnaryOperatorNode(QueryNode operand, UnaryOperatorKind operatorKind)
+        internal UnaryOperatorNode(QueryNode operand, UnaryOperatorKind operatorKind)
         {
             this.Operand = operand;
             this.OperatorKind = operatorKind;

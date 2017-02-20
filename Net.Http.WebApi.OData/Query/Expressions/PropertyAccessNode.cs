@@ -22,7 +22,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// Initialises a new instance of the <see cref="PropertyAccessNode"/> class.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        public PropertyAccessNode(string propertyName)
+        internal PropertyAccessNode(string propertyName)
         {
             this.PropertyName = propertyName;
         }

@@ -13,7 +13,7 @@
             public WhenAddingAParameter()
             {
                 this.node = new FunctionCallNode("substringof");
-                this.node.Parameters.Add(parameter);
+                this.node.AddParameter(parameter);
             }
 
             [Fact]

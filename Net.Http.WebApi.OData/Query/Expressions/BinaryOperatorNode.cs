@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="left">The left query node.</param>
         /// <param name="operatorKind">Kind of the operator.</param>
         /// <param name="right">The right query node.</param>
-        public BinaryOperatorNode(QueryNode left, BinaryOperatorKind operatorKind, QueryNode right)
+        internal BinaryOperatorNode(QueryNode left, BinaryOperatorKind operatorKind, QueryNode right)
         {
             this.Left = left;
             this.OperatorKind = operatorKind;
@@ -37,12 +37,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public override QueryNodeKind Kind { get; } = QueryNodeKind.BinaryOperator;
 
         /// <summary>
-        /// Gets or sets the left query node.
+        /// Gets the left query node.
         /// </summary>
         public QueryNode Left
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
@@ -54,12 +54,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
-        /// Gets or sets the right query node.
+        /// Gets the right query node.
         /// </summary>
         public QueryNode Right
         {
             get;
-            set;
+            internal set;
         }
     }
 }

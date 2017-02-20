@@ -21,10 +21,10 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     public sealed class FunctionCallNode : QueryNode
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="FunctionCallNode"/> class.
+        /// Initialises a new instance of the <see cref="FunctionCallNode" /> class.
         /// </summary>
-        /// <param name="name">The name.</param>
-        public FunctionCallNode(string name)
+        /// <param name="name">The name of the function.</param>
+        internal FunctionCallNode(string name)
         {
             this.Name = name;
         }
@@ -45,6 +45,11 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the parameters for the function call.
         /// </summary>
-        public IList<QueryNode> Parameters { get; } = new List<QueryNode>();
+        public IReadOnlyList<QueryNode> Parameters { get; } = new List<QueryNode>();
+
+        internal void AddParameter(QueryNode queryNode)
+        {
+            ((IList<QueryNode>)this.Parameters).Add(queryNode);
+        }
     }
 }
