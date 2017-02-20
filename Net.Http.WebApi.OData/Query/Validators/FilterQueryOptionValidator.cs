@@ -92,7 +92,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
 
             var rawFilterValue = queryOptions.RawValues.Filter;
-            
+
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
                 && rawFilterValue.Contains("year("))
             {
@@ -248,7 +248,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
 
             var rawFilterValue = queryOptions.RawValues.Filter;
-            
+
             if ((validationSettings.AllowedFunctions & AllowedFunctions.EndsWith) != AllowedFunctions.EndsWith
                 && rawFilterValue.Contains("endswith("))
             {

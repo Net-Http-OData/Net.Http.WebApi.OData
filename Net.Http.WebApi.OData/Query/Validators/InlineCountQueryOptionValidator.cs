@@ -12,8 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validators
 {
-    using System;
-
     /// <summary>
     /// A class which validates the $inlinecount query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>

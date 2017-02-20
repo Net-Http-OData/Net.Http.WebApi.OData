@@ -207,7 +207,7 @@
                 Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-        
+
         public class WhenTheFilterQueryOptionContainsTheDayFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -407,7 +407,7 @@
                 Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-        
+
         public class WhenTheFilterQueryOptionContainsTheGreaterThanOperatorGreaterThanItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -723,7 +723,7 @@
                 Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-        
+
         public class WhenTheFilterQueryOptionContainsTheMinuteFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -924,7 +924,7 @@
                 Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-        
+
         public class WhenTheFilterQueryOptionContainsTheOrOperatorOrItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -1215,7 +1215,7 @@
                 Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
-        
+
         public class WhenTheFilterQueryOptionContainsTheSubtractOperatorSubtractItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -1453,6 +1453,6 @@
             {
                 Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
-        }        
+        }
     }
 }
