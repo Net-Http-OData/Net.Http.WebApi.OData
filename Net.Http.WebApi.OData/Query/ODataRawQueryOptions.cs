@@ -20,7 +20,6 @@ namespace Net.Http.WebApi.OData.Query
     /// </summary>
     public sealed class ODataRawQueryOptions
     {
-        private static readonly char[] QuerySeparators = new[] { '&' };
         private readonly string rawQuery;
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 var query = this.rawQuery.Substring(1, this.rawQuery.Length - 1);
 
-                var queryOptions = query.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
+                var queryOptions = query.Split(SplitCharacter.Ampersand, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var queryOption in queryOptions)
                 {

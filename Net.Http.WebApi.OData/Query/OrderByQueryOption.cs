@@ -21,8 +21,6 @@ namespace Net.Http.WebApi.OData.Query
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
     public sealed class OrderByQueryOption : QueryOption
     {
-        private static readonly char[] Comma = new[] { ',' };
-
         /// <summary>
         /// Initialises a new instance of the <see cref="OrderByQueryOption"/> class.
         /// </summary>
@@ -35,7 +33,7 @@ namespace Net.Http.WebApi.OData.Query
 
             if (properties.Contains(','))
             {
-                this.Properties = properties.Split(Comma)
+                this.Properties = properties.Split(SplitCharacter.Comma)
                     .Select(raw => new OrderByProperty(raw))
                     .ToArray();
             }

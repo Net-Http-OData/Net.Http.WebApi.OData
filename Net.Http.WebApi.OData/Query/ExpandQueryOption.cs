@@ -20,8 +20,6 @@ namespace Net.Http.WebApi.OData.Query
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
     public sealed class ExpandQueryOption : QueryOption
     {
-        private static readonly char[] Comma = new[] { ',' };
-
         /// <summary>
         /// Initialises a new instance of the <see cref="ExpandQueryOption"/> class.
         /// </summary>
@@ -30,7 +28,7 @@ namespace Net.Http.WebApi.OData.Query
             : base(rawValue)
         {
             var equals = rawValue.IndexOf('=') + 1;
-            var properties = rawValue.Substring(equals, rawValue.Length - equals).Split(Comma);
+            var properties = rawValue.Substring(equals, rawValue.Length - equals).Split(SplitCharacter.Comma);
 
             this.Properties = properties;
         }
