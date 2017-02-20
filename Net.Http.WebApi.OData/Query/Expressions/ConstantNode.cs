@@ -88,15 +88,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         }
 
         /// <summary>
-        /// Gets a ConstantNode which represents a boolean value.
-        /// </summary>
-        /// <param name="literalText">The literal text.</param>
-        /// <param name="value">The value.</param>
-        /// <returns>A ConstantNode representing a boolean value.</returns>
-        [Obsolete("Use ConstantNode.False or ConstantNode.True instead, this will be removed in version 4.0.0 of Net.Http.WebApi.OData.")]
-        public static ConstantNode Boolean(string literalText, bool value) => new ConstantNode(EdmType.Boolean, literalText, value);
-
-        /// <summary>
         /// Gets a ConstantNode which represents a DateTime value.
         /// </summary>
         /// <param name="literalText">The literal text.</param>

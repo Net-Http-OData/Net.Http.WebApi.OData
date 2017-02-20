@@ -66,8 +66,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Binders\AbstractFilterBinder.cs" />
-    <Compile Include="InlineCountCollection{T}.cs" />
     <Compile Include="InlineCount{T}.cs" />
     <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
