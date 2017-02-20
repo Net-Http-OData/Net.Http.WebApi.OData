@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using Net.Http.WebApi.OData.Query.Expressions;
 
@@ -28,6 +29,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
         private sealed class FilterExpressionParserImpl
         {
+            private static readonly ConcurrentDictionary<string, SingleValuePropertyAccessNode> PropertyNodeCache = new ConcurrentDictionary<string, SingleValuePropertyAccessNode>();
             private readonly Stack<SingleValueNode> nodeStack = new Stack<SingleValueNode>();
             private readonly Queue<Token> tokens = new Queue<Token>();
             private int groupingDepth;
@@ -120,13 +122,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.PropertyName:
+                            var propertyNode = PropertyNodeCache.GetOrAdd(token.Value, propName => new SingleValuePropertyAccessNode(propName));
+
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Parameters.Add(new SingleValuePropertyAccessNode(token.Value));
+                                stack.Peek().Parameters.Add(propertyNode);
                             }
                             else
                             {
-                                binaryNode.Right = new SingleValuePropertyAccessNode(token.Value);
+                                binaryNode.Right = propertyNode;
                             }
 
                             break;
@@ -245,13 +249,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.PropertyName:
+                            var propertyNode = PropertyNodeCache.GetOrAdd(token.Value, propName => new SingleValuePropertyAccessNode(propName));
+
                             if (leftNode == null)
                             {
-                                leftNode = new SingleValuePropertyAccessNode(token.Value);
+                                leftNode = propertyNode;
                             }
                             else if (rightNode == null)
                             {
-                                rightNode = new SingleValuePropertyAccessNode(token.Value);
+                                rightNode = propertyNode;
                             }
 
                             break;
