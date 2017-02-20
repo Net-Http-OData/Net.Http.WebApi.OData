@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using Net.Http.WebApi.OData.Query.Expressions;
+    using Expressions;
 
     internal static class FilterExpressionParser
     {
@@ -118,7 +118,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.LogicalOperator:
-                            binaryNode = new BinaryOperatorNode(node, BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value), null);
+                            binaryNode = new BinaryOperatorNode(node, token.Value.ToBinaryOperatorKind(), null);
                             break;
 
                         case TokenType.PropertyName:
@@ -148,13 +148,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Null:
                         case TokenType.Time:
                         case TokenType.True:
+                            var constantNode = ConstantNodeParser.ParseConstantNode(token);
+
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Parameters.Add(ConstantNodeParser.ParseConstantNode(token));
+                                stack.Peek().Parameters.Add(constantNode);
                             }
                             else
                             {
-                                binaryNode.Right = ConstantNodeParser.ParseConstantNode(token);
+                                binaryNode.Right = constantNode;
                             }
 
                             break;
@@ -182,7 +184,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     case TokenType.UnaryOperator:
                         var token = this.tokens.Dequeue();
                         node = this.ParseSingleValueNode();
-                        node = new UnaryOperatorNode(node, UnaryOperatorKindParser.ToUnaryOperatorKind(token.Value));
+                        node = new UnaryOperatorNode(node, token.Value.ToUnaryOperatorKind());
                         break;
 
                     case TokenType.OpenParentheses:
@@ -225,7 +227,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                                 rightNode = null;
                             }
 
-                            operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(token.Value);
+                            operatorKind = token.Value.ToBinaryOperatorKind();
                             break;
 
                         case TokenType.OpenParentheses:
@@ -359,12 +361,10 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             var binaryParent = (BinaryOperatorNode)this.nodeStack.Pop();
                             binaryParent.Right = binaryNode;
 
-                            this.nodeStack.Push(new BinaryOperatorNode(binaryParent, this.nextBinaryOperatorKind, null));
+                            binaryNode = binaryParent;
                         }
-                        else
-                        {
-                            this.nodeStack.Push(new BinaryOperatorNode(binaryNode, this.nextBinaryOperatorKind, null));
-                        }
+
+                        this.nodeStack.Push(new BinaryOperatorNode(binaryNode, this.nextBinaryOperatorKind, null));
                     }
                 }
             }

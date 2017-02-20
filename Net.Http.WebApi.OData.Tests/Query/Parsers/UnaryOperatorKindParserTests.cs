@@ -10,13 +10,13 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
         [Fact]
         public void ToUnaryOperatorKindReturnsNotForNot()
         {
-            Assert.Equal(UnaryOperatorKind.Not, UnaryOperatorKindParser.ToUnaryOperatorKind("not"));
+            Assert.Equal(UnaryOperatorKind.Not, "not".ToUnaryOperatorKind());
         }
 
         [Fact]
         public void ToUnaryOperatorKindThrowsODataExceptionForUnsupportedOperatorKind()
         {
-            Assert.Throws<ODataException>(() => UnaryOperatorKindParser.ToUnaryOperatorKind("wibble"));
+            Assert.Throws<ODataException>(() => "wibble".ToUnaryOperatorKind());
         }
     }
 }

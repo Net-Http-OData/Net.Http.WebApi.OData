@@ -12,11 +12,11 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
-    using Net.Http.WebApi.OData.Query.Expressions;
+    using Expressions;
 
     internal static class UnaryOperatorKindParser
     {
-        internal static UnaryOperatorKind ToUnaryOperatorKind(string operatorType)
+        internal static UnaryOperatorKind ToUnaryOperatorKind(this string operatorType)
         {
             switch (operatorType)
             {
