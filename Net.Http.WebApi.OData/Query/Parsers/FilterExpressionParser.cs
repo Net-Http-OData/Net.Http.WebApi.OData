@@ -29,8 +29,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
         private sealed class FilterExpressionParserImpl
         {
-            private static readonly ConcurrentDictionary<string, SingleValuePropertyAccessNode> PropertyNodeCache = new ConcurrentDictionary<string, SingleValuePropertyAccessNode>();
-            private readonly Stack<SingleValueNode> nodeStack = new Stack<SingleValueNode>();
+            private static readonly ConcurrentDictionary<string, PropertyAccessNode> PropertyAccessNodeCache = new ConcurrentDictionary<string, PropertyAccessNode>();
+            private readonly Stack<QueryNode> nodeStack = new Stack<QueryNode>();
             private readonly Queue<Token> tokens = new Queue<Token>();
             private int groupingDepth;
             private BinaryOperatorKind nextBinaryOperatorKind = BinaryOperatorKind.None;
@@ -39,7 +39,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             {
             }
 
-            internal SingleValueNode Parse(Lexer lexer)
+            internal QueryNode Parse(Lexer lexer)
             {
                 while (lexer.MoveNext())
                 {
@@ -69,12 +69,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 return this.nodeStack.Pop();
             }
 
-            private SingleValueNode ParseSingleValueFunctionCall()
+            private QueryNode ParseFunctionCallNode()
             {
                 BinaryOperatorNode binaryNode = null;
-                SingleValueFunctionCallNode node = null;
+                FunctionCallNode node = null;
 
-                var stack = new Stack<SingleValueFunctionCallNode>();
+                var stack = new Stack<FunctionCallNode>();
 
                 while (this.tokens.Count > 0)
                 {
@@ -114,7 +114,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.FunctionName:
-                            node = new SingleValueFunctionCallNode(token.Value);
+                            node = new FunctionCallNode(token.Value);
                             break;
 
                         case TokenType.LogicalOperator:
@@ -122,15 +122,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.PropertyName:
-                            var propertyNode = PropertyNodeCache.GetOrAdd(token.Value, propName => new SingleValuePropertyAccessNode(propName));
+                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(token.Value, propName => new PropertyAccessNode(propName));
 
                             if (stack.Count > 0)
                             {
-                                stack.Peek().Parameters.Add(propertyNode);
+                                stack.Peek().Parameters.Add(propertyAccessNode);
                             }
                             else
                             {
-                                binaryNode.Right = propertyNode;
+                                binaryNode.Right = propertyAccessNode;
                             }
 
                             break;
@@ -171,46 +171,13 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 return node;
             }
 
-            private SingleValueNode ParseSingleValueNode()
+            private QueryNode ParsePropertyAccessNode()
             {
-                SingleValueNode node = null;
+                QueryNode result = null;
 
-                switch (this.tokens.Peek().TokenType)
-                {
-                    case TokenType.FunctionName:
-                        node = this.ParseSingleValueFunctionCall();
-                        break;
-
-                    case TokenType.UnaryOperator:
-                        var token = this.tokens.Dequeue();
-                        node = this.ParseSingleValueNode();
-                        node = new UnaryOperatorNode(node, token.Value.ToUnaryOperatorKind());
-                        break;
-
-                    case TokenType.OpenParentheses:
-                        this.groupingDepth++;
-                        this.tokens.Dequeue();
-                        node = this.ParseSingleValueNode();
-                        break;
-
-                    case TokenType.PropertyName:
-                        node = this.ParseSingleValuePropertyAccess();
-                        break;
-
-                    default:
-                        throw new NotSupportedException(this.tokens.Peek().TokenType.ToString());
-                }
-
-                return node;
-            }
-
-            private SingleValueNode ParseSingleValuePropertyAccess()
-            {
-                SingleValueNode result = null;
-
-                SingleValueNode leftNode = null;
+                QueryNode leftNode = null;
                 BinaryOperatorKind operatorKind = BinaryOperatorKind.None;
-                SingleValueNode rightNode = null;
+                QueryNode rightNode = null;
 
                 while (this.tokens.Count > 0)
                 {
@@ -241,25 +208,25 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.FunctionName:
                             if (leftNode == null)
                             {
-                                leftNode = new SingleValueFunctionCallNode(token.Value);
+                                leftNode = new FunctionCallNode(token.Value);
                             }
                             else if (rightNode == null)
                             {
-                                rightNode = new SingleValueFunctionCallNode(token.Value);
+                                rightNode = new FunctionCallNode(token.Value);
                             }
 
                             break;
 
                         case TokenType.PropertyName:
-                            var propertyNode = PropertyNodeCache.GetOrAdd(token.Value, propName => new SingleValuePropertyAccessNode(propName));
+                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(token.Value, propName => new PropertyAccessNode(propName));
 
                             if (leftNode == null)
                             {
-                                leftNode = propertyNode;
+                                leftNode = propertyAccessNode;
                             }
                             else if (rightNode == null)
                             {
-                                rightNode = propertyNode;
+                                rightNode = propertyAccessNode;
                             }
 
                             break;
@@ -289,11 +256,44 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 return result;
             }
 
+            private QueryNode ParseQueryNode()
+            {
+                QueryNode node = null;
+
+                switch (this.tokens.Peek().TokenType)
+                {
+                    case TokenType.FunctionName:
+                        node = this.ParseFunctionCallNode();
+                        break;
+
+                    case TokenType.UnaryOperator:
+                        var token = this.tokens.Dequeue();
+                        node = this.ParseQueryNode();
+                        node = new UnaryOperatorNode(node, token.Value.ToUnaryOperatorKind());
+                        break;
+
+                    case TokenType.OpenParentheses:
+                        this.groupingDepth++;
+                        this.tokens.Dequeue();
+                        node = this.ParseQueryNode();
+                        break;
+
+                    case TokenType.PropertyName:
+                        node = this.ParsePropertyAccessNode();
+                        break;
+
+                    default:
+                        throw new NotSupportedException(this.tokens.Peek().TokenType.ToString());
+                }
+
+                return node;
+            }
+
             private void UpdateExpressionTree()
             {
                 var initialGroupingDepth = this.groupingDepth;
 
-                var node = this.ParseSingleValueNode();
+                var node = this.ParseQueryNode();
 
                 if (this.groupingDepth == initialGroupingDepth)
                 {

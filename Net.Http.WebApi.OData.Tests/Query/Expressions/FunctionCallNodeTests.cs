@@ -3,16 +3,16 @@
     using Net.Http.WebApi.OData.Query.Expressions;
     using Xunit;
 
-    public class SingleValueFunctionCallNodeTests
+    public class FunctionCallNodeTests
     {
         public class WhenAddingAParameter
         {
-            private readonly SingleValueFunctionCallNode node;
+            private readonly FunctionCallNode node;
             private readonly QueryNode parameter = ConstantNode.String("Hi", "Hi");
 
             public WhenAddingAParameter()
             {
-                this.node = new SingleValueFunctionCallNode("substringof");
+                this.node = new FunctionCallNode("substringof");
                 this.node.Parameters.Add(parameter);
             }
 
@@ -26,17 +26,17 @@
         public class WhenConstructed
         {
             private readonly string functionName = "substringof";
-            private readonly SingleValueFunctionCallNode node;
+            private readonly FunctionCallNode node;
 
             public WhenConstructed()
             {
-                this.node = new SingleValueFunctionCallNode(this.functionName);
+                this.node = new FunctionCallNode(this.functionName);
             }
 
             [Fact]
             public void TheKindIsQueryNodeKindSingleValueFunctionCall()
             {
-                Assert.Equal(QueryNodeKind.SingleValueFunctionCall, this.node.Kind);
+                Assert.Equal(QueryNodeKind.FunctionCall, this.node.Kind);
             }
 
             [Fact]

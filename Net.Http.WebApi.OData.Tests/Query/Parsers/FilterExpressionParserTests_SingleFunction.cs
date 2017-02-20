@@ -18,12 +18,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("cast", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("Age", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'Edm.Int64'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
 
@@ -45,12 +45,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("ceiling", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("Freight", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("Freight", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -70,20 +70,20 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("concat", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValueFunctionCallNode>(nodeLeft.Parameters[0]);
-                var nodeLeftArg0 = (SingleValueFunctionCallNode)nodeLeft.Parameters[0];
+                Assert.IsType<FunctionCallNode>(nodeLeft.Parameters[0]);
+                var nodeLeftArg0 = (FunctionCallNode)nodeLeft.Parameters[0];
                 Assert.Equal("concat", nodeLeftArg0.Name);
                 Assert.Equal(2, nodeLeftArg0.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeftArg0.Parameters[0]);
-                Assert.Equal("City", ((SingleValuePropertyAccessNode)nodeLeftArg0.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeftArg0.Parameters[0]);
+                Assert.Equal("City", ((PropertyAccessNode)nodeLeftArg0.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeftArg0.Parameters[1]);
                 Assert.Equal(", ", ((ConstantNode)nodeLeftArg0.Parameters[1]).Value);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[1]);
-                var nodeLeftArg1 = (SingleValuePropertyAccessNode)nodeLeft.Parameters[1];
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[1]);
+                var nodeLeftArg1 = (PropertyAccessNode)nodeLeft.Parameters[1];
                 Assert.Equal("Country", nodeLeftArg1.PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
@@ -99,14 +99,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var queryNode = FilterExpressionParser.Parse("contains(CompanyName,'Alfreds')");
 
                 Assert.NotNull(queryNode);
-                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
 
-                var node = (SingleValueFunctionCallNode)queryNode;
+                var node = (FunctionCallNode)queryNode;
 
                 Assert.Equal("contains", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(node.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)node.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
                 Assert.Equal("'Alfreds'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
@@ -123,12 +123,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("day", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -148,12 +148,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("endswith", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'Futterkiste'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -173,14 +173,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var queryNode = FilterExpressionParser.Parse("endswith(CompanyName, 'Futterkiste')");
 
                 Assert.NotNull(queryNode);
-                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
 
-                var node = (SingleValueFunctionCallNode)queryNode;
+                var node = (FunctionCallNode)queryNode;
 
                 Assert.Equal("endswith", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(node.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)node.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
                 Assert.Equal("'Futterkiste'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
@@ -197,12 +197,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("floor", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("Freight", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("Freight", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -222,12 +222,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("hour", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -247,12 +247,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("indexof", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'lfreds'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -272,14 +272,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var queryNode = FilterExpressionParser.Parse("isof(Age, 'Edm.Int64')");
 
                 Assert.NotNull(queryNode);
-                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
 
-                var node = (SingleValueFunctionCallNode)queryNode;
+                var node = (FunctionCallNode)queryNode;
 
                 Assert.Equal("isof", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
-                Assert.Equal("Age", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(node.Parameters[0]);
+                Assert.Equal("Age", ((PropertyAccessNode)node.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
                 Assert.Equal("'Edm.Int64'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
@@ -296,12 +296,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("length", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -321,12 +321,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("minute", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -346,12 +346,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("month", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -371,12 +371,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (UnaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Operand);
-                var nodeOperand = (SingleValueFunctionCallNode)node.Operand;
+                Assert.IsType<FunctionCallNode>(node.Operand);
+                var nodeOperand = (FunctionCallNode)node.Operand;
                 Assert.Equal("endswith", nodeOperand.Name);
                 Assert.Equal(2, nodeOperand.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeOperand.Parameters[0]);
-                Assert.Equal("Name", ((SingleValuePropertyAccessNode)nodeOperand.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeOperand.Parameters[0]);
+                Assert.Equal("Name", ((PropertyAccessNode)nodeOperand.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeOperand.Parameters[1]);
                 Assert.Equal("'ilk'", ((ConstantNode)nodeOperand.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeOperand.Parameters[1]).Value);
@@ -395,12 +395,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("replace", nodeLeft.Name);
                 Assert.Equal(3, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("' '", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -428,12 +428,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("round", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("Freight", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("Freight", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -453,12 +453,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("second", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -478,12 +478,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("startswith", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'Alfr'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -503,14 +503,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var queryNode = FilterExpressionParser.Parse("startswith(CompanyName, 'Alfr')");
 
                 Assert.NotNull(queryNode);
-                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
 
-                var node = (SingleValueFunctionCallNode)queryNode;
+                var node = (FunctionCallNode)queryNode;
 
                 Assert.Equal("startswith", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(node.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)node.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
                 Assert.Equal("'Alfr'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
@@ -527,12 +527,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("substring", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("1", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<int>(((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -555,18 +555,18 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var queryNode = FilterExpressionParser.Parse("substring(tolower(Name), 'Paul')");
 
                 Assert.NotNull(queryNode);
-                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
 
-                var node = (SingleValueFunctionCallNode)queryNode;
+                var node = (FunctionCallNode)queryNode;
                 Assert.Equal("substring", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
-                Assert.IsType<SingleValueFunctionCallNode>(node.Parameters[0]);
+                Assert.IsType<FunctionCallNode>(node.Parameters[0]);
 
-                var firstParameter = (SingleValueFunctionCallNode)node.Parameters[0];
+                var firstParameter = (FunctionCallNode)node.Parameters[0];
                 Assert.Equal("tolower", firstParameter.Name);
                 Assert.Equal(1, firstParameter.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(firstParameter.Parameters[0]);
-                Assert.Equal("Name", ((SingleValuePropertyAccessNode)firstParameter.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(firstParameter.Parameters[0]);
+                Assert.Equal("Name", ((PropertyAccessNode)firstParameter.Parameters[0]).PropertyName);
 
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
                 Assert.Equal("'Paul'", ((ConstantNode)node.Parameters[1]).LiteralText);
@@ -582,12 +582,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("substring", nodeLeft.Name);
                 Assert.Equal(3, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("1", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<int>(((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -615,16 +615,16 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("substringof", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[0]);
                 Assert.Equal("'Alfreds'", ((ConstantNode)nodeLeft.Parameters[0]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[0]).Value);
                 Assert.Equal("Alfreds", ((ConstantNode)nodeLeft.Parameters[0]).Value);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[1]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[1]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[1]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[1]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -640,9 +640,9 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var queryNode = FilterExpressionParser.Parse("substringof('Alfreds', CompanyName)");
 
                 Assert.NotNull(queryNode);
-                Assert.IsType<SingleValueFunctionCallNode>(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
 
-                var node = (SingleValueFunctionCallNode)queryNode;
+                var node = (FunctionCallNode)queryNode;
 
                 Assert.Equal("substringof", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
@@ -650,8 +650,8 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("'Alfreds'", ((ConstantNode)node.Parameters[0]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[0]).Value);
                 Assert.Equal("Alfreds", ((ConstantNode)node.Parameters[0]).Value);
-                Assert.IsType<SingleValuePropertyAccessNode>(node.Parameters[1]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Parameters[1]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(node.Parameters[1]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)node.Parameters[1]).PropertyName);
             }
 
             [Fact]
@@ -664,12 +664,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("tolower", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -689,12 +689,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("toupper", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -714,17 +714,17 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("trim", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
-                Assert.IsType<SingleValuePropertyAccessNode>(node.Right);
-                Assert.Equal("CompanyName", ((SingleValuePropertyAccessNode)node.Right).PropertyName);
+                Assert.IsType<PropertyAccessNode>(node.Right);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)node.Right).PropertyName);
             }
 
             [Fact]
@@ -737,12 +737,12 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                Assert.IsType<SingleValueFunctionCallNode>(node.Left);
-                var nodeLeft = (SingleValueFunctionCallNode)node.Left;
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
                 Assert.Equal("year", nodeLeft.Name);
                 Assert.Equal(1, nodeLeft.Parameters.Count);
-                Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((SingleValuePropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 

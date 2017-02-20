@@ -8,7 +8,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Expressions
         public class WhenConstructed
         {
             private readonly UnaryOperatorNode node;
-            private readonly SingleValueNode operand = new SingleValuePropertyAccessNode("Name");
+            private readonly QueryNode operand = new PropertyAccessNode("Name");
             private readonly UnaryOperatorKind unaryOperatorKind = UnaryOperatorKind.Not;
 
             public WhenConstructed()

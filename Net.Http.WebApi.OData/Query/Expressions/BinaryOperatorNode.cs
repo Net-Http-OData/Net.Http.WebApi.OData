@@ -16,7 +16,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     /// A QueryNode which represents a binary operator with a left and right branch.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{Left} {OperatorKind} {Right}")]
-    public sealed class BinaryOperatorNode : SingleValueNode
+    public sealed class BinaryOperatorNode : QueryNode
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="BinaryOperatorNode"/> class.
@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="left">The left query node.</param>
         /// <param name="operatorKind">Kind of the operator.</param>
         /// <param name="right">The right query node.</param>
-        public BinaryOperatorNode(SingleValueNode left, BinaryOperatorKind operatorKind, SingleValueNode right)
+        public BinaryOperatorNode(QueryNode left, BinaryOperatorKind operatorKind, QueryNode right)
         {
             this.Left = left;
             this.OperatorKind = operatorKind;
@@ -39,7 +39,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets or sets the left query node.
         /// </summary>
-        public SingleValueNode Left
+        public QueryNode Left
         {
             get;
             set;
@@ -56,7 +56,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets or sets the right query node.
         /// </summary>
-        public SingleValueNode Right
+        public QueryNode Right
         {
             get;
             set;

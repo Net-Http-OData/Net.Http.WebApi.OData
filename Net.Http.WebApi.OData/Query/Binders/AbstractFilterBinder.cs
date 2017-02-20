@@ -39,13 +39,6 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <exception cref="System.NotSupportedException">Thrown if the <see cref="QueryNodeKind"/> is not supported.</exception>
         protected void Bind(QueryNode queryNode)
         {
-            var singleValueNode = queryNode as SingleValueNode;
-
-            if (singleValueNode == null)
-            {
-                throw new NotSupportedException();
-            }
-
             switch (queryNode.Kind)
             {
                 case QueryNodeKind.BinaryOperator:
@@ -56,12 +49,12 @@ namespace Net.Http.WebApi.OData.Query.Binders
                     this.Bind((ConstantNode)queryNode);
                     break;
 
-                case QueryNodeKind.SingleValueFunctionCall:
-                    this.Bind((SingleValueFunctionCallNode)queryNode);
+                case QueryNodeKind.FunctionCall:
+                    this.Bind((FunctionCallNode)queryNode);
                     break;
 
-                case QueryNodeKind.SingleValuePropertyAccess:
-                    this.Bind((SingleValuePropertyAccessNode)queryNode);
+                case QueryNodeKind.PropertyAccess:
+                    this.Bind((PropertyAccessNode)queryNode);
                     break;
 
                 case QueryNodeKind.UnaryOperator:
@@ -74,16 +67,16 @@ namespace Net.Http.WebApi.OData.Query.Binders
         }
 
         /// <summary>
-        /// Binds the specified <see cref="SingleValueFunctionCallNode"/>.
+        /// Binds the specified <see cref="FunctionCallNode"/>.
         /// </summary>
-        /// <param name="singleValueFunctionCallNode">The <see cref="SingleValueFunctionCallNode"/> to bind.</param>
-        protected abstract void Bind(SingleValueFunctionCallNode singleValueFunctionCallNode);
+        /// <param name="functionCallNode">The <see cref="FunctionCallNode"/> to bind.</param>
+        protected abstract void Bind(FunctionCallNode functionCallNode);
 
         /// <summary>
-        /// Binds the specified <see cref="SingleValuePropertyAccessNode"/>.
+        /// Binds the specified <see cref="PropertyAccessNode"/>.
         /// </summary>
-        /// <param name="singleValuePropertyAccessNode">The <see cref="SingleValuePropertyAccessNode"/> to bind.</param>
-        protected abstract void Bind(SingleValuePropertyAccessNode singleValuePropertyAccessNode);
+        /// <param name="propertyAccessNode">The <see cref="PropertyAccessNode"/> to bind.</param>
+        protected abstract void Bind(PropertyAccessNode propertyAccessNode);
 
         /// <summary>
         /// Binds the specified <see cref="UnaryOperatorNode"/>.

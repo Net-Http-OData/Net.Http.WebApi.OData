@@ -8,9 +8,9 @@
         public class WhenConstructed
         {
             private readonly BinaryOperatorKind binaryOperatorKind = BinaryOperatorKind.And;
-            private readonly SingleValueNode left = new SingleValuePropertyAccessNode("Name");
+            private readonly QueryNode left = new PropertyAccessNode("Name");
             private readonly BinaryOperatorNode node;
-            private readonly SingleValueNode right = ConstantNode.String("Fred", "Fred");
+            private readonly QueryNode right = ConstantNode.String("Fred", "Fred");
 
             public WhenConstructed()
             {

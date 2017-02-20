@@ -85,11 +85,10 @@
     <Compile Include="Query\Expressions\BinaryOperatorNode.cs" />
     <Compile Include="Query\Expressions\ConstantNode.cs" />
     <Compile Include="Query\Expressions\EdmType.cs" />
+    <Compile Include="Query\Expressions\FunctionCallNode.cs" />
+    <Compile Include="Query\Expressions\PropertyAccessNode.cs" />
     <Compile Include="Query\Expressions\QueryNode.cs" />
     <Compile Include="Query\Expressions\QueryNodeKind.cs" />
-    <Compile Include="Query\Expressions\SingleValueFunctionCallNode.cs" />
-    <Compile Include="Query\Expressions\SingleValueNode.cs" />
-    <Compile Include="Query\Expressions\SingleValuePropertyAccessNode.cs" />
     <Compile Include="Query\Expressions\UnaryOperatorKind.cs" />
     <Compile Include="Query\Expressions\UnaryOperatorNode.cs" />
     <Compile Include="Query\FilterQueryOption.cs" />

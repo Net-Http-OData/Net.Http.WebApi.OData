@@ -3,22 +3,22 @@
     using Net.Http.WebApi.OData.Query.Expressions;
     using Xunit;
 
-    public class SingleValuePropertyAccessNodeTests
+    public class PropertyAccessNodeTests
     {
         public class WhenConstructed
         {
-            private readonly SingleValuePropertyAccessNode node;
+            private readonly PropertyAccessNode node;
             private readonly string propertyName = "Name";
 
             public WhenConstructed()
             {
-                this.node = new SingleValuePropertyAccessNode(this.propertyName);
+                this.node = new PropertyAccessNode(this.propertyName);
             }
 
             [Fact]
             public void TheKindIsQueryNodeKindSingleValuePropertyAccess()
             {
-                Assert.Equal(QueryNodeKind.SingleValuePropertyAccess, this.node.Kind);
+                Assert.Equal(QueryNodeKind.PropertyAccess, this.node.Kind);
             }
 
             [Fact]

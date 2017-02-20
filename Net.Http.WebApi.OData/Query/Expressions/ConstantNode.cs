@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     /// A QueryNode which represents a constant value.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{LiteralText}")]
-    public sealed class ConstantNode : SingleValueNode
+    public sealed class ConstantNode : QueryNode
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="ConstantNode" /> class.

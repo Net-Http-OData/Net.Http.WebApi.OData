@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     public enum QueryNodeKind
     {
         /// <summary>
-        /// The query node is not specified.
+        /// The query node kind is not specified.
         /// </summary>
         None = 0,
 
@@ -28,19 +28,19 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         BinaryOperator = 1,
 
         /// <summary>
-        /// The single value property access query node.
+        /// The query node is a property access query node.
         /// </summary>
-        SingleValuePropertyAccess = 2,
+        PropertyAccess = 2,
 
         /// <summary>
-        /// The constant value query node.
+        /// The query node is a constant value query node.
         /// </summary>
         Constant = 3,
 
         /// <summary>
-        /// The single value function call query node.
+        /// The query node is a function call query node.
         /// </summary>
-        SingleValueFunctionCall = 4,
+        FunctionCall = 4,
 
         /// <summary>
         /// The query node is a unary operator query node.

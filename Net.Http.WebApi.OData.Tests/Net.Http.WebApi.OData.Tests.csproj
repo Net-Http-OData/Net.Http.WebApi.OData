@@ -69,8 +69,8 @@
     <Compile Include="Query\ExpandQueryOptionTests.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
     <Compile Include="Query\Expressions\ConstantNodeTests.cs" />
-    <Compile Include="Query\Expressions\SingleValueFunctionCallNodeTests.cs" />
-    <Compile Include="Query\Expressions\SingleValuePropertyAccessNodeTests.cs" />
+    <Compile Include="Query\Expressions\FunctionCallNodeTests.cs" />
+    <Compile Include="Query\Expressions\PropertyAccessNodeTests.cs" />
     <Compile Include="Query\Expressions\UnaryOperatorNodeTests.cs" />
     <Compile Include="Query\FilterQueryOptionTests.cs" />
     <Compile Include="Query\FormatQueryOptionTests.cs" />

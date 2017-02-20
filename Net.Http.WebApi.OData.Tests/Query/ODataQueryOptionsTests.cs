@@ -28,8 +28,8 @@
 
             Assert.IsType<BinaryOperatorNode>(node.Left);
             var nodeLeft = (BinaryOperatorNode)node.Left;
-            Assert.IsType<SingleValuePropertyAccessNode>(nodeLeft.Left);
-            Assert.Equal("LegacyId", ((SingleValuePropertyAccessNode)nodeLeft.Left).PropertyName);
+            Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
+            Assert.Equal("LegacyId", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
             Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
             Assert.IsType<ConstantNode>(nodeLeft.Right);
             Assert.Equal(2139, ((ConstantNode)nodeLeft.Right).Value);
@@ -38,8 +38,8 @@
 
             Assert.IsType<BinaryOperatorNode>(node.Right);
             var nodeRight = (BinaryOperatorNode)node.Right;
-            Assert.IsType<SingleValuePropertyAccessNode>(nodeRight.Left);
-            Assert.Equal("Name", ((SingleValuePropertyAccessNode)nodeRight.Left).PropertyName);
+            Assert.IsType<PropertyAccessNode>(nodeRight.Left);
+            Assert.Equal("Name", ((PropertyAccessNode)nodeRight.Left).PropertyName);
             Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
             Assert.IsType<ConstantNode>(nodeRight.Right);
             Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
@@ -219,7 +219,7 @@
 
                 var node = (BinaryOperatorNode)this.option.Filter.Expression;
 
-                Assert.IsType<SingleValuePropertyAccessNode>(node.Left);
+                Assert.IsType<PropertyAccessNode>(node.Left);
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
                 Assert.IsType<ConstantNode>(node.Right);
             }

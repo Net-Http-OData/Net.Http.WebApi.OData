@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SingleValuePropertyAccessNode.cs" company="Project Contributors">
+// <copyright file="PropertyAccessNode.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +16,13 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     /// A QueryNode which represents a property.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{PropertyName}")]
-    public sealed class SingleValuePropertyAccessNode : SingleValueNode
+    public sealed class PropertyAccessNode : QueryNode
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="SingleValuePropertyAccessNode"/> class.
+        /// Initialises a new instance of the <see cref="PropertyAccessNode"/> class.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        public SingleValuePropertyAccessNode(string propertyName)
+        public PropertyAccessNode(string propertyName)
         {
             this.PropertyName = propertyName;
         }
@@ -30,7 +30,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the kind of query node.
         /// </summary>
-        public override QueryNodeKind Kind { get; } = QueryNodeKind.SingleValuePropertyAccess;
+        public override QueryNodeKind Kind { get; } = QueryNodeKind.PropertyAccess;
 
         /// <summary>
         /// Gets the name of the property.

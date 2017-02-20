@@ -16,14 +16,14 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     /// A QueryNode which represents a unary operator.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{OperatorKind} {Operand}")]
-    public sealed class UnaryOperatorNode : SingleValueNode
+    public sealed class UnaryOperatorNode : QueryNode
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="UnaryOperatorNode"/> class.
         /// </summary>
         /// <param name="operand">The operand of the unary operator.</param>
         /// <param name="operatorKind">Kind of the operator.</param>
-        public UnaryOperatorNode(SingleValueNode operand, UnaryOperatorKind operatorKind)
+        public UnaryOperatorNode(QueryNode operand, UnaryOperatorKind operatorKind)
         {
             this.Operand = operand;
             this.OperatorKind = operatorKind;
@@ -37,7 +37,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the operand of the unary operator.
         /// </summary>
-        public SingleValueNode Operand
+        public QueryNode Operand
         {
             get;
         }
