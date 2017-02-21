@@ -24,7 +24,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.TopQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$top"), exception.Message);
             }
         }
 

@@ -62,7 +62,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
                     break;
 
                 default:
-                    throw new NotSupportedException("Nodes of type '" + queryNode.Kind.ToString() + "' are not supported");
+                    throw new NotSupportedException(Messages.UnsupportedNodeType.FormatWith(queryNode.Kind.ToString()));
             }
         }
 

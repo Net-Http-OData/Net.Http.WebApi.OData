@@ -32,7 +32,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter) != AllowedQueryOptions.Filter)
             {
-                throw new ODataException(Messages.FilterQueryOptionNotSupported);
+                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$filter"));
             }
 
             ValidateFunctions(queryOptions, validationSettings);
@@ -55,31 +55,31 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Add) != AllowedArithmeticOperators.Add
                 && rawFilterValue.Contains(" add "))
             {
-                throw new ODataException(Messages.AddOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator);
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Divide) != AllowedArithmeticOperators.Divide
                 && rawFilterValue.Contains(" div "))
             {
-                throw new ODataException(Messages.DivideOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("div"));
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Modulo) != AllowedArithmeticOperators.Modulo
                 && rawFilterValue.Contains(" mod "))
             {
-                throw new ODataException(Messages.ModuloOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("mod"));
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Multiply) != AllowedArithmeticOperators.Multiply
                 && rawFilterValue.Contains(" mul "))
             {
-                throw new ODataException(Messages.MultiplyOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("mul"));
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Subtract) != AllowedArithmeticOperators.Subtract
                 && rawFilterValue.Contains(" sub "))
             {
-                throw new ODataException(Messages.SubtractOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("sub"));
             }
         }
 
@@ -96,37 +96,37 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
                 && rawFilterValue.Contains("year("))
             {
-                throw new ODataException(Messages.YearFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("year"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Month) != AllowedFunctions.Month
                 && rawFilterValue.Contains("month("))
             {
-                throw new ODataException(Messages.MonthFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("month"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Day) != AllowedFunctions.Day
                 && rawFilterValue.Contains("day("))
             {
-                throw new ODataException(Messages.DayFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("day"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Hour) != AllowedFunctions.Hour
                 && rawFilterValue.Contains("hour("))
             {
-                throw new ODataException(Messages.HourFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("hour"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Minute) != AllowedFunctions.Minute
                 && rawFilterValue.Contains("minute("))
             {
-                throw new ODataException(Messages.MinuteFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("minute"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Second) != AllowedFunctions.Second
                 && rawFilterValue.Contains("second("))
             {
-                throw new ODataException(Messages.SecondFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("second"));
             }
         }
 
@@ -142,13 +142,13 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Cast) != AllowedFunctions.Cast
                 && rawFilterValue.Contains("cast("))
             {
-                throw new ODataException(Messages.CastFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("cast"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.IsOf) != AllowedFunctions.IsOf
                 && rawFilterValue.Contains("isof("))
             {
-                throw new ODataException(Messages.IsOfFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("isof"));
             }
         }
 
@@ -164,49 +164,49 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.And) != AllowedLogicalOperators.And
                 && rawFilterValue.Contains(" and "))
             {
-                throw new ODataException(Messages.AndOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("and"));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Or) != AllowedLogicalOperators.Or
                 && rawFilterValue.Contains(" or "))
             {
-                throw new ODataException(Messages.OrOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("or"));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Equal) != AllowedLogicalOperators.Equal
                 && rawFilterValue.Contains(" eq "))
             {
-                throw new ODataException(Messages.EqualsOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("eq"));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.NotEqual) != AllowedLogicalOperators.NotEqual
                 && rawFilterValue.Contains(" ne "))
             {
-                throw new ODataException(Messages.NotEqualsOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("ne"));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThan) != AllowedLogicalOperators.GreaterThan
                 && rawFilterValue.Contains(" gt "))
             {
-                throw new ODataException(Messages.GreaterThanOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("gt"));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThanOrEqual) != AllowedLogicalOperators.GreaterThanOrEqual
                 && rawFilterValue.Contains(" ge "))
             {
-                throw new ODataException(Messages.GreaterThanOrEqualsOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("ge"));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThan) != AllowedLogicalOperators.LessThan
                 && rawFilterValue.Contains(" lt "))
             {
-                throw new ODataException(Messages.LessThanOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("lt"));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThanOrEqual) != AllowedLogicalOperators.LessThanOrEqual
                 && rawFilterValue.Contains(" le "))
             {
-                throw new ODataException(Messages.LessThanOrEqualsOperatorNotSupported);
+                throw new ODataException(Messages.UnsupportedOperator.FormatWith("le"));
             }
         }
 
@@ -223,19 +223,19 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Round) != AllowedFunctions.Round
                 && rawFilterValue.Contains("round("))
             {
-                throw new ODataException(Messages.RoundFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("round"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Ceiling) != AllowedFunctions.Ceiling
                 && rawFilterValue.Contains("ceiling("))
             {
-                throw new ODataException(Messages.CeilingFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("ceiling"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Floor) != AllowedFunctions.Floor
                 && rawFilterValue.Contains("floor("))
             {
-                throw new ODataException(Messages.FloorFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("floor"));
             }
         }
 
@@ -252,67 +252,67 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.EndsWith) != AllowedFunctions.EndsWith
                 && rawFilterValue.Contains("endswith("))
             {
-                throw new ODataException(Messages.EndsWithFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("endswith"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.StartsWith) != AllowedFunctions.StartsWith
                 && rawFilterValue.Contains("startswith("))
             {
-                throw new ODataException(Messages.StartsWithFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("startswith"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.SubstringOf) != AllowedFunctions.SubstringOf
                 && rawFilterValue.Contains("substringof("))
             {
-                throw new ODataException(Messages.SubstringOfFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("substringof"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.ToLower) != AllowedFunctions.ToLower
                 && rawFilterValue.Contains("tolower("))
             {
-                throw new ODataException(Messages.ToLowerFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("tolower"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.ToUpper) != AllowedFunctions.ToUpper
                 && rawFilterValue.Contains("toupper("))
             {
-                throw new ODataException(Messages.ToUpperFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("toupper"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Trim) != AllowedFunctions.Trim
                 && rawFilterValue.Contains("trim("))
             {
-                throw new ODataException(Messages.TrimFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("trim"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Length) != AllowedFunctions.Length
                 && rawFilterValue.Contains("length("))
             {
-                throw new ODataException(Messages.LengthFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("length"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.IndexOf) != AllowedFunctions.IndexOf
                 && rawFilterValue.Contains("indexof("))
             {
-                throw new ODataException(Messages.IndexOfFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("indexof"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Replace) != AllowedFunctions.Replace
                 && rawFilterValue.Contains("replace("))
             {
-                throw new ODataException(Messages.ReplaceFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("replace"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Substring) != AllowedFunctions.Substring
                 && rawFilterValue.Contains("substring("))
             {
-                throw new ODataException(Messages.SubstringFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("substring"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Concat) != AllowedFunctions.Concat
                 && rawFilterValue.Contains("concat("))
             {
-                throw new ODataException(Messages.ConcatFunctionNotSupported);
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("concat"));
             }
         }
     }

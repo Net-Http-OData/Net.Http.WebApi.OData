@@ -24,7 +24,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FormatQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.FormatQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$format"), exception.Message);
             }
         }
 

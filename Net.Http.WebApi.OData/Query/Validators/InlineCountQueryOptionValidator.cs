@@ -33,7 +33,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if (queryOptions.RawValues.InlineCount != null
                 && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
             {
-                throw new ODataException(Messages.InlineCountQueryOptionNotSupported);
+                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"));
             }
         }
     }

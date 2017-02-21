@@ -26,7 +26,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.AddOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator, exception.Message);
             }
         }
 
@@ -66,7 +66,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.AndOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("and"), exception.Message);
             }
         }
 
@@ -105,7 +105,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.CastFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("cast"), exception.Message);
             }
         }
 
@@ -145,7 +145,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.CeilingFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("ceiling"), exception.Message);
             }
         }
 
@@ -185,7 +185,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.ConcatFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("concat"), exception.Message);
             }
         }
 
@@ -225,7 +225,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.DayFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("day"), exception.Message);
             }
         }
 
@@ -266,7 +266,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.DivideOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("div"), exception.Message);
             }
         }
 
@@ -306,7 +306,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.EndsWithFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("endswith"), exception.Message);
             }
         }
 
@@ -346,7 +346,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.EqualsOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("eq"), exception.Message);
             }
         }
 
@@ -385,7 +385,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.FloorFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("floor"), exception.Message);
             }
         }
 
@@ -425,7 +425,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.GreaterThanOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("gt"), exception.Message);
             }
         }
 
@@ -464,7 +464,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.GreaterThanOrEqualsOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ge"), exception.Message);
             }
         }
 
@@ -503,7 +503,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.HourFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("hour"), exception.Message);
             }
         }
 
@@ -543,7 +543,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.IndexOfFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("indexof"), exception.Message);
             }
         }
 
@@ -583,7 +583,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.IsOfFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("isof"), exception.Message);
             }
         }
 
@@ -623,7 +623,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.LengthFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("length"), exception.Message);
             }
         }
 
@@ -663,7 +663,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.LessThanOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("lt"), exception.Message);
             }
         }
 
@@ -702,7 +702,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.LessThanOrEqualsOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("le"), exception.Message);
             }
         }
 
@@ -741,7 +741,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.MinuteFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("minute"), exception.Message);
             }
         }
 
@@ -782,7 +782,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.ModuloOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mod"), exception.Message);
             }
         }
 
@@ -822,7 +822,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.MonthFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("month"), exception.Message);
             }
         }
 
@@ -863,7 +863,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.MultiplyOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mul"), exception.Message);
             }
         }
 
@@ -903,7 +903,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.NotEqualsOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ne"), exception.Message);
             }
         }
 
@@ -942,7 +942,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.OrOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("or"), exception.Message);
             }
         }
 
@@ -981,7 +981,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.ReplaceFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("replace"), exception.Message);
             }
         }
 
@@ -1021,7 +1021,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.RoundFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("round"), exception.Message);
             }
         }
 
@@ -1061,7 +1061,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.SecondFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("second"), exception.Message);
             }
         }
 
@@ -1101,7 +1101,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.StartsWithFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("startswith"), exception.Message);
             }
         }
 
@@ -1141,7 +1141,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.SubstringFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("substring"), exception.Message);
             }
         }
 
@@ -1187,7 +1187,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.SubstringOfFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("substringof"), exception.Message);
             }
         }
 
@@ -1234,7 +1234,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.SubtractOperatorNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("sub"), exception.Message);
             }
         }
 
@@ -1274,7 +1274,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.ToLowerFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("tolower"), exception.Message);
             }
         }
 
@@ -1314,7 +1314,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.ToUpperFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("toupper"), exception.Message);
             }
         }
 
@@ -1354,7 +1354,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.TrimFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("trim"), exception.Message);
             }
         }
 
@@ -1394,7 +1394,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.YearFunctionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("year"), exception.Message);
             }
         }
 
@@ -1433,7 +1433,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.FilterQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$filter"), exception.Message);
             }
         }
 

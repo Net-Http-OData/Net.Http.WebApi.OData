@@ -30,7 +30,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.InlineCountQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"), exception.Message);
             }
         }
 

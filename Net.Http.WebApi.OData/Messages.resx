@@ -117,47 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EndsWithFunctionNotSupported" xml:space="preserve">
-    <value>The 'endswith' function is not supported by this service.</value>
-  </data>
-  <data name="FilterQueryOptionNotSupported" xml:space="preserve">
-    <value>The $filter query option is not supported by this service.</value>
-  </data>
-  <data name="FormatQueryOptionNotSupported" xml:space="preserve">
-    <value>The $format query option is not supported by this service.</value>
-  </data>
-  <data name="InlineCountQueryOptionNotSupported" xml:space="preserve">
-    <value>The $inlinecount query option is not supported by this service.</value>
-  </data>
   <data name="InlineCountRawValueInvalid" xml:space="preserve">
     <value>If specified, the $inlinecount value must be either 'allpages' or 'none'.</value>
   </data>
   <data name="OrderByPropertyRawValueInvalid" xml:space="preserve">
     <value>If specified, the $orderby direction must be either 'asc' or 'desc'.</value>
   </data>
-  <data name="OrderByQueryOptionNotSupported" xml:space="preserve">
-    <value>The $orderby query option is not supported by this service.</value>
-  </data>
-  <data name="SelectQueryOptionNotSupported" xml:space="preserve">
-    <value>The $select query option is not supported by this service.</value>
-  </data>
-  <data name="SkipQueryOptionNotSupported" xml:space="preserve">
-    <value>The $skip query option is not supported by this service.</value>
-  </data>
   <data name="SkipRawValueInvalid" xml:space="preserve">
     <value>If specified, the $skip value must be a positive integer.</value>
-  </data>
-  <data name="StartsWithFunctionNotSupported" xml:space="preserve">
-    <value>The 'startswith' function is not supported by this service.</value>
-  </data>
-  <data name="SubstringOfFunctionNotSupported" xml:space="preserve">
-    <value>The 'substringof' function is not supported by this service.</value>
-  </data>
-  <data name="ToLowerFunctionNotSupported" xml:space="preserve">
-    <value>The 'tolower' function is not supported by this service.</value>
-  </data>
-  <data name="TopQueryOptionNotSupported" xml:space="preserve">
-    <value>The $top query option is not supported by this service.</value>
   </data>
   <data name="TopRawValueInvalid" xml:space="preserve">
     <value>If specified, the $top value must be a positive integer.</value>
@@ -165,103 +132,22 @@
   <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
     <value>The specified $top value exceeds the maximum allowed value of '{0}'</value>
   </data>
-  <data name="ToUpperFunctionNotSupported" xml:space="preserve">
-    <value>The 'toupper' function is not supported by this service.</value>
-  </data>
   <data name="UnknownQueryOption" xml:space="preserve">
     <value>The query option '{0}' is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top</value>
   </data>
-  <data name="DayFunctionNotSupported" xml:space="preserve">
-    <value>The 'day' function is not supported by this service.</value>
+  <data name="UnsupportedOperator" xml:space="preserve">
+    <value>The '{0}' operator is not supported by this service.</value>
   </data>
-  <data name="MonthFunctionNotSupported" xml:space="preserve">
-    <value>The 'month' function is not supported by this service.</value>
+  <data name="UnknownOperator" xml:space="preserve">
+    <value>The '{0}' operator is not a valid operator.</value>
   </data>
-  <data name="YearFunctionNotSupported" xml:space="preserve">
-    <value>The 'year' function is not supported by this service.</value>
+  <data name="UnsupportedNodeType" xml:space="preserve">
+    <value>Query nodes of type '{0}' are not supported.</value>
   </data>
-  <data name="CeilingFunctionNotSupported" xml:space="preserve">
-    <value>The 'ceiling' function is not supported by this service.</value>
+  <data name="UnsupportedQueryOption" xml:space="preserve">
+    <value>The query option '{0}' is not supported by this service.</value>
   </data>
-  <data name="FloorFunctionNotSupported" xml:space="preserve">
-    <value>The 'floor' function is not supported by this service.</value>
-  </data>
-  <data name="LengthFunctionNotSupported" xml:space="preserve">
-    <value>The 'length' function is not supported by this service.</value>
-  </data>
-  <data name="RoundFunctionNotSupported" xml:space="preserve">
-    <value>The 'round' function is not supported by this service.</value>
-  </data>
-  <data name="TrimFunctionNotSupported" xml:space="preserve">
-    <value>The 'trim' function is not supported by this service.</value>
-  </data>
-  <data name="HourFunctionNotSupported" xml:space="preserve">
-    <value>The 'hour' function is not supported by this service.</value>
-  </data>
-  <data name="IndexOfFunctionNotSupported" xml:space="preserve">
-    <value>The 'indexof' function is not supported by this service.</value>
-  </data>
-  <data name="MinuteFunctionNotSupported" xml:space="preserve">
-    <value>The 'minute' function is not supported by this service.</value>
-  </data>
-  <data name="SecondFunctionNotSupported" xml:space="preserve">
-    <value>The 'second' function is not supported by this service.</value>
-  </data>
-  <data name="ReplaceFunctionNotSupported" xml:space="preserve">
-    <value>The 'replace' function is not supported by this service.</value>
-  </data>
-  <data name="SubstringFunctionNotSupported" xml:space="preserve">
-    <value>The 'substring' function is not supported by this service.</value>
-  </data>
-  <data name="AndOperatorNotSupported" xml:space="preserve">
-    <value>The 'and' operator is not supported by this service.</value>
-  </data>
-  <data name="EqualsOperatorNotSupported" xml:space="preserve">
-    <value>The 'eq' operator is not supported by this service.</value>
-  </data>
-  <data name="GreaterThanOperatorNotSupported" xml:space="preserve">
-    <value>The 'gt' operator is not supported by this service.</value>
-  </data>
-  <data name="GreaterThanOrEqualsOperatorNotSupported" xml:space="preserve">
-    <value>The 'ge' operator is not supported by this service.</value>
-  </data>
-  <data name="LessThanOperatorNotSupported" xml:space="preserve">
-    <value>The 'lt' operator is not supported by this service.</value>
-  </data>
-  <data name="LessThanOrEqualsOperatorNotSupported" xml:space="preserve">
-    <value>The 'le' operator is not supported by this service.</value>
-  </data>
-  <data name="NotEqualsOperatorNotSupported" xml:space="preserve">
-    <value>The 'ne' operator is not supported by this service.</value>
-  </data>
-  <data name="OrOperatorNotSupported" xml:space="preserve">
-    <value>The 'or' operator is not supported by this service.</value>
-  </data>
-  <data name="AddOperatorNotSupported" xml:space="preserve">
-    <value>The 'add' operator is not supported by this service.</value>
-  </data>
-  <data name="DivideOperatorNotSupported" xml:space="preserve">
-    <value>The 'div' operator is not supported by this service.</value>
-  </data>
-  <data name="ModuloOperatorNotSupported" xml:space="preserve">
-    <value>The 'mod' operator is not supported by this service.</value>
-  </data>
-  <data name="MultiplyOperatorNotSupported" xml:space="preserve">
-    <value>The 'mul' operator is not supported by this service.</value>
-  </data>
-  <data name="SubtractOperatorNotSupported" xml:space="preserve">
-    <value>The 'sub' operator is not supported by this service.</value>
-  </data>
-  <data name="ConcatFunctionNotSupported" xml:space="preserve">
-    <value>The 'concat' function is not supported by this service.</value>
-  </data>
-  <data name="IsOfFunctionNotSupported" xml:space="preserve">
-    <value>The 'isof' function is not supported by this service.</value>
-  </data>
-  <data name="CastFunctionNotSupported" xml:space="preserve">
-    <value>The 'cast' function is not supported by this service.</value>
-  </data>
-  <data name="ExpandQueryOptionNotSupported" xml:space="preserve">
-    <value>The $expand query option is not supported by this service.</value>
+  <data name="UnsupportedFunction" xml:space="preserve">
+    <value>The '{0}' function is not supported by this service.</value>
   </data>
 </root>

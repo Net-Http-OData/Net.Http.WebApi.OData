@@ -32,7 +32,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Expand) != AllowedQueryOptions.Expand)
             {
-                throw new ODataException(Messages.ExpandQueryOptionNotSupported);
+                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$expand"));
             }
         }
     }

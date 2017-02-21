@@ -24,7 +24,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => OrderByQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.OrderByQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$orderby"), exception.Message);
             }
         }
 

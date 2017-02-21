@@ -24,7 +24,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => SelectQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.SelectQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$select"), exception.Message);
             }
         }
 

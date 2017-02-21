@@ -24,7 +24,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.SkipQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$skip"), exception.Message);
             }
         }
 

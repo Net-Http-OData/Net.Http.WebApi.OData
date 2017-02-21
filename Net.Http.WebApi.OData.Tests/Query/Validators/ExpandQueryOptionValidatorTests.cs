@@ -24,7 +24,7 @@
                 var exception = Assert.Throws<ODataException>(
                     () => ExpandQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.ExpandQueryOptionNotSupported, exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$expand"), exception.Message);
             }
         }
 
