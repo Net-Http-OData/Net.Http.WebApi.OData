@@ -208,6 +208,58 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            public WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsNotSpecifiedInAllowedFunctions()
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=contains(CompanyName,'Alfreds')");
+
+                this.queryOptions = new ODataQueryOptions(requestMessage);
+            }
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("contains"), exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Contains,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal
+            };
+
+            public WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsSpecifiedInAllowedFunctions()
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=contains(CompanyName,'Alfreds')");
+
+                this.queryOptions = new ODataQueryOptions(requestMessage);
+            }
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheDayFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -1156,58 +1208,6 @@
                 AllowedFunctions = AllowedFunctions.Substring,
                 AllowedLogicalOperators = AllowedLogicalOperators.Equal
             };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions;
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            public WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsNotSpecifiedInAllowedFunctions()
-            {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=substringof('Hayes', Name) eq true");
-
-                this.queryOptions = new ODataQueryOptions(requestMessage);
-            }
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("substringof"), exception.Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions;
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.SubstringOf,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
-            };
-
-            public WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsSpecifiedInAllowedFunctions()
-            {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=substringof('Hayes', Name) eq true");
-
-                this.queryOptions = new ODataQueryOptions(requestMessage);
-            }
 
             [Fact]
             public void AnODataExceptionIsNotThrown()

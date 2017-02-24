@@ -36,9 +36,9 @@ namespace Net.Http.WebApi.OData.Query
         EndsWith = 2,
 
         /// <summary>
-        /// Specifies that the 'SubstringOf' function is allowed in the $filter query option.
+        /// Specifies that the 'Contains' function is allowed in the $filter query option.
         /// </summary>
-        SubstringOf = 4,
+        Contains = 4,
 
         /// <summary>
         /// Specifies that the 'ToLower' function is allowed in the $filter query option.
@@ -138,7 +138,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
-        AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
+        AllStringFunctions = StartsWith | EndsWith | Contains | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
 
         /// <summary>
         /// Specifies that all date/time functions are allowed in the $filter query option.

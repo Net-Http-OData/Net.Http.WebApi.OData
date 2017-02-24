@@ -584,7 +584,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseNestedGrouping()
             {
-                var queryNode = FilterExpressionParser.Parse("(Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59') and ((Enabled eq true and substringof('John', FirstName) eq true) or (Enabled eq true and substringof('Smi', LastName) eq true))");
+                var queryNode = FilterExpressionParser.Parse("(Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59') and ((Enabled eq true and contains(CompanyName,'Alfreds') eq true or (Enabled eq true and contains(CompanyName,'Futterkiste') eq true)");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);

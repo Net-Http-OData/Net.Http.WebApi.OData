@@ -94,6 +94,26 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParseContainsFunctionEqTrueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("contains(CompanyName,'Alfreds')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
+
+                var node = (FunctionCallNode)queryNode;
+
+                Assert.Equal("contains", node.Name);
+                Assert.Equal(2, node.Parameters.Count);
+                Assert.IsType<PropertyAccessNode>(node.Parameters[0]);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)node.Parameters[0]).PropertyName);
+                Assert.IsType<ConstantNode>(node.Parameters[1]);
+                Assert.Equal("'Alfreds'", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
+                Assert.Equal("Alfreds", ((ConstantNode)node.Parameters[1]).Value);
+            }
+
+            [Fact]
             public void ParseContainsFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("contains(CompanyName,'Alfreds')");
@@ -603,55 +623,6 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("'lf'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("lf", ((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
-            public void ParseSubstringOfFunctionEqTrueExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("substringof('Alfreds', CompanyName) eq true");
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                Assert.IsType<FunctionCallNode>(node.Left);
-                var nodeLeft = (FunctionCallNode)node.Left;
-                Assert.Equal("substringof", nodeLeft.Name);
-                Assert.Equal(2, nodeLeft.Parameters.Count);
-                Assert.IsType<ConstantNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("'Alfreds'", ((ConstantNode)nodeLeft.Parameters[0]).LiteralText);
-                Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[0]).Value);
-                Assert.Equal("Alfreds", ((ConstantNode)nodeLeft.Parameters[0]).Value);
-                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[1]);
-                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[1]).PropertyName);
-
-                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
-
-                Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("true", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<bool>(((ConstantNode)node.Right).Value);
-                Assert.True((bool)((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
-            public void ParseSubstringOfFunctionExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("substringof('Alfreds', CompanyName)");
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<FunctionCallNode>(queryNode);
-
-                var node = (FunctionCallNode)queryNode;
-
-                Assert.Equal("substringof", node.Name);
-                Assert.Equal(2, node.Parameters.Count);
-                Assert.IsType<ConstantNode>(node.Parameters[0]);
-                Assert.Equal("'Alfreds'", ((ConstantNode)node.Parameters[0]).LiteralText);
-                Assert.IsType<string>(((ConstantNode)node.Parameters[0]).Value);
-                Assert.Equal("Alfreds", ((ConstantNode)node.Parameters[0]).Value);
-                Assert.IsType<PropertyAccessNode>(node.Parameters[1]);
-                Assert.Equal("CompanyName", ((PropertyAccessNode)node.Parameters[1]).PropertyName);
             }
 
             [Fact]

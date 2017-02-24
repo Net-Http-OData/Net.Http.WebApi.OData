@@ -261,10 +261,10 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 throw new ODataException(Messages.UnsupportedFunction.FormatWith("startswith"));
             }
 
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.SubstringOf) != AllowedFunctions.SubstringOf
-                && rawFilterValue.Contains("substringof("))
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Contains) != AllowedFunctions.Contains
+                && rawFilterValue.Contains("contains("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("substringof"));
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("contains"));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.ToLower) != AllowedFunctions.ToLower
