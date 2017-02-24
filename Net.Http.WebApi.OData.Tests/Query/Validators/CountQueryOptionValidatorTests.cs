@@ -6,9 +6,9 @@
     using Net.Http.WebApi.OData.Query.Validators;
     using Xunit;
 
-    public class InlineCountQueryOptionValidatorTests
+    public class CountQueryOptionValidatorTests
     {
-        public class WhenTheInlineCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
+        public class WhenTheCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
             private readonly ODataQueryOptions queryOptions;
 
@@ -17,9 +17,9 @@
                 AllowedQueryOptions = AllowedQueryOptions.None
             };
 
-            public WhenTheInlineCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
+            public WhenTheCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages");
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$count=true");
 
                 this.queryOptions = new ODataQueryOptions(requestMessage);
             }
@@ -28,24 +28,24 @@
             public void AnODataExceptionIsThrown()
             {
                 var exception = Assert.Throws<ODataException>(
-                    () => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"), exception.Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$count"), exception.Message);
             }
         }
 
-        public class WhenTheInlineCountQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
+        public class WhenTheCountQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
         {
             private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
-                AllowedQueryOptions = AllowedQueryOptions.InlineCount
+                AllowedQueryOptions = AllowedQueryOptions.Count
             };
 
-            public WhenTheInlineCountQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions()
+            public WhenTheCountQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions()
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages");
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$count=true");
 
                 this.queryOptions = new ODataQueryOptions(requestMessage);
             }
@@ -53,7 +53,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
     }

@@ -54,9 +54,15 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$filter=Name eq 'John'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$top=25&$expand=Orders");
+                    "http://localhost/api?$count=true&$filter=Name eq 'John'&$format=json&$orderby=Name&$select=Name,Id&$skip=10&$top=25&$expand=Orders");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheCountOptionShouldBeSet()
+            {
+                Assert.True(this.option.Count);
             }
 
             [Fact]
@@ -75,12 +81,6 @@
             public void TheFormatOptionShouldBeSet()
             {
                 Assert.NotNull(this.option.Format);
-            }
-
-            [Fact]
-            public void TheInlineCountOptionShouldBeSet()
-            {
-                Assert.NotNull(this.option.InlineCount);
             }
 
             [Fact]
@@ -135,6 +135,12 @@
             }
 
             [Fact]
+            public void TheCountOptionShouldNotBeSet()
+            {
+                Assert.False(this.option.Count);
+            }
+
+            [Fact]
             public void TheExpandOptionShouldNotBeSet()
             {
                 Assert.Null(this.option.Expand);
@@ -150,12 +156,6 @@
             public void TheFormatOptionShouldNotBeSet()
             {
                 Assert.Null(this.option.Format);
-            }
-
-            [Fact]
-            public void TheInlineCountOptionShouldNotBeSet()
-            {
-                Assert.Null(this.option.InlineCount);
             }
 
             [Fact]

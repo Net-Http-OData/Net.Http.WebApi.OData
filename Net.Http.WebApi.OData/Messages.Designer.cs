@@ -61,15 +61,6 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the $inlinecount value must be either &apos;allpages&apos; or &apos;none&apos;..
-        /// </summary>
-        internal static string InlineCountRawValueInvalid {
-            get {
-                return ResourceManager.GetString("InlineCountRawValueInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to If specified, the $orderby direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {
@@ -115,7 +106,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top.
+        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $count, $expand, $filter, $format, $orderby, $select, $skip, $skiptoken and $top.
         /// </summary>
         internal static string UnknownQueryOption {
             get {

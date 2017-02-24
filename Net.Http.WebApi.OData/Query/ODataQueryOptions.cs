@@ -24,7 +24,6 @@ namespace Net.Http.WebApi.OData.Query
         private ExpandQueryOption expand;
         private FilterQueryOption filter;
         private FormatQueryOption format;
-        private InlineCountQueryOption inlineCount;
         private OrderByQueryOption orderBy;
         private SelectQueryOption select;
         private SkipQueryOption skip;
@@ -43,6 +42,17 @@ namespace Net.Http.WebApi.OData.Query
 
             this.Request = request;
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the count query option has been specified.
+        /// </summary>
+        public bool Count
+        {
+            get
+            {
+                return this.RawValues.Count?.EndsWith("true", StringComparison.Ordinal) == true;
+            }
         }
 
         /// <summary>
@@ -90,22 +100,6 @@ namespace Net.Http.WebApi.OData.Query
                 }
 
                 return this.format;
-            }
-        }
-
-        /// <summary>
-        /// Gets the inline count query option.
-        /// </summary>
-        public InlineCountQueryOption InlineCount
-        {
-            get
-            {
-                if (this.inlineCount == null && this.RawValues.InlineCount != null)
-                {
-                    this.inlineCount = new InlineCountQueryOption(this.RawValues.InlineCount);
-                }
-
-                return this.inlineCount;
             }
         }
 

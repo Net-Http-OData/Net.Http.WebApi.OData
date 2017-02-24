@@ -93,8 +93,6 @@
     <Compile Include="Query\Expressions\UnaryOperatorNode.cs" />
     <Compile Include="Query\FilterQueryOption.cs" />
     <Compile Include="Query\FormatQueryOption.cs" />
-    <Compile Include="Query\InlineCount.cs" />
-    <Compile Include="Query\InlineCountQueryOption.cs" />
     <Compile Include="Query\ODataQueryOptions.cs" />
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
     <Compile Include="Query\ODataQueryOptionsParameterBindingAttribute.cs" />
@@ -118,7 +116,7 @@
     <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\InlineCountQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ODataQueryOptionsExtensions.cs" />
     <Compile Include="Query\Validators\OrderByQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SelectQueryOptionValidator.cs" />

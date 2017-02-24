@@ -68,9 +68,9 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         this.Top = rawQueryOption;
                     }
-                    else if (rawQueryOption.StartsWith("$inlinecount=", StringComparison.Ordinal))
+                    else if (rawQueryOption.StartsWith("$count=", StringComparison.Ordinal))
                     {
-                        this.InlineCount = rawQueryOption;
+                        this.Count = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$format=", StringComparison.Ordinal))
                     {
@@ -95,6 +95,14 @@ namespace Net.Http.WebApi.OData.Query
         }
 
         /// <summary>
+        /// Gets the raw $count query value from the incoming request Uri if specified.
+        /// </summary>
+        public string Count
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets the raw $expand query value from the incoming request Uri if specified.
         /// </summary>
         public string Expand
@@ -114,14 +122,6 @@ namespace Net.Http.WebApi.OData.Query
         /// Gets the raw $format query value from the incoming request Uri if specified.
         /// </summary>
         public string Format
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the raw $inline count query value from the incoming request Uri if specified.
-        /// </summary>
-        public string InlineCount
         {
             get;
         }

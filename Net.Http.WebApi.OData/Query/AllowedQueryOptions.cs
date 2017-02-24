@@ -61,9 +61,9 @@ namespace Net.Http.WebApi.OData.Query
         OrderBy = 64,
 
         /// <summary>
-        /// Specifies that the $inline count query option may be used.
+        /// Specifies that the $count query option may be used.
         /// </summary>
-        InlineCount = 128,
+        Count = 128,
 
         /// <summary>
         /// Specifies that the $format query option may be used.
@@ -73,6 +73,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all query options may be used.
         /// </summary>
-        All = Select | Filter | Expand | Skip | Top | SkipToken | OrderBy | InlineCount | Format,
+        All = Select | Filter | Expand | Skip | Top | SkipToken | OrderBy | Count | Format,
     }
 }

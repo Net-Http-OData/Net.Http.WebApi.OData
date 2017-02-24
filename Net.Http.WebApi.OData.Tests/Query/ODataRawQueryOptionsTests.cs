@@ -13,7 +13,13 @@
             public WhenCallingConstructorWithAllQueryOptions()
             {
                 this.rawQueryOptions = new ODataRawQueryOptions(
-                    "?$expand=*&$filter=Name eq 'Fred'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
+                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
+            }
+
+            [Fact]
+            public void CountShouldBeSet()
+            {
+                Assert.Equal("$count=true", this.rawQueryOptions.Count);
             }
 
             [Fact]
@@ -32,12 +38,6 @@
             public void FormatShouldBeSet()
             {
                 Assert.Equal("$format=json", this.rawQueryOptions.Format);
-            }
-
-            [Fact]
-            public void InlineCountShouldBeSet()
-            {
-                Assert.Equal("$inlinecount=allpages", this.rawQueryOptions.InlineCount);
             }
 
             [Fact]
@@ -74,7 +74,7 @@
             public void ToStringShouldReturnTheOriginalQuery()
             {
                 Assert.Equal(
-                    "?$expand=*&$filter=Name eq 'Fred'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25",
+                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25",
                     rawQueryOptions.ToString());
             }
         }
@@ -109,6 +109,12 @@
             }
 
             [Fact]
+            public void CountShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Count);
+            }
+
+            [Fact]
             public void ExpandShouldBeNull()
             {
                 Assert.Null(this.rawQueryOptions.Expand);
@@ -124,12 +130,6 @@
             public void FormatShouldBeNull()
             {
                 Assert.Null(this.rawQueryOptions.Format);
-            }
-
-            [Fact]
-            public void InlineCountShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.InlineCount);
             }
 
             [Fact]

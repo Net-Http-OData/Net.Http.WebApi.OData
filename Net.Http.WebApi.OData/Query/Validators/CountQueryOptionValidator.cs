@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="InlineCountQueryOptionValidator.cs" company="Project Contributors">
+// <copyright file="CountQueryOptionValidator.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +13,9 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     /// <summary>
-    /// A class which validates the $inlinecount query option based upon the <see cref="ODataValidationSettings"/>.
+    /// A class which validates the $count query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>
-    internal static class InlineCountQueryOptionValidator
+    internal static class CountQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
@@ -25,15 +25,15 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.RawValues.InlineCount == null)
+            if (queryOptions.RawValues.Count == null)
             {
                 return;
             }
 
-            if (queryOptions.RawValues.InlineCount != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
+            if (queryOptions.RawValues.Count != null
+                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Count) != AllowedQueryOptions.Count)
             {
-                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"));
+                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$count"));
             }
         }
     }
