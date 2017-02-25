@@ -431,6 +431,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParseNowFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("StartTime ge now()");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                var nodeLeft = (PropertyAccessNode)node.Left;
+                Assert.Equal("StartTime", nodeLeft.PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, node.OperatorKind);
+
+                Assert.IsType<FunctionCallNode>(node.Right);
+                Assert.Equal("now", ((FunctionCallNode)node.Right).Name);
+                Assert.Equal(0, ((FunctionCallNode)node.Right).Parameters.Count);
+            }
+
+            [Fact]
             public void ParseReplaceFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'");

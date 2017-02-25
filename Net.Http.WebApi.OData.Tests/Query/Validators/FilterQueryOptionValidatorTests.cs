@@ -1017,6 +1017,47 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheNowAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=StartTime ge now()"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None,
+                AllowedLogicalOperators = AllowedLogicalOperators.GreaterThanOrEqual
+            };
+
+            [Fact]
+            public void AnODataExceptionIsThrown()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("now"), exception.Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheNowFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=StartTime ge now()"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Now,
+                AllowedLogicalOperators = AllowedLogicalOperators.GreaterThanOrEqual
+            };
+
+            [Fact]
+            public void AnODataExceptionIsNotThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheOrOperatorOrItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(

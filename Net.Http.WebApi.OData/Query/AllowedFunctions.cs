@@ -141,6 +141,11 @@ namespace Net.Http.WebApi.OData.Query
         FractionalSeconds = 4194304,
 
         /// <summary>
+        /// Specifies that the 'Now' function is allowed in the $filter query option.
+        /// </summary>
+        Now = 8388608,
+
+        /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
         AllStringFunctions = StartsWith | EndsWith | Contains | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
@@ -148,7 +153,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all date/time functions are allowed in the $filter query option.
         /// </summary>
-        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second | FractionalSeconds,
+        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second | FractionalSeconds | Now,
 
         /// <summary>
         /// Specifies that all math functions are allowed in the $filter query option.

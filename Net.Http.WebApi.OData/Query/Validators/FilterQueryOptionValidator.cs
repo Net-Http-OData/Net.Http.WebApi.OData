@@ -134,6 +134,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
             {
                 throw new ODataException(Messages.UnsupportedFunction.FormatWith("fractionalseconds"));
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Now) != AllowedFunctions.Now
+                && rawFilterValue.Contains("now("))
+            {
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("now"));
+            }
         }
 
         private static void ValidateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
