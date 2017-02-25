@@ -20,6 +20,10 @@ namespace Net.Http.WebApi.OData.Query
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
     public sealed class FormatQueryOption : QueryOption
     {
+        private static readonly MediaTypeHeaderValue AtomXml = new MediaTypeHeaderValue("application/atom+xml");
+        private static readonly MediaTypeHeaderValue Json = new MediaTypeHeaderValue("application/json");
+        private static readonly MediaTypeHeaderValue Xml = new MediaTypeHeaderValue("application/xml");
+
         /// <summary>
         /// Initialises a new instance of the <see cref="FormatQueryOption"/> class.
         /// </summary>
@@ -34,15 +38,15 @@ namespace Net.Http.WebApi.OData.Query
             switch (value)
             {
                 case "atom":
-                    this.MediaTypeHeaderValue = new MediaTypeHeaderValue("application/atom+xml");
+                    this.MediaTypeHeaderValue = AtomXml;
                     break;
 
                 case "json":
-                    this.MediaTypeHeaderValue = new MediaTypeHeaderValue("application/json");
+                    this.MediaTypeHeaderValue = Json;
                     break;
 
                 case "xml":
-                    this.MediaTypeHeaderValue = new MediaTypeHeaderValue("application/xml");
+                    this.MediaTypeHeaderValue = Xml;
                     break;
 
                 default:
