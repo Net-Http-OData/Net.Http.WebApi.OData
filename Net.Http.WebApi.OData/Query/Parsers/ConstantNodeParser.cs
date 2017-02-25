@@ -47,8 +47,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.False;
 
                 case TokenType.Guid:
-                    var guidText = token.Value.Substring(5, token.Value.Length - 6);
-                    var guidValue = Guid.ParseExact(guidText, "D");
+                    var guidValue = Guid.ParseExact(token.Value, "D");
                     return ConstantNode.Guid(token.Value, guidValue);
 
                 case TokenType.Int32:

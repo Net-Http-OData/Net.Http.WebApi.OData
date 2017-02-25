@@ -192,7 +192,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParsePropertyEqGuidValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("TransactionId eq guid'0D01B09B-38CD-4C53-AA04-181371087A00'");
+                var queryNode = FilterExpressionParser.Parse("TransactionId eq 0D01B09B-38CD-4C53-AA04-181371087A00");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -205,7 +205,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("guid'0D01B09B-38CD-4C53-AA04-181371087A00'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("0D01B09B-38CD-4C53-AA04-181371087A00", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<Guid>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new Guid("0D01B09B-38CD-4C53-AA04-181371087A00"), ((ConstantNode)node.Right).Value);
             }

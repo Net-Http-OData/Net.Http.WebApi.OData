@@ -232,7 +232,7 @@
 
             public GuidValue()
             {
-                this.node = ConstantNode.Guid("guid'12345678-aaaa-bbbb-cccc-ddddeeeeffff'", new Guid("12345678-aaaa-bbbb-cccc-ddddeeeeffff"));
+                this.node = ConstantNode.Guid("12345678-aaaa-bbbb-cccc-ddddeeeeffff", new Guid("12345678-aaaa-bbbb-cccc-ddddeeeeffff"));
             }
 
             [Fact]
@@ -250,7 +250,7 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("guid'12345678-aaaa-bbbb-cccc-ddddeeeeffff'", this.node.LiteralText);
+                Assert.Equal("12345678-aaaa-bbbb-cccc-ddddeeeeffff", this.node.LiteralText);
             }
 
             [Fact]
