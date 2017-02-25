@@ -30,8 +30,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.DateTime(token.Value, dateTimeValue);
 
                 case TokenType.DateTimeOffset:
-                    var dateTimeOffsetText = token.Value.Substring(15, token.Value.Length - 16);
-                    var dateTimeOffsetValue = DateTimeOffset.Parse(dateTimeOffsetText, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    var dateTimeOffsetValue = DateTimeOffset.Parse(token.Value, CultureInfo.InvariantCulture, DateTimeStyles.None);
                     return ConstantNode.DateTimeOffset(token.Value, dateTimeOffsetValue);
 
                 case TokenType.Decimal:

@@ -57,7 +57,7 @@
 
             public DateTimeOffsetValue()
             {
-                this.node = ConstantNode.DateTimeOffset("datetimeoffset'2002-10-15T17:34:23Z'", new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero));
+                this.node = ConstantNode.DateTimeOffset("2002-10-15T17:34:23Z", new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero));
             }
 
             [Fact]
@@ -75,7 +75,7 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("datetimeoffset'2002-10-15T17:34:23Z'", this.node.LiteralText);
+                Assert.Equal("2002-10-15T17:34:23Z", this.node.LiteralText);
             }
 
             [Fact]
