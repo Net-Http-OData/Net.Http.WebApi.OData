@@ -146,6 +146,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
             {
                 throw new ODataException(Messages.UnsupportedFunction.FormatWith("mindatetime"));
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.MaxDateTime) != AllowedFunctions.MaxDateTime
+                && rawFilterValue.Contains("maxdatetime("))
+            {
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("maxdatetime"));
+            }
         }
 
         private static void ValidateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)

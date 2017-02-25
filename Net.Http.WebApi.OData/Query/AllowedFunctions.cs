@@ -151,6 +151,11 @@ namespace Net.Http.WebApi.OData.Query
         MinDateTime = 16777216,
 
         /// <summary>
+        /// Specifies that the 'MaxDateTime' function is allowed in the $filter query option.
+        /// </summary>
+        MaxDateTime = 33554432,
+
+        /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
         AllStringFunctions = StartsWith | EndsWith | Contains | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
@@ -158,7 +163,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all date/time functions are allowed in the $filter query option.
         /// </summary>
-        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second | FractionalSeconds | Now | MinDateTime,
+        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second | FractionalSeconds | Now | MinDateTime | MaxDateTime,
 
         /// <summary>
         /// Specifies that all math functions are allowed in the $filter query option.
