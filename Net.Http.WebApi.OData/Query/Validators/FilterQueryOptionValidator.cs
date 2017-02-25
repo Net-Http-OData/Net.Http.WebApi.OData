@@ -140,6 +140,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
             {
                 throw new ODataException(Messages.UnsupportedFunction.FormatWith("now"));
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.MinDateTime) != AllowedFunctions.MinDateTime
+                && rawFilterValue.Contains("mindatetime("))
+            {
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("mindatetime"));
+            }
         }
 
         private static void ValidateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)

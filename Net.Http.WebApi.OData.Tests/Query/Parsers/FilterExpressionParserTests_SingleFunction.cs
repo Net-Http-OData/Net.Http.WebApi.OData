@@ -357,6 +357,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParseMinDateTimeFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("StartTime eq mindatetime()");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                var nodeLeft = (PropertyAccessNode)node.Left;
+                Assert.Equal("StartTime", nodeLeft.PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<FunctionCallNode>(node.Right);
+                Assert.Equal("mindatetime", ((FunctionCallNode)node.Right).Name);
+                Assert.Equal(0, ((FunctionCallNode)node.Right).Parameters.Count);
+            }
+
+            [Fact]
             public void ParseMinuteFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("minute(BirthDate) eq 40");
