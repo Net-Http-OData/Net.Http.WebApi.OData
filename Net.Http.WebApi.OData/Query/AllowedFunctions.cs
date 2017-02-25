@@ -51,21 +51,6 @@ namespace Net.Http.WebApi.OData.Query
         ToUpper = 16,
 
         /// <summary>
-        /// Specifies that the 'Year' function is allowed in the $filter query option.
-        /// </summary>
-        Year = 32,
-
-        /// <summary>
-        /// Specifies that the 'Month' function is allowed in the $filter query option.
-        /// </summary>
-        Month = 64,
-
-        /// <summary>
-        /// Specifies that the 'Day' function is allowed in the $filter query option.
-        /// </summary>
-        Day = 128,
-
-        /// <summary>
         /// Specifies that the 'Trim' function is allowed in the $filter query option.
         /// </summary>
         Trim = 256,
@@ -89,21 +74,6 @@ namespace Net.Http.WebApi.OData.Query
         /// Specifies that the 'Floor' function is allowed in the $filter query option.
         /// </summary>
         Floor = 4096,
-
-        /// <summary>
-        /// Specifies that the 'Hour' function is allowed in the $filter query option.
-        /// </summary>
-        Hour = 8192,
-
-        /// <summary>
-        /// Specifies that the 'Minute' function is allowed in the $filter query option.
-        /// </summary>
-        Minute = 16384,
-
-        /// <summary>
-        /// Specifies that the 'Second' function is allowed in the $filter query option.
-        /// </summary>
-        Second = 32768,
 
         /// <summary>
         /// Specifies that the 'IndexOf' function is allowed in the $filter query option.
@@ -141,11 +111,6 @@ namespace Net.Http.WebApi.OData.Query
         AllStringFunctions = StartsWith | EndsWith | Contains | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
 
         /// <summary>
-        /// Specifies that all date/time functions are allowed in the $filter query option.
-        /// </summary>
-        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second,
-
-        /// <summary>
         /// Specifies that all math functions are allowed in the $filter query option.
         /// </summary>
         AllMathFunctions = Round | Floor | Ceiling,
@@ -153,6 +118,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Specifies that all functions are allowed in the $filter query option.
         /// </summary>
-        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions | IsOf | Cast
+        AllFunctions = AllStringFunctions | AllMathFunctions | IsOf | Cast
     }
 }

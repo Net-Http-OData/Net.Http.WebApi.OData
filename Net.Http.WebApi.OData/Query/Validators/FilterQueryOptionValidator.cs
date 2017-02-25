@@ -37,7 +37,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             ValidateFunctions(queryOptions, validationSettings);
             ValidateStringFunctions(queryOptions, validationSettings);
-            ValidateDateFunctions(queryOptions, validationSettings);
             ValidateMathFunctions(queryOptions, validationSettings);
             ValidateLogicalOperators(queryOptions, validationSettings);
             ValidateArithmeticOperators(queryOptions, validationSettings);
@@ -80,53 +79,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 && rawFilterValue.Contains(" sub "))
             {
                 throw new ODataException(Messages.UnsupportedOperator.FormatWith("sub"));
-            }
-        }
-
-        private static void ValidateDateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
-        {
-            if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
-                || validationSettings.AllowedFunctions == AllowedFunctions.AllDateTimeFunctions)
-            {
-                return;
-            }
-
-            var rawFilterValue = queryOptions.RawValues.Filter;
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
-                && rawFilterValue.Contains("year("))
-            {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("year"));
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Month) != AllowedFunctions.Month
-                && rawFilterValue.Contains("month("))
-            {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("month"));
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Day) != AllowedFunctions.Day
-                && rawFilterValue.Contains("day("))
-            {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("day"));
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Hour) != AllowedFunctions.Hour
-                && rawFilterValue.Contains("hour("))
-            {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("hour"));
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Minute) != AllowedFunctions.Minute
-                && rawFilterValue.Contains("minute("))
-            {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("minute"));
-            }
-
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.Second) != AllowedFunctions.Second
-                && rawFilterValue.Contains("second("))
-            {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("second"));
             }
         }
 

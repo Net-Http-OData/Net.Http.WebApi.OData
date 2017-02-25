@@ -260,46 +260,6 @@
             }
         }
 
-        public class WhenTheFilterQueryOptionContainsTheDayFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=day(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("day"), exception.Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheDayFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=day(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.Day,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
         public class WhenTheFilterQueryOptionContainsTheDivideOperatorDivideItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -538,46 +498,6 @@
             }
         }
 
-        public class WhenTheFilterQueryOptionContainsTheHourFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=hour(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("hour"), exception.Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheHourFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=hour(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.Hour,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
         public class WhenTheFilterQueryOptionContainsTheIndexOfFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -776,46 +696,6 @@
             }
         }
 
-        public class WhenTheFilterQueryOptionContainsTheMinuteFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=minute(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("minute"), exception.Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheMinuteFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=minute(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.Minute,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
         public class WhenTheFilterQueryOptionContainsTheModuloOperatorModuloItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
@@ -848,46 +728,6 @@
                 AllowedArithmeticOperators = AllowedArithmeticOperators.Modulo,
                 AllowedLogicalOperators = AllowedLogicalOperators.Equal,
                 AllowedQueryOptions = AllowedQueryOptions.Filter
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheMonthFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=month(BirthDate) eq 5"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("month"), exception.Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheMonthFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=month(BirthDate) eq 5"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.Month,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
             };
 
             [Fact]
@@ -1086,46 +926,6 @@
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
                 AllowedFunctions = AllowedFunctions.Round,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheSecondFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=second(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("second"), exception.Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheSecondFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=second(BirthDate) eq 8"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.Second,
                 AllowedLogicalOperators = AllowedLogicalOperators.Equal
             };
 
@@ -1367,46 +1167,6 @@
             {
                 AllowedQueryOptions = AllowedQueryOptions.Filter,
                 AllowedFunctions = AllowedFunctions.Trim,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
-            };
-
-            [Fact]
-            public void AnODataExceptionIsNotThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheYearFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=year(BirthDate) eq 1971"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            [Fact]
-            public void AnODataExceptionIsThrown()
-            {
-                var exception = Assert.Throws<ODataException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("year"), exception.Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheYearFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$filter=year(BirthDate) eq 1971"));
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.Year,
                 AllowedLogicalOperators = AllowedLogicalOperators.Equal
             };
 
