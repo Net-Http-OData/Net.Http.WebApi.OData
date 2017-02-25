@@ -233,6 +233,31 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParseFractionalSecondsFunctionExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("fractionalseconds(BirthDate) lt 0.1m");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<FunctionCallNode>(node.Left);
+                var nodeLeft = (FunctionCallNode)node.Left;
+                Assert.Equal("fractionalseconds", nodeLeft.Name);
+                Assert.Equal(1, nodeLeft.Parameters.Count);
+                Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.LessThan, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("0.1m", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<decimal>(((ConstantNode)node.Right).Value);
+                Assert.Equal(0.1m, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParseHourFunctionExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("hour(BirthDate) eq 4");

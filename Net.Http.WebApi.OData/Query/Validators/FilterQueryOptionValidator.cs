@@ -128,6 +128,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
             {
                 throw new ODataException(Messages.UnsupportedFunction.FormatWith("second"));
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.FractionalSeconds) != AllowedFunctions.FractionalSeconds
+                && rawFilterValue.Contains("fractionalseconds("))
+            {
+                throw new ODataException(Messages.UnsupportedFunction.FormatWith("fractionalseconds"));
+            }
         }
 
         private static void ValidateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
