@@ -134,6 +134,7 @@
     </None>
     <None Include="Query\Expressions\_QueryNodes.cd" />
     <None Include="packages.config" />
+    <None Include="Query\_QueryOptions.cd" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
