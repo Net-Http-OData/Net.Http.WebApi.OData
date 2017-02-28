@@ -14,7 +14,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System.Text.RegularExpressions;
 
-    [System.Diagnostics.DebuggerDisplay("{TokenType}: {Regex}")]
+    [System.Diagnostics.DebuggerDisplay("{tokenType}: {Regex}")]
     internal struct TokenDefinition
     {
         private readonly TokenType tokenType;
