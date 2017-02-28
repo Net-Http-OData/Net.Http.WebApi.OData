@@ -115,10 +115,10 @@
     <Compile Include="Query\SelectQueryOption.cs" />
     <Compile Include="Query\SkipQueryOption.cs" />
     <Compile Include="Query\TopQueryOption.cs" />
+    <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ODataQueryOptionsExtensions.cs" />
     <Compile Include="Query\Validators\OrderByQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SearchQueryOptionValidator.cs" />

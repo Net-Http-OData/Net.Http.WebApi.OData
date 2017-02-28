@@ -49,13 +49,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets a value indicating whether the count query option has been specified.
         /// </summary>
-        public bool Count
-        {
-            get
-            {
-                return this.RawValues.Count?.EndsWith("true", StringComparison.Ordinal) == true;
-            }
-        }
+        public bool Count => this.RawValues.Count?.EndsWith("true", StringComparison.Ordinal) == true;
 
         /// <summary>
         /// Gets the expand query option.
