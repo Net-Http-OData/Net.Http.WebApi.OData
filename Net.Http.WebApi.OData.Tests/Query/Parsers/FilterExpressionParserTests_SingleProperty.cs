@@ -129,7 +129,133 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
-            public void ParsePropertyEqDateTimeOffsetValueExpression()
+            public void ParsePropertyEqDateTimeOffset_DateHourMinute_ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Created eq datetimeoffset'2013-06-18T09:30'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Created", ((PropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetimeoffset'2013-06-18T09:30'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 0, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqDateTimeOffset_DateHourMinuteSecond_ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Created eq datetimeoffset'2013-06-18T09:30:54'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Created", ((PropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetimeoffset'2013-06-18T09:30:54'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 54, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqDateTimeOffset_MinusOffset_ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq datetimeoffset'2002-10-15T17:34:23-02:00'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("LastUpdated", ((PropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetimeoffset'2002-10-15T17:34:23-02:00'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.FromHours(-2)), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqDateTimeOffset_MomentJsIsoStringFormat_ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Created eq datetimeoffset'2013-02-04T22:44:30.652Z'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Created", ((PropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetimeoffset'2013-02-04T22:44:30.652Z'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2013, 2, 4, 22, 44, 30, 652, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqDateTimeOffset_PlusOffset_ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq datetimeoffset'2002-10-15T17:34:23+02:00'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("LastUpdated", ((PropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetimeoffset'2002-10-15T17:34:23+02:00'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.FromHours(2)), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqDateTimeOffset_ToStringSFormat_ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Created eq datetimeoffset'2013-06-18T09:30:20'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Created", ((PropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetimeoffset'2013-06-18T09:30:20'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 20, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqDateTimeOffset_Z_ValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("LastUpdated eq datetimeoffset'2002-10-15T17:34:23Z'");
 
@@ -147,6 +273,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("datetimeoffset'2002-10-15T17:34:23Z'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqDateTimeOffset_ZeroOffset_ValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Created eq datetimeoffset'2017-02-28T16:34:18'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Created", ((PropertyAccessNode)node.Left).PropertyName);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("datetimeoffset'2017-02-28T16:34:18'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTimeOffset(2017, 2, 28, 16, 34, 18, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
