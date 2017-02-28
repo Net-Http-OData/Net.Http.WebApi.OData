@@ -14,7 +14,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void Parse_GroupedA_AndGroupedBandC_AndGroupedD()
             {
-                var queryNode = FilterExpressionParser.Parse("(CustomerId eq 9) and (Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59') and (Status eq 1)");
+                var queryNode = FilterExpressionParser.Parse("(CustomerId eq 9) and (Created ge 2015-03-01T00:00:00 and Created le 2015-03-31T23:59:59) and (Status eq 1)");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -31,7 +31,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                // node.Left = (CustomerId eq 9) and (Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59')
+                // node.Left = (CustomerId eq 9) and (Created ge 2015-03-01T00:00:00 and Created le 2015-03-31T23:59:59)
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
 
@@ -45,7 +45,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
                 Assert.Equal("9", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
 
-                // node.Left.Right = (Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59')
+                // node.Left.Right = (Created ge 2015-03-01T00:00:00 and Created le 2015-03-31T23:59:59)
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
 
@@ -56,7 +56,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("Created", ((PropertyAccessNode)nodeLeftRightLeft.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRightLeft.Right);
-                Assert.Equal("datetime'2015-03-01T00:00:00'", ((ConstantNode)nodeLeftRightLeft.Right).LiteralText);
+                Assert.Equal("2015-03-01T00:00:00", ((ConstantNode)nodeLeftRightLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeftRight.OperatorKind);
 
@@ -67,7 +67,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("Created", ((PropertyAccessNode)nodeLeftRightRight.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRightRight.Right);
-                Assert.Equal("datetime'2015-03-31T23:59:59'", ((ConstantNode)nodeLeftRightRight.Right).LiteralText);
+                Assert.Equal("2015-03-31T23:59:59", ((ConstantNode)nodeLeftRightRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
@@ -85,7 +85,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void Parse_GroupedAandBandC_And_GroupedDorEorF()
             {
-                var queryNode = FilterExpressionParser.Parse("(Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59' and CustomerId eq 122134) and (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')");
+                var queryNode = FilterExpressionParser.Parse("(Date ge 2015-02-06T00:00:00 and Date le 2015-02-06T23:59:59 and CustomerId eq 122134) and (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -102,31 +102,31 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                // node.Left = (Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59' and CustomerId eq 122134)
+                // node.Left = (Date ge 2015-02-06T00:00:00 and Date le 2015-02-06T23:59:59 and CustomerId eq 122134)
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
 
-                // node.Left.Left = Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59'
+                // node.Left.Left = Date ge 2015-02-06T00:00:00 and Date le 2015-02-06T23:59:59
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
 
-                // node.Left.Left.Left = Date ge datetime'2015-02-06T00:00:00'
+                // node.Left.Left.Left = Date ge 2015-02-06T00:00:00
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Left);
                 var nodeLeftLeftLeft = (BinaryOperatorNode)nodeLeftLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftLeft.Left);
                 Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeftLeft.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeftLeft.OperatorKind);
-                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeftLeft.Right).LiteralText);
+                Assert.Equal("2015-02-06T00:00:00", ((ConstantNode)nodeLeftLeftLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeftLeft.OperatorKind);
 
-                // node.Right.Left.Right = Date le datetime'2015-02-06T23:59:59'
+                // node.Right.Left.Right = Date le 2015-02-06T23:59:59
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Right);
                 var nodeLeftLeftRight = (BinaryOperatorNode)nodeLeftLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftRight.Left);
                 Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeftRight.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftLeftRight.OperatorKind);
-                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftLeftRight.Right).LiteralText);
+                Assert.Equal("2015-02-06T23:59:59", ((ConstantNode)nodeLeftLeftRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
 
@@ -185,7 +185,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void Parse_GroupedXandY_And_GroupedAorBorC()
             {
-                var queryNode = FilterExpressionParser.Parse("(Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59') and (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')");
+                var queryNode = FilterExpressionParser.Parse("(Date ge 2015-02-06T00:00:00 and Date le 2015-02-06T23:59:59) and (Level eq 'WARN' or Level eq 'ERROR' or Level eq 'FATAL')");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -202,27 +202,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                // node.Left = (Date ge datetime'2015-02-06T00:00:00' and Date le datetime'2015-02-06T23:59:59')
+                // node.Left = (Date ge 2015-02-06T00:00:00 and Date le 2015-02-06T23:59:59)
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
 
-                // node.Left.Left = Date ge datetime'2015-02-06T00:00:00'
+                // node.Left.Left = Date ge 2015-02-06T00:00:00
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
                 Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeft.OperatorKind);
-                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
+                Assert.Equal("2015-02-06T00:00:00", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
 
-                // node.Left.Right = Date le datetime'2015-02-06T23:59:59'
+                // node.Left.Right = Date le 2015-02-06T23:59:59
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
                 Assert.Equal("Date", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRight.OperatorKind);
-                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftRight.Right).LiteralText);
+                Assert.Equal("2015-02-06T23:59:59", ((ConstantNode)nodeLeftRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
@@ -584,7 +584,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseNestedGrouping()
             {
-                var queryNode = FilterExpressionParser.Parse("(Created ge datetime'2015-03-01T00:00:00' and Created le datetime'2015-03-31T23:59:59') and ((Enabled eq true and contains(CompanyName,'Alfreds') eq true or (Enabled eq true and contains(CompanyName,'Futterkiste') eq true)");
+                var queryNode = FilterExpressionParser.Parse("(Created ge 2015-03-01T00:00:00 and Created le 2015-03-31T23:59:59) and ((Enabled eq true and contains(CompanyName,'Alfreds') eq true or (Enabled eq true and contains(CompanyName,'Futterkiste') eq true)");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);

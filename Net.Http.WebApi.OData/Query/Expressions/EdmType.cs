@@ -38,9 +38,9 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         Byte = 3,
 
         /// <summary>
-        /// Represents date and time with values ranging from 12:00:00 midnight, January 1, 1753 A.D. through 11:59:59 P.M, December 9999 A.D.
+        /// Represents a date with a value ranging from January 1, 1753 A.D. through December 9999 A.D.
         /// </summary>
-        DateTime = 4,
+        Date = 4,
 
         /// <summary>
         /// Represents numeric values with fixed precision and scale. This type can describe a numeric value ranging from negative 10^255 + 1 to positive 10^255 -1
@@ -90,7 +90,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Represents the time of day with values ranging from 0:00:00.x to 23:59:59.y, where x and y depend upon the precision
         /// </summary>
-        Time = 14,
+        TimeOfDay = 14,
 
         /// <summary>
         /// Represents date and time as an Offset in minutes from GMT, with values ranging from 12:00:00 midnight, January 1, 1753 A.D. through 11:59:59 P.M, December 9999 A.D

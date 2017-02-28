@@ -141,12 +141,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Single:
                         case TokenType.Int32:
                         case TokenType.Int64:
-                        case TokenType.DateTime:
+                        case TokenType.Date:
                         case TokenType.DateTimeOffset:
                         case TokenType.Guid:
                         case TokenType.String:
                         case TokenType.Null:
-                        case TokenType.Time:
+                        case TokenType.TimeOfDay:
                         case TokenType.True:
                             var constantNode = ConstantNodeParser.ParseConstantNode(token);
 
@@ -237,12 +237,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Single:
                         case TokenType.Int32:
                         case TokenType.Int64:
-                        case TokenType.DateTime:
+                        case TokenType.Date:
                         case TokenType.DateTimeOffset:
                         case TokenType.Guid:
                         case TokenType.String:
                         case TokenType.Null:
-                        case TokenType.Time:
+                        case TokenType.TimeOfDay:
                         case TokenType.True:
                             rightNode = ConstantNodeParser.ParseConstantNode(token);
                             break;

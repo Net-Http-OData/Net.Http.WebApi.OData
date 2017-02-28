@@ -86,19 +86,19 @@
             }
         }
 
-        public class DateTimeValue
+        public class DateValue
         {
             private readonly ConstantNode node;
 
-            public DateTimeValue()
+            public DateValue()
             {
-                this.node = ConstantNode.DateTime("datetime'2000-12-18T12:00'", new DateTime(2000, 12, 18, 12, 0, 0));
+                this.node = ConstantNode.Date("2000-12-18", new DateTime(2000, 12, 18));
             }
 
             [Fact]
             public void TheEdmTypeIsSet()
             {
-                Assert.Equal(EdmType.DateTime, this.node.EdmType);
+                Assert.Equal(EdmType.Date, this.node.EdmType);
             }
 
             [Fact]
@@ -110,14 +110,14 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("datetime'2000-12-18T12:00'", this.node.LiteralText);
+                Assert.Equal("2000-12-18", this.node.LiteralText);
             }
 
             [Fact]
             public void TheValuePropertyIsSet()
             {
                 Assert.IsType<DateTime>(this.node.Value);
-                Assert.Equal(new DateTime(2000, 12, 18, 12, 0, 0), this.node.Value);
+                Assert.Equal(new DateTime(2000, 12, 18), this.node.Value);
             }
         }
 
@@ -503,19 +503,19 @@
             }
         }
 
-        public class TimeValue
+        public class TimeOfDayValue
         {
             private readonly ConstantNode node;
 
-            public TimeValue()
+            public TimeOfDayValue()
             {
-                this.node = ConstantNode.Time("time'13:20:00'", new TimeSpan(13, 20, 0));
+                this.node = ConstantNode.Time("13:20:00", new TimeSpan(13, 20, 0));
             }
 
             [Fact]
             public void TheEdmTypeIsSet()
             {
-                Assert.Equal(EdmType.Time, this.node.EdmType);
+                Assert.Equal(EdmType.TimeOfDay, this.node.EdmType);
             }
 
             [Fact]
@@ -527,7 +527,7 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("time'13:20:00'", this.node.LiteralText);
+                Assert.Equal("13:20:00", this.node.LiteralText);
             }
 
             [Fact]

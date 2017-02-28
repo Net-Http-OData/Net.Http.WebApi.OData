@@ -18,16 +18,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
     internal static class ConstantNodeParser
     {
-        private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o", "yyyy-MM-ddTHH:mm:ss.fffZ" };
+        private const string ODataDateFormat = "yyyy-MM-dd";
 
         internal static ConstantNode ParseConstantNode(Token token)
         {
             switch (token.TokenType)
             {
-                case TokenType.DateTime:
-                    var dateTimeText = token.Value.Substring(9, token.Value.Length - 10);
-                    var dateTimeValue = DateTime.ParseExact(dateTimeText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                    return ConstantNode.DateTime(token.Value, dateTimeValue);
+                case TokenType.Date:
+                    var dateTimeValue = DateTime.ParseExact(token.Value, ODataDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    return ConstantNode.Date(token.Value, dateTimeValue);
 
                 case TokenType.DateTimeOffset:
                     var dateTimeOffsetValue = DateTimeOffset.Parse(token.Value, CultureInfo.InvariantCulture, DateTimeStyles.None);
@@ -82,9 +81,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     var stringText = token.Value.Trim('\'').Replace("''", "'");
                     return ConstantNode.String(token.Value, stringText);
 
-                case TokenType.Time:
-                    var timeSpanText = token.Value.Substring(5, token.Value.Length - 6);
-                    var timeSpanValue = TimeSpan.Parse(timeSpanText, CultureInfo.InvariantCulture);
+                case TokenType.TimeOfDay:
+                    var timeSpanValue = TimeSpan.Parse(token.Value, CultureInfo.InvariantCulture);
                     return ConstantNode.Time(token.Value, timeSpanValue);
 
                 case TokenType.True:

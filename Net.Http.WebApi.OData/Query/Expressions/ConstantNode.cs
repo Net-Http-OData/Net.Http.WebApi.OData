@@ -88,12 +88,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         internal static ConstantNode True { get; } = new ConstantNode(EdmType.Boolean, "true", true);
 
         /// <summary>
-        /// Gets a ConstantNode which represents a DateTime value.
+        /// Gets a ConstantNode which represents a Date value.
         /// </summary>
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
-        /// <returns>A ConstantNode representing a DateTime value.</returns>
-        internal static ConstantNode DateTime(string literalText, DateTime value) => new ConstantNode(EdmType.DateTime, literalText, value);
+        /// <returns>A ConstantNode representing a Date value.</returns>
+        internal static ConstantNode Date(string literalText, DateTime value) => new ConstantNode(EdmType.Date, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a DateTimeOffset value.
@@ -165,6 +165,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a time value.</returns>
-        internal static ConstantNode Time(string literalText, TimeSpan value) => new ConstantNode(EdmType.Time, literalText, value);
+        internal static ConstantNode Time(string literalText, TimeSpan value) => new ConstantNode(EdmType.TimeOfDay, literalText, value);
     }
 }
