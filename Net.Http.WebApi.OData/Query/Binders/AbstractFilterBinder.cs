@@ -39,6 +39,11 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <exception cref="System.NotSupportedException">Thrown if the <see cref="QueryNodeKind"/> is not supported.</exception>
         protected void Bind(QueryNode queryNode)
         {
+            if (queryNode == null)
+            {
+                throw new ArgumentNullException(nameof(queryNode));
+            }
+
             switch (queryNode.Kind)
             {
                 case QueryNodeKind.BinaryOperator:
