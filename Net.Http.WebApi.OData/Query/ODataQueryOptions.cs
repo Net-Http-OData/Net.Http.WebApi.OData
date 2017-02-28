@@ -25,6 +25,7 @@ namespace Net.Http.WebApi.OData.Query
         private FilterQueryOption filter;
         private FormatQueryOption format;
         private OrderByQueryOption orderBy;
+        private SearchQueryOption search;
         private SelectQueryOption select;
         private SkipQueryOption skip;
         private TopQueryOption top;
@@ -133,6 +134,22 @@ namespace Net.Http.WebApi.OData.Query
         public HttpRequestMessage Request
         {
             get;
+        }
+
+        /// <summary>
+        /// Gets the search query option.
+        /// </summary>
+        public SearchQueryOption Search
+        {
+            get
+            {
+                if (this.search == null && this.RawValues.Search != null)
+                {
+                    this.search = new SearchQueryOption(this.RawValues.Search);
+                }
+
+                return this.search;
+            }
         }
 
         /// <summary>

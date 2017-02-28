@@ -31,6 +31,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             FilterQueryOptionValidator.Validate(queryOptions, validationSettings);
             FormatQueryOptionValidator.Validate(queryOptions, validationSettings);
             OrderByQueryOptionValidator.Validate(queryOptions, validationSettings);
+            SearchQueryOptionValidator.Validate(queryOptions, validationSettings);
             SelectQueryOptionValidator.Validate(queryOptions, validationSettings);
             SkipQueryOptionValidator.Validate(queryOptions, validationSettings);
             TopQueryOptionValidator.Validate(queryOptions, validationSettings);

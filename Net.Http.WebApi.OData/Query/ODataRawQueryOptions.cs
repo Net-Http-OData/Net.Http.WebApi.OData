@@ -80,6 +80,10 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         this.Expand = rawQueryOption;
                     }
+                    else if (rawQueryOption.StartsWith("$search=", StringComparison.Ordinal))
+                    {
+                        this.Search = rawQueryOption;
+                    }
                     else if (rawQueryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
                     {
                         this.SkipToken = rawQueryOption;
@@ -130,6 +134,14 @@ namespace Net.Http.WebApi.OData.Query
         /// Gets the raw $orderby query value from the incoming request Uri if specified.
         /// </summary>
         public string OrderBy
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the raw $search query value from the incoming request Uri if specified.
+        /// </summary>
+        public string Search
         {
             get;
         }

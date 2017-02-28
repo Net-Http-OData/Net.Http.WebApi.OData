@@ -71,8 +71,13 @@ namespace Net.Http.WebApi.OData.Query
         Format = 256,
 
         /// <summary>
+        /// Specifies that the $search query option may be used.
+        /// </summary>
+        Search = 512,
+
+        /// <summary>
         /// Specifies that all query options may be used.
         /// </summary>
-        All = Select | Filter | Expand | Skip | Top | SkipToken | OrderBy | Count | Format,
+        All = Select | Filter | Expand | Skip | Top | SkipToken | OrderBy | Count | Format | Search,
     }
 }

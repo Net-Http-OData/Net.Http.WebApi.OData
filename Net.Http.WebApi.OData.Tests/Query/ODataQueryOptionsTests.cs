@@ -54,7 +54,7 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$count=true&$filter=Name eq 'John'&$format=json&$orderby=Name&$select=Name,Id&$skip=10&$top=25&$expand=Orders");
+                    "http://localhost/api?$count=true&$expand=Orders&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
             }
@@ -99,6 +99,12 @@
             public void TheRequestPropertyShouldReturnTheRequestMessage()
             {
                 Assert.Equal(this.httpRequestMessage, this.option.Request);
+            }
+
+            [Fact]
+            public void TheSearchPropertyShouldBeSet()
+            {
+                Assert.NotNull(this.option.Search);
             }
 
             [Fact]
@@ -174,6 +180,12 @@
             public void TheRequestPropertyShouldReturnTheRequestMessage()
             {
                 Assert.Equal(this.httpRequestMessage, this.option.Request);
+            }
+
+            [Fact]
+            public void TheSearchPropertyShouldNotBeSet()
+            {
+                Assert.Null(this.option.Search);
             }
 
             [Fact]

@@ -13,7 +13,7 @@
             public WhenCallingConstructorWithAllQueryOptions()
             {
                 this.rawQueryOptions = new ODataRawQueryOptions(
-                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
+                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
             }
 
             [Fact]
@@ -47,6 +47,12 @@
             }
 
             [Fact]
+            public void SearchShouldBeSet()
+            {
+                Assert.Equal("$search=blue OR green", this.rawQueryOptions.Search);
+            }
+
+            [Fact]
             public void SelectShouldBeSet()
             {
                 Assert.Equal("$select=Name,Id", this.rawQueryOptions.Select);
@@ -74,7 +80,7 @@
             public void ToStringShouldReturnTheOriginalQuery()
             {
                 Assert.Equal(
-                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25",
+                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Id&$skip=10&$skiptoken=5&$top=25",
                     rawQueryOptions.ToString());
             }
         }
@@ -136,6 +142,12 @@
             public void OrderByShouldBeNull()
             {
                 Assert.Null(this.rawQueryOptions.OrderBy);
+            }
+
+            [Fact]
+            public void SearchShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Search);
             }
 
             [Fact]
