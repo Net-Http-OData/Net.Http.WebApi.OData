@@ -120,6 +120,12 @@
             }
 
             [Fact]
+            public void TheSkipTokenPropertyShouldBeSet()
+            {
+                Assert.NotNull(this.option.SkipToken);
+            }
+
+            [Fact]
             public void TheTopPropertyShouldBeSet()
             {
                 Assert.NotNull(this.option.Top);
@@ -198,6 +204,12 @@
             public void TheSkipPropertyShouldBeNotSet()
             {
                 Assert.Null(this.option.Skip);
+            }
+
+            [Fact]
+            public void TheSkipTokenPropertyShouldBeNotSet()
+            {
+                Assert.Null(this.option.SkipToken);
             }
 
             [Fact]

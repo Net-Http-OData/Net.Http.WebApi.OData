@@ -51,7 +51,7 @@ namespace Net.Http.WebApi.OData.Query
         Top = 16,
 
         /// <summary>
-        /// Specifies that the $skip token query option may be used.
+        /// Specifies that the $skiptoken query option may be used.
         /// </summary>
         SkipToken = 32,
 

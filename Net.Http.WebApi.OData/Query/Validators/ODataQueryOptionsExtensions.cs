@@ -34,6 +34,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             SearchQueryOptionValidator.Validate(queryOptions, validationSettings);
             SelectQueryOptionValidator.Validate(queryOptions, validationSettings);
             SkipQueryOptionValidator.Validate(queryOptions, validationSettings);
+            SkipTokenQueryOptionValidator.Validate(queryOptions, validationSettings);
             TopQueryOptionValidator.Validate(queryOptions, validationSettings);
         }
     }

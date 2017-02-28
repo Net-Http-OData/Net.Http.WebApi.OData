@@ -28,6 +28,7 @@ namespace Net.Http.WebApi.OData.Query
         private SearchQueryOption search;
         private SelectQueryOption select;
         private SkipQueryOption skip;
+        private SkipTokenQueryOption skipToken;
         private TopQueryOption top;
 
         /// <summary>
@@ -181,6 +182,22 @@ namespace Net.Http.WebApi.OData.Query
                 }
 
                 return this.skip;
+            }
+        }
+
+        /// <summary>
+        /// Gets the skip token query option.
+        /// </summary>
+        public SkipTokenQueryOption SkipToken
+        {
+            get
+            {
+                if (this.skipToken == null && this.RawValues.SkipToken != null)
+                {
+                    this.skipToken = new SkipTokenQueryOption(this.RawValues.SkipToken);
+                }
+
+                return this.skipToken;
             }
         }
 
