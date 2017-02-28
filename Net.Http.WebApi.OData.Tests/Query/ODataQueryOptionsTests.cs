@@ -54,7 +54,7 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$filter=Name eq 'John'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$top=25&$expand=Orders");
+                    "http://localhost/api?$expand=Orders&$filter=Name eq 'Fred'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
             }
@@ -111,6 +111,12 @@
             public void TheSkipPropertyShouldBeSet()
             {
                 Assert.NotNull(this.option.Skip);
+            }
+
+            [Fact]
+            public void TheSkipTokenPropertyShouldBeSet()
+            {
+                Assert.NotNull(this.option.SkipToken);
             }
 
             [Fact]
@@ -186,6 +192,12 @@
             public void TheSkipPropertyShouldBeNotSet()
             {
                 Assert.Null(this.option.Skip);
+            }
+
+            [Fact]
+            public void TheSkipTokenPropertyShouldBeNotSet()
+            {
+                Assert.Null(this.option.SkipToken);
             }
 
             [Fact]

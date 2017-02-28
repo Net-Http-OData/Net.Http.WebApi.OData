@@ -95,6 +95,7 @@
     <Compile Include="Query\Validators\OrderByQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\SelectQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\SkipQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\SkipTokenQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -79,6 +79,7 @@
     <Compile Include="Query\AllowedLogicalOperators.cs" />
     <Compile Include="Query\AllowedQueryOptions.cs" />
     <Compile Include="Query\Binders\AbstractFilterBinder.cs" />
+    <Compile Include="Query\SkipTokenQueryOption.cs" />
     <Compile Include="Query\SplitCharacter.cs" />
     <Compile Include="Query\ExpandQueryOption.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorKind.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Query\Validators\OrderByQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SelectQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SkipQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\SkipTokenQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidator.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>
