@@ -124,19 +124,19 @@
     <value>If specified, the $orderby direction must be either 'asc' or 'desc'.</value>
   </data>
   <data name="SkipRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $skip value must be a positive integer.</value>
+    <value>If specified, the $skip value must be a non-negative numeric value.</value>
   </data>
   <data name="TopRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $top value must be a positive integer.</value>
+    <value>If specified, the $top value must be a non-negative numeric value.</value>
   </data>
   <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
-    <value>The specified $top value exceeds the maximum allowed value of '{0}'</value>
+    <value>The specified $top value exceeds the maximum value of '{0}' permitted by this service.</value>
   </data>
   <data name="UnknownQueryOption" xml:space="preserve">
     <value>The query option '{0}' is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top</value>
   </data>
   <data name="UnsupportedOperator" xml:space="preserve">
-    <value>The '{0}' operator is not supported by this service.</value>
+    <value>The '{0}' operator is not implemented by this service.</value>
   </data>
   <data name="UnknownOperator" xml:space="preserve">
     <value>The '{0}' operator is not a valid operator.</value>
@@ -145,9 +145,9 @@
     <value>Query nodes of type '{0}' are not supported.</value>
   </data>
   <data name="UnsupportedQueryOption" xml:space="preserve">
-    <value>The query option '{0}' is not supported by this service.</value>
+    <value>The query option '{0}' is not implemented by this service.</value>
   </data>
   <data name="UnsupportedFunction" xml:space="preserve">
-    <value>The '{0}' function is not supported by this service.</value>
+    <value>The '{0}' function is not implemented by this service.</value>
   </data>
 </root>

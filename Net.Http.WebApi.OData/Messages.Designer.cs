@@ -79,7 +79,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the $skip value must be a positive integer..
+        ///   Looks up a localized string similar to If specified, the $skip value must be a non-negative numeric value..
         /// </summary>
         internal static string SkipRawValueInvalid {
             get {
@@ -88,7 +88,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the $top value must be a positive integer..
+        ///   Looks up a localized string similar to If specified, the $top value must be a non-negative numeric value..
         /// </summary>
         internal static string TopRawValueInvalid {
             get {
@@ -97,7 +97,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified $top value exceeds the maximum allowed value of &apos;{0}&apos;.
+        ///   Looks up a localized string similar to The specified $top value exceeds the maximum value of &apos;{0}&apos; permitted by this service..
         /// </summary>
         internal static string TopValueExceedsMaxAllowed {
             get {
@@ -124,7 +124,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;{0}&apos; function is not supported by this service..
+        ///   Looks up a localized string similar to The &apos;{0}&apos; function is not implemented by this service..
         /// </summary>
         internal static string UnsupportedFunction {
             get {
@@ -142,7 +142,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;{0}&apos; operator is not supported by this service..
+        ///   Looks up a localized string similar to The &apos;{0}&apos; operator is not implemented by this service..
         /// </summary>
         internal static string UnsupportedOperator {
             get {
@@ -151,7 +151,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not supported by this service..
+        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not implemented by this service..
         /// </summary>
         internal static string UnsupportedQueryOption {
             get {
