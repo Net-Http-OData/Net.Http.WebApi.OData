@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query
 {
+    using System;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
@@ -9,9 +10,11 @@
         public class WhenConstructedWithAnInvalidValue
         {
             [Fact]
-            public void AnODataExceptionShouldBeThrown()
+            public void AnArgumentOutOfRangeExceptionShouldBeThrown()
             {
-                Assert.Throws<ODataException>(() => new SkipQueryOption("$skip=wibble"));
+                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new SkipQueryOption("$skip=wibble"));
+
+                Assert.Equal(Messages.SkipRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
             }
         }
 

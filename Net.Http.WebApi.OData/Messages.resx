@@ -147,4 +147,7 @@
   <data name="UnsupportedFunction" xml:space="preserve">
     <value>The '{0}' function is not supported by this service.</value>
   </data>
+  <data name="CountRawValueInvalid" xml:space="preserve">
+    <value>If specified, the $count value must be 'true' or 'false'</value>
+  </data>
 </root>

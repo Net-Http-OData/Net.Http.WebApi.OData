@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
+    using System;
     using Expressions;
 
     internal static class BinaryOperatorKindParser
@@ -60,7 +61,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return BinaryOperatorKind.Subtract;
 
                 default:
-                    throw new ODataException(Messages.UnknownOperator.FormatWith(operatorType));
+                    throw new ArgumentException(Messages.UnknownOperator.FormatWith(operatorType), nameof(operatorType));
             }
         }
     }

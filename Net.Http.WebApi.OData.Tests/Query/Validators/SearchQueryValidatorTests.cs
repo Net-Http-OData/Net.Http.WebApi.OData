@@ -1,6 +1,8 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query.Validators
 {
+    using System.Net;
     using System.Net.Http;
+    using System.Web.Http;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
@@ -19,12 +21,13 @@
             };
 
             [Fact]
-            public void AnODataExceptionIsThrown()
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<ODataException>(
+                var exception = Assert.Throws<HttpResponseException>(
                     () => SearchQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$search"), exception.Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$search"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
@@ -39,7 +42,7 @@
             };
 
             [Fact]
-            public void AnODataExceptionIsNotThrown()
+            public void AnExceptionShouldNotBeThrown()
             {
                 Assert.DoesNotThrow(() => SearchQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }

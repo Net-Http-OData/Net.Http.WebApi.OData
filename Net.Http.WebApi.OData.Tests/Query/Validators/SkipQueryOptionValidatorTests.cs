@@ -1,6 +1,8 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Query.Validators
 {
+    using System.Net;
     using System.Net.Http;
+    using System.Web.Http;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
@@ -19,12 +21,13 @@
             };
 
             [Fact]
-            public void AnODataExceptionIsThrown()
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<ODataException>(
+                var exception = Assert.Throws<HttpResponseException>(
                     () => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$skip"), exception.Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$skip"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
@@ -39,7 +42,7 @@
             };
 
             [Fact]
-            public void AnODataExceptionIsNotThrown()
+            public void AnExceptionShouldNotBeThrown()
             {
                 Assert.DoesNotThrow(() => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
@@ -60,13 +63,21 @@
         public class WhenValidatingAndTheValueIsBelowZero
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=-10"));
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=-1"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Skip
+            };
 
             [Fact]
-            public void AnExceptionIsThrown()
+            public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()
             {
-                Assert.Throws<ODataException>(
-                    () => SkipQueryOptionValidator.Validate(this.queryOptions, ODataValidationSettings.All));
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
+                Assert.Equal(Messages.SkipRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
     }

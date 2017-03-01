@@ -13,7 +13,8 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
-    using System.Globalization;
+    using System.Net;
+    using System.Web.Http;
 
     /// <summary>
     /// A class which contains the raw request values.
@@ -90,9 +91,7 @@ namespace Net.Http.WebApi.OData.Query
                     }
                     else if (rawQueryOption.StartsWith("$", StringComparison.Ordinal))
                     {
-                        var message = string.Format(CultureInfo.InvariantCulture, Messages.UnknownQueryOption, rawQueryOption);
-
-                        throw new ODataException(message);
+                        throw new HttpResponseException(HttpStatusCode.BadRequest);
                     }
                 }
             }

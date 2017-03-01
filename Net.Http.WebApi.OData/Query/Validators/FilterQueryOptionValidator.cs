@@ -12,6 +12,10 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validators
 {
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+
     /// <summary>
     /// A class which validates the $filter query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>
@@ -22,7 +26,8 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </summary>
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
-        /// <exception cref="ODataException">Thrown if the validation fails.</exception>
+        /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (queryOptions.Filter == null)
@@ -32,7 +37,8 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter) != AllowedQueryOptions.Filter)
             {
-                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$filter"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$filter")));
             }
 
             ValidateFunctions(queryOptions, validationSettings);
@@ -43,6 +49,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             ValidateArithmeticOperators(queryOptions, validationSettings);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateArithmeticOperators(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedArithmeticOperators == AllowedArithmeticOperators.All)
@@ -55,34 +62,40 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Add) != AllowedArithmeticOperators.Add
                 && rawFilterValue.Contains(" add "))
             {
-                throw new ODataException(Messages.UnsupportedOperator);
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("add")));
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Divide) != AllowedArithmeticOperators.Divide
                 && rawFilterValue.Contains(" div "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("div"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("div")));
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Modulo) != AllowedArithmeticOperators.Modulo
                 && rawFilterValue.Contains(" mod "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("mod"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("mod")));
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Multiply) != AllowedArithmeticOperators.Multiply
                 && rawFilterValue.Contains(" mul "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("mul"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("mul")));
             }
 
             if ((validationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.Subtract) != AllowedArithmeticOperators.Subtract
                 && rawFilterValue.Contains(" sub "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("sub"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("sub")));
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateDateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
@@ -96,64 +109,75 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Year) != AllowedFunctions.Year
                 && rawFilterValue.Contains("year("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("year"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("year")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Month) != AllowedFunctions.Month
                 && rawFilterValue.Contains("month("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("month"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("month")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Day) != AllowedFunctions.Day
                 && rawFilterValue.Contains("day("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("day"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("day")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Hour) != AllowedFunctions.Hour
                 && rawFilterValue.Contains("hour("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("hour"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("hour")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Minute) != AllowedFunctions.Minute
                 && rawFilterValue.Contains("minute("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("minute"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("minute")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Second) != AllowedFunctions.Second
                 && rawFilterValue.Contains("second("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("second"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("second")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.FractionalSeconds) != AllowedFunctions.FractionalSeconds
                 && rawFilterValue.Contains("fractionalseconds("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("fractionalseconds"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("fractionalseconds")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Now) != AllowedFunctions.Now
                 && rawFilterValue.Contains("now("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("now"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("now")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.MinDateTime) != AllowedFunctions.MinDateTime
                 && rawFilterValue.Contains("mindatetime("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("mindatetime"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("mindatetime")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.MaxDateTime) != AllowedFunctions.MaxDateTime
                 && rawFilterValue.Contains("maxdatetime("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("maxdatetime"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("maxdatetime")));
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions)
@@ -166,16 +190,19 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Cast) != AllowedFunctions.Cast
                 && rawFilterValue.Contains("cast("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("cast"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("cast")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.IsOf) != AllowedFunctions.IsOf
                 && rawFilterValue.Contains("isof("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("isof"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("isof")));
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateLogicalOperators(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedLogicalOperators == AllowedLogicalOperators.All)
@@ -188,52 +215,61 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.And) != AllowedLogicalOperators.And
                 && rawFilterValue.Contains(" and "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("and"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("and")));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Or) != AllowedLogicalOperators.Or
                 && rawFilterValue.Contains(" or "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("or"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("or")));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Equal) != AllowedLogicalOperators.Equal
                 && rawFilterValue.Contains(" eq "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("eq"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("eq")));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.NotEqual) != AllowedLogicalOperators.NotEqual
                 && rawFilterValue.Contains(" ne "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("ne"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("ne")));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThan) != AllowedLogicalOperators.GreaterThan
                 && rawFilterValue.Contains(" gt "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("gt"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("gt")));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThanOrEqual) != AllowedLogicalOperators.GreaterThanOrEqual
                 && rawFilterValue.Contains(" ge "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("ge"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("ge")));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThan) != AllowedLogicalOperators.LessThan
                 && rawFilterValue.Contains(" lt "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("lt"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("lt")));
             }
 
             if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThanOrEqual) != AllowedLogicalOperators.LessThanOrEqual
                 && rawFilterValue.Contains(" le "))
             {
-                throw new ODataException(Messages.UnsupportedOperator.FormatWith("le"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("le")));
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateMathFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
@@ -247,22 +283,26 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Round) != AllowedFunctions.Round
                 && rawFilterValue.Contains("round("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("round"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("round")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Ceiling) != AllowedFunctions.Ceiling
                 && rawFilterValue.Contains("ceiling("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("ceiling"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("ceiling")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Floor) != AllowedFunctions.Floor
                 && rawFilterValue.Contains("floor("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("floor"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("floor")));
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateStringFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
@@ -276,67 +316,78 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if ((validationSettings.AllowedFunctions & AllowedFunctions.EndsWith) != AllowedFunctions.EndsWith
                 && rawFilterValue.Contains("endswith("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("endswith"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("endswith")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.StartsWith) != AllowedFunctions.StartsWith
                 && rawFilterValue.Contains("startswith("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("startswith"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("startswith")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Contains) != AllowedFunctions.Contains
                 && rawFilterValue.Contains("contains("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("contains"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("contains")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.ToLower) != AllowedFunctions.ToLower
                 && rawFilterValue.Contains("tolower("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("tolower"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("tolower")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.ToUpper) != AllowedFunctions.ToUpper
                 && rawFilterValue.Contains("toupper("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("toupper"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("toupper")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Trim) != AllowedFunctions.Trim
                 && rawFilterValue.Contains("trim("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("trim"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("trim")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Length) != AllowedFunctions.Length
                 && rawFilterValue.Contains("length("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("length"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("length")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.IndexOf) != AllowedFunctions.IndexOf
                 && rawFilterValue.Contains("indexof("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("indexof"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("indexof")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Replace) != AllowedFunctions.Replace
                 && rawFilterValue.Contains("replace("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("replace"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("replace")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Substring) != AllowedFunctions.Substring
                 && rawFilterValue.Contains("substring("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("substring"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("substring")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.Concat) != AllowedFunctions.Concat
                 && rawFilterValue.Contains("concat("))
             {
-                throw new ODataException(Messages.UnsupportedFunction.FormatWith("concat"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("concat")));
             }
         }
     }

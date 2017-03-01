@@ -1,6 +1,7 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query
 {
-    using Net.Http.WebApi.OData;
+    using System.Net;
+    using System.Web.Http;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
@@ -88,7 +89,7 @@
         public class WhenCallingConstructorWithAnUnknownQueryOptionWhichDoesNotStartsWithADollar
         {
             [Fact]
-            public void AnODataExceptionShouldNotBeThrown()
+            public void AnExceptionShouldNotBeThrown()
             {
                 Assert.DoesNotThrow(() => new ODataRawQueryOptions("wibble=*"));
             }
@@ -97,11 +98,11 @@
         public class WhenCallingConstructorWithAnUnknownQueryOptionWhichStartsWithADollar
         {
             [Fact]
-            public void AnODataExceptionShouldBeThrown()
+            public void AnHttpResponseExceptionShouldBeThrown()
             {
-                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$wibble=*"));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataRawQueryOptions("?$wibble=*"));
 
-                Assert.Equal(string.Format(Messages.UnknownQueryOption, "$wibble=*"), exception.Message);
+                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
             }
         }
 

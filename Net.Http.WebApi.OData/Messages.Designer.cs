@@ -61,6 +61,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If specified, the $count value must be &apos;true&apos; or &apos;false&apos;.
+        /// </summary>
+        internal static string CountRawValueInvalid {
+            get {
+                return ResourceManager.GetString("CountRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If specified, the $orderby direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {
