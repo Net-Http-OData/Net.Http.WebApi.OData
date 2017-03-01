@@ -20,7 +20,7 @@
             [Fact]
             public void ThePropertiesShouldContainEachSpecifiedValue()
             {
-                foreach (var property in new[] { new EdmProperty("Name"), new EdmProperty("Age"), new EdmProperty("Joined") })
+                foreach (var property in new[] { EdmProperty.From("Name"), EdmProperty.From("Age"), EdmProperty.From("Joined") })
                 {
                     Assert.Contains(property, this.option.Properties);
                 }

@@ -9,7 +9,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Expressions
         public class WhenConstructed
         {
             private readonly UnaryOperatorNode node;
-            private readonly QueryNode operand = new PropertyAccessNode(new EdmProperty("Name"));
+            private readonly QueryNode operand = new PropertyAccessNode(EdmProperty.From("Name"));
             private readonly UnaryOperatorKind unaryOperatorKind = UnaryOperatorKind.Not;
 
             public WhenConstructed()

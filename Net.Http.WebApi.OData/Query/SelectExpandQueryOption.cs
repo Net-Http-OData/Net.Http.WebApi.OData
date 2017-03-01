@@ -33,7 +33,7 @@ namespace Net.Http.WebApi.OData.Query
 
             var properties = rawValue.Substring(equals, rawValue.Length - equals)
                 .Split(SplitCharacter.Comma)
-                .Select(p => new EdmProperty(p))
+                .Select(p => EdmProperty.From(p))
                 .ToList();
 
             this.Properties = properties;

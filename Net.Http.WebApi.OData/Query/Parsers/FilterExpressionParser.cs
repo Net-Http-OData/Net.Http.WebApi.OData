@@ -125,7 +125,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.PropertyName:
                             var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(
                                 token.Value,
-                                propName => new PropertyAccessNode(new EdmProperty(propName)));
+                                propName => new PropertyAccessNode(EdmProperty.From(propName)));
 
                             if (stack.Count > 0)
                             {
@@ -223,7 +223,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.PropertyName:
                             var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(
                                 token.Value,
-                                propName => new PropertyAccessNode(new EdmProperty(propName)));
+                                propName => new PropertyAccessNode(EdmProperty.From(propName)));
 
                             if (leftNode == null)
                             {

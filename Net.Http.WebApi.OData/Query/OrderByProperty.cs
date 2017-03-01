@@ -39,11 +39,11 @@ namespace Net.Http.WebApi.OData.Query
 
             if (space == -1)
             {
-                this.Property = new EdmProperty(rawValue);
+                this.Property = EdmProperty.From(rawValue);
             }
             else
             {
-                this.Property = new EdmProperty(rawValue.Substring(0, space));
+                this.Property = EdmProperty.From(rawValue.Substring(0, space));
 
                 switch (rawValue.Substring(space + 1, rawValue.Length - (space + 1)))
                 {
