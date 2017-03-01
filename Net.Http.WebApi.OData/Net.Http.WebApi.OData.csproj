@@ -72,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\EdmPrimitiveType.cs" />
     <Compile Include="Model\EdmProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\AllowedArithmeticOperators.cs" />
@@ -79,13 +80,9 @@
     <Compile Include="Query\AllowedLogicalOperators.cs" />
     <Compile Include="Query\AllowedQueryOptions.cs" />
     <Compile Include="Query\Binders\AbstractFilterBinder.cs" />
-    <Compile Include="Query\SearchQueryOption.cs" />
-    <Compile Include="Query\SkipTokenQueryOption.cs" />
-    <Compile Include="Query\SplitCharacter.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorKind.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNode.cs" />
     <Compile Include="Query\Expressions\ConstantNode.cs" />
-    <Compile Include="Model\EdmPrimativeType.cs" />
     <Compile Include="Query\Expressions\FunctionCallNode.cs" />
     <Compile Include="Query\Expressions\PropertyAccessNode.cs" />
     <Compile Include="Query\Expressions\QueryNode.cs" />
@@ -111,8 +108,11 @@
     <Compile Include="Query\Parsers\TokenType.cs" />
     <Compile Include="Query\Parsers\UnaryOperatorKindParser.cs" />
     <Compile Include="Query\QueryOption.cs" />
+    <Compile Include="Query\SearchQueryOption.cs" />
     <Compile Include="Query\SelectExpandQueryOption.cs" />
     <Compile Include="Query\SkipQueryOption.cs" />
+    <Compile Include="Query\SkipTokenQueryOption.cs" />
+    <Compile Include="Query\SplitCharacter.cs" />
     <Compile Include="Query\TopQueryOption.cs" />
     <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
@@ -131,8 +131,8 @@
     <None Include="..\Net.Http.WebApi.OData.snk">
       <Link>Net.Http.WebApi.OData.snk</Link>
     </None>
-    <None Include="Query\Expressions\_QueryNodes.cd" />
     <None Include="packages.config" />
+    <None Include="Query\Expressions\_QueryNodes.cd" />
     <None Include="Query\_QueryOptions.cd" />
   </ItemGroup>
   <ItemGroup>

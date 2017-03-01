@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="EdmPrimativeType.cs" company="Project Contributors">
+// <copyright file="EdmPrimitiveType.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData.Model
     /// <summary>
     /// The primitive types in the entity data model.
     /// </summary>
-    public enum EdmPrimativeType
+    public enum EdmPrimitiveType
     {
         /// <summary>
         /// Represents the absence of a value
