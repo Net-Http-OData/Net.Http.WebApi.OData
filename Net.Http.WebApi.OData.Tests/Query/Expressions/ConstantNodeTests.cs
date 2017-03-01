@@ -2,6 +2,7 @@
 {
     using System;
     using Net.Http.WebApi.OData.Query.Expressions;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class ConstantNodeTests

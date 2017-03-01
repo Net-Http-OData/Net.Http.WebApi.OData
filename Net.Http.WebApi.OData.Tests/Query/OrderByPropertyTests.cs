@@ -49,7 +49,7 @@
             [Fact]
             public void ThePropertyNameShouldBeSetToTheNameOfThePropertyPassedToTheConstructor()
             {
-                Assert.Equal("Name", this.property.Name);
+                Assert.Equal("Name", this.property.Property.Name);
             }
 
             [Fact]
@@ -79,7 +79,7 @@
             [Fact]
             public void ThePropertyNameShouldBeSetToTheNameOfThePropertyPassedToTheConstructor()
             {
-                Assert.Equal("Name", this.property.Name);
+                Assert.Equal("Name", this.property.Property.Name);
             }
 
             [Fact]
@@ -109,7 +109,7 @@
             [Fact]
             public void ThePropertyNameShouldBeSetToTheNameOfThePropertyPassedToTheConstructor()
             {
-                Assert.Equal("Name", this.property.Name);
+                Assert.Equal("Name", this.property.Property.Name);
             }
 
             [Fact]

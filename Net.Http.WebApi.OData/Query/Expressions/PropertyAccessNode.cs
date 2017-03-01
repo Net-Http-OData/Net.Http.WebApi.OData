@@ -12,6 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Expressions
 {
+    using Model;
+
     /// <summary>
     /// A QueryNode which represents a property.
     /// </summary>
@@ -21,10 +23,10 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Initialises a new instance of the <see cref="PropertyAccessNode"/> class.
         /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        internal PropertyAccessNode(string propertyName)
+        /// <param name="property">The property being referenced in the query.</param>
+        internal PropertyAccessNode(EdmProperty property)
         {
-            this.PropertyName = propertyName;
+            this.Property = property;
         }
 
         /// <summary>
@@ -33,9 +35,9 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public override QueryNodeKind Kind { get; } = QueryNodeKind.PropertyAccess;
 
         /// <summary>
-        /// Gets the name of the property.
+        /// Gets the property being referenced in the query.
         /// </summary>
-        public string PropertyName
+        public EdmProperty Property
         {
             get;
         }

@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query.Expressions
+namespace Net.Http.WebApi.OData.Model
 {
     /// <summary>
     /// The primitive types in the entity data model.

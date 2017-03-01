@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Expressions
 {
     using System;
+    using Model;
 
     /// <summary>
     /// A QueryNode which represents a constant value.

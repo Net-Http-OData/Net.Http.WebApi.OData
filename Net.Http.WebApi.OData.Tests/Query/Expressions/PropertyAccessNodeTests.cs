@@ -1,6 +1,7 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query.Expressions
 {
     using Net.Http.WebApi.OData.Query.Expressions;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class PropertyAccessNodeTests
@@ -8,11 +9,11 @@
         public class WhenConstructed
         {
             private readonly PropertyAccessNode node;
-            private readonly string propertyName = "Name";
+            private readonly EdmProperty property = new EdmProperty("Name");
 
             public WhenConstructed()
             {
-                this.node = new PropertyAccessNode(this.propertyName);
+                this.node = new PropertyAccessNode(this.property);
             }
 
             [Fact]
@@ -22,9 +23,9 @@
             }
 
             [Fact]
-            public void ThePropertyNamePropertyIsSet()
+            public void ThePropertyPropertyIsSet()
             {
-                Assert.Equal(this.propertyName, this.node.PropertyName);
+                Assert.Equal(this.property, this.node.Property);
             }
         }
     }

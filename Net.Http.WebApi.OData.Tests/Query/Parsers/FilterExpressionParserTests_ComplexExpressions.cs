@@ -40,7 +40,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
 
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("CustomerId", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("CustomerId", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
                 Assert.Equal("9", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
@@ -53,7 +53,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var nodeLeftRightLeft = (BinaryOperatorNode)nodeLeftRight.Left;
 
                 Assert.IsType<PropertyAccessNode>(nodeLeftRightLeft.Left);
-                Assert.Equal("Created", ((PropertyAccessNode)nodeLeftRightLeft.Left).PropertyName);
+                Assert.Equal("Created", ((PropertyAccessNode)nodeLeftRightLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRightLeft.Right);
                 Assert.Equal("datetime'2015-03-01T00:00:00'", ((ConstantNode)nodeLeftRightLeft.Right).LiteralText);
@@ -64,7 +64,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var nodeLeftRightRight = (BinaryOperatorNode)nodeLeftRight.Right;
 
                 Assert.IsType<PropertyAccessNode>(nodeLeftRightRight.Left);
-                Assert.Equal("Created", ((PropertyAccessNode)nodeLeftRightRight.Left).PropertyName);
+                Assert.Equal("Created", ((PropertyAccessNode)nodeLeftRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRightRight.Right);
                 Assert.Equal("datetime'2015-03-31T23:59:59'", ((ConstantNode)nodeLeftRightRight.Right).LiteralText);
@@ -76,7 +76,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var nodeRight = (BinaryOperatorNode)node.Right;
 
                 Assert.IsType<PropertyAccessNode>(nodeRight.Left);
-                Assert.Equal("Status", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Status", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal("1", ((ConstantNode)nodeRight.Right).LiteralText);
@@ -114,7 +114,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Left);
                 var nodeLeftLeftLeft = (BinaryOperatorNode)nodeLeftLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftLeft.Left);
-                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeftLeft.Left).PropertyName);
+                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeftLeft.OperatorKind);
                 Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeftLeft.Right).LiteralText);
 
@@ -124,7 +124,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Right);
                 var nodeLeftLeftRight = (BinaryOperatorNode)nodeLeftLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftRight.Left);
-                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeftRight.Left).PropertyName);
+                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftLeftRight.OperatorKind);
                 Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftLeftRight.Right).LiteralText);
 
@@ -134,7 +134,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("CustomerId", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("CustomerId", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("122134", ((ConstantNode)nodeLeftRight.Right).LiteralText);
 
@@ -152,7 +152,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Left);
                 var nodeRightLeftLeft = (BinaryOperatorNode)nodeRightLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeftLeft.Left);
-                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftLeft.Left).PropertyName);
+                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftLeft.OperatorKind);
                 Assert.Equal("'WARN'", ((ConstantNode)nodeRightLeftLeft.Right).LiteralText);
                 Assert.Equal("WARN", ((ConstantNode)nodeRightLeftLeft.Right).Value);
@@ -163,7 +163,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Right);
                 var nodeRightLeftRight = (BinaryOperatorNode)nodeRightLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeftRight.Left);
-                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftRight.Left).PropertyName);
+                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftRight.OperatorKind);
                 Assert.Equal("'ERROR'", ((ConstantNode)nodeRightLeftRight.Right).LiteralText);
                 Assert.Equal("ERROR", ((ConstantNode)nodeRightLeftRight.Right).Value);
@@ -174,7 +174,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Right);
                 var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Level", ((PropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal("Level", ((PropertyAccessNode)nodeRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
                 Assert.Equal("'FATAL'", ((ConstantNode)nodeRightRight.Right).LiteralText);
             }
@@ -210,7 +210,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeft.OperatorKind);
                 Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
 
@@ -220,7 +220,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Date", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRight.OperatorKind);
                 Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftRight.Right).LiteralText);
 
@@ -238,7 +238,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Left);
                 var nodeRightLeftLeft = (BinaryOperatorNode)nodeRightLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeftLeft.Left);
-                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftLeft.Left).PropertyName);
+                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftLeft.OperatorKind);
                 Assert.Equal("'WARN'", ((ConstantNode)nodeRightLeftLeft.Right).LiteralText);
                 Assert.Equal("WARN", ((ConstantNode)nodeRightLeftLeft.Right).Value);
@@ -249,7 +249,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRightLeft.Right);
                 var nodeRightLeftRight = (BinaryOperatorNode)nodeRightLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeftRight.Left);
-                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftRight.Left).PropertyName);
+                Assert.Equal("Level", ((PropertyAccessNode)nodeRightLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeftRight.OperatorKind);
                 Assert.Equal("'ERROR'", ((ConstantNode)nodeRightLeftRight.Right).LiteralText);
                 Assert.Equal("ERROR", ((ConstantNode)nodeRightLeftRight.Right).Value);
@@ -260,7 +260,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Right);
                 var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Level", ((PropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal("Level", ((PropertyAccessNode)nodeRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
                 Assert.Equal("'FATAL'", ((ConstantNode)nodeRightRight.Right).LiteralText);
             }
@@ -312,7 +312,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("endswith", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).Property.Name);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'Futterkiste'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.Equal("Futterkiste", ((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -324,14 +324,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
                 var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightLeft.Right);
                 Assert.Equal("'Smith'", ((ConstantNode)nodeRightLeft.Right).LiteralText);
                 Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
                 var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightRight.Right);
                 Assert.Equal("'Smythe'", ((ConstantNode)nodeRightRight.Right).LiteralText);
@@ -352,7 +352,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("endswith", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).PropertyName);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeft.Parameters[0]).Property.Name);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'Futterkiste'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
 
@@ -360,7 +360,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal("'Smith'", ((ConstantNode)nodeRight.Right).LiteralText);
@@ -379,7 +379,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeft.Right);
                 Assert.Equal("John", ((ConstantNode)nodeLeft.Right).Value);
@@ -389,7 +389,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(node.Right);
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal("Smith", ((ConstantNode)nodeRight.Right).Value);
@@ -409,13 +409,13 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeftRight.Right).Value);
 
@@ -423,7 +423,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 var nodeRightLeft = (PropertyAccessNode)nodeRight.Left;
-                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal(35, ((ConstantNode)nodeRight.Right).Value);
@@ -444,7 +444,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
                 Assert.Equal("'Smith'", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
@@ -452,7 +452,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Or, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRight.Right);
                 Assert.Equal("'Smythe'", ((ConstantNode)nodeLeftRight.Right).LiteralText);
@@ -465,7 +465,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("endswith", nodeRight.Name);
                 Assert.Equal(2, nodeRight.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeRight.Parameters[0]);
-                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeRight.Parameters[0]).PropertyName);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeRight.Parameters[0]).Property.Name);
                 Assert.IsType<ConstantNode>(nodeRight.Parameters[1]);
                 Assert.Equal("'Futterkiste'", ((ConstantNode)nodeRight.Parameters[1]).LiteralText);
             }
@@ -485,14 +485,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.Or, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRight.Right);
                 Assert.Equal("Joe", ((ConstantNode)nodeLeftRight.Right).Value);
@@ -504,14 +504,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
                 var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightLeft.Right);
                 Assert.Equal("Smith", ((ConstantNode)nodeRightLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
                 var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightRight.Right);
                 Assert.Equal("Bloggs", ((ConstantNode)nodeRightRight.Right).Value);
@@ -536,7 +536,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("trim", nodeLeftArg0.Name);
                 Assert.Equal(1, nodeLeftArg0.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeLeftArg0.Parameters[0]);
-                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeftArg0.Parameters[0]).PropertyName);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeftArg0.Parameters[0]).Property.Name);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -546,7 +546,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(1, nodeRight.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeRight.Parameters[0]);
                 var nodeRightArg0 = (PropertyAccessNode)nodeRight.Parameters[0];
-                Assert.Equal("CompanyName", nodeRightArg0.PropertyName);
+                Assert.Equal("CompanyName", nodeRightArg0.Property.Name);
             }
 
             [Fact]
@@ -568,7 +568,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("trim", nodeLeftArg0.Name);
                 Assert.Equal(1, nodeLeftArg0.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeLeftArg0.Parameters[0]);
-                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeftArg0.Parameters[0]).PropertyName);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)nodeLeftArg0.Parameters[0]).Property.Name);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -653,13 +653,13 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("FirstName", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("FirstName", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.Equal("andrew", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("LastName", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("LastName", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("davis", ((ConstantNode)nodeLeftRight.Right).Value);
 
@@ -667,7 +667,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 var nodeRightLeft = (PropertyAccessNode)nodeRight.Left;
-                Assert.Equal("FirstName", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("FirstName", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal("system", ((ConstantNode)nodeRight.Right).Value);
@@ -685,7 +685,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeLeft = (BinaryOperatorNode)node.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeft.Right);
                 Assert.Equal("John", ((ConstantNode)nodeLeft.Right).Value);
@@ -696,14 +696,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
                 var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightLeft.Right);
                 Assert.Equal("'Smith'", ((ConstantNode)nodeRightLeft.Right).LiteralText);
                 Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
                 var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightRight.Right);
                 Assert.Equal("'Smythe'", ((ConstantNode)nodeRightRight.Right).LiteralText);
@@ -723,13 +723,13 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeftRight.Right).Value);
 
@@ -737,7 +737,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 var nodeRightLeft = (PropertyAccessNode)nodeRight.Left;
-                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal(35, ((ConstantNode)nodeRight.Right).Value);
@@ -758,14 +758,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.Or, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRight.Right);
                 Assert.Equal("Joe", ((ConstantNode)nodeLeftRight.Right).Value);
@@ -777,14 +777,14 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
                 var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightLeft.Right);
                 Assert.Equal("Smith", ((ConstantNode)nodeRightLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
                 var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightRight.Right);
                 Assert.Equal("Bloggs", ((ConstantNode)nodeRightRight.Right).Value);
@@ -802,7 +802,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeLeft = (BinaryOperatorNode)node.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeft.Right);
                 Assert.Equal("John", ((ConstantNode)nodeLeft.Right).Value);
@@ -813,7 +813,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeRight.Left);
                 var nodeRightLeft = (BinaryOperatorNode)nodeRight.Left;
                 Assert.IsType<PropertyAccessNode>(nodeRightLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightLeft.Right);
                 Assert.Equal("'Smith'", ((ConstantNode)nodeRightLeft.Right).LiteralText);
@@ -821,7 +821,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Or, nodeRight.OperatorKind);
                 var nodeRightRight = (BinaryOperatorNode)nodeRight.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRightRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRightRight.Right);
                 Assert.Equal("'Smythe'", ((ConstantNode)nodeRightRight.Right).LiteralText);
@@ -844,26 +844,26 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Left);
                 var nodeLeftLeftLeft = (BinaryOperatorNode)nodeLeftLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeftLeft.OperatorKind);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.And, nodeLeftLeft.OperatorKind);
                 var nodeLeftLeftRight = (BinaryOperatorNode)nodeLeftLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeftRight.OperatorKind);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeftLeftRight.Right).Value);
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Age", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRight.Left);
-                Assert.Equal("Title", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Title", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal("Mr", ((ConstantNode)nodeRight.Right).Value);
@@ -883,13 +883,13 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeftRight.Right).Value);
 
@@ -897,7 +897,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 var nodeRightLeft = (PropertyAccessNode)nodeRight.Left;
-                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal(35, ((ConstantNode)nodeRight.Right).Value);
@@ -916,7 +916,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeft.Right);
                 Assert.Equal("John", ((ConstantNode)nodeLeft.Right).Value);
@@ -926,7 +926,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(node.Right);
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal("Smith", ((ConstantNode)nodeRight.Right).Value);
@@ -946,13 +946,13 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeftRight.Right).Value);
 
@@ -960,7 +960,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 var nodeRightLeft = (PropertyAccessNode)nodeRight.Left;
-                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal(35, ((ConstantNode)nodeRight.Right).Value);
@@ -979,7 +979,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeft.Right);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeft.Right).Value);
@@ -992,7 +992,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("year", ((FunctionCallNode)nodeRight.Left).Name);
                 var rightNodeLeft = (FunctionCallNode)nodeRight.Left;
                 Assert.IsType<PropertyAccessNode>(rightNodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((PropertyAccessNode)rightNodeLeft.Parameters[0]).PropertyName);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)rightNodeLeft.Parameters[0]).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal(1971, ((ConstantNode)nodeRight.Right).Value);
@@ -1011,7 +1011,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeft.Right);
                 Assert.Equal("John", ((ConstantNode)nodeLeft.Right).Value);
@@ -1022,7 +1022,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRight.Left);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal("Smith", ((ConstantNode)nodeRight.Right).Value);
             }
@@ -1042,13 +1042,13 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeft.OperatorKind);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.Or, nodeLeft.OperatorKind);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftRight.OperatorKind);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeftRight.Right).Value);
 
@@ -1056,7 +1056,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 var nodeRightLeft = (PropertyAccessNode)nodeRight.Left;
-                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 var nodeRightRight = (ConstantNode)nodeRight.Right;
                 Assert.Equal(35, ((ConstantNode)nodeRight.Right).Value);
@@ -1078,26 +1078,26 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Left);
                 var nodeLeftLeftLeft = (BinaryOperatorNode)nodeLeftLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftLeft.Left);
-                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeftLeft.Left).PropertyName);
+                Assert.Equal("Forename", ((PropertyAccessNode)nodeLeftLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeftLeft.OperatorKind);
                 Assert.Equal("John", ((ConstantNode)nodeLeftLeftLeft.Right).Value);
                 Assert.Equal(BinaryOperatorKind.Or, nodeLeftLeft.OperatorKind);
                 var nodeLeftLeftRight = (BinaryOperatorNode)nodeLeftLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftRight.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftLeftRight.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeftLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeftLeftRight.OperatorKind);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeftLeftRight.Right).Value);
                 Assert.Equal(BinaryOperatorKind.Or, nodeLeft.OperatorKind);
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
-                Assert.Equal("Age", ((PropertyAccessNode)nodeLeftRight.Left).PropertyName);
+                Assert.Equal("Age", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
 
                 Assert.Equal(BinaryOperatorKind.Or, node.OperatorKind);
 
                 var nodeRight = (BinaryOperatorNode)node.Right;
                 Assert.IsType<PropertyAccessNode>(nodeRight.Left);
-                Assert.Equal("Title", ((PropertyAccessNode)nodeRight.Left).PropertyName);
+                Assert.Equal("Title", ((PropertyAccessNode)nodeRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal("Mr", ((ConstantNode)nodeRight.Right).Value);
@@ -1116,7 +1116,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Left);
-                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeft.Left).PropertyName);
+                Assert.Equal("Surname", ((PropertyAccessNode)nodeLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeft.Right);
                 Assert.Equal("Smith", ((ConstantNode)nodeLeft.Right).Value);
@@ -1129,7 +1129,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("year", ((FunctionCallNode)nodeRight.Left).Name);
                 var rightNodeLeft = (FunctionCallNode)nodeRight.Left;
                 Assert.IsType<PropertyAccessNode>(rightNodeLeft.Parameters[0]);
-                Assert.Equal("BirthDate", ((PropertyAccessNode)rightNodeLeft.Parameters[0]).PropertyName);
+                Assert.Equal("BirthDate", ((PropertyAccessNode)rightNodeLeft.Parameters[0]).Property.Name);
                 Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeRight.Right);
                 Assert.Equal(1971, ((ConstantNode)nodeRight.Right).Value);
