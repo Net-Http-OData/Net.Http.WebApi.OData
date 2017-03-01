@@ -16,6 +16,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using Expressions;
+    using Model;
 
     internal static class FilterExpressionParser
     {
@@ -122,7 +123,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.PropertyName:
-                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(token.Value, propName => new PropertyAccessNode(propName));
+                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(
+                                token.Value,
+                                propName => new PropertyAccessNode(new EdmProperty(propName)));
 
                             if (stack.Count > 0)
                             {
@@ -218,7 +221,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.PropertyName:
-                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(token.Value, propName => new PropertyAccessNode(propName));
+                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(
+                                token.Value,
+                                propName => new PropertyAccessNode(new EdmProperty(propName)));
 
                             if (leftNode == null)
                             {

@@ -2,6 +2,7 @@
 {
     using System;
     using Net.Http.WebApi.OData.Query.Expressions;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class ConstantNodeTests
@@ -61,9 +62,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.DateTimeOffset, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.DateTimeOffset, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -96,9 +97,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Date, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Date, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -131,9 +132,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Decimal, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Decimal, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -166,9 +167,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Double, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Double, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -201,9 +202,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Boolean, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Boolean, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -236,9 +237,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Guid, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Guid, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -271,9 +272,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Int32, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Int32, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -306,9 +307,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Int32, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Int32, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -340,9 +341,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Int64, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Int64, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -375,9 +376,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Int64, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Int64, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -409,9 +410,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Null, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Null, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -443,9 +444,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Single, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Single, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -478,9 +479,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.String, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.String, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -513,9 +514,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.TimeOfDay, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.TimeOfDay, this.node.EdmPrimativeType);
             }
 
             [Fact]
@@ -548,9 +549,9 @@
             }
 
             [Fact]
-            public void TheEdmTypeIsSet()
+            public void TheEdmPrimativeTypeIsSet()
             {
-                Assert.Equal(EdmType.Boolean, this.node.EdmType);
+                Assert.Equal(EdmPrimativeType.Boolean, this.node.EdmPrimativeType);
             }
 
             [Fact]

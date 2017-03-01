@@ -1,6 +1,7 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query.Expressions
 {
     using Net.Http.WebApi.OData.Query.Expressions;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class BinaryOperatorNodeTests
@@ -8,7 +9,7 @@
         public class WhenConstructed
         {
             private readonly BinaryOperatorKind binaryOperatorKind = BinaryOperatorKind.And;
-            private readonly QueryNode left = new PropertyAccessNode("Name");
+            private readonly QueryNode left = new PropertyAccessNode(new EdmProperty("Name"));
             private readonly BinaryOperatorNode node;
             private readonly QueryNode right = ConstantNode.String("Fred", "Fred");
 

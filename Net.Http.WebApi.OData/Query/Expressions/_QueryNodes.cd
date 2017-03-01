@@ -10,7 +10,7 @@
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.ConstantNode">
     <Position X="2.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAADgAAgAQQAAAACAIAACBIQAEAogAAAAAQA=</HashCode>
+      <HashCode>AIAAAAAAAADgAAgAQQAAAACAIAACBAQAEAogAAAAAQA=</HashCode>
       <FileName>Query\Expressions\ConstantNode.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,7 +24,7 @@
   <Class Name="Net.Http.WebApi.OData.Query.Expressions.FunctionCallNode">
     <Position X="4.25" Y="4.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAQCAAAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Query\Expressions\FunctionCallNode.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -61,13 +61,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Query\Expressions\UnaryOperatorKind.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="Net.Http.WebApi.OData.Query.Expressions.EdmType">
-    <Position X="12.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAEAAAAQAgABgAQAAAAACAJAACBAQAEEIAAAAAAQA=</HashCode>
-      <FileName>Query\Expressions\EdmType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

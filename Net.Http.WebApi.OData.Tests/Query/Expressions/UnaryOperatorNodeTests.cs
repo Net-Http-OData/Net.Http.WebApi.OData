@@ -1,6 +1,7 @@
 namespace Net.Http.WebApi.Tests.OData.Query.Expressions
 {
     using Net.Http.WebApi.OData.Query.Expressions;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class UnaryOperatorNodeTests
@@ -8,7 +9,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Expressions
         public class WhenConstructed
         {
             private readonly UnaryOperatorNode node;
-            private readonly QueryNode operand = new PropertyAccessNode("Name");
+            private readonly QueryNode operand = new PropertyAccessNode(new EdmProperty("Name"));
             private readonly UnaryOperatorKind unaryOperatorKind = UnaryOperatorKind.Not;
 
             public WhenConstructed()

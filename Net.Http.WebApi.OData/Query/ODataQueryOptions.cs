@@ -21,12 +21,12 @@ namespace Net.Http.WebApi.OData.Query
     [ODataQueryOptionsParameterBinding]
     public sealed class ODataQueryOptions
     {
-        private ExpandQueryOption expand;
+        private SelectExpandQueryOption expand;
         private FilterQueryOption filter;
         private FormatQueryOption format;
         private OrderByQueryOption orderBy;
         private SearchQueryOption search;
-        private SelectQueryOption select;
+        private SelectExpandQueryOption select;
         private SkipQueryOption skip;
         private SkipTokenQueryOption skipToken;
         private TopQueryOption top;
@@ -54,13 +54,13 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the expand query option.
         /// </summary>
-        public ExpandQueryOption Expand
+        public SelectExpandQueryOption Expand
         {
             get
             {
                 if (this.expand == null && this.RawValues.Expand != null)
                 {
-                    this.expand = new ExpandQueryOption(this.RawValues.Expand);
+                    this.expand = new SelectExpandQueryOption(this.RawValues.Expand);
                 }
 
                 return this.expand;
@@ -150,13 +150,13 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the select query option.
         /// </summary>
-        public SelectQueryOption Select
+        public SelectExpandQueryOption Select
         {
             get
             {
                 if (this.select == null && this.RawValues.Select != null)
                 {
-                    this.select = new SelectQueryOption(this.RawValues.Select);
+                    this.select = new SelectExpandQueryOption(this.RawValues.Select);
                 }
 
                 return this.select;

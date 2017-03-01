@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SelectQueryOption.cs" company="Project Contributors">
+// <copyright file="SelectExpandQueryOption.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,30 +13,36 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using Model;
 
     /// <summary>
-    /// A class containing deserialised values from the $select query option.
+    /// A class containing deserialised values from the $select or $expand query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
-    public sealed class SelectQueryOption : QueryOption
+    public sealed class SelectExpandQueryOption : QueryOption
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="SelectQueryOption"/> class.
+        /// Initialises a new instance of the <see cref="SelectExpandQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        public SelectQueryOption(string rawValue)
+        public SelectExpandQueryOption(string rawValue)
             : base(rawValue)
         {
             var equals = rawValue.IndexOf('=') + 1;
-            var properties = rawValue.Substring(equals, rawValue.Length - equals).Split(SplitCharacter.Comma);
+
+            var properties = rawValue.Substring(equals, rawValue.Length - equals)
+                .Split(SplitCharacter.Comma)
+                .Select(p => new EdmProperty(p))
+                .ToList();
 
             this.Properties = properties;
         }
 
         /// <summary>
-        /// Gets the properties to be included in the query.
+        /// Gets the properties specified in the query.
         /// </summary>
-        public IReadOnlyList<string> Properties
+        public IReadOnlyList<EdmProperty> Properties
         {
             get;
         }

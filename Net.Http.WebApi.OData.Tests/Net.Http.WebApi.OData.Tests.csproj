@@ -66,7 +66,6 @@
     <Compile Include="InlineCountSerializationTests.cs" />
     <Compile Include="InlineCountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\ExpandQueryOptionTests.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
     <Compile Include="Query\Expressions\ConstantNodeTests.cs" />
     <Compile Include="Query\Expressions\FunctionCallNodeTests.cs" />
@@ -85,7 +84,7 @@
     <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleProperty.cs" />
     <Compile Include="Query\Parsers\UnaryOperatorKindParserTests.cs" />
     <Compile Include="Query\SearchQueryOptionTests.cs" />
-    <Compile Include="Query\SelectQueryOptionTests.cs" />
+    <Compile Include="Query\SelectExpandQueryOptionTests.cs" />
     <Compile Include="Query\SkipQueryOptionTests.cs" />
     <Compile Include="Query\TopQueryOptionTests.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidatorTests.cs" />
