@@ -10,7 +10,7 @@
         public class WhenConstructedWithAnIncorrectlyCasedValue
         {
             [Fact]
-            public void AnODataExceptionShouldBeThrown()
+            public void AnArgumentOutOfRangeExceptionShouldBeThrown()
             {
                 var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new InlineCountQueryOption("$inlinecount=AllPages"));
                 Assert.Equal(Messages.InlineCountRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
@@ -20,7 +20,7 @@
         public class WhenConstructedWithAnInvalidValue
         {
             [Fact]
-            public void AnODataExceptionShouldBeThrown()
+            public void AnArgumentOutOfRangeExceptionShouldBeThrown()
             {
                 var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new InlineCountQueryOption("$inlinecount=wibble"));
                 Assert.Equal(Messages.InlineCountRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);

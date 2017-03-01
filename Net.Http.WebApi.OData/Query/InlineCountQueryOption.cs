@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="InlineCountQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        /// <exception cref="ODataException">Thrown if the raw value is invalid.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if the raw value is invalid.</exception>
         public InlineCountQueryOption(string rawValue)
             : base(rawValue)
         {

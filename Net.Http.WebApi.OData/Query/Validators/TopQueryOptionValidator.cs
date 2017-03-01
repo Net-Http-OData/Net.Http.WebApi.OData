@@ -13,6 +13,9 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     using System.Globalization;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
 
     /// <summary>
     /// A class which validates the $top query option based upon the <see cref="ODataValidationSettings"/>.
@@ -24,7 +27,8 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </summary>
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
-        /// <exception cref="ODataException">Thrown if the validation fails.</exception>
+        /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (queryOptions.RawValues.Top == null)
@@ -34,22 +38,20 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
-                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$top"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$top")));
             }
 
             if (queryOptions.Top.Value < 0)
             {
-                throw new ODataException(Messages.TopRawValueInvalid);
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.TopRawValueInvalid));
             }
 
             if (queryOptions.Top.Value > validationSettings.MaxTop)
             {
-                var message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    Messages.TopValueExceedsMaxAllowed,
-                    validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture));
-
-                throw new ODataException(message);
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.TopValueExceedsMaxAllowed.FormatWith(validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture))));
             }
         }
     }

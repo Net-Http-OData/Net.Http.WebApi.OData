@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </summary>
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
-        /// <exception cref="ODataException">Thrown if the validation fails.</exception>
+        /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
@@ -37,7 +37,8 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
             {
-                throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"));
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$inlinecount")));
             }
 
             if (queryOptions.RawValues.InlineCount != "$inlinecount=allpages"

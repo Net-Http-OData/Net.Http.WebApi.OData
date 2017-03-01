@@ -33,6 +33,7 @@
                     () => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
+                Assert.Equal(Messages.InlineCountRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
@@ -53,12 +54,13 @@
             }
 
             [Fact]
-            public void AnODataExceptionIsThrown()
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<ODataException>(
+                var exception = Assert.Throws<HttpResponseException>(
                     () => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"), exception.Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
@@ -79,7 +81,7 @@
             }
 
             [Fact]
-            public void AnODataExceptionIsNotThrown()
+            public void AnExceptionShouldNotBeThrown()
             {
                 Assert.DoesNotThrow(() => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
@@ -102,7 +104,7 @@
             }
 
             [Fact]
-            public void AnODataExceptionIsNotThrown()
+            public void AnExceptionShouldNotBeThrown()
             {
                 Assert.DoesNotThrow(() => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }

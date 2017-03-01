@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query.Parsers
 {
+    using System;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query.Expressions;
     using Net.Http.WebApi.OData.Query.Parsers;
@@ -86,9 +87,11 @@
         }
 
         [Fact]
-        public void ToBinaryOperatorKindThrowsODataExceptionForUnsupportedOperatorKind()
+        public void ToBinaryOperatorKindThrowsArgumentExceptionForUnsupportedOperatorKind()
         {
-            Assert.Throws<ODataException>(() => "wibble".ToBinaryOperatorKind());
+            var exception = Assert.Throws<ArgumentException>(() => "wibble".ToBinaryOperatorKind());
+
+            Assert.Equal(Messages.UnknownOperator.FormatWith("wibble") + "\r\nParameter name: operatorType", exception.Message);
         }
     }
 }

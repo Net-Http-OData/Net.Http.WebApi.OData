@@ -12,6 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System;
+
     /// <summary>
     /// A class containing deserialised values from the $skip query option.
     /// </summary>
@@ -22,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="SkipQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        /// <exception cref="ODataException">If supplied, the $skip value should be an integer.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If supplied, the $skip value should be an integer.</exception>
         public SkipQueryOption(string rawValue)
             : base(rawValue)
         {
@@ -37,7 +39,7 @@ namespace Net.Http.WebApi.OData.Query
             }
             else
             {
-                throw new ODataException(Messages.SkipRawValueInvalid);
+                throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.SkipRawValueInvalid);
             }
         }
 

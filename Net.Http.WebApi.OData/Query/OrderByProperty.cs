@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="OrderByProperty"/> class.
         /// </summary>
         /// <param name="rawValue">The raw value.</param>
-        /// <exception cref="ODataException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
         public OrderByProperty(string rawValue)
         {
             if (rawValue == null)
@@ -55,7 +55,7 @@ namespace Net.Http.WebApi.OData.Query
                         break;
 
                     default:
-                        throw new ODataException(Messages.OrderByPropertyRawValueInvalid);
+                        throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.OrderByPropertyRawValueInvalid);
                 }
             }
         }

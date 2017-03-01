@@ -28,7 +28,6 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="FormatQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        /// <exception cref="ODataException">Thrown if the raw value is invalid.</exception>
         public FormatQueryOption(string rawValue)
             : base(rawValue)
         {

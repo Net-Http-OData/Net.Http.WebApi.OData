@@ -1,6 +1,8 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query.Validators
 {
+    using System.Net;
     using System.Net.Http;
+    using System.Web.Http;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
@@ -19,12 +21,13 @@
             };
 
             [Fact]
-            public void AnODataExceptionIsThrown()
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<ODataException>(
+                var exception = Assert.Throws<HttpResponseException>(
                     () => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$top"), exception.Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$top"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
@@ -40,7 +43,7 @@
             };
 
             [Fact]
-            public void AnODataExceptionIsNotThrown()
+            public void AnExceptionShouldNotBeThrown()
             {
                 Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
@@ -49,17 +52,21 @@
         public class WhenValidatingAndNoMaxTopIsSetButTheValueIsBelowZero
         {
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=-10"));
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=-1"));
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
-                MaxTop = 100
+                AllowedQueryOptions = AllowedQueryOptions.Top
             };
 
             [Fact]
-            public void AnExceptionIsThrown()
+            public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()
             {
-                Assert.Throws<ODataException>(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
+                Assert.Equal(Messages.TopRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
@@ -110,12 +117,13 @@
             };
 
             [Fact]
-            public void AnExceptionIsThrown()
+            public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()
             {
-                var exception = Assert.Throws<ODataException>(
+                var exception = Assert.Throws<HttpResponseException>(
                     () => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(string.Format(Messages.TopValueExceedsMaxAllowed, 100), exception.Message);
+                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
+                Assert.Equal(Messages.TopValueExceedsMaxAllowed.FormatWith(validationSettings.MaxTop.ToString()), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
     }

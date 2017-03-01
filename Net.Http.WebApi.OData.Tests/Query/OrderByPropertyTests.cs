@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query
 {
+    using System;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
@@ -9,20 +10,22 @@
         public class WhenConstructedWithAnIncorrectlyCasedValue
         {
             [Fact]
-            public void AnODataExceptionShouldBeThrown()
+            public void AnArgumentOutOfRangeExceptionShouldBeThrown()
             {
-                var exception = Assert.Throws<ODataException>(() => new OrderByProperty("Name ASC"));
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
+                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("Name ASC"));
+
+                Assert.Equal(Messages.OrderByPropertyRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
             }
         }
 
         public class WhenConstructedWithAnInvalidValue
         {
             [Fact]
-            public void AnODataExceptionShouldBeThrown()
+            public void AnArgumentOutOfRangeExceptionShouldBeThrown()
             {
-                var exception = Assert.Throws<ODataException>(() => new OrderByProperty("Name wibble"));
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
+                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("Name wibble"));
+
+                Assert.Equal(Messages.OrderByPropertyRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
             }
         }
 
