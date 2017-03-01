@@ -84,7 +84,7 @@
     <Compile Include="Query\Expressions\BinaryOperatorKind.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNode.cs" />
     <Compile Include="Query\Expressions\ConstantNode.cs" />
-    <Compile Include="Query\Expressions\EdmType.cs" />
+    <Compile Include="Query\Expressions\EdmPrimativeType.cs" />
     <Compile Include="Query\Expressions\FunctionCallNode.cs" />
     <Compile Include="Query\Expressions\PropertyAccessNode.cs" />
     <Compile Include="Query\Expressions\QueryNode.cs" />

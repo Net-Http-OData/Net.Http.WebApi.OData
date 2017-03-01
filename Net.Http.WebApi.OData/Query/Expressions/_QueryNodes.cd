@@ -63,11 +63,11 @@
       <FileName>Query\Expressions\UnaryOperatorKind.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Net.Http.WebApi.OData.Query.Expressions.EdmType">
+  <Enum Name="Net.Http.WebApi.OData.Query.Expressions.EdmPrimativeType">
     <Position X="12.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAQAgABgAQAAAAACAJAACBAQAEEIAAAAAAQA=</HashCode>
-      <FileName>Query\Expressions\EdmType.cs</FileName>
+      <FileName>Query\Expressions\EdmPrimativeType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
