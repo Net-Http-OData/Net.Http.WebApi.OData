@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query
 {
+    using System;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
@@ -11,8 +12,8 @@
             [Fact]
             public void AnODataExceptionShouldBeThrown()
             {
-                var exception = Assert.Throws<ODataException>(() => new InlineCountQueryOption("$inlinecount=AllPages"));
-                Assert.Equal(Messages.InlineCountRawValueInvalid, exception.Message);
+                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new InlineCountQueryOption("$inlinecount=AllPages"));
+                Assert.Equal(Messages.InlineCountRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
             }
         }
 
@@ -21,8 +22,8 @@
             [Fact]
             public void AnODataExceptionShouldBeThrown()
             {
-                var exception = Assert.Throws<ODataException>(() => new InlineCountQueryOption("$inlinecount=wibble"));
-                Assert.Equal(Messages.InlineCountRawValueInvalid, exception.Message);
+                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new InlineCountQueryOption("$inlinecount=wibble"));
+                Assert.Equal(Messages.InlineCountRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
             }
         }
 

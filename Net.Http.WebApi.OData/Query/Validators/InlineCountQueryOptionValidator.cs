@@ -12,6 +12,10 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validators
 {
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+
     /// <summary>
     /// A class which validates the $inlinecount query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>
@@ -23,6 +27,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (queryOptions.RawValues.InlineCount == null)
@@ -30,10 +35,16 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 return;
             }
 
-            if (queryOptions.RawValues.InlineCount != null
-                && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
+            if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
             {
                 throw new ODataException(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"));
+            }
+
+            if (queryOptions.RawValues.InlineCount != "$inlinecount=allpages"
+                && queryOptions.RawValues.InlineCount != "$inlinecount=none")
+            {
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.InlineCountRawValueInvalid));
             }
         }
     }

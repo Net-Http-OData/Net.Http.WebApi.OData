@@ -12,8 +12,10 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System;
+
     /// <summary>
-    /// A class containing deserialised values from the $inline count query option.
+    /// A class containing deserialised values from the $inlinecount query option.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{RawValue}")]
     public sealed class InlineCountQueryOption : QueryOption
@@ -26,21 +28,18 @@ namespace Net.Http.WebApi.OData.Query
         public InlineCountQueryOption(string rawValue)
             : base(rawValue)
         {
-            var equals = rawValue.IndexOf('=') + 1;
-            var value = rawValue.Substring(equals, rawValue.Length - equals);
-
-            switch (value)
+            switch (rawValue)
             {
-                case "allpages":
+                case "$inlinecount=allpages":
                     this.InlineCount = InlineCount.AllPages;
                     break;
 
-                case "none":
+                case "$inlinecount=none":
                     this.InlineCount = InlineCount.None;
                     break;
 
                 default:
-                    throw new ODataException(Messages.InlineCountRawValueInvalid);
+                    throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.InlineCountRawValueInvalid);
             }
         }
 

@@ -61,7 +61,7 @@ namespace Net.Http.WebApi.OData.Query
         OrderBy = 64,
 
         /// <summary>
-        /// Specifies that the $inline count query option may be used.
+        /// Specifies that the $inlinecount query option may be used.
         /// </summary>
         InlineCount = 128,
 
