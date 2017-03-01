@@ -9,7 +9,7 @@
         public class WhenConstructed
         {
             private readonly PropertyAccessNode node;
-            private readonly EdmProperty property = new EdmProperty("Name");
+            private readonly EdmProperty property = EdmProperty.From("Name");
 
             public WhenConstructed()
             {

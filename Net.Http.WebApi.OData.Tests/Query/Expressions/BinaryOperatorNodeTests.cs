@@ -9,7 +9,7 @@
         public class WhenConstructed
         {
             private readonly BinaryOperatorKind binaryOperatorKind = BinaryOperatorKind.And;
-            private readonly QueryNode left = new PropertyAccessNode(new EdmProperty("Name"));
+            private readonly QueryNode left = new PropertyAccessNode(EdmProperty.From("Name"));
             private readonly BinaryOperatorNode node;
             private readonly QueryNode right = ConstantNode.String("Fred", "Fred");
 
