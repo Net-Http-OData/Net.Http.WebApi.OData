@@ -46,9 +46,8 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException(nameof(request));
             }
 
-            ValidateRequest(request);
-
             this.Request = request;
+            this.ReadHeaders();
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
 
@@ -104,6 +103,12 @@ namespace Net.Http.WebApi.OData.Query
                 return this.format;
             }
         }
+
+        /// <summary>
+        /// Gets the OData-Isolation requested by the client.
+        /// </summary>
+        /// <remarks>If the OData-Isolation header is not present in the request, defaults to none.</remarks>
+        public ODataIsolationLevel IsolationLevel { get; private set; } = ODataIsolationLevel.None;
 
         /// <summary>
         /// Gets the order by query option.
@@ -217,19 +222,42 @@ namespace Net.Http.WebApi.OData.Query
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
-        private static void ValidateRequest(HttpRequestMessage request)
+        private static string ReadHeaderValue(HttpRequestMessage request, string name)
         {
             IEnumerable<string> values;
+            string value = null;
 
-            if (request.Headers.TryGetValues("OData-Version", out values))
+            if (request.Headers.TryGetValues(name, out values))
             {
-                var value = values.FirstOrDefault();
+                value = values.FirstOrDefault();
+            }
 
-                if (value != null && value != "4.0")
+            return value;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
+        private void ReadHeaders()
+        {
+            var headerValue = ReadHeaderValue(this.Request, HeaderNames.ODataVersion);
+
+            if (headerValue != null && headerValue != "4.0")
+            {
+                throw new HttpResponseException(
+                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+            }
+
+            headerValue = ReadHeaderValue(this.Request, HeaderNames.ODataIsolation);
+
+            if (headerValue != null)
+            {
+                if (headerValue == "Snapshot")
+                {
+                    this.IsolationLevel = ODataIsolationLevel.Snapshot;
+                }
+                else
                 {
                     throw new HttpResponseException(
-                        request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+                        this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel));
                 }
             }
         }

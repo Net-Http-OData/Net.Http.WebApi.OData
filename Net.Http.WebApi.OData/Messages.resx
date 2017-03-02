@@ -153,4 +153,7 @@
   <data name="CountRawValueInvalid" xml:space="preserve">
     <value>If specified, the $count value must be 'true' or 'false'</value>
   </data>
+  <data name="UnsupportedIsolationLevel" xml:space="preserve">
+    <value>If specified, the OData-IsolationLevel must be 'Snapshot'</value>
+  </data>
 </root>

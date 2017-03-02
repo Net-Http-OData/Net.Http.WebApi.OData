@@ -133,6 +133,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If specified, the OData-IsolationLevel must be &apos;Snapshot&apos;.
+        /// </summary>
+        internal static string UnsupportedIsolationLevel {
+            get {
+                return ResourceManager.GetString("UnsupportedIsolationLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Query nodes of type &apos;{0}&apos; are not supported..
         /// </summary>
         internal static string UnsupportedNodeType {

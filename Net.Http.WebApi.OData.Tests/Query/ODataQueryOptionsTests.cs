@@ -87,6 +87,12 @@
             }
 
             [Fact]
+            public void TheIsolationLevelIsNone()
+            {
+                Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+            }
+
+            [Fact]
             public void TheOrderByPropertyShouldBeSet()
             {
                 Assert.NotNull(this.option.OrderBy);
@@ -174,6 +180,12 @@
             }
 
             [Fact]
+            public void TheIsolationLevelIsNone()
+            {
+                Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+            }
+
+            [Fact]
             public void TheOrderByPropertyShouldBeNotSet()
             {
                 Assert.Null(this.option.OrderBy);
@@ -222,13 +234,47 @@
             }
         }
 
+        public class WhenConstructedWithODataIsolationHeaderContainingSnapshot
+        {
+            private readonly ODataQueryOptions option;
+
+            public WhenConstructedWithODataIsolationHeaderContainingSnapshot()
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                httpRequestMessage.Headers.Add(HeaderNames.ODataIsolation, "Snapshot");
+
+                this.option = new ODataQueryOptions(httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheIsolationLevelIsSet()
+            {
+                Assert.Equal(ODataIsolationLevel.Snapshot, this.option.IsolationLevel);
+            }
+        }
+
+        public class WhenConstructedWithODataIsolationHeaderNotContainingSnapshot
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrown()
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                httpRequestMessage.Headers.Add(HeaderNames.ODataIsolation, "ReadCommitted");
+
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedIsolationLevel, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
         public class WhenConstructedWithODataVersionHeaderContaining1_0
         {
             [Fact]
             public void AnHttpResponseExceptionIsThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add("OData-Version", "1.0");
+                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "1.0");
 
                 var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
 
@@ -243,7 +289,7 @@
             public void AnHttpResponseExceptionIsThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add("OData-Version", "2.0");
+                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "2.0");
 
                 var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
 
@@ -258,7 +304,7 @@
             public void AnHttpResponseExceptionIsThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add("OData-Version", "3.0");
+                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "3.0");
 
                 var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
 
@@ -273,7 +319,7 @@
             public void AnExceptionIsNotThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add("OData-Version", "4.0");
+                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "4.0");
 
                 Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage));
             }
