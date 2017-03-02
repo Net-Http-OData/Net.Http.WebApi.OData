@@ -142,6 +142,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This service only supports OData 3.0.
+        /// </summary>
+        internal static string UnsupportedODataVersion {
+            get {
+                return ResourceManager.GetString("UnsupportedODataVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; operator is not implemented by this service..
         /// </summary>
         internal static string UnsupportedOperator {

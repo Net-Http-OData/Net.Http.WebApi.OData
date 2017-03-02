@@ -1,7 +1,10 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query
 {
+    using System.Net;
     using System.Net.Http;
+    using System.Web.Http;
     using Net.Http.WebApi.OData.Query;
+    using WebApi.OData;
     using WebApi.OData.Query.Expressions;
     using Xunit;
 
@@ -45,12 +48,12 @@
             Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
         }
 
-        public class WhenCreatedWithAllQueryOptions
+        public class WhenConstructedWithAllQueryOptions
         {
             private readonly HttpRequestMessage httpRequestMessage;
             private readonly ODataQueryOptions option;
 
-            public WhenCreatedWithAllQueryOptions()
+            public WhenConstructedWithAllQueryOptions()
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -126,12 +129,54 @@
             }
         }
 
-        public class WhenCreatedWithNoQueryOptions
+        public class WhenConstructedWithDataServiceVersionHeaderContaining1_0
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrown()
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                httpRequestMessage.Headers.Add("DataServiceVersion", "1.0");
+
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
+
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenConstructedWithDataServiceVersionHeaderContaining2_0
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrown()
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                httpRequestMessage.Headers.Add("DataServiceVersion", "2.0");
+
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
+
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenConstructedWithDataServiceVersionHeaderContaining3_0
+        {
+            [Fact]
+            public void AnExceptionIsNotThrown()
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                httpRequestMessage.Headers.Add("DataServiceVersion", "3.0");
+
+                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage));
+            }
+        }
+
+        public class WhenConstructedWithNoQueryOptions
         {
             private readonly HttpRequestMessage httpRequestMessage;
             private readonly ODataQueryOptions option;
 
-            public WhenCreatedWithNoQueryOptions()
+            public WhenConstructedWithNoQueryOptions()
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -210,12 +255,12 @@
         /// <summary>
         /// Issue #58 - Plus character in uri should be treated as a space
         /// </summary>
-        public class WhenCreatedWithPlusSignsInsteadOfSpacesInTheUrl
+        public class WhenConstructedWithPlusSignsInsteadOfSpacesInTheUrl
         {
             private readonly HttpRequestMessage httpRequestMessage;
             private readonly ODataQueryOptions option;
 
-            public WhenCreatedWithPlusSignsInsteadOfSpacesInTheUrl()
+            public WhenConstructedWithPlusSignsInsteadOfSpacesInTheUrl()
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -273,12 +318,12 @@
         /// <summary>
         /// Issue #78 - Cannot send + in the request
         /// </summary>
-        public class WhenCreatedWithUrlEncodedPlusSignsAndPlusSignsInsteadOfSpacesInTheUrl
+        public class WhenConstructedWithUrlEncodedPlusSignsAndPlusSignsInsteadOfSpacesInTheUrl
         {
             private readonly HttpRequestMessage httpRequestMessage;
             private readonly ODataQueryOptions option;
 
-            public WhenCreatedWithUrlEncodedPlusSignsAndPlusSignsInsteadOfSpacesInTheUrl()
+            public WhenConstructedWithUrlEncodedPlusSignsAndPlusSignsInsteadOfSpacesInTheUrl()
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,

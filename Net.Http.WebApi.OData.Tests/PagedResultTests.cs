@@ -6,13 +6,13 @@ namespace Net.Http.WebApi.Tests.OData
 
     public class PagedResultTests
     {
-        public class WhenCreated
+        public class WhenConstructed
         {
             private readonly int count = 5;
             private readonly PagedResult<int> pagedResult;
             private readonly List<int> results = new List<int> { 1, 2, 3 };
 
-            public WhenCreated()
+            public WhenConstructed()
             {
                 this.pagedResult = new PagedResult<int>(results, count);
             }

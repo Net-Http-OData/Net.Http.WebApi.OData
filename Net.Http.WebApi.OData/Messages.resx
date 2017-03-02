@@ -150,4 +150,7 @@
   <data name="UnsupportedFunction" xml:space="preserve">
     <value>The '{0}' function is not implemented by this service.</value>
   </data>
+  <data name="UnsupportedODataVersion" xml:space="preserve">
+    <value>This service only supports OData 3.0</value>
+  </data>
 </root>
