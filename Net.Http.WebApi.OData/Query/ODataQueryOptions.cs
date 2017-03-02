@@ -13,7 +13,11 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
     using System.Net.Http;
+    using System.Web.Http;
 
     /// <summary>
     /// An object which contains the query options in an OData query.
@@ -41,6 +45,8 @@ namespace Net.Http.WebApi.OData.Query
             {
                 throw new ArgumentNullException(nameof(request));
             }
+
+            ValidateRequest(request);
 
             this.Request = request;
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
@@ -208,6 +214,23 @@ namespace Net.Http.WebApi.OData.Query
                 }
 
                 return this.top;
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
+        private static void ValidateRequest(HttpRequestMessage request)
+        {
+            IEnumerable<string> values;
+
+            if (request.Headers.TryGetValues("OData-Version", out values))
+            {
+                var value = values.FirstOrDefault();
+
+                if (value != null && value != "4.0")
+                {
+                    throw new HttpResponseException(
+                        request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+                }
             }
         }
     }
