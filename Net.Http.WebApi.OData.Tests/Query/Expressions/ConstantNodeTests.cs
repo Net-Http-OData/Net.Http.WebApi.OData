@@ -62,7 +62,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.DateTimeOffset, this.node.EdmPrimitiveType);
             }
@@ -97,7 +97,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.DateTime, this.node.EdmPrimitiveType);
             }
@@ -132,7 +132,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Decimal, this.node.EdmPrimitiveType);
             }
@@ -167,7 +167,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Double, this.node.EdmPrimitiveType);
             }
@@ -202,7 +202,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Boolean, this.node.EdmPrimitiveType);
             }
@@ -237,7 +237,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Guid, this.node.EdmPrimitiveType);
             }
@@ -272,7 +272,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Int32, this.node.EdmPrimitiveType);
             }
@@ -307,7 +307,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Int32, this.node.EdmPrimitiveType);
             }
@@ -341,7 +341,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Int64, this.node.EdmPrimitiveType);
             }
@@ -376,7 +376,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Int64, this.node.EdmPrimitiveType);
             }
@@ -410,7 +410,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Null, this.node.EdmPrimitiveType);
             }
@@ -444,7 +444,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Single, this.node.EdmPrimitiveType);
             }
@@ -479,7 +479,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.String, this.node.EdmPrimitiveType);
             }
@@ -514,7 +514,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Time, this.node.EdmPrimitiveType);
             }
@@ -549,7 +549,7 @@
             }
 
             [Fact]
-            public void TheEdmPrimativeTypeIsSet()
+            public void TheEdmPrimitiveTypeIsSet()
             {
                 Assert.Equal(EdmPrimitiveType.Boolean, this.node.EdmPrimitiveType);
             }
