@@ -26,6 +26,8 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("Age", ((PropertyAccessNode)nodeLeft.Parameters[0]).Property.Name);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'Edm.Int64'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
+                Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
+                Assert.Equal("Edm.Int64", ((ConstantNode)nodeLeft.Parameters[1]).Value);
 
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
@@ -33,6 +35,24 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("20", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<int>(((ConstantNode)node.Right).Value);
                 Assert.Equal(20, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParseCastFunctionWithTypeOnlyExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("cast('Edm.Int64')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
+
+                var node = (FunctionCallNode)queryNode;
+
+                Assert.Equal("cast", node.Name);
+                Assert.Equal(1, node.Parameters.Count);
+                Assert.IsType<ConstantNode>(node.Parameters[0]);
+                Assert.Equal("'Edm.Int64'", ((ConstantNode)node.Parameters[0]).LiteralText);
+                Assert.IsType<string>(((ConstantNode)node.Parameters[0]).Value);
+                Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[0]).Value);
             }
 
             [Fact]
@@ -329,6 +349,24 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("'Edm.Int64'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
                 Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[1]).Value);
+            }
+
+            [Fact]
+            public void ParseIsOfFunctionWithTypeOnlyExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("isof('Edm.Int64')");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<FunctionCallNode>(queryNode);
+
+                var node = (FunctionCallNode)queryNode;
+
+                Assert.Equal("isof", node.Name);
+                Assert.Equal(1, node.Parameters.Count);
+                Assert.IsType<ConstantNode>(node.Parameters[0]);
+                Assert.Equal("'Edm.Int64'", ((ConstantNode)node.Parameters[0]).LiteralText);
+                Assert.IsType<string>(((ConstantNode)node.Parameters[0]).Value);
+                Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[0]).Value);
             }
 
             [Fact]

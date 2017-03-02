@@ -8,7 +8,7 @@ namespace Net.Http.WebApi.Tests.OData
     using Newtonsoft.Json;
     using Xunit;
 
-    public class InlineCountSerializationTests
+    public class PagedResultSerializationTests
     {
         [Fact]
         public void JsonSerializationWithClassContent()
@@ -17,11 +17,11 @@ namespace Net.Http.WebApi.Tests.OData
             item.Name = "Coffee";
             item.Total = 2.55M;
 
-            var inlineCount = new InlineCount<Thing>(new[] { item }, count: 12);
+            var inlineCount = new PagedResult<Thing>(new[] { item }, count: 12);
 
             var result = JsonConvert.SerializeObject(inlineCount);
 
-            Assert.Equal("{\"__count\":12,\"results\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", result);
+            Assert.Equal("{\"odata.count\":12,\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", result);
         }
 
         [Fact]
@@ -31,21 +31,21 @@ namespace Net.Http.WebApi.Tests.OData
             item.Id = 14225;
             item.Name = "Fred";
 
-            var inlineCount = new InlineCount<dynamic>(new[] { item }, count: 12);
+            var inlineCount = new PagedResult<dynamic>(new[] { item }, count: 12);
 
             var result = JsonConvert.SerializeObject(inlineCount);
 
-            Assert.Equal("{\"__count\":12,\"results\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", result);
+            Assert.Equal("{\"odata.count\":12,\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", result);
         }
 
         [Fact]
         public void JsonSerializationWithSimpleContent()
         {
-            var inlineCount = new InlineCount<int>(new[] { 1, 2, 3 }, count: 5);
+            var inlineCount = new PagedResult<int>(new[] { 1, 2, 3 }, count: 5);
 
             var result = JsonConvert.SerializeObject(inlineCount);
 
-            Assert.Equal("{\"__count\":5,\"results\":[1,2,3]}", result);
+            Assert.Equal("{\"odata.count\":5,\"value\":[1,2,3]}", result);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Net.Http.WebApi.Tests.OData
             item.Name = "Coffee";
             item.Total = 2.55M;
 
-            var inlineCount = new InlineCount<Thing>(new[] { item }, count: 12);
+            var inlineCount = new PagedResult<Thing>(new[] { item }, count: 12);
 
             var stringBuilder = new StringBuilder();
             using (var xmlWriter = XmlWriter.Create(stringBuilder, new XmlWriterSettings { Indent = false, OmitXmlDeclaration = true }))
@@ -66,13 +66,13 @@ namespace Net.Http.WebApi.Tests.OData
 
             var result = stringBuilder.ToString();
 
-            Assert.Equal("<InlineCountOfInlineCountSerializationTests.ThingAeZ_PiJ7K xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><__count>12</__count><results xmlns:d2p1=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.Tests.OData\"><d2p1:InlineCountSerializationTests.Thing><d2p1:Name>Coffee</d2p1:Name><d2p1:Total>2.55</d2p1:Total></d2p1:InlineCountSerializationTests.Thing></results></InlineCountOfInlineCountSerializationTests.ThingAeZ_PiJ7K>", result);
+            Assert.Equal("<PagedResultOfPagedResultSerializationTests.ThingAeZ_PiJ7K xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><odata.count>12</odata.count><value xmlns:d2p1=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.Tests.OData\"><d2p1:PagedResultSerializationTests.Thing><d2p1:Name>Coffee</d2p1:Name><d2p1:Total>2.55</d2p1:Total></d2p1:PagedResultSerializationTests.Thing></value></PagedResultOfPagedResultSerializationTests.ThingAeZ_PiJ7K>", result);
         }
 
         [Fact]
         public void XmlSerializationWithSimpleContent()
         {
-            var inlineCount = new InlineCount<int>(new[] { 1, 2, 3 }, count: 5);
+            var inlineCount = new PagedResult<int>(new[] { 1, 2, 3 }, count: 5);
 
             var stringBuilder = new StringBuilder();
             using (var xmlWriter = XmlWriter.Create(stringBuilder, new XmlWriterSettings { Indent = false, OmitXmlDeclaration = true }))
@@ -83,7 +83,7 @@ namespace Net.Http.WebApi.Tests.OData
 
             var result = stringBuilder.ToString();
 
-            Assert.Equal("<InlineCountOfint xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><__count>5</__count><results xmlns:d2p1=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><d2p1:int>1</d2p1:int><d2p1:int>2</d2p1:int><d2p1:int>3</d2p1:int></results></InlineCountOfint>", result);
+            Assert.Equal("<PagedResultOfint xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><odata.count>5</odata.count><value xmlns:d2p1=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><d2p1:int>1</d2p1:int><d2p1:int>2</d2p1:int><d2p1:int>3</d2p1:int></value></PagedResultOfint>", result);
         }
 
         [DataContract]

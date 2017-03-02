@@ -63,8 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InlineCountSerializationTests.cs" />
-    <Compile Include="InlineCountTests.cs" />
+    <Compile Include="PagedResultSerializationTests.cs" />
+    <Compile Include="PagedResultTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
     <Compile Include="Query\Expressions\ConstantNodeTests.cs" />

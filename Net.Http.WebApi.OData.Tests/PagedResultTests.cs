@@ -4,29 +4,29 @@ namespace Net.Http.WebApi.Tests.OData
     using Net.Http.WebApi.OData;
     using Xunit;
 
-    public class InlineCountTests
+    public class PagedResultTests
     {
         public class WhenCreated
         {
             private readonly int count = 5;
-            private readonly InlineCount<int> inlineCount;
+            private readonly PagedResult<int> pagedResult;
             private readonly List<int> results = new List<int> { 1, 2, 3 };
 
             public WhenCreated()
             {
-                this.inlineCount = new InlineCount<int>(results, count);
+                this.pagedResult = new PagedResult<int>(results, count);
             }
 
             [Fact]
             public void TheCountIsSet()
             {
-                Assert.Equal(count, inlineCount.Count);
+                Assert.Equal(count, pagedResult.Count);
             }
 
             [Fact]
             public void TheResultsAreSet()
             {
-                Assert.Same(results, inlineCount.Results);
+                Assert.Same(results, pagedResult.Results);
             }
         }
     }
