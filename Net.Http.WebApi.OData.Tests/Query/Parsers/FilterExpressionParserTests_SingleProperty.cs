@@ -417,6 +417,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqNegativeDecimalWithNoDigitBeforeDecimalPointValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq -.1M");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("-.1M", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<decimal>(((ConstantNode)node.Right).Value);
+                Assert.Equal(-.1M, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqNegativeDoubleValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Amount eq -1234.567D");
@@ -435,6 +456,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("-1234.567D", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<double>(((ConstantNode)node.Right).Value);
                 Assert.Equal(-1234.567D, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqNegativeDoubleWithExponentValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq -0.314e1");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("-0.314e1", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<double>(((ConstantNode)node.Right).Value);
+                Assert.Equal(-0.314e1D, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -541,6 +583,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqPositiveDecimalWithNoDigitBeforeDecimalPointValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq .1M");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal(".1M", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<decimal>(((ConstantNode)node.Right).Value);
+                Assert.Equal(.1M, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqPositiveDoubleValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Amount eq 1234.567D");
@@ -559,6 +622,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("1234.567D", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<double>(((ConstantNode)node.Right).Value);
                 Assert.Equal(1234.567D, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqPositiveDoubleWithExponentValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Amount eq 0.314e1");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Amount", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("0.314e1", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<double>(((ConstantNode)node.Right).Value);
+                Assert.Equal(0.314e1D, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

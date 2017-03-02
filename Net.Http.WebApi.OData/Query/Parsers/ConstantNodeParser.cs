@@ -40,7 +40,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.Decimal(token.Value, decimalValue);
 
                 case TokenType.Double:
-                    var doubleText = token.Value.Substring(0, token.Value.Length - 1);
+                    var doubleText = token.Value.EndsWith("d", StringComparison.OrdinalIgnoreCase)
+                        ? token.Value.Substring(0, token.Value.Length - 1)
+                        : token.Value;
                     var doubleValue = double.Parse(doubleText, CultureInfo.InvariantCulture);
                     return ConstantNode.Double(token.Value, doubleValue);
 
