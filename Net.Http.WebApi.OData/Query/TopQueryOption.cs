@@ -25,7 +25,7 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
         /// <exception cref="ArgumentOutOfRangeException">If supplied, the $top value should be an integer.</exception>
-        public TopQueryOption(string rawValue)
+        internal TopQueryOption(string rawValue)
             : base(rawValue)
         {
             var equals = rawValue.IndexOf('=') + 1;

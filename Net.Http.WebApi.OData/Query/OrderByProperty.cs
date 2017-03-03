@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         /// <param name="rawValue">The raw value.</param>
         /// <exception cref="ArgumentOutOfRangeException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
-        public OrderByProperty(string rawValue)
+        internal OrderByProperty(string rawValue)
         {
             if (rawValue == null)
             {

@@ -25,7 +25,7 @@ namespace Net.Http.WebApi.OData.Query
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if the raw value is invalid.</exception>
-        public InlineCountQueryOption(string rawValue)
+        internal InlineCountQueryOption(string rawValue)
             : base(rawValue)
         {
             switch (rawValue)

@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="FilterQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        public FilterQueryOption(string rawValue)
+        internal FilterQueryOption(string rawValue)
             : base(rawValue)
         {
             this.Expression = FilterExpressionParser.Parse(
