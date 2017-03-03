@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="SelectExpandQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        public SelectExpandQueryOption(string rawValue)
+        internal SelectExpandQueryOption(string rawValue)
             : base(rawValue)
         {
             var equals = rawValue.IndexOf('=') + 1;

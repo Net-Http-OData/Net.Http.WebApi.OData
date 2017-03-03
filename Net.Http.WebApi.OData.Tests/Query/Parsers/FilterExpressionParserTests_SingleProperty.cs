@@ -665,6 +665,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqStringFullCharacterSetValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Name eq 'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&('')*+,;=@'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Name", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&('')*+,;=@'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<string>(((ConstantNode)node.Right).Value);
+                Assert.Equal("ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&(')*+,;=@", ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqStringValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Name eq 'Milk'");
@@ -686,9 +707,9 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
-            public void ParsePropertyEqStringValueWithQuoteCharacterExpression()
+            public void ParsePropertyEqStringWithQuoteCharacterValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Name eq 'O''Brien'");
+                var queryNode = FilterExpressionParser.Parse("Name eq 'O''Neil'");
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -701,9 +722,9 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("'O''Brien'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("'O''Neil'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
-                Assert.Equal("O'Brien", ((ConstantNode)node.Right).Value);
+                Assert.Equal("O'Neil", ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

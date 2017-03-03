@@ -40,7 +40,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(TokenType.FunctionName,         @"\w+(?=\()"),
             new TokenDefinition(TokenType.Comma,                @",(?=\s?)"),
             new TokenDefinition(TokenType.PropertyName,         @"\w+"),
-            new TokenDefinition(TokenType.String,               @"'(?:''|[^']*)*'"),
+            new TokenDefinition(TokenType.String,               @"'(?:''|[\w\s-.~!$&()*+,;=@]*)*'"),
             new TokenDefinition(TokenType.Whitespace,           @"\s", ignore: true)
         };
 
@@ -51,7 +51,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         internal Lexer(string content)
         {
             this.content = content;
-            this.position = content.IndexOf('=') + 1;
+            this.position = 0;
             this.current = default(Token);
         }
 

@@ -66,7 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HeaderNames.cs" />
+    <Compile Include="HttpRequestMessageExtensions.cs" />
     <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +75,7 @@
     <Compile Include="Model\EdmPrimitiveType.cs" />
     <Compile Include="Model\EdmProperty.cs" />
     <Compile Include="ODataIsolationLevel.cs" />
+    <Compile Include="ODataHeaderNames.cs" />
     <Compile Include="PagedResult{T}.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\AllowedArithmeticOperators.cs" />

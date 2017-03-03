@@ -22,7 +22,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="SkipTokenQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        public SkipTokenQueryOption(string rawValue)
+        internal SkipTokenQueryOption(string rawValue)
             : base(rawValue)
         {
         }

@@ -22,7 +22,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="SearchQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        public SearchQueryOption(string rawValue)
+        internal SearchQueryOption(string rawValue)
             : base(rawValue)
         {
         }

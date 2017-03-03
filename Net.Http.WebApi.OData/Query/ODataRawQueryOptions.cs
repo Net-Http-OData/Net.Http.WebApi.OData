@@ -27,7 +27,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="ODataRawQueryOptions"/> class.
         /// </summary>
         /// <param name="rawQuery">The raw query.</param>
-        public ODataRawQueryOptions(string rawQuery)
+        internal ODataRawQueryOptions(string rawQuery)
         {
             if (rawQuery == null)
             {

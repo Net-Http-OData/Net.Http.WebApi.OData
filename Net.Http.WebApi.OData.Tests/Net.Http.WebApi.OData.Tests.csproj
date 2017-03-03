@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpRequestMessageExtensionsTests.cs" />
     <Compile Include="PagedResultSerializationTests.cs" />
     <Compile Include="PagedResultTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

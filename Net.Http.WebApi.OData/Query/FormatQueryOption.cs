@@ -28,7 +28,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="FormatQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        public FormatQueryOption(string rawValue)
+        internal FormatQueryOption(string rawValue)
             : base(rawValue)
         {
             var equals = rawValue.IndexOf('=') + 1;

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="HeaderNames.cs" company="Project Contributors">
+// <copyright file="ODataHeaderNames.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,19 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData
 {
-    internal static class HeaderNames
+    /// <summary>
+    /// The header names for OData HTTP Headers
+    /// </summary>
+    public static class ODataHeaderNames
     {
-        internal const string ODataIsolation = "OData-Isolation";
-        internal const string ODataVersion = "OData-Version";
+        /// <summary>
+        /// The OData isolation header.
+        /// </summary>
+        public const string ODataIsolation = "OData-Isolation";
+
+        /// <summary>
+        /// The OData version header.
+        /// </summary>
+        public const string ODataVersion = "OData-Version";
     }
 }

@@ -238,7 +238,7 @@ namespace Net.Http.WebApi.OData.Query
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private void ReadHeaders()
         {
-            var headerValue = ReadHeaderValue(this.Request, HeaderNames.ODataVersion);
+            var headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.ODataVersion);
 
             if (headerValue != null && headerValue != "4.0")
             {
@@ -246,7 +246,7 @@ namespace Net.Http.WebApi.OData.Query
                     this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
 
-            headerValue = ReadHeaderValue(this.Request, HeaderNames.ODataIsolation);
+            headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.ODataIsolation);
 
             if (headerValue != null)
             {

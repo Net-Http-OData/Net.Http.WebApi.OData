@@ -241,7 +241,7 @@
             public WhenConstructedWithODataIsolationHeaderContainingSnapshot()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add(HeaderNames.ODataIsolation, "Snapshot");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "Snapshot");
 
                 this.option = new ODataQueryOptions(httpRequestMessage);
             }
@@ -259,7 +259,7 @@
             public void AnHttpResponseExceptionIsThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add(HeaderNames.ODataIsolation, "ReadCommitted");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
 
                 var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
 
@@ -274,7 +274,7 @@
             public void AnHttpResponseExceptionIsThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "1.0");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "1.0");
 
                 var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
 
@@ -289,7 +289,7 @@
             public void AnHttpResponseExceptionIsThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "2.0");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "2.0");
 
                 var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
 
@@ -304,7 +304,7 @@
             public void AnHttpResponseExceptionIsThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "3.0");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "3.0");
 
                 var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
 
@@ -319,7 +319,7 @@
             public void AnExceptionIsNotThrown()
             {
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
-                httpRequestMessage.Headers.Add(HeaderNames.ODataVersion, "4.0");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
                 Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage));
             }
