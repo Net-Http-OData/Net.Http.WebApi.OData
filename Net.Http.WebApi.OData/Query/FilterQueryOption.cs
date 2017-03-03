@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System;
     using Net.Http.WebApi.OData.Query.Expressions;
     using Net.Http.WebApi.OData.Query.Parsers;
 
@@ -28,7 +29,8 @@ namespace Net.Http.WebApi.OData.Query
         public FilterQueryOption(string rawValue)
             : base(rawValue)
         {
-            this.Expression = FilterExpressionParser.Parse(rawValue);
+            this.Expression = FilterExpressionParser.Parse(
+                rawValue.Substring(rawValue.IndexOf("=", StringComparison.Ordinal) + 1));
         }
 
         /// <summary>
