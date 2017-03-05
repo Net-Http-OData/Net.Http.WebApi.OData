@@ -12,9 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
-    using System;
-    using Net.Http.WebApi.OData.Query.Expressions;
-    using Net.Http.WebApi.OData.Query.Parsers;
+    using Expressions;
+    using Parsers;
 
     /// <summary>
     /// A class containing deserialised values from the $filter query option.
@@ -29,8 +28,7 @@ namespace Net.Http.WebApi.OData.Query
         internal FilterQueryOption(string rawValue)
             : base(rawValue)
         {
-            this.Expression = FilterExpressionParser.Parse(
-                rawValue.Substring(rawValue.IndexOf("=", StringComparison.Ordinal) + 1));
+            this.Expression = FilterExpressionParser.Parse(rawValue);
         }
 
         /// <summary>

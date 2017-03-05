@@ -12,6 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
+    using System;
+
     internal struct Lexer
     {
         // More restrictive expressions should be added before less restrictive expressions which could also match.
@@ -51,8 +53,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         internal Lexer(string content)
         {
             this.content = content;
-            this.position = 0;
             this.current = default(Token);
+
+            this.position = this.content.StartsWith("$filter=", StringComparison.Ordinal)
+                ? content.IndexOf('=') + 1
+                : 0;
         }
 
         internal Token Current => this.current;
