@@ -543,6 +543,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqNegativeTimeValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq time'-P6DT23H59M59.9999S'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("LastUpdated", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("time'-P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(TimeSpan.Parse("-6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqNullValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("MiddleName eq null");
@@ -709,6 +730,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqPositiveTimeValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq time'P6DT23H59M59.9999S'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("LastUpdated", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("time'P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(TimeSpan.Parse("6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqPropertyExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Forename eq Surname");
@@ -788,27 +830,6 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("'O''Neil'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("O'Neil", ((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
-            public void ParsePropertyEqTimeValueExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("LastUpdated eq time'13:20:00'");
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                Assert.IsType<PropertyAccessNode>(node.Left);
-                Assert.Equal("LastUpdated", ((PropertyAccessNode)node.Left).Property.Name);
-
-                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
-
-                Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("time'13:20:00'", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new TimeSpan(13, 20, 0), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

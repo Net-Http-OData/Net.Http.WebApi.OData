@@ -40,7 +40,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(TokenType.FunctionName,         @"\w+(?=\()"),
             new TokenDefinition(TokenType.Comma,                @",(?=\s?)"),
             new TokenDefinition(TokenType.DateTime,             @"datetime'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d{1,12}(Z|-\d{2}:\d{2}))?)?)?'"),
-            new TokenDefinition(TokenType.Time,                 @"time'\d{2}:\d{2}:\d{2}'"),
+            new TokenDefinition(TokenType.Time,                 @"time'(-)?P\d+DT\d{2}H\d{2}M\d{2}\.\d+S'"),
             new TokenDefinition(TokenType.PropertyName,         @"\w+"),
             new TokenDefinition(TokenType.String,               @"'(?:''|[\w\s-.~!$&()*+,;=@]*)*'"),
             new TokenDefinition(TokenType.Whitespace,           @"\s", ignore: true)

@@ -87,7 +87,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.String(token.Value, stringText);
 
                 case TokenType.Time:
-                    var timeSpanText = token.Value.Substring(5, token.Value.Length - 6);
+                    var timeSpanText = token.Value.Substring(5, token.Value.Length - 6)
+                        .Replace("P", string.Empty)
+                        .Replace("DT", ".")
+                        .Replace("H", ":")
+                        .Replace("M", ":")
+                        .Replace("S", string.Empty);
                     var timeSpanValue = TimeSpan.Parse(timeSpanText, CultureInfo.InvariantCulture);
                     return ConstantNode.Time(token.Value, timeSpanValue);
 
