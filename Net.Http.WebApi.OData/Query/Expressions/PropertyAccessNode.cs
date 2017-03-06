@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
     /// <summary>
     /// A QueryNode which represents a property.
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("{PropertyName}")]
+    [System.Diagnostics.DebuggerDisplay("{Property}")]
     public sealed class PropertyAccessNode : QueryNode
     {
         /// <summary>
