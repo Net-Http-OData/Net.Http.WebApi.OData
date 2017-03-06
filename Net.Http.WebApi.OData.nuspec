@@ -20,7 +20,7 @@
 - The InlineCount&lt;T&gt; class was still returning OData 2.0 format { "__count":0, "results":[] }, updated to OData 4.0 format { "@odata.count":0, "value":[] } replaced by PagedResult&lt;T&gt; class
 - substringof function removed
 - contains function added (replaces substringof)
-- Edm.DateTime & Edm.Time removed
+- Edm.DateTime &amp; Edm.Time removed
 - Edm.Date and Edm.TimeOfDay added
 - Edm.Duration added
 - Edm.DateTimeOffset parsing improved, also doesn't require prefix or quotes
