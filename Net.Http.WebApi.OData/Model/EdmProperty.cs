@@ -45,6 +45,17 @@ namespace Net.Http.WebApi.OData.Model
             get;
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.Name;
+        }
+
         internal static EdmProperty From(string propertyName)
         {
             return EdmPropertyCache.GetOrAdd(propertyName, propName => new EdmProperty(propName));
