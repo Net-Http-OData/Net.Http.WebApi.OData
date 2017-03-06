@@ -6,7 +6,29 @@
     <authors>Trevor Pilley and Project Contributors</authors>
     <owners>Trevor Pilley</owners>
     <description>A library which makes it easy to consume an OData Query with ASP.NET WebApi.</description>
-    <releaseNotes>See https://github.com/TrevorPilley/Net.Http.WebApi.OData/releases for a summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>See https://github.com/TrevorPilley/Net.Http.WebApi.OData/releases for a summary of changes made in this release of the package.
+
+- Removed types/members obsoleted in 3.4.x and earlier
+- Expression QueryNode objects refactored (partly for performance, partly to simplify)
+- Improved validation
+- Fixed parsing of Edm.DateTimeOffset
+- Improved parsing of Edm.Decimal, now allows (+/-) without digit before decimal point
+- Improved parsing of Edm.Double, now allows (+/-) with exponent
+- Correctly returning HTTP 400 and HTTP 501 where appropriate instead of ODataException which resulted in HTTP 500
+- SelectQueryOption and ExpandQueryOption merged into SelectExpandQueryOption since they have the same implementation
+- Introduction of EdmProperty which is used in SelectExpandQueryOption, OrderByProperty, PropertyAccessNode
+- The InlineCount<T> class was still returning OData 2.0 format { "__count":0, "results":[] }, updated to OData 4.0 format { "@odata.count":0, "value":[] } replaced by PagedResult<T> class
+- substringof function removed
+- contains function added (replaces substringof)
+- Edm.DateTime & Edm.Time removed
+- Edm.Date and Edm.TimeOfDay added
+- Edm.Duration added
+- Edm.DateTimeOffset parsing improved, also doesn't require prefix or quotes
+- Edm.Guid doesn't require prefix or quotes
+- $inlinecount=allpages replaced by $count=true
+- Added $search query option
+- Added FractionalSeconds, Now, MinDateTime and MaxDateTime functions
+</releaseNotes>
     <language>en-GB</language>
     <projectUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/</projectUrl>
     <licenseUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/blob/master/License.txt</licenseUrl>
