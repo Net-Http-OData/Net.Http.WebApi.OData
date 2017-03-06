@@ -138,17 +138,17 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                             break;
 
+                        case TokenType.DateTime:
+                        case TokenType.DateTimeOffset:
                         case TokenType.Decimal:
                         case TokenType.Double:
                         case TokenType.False:
-                        case TokenType.Single:
+                        case TokenType.Guid:
                         case TokenType.Int32:
                         case TokenType.Int64:
-                        case TokenType.DateTime:
-                        case TokenType.DateTimeOffset:
-                        case TokenType.Guid:
-                        case TokenType.String:
                         case TokenType.Null:
+                        case TokenType.Single:
+                        case TokenType.String:
                         case TokenType.Time:
                         case TokenType.True:
                             var constantNode = ConstantNodeParser.ParseConstantNode(token);
@@ -236,17 +236,17 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                             break;
 
+                        case TokenType.DateTime:
+                        case TokenType.DateTimeOffset:
                         case TokenType.Decimal:
                         case TokenType.Double:
                         case TokenType.False:
-                        case TokenType.Single:
+                        case TokenType.Guid:
                         case TokenType.Int32:
                         case TokenType.Int64:
-                        case TokenType.DateTime:
-                        case TokenType.DateTimeOffset:
-                        case TokenType.Guid:
-                        case TokenType.String:
                         case TokenType.Null:
+                        case TokenType.Single:
+                        case TokenType.String:
                         case TokenType.Time:
                         case TokenType.True:
                             rightNode = ConstantNodeParser.ParseConstantNode(token);
