@@ -417,6 +417,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqNegativeDurationValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq duration'-P6DT23H59M59.9999S'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("LastUpdated", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("duration'-P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(TimeSpan.Parse("-6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqNegativeFloatValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Amount eq -1234.567F");
@@ -580,6 +601,27 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("0.314e1", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<double>(((ConstantNode)node.Right).Value);
                 Assert.Equal(0.314e1D, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqPositiveDurationValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("LastUpdated eq duration'P6DT23H59M59.9999S'");
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("LastUpdated", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("duration'P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(TimeSpan.Parse("6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

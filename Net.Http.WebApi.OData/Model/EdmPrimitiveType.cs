@@ -95,6 +95,11 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Represents date and time as an Offset in minutes from GMT, with values ranging from 12:00:00 midnight, January 1, 1753 A.D. through 11:59:59 P.M, December 9999 A.D
         /// </summary>
-        DateTimeOffset = 15
+        DateTimeOffset = 15,
+
+        /// <summary>
+        /// Represents a duration
+        /// </summary>
+        Duration = 16
     }
 }

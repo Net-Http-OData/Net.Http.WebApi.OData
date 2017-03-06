@@ -37,6 +37,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         FunctionName,
         PropertyName,
         UnaryOperator,
-        TimeOfDay
+        TimeOfDay,
+        Duration
     }
 }

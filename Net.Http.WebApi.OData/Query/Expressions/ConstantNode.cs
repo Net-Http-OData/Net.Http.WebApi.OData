@@ -121,6 +121,14 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         internal static ConstantNode Double(string literalText, double value) => new ConstantNode(EdmPrimitiveType.Double, literalText, value);
 
         /// <summary>
+        /// Gets a ConstantNode which represents a duration value.
+        /// </summary>
+        /// <param name="literalText">The literal text.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>A ConstantNode representing a duration value.</returns>
+        internal static ConstantNode Duration(string literalText, TimeSpan value) => new ConstantNode(EdmPrimitiveType.Duration, literalText, value);
+
+        /// <summary>
         /// Gets a ConstantNode which represents a Guid value.
         /// </summary>
         /// <param name="literalText">The literal text.</param>

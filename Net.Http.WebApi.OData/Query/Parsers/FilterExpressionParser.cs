@@ -140,6 +140,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                         case TokenType.Decimal:
                         case TokenType.Double:
+                        case TokenType.Duration:
                         case TokenType.False:
                         case TokenType.Single:
                         case TokenType.Int32:
@@ -238,6 +239,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                         case TokenType.Decimal:
                         case TokenType.Double:
+                        case TokenType.Duration:
                         case TokenType.False:
                         case TokenType.Single:
                         case TokenType.Int32:

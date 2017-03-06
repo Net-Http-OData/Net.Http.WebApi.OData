@@ -44,6 +44,16 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     var doubleValue = double.Parse(doubleText, CultureInfo.InvariantCulture);
                     return ConstantNode.Double(token.Value, doubleValue);
 
+                case TokenType.Duration:
+                    var durationText = token.Value.Substring(9, token.Value.Length - 10)
+                        .Replace("P", string.Empty)
+                        .Replace("DT", ".")
+                        .Replace("H", ":")
+                        .Replace("M", ":")
+                        .Replace("S", string.Empty);
+                    var durationTimeSpanValue = TimeSpan.Parse(durationText, CultureInfo.InvariantCulture);
+                    return ConstantNode.Duration(token.Value, durationTimeSpanValue);
+
                 case TokenType.False:
                     return ConstantNode.False;
 
@@ -84,8 +94,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.String(token.Value, stringText);
 
                 case TokenType.TimeOfDay:
-                    var timeSpanValue = TimeSpan.Parse(token.Value, CultureInfo.InvariantCulture);
-                    return ConstantNode.Time(token.Value, timeSpanValue);
+                    var timeSpanTimeOfDayValue = TimeSpan.Parse(token.Value, CultureInfo.InvariantCulture);
+                    return ConstantNode.Time(token.Value, timeSpanTimeOfDayValue);
 
                 case TokenType.True:
                     return ConstantNode.True;
