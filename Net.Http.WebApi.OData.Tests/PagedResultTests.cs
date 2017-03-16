@@ -1,4 +1,4 @@
-namespace Net.Http.WebApi.Tests.OData
+namespace Net.Http.WebApi.OData.Tests
 {
     using System.Collections.Generic;
     using Net.Http.WebApi.OData;

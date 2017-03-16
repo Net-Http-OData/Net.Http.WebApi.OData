@@ -1,4 +1,4 @@
-namespace Net.Http.WebApi.Tests.OData.Query.Validators
+namespace Net.Http.WebApi.OData.Tests.Query.Validators
 {
     using Net.Http.WebApi.OData.Query;
     using Xunit;

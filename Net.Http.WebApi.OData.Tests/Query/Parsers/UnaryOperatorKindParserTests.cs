@@ -1,4 +1,4 @@
-namespace Net.Http.WebApi.Tests.OData.Query.Parsers
+namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 {
     using System;
     using Net.Http.WebApi.OData;
