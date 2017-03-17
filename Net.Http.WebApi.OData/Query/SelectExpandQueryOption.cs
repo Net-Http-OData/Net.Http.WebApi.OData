@@ -23,17 +23,18 @@ namespace Net.Http.WebApi.OData.Query
     public sealed class SelectExpandQueryOption : QueryOption
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="SelectExpandQueryOption"/> class.
+        /// Initialises a new instance of the <see cref="SelectExpandQueryOption" /> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        internal SelectExpandQueryOption(string rawValue)
+        /// <param name="model">The model.</param>
+        internal SelectExpandQueryOption(string rawValue, EdmComplexType model)
             : base(rawValue)
         {
             var equals = rawValue.IndexOf('=') + 1;
 
             var properties = rawValue.Substring(equals, rawValue.Length - equals)
                 .Split(SplitCharacter.Comma)
-                .Select(p => EdmProperty.From(p))
+                .Select(p => model.GetProperty(p))
                 .ToList();
 
             this.Properties = properties;

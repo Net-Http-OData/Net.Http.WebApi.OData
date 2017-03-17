@@ -153,4 +153,7 @@
   <data name="UnsupportedODataVersion" xml:space="preserve">
     <value>This service only supports OData 3.0</value>
   </data>
+  <data name="CollectionNameInvalid" xml:space="preserve">
+    <value>This service does not contain a collection named '{0}'</value>
+  </data>
 </root>

@@ -18,6 +18,7 @@ namespace Net.Http.WebApi.OData.Query
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+    using Model;
 
     /// <summary>
     /// An object which contains the query options in an OData query.
@@ -36,19 +37,29 @@ namespace Net.Http.WebApi.OData.Query
         private TopQueryOption top;
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="ODataQueryOptions"/> class.
+        /// Initialises a new instance of the <see cref="ODataQueryOptions" /> class.
         /// </summary>
         /// <param name="request">The request.</param>
-        public ODataQueryOptions(HttpRequestMessage request)
+        /// <param name="model">The model.</param>
+        /// <exception cref="ArgumentNullException">Thrown if the request or model are null.</exception>
+        public ODataQueryOptions(HttpRequestMessage request, EdmComplexType model)
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.Collections[request.GetModelName()]), "The model appears to be incorrect for the URI");
+
             ValidateRequest(request);
 
             this.Request = request;
+            this.Model = model;
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
 
@@ -61,7 +72,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.expand == null && this.RawValues.Expand != null)
                 {
-                    this.expand = new SelectExpandQueryOption(this.RawValues.Expand);
+                    this.expand = new SelectExpandQueryOption(this.RawValues.Expand, this.Model);
                 }
 
                 return this.expand;
@@ -77,7 +88,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.filter == null && this.RawValues.Filter != null)
                 {
-                    this.filter = new FilterQueryOption(this.RawValues.Filter);
+                    this.filter = new FilterQueryOption(this.RawValues.Filter, this.Model);
                 }
 
                 return this.filter;
@@ -117,6 +128,14 @@ namespace Net.Http.WebApi.OData.Query
         }
 
         /// <summary>
+        /// Gets the <see cref="EdmComplexType"/> which the OData query relates to.
+        /// </summary>
+        public EdmComplexType Model
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets the order by query option.
         /// </summary>
         public OrderByQueryOption OrderBy
@@ -125,7 +144,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.orderBy == null && this.RawValues.OrderBy != null)
                 {
-                    this.orderBy = new OrderByQueryOption(this.RawValues.OrderBy);
+                    this.orderBy = new OrderByQueryOption(this.RawValues.OrderBy, this.Model);
                 }
 
                 return this.orderBy;
@@ -157,7 +176,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.select == null && this.RawValues.Select != null)
                 {
-                    this.select = new SelectExpandQueryOption(this.RawValues.Select);
+                    this.select = new SelectExpandQueryOption(this.RawValues.Select, this.Model);
                 }
 
                 return this.select;
@@ -212,7 +231,6 @@ namespace Net.Http.WebApi.OData.Query
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateRequest(HttpRequestMessage request)
         {
             IEnumerable<string> values;

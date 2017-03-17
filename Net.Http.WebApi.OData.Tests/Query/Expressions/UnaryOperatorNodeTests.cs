@@ -1,4 +1,4 @@
-namespace Net.Http.WebApi.Tests.OData.Query.Expressions
+namespace Net.Http.WebApi.OData.Tests.Query.Expressions
 {
     using Net.Http.WebApi.OData.Query.Expressions;
     using WebApi.OData.Model;
@@ -9,11 +9,16 @@ namespace Net.Http.WebApi.Tests.OData.Query.Expressions
         public class WhenConstructed
         {
             private readonly UnaryOperatorNode node;
-            private readonly QueryNode operand = new PropertyAccessNode(EdmProperty.From("Name"));
+            private readonly QueryNode operand;
             private readonly UnaryOperatorKind unaryOperatorKind = UnaryOperatorKind.Not;
 
             public WhenConstructed()
             {
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                this.operand = new PropertyAccessNode(model.GetProperty("CompanyName"));
                 this.node = new UnaryOperatorNode(this.operand, unaryOperatorKind);
             }
 

@@ -25,12 +25,19 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="OrderByProperty"/> class.
         /// </summary>
         /// <param name="rawValue">The raw value.</param>
+        /// <param name="model">The model.</param>
+        /// <exception cref="ArgumentNullException">Thrown if raw value or model are null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
-        internal OrderByProperty(string rawValue)
+        internal OrderByProperty(string rawValue, EdmComplexType model)
         {
             if (rawValue == null)
             {
                 throw new ArgumentNullException(nameof(rawValue));
+            }
+
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
             }
 
             this.RawValue = rawValue;
@@ -39,11 +46,11 @@ namespace Net.Http.WebApi.OData.Query
 
             if (space == -1)
             {
-                this.Property = EdmProperty.From(rawValue);
+                this.Property = model.GetProperty(rawValue);
             }
             else
             {
-                this.Property = EdmProperty.From(rawValue.Substring(0, space));
+                this.Property = model.GetProperty(rawValue.Substring(0, space));
 
                 switch (rawValue.Substring(space + 1, rawValue.Length - (space + 1)))
                 {

@@ -61,6 +61,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This service does not contain a collection named &apos;{0}&apos;.
+        /// </summary>
+        internal static string CollectionNameInvalid {
+            get {
+                return ResourceManager.GetString("CollectionNameInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If specified, the $inlinecount value must be either &apos;allpages&apos; or &apos;none&apos;..
         /// </summary>
         internal static string InlineCountRawValueInvalid {

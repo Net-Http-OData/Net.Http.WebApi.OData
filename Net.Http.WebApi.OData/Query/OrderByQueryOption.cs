@@ -14,6 +14,7 @@ namespace Net.Http.WebApi.OData.Query
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Model;
 
     /// <summary>
     /// A class containing deserialised values from the $orderby query option.
@@ -25,7 +26,8 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="OrderByQueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw request value.</param>
-        internal OrderByQueryOption(string rawValue)
+        /// <param name="model">The model.</param>
+        internal OrderByQueryOption(string rawValue, EdmComplexType model)
             : base(rawValue)
         {
             var equals = rawValue.IndexOf('=') + 1;
@@ -34,12 +36,12 @@ namespace Net.Http.WebApi.OData.Query
             if (properties.Contains(','))
             {
                 this.Properties = properties.Split(SplitCharacter.Comma)
-                    .Select(raw => new OrderByProperty(raw))
+                    .Select(raw => new OrderByProperty(raw, model))
                     .ToArray();
             }
             else
             {
-                this.Properties = new[] { new OrderByProperty(properties) };
+                this.Properties = new[] { new OrderByProperty(properties, model) };
             }
         }
 

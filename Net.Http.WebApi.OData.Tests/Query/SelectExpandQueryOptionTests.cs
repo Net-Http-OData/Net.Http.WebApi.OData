@@ -1,4 +1,4 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query
+﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
     using Net.Http.WebApi.OData.Query;
     using WebApi.OData.Model;
@@ -13,17 +13,22 @@
 
             public WhenConstructedWithAValidValue()
             {
-                this.rawValue = "$select=Name,Age,Joined";
-                this.option = new SelectExpandQueryOption(this.rawValue);
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Products"];
+
+                this.rawValue = "$select=Name,Price,ReleaseDate";
+                this.option = new SelectExpandQueryOption(this.rawValue, model);
             }
 
             [Fact]
             public void ThePropertiesShouldContainEachSpecifiedValue()
             {
-                foreach (var property in new[] { EdmProperty.From("Name"), EdmProperty.From("Age"), EdmProperty.From("Joined") })
-                {
-                    Assert.Contains(property, this.option.Properties);
-                }
+                Assert.Equal(3, this.option.Properties.Count);
+
+                Assert.Equal("Name", this.option.Properties[0].Name);
+                Assert.Equal("Price", this.option.Properties[1].Name);
+                Assert.Equal("ReleaseDate", this.option.Properties[2].Name);
             }
 
             [Fact]

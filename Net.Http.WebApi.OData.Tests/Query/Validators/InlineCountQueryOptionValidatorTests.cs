@@ -1,4 +1,4 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Validators
+﻿namespace Net.Http.WebApi.OData.Tests.Query.Validators
 {
     using System.Net;
     using System.Net.Http;
@@ -6,6 +6,7 @@
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
+    using OData.Model;
     using Xunit;
 
     public class InlineCountQueryOptionValidatorTests
@@ -21,9 +22,11 @@
 
             public WhenTheInlineCountQueryOptionIsSetAndItIsNotAValidValue()
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=x");
+                TestHelper.EnsureEDM();
 
-                this.queryOptions = new ODataQueryOptions(requestMessage);
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=x"),
+                    EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
@@ -48,9 +51,11 @@
 
             public WhenTheInlineCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages");
+                TestHelper.EnsureEDM();
 
-                this.queryOptions = new ODataQueryOptions(requestMessage);
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
+                    EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
@@ -75,9 +80,11 @@
 
             public WhenTheInlineCountQueryOptionIsSetToAllPagesAndItIsSpecifiedInAllowedQueryOptions()
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages");
+                TestHelper.EnsureEDM();
 
-                this.queryOptions = new ODataQueryOptions(requestMessage);
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
+                    EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
@@ -98,9 +105,11 @@
 
             public WhenTheInlineCountQueryOptionIsSetToNoneAndItIsSpecifiedInAllowedQueryOptions()
             {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=none");
+                TestHelper.EnsureEDM();
 
-                this.queryOptions = new ODataQueryOptions(requestMessage);
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=none"),
+                    EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]

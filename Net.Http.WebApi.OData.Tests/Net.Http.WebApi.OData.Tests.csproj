@@ -63,9 +63,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
+    <Compile Include="Model\EdmComplexTypeTests.cs" />
+    <Compile Include="Model\EdmPrimitiveTypeTests.cs" />
+    <Compile Include="Model\EdmPropertyTests.cs" />
+    <Compile Include="Model\EdmTypeCacheTests.cs" />
+    <Compile Include="Model\EntityDataModelBuilderTests.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="PagedResultSerializationTests.cs" />
     <Compile Include="PagedResultTests.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
     <Compile Include="Query\Expressions\ConstantNodeTests.cs" />
@@ -97,6 +107,7 @@
     <Compile Include="Query\Validators\SkipQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\SkipTokenQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidatorTests.cs" />
+    <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">

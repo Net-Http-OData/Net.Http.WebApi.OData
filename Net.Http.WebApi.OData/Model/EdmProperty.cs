@@ -13,28 +13,49 @@
 namespace Net.Http.WebApi.OData.Model
 {
     using System;
-    using System.Collections.Concurrent;
 
     /// <summary>
-    /// A class which represents an entity property in the entity data model.
+    /// A class which represents an entity property in the Entity Data Model.
     /// </summary>
+    [System.Diagnostics.DebuggerDisplay("{Name}")]
     public sealed class EdmProperty
     {
-        private static readonly ConcurrentDictionary<string, EdmProperty> EdmPropertyCache = new ConcurrentDictionary<string, EdmProperty>();
-
         /// <summary>
-        /// Initialises a new instance of the <see cref="EdmProperty"/> class.
+        /// Initialises a new instance of the <see cref="EdmProperty" /> class.
         /// </summary>
         /// <param name="name">The name of the property.</param>
+        /// <param name="propertyType">Type of the edm.</param>
+        /// <param name="declaringType">Type of the declaring.</param>
         /// <exception cref="System.ArgumentException">Property name must be specified</exception>
-        private EdmProperty(string name)
+        /// <exception cref="System.ArgumentNullException">Property type and declaring type must be specified.</exception>
+        internal EdmProperty(string name, EdmType propertyType, EdmComplexType declaringType)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Property name must be specified", nameof(name));
             }
 
+            if (propertyType == null)
+            {
+                throw new ArgumentNullException(nameof(propertyType));
+            }
+
+            if (declaringType == null)
+            {
+                throw new ArgumentNullException(nameof(declaringType));
+            }
+
             this.Name = name;
+            this.PropertyType = propertyType;
+            this.DeclaringType = declaringType;
+        }
+
+        /// <summary>
+        /// Gets the type in the Entity Data Model which declares this property.
+        /// </summary>
+        public EdmComplexType DeclaringType
+        {
+            get;
         }
 
         /// <summary>
@@ -46,19 +67,19 @@ namespace Net.Http.WebApi.OData.Model
         }
 
         /// <summary>
+        /// Gets the type of the property in the Entity Data Model.
+        /// </summary>
+        public EdmType PropertyType
+        {
+            get;
+        }
+
+        /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.Name;
-        }
-
-        internal static EdmProperty From(string propertyName)
-        {
-            return EdmPropertyCache.GetOrAdd(propertyName, propName => new EdmProperty(propName));
-        }
+        public override string ToString() => this.Name;
     }
 }

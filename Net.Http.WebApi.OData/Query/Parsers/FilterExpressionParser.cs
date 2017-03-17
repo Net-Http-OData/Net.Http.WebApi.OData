@@ -13,16 +13,15 @@
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using Expressions;
     using Model;
 
     internal static class FilterExpressionParser
     {
-        internal static QueryNode Parse(string filterValue)
+        internal static QueryNode Parse(string filterValue, EdmComplexType model)
         {
-            var parserImpl = new FilterExpressionParserImpl();
+            var parserImpl = new FilterExpressionParserImpl(model);
             var queryNode = parserImpl.Parse(new Lexer(filterValue));
 
             return queryNode;
@@ -30,14 +29,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
         private sealed class FilterExpressionParserImpl
         {
-            private static readonly ConcurrentDictionary<string, PropertyAccessNode> PropertyAccessNodeCache = new ConcurrentDictionary<string, PropertyAccessNode>();
+            private readonly EdmComplexType model;
             private readonly Stack<QueryNode> nodeStack = new Stack<QueryNode>();
             private readonly Queue<Token> tokens = new Queue<Token>();
             private int groupingDepth;
             private BinaryOperatorKind nextBinaryOperatorKind = BinaryOperatorKind.None;
 
-            internal FilterExpressionParserImpl()
+            internal FilterExpressionParserImpl(EdmComplexType model)
             {
+                this.model = model;
             }
 
             internal QueryNode Parse(Lexer lexer)
@@ -123,9 +123,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.PropertyName:
-                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(
-                                token.Value,
-                                propName => new PropertyAccessNode(EdmProperty.From(propName)));
+                            var propertyAccessNode = new PropertyAccessNode(this.model.GetProperty(token.Value));
 
                             if (stack.Count > 0)
                             {
@@ -221,9 +219,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.PropertyName:
-                            var propertyAccessNode = PropertyAccessNodeCache.GetOrAdd(
-                                token.Value,
-                                propName => new PropertyAccessNode(EdmProperty.From(propName)));
+                            var propertyAccessNode = new PropertyAccessNode(this.model.GetProperty(token.Value));
 
                             if (leftNode == null)
                             {

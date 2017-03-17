@@ -1,17 +1,23 @@
-namespace Net.Http.WebApi.Tests.OData.Query.Parsers
+namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 {
-    using Net.Http.WebApi.OData.Query.Expressions;
-    using Net.Http.WebApi.OData.Query.Parsers;
+    using WebApi.OData.Model;
+    using WebApi.OData.Query.Expressions;
+    using WebApi.OData.Query.Parsers;
     using Xunit;
 
     public partial class FilterExpressionParserTests
     {
         public class SingleValueFunctionCallTests
         {
+            public SingleValueFunctionCallTests()
+            {
+                TestHelper.EnsureEDM();
+            }
+
             [Fact]
             public void ParseCastFunctionWithExpressionAndTypeExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("cast(Age, 'Edm.Int64') eq 20");
+                var queryNode = FilterExpressionParser.Parse("cast(Rating, 'Edm.Int64') eq 20", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -23,7 +29,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("cast", nodeLeft.Name);
                 Assert.Equal(2, nodeLeft.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeLeft.Parameters[0]);
-                Assert.Equal("Age", ((PropertyAccessNode)nodeLeft.Parameters[0]).Property.Name);
+                Assert.Equal("Rating", ((PropertyAccessNode)nodeLeft.Parameters[0]).Property.Name);
                 Assert.IsType<ConstantNode>(nodeLeft.Parameters[1]);
                 Assert.Equal("'Edm.Int64'", ((ConstantNode)nodeLeft.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeLeft.Parameters[1]).Value);
@@ -40,7 +46,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseCastFunctionWithTypeOnlyExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("cast('Edm.Int64')");
+                var queryNode = FilterExpressionParser.Parse("cast('Edm.Int64')", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -58,7 +64,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseCeilingFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ceiling(Freight) eq 32");
+                var queryNode = FilterExpressionParser.Parse("ceiling(Freight) eq 32", EntityDataModel.Current.Collections["Orders"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -83,7 +89,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseConcatFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("concat(concat(City, ', '), Country) eq 'Berlin, Germany'");
+                var queryNode = FilterExpressionParser.Parse("concat(concat(City, ', '), Country) eq 'Berlin, Germany'", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -116,7 +122,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseContainsFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("contains(CompanyName,'Alfreds')");
+                var queryNode = FilterExpressionParser.Parse("contains(CompanyName,'Alfreds')", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -136,7 +142,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseDayFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("day(BirthDate) eq 8");
+                var queryNode = FilterExpressionParser.Parse("day(BirthDate) eq 8", EntityDataModel.Current.Collections["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -161,7 +167,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseEndswithFunctionEqTrueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("endswith(CompanyName, 'Futterkiste') eq true");
+                var queryNode = FilterExpressionParser.Parse("endswith(CompanyName, 'Futterkiste') eq true", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -190,7 +196,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseEndswithFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("endswith(CompanyName, 'Futterkiste')");
+                var queryNode = FilterExpressionParser.Parse("endswith(CompanyName, 'Futterkiste')", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -210,7 +216,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseFloorFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("floor(Freight) eq 32");
+                var queryNode = FilterExpressionParser.Parse("floor(Freight) eq 32", EntityDataModel.Current.Collections["Orders"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -235,7 +241,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseHourFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("hour(BirthDate) eq 4");
+                var queryNode = FilterExpressionParser.Parse("hour(BirthDate) eq 4", EntityDataModel.Current.Collections["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -260,7 +266,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseIndexOfFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("indexof(CompanyName, 'lfreds') eq 1");
+                var queryNode = FilterExpressionParser.Parse("indexof(CompanyName, 'lfreds') eq 1", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -289,7 +295,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseIsOfFunctionWithExpressionAndTypeExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("isof(Age, 'Edm.Int64')");
+                var queryNode = FilterExpressionParser.Parse("isof(ShipCountry, 'Edm.String')", EntityDataModel.Current.Collections["Orders"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -299,17 +305,17 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("isof", node.Name);
                 Assert.Equal(2, node.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(node.Parameters[0]);
-                Assert.Equal("Age", ((PropertyAccessNode)node.Parameters[0]).Property.Name);
+                Assert.Equal("ShipCountry", ((PropertyAccessNode)node.Parameters[0]).Property.Name);
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
-                Assert.Equal("'Edm.Int64'", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.Equal("'Edm.String'", ((ConstantNode)node.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[1]).Value);
-                Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[1]).Value);
+                Assert.Equal("Edm.String", ((ConstantNode)node.Parameters[1]).Value);
             }
 
             [Fact]
             public void ParseIsOfFunctionWithTypeOnlyExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("isof('Edm.Int64')");
+                var queryNode = FilterExpressionParser.Parse("isof('NorthwindModel.Order')", EntityDataModel.Current.Collections["Orders"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -319,15 +325,15 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("isof", node.Name);
                 Assert.Equal(1, node.Parameters.Count);
                 Assert.IsType<ConstantNode>(node.Parameters[0]);
-                Assert.Equal("'Edm.Int64'", ((ConstantNode)node.Parameters[0]).LiteralText);
+                Assert.Equal("'NorthwindModel.Order'", ((ConstantNode)node.Parameters[0]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Parameters[0]).Value);
-                Assert.Equal("Edm.Int64", ((ConstantNode)node.Parameters[0]).Value);
+                Assert.Equal("NorthwindModel.Order", ((ConstantNode)node.Parameters[0]).Value);
             }
 
             [Fact]
             public void ParseLengthFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("length(CompanyName) eq 19");
+                var queryNode = FilterExpressionParser.Parse("length(CompanyName) eq 19", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -352,7 +358,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseMinuteFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("minute(BirthDate) eq 40");
+                var queryNode = FilterExpressionParser.Parse("minute(BirthDate) eq 40", EntityDataModel.Current.Collections["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -377,7 +383,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseMonthFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("month(BirthDate) eq 5");
+                var queryNode = FilterExpressionParser.Parse("month(BirthDate) eq 5", EntityDataModel.Current.Collections["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -402,7 +408,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseNotEndsWithFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("not endswith(Name, 'ilk')");
+                var queryNode = FilterExpressionParser.Parse("not endswith(Description, 'ilk')", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<UnaryOperatorNode>(queryNode);
@@ -414,7 +420,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("endswith", nodeOperand.Name);
                 Assert.Equal(2, nodeOperand.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(nodeOperand.Parameters[0]);
-                Assert.Equal("Name", ((PropertyAccessNode)nodeOperand.Parameters[0]).Property.Name);
+                Assert.Equal("Description", ((PropertyAccessNode)nodeOperand.Parameters[0]).Property.Name);
                 Assert.IsType<ConstantNode>(nodeOperand.Parameters[1]);
                 Assert.Equal("'ilk'", ((ConstantNode)nodeOperand.Parameters[1]).LiteralText);
                 Assert.IsType<string>(((ConstantNode)nodeOperand.Parameters[1]).Value);
@@ -426,7 +432,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseReplaceFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'");
+                var queryNode = FilterExpressionParser.Parse("replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -459,7 +465,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseRoundFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("round(Freight) eq 32");
+                var queryNode = FilterExpressionParser.Parse("round(Freight) eq 32", EntityDataModel.Current.Collections["Orders"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -484,7 +490,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseSecondFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("second(BirthDate) eq 40");
+                var queryNode = FilterExpressionParser.Parse("second(BirthDate) eq 40", EntityDataModel.Current.Collections["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -509,7 +515,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseStartswithFunctionEqTrueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("startswith(CompanyName, 'Alfr') eq true");
+                var queryNode = FilterExpressionParser.Parse("startswith(CompanyName, 'Alfr') eq true", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -538,7 +544,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseStartswithFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("startswith(CompanyName, 'Alfr')");
+                var queryNode = FilterExpressionParser.Parse("startswith(CompanyName, 'Alfr')", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -558,7 +564,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseSubstringFunctionExpressionWithOneArgument()
             {
-                var queryNode = FilterExpressionParser.Parse("substring(CompanyName, 1) eq 'lfreds Futterkiste'");
+                var queryNode = FilterExpressionParser.Parse("substring(CompanyName, 1) eq 'lfreds Futterkiste'", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -590,7 +596,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseSubstringFunctionExpressionWithOneArgumentWhichIsAlsoAFunction()
             {
-                var queryNode = FilterExpressionParser.Parse("substring(tolower(Name), 'Paul')");
+                var queryNode = FilterExpressionParser.Parse("substring(tolower(CompanyName), 'alfreds futterkiste')", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -604,16 +610,16 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
                 Assert.Equal("tolower", firstParameter.Name);
                 Assert.Equal(1, firstParameter.Parameters.Count);
                 Assert.IsType<PropertyAccessNode>(firstParameter.Parameters[0]);
-                Assert.Equal("Name", ((PropertyAccessNode)firstParameter.Parameters[0]).Property.Name);
+                Assert.Equal("CompanyName", ((PropertyAccessNode)firstParameter.Parameters[0]).Property.Name);
 
                 Assert.IsType<ConstantNode>(node.Parameters[1]);
-                Assert.Equal("'Paul'", ((ConstantNode)node.Parameters[1]).LiteralText);
+                Assert.Equal("'alfreds futterkiste'", ((ConstantNode)node.Parameters[1]).LiteralText);
             }
 
             [Fact]
             public void ParseSubstringFunctionExpressionWithTwoArguments()
             {
-                var queryNode = FilterExpressionParser.Parse("substring(CompanyName,1,2) eq 'lf'");
+                var queryNode = FilterExpressionParser.Parse("substring(CompanyName,1,2) eq 'lf'", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -646,7 +652,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseSubstringOfFunctionEqTrueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("substringof('Alfreds', CompanyName) eq true");
+                var queryNode = FilterExpressionParser.Parse("substringof('Alfreds', CompanyName) eq true", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -675,7 +681,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseSubstringOfFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("substringof('Alfreds', CompanyName)");
+                var queryNode = FilterExpressionParser.Parse("substringof('Alfreds', CompanyName)", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<FunctionCallNode>(queryNode);
@@ -695,7 +701,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseToLowerFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("tolower(CompanyName) eq 'alfreds futterkiste'");
+                var queryNode = FilterExpressionParser.Parse("tolower(CompanyName) eq 'alfreds futterkiste'", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -720,7 +726,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseToUpperFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'");
+                var queryNode = FilterExpressionParser.Parse("toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -745,7 +751,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseTrimFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("trim(CompanyName) eq CompanyName");
+                var queryNode = FilterExpressionParser.Parse("trim(CompanyName) eq CompanyName", EntityDataModel.Current.Collections["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -768,7 +774,7 @@ namespace Net.Http.WebApi.Tests.OData.Query.Parsers
             [Fact]
             public void ParseYearFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("year(BirthDate) eq 1971");
+                var queryNode = FilterExpressionParser.Parse("year(BirthDate) eq 1971", EntityDataModel.Current.Collections["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);

@@ -6,19 +6,28 @@
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
+    using OData.Model;
     using Xunit;
 
     public class SkipQueryOptionValidatorTests
     {
         public class WhenTheSkipQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=50"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.None
             };
+
+            public WhenTheSkipQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$skip=50"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
@@ -33,13 +42,21 @@
 
         public class WhenTheSkipQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=50"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Skip
             };
+
+            public WhenTheSkipQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$skip=50"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnExceptionShouldNotBeThrown()
@@ -50,8 +67,16 @@
 
         public class WhenValidatingAndTheValueIsAboveZero
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=10"));
+            private readonly ODataQueryOptions queryOptions;
+
+            public WhenValidatingAndTheValueIsAboveZero()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$skip=10"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void NoExceptionIsThrown()
@@ -62,13 +87,21 @@
 
         public class WhenValidatingAndTheValueIsBelowZero
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=-1"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Skip
             };
+
+            public WhenValidatingAndTheValueIsBelowZero()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$skip=-1"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()

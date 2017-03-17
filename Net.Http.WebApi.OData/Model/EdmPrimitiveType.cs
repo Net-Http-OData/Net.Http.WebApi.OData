@@ -12,89 +12,93 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Model
 {
+    using System;
+
     /// <summary>
-    /// The primitive types in the entity data model.
+    /// Represents a primitive type in the Entity Data Model.
     /// </summary>
-    public enum EdmPrimitiveType
+    /// <seealso cref="Net.Http.WebApi.OData.Model.EdmType" />
+    [System.Diagnostics.DebuggerDisplay("{Name}: {ClrType}")]
+    internal sealed class EdmPrimitiveType : EdmType
     {
-        /// <summary>
-        /// Represents the absence of a value
-        /// </summary>
-        Null = 0,
+        private EdmPrimitiveType(string name, Type clrType)
+            : base(name, clrType)
+        {
+        }
 
         /// <summary>
-        /// Represent fixed- or variable- length binary data
+        /// Gets the EdmType which represent fixed- or variable- length binary data.
         /// </summary>
-        Binary = 1,
+        internal static EdmType Binary { get; } = new EdmPrimitiveType("Edm.Binary", typeof(byte[]));
 
         /// <summary>
-        /// Represents the mathematical concept of binary-valued logic
+        /// Gets the EdmType which represents the mathematical concept of binary-valued logic.
         /// </summary>
-        Boolean = 2,
+        internal static EdmType Boolean { get; } = new EdmPrimitiveType("Edm.Boolean", typeof(bool));
 
         /// <summary>
-        /// Unsigned 8-bit integer value
+        /// Gets the EdmType which represents an unsigned 8-bit integer value.
         /// </summary>
-        Byte = 3,
+        internal static EdmType Byte { get; } = new EdmPrimitiveType("Edm.Byte", typeof(byte));
 
         /// <summary>
-        /// Represents date and time with values ranging from 12:00:00 midnight, January 1, 1753 A.D. through 11:59:59 P.M, December 9999 A.D.
+        /// Gets the EdmType which represents date and time with values ranging from 12:00:00 midnight; January 1; 1753 A.D. through 11:59:59 P.M; December 9999 A.D.
         /// </summary>
-        DateTime = 4,
+        internal static EdmType DateTime { get; } = new EdmPrimitiveType("Edm.DateTime", typeof(DateTime));
 
         /// <summary>
-        /// Represents numeric values with fixed precision and scale. This type can describe a numeric value ranging from negative 10^255 + 1 to positive 10^255 -1
+        /// Gets the EdmType which represents date and time as an Offset in minutes from GMT; with values ranging from 12:00:00 midnight; January 1; 1753 A.D. through 11:59:59 P.M; December 9999 A.D.
         /// </summary>
-        Decimal = 5,
+        internal static EdmType DateTimeOffset { get; } = new EdmPrimitiveType("Edm.DateTimeOffset", typeof(DateTimeOffset));
 
         /// <summary>
-        /// Represents a floating point number with 15 digits precision that can represent values with approximate range of ± 2.23e -308 through ± 1.79e +308
+        /// Gets the EdmType which represents numeric values with fixed precision and scale. This type can describe a numeric value ranging from negative 10^255 + 1 to positive 10^255 -1
         /// </summary>
-        Double = 6,
+        internal static EdmType Decimal { get; } = new EdmPrimitiveType("Edm.Decimal", typeof(decimal));
 
         /// <summary>
-        /// Represents a floating point number with 7 digits precision that can represent values with approximate range of ± 1.18e -38 through ± 3.40e +38
+        /// Gets the EdmType which represents a floating point number with 15 digits precision that can represent values with approximate range of ± 2.23e -308 through ± 1.79e +308
         /// </summary>
-        Single = 7,
+        internal static EdmType Double { get; } = new EdmPrimitiveType("Edm.Double", typeof(double));
 
         /// <summary>
-        /// Represents a 16-byte (128-bit) unique identifier value
+        /// Gets the EdmType which represents a 16-byte (128-bit) unique identifier value.
         /// </summary>
-        Guid = 8,
+        internal static EdmType Guid { get; } = new EdmPrimitiveType("Edm.Guid", typeof(Guid));
 
         /// <summary>
-        /// Represents a signed 16-bit integer value
+        /// Gets the EdmType which represents a signed 16-bit integer value.
         /// </summary>
-        Int16 = 9,
+        internal static EdmType Int16 { get; } = new EdmPrimitiveType("Edm.Int16", typeof(short));
 
         /// <summary>
-        /// Represents a signed 32-bit integer value
+        /// Gets the EdmType which represents a signed 32-bit integer value.
         /// </summary>
-        Int32 = 10,
+        internal static EdmType Int32 { get; } = new EdmPrimitiveType("Edm.Int32", typeof(int));
 
         /// <summary>
-        /// Represents a signed 64-bit integer value
+        /// Gets the EdmType which represents a signed 64-bit integer value.
         /// </summary>
-        Int64 = 11,
+        internal static EdmType Int64 { get; } = new EdmPrimitiveType("Edm.Int64", typeof(long));
 
         /// <summary>
-        /// Represents a signed 8-bit integer value
+        /// Gets the EdmType which represents a signed 8-bit integer value.
         /// </summary>
-        SByte = 12,
+        internal static EdmType SByte { get; } = new EdmPrimitiveType("Edm.SByte", typeof(sbyte));
 
         /// <summary>
-        /// Represents fixed- or variable-length character data
+        /// Gets the EdmType which represents a floating point number with 7 digits precision that can represent values with approximate range of ± 1.18e -38 through ± 3.40e +38
         /// </summary>
-        String = 13,
+        internal static EdmType Single { get; } = new EdmPrimitiveType("Edm.Single", typeof(float));
 
         /// <summary>
-        /// Represents the time of day with values ranging from 0:00:00.x to 23:59:59.y, where x and y depend upon the precision
+        /// Gets the EdmType which represents fixed- or variable-length character data.
         /// </summary>
-        Time = 14,
+        internal static EdmType String { get; } = new EdmPrimitiveType("Edm.String", typeof(string));
 
         /// <summary>
-        /// Represents date and time as an Offset in minutes from GMT, with values ranging from 12:00:00 midnight, January 1, 1753 A.D. through 11:59:59 P.M, December 9999 A.D
+        /// Gets the EdmType which represents the time of day with values ranging from 0:00:00.x to 23:59:59.y; where x and y depend upon the precision.
         /// </summary>
-        DateTimeOffset = 15
+        internal static EdmType Time { get; } = new EdmPrimitiveType("Edm.Time", typeof(TimeSpan));
     }
 }
