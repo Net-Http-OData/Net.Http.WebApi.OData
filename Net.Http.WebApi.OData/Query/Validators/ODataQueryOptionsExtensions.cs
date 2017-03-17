@@ -12,7 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validators
 {
-    using Net.Http.WebApi.OData.Query;
+    using Query;
 
     /// <summary>
     /// Extension methods for validating the <see cref="ODataQueryOptions"/>
