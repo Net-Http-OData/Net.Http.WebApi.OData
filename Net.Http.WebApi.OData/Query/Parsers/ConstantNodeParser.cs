@@ -72,12 +72,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.Int32(token.Value, int32Value);
 
                 case TokenType.Int64:
-                    var int64Text = token.Value.Substring(0, token.Value.Length - 1);
-                    if (int64Text == "0")
+                    if (token.Value == "0l" || token.Value == "0L")
                     {
                         return ConstantNode.Int64Zero;
                     }
 
+                    var int64Text = token.Value.Substring(0, token.Value.Length - 1);
                     var int64Value = long.Parse(int64Text, CultureInfo.InvariantCulture);
                     return ConstantNode.Int64(token.Value, int64Value);
 
