@@ -130,7 +130,7 @@
     <value>The specified $top value exceeds the maximum value of '{0}' permitted by this service.</value>
   </data>
   <data name="UnknownQueryOption" xml:space="preserve">
-    <value>The query option '{0}' is not a valid query option. Valid query options are $count, $expand, $filter, $format, $orderby, $select, $skip, $skiptoken and $top</value>
+    <value>The query option '{0}' is not a valid query option. Valid query options are $count, $expand, $filter, $format, $orderby, $search, $select, $skip, $skiptoken and $top</value>
   </data>
   <data name="UnsupportedOperator" xml:space="preserve">
     <value>The '{0}' operator is not implemented by this service.</value>

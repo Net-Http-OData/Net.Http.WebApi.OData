@@ -70,7 +70,6 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the $inlinecount value must be either &apos;allpages&apos; or &apos;none&apos;..
         ///   Looks up a localized string similar to If specified, the $count value must be &apos;true&apos; or &apos;false&apos;.
         /// </summary>
         internal static string CountRawValueInvalid {
@@ -125,7 +124,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $count, $expand, $filter, $format, $orderby, $select, $skip, $skiptoken and $top.
+        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $count, $expand, $filter, $format, $orderby, $search, $select, $skip, $skiptoken and $top.
         /// </summary>
         internal static string UnknownQueryOption {
             get {
