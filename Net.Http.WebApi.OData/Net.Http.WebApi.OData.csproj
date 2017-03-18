@@ -87,6 +87,8 @@
     <Compile Include="Query\AllowedLogicalOperators.cs" />
     <Compile Include="Query\AllowedQueryOptions.cs" />
     <Compile Include="Query\Binders\AbstractFilterBinder.cs" />
+    <Compile Include="Query\Binders\AbstractOrderByBinder.cs" />
+    <Compile Include="Query\Binders\AbstractSelectExpandBinder.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorKind.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNode.cs" />
     <Compile Include="Query\Expressions\ConstantNode.cs" />
