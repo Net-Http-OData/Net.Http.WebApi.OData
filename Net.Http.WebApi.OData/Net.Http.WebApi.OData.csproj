@@ -118,7 +118,6 @@
     <Compile Include="Query\Parsers\TokenType.cs" />
     <Compile Include="Query\Parsers\UnaryOperatorKindParser.cs" />
     <Compile Include="Query\QueryOption.cs" />
-    <Compile Include="Query\SearchQueryOption.cs" />
     <Compile Include="Query\SelectExpandQueryOption.cs" />
     <Compile Include="Query\SkipTokenQueryOption.cs" />
     <Compile Include="Query\SplitCharacter.cs" />

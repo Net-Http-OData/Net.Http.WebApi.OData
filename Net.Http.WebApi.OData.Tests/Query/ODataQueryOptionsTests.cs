@@ -143,6 +143,7 @@
             public void TheSearchPropertyShouldBeSet()
             {
                 Assert.NotNull(this.option.Search);
+                Assert.Equal("blue OR green", this.option.Search);
             }
 
             [Fact]

@@ -94,7 +94,6 @@
     <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleFunction.cs" />
     <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleProperty.cs" />
     <Compile Include="Query\Parsers\UnaryOperatorKindParserTests.cs" />
-    <Compile Include="Query\SearchQueryOptionTests.cs" />
     <Compile Include="Query\SelectExpandQueryOptionTests.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidatorTests.cs" />
