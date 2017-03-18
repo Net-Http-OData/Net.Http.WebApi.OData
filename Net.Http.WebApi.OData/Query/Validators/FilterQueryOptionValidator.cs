@@ -27,7 +27,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
         /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (queryOptions.Filter == null)
@@ -49,7 +48,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
             ValidateArithmeticOperators(queryOptions, validationSettings);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateArithmeticOperators(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedArithmeticOperators == AllowedArithmeticOperators.All)
@@ -95,7 +93,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateDateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
@@ -177,7 +174,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions)
@@ -202,7 +198,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateLogicalOperators(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedLogicalOperators == AllowedLogicalOperators.All)
@@ -269,7 +264,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateMathFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions
@@ -302,7 +296,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're throwing an exception with the HttpResponseMessage")]
         private static void ValidateStringFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (validationSettings.AllowedFunctions == AllowedFunctions.AllFunctions

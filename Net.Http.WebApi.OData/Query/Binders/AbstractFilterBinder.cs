@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Binders
 {
     using System;
-    using Net.Http.WebApi.OData.Query.Expressions;
+    using Expressions;
 
     /// <summary>
     /// A base class for binding a filter expression tree.

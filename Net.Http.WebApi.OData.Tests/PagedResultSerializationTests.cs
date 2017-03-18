@@ -1,4 +1,4 @@
-namespace Net.Http.WebApi.Tests.OData
+namespace Net.Http.WebApi.OData.Tests
 {
     using System.Dynamic;
     using System.Runtime.Serialization;
