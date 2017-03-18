@@ -32,9 +32,7 @@ namespace Net.Http.WebApi.OData.Query
         private InlineCountQueryOption inlineCount;
         private OrderByQueryOption orderBy;
         private SelectExpandQueryOption select;
-        private SkipQueryOption skip;
         private SkipTokenQueryOption skipToken;
-        private TopQueryOption top;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataQueryOptions" /> class.
@@ -186,18 +184,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the skip query option.
         /// </summary>
-        public SkipQueryOption Skip
-        {
-            get
-            {
-                if (this.skip == null && this.RawValues.Skip != null)
-                {
-                    this.skip = new SkipQueryOption(this.RawValues.Skip);
-                }
-
-                return this.skip;
-            }
-        }
+        public int? Skip => ParseInt(this.RawValues.Skip);
 
         /// <summary>
         /// Gets the skip token query option.
@@ -218,17 +205,26 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the top query option.
         /// </summary>
-        public TopQueryOption Top
-        {
-            get
-            {
-                if (this.top == null && this.RawValues.Top != null)
-                {
-                    this.top = new TopQueryOption(this.RawValues.Top);
-                }
+        public int? Top => ParseInt(this.RawValues.Top);
 
-                return this.top;
+        private static int? ParseInt(string rawValue)
+        {
+            if (rawValue == null)
+            {
+                return null;
             }
+
+            var equals = rawValue.IndexOf('=') + 1;
+            var value = rawValue.Substring(equals, rawValue.Length - equals);
+
+            int skip;
+
+            if (int.TryParse(value, out skip))
+            {
+                return skip;
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.IntRawValueInvalid.FormatWith(value.Substring(0, equals)));
         }
 
         private static void ValidateRequest(HttpRequestMessage request)

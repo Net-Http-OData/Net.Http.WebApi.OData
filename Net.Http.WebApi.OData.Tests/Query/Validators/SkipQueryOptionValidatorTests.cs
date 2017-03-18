@@ -110,7 +110,7 @@
                     () => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
-                Assert.Equal(Messages.SkipRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(Messages.IntRawValueInvalid.FormatWith("$skip"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
     }

@@ -43,7 +43,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if (queryOptions.Skip.Value < 0)
             {
                 throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.SkipRawValueInvalid));
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$skip")));
             }
         }
     }

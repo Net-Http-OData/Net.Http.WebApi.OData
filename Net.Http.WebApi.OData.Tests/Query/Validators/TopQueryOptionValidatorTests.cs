@@ -91,7 +91,7 @@
                     () => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
-                Assert.Equal(Messages.TopRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(Messages.IntRawValueInvalid.FormatWith("$top"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
