@@ -188,9 +188,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("true", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<bool>(((ConstantNode)node.Right).Value);
-                Assert.True((bool)((ConstantNode)node.Right).Value);
+                Assert.Same(ConstantNode.True, node.Right);
             }
 
             [Fact]
@@ -536,9 +534,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("true", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<bool>(((ConstantNode)node.Right).Value);
-                Assert.True((bool)((ConstantNode)node.Right).Value);
+                Assert.Same(ConstantNode.True, node.Right);
             }
 
             [Fact]
@@ -673,9 +669,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("true", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<bool>(((ConstantNode)node.Right).Value);
-                Assert.True((bool)((ConstantNode)node.Right).Value);
+                Assert.Same(ConstantNode.True, node.Right);
             }
 
             [Fact]
