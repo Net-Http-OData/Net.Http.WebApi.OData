@@ -26,8 +26,8 @@
             [Fact]
             public void TheDataServiceVersionHeaderIsSet()
             {
-                Assert.True(this.httpResponseMessage.Headers.Contains("DataServiceVersion"));
-                Assert.Equal("3.0", this.httpResponseMessage.Headers.GetValues("DataServiceVersion").Single());
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.DataServiceVersion));
+                Assert.Equal("3.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.DataServiceVersion).Single());
             }
         }
     }

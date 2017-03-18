@@ -235,7 +235,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             IEnumerable<string> values;
 
-            if (request.Headers.TryGetValues("DataServiceVersion", out values))
+            if (request.Headers.TryGetValues(ODataHeaderNames.DataServiceVersion, out values))
             {
                 var value = values.FirstOrDefault();
 
