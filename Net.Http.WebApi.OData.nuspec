@@ -17,7 +17,10 @@
 - Correctly returning HTTP 400 and HTTP 501 where appropriate instead of ODataException which resulted in HTTP 500
 - SelectQueryOption and ExpandQueryOption merged into SelectExpandQueryOption since they have the same implementation
 - Introduction of EdmProperty which is used in SelectExpandQueryOption, OrderByProperty, PropertyAccessNode
-- The InlineCount&lt;T&gt; class was still returning OData 2.0 format { "__count":0, "results":[] }, updated to OData 4.0 format { "@odata.count":0, "value":[] } replaced by PagedResult&lt;T&gt; class
+- The InlineCount&lt;T&gt; class was still returning OData 2.0 format { "__count":0, "results":[] }, updated to OData 3.0 format { "odata.count":0, "value":[] } replaced by PagedResult&lt;T&gt; class
+- Improved AbstractFilterBinder and added an AbstractSelectExpandBinder and and AbstractOrderByBinder
+- Removed SkipQueryOption and TopQueryOption, they only contain an int so exposed that directly as int?
+- Added an Entity Data Model
 - substringof function removed
 - contains function added (replaces substringof)
 - Edm.DateTime &amp; Edm.Time removed
