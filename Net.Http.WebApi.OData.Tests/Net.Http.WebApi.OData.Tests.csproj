@@ -96,8 +96,6 @@
     <Compile Include="Query\Parsers\UnaryOperatorKindParserTests.cs" />
     <Compile Include="Query\SearchQueryOptionTests.cs" />
     <Compile Include="Query\SelectExpandQueryOptionTests.cs" />
-    <Compile Include="Query\SkipQueryOptionTests.cs" />
-    <Compile Include="Query\TopQueryOptionTests.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidatorTests.cs" />

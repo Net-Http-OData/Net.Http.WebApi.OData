@@ -16,10 +16,24 @@ namespace Net.Http.WebApi.OData.Query.Binders
     using Expressions;
 
     /// <summary>
-    /// A base class for binding a filter expression tree.
+    /// A base class for binding the $filter query option.
     /// </summary>
     public abstract class AbstractFilterBinder
     {
+        /// <summary>
+        /// Binds the $filter value from the OData Query.
+        /// </summary>
+        /// <param name="filterQueryOption">The filter query option.</param>
+        public void Bind(FilterQueryOption filterQueryOption)
+        {
+            if (filterQueryOption == null)
+            {
+                return;
+            }
+
+            this.Bind(filterQueryOption.Expression);
+        }
+
         /// <summary>
         /// Binds the specified <see cref="BinaryOperatorNode"/>.
         /// </summary>

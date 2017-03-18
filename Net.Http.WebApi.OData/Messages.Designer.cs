@@ -79,29 +79,20 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If specified, the {0} value must be a non-negative numeric value..
+        /// </summary>
+        internal static string IntRawValueInvalid {
+            get {
+                return ResourceManager.GetString("IntRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If specified, the $orderby direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {
             get {
                 return ResourceManager.GetString("OrderByPropertyRawValueInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to If specified, the $skip value must be a non-negative numeric value..
-        /// </summary>
-        internal static string SkipRawValueInvalid {
-            get {
-                return ResourceManager.GetString("SkipRawValueInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to If specified, the $top value must be a non-negative numeric value..
-        /// </summary>
-        internal static string TopRawValueInvalid {
-            get {
-                return ResourceManager.GetString("TopRawValueInvalid", resourceCulture);
             }
         }
         

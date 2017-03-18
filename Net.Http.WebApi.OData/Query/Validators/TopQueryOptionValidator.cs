@@ -44,7 +44,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
             if (queryOptions.Top.Value < 0)
             {
                 throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.TopRawValueInvalid));
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$top")));
             }
 
             if (queryOptions.Top.Value > validationSettings.MaxTop)

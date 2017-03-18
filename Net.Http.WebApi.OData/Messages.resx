@@ -120,11 +120,8 @@
   <data name="OrderByPropertyRawValueInvalid" xml:space="preserve">
     <value>If specified, the $orderby direction must be either 'asc' or 'desc'.</value>
   </data>
-  <data name="SkipRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $skip value must be a non-negative numeric value.</value>
-  </data>
-  <data name="TopRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $top value must be a non-negative numeric value.</value>
+  <data name="IntRawValueInvalid" xml:space="preserve">
+    <value>If specified, the {0} value must be a non-negative numeric value.</value>
   </data>
   <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
     <value>The specified $top value exceeds the maximum value of '{0}' permitted by this service.</value>
