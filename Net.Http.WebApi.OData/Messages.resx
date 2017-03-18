@@ -156,4 +156,7 @@
   <data name="UnsupportedIsolationLevel" xml:space="preserve">
     <value>If specified, the OData-IsolationLevel must be 'Snapshot'</value>
   </data>
+  <data name="CollectionNameInvalid" xml:space="preserve">
+    <value>This service does not contain a collection named '{0}'</value>
+  </data>
 </root>

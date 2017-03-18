@@ -12,10 +12,14 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System.Net;
+    using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Web.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Metadata;
+    using Model;
 
     /// <summary>
     /// The <see cref="HttpParameterBinding"/> which can create an <see cref="ODataQueryOptions"/> from the request parameters.
@@ -49,7 +53,17 @@ namespace Net.Http.WebApi.OData.Query
             CancellationToken cancellationToken)
         {
             var request = actionContext.Request;
-            var parameterValue = new ODataQueryOptions(request);
+
+            var modelName = request.GetModelName();
+            EdmComplexType model;
+
+            if (!EntityDataModel.Current.Collections.TryGetValue(modelName, out model))
+            {
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(modelName)));
+            }
+
+            var parameterValue = new ODataQueryOptions(request, model);
 
             this.SetValue(actionContext, parameterValue);
 

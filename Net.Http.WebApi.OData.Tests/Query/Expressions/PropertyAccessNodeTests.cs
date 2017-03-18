@@ -1,4 +1,4 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Expressions
+﻿namespace Net.Http.WebApi.OData.Tests.Query.Expressions
 {
     using Net.Http.WebApi.OData.Query.Expressions;
     using WebApi.OData.Model;
@@ -9,10 +9,15 @@
         public class WhenConstructed
         {
             private readonly PropertyAccessNode node;
-            private readonly EdmProperty property = EdmProperty.From("Name");
+            private readonly EdmProperty property;
 
             public WhenConstructed()
             {
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                this.property = model.GetProperty("CompanyName");
                 this.node = new PropertyAccessNode(this.property);
             }
 

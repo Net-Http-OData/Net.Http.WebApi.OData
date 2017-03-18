@@ -24,20 +24,20 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Initialises a new instance of the <see cref="ConstantNode" /> class.
         /// </summary>
-        /// <param name="edmType">The <see cref="EdmPrimitiveType"/> of the value.</param>
+        /// <param name="edmType">The <see cref="EdmType"/> of the value.</param>
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
-        private ConstantNode(EdmPrimitiveType edmType, string literalText, object value)
+        private ConstantNode(EdmType edmType, string literalText, object value)
         {
-            this.EdmPrimitiveType = edmType;
+            this.EdmType = edmType;
             this.LiteralText = literalText;
             this.Value = value;
         }
 
         /// <summary>
-        /// Gets the <see cref="EdmPrimitiveType"/> of the value.
+        /// Gets the <see cref="EdmType"/> of the value.
         /// </summary>
-        public EdmPrimitiveType EdmPrimitiveType
+        public EdmType EdmType
         {
             get;
         }
@@ -81,7 +81,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the ConstantNode which represents a value of null.
         /// </summary>
-        internal static ConstantNode Null { get; } = new ConstantNode(EdmPrimitiveType.Null, "null", null);
+        internal static ConstantNode Null { get; } = new ConstantNode(null, "null", null);
 
         /// <summary>
         /// Gets the ConstantNode which represents a value of true.

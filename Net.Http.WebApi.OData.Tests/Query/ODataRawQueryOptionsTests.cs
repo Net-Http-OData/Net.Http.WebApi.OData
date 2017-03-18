@@ -1,5 +1,6 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query
+﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
+    using System;
     using System.Net;
     using System.Web.Http;
     using Net.Http.WebApi.OData.Query;
@@ -7,6 +8,12 @@
 
     public class ODataRawQueryOptionsTests
     {
+        [Fact]
+        public void Constructor_ThrowsArgumentNullException_ForNullHttpReuestMessage()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ODataRawQueryOptions(null));
+        }
+
         public class WhenCallingConstructorWithAllQueryOptions
         {
             private readonly ODataRawQueryOptions rawQueryOptions;

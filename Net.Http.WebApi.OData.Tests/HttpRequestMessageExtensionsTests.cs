@@ -17,7 +17,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/Business?$filter=LegacyId eq 2139");
+                    "http://services.odata.org/OData/OData.svc/Products?$filter=Price eq 21.39M");
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
                 this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new PagedResult<dynamic>(new object[0], 0));

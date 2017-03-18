@@ -1,4 +1,4 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Validators
+﻿namespace Net.Http.WebApi.OData.Tests.Query.Validators
 {
     using System.Net;
     using System.Net.Http;
@@ -6,19 +6,28 @@
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
+    using OData.Model;
     using Xunit;
 
     public class FormatQueryValidatorTests
     {
         public class WhenTheFormatQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$format=xml"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.None
             };
+
+            public WhenTheFormatQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$format=xml"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
@@ -33,13 +42,21 @@
 
         public class WhenTheFormatQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$format=xml"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Format
             };
+
+            public WhenTheFormatQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$format=xml"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnExceptionShouldNotBeThrown()

@@ -1,6 +1,7 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query
+﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
     using Net.Http.WebApi.OData.Query;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class FilterQueryOptionTests
@@ -12,8 +13,12 @@
 
             public WhenConstructedWithAValidValue()
             {
-                this.rawValue = "$filter=Name eq 'John'";
-                this.option = new FilterQueryOption(this.rawValue);
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                this.rawValue = "$filter=CompanyName eq 'Alfreds Futterkiste'";
+                this.option = new FilterQueryOption(this.rawValue, model);
             }
 
             [Fact]

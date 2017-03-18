@@ -6,19 +6,29 @@
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
+    using WebApi.OData.Model;
+    using WebApi.OData.Tests;
     using Xunit;
 
     public class SearchQueryValidatorTests
     {
         public class WhenTheSearchQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$search=blue OR green"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.None
             };
+
+            public WhenTheSearchQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$search=blue OR green"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
@@ -33,13 +43,21 @@
 
         public class WhenTheSearchQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$search=blue OR green"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Search
             };
+
+            public WhenTheSearchQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$search=blue OR green"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnExceptionShouldNotBeThrown()

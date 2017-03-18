@@ -1,25 +1,33 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query
+﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
     using Net.Http.WebApi.OData.Query;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class OrderByQueryOptionTests
     {
-        public class WhenConstructedWithAMultipleValues
+        public class WhenConstructedWithASingleValue
         {
             private readonly OrderByQueryOption option;
             private readonly string rawValue;
 
-            public WhenConstructedWithAMultipleValues()
+            public WhenConstructedWithASingleValue()
             {
-                this.rawValue = "$orderby=Name,Age desc";
-                this.option = new OrderByQueryOption(this.rawValue);
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Products"];
+
+                this.rawValue = "$orderby=Name";
+                this.option = new OrderByQueryOption(this.rawValue, model);
             }
 
             [Fact]
-            public void ThePropertiesShouldContainTheCorrectNumberOfItems()
+            public void ThePropertiesShouldContainTheCorrectItems()
             {
-                Assert.Equal(2, this.option.Properties.Count);
+                Assert.Equal(1, this.option.Properties.Count);
+
+                Assert.Equal("Name", this.option.Properties[0].Property.Name);
+                Assert.Equal(OrderByDirection.Ascending, this.option.Properties[0].Direction);
             }
 
             [Fact]
@@ -29,21 +37,34 @@
             }
         }
 
-        public class WhenConstructedWithASingleValue
+        public class WhenConstructedWithMultipleValues
         {
             private readonly OrderByQueryOption option;
             private readonly string rawValue;
 
-            public WhenConstructedWithASingleValue()
+            public WhenConstructedWithMultipleValues()
             {
-                this.rawValue = "$orderby=Name";
-                this.option = new OrderByQueryOption(this.rawValue);
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Products"];
+
+                this.rawValue = "$orderby=Name,Price desc,Rating asc";
+                this.option = new OrderByQueryOption(this.rawValue, model);
             }
 
             [Fact]
-            public void ThePropertiesShouldContainTheCorrectNumberOfItems()
+            public void ThePropertiesShouldContainTheCorrectItems()
             {
-                Assert.Equal(1, this.option.Properties.Count);
+                Assert.Equal(3, this.option.Properties.Count);
+
+                Assert.Equal("Name", this.option.Properties[0].Property.Name);
+                Assert.Equal(OrderByDirection.Ascending, this.option.Properties[0].Direction);
+
+                Assert.Equal("Price", this.option.Properties[1].Property.Name);
+                Assert.Equal(OrderByDirection.Descending, this.option.Properties[1].Direction);
+
+                Assert.Equal("Rating", this.option.Properties[2].Property.Name);
+                Assert.Equal(OrderByDirection.Ascending, this.option.Properties[2].Direction);
             }
 
             [Fact]

@@ -1,18 +1,41 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query
+﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
     using System;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
+    using WebApi.OData.Model;
     using Xunit;
 
     public class OrderByPropertyTests
     {
+        [Fact]
+        public void Constructor_ThrowsArgumentNullException_ForNullModel()
+        {
+            TestHelper.EnsureEDM();
+
+            Assert.Throws<ArgumentNullException>(
+                () => new OrderByProperty("CompanyName", null));
+        }
+
+        [Fact]
+        public void Constructor_ThrowsArgumentNullException_ForNullRawValue()
+        {
+            TestHelper.EnsureEDM();
+
+            Assert.Throws<ArgumentNullException>(
+                () => new OrderByProperty(null, EntityDataModel.Current.Collections["Customers"]));
+        }
+
         public class WhenConstructedWithAnIncorrectlyCasedValue
         {
             [Fact]
             public void AnArgumentOutOfRangeExceptionShouldBeThrown()
             {
-                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("Name ASC"));
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("CompanyName ASC", model));
 
                 Assert.Equal(Messages.OrderByPropertyRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
             }
@@ -23,7 +46,11 @@
             [Fact]
             public void AnArgumentOutOfRangeExceptionShouldBeThrown()
             {
-                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("Name wibble"));
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("CompanyName wibble", model));
 
                 Assert.Equal(Messages.OrderByPropertyRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
             }
@@ -36,8 +63,12 @@
 
             public WhenConstructedWithAsc()
             {
-                this.rawValue = "Name asc";
-                this.property = new OrderByProperty(this.rawValue);
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                this.rawValue = "CompanyName asc";
+                this.property = new OrderByProperty(this.rawValue, model);
             }
 
             [Fact]
@@ -49,7 +80,7 @@
             [Fact]
             public void ThePropertyNameShouldBeSetToTheNameOfThePropertyPassedToTheConstructor()
             {
-                Assert.Equal("Name", this.property.Property.Name);
+                Assert.Equal("CompanyName", this.property.Property.Name);
             }
 
             [Fact]
@@ -66,8 +97,12 @@
 
             public WhenConstructedWithDesc()
             {
-                this.rawValue = "Name desc";
-                this.property = new OrderByProperty(this.rawValue);
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                this.rawValue = "CompanyName desc";
+                this.property = new OrderByProperty(this.rawValue, model);
             }
 
             [Fact]
@@ -79,7 +114,7 @@
             [Fact]
             public void ThePropertyNameShouldBeSetToTheNameOfThePropertyPassedToTheConstructor()
             {
-                Assert.Equal("Name", this.property.Property.Name);
+                Assert.Equal("CompanyName", this.property.Property.Name);
             }
 
             [Fact]
@@ -96,8 +131,12 @@
 
             public WhenConstructedWithoutADirection()
             {
-                this.rawValue = "Name";
-                this.property = new OrderByProperty(this.rawValue);
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                this.rawValue = "CompanyName";
+                this.property = new OrderByProperty(this.rawValue, model);
             }
 
             [Fact]
@@ -109,7 +148,7 @@
             [Fact]
             public void ThePropertyNameShouldBeSetToTheNameOfThePropertyPassedToTheConstructor()
             {
-                Assert.Equal("Name", this.property.Property.Name);
+                Assert.Equal("CompanyName", this.property.Property.Name);
             }
 
             [Fact]

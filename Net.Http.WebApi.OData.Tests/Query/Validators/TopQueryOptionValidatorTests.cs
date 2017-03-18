@@ -1,4 +1,4 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Validators
+﻿namespace Net.Http.WebApi.OData.Tests.Query.Validators
 {
     using System.Net;
     using System.Net.Http;
@@ -6,19 +6,28 @@
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
+    using OData.Model;
     using Xunit;
 
     public class TopQueryValidatorTests
     {
         public class WhenTheTopQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=50"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.None
             };
+
+            public WhenTheTopQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$top=50"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
@@ -33,14 +42,22 @@
 
         public class WhenTheTopQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=50"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Top,
                 MaxTop = 100
             };
+
+            public WhenTheTopQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$top=50"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnExceptionShouldNotBeThrown()
@@ -51,13 +68,21 @@
 
         public class WhenValidatingAndNoMaxTopIsSetButTheValueIsBelowZero
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=-1"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Top
             };
+
+            public WhenValidatingAndNoMaxTopIsSetButTheValueIsBelowZero()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$top=-1"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()
@@ -72,14 +97,22 @@
 
         public class WhenValidatingAndTheQueryOptionDoesNotExceedTheSpecifiedMaxTopValue
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=25"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Top,
                 MaxTop = 100
             };
+
+            public WhenValidatingAndTheQueryOptionDoesNotExceedTheSpecifiedMaxTopValue()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$top=25"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void NoExceptionIsThrown()
@@ -90,13 +123,21 @@
 
         public class WhenValidatingAndTheQueryOptionDoesNotSpecifyATopValue
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 MaxTop = 100
             };
+
+            public WhenValidatingAndTheQueryOptionDoesNotSpecifyATopValue()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void NoExceptionIsThrown()
@@ -107,14 +148,22 @@
 
         public class WhenValidatingAndTheQueryOptionExceedsTheSpecifiedMaxTopValue
         {
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=150"));
+            private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
                 AllowedQueryOptions = AllowedQueryOptions.Top,
                 MaxTop = 100
             };
+
+            public WhenValidatingAndTheQueryOptionExceedsTheSpecifiedMaxTopValue()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$top=150"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
 
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()

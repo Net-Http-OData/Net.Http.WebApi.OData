@@ -1,4 +1,4 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query.Expressions
+﻿namespace Net.Http.WebApi.OData.Tests.Query.Expressions
 {
     using Net.Http.WebApi.OData.Query.Expressions;
     using WebApi.OData.Model;
@@ -8,13 +8,18 @@
     {
         public class WhenConstructed
         {
-            private readonly BinaryOperatorKind binaryOperatorKind = BinaryOperatorKind.And;
-            private readonly QueryNode left = new PropertyAccessNode(EdmProperty.From("Name"));
+            private readonly BinaryOperatorKind binaryOperatorKind = BinaryOperatorKind.Equal;
+            private readonly QueryNode left;
             private readonly BinaryOperatorNode node;
-            private readonly QueryNode right = ConstantNode.String("Fred", "Fred");
+            private readonly QueryNode right = ConstantNode.String("'Alfreds Futterkiste'", "AlfredsFutterkiste");
 
             public WhenConstructed()
             {
+                TestHelper.EnsureEDM();
+
+                var model = EntityDataModel.Current.Collections["Customers"];
+
+                this.left = new PropertyAccessNode(model.GetProperty("CompanyName"));
                 this.node = new BinaryOperatorNode(this.left, binaryOperatorKind, this.right);
             }
 

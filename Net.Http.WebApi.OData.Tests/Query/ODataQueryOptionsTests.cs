@@ -1,26 +1,47 @@
-﻿namespace Net.Http.WebApi.Tests.OData.Query
+﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
+    using System;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
     using Net.Http.WebApi.OData.Query;
     using WebApi.OData;
+    using WebApi.OData.Model;
     using WebApi.OData.Query.Expressions;
     using Xunit;
 
     public class ODataQueryOptionsTests
     {
+        [Fact]
+        public void Constructor_ThrowsArgumentNullException_ForNullHttpReuestMessage()
+        {
+            TestHelper.EnsureEDM();
+
+            Assert.Throws<ArgumentNullException>(
+                () => new ODataQueryOptions(null, EntityDataModel.Current.Collections["Products"]));
+        }
+
+        [Fact]
+        public void Constructor_ThrowsArgumentNullException_ForNullModel()
+        {
+            TestHelper.EnsureEDM();
+
+            Assert.Throws<ArgumentNullException>(
+                () => new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products"), null));
+        }
+
         /// <summary>
         /// https://github.com/TrevorPilley/Net.Http.WebApi.OData/issues/85 - Not parsing ampersand in query
         /// </summary>
         [Fact]
         public void Parse_WithAmpersandInQuery()
         {
-            var httpRequestMessage = new HttpRequestMessage(
-                HttpMethod.Get,
-                "http://localhost/Business?$filter=LegacyId+eq+2139+and+Name+eq+'Pool+Farm+%26+Primrose+Hill+Nursery'&$top=1");
+            TestHelper.EnsureEDM();
 
-            var option = new ODataQueryOptions(httpRequestMessage);
+            var option = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=LegacyId+eq+2139+and+CompanyName+eq+'Pool+Farm+%26+Primrose+Hill+Nursery'&$top=1"),
+                EntityDataModel.Current.Collections["Customers"]);
+
             Assert.NotNull(option);
             Assert.NotNull(option.Filter);
 
@@ -42,7 +63,7 @@
             Assert.IsType<BinaryOperatorNode>(node.Right);
             var nodeRight = (BinaryOperatorNode)node.Right;
             Assert.IsType<PropertyAccessNode>(nodeRight.Left);
-            Assert.Equal("Name", ((PropertyAccessNode)nodeRight.Left).Property.Name);
+            Assert.Equal("CompanyName", ((PropertyAccessNode)nodeRight.Left).Property.Name);
             Assert.Equal(BinaryOperatorKind.Equal, nodeRight.OperatorKind);
             Assert.IsType<ConstantNode>(nodeRight.Right);
             Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
@@ -55,11 +76,13 @@
 
             public WhenConstructedWithAllQueryOptions()
             {
+                TestHelper.EnsureEDM();
+
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$count=true&$expand=Orders&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
+                    "http://services.odata.org/OData/OData.svc/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$skip=10&$skiptoken=5&$top=25");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
@@ -90,6 +113,12 @@
             public void TheIsolationLevelIsNone()
             {
                 Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+            }
+
+            [Fact]
+            public void TheModelShouldBeSet()
+            {
+                Assert.NotNull(this.option.Model);
             }
 
             [Fact]
@@ -148,11 +177,13 @@
 
             public WhenConstructedWithNoQueryOptions()
             {
+                TestHelper.EnsureEDM();
+
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api");
+                    "http://services.odata.org/OData/OData.svc/Products");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
@@ -183,6 +214,12 @@
             public void TheIsolationLevelIsNone()
             {
                 Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+            }
+
+            [Fact]
+            public void TheModelShouldBeSet()
+            {
+                Assert.NotNull(this.option.Model);
             }
 
             [Fact]
@@ -240,10 +277,12 @@
 
             public WhenConstructedWithODataIsolationHeaderContainingSnapshot()
             {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "Snapshot");
 
-                this.option = new ODataQueryOptions(httpRequestMessage);
+                this.option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
@@ -258,10 +297,12 @@
             [Fact]
             public void AnHttpResponseExceptionIsThrown()
             {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedIsolationLevel, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -273,10 +314,12 @@
             [Fact]
             public void AnHttpResponseExceptionIsThrown()
             {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "1.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -288,10 +331,12 @@
             [Fact]
             public void AnHttpResponseExceptionIsThrown()
             {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "2.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -303,10 +348,12 @@
             [Fact]
             public void AnHttpResponseExceptionIsThrown()
             {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "3.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -318,10 +365,12 @@
             [Fact]
             public void AnExceptionIsNotThrown()
             {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api");
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
-                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage));
+                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
             }
         }
 
@@ -335,11 +384,13 @@
 
             public WhenConstructedWithPlusSignsInsteadOfSpacesInTheUrl()
             {
+                TestHelper.EnsureEDM();
+
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$filter=Name+eq+'John'&$orderby=Name+asc");
+                    "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename+eq+'John'&$orderby=Forename+asc");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Employees"]);
             }
 
             [Fact]
@@ -363,7 +414,7 @@
             [Fact]
             public void TheFilterOptionShouldHaveTheUnescapedRawValue()
             {
-                Assert.Equal("$filter=Name eq 'John'", this.option.Filter.RawValue);
+                Assert.Equal("$filter=Forename eq 'John'", this.option.Filter.RawValue);
             }
 
             [Fact]
@@ -371,8 +422,8 @@
             {
                 Assert.Equal(1, this.option.OrderBy.Properties.Count);
                 Assert.Equal(OrderByDirection.Ascending, this.option.OrderBy.Properties[0].Direction);
-                Assert.Equal("Name", this.option.OrderBy.Properties[0].Property.Name);
-                Assert.Equal("Name asc", this.option.OrderBy.Properties[0].RawValue);
+                Assert.Equal("Forename", this.option.OrderBy.Properties[0].Property.Name);
+                Assert.Equal("Forename asc", this.option.OrderBy.Properties[0].RawValue);
             }
 
             [Fact]
@@ -384,7 +435,7 @@
             [Fact]
             public void TheOrderByOptionShouldHaveTheUnescapedRawValue()
             {
-                Assert.Equal("$orderby=Name asc", this.option.OrderBy.RawValue);
+                Assert.Equal("$orderby=Forename asc", this.option.OrderBy.RawValue);
             }
         }
 
@@ -398,11 +449,13 @@
 
             public WhenConstructedWithUrlEncodedPlusSignsAndPlusSignsInsteadOfSpacesInTheUrl()
             {
+                TestHelper.EnsureEDM();
+
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$filter=Name+eq+'John'+and+Data+eq+'TG9yZW0gaXBzdW0gZG9s%2Bb3Igc2l0IGF%3D'");
+                    "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename+eq+'John'+and+ImageData+eq+'TG9yZW0gaXBzdW0gZG9s%2Bb3Igc2l0IGF%3D'");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Employees"]);
             }
 
             [Fact]
@@ -414,7 +467,7 @@
             [Fact]
             public void TheFilterOptionShouldHaveTheUnescapedRawValue()
             {
-                Assert.Equal("$filter=Name eq 'John' and Data eq 'TG9yZW0gaXBzdW0gZG9s+b3Igc2l0IGF='", this.option.Filter.RawValue);
+                Assert.Equal("$filter=Forename eq 'John' and ImageData eq 'TG9yZW0gaXBzdW0gZG9s+b3Igc2l0IGF='", this.option.Filter.RawValue);
             }
         }
     }
