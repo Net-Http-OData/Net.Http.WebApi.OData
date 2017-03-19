@@ -25,17 +25,23 @@ namespace Net.Http.WebApi.OData.Model
         }
 
         /// <summary>
+        /// Gets the current Entity Data Model.
+        /// </summary>
+        /// <remarks>
+        /// Will be null until <see cref="EntityDataModelBuilder" />.BuildModel() has been called.
+        /// </remarks>
+        public static EntityDataModel Current
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
         /// Gets the collections defined in the Entity Data Model.
         /// </summary>
         public IReadOnlyDictionary<string, EdmComplexType> Collections
         {
             get;
-        }
-
-        internal static EntityDataModel Current
-        {
-            get;
-            set;
         }
     }
 }
