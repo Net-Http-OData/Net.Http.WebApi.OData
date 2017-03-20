@@ -64,10 +64,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as EdmType);
-        }
+        public override bool Equals(object obj) => this.Equals(obj as EdmType);
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
@@ -97,10 +94,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.ClrType.GetHashCode() ^ this.Name.GetHashCode();
-        }
+        public override int GetHashCode() => this.ClrType.GetHashCode() ^ this.Name.GetHashCode();
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
