@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -40,23 +41,31 @@ namespace Net.Http.WebApi.OData.Model
         /// <param name="collectionName">Name of the collection.</param>
         public void RegisterCollection<T>(string collectionName)
         {
-            var edmType = (EdmComplexType)EdmTypeCache.FromClrType(
-                typeof(T),
-                clrType =>
-                {
-                    var clrTypeProperties = clrType.GetProperties().OrderBy(p => p.Name);
-
-                    var edmProperties = new List<EdmProperty>();
-                    var edmComplexType = new EdmComplexType(clrType.FullName, clrType, edmProperties);
-
-                    edmProperties.AddRange(
-                        clrTypeProperties.Select(
-                            p => new EdmProperty(p.Name, EdmTypeCache.FromClrType(p.PropertyType), edmComplexType)));
-
-                    return edmComplexType;
-                });
+            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), EdmTypeResolver);
 
             this.collections.Add(collectionName, edmType);
+        }
+
+        private static EdmType EdmTypeResolver(Type clrType)
+        {
+            if (clrType.IsEnum)
+            {
+                throw new NotSupportedException("Enums are not supported in OData 3.0");
+            }
+
+            var clrTypeProperties = clrType.GetProperties().OrderBy(p => p.Name);
+
+            var edmProperties = new List<EdmProperty>();
+            var edmComplexType = new EdmComplexType(clrType.FullName, clrType, edmProperties);
+
+            edmProperties.AddRange(
+                clrTypeProperties.Select(
+                    p => new EdmProperty(
+                        p.Name,
+                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver),
+                        edmComplexType)));
+
+            return edmComplexType;
         }
     }
 }

@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Net.Http.WebApi.OData.Model.EdmType">
-    <Position X="9" Y="1.75" Width="1.5" />
+    <Position X="9" Y="1.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAAEgAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\EdmType.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Net.Http.WebApi.OData.Model.EdmPrimitiveType">
-    <Position X="6.25" Y="4.75" Width="3.25" />
+    <Position X="10.5" Y="4.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAQAgABgAQAAAAACAJAACBAQAEEAAAAAAAQA=</HashCode>
       <FileName>Model\EdmPrimitiveType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Model.EdmComplexType">
-    <Position X="10" Y="4.75" Width="3" />
+    <Position X="7" Y="4.75" Width="3" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Model\EdmComplexType.cs</FileName>
@@ -24,7 +25,7 @@
   <Class Name="Net.Http.WebApi.OData.Model.EdmProperty">
     <Position X="13.5" Y="5.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAACAAgAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAACAAgAAAA=</HashCode>
       <FileName>Model\EdmProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,14 +39,14 @@
   <Class Name="Net.Http.WebApi.OData.Model.EntityDataModelBuilder">
     <Position X="5" Y="1.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAgAAAAAABAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAgAAAAAARAAA=</HashCode>
       <FileName>Model\EntityDataModelBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Model.EdmTypeCache">
     <Position X="11.75" Y="0.5" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\EdmTypeCache.cs</FileName>
     </TypeIdentifier>
   </Class>

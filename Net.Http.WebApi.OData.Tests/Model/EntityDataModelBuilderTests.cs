@@ -141,7 +141,7 @@
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
                 Assert.Equal("Category", edmComplexType.Properties[0].Name);
-                Assert.Same(EdmTypeCache.FromClrType(typeof(Category)), edmComplexType.Properties[0].PropertyType);
+                Assert.Same(EdmTypeCache.Map[typeof(Category)], edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
                 Assert.Equal("Deleted", edmComplexType.Properties[1].Name);
