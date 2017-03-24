@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Model
 
     internal static class EdmTypeCache
     {
-        private static ConcurrentDictionary<Type, EdmType> edmTypeCache = new ConcurrentDictionary<Type, EdmType>(
+        private static ConcurrentDictionary<Type, EdmType> map = new ConcurrentDictionary<Type, EdmType>(
             new Dictionary<Type, EdmType>
             {
                 [typeof(byte[])] = EdmPrimitiveType.Binary,
@@ -55,34 +55,6 @@ namespace Net.Http.WebApi.OData.Model
                 ////[typeof(TimeSpan?)] = EdmPrimitiveType.TimeOfDay
             });
 
-        /// <summary>
-        /// Gets the <see cref="EdmType" /> for the specified <see cref="Type" />.
-        /// </summary>
-        /// <param name="clrType">The CLR Type.</param>
-        /// <returns>
-        /// The <see cref="EdmType" /> for the specified <see cref="Type" />.
-        /// </returns>
-        /// <exception cref="System.ArgumentException">There is no matching EdmType for the CLR type</exception>
-        internal static EdmType FromClrType(Type clrType)
-        {
-            EdmType edmType;
-
-            if (edmTypeCache.TryGetValue(clrType, out edmType))
-            {
-                return edmType;
-            }
-
-            throw new ArgumentException($"There is no matching EdmType for the CLR type '{clrType.FullName}'");
-        }
-
-        /// <summary>
-        /// Gets the <see cref="EdmType" /> for the specified <see cref="Type" /> or creates it using the specified resolver.
-        /// </summary>
-        /// <param name="clrType">The CLR Type.</param>
-        /// <param name="edmTypeResolver">The a function which resolves the <see cref="EdmType"/>.</param>
-        /// <returns>
-        /// The <see cref="EdmType" /> for the specified <see cref="Type" />.
-        /// </returns>
-        internal static EdmType FromClrType(Type clrType, Func<Type, EdmType> edmTypeResolver) => edmTypeCache.GetOrAdd(clrType, edmTypeResolver);
+        internal static ConcurrentDictionary<Type, EdmType> Map => map;
     }
 }

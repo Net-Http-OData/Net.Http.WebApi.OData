@@ -58,16 +58,48 @@ namespace Net.Http.WebApi.OData.Model
         }
 
         /// <summary>
+        /// Gets the type with the specified name in the Entity Data Model.
+        /// </summary>
+        /// <param name="edmTypeName">Name of the type in the Entity Data Model.</param>
+        /// <returns>The EdmType with the specified name, if found; otherwise, null.</returns>
+        public static EdmType GetEdmType(string edmTypeName)
+        {
+            foreach (var edmType in EdmTypeCache.Map.Values)
+            {
+                if (edmType.Name.Equals(edmTypeName))
+                {
+                    return edmType;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Gets the type for the specified CLR type in the Entity Data Model.
+        /// </summary>
+        /// <param name="clrType">The CLR type to find in the Entity Data Model.</param>
+        /// <returns>The EdmType for the specified CLR type, if found; otherwise, null.</returns>
+        public static EdmType GetEdmType(Type clrType)
+        {
+            EdmType edmType;
+
+            if (EdmTypeCache.Map.TryGetValue(clrType, out edmType))
+            {
+                return edmType;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as EdmType);
-        }
+        public override bool Equals(object obj) => this.Equals(obj as EdmType);
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
@@ -97,10 +129,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.ClrType.GetHashCode() ^ this.Name.GetHashCode();
-        }
+        public override int GetHashCode() => this.ClrType.GetHashCode() ^ this.Name.GetHashCode();
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.

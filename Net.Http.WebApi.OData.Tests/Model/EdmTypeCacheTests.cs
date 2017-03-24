@@ -7,63 +7,55 @@
     public class EdmTypeCacheTests
     {
         [Fact]
-        public void FromClrType_ThrowsArgumentException_IfTypeNotRegistered()
-        {
-            var exception = Assert.Throws<ArgumentException>(() => EdmTypeCache.FromClrType(typeof(ICloneable)));
-
-            Assert.Equal("There is no matching EdmType for the CLR type 'System.ICloneable'", exception.Message);
-        }
-
-        [Fact]
         public void PrimitivesAreRegisteredByDefault()
         {
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(byte[])), EdmPrimitiveType.Binary);
+            Assert.Equal(EdmType.GetEdmType(typeof(byte[])), EdmPrimitiveType.Binary);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(bool)), EdmPrimitiveType.Boolean);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(bool?)), EdmPrimitiveType.Boolean);
+            Assert.Equal(EdmType.GetEdmType(typeof(bool)), EdmPrimitiveType.Boolean);
+            Assert.Equal(EdmType.GetEdmType(typeof(bool?)), EdmPrimitiveType.Boolean);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(byte)), EdmPrimitiveType.Byte);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(byte?)), EdmPrimitiveType.Byte);
+            Assert.Equal(EdmType.GetEdmType(typeof(byte)), EdmPrimitiveType.Byte);
+            Assert.Equal(EdmType.GetEdmType(typeof(byte?)), EdmPrimitiveType.Byte);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(DateTime)), EdmPrimitiveType.Date);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(DateTime?)), EdmPrimitiveType.Date);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTime)), EdmPrimitiveType.Date);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTime?)), EdmPrimitiveType.Date);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(DateTimeOffset)), EdmPrimitiveType.DateTimeOffset);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(DateTimeOffset?)), EdmPrimitiveType.DateTimeOffset);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTimeOffset)), EdmPrimitiveType.DateTimeOffset);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTimeOffset?)), EdmPrimitiveType.DateTimeOffset);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(decimal)), EdmPrimitiveType.Decimal);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(decimal?)), EdmPrimitiveType.Decimal);
+            Assert.Equal(EdmType.GetEdmType(typeof(decimal)), EdmPrimitiveType.Decimal);
+            Assert.Equal(EdmType.GetEdmType(typeof(decimal?)), EdmPrimitiveType.Decimal);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(double)), EdmPrimitiveType.Double);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(double?)), EdmPrimitiveType.Double);
+            Assert.Equal(EdmType.GetEdmType(typeof(double)), EdmPrimitiveType.Double);
+            Assert.Equal(EdmType.GetEdmType(typeof(double?)), EdmPrimitiveType.Double);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(TimeSpan)), EdmPrimitiveType.Duration);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(TimeSpan?)), EdmPrimitiveType.Duration);
+            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan)), EdmPrimitiveType.Duration);
+            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan?)), EdmPrimitiveType.Duration);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(Guid)), EdmPrimitiveType.Guid);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(Guid?)), EdmPrimitiveType.Guid);
+            Assert.Equal(EdmType.GetEdmType(typeof(Guid)), EdmPrimitiveType.Guid);
+            Assert.Equal(EdmType.GetEdmType(typeof(Guid?)), EdmPrimitiveType.Guid);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(short)), EdmPrimitiveType.Int16);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(short?)), EdmPrimitiveType.Int16);
+            Assert.Equal(EdmType.GetEdmType(typeof(short)), EdmPrimitiveType.Int16);
+            Assert.Equal(EdmType.GetEdmType(typeof(short?)), EdmPrimitiveType.Int16);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(int)), EdmPrimitiveType.Int32);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(int?)), EdmPrimitiveType.Int32);
+            Assert.Equal(EdmType.GetEdmType(typeof(int)), EdmPrimitiveType.Int32);
+            Assert.Equal(EdmType.GetEdmType(typeof(int?)), EdmPrimitiveType.Int32);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(long)), EdmPrimitiveType.Int64);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(long?)), EdmPrimitiveType.Int64);
+            Assert.Equal(EdmType.GetEdmType(typeof(long)), EdmPrimitiveType.Int64);
+            Assert.Equal(EdmType.GetEdmType(typeof(long?)), EdmPrimitiveType.Int64);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(sbyte)), EdmPrimitiveType.SByte);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(sbyte?)), EdmPrimitiveType.SByte);
+            Assert.Equal(EdmType.GetEdmType(typeof(sbyte)), EdmPrimitiveType.SByte);
+            Assert.Equal(EdmType.GetEdmType(typeof(sbyte?)), EdmPrimitiveType.SByte);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(float)), EdmPrimitiveType.Single);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(float?)), EdmPrimitiveType.Single);
+            Assert.Equal(EdmType.GetEdmType(typeof(float)), EdmPrimitiveType.Single);
+            Assert.Equal(EdmType.GetEdmType(typeof(float?)), EdmPrimitiveType.Single);
 
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(char)), EdmPrimitiveType.String);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(char?)), EdmPrimitiveType.String);
-            Assert.Equal(EdmTypeCache.FromClrType(typeof(string)), EdmPrimitiveType.String);
+            Assert.Equal(EdmType.GetEdmType(typeof(char)), EdmPrimitiveType.String);
+            Assert.Equal(EdmType.GetEdmType(typeof(char?)), EdmPrimitiveType.String);
+            Assert.Equal(EdmType.GetEdmType(typeof(string)), EdmPrimitiveType.String);
 
-            ////Assert.Equal(EdmTypeCache.FromClrType(typeof(TimeSpan)), EdmPrimitiveType.TimeOfDay);
-            ////Assert.Equal(EdmTypeCache.FromClrType(typeof(TimeSpan?)), EdmPrimitiveType.TimeOfDay);
+            ////Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan)), EdmPrimitiveType.TimeOfDay);
+            ////Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan?)), EdmPrimitiveType.TimeOfDay);
         }
     }
 }

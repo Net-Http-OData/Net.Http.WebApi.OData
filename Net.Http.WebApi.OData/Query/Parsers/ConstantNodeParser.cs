@@ -15,6 +15,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
     using System;
     using System.Globalization;
     using Expressions;
+    using Model;
 
     internal static class ConstantNodeParser
     {
@@ -53,6 +54,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         .Replace("S", string.Empty);
                     var durationTimeSpanValue = TimeSpan.Parse(durationText, CultureInfo.InvariantCulture);
                     return ConstantNode.Duration(token.Value, durationTimeSpanValue);
+
+                case TokenType.Enum:
+                    var firstQuote = token.Value.IndexOf('\'');
+                    var edmEnumTypeName = token.Value.Substring(0, firstQuote);
+                    var edmEnumMemberName = token.Value.Substring(firstQuote + 1, token.Value.Length - firstQuote - 2);
+                    var edmEnumType = (EdmEnumType)EdmType.GetEdmType(edmEnumTypeName);
+                    var edmEnumMember = edmEnumType.GetMember(edmEnumMemberName);
+                    var enumValue = edmEnumType.GetClrValue(edmEnumMember);
+                    return new ConstantNode(edmEnumType, token.Value, enumValue);
 
                 case TokenType.False:
                     return ConstantNode.False;

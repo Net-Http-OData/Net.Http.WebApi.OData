@@ -1,6 +1,7 @@
 namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 {
     using System;
+    using NorthwindModel;
     using WebApi.OData.Model;
     using WebApi.OData.Query.Expressions;
     using WebApi.OData.Query.Parsers;
@@ -258,6 +259,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("2013-06-18", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTime(2013, 6, 18), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqEnumValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Colour eq NorthwindModel.Colour'Blue'", EntityDataModel.Current.Collections["Products"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Colour", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("NorthwindModel.Colour'Blue'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<Colour>(((ConstantNode)node.Right).Value);
+                Assert.Equal(Colour.Blue, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

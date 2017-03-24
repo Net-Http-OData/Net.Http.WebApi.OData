@@ -73,6 +73,8 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Model\EdmComplexType.cs" />
+    <Compile Include="Model\EdmEnumMember.cs" />
+    <Compile Include="Model\EdmEnumType.cs" />
     <Compile Include="Model\EdmPrimitiveType.cs" />
     <Compile Include="Model\EdmProperty.cs" />
     <Compile Include="ODataIsolationLevel.cs" />

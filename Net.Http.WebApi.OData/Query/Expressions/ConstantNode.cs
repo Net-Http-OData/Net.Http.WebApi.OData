@@ -27,7 +27,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="edmType">The <see cref="EdmType"/> of the value.</param>
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
-        private ConstantNode(EdmType edmType, string literalText, object value)
+        internal ConstantNode(EdmType edmType, string literalText, object value)
         {
             this.EdmType = edmType;
             this.LiteralText = literalText;
