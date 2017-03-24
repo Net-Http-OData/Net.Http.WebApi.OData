@@ -56,7 +56,7 @@ namespace Net.Http.WebApi.OData.Model
             var clrTypeProperties = clrType.GetProperties().OrderBy(p => p.Name);
 
             var edmProperties = new List<EdmProperty>();
-            var edmComplexType = new EdmComplexType(clrType.FullName, clrType, edmProperties);
+            var edmComplexType = new EdmComplexType(clrType.FullName, clrType, edmProperties.AsReadOnly());
 
             edmProperties.AddRange(
                 clrTypeProperties.Select(

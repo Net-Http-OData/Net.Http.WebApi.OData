@@ -9,50 +9,50 @@
         [Fact]
         public void PrimitivesAreRegisteredByDefault()
         {
-            Assert.Equal(EdmTypeCache.Map[typeof(byte[])], EdmPrimitiveType.Binary);
+            Assert.Equal(EdmType.GetEdmType(typeof(byte[])), EdmPrimitiveType.Binary);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(bool)], EdmPrimitiveType.Boolean);
-            Assert.Equal(EdmTypeCache.Map[typeof(bool?)], EdmPrimitiveType.Boolean);
+            Assert.Equal(EdmType.GetEdmType(typeof(bool)), EdmPrimitiveType.Boolean);
+            Assert.Equal(EdmType.GetEdmType(typeof(bool?)), EdmPrimitiveType.Boolean);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(byte)], EdmPrimitiveType.Byte);
-            Assert.Equal(EdmTypeCache.Map[typeof(byte?)], EdmPrimitiveType.Byte);
+            Assert.Equal(EdmType.GetEdmType(typeof(byte)), EdmPrimitiveType.Byte);
+            Assert.Equal(EdmType.GetEdmType(typeof(byte?)), EdmPrimitiveType.Byte);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(DateTime)], EdmPrimitiveType.DateTime);
-            Assert.Equal(EdmTypeCache.Map[typeof(DateTime?)], EdmPrimitiveType.DateTime);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTime)), EdmPrimitiveType.DateTime);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTime?)), EdmPrimitiveType.DateTime);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(DateTimeOffset)], EdmPrimitiveType.DateTimeOffset);
-            Assert.Equal(EdmTypeCache.Map[typeof(DateTimeOffset?)], EdmPrimitiveType.DateTimeOffset);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTimeOffset)), EdmPrimitiveType.DateTimeOffset);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTimeOffset?)), EdmPrimitiveType.DateTimeOffset);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(decimal)], EdmPrimitiveType.Decimal);
-            Assert.Equal(EdmTypeCache.Map[typeof(decimal?)], EdmPrimitiveType.Decimal);
+            Assert.Equal(EdmType.GetEdmType(typeof(decimal)), EdmPrimitiveType.Decimal);
+            Assert.Equal(EdmType.GetEdmType(typeof(decimal?)), EdmPrimitiveType.Decimal);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(double)], EdmPrimitiveType.Double);
-            Assert.Equal(EdmTypeCache.Map[typeof(double?)], EdmPrimitiveType.Double);
+            Assert.Equal(EdmType.GetEdmType(typeof(double)), EdmPrimitiveType.Double);
+            Assert.Equal(EdmType.GetEdmType(typeof(double?)), EdmPrimitiveType.Double);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(Guid)], EdmPrimitiveType.Guid);
-            Assert.Equal(EdmTypeCache.Map[typeof(Guid?)], EdmPrimitiveType.Guid);
+            Assert.Equal(EdmType.GetEdmType(typeof(Guid)), EdmPrimitiveType.Guid);
+            Assert.Equal(EdmType.GetEdmType(typeof(Guid?)), EdmPrimitiveType.Guid);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(short)], EdmPrimitiveType.Int16);
-            Assert.Equal(EdmTypeCache.Map[typeof(short?)], EdmPrimitiveType.Int16);
+            Assert.Equal(EdmType.GetEdmType(typeof(short)), EdmPrimitiveType.Int16);
+            Assert.Equal(EdmType.GetEdmType(typeof(short?)), EdmPrimitiveType.Int16);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(int)], EdmPrimitiveType.Int32);
-            Assert.Equal(EdmTypeCache.Map[typeof(int?)], EdmPrimitiveType.Int32);
+            Assert.Equal(EdmType.GetEdmType(typeof(int)), EdmPrimitiveType.Int32);
+            Assert.Equal(EdmType.GetEdmType(typeof(int?)), EdmPrimitiveType.Int32);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(long)], EdmPrimitiveType.Int64);
-            Assert.Equal(EdmTypeCache.Map[typeof(long?)], EdmPrimitiveType.Int64);
+            Assert.Equal(EdmType.GetEdmType(typeof(long)), EdmPrimitiveType.Int64);
+            Assert.Equal(EdmType.GetEdmType(typeof(long?)), EdmPrimitiveType.Int64);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(sbyte)], EdmPrimitiveType.SByte);
-            Assert.Equal(EdmTypeCache.Map[typeof(sbyte?)], EdmPrimitiveType.SByte);
+            Assert.Equal(EdmType.GetEdmType(typeof(sbyte)), EdmPrimitiveType.SByte);
+            Assert.Equal(EdmType.GetEdmType(typeof(sbyte?)), EdmPrimitiveType.SByte);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(float)], EdmPrimitiveType.Single);
-            Assert.Equal(EdmTypeCache.Map[typeof(float?)], EdmPrimitiveType.Single);
+            Assert.Equal(EdmType.GetEdmType(typeof(float)), EdmPrimitiveType.Single);
+            Assert.Equal(EdmType.GetEdmType(typeof(float?)), EdmPrimitiveType.Single);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(char)], EdmPrimitiveType.String);
-            Assert.Equal(EdmTypeCache.Map[typeof(char?)], EdmPrimitiveType.String);
-            Assert.Equal(EdmTypeCache.Map[typeof(string)], EdmPrimitiveType.String);
+            Assert.Equal(EdmType.GetEdmType(typeof(char)), EdmPrimitiveType.String);
+            Assert.Equal(EdmType.GetEdmType(typeof(char?)), EdmPrimitiveType.String);
+            Assert.Equal(EdmType.GetEdmType(typeof(string)), EdmPrimitiveType.String);
 
-            Assert.Equal(EdmTypeCache.Map[typeof(TimeSpan)], EdmPrimitiveType.Time);
-            Assert.Equal(EdmTypeCache.Map[typeof(TimeSpan?)], EdmPrimitiveType.Time);
+            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan)), EdmPrimitiveType.Time);
+            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan?)), EdmPrimitiveType.Time);
         }
     }
 }

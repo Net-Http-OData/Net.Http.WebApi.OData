@@ -58,6 +58,41 @@ namespace Net.Http.WebApi.OData.Model
         }
 
         /// <summary>
+        /// Gets the type with the specified name in the Entity Data Model.
+        /// </summary>
+        /// <param name="edmTypeName">Name of the type in the Entity Data Model.</param>
+        /// <returns>The EdmType with the specified name, if found; otherwise, null.</returns>
+        public static EdmType GetEdmType(string edmTypeName)
+        {
+            foreach (var edmType in EdmTypeCache.Map.Values)
+            {
+                if (edmType.Name.Equals(edmTypeName))
+                {
+                    return edmType;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Gets the type for the specified CLR type in the Entity Data Model.
+        /// </summary>
+        /// <param name="clrType">The CLR type to find in the Entity Data Model.</param>
+        /// <returns>The EdmType for the specified CLR type, if found; otherwise, null.</returns>
+        public static EdmType GetEdmType(Type clrType)
+        {
+            EdmType edmType;
+
+            if (EdmTypeCache.Map.TryGetValue(clrType, out edmType))
+            {
+                return edmType;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
