@@ -30,14 +30,27 @@ namespace Net.Http.WebApi.OData.Query
         internal SelectExpandQueryOption(string rawValue, EdmComplexType model)
             : base(rawValue)
         {
-            var equals = rawValue.IndexOf('=') + 1;
+            if (rawValue == "$select=*")
+            {
+                this.Properties = model.Properties;
+            }
+            else if (rawValue == "$expand=*")
+            {
+                this.Properties = model.Properties
+                    .Where(p => p.PropertyType is EdmComplexType)
+                    .ToList();
+            }
+            else
+            {
+                var equals = rawValue.IndexOf('=') + 1;
 
-            var properties = rawValue.Substring(equals, rawValue.Length - equals)
-                .Split(SplitCharacter.Comma)
-                .Select(p => model.GetProperty(p))
-                .ToList();
+                var properties = rawValue.Substring(equals, rawValue.Length - equals)
+                    .Split(SplitCharacter.Comma)
+                    .Select(p => model.GetProperty(p))
+                    .ToList();
 
-            this.Properties = properties;
+                this.Properties = properties;
+            }
         }
 
         /// <summary>
