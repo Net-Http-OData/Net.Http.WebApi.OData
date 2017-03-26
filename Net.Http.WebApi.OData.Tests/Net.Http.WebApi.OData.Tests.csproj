@@ -107,6 +107,7 @@
     <Compile Include="Query\Validators\SkipTokenQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidatorTests.cs" />
     <Compile Include="TestHelper.cs" />
+    <Compile Include="UriExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">
