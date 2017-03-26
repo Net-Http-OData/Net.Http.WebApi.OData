@@ -52,7 +52,7 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException(nameof(model));
             }
 
-            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.Collections[request.GetModelName()]), "The model appears to be incorrect for the URI");
+            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.Collections[request.RequestUri.GetModelName()]), "The model appears to be incorrect for the URI");
 
             ValidateRequest(request);
 

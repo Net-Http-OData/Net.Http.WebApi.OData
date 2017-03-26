@@ -133,6 +133,7 @@
     <Compile Include="Query\Validators\SkipTokenQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidator.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="UriExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">

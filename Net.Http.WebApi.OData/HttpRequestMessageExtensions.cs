@@ -36,10 +36,5 @@ namespace Net.Http.WebApi.OData
 
             return response;
         }
-
-        internal static string GetModelName(this HttpRequestMessage request)
-        {
-            return request.RequestUri.Segments[request.RequestUri.Segments.Length - 1];
-        }
     }
 }

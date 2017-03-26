@@ -54,7 +54,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             var request = actionContext.Request;
 
-            var modelName = request.GetModelName();
+            var modelName = request.RequestUri.GetModelName();
             EdmComplexType model;
 
             if (!EntityDataModel.Current.Collections.TryGetValue(modelName, out model))
