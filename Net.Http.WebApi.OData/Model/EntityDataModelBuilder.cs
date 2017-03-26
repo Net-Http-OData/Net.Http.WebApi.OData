@@ -21,7 +21,25 @@ namespace Net.Http.WebApi.OData.Model
     /// </summary>
     public sealed class EntityDataModelBuilder
     {
-        private readonly Dictionary<string, EdmComplexType> collections = new Dictionary<string, EdmComplexType>();
+        private readonly Dictionary<string, EdmComplexType> collections;
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
+        /// </summary>
+        /// <remarks>Uses <see cref="StringComparer"/>.OrdinalIgnoreCase for the collection name comparer.</remarks>
+        public EntityDataModelBuilder()
+            : this(StringComparer.OrdinalIgnoreCase)
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
+        /// </summary>
+        /// <param name="collectionNameComparer">The equality comparer to use.</param>
+        public EntityDataModelBuilder(IEqualityComparer<string> collectionNameComparer)
+        {
+            this.collections = new Dictionary<string, EdmComplexType>(collectionNameComparer);
+        }
 
         /// <summary>
         /// Builds the Entity Data Model containing the collections registered.

@@ -1,11 +1,33 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Model
 {
+    using System;
     using NorthwindModel;
     using OData.Model;
     using Xunit;
 
     public class EntityDataModelBuilderTests
     {
+        [Fact]
+        public void CollectionNamesCaseInsensitiveByDefault_RegisterCollectionThrowsArgumentExceptionForDuplicateKeyVaryingOnlyOnCasing()
+        {
+            var entityDataModelBuilder = new EntityDataModelBuilder();
+            entityDataModelBuilder.RegisterCollection<Category>("Categories");
+
+            var exception = Assert.Throws<ArgumentException>(() => entityDataModelBuilder.RegisterCollection<Category>("categories"));
+            Assert.Equal("An item with the same key has already been added.", exception.Message);
+        }
+
+        [Fact]
+        public void CollectionNamesCaseInsensitiveByDefault_ResolveCollectionVaryingCollectionNameCasing()
+        {
+            var entityDataModelBuilder = new EntityDataModelBuilder();
+            entityDataModelBuilder.RegisterCollection<Category>("Categories");
+
+            var entityDataModel = entityDataModelBuilder.BuildModel();
+
+            Assert.Same(entityDataModel.Collections["categories"], entityDataModel.Collections["Categories"]);
+        }
+
         public class WhenCalling_BuildModelWith_Models
         {
             private readonly EntityDataModel entityDataModel;

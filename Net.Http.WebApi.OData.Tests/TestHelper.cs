@@ -7,17 +7,14 @@
     {
         internal static void EnsureEDM()
         {
-            if (EntityDataModel.Current == null)
-            {
-                var entityDataModelBuilder = new EntityDataModelBuilder();
-                entityDataModelBuilder.RegisterCollection<Category>("Categories");
-                entityDataModelBuilder.RegisterCollection<Customer>("Customers");
-                entityDataModelBuilder.RegisterCollection<Employee>("Employees");
-                entityDataModelBuilder.RegisterCollection<Order>("Orders");
-                entityDataModelBuilder.RegisterCollection<Product>("Products");
+            var entityDataModelBuilder = new EntityDataModelBuilder();
+            entityDataModelBuilder.RegisterCollection<Category>("Categories");
+            entityDataModelBuilder.RegisterCollection<Customer>("Customers");
+            entityDataModelBuilder.RegisterCollection<Employee>("Employees");
+            entityDataModelBuilder.RegisterCollection<Order>("Orders");
+            entityDataModelBuilder.RegisterCollection<Product>("Products");
 
-                entityDataModelBuilder.BuildModel();
-            }
+            entityDataModelBuilder.BuildModel();
         }
     }
 }
