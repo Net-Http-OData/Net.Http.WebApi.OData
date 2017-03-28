@@ -54,10 +54,9 @@ namespace Net.Http.WebApi.OData.Query
 
             System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.Collections[request.RequestUri.GetModelName()]), "The model appears to be incorrect for the URI");
 
-            ValidateRequest(request);
-
             this.Request = request;
             this.Model = model;
+            this.ReadHeaders();
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
 
@@ -227,19 +226,27 @@ namespace Net.Http.WebApi.OData.Query
             throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.IntRawValueInvalid.FormatWith(value.Substring(0, equals)));
         }
 
-        private static void ValidateRequest(HttpRequestMessage request)
+        private static string ReadHeaderValue(HttpRequestMessage request, string name)
         {
             IEnumerable<string> values;
+            string value = null;
 
-            if (request.Headers.TryGetValues(ODataHeaderNames.DataServiceVersion, out values))
+            if (request.Headers.TryGetValues(name, out values))
             {
-                var value = values.FirstOrDefault();
+                value = values.FirstOrDefault();
+            }
 
-                if (value != null && value != "3.0")
-                {
-                    throw new HttpResponseException(
-                        request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
-                }
+            return value;
+        }
+
+        private void ReadHeaders()
+        {
+            var headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.DataServiceVersion);
+
+            if (headerValue != null && headerValue != "3.0")
+            {
+                throw new HttpResponseException(
+                this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
         }
     }
