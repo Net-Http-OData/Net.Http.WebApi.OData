@@ -226,22 +226,9 @@ namespace Net.Http.WebApi.OData.Query
             throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.IntRawValueInvalid.FormatWith(value.Substring(0, equals)));
         }
 
-        private static string ReadHeaderValue(HttpRequestMessage request, string name)
-        {
-            IEnumerable<string> values;
-            string value = null;
-
-            if (request.Headers.TryGetValues(name, out values))
-            {
-                value = values.FirstOrDefault();
-            }
-
-            return value;
-        }
-
         private void ReadHeaders()
         {
-            var headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.DataServiceVersion);
+            var headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.DataServiceVersion);
 
             if (headerValue != null && headerValue != "3.0")
             {
@@ -249,7 +236,7 @@ namespace Net.Http.WebApi.OData.Query
                     this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
 
-            headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.MaxDataServiceVersion);
+            headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.MaxDataServiceVersion);
 
             if (headerValue != null && headerValue != "3.0")
             {
@@ -257,7 +244,7 @@ namespace Net.Http.WebApi.OData.Query
                     this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
 
-            headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.MinDataServiceVersion);
+            headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.MinDataServiceVersion);
 
             if (headerValue != null && headerValue != "3.0")
             {
