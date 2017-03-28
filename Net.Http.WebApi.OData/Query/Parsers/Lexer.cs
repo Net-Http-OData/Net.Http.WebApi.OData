@@ -28,7 +28,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(TokenType.False,                @"false"),
             new TokenDefinition(TokenType.Null,                 @"null"),
             new TokenDefinition(TokenType.UnaryOperator,        @"not(?=\s)"),
-            new TokenDefinition(TokenType.LogicalOperator,      @"(eq|ne|gt|ge|lt|le)(?=\s)"),
+            new TokenDefinition(TokenType.LogicalOperator,      @"(eq|ne|gt|ge|lt|le|has)(?=\s)"),
             new TokenDefinition(TokenType.DateTimeOffset,       @"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,12})?(Z|[+-]\d{2}:\d{2})?)?"),
             new TokenDefinition(TokenType.Date,                 @"\d{4}-\d{2}-\d{2}"),
             new TokenDefinition(TokenType.TimeOfDay,            @"\d{2}:\d{2}(:\d{2}(\.\d{1,12})?)?"),
@@ -42,7 +42,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(TokenType.FunctionName,         @"\w+(?=\()"),
             new TokenDefinition(TokenType.Comma,                @",(?=\s?)"),
             new TokenDefinition(TokenType.Duration,             @"duration'(-)?P\d+DT\d{2}H\d{2}M\d{2}\.\d+S'"),
-            new TokenDefinition(TokenType.Enum,                 @"\w+(\.\w+)+'\w+'"),
+            new TokenDefinition(TokenType.Enum,                 @"\w+(\.\w+)+'\w+(\,\w+)*'"),
             new TokenDefinition(TokenType.PropertyName,         @"\w+"),
             new TokenDefinition(TokenType.String,               @"'(?:''|[\w\s-.~!$&()*+,;=@]*)*'"),
             new TokenDefinition(TokenType.Whitespace,           @"\s", ignore: true)

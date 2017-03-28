@@ -807,6 +807,62 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsNotSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedLogicalOperators = AllowedLogicalOperators.None
+            };
+
+            public WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsNotSpecifiedInAllowedLogicalOperators()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=AccessLevel has NorthwindModel.AccessLevel'Write'"),
+                    EntityDataModel.Current.Collections["Employees"]);
+            }
+
+            [Fact]
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
+            {
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("has"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedLogicalOperators = AllowedLogicalOperators.Has
+            };
+
+            public WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsSpecifiedInAllowedLogicalOperators()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=AccessLevel has NorthwindModel.AccessLevel'Write'"),
+                    EntityDataModel.Current.Collections["Employees"]);
+            }
+
+            [Fact]
+            public void AnExceptionShouldNotBeThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheHourFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions;

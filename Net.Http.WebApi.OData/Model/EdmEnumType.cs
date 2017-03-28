@@ -44,29 +44,8 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the CLR Enum value for the specified Enum member in the Entity Data Model.
         /// </summary>
-        /// <param name="edmEnumMember">The Enum member in the Entity Data Model.</param>
+        /// <param name="value">The Enum string value in the Entity Data Model.</param>
         /// <returns>An object containing the CLR Enum value.</returns>
-        public object GetClrValue(EdmEnumMember edmEnumMember) => Enum.ToObject(this.ClrType, edmEnumMember.Value);
-
-        /// <summary>
-        /// Gets the member with the specified name.
-        /// </summary>
-        /// <param name="name">The name of the member.</param>
-        /// <returns>The <see cref="EdmEnumMember"/> declared in this type with the specified name.</returns>
-        /// <exception cref="System.ArgumentException">The type does not contain a member with the specified name.</exception>
-        public EdmEnumMember GetMember(string name)
-        {
-            for (int i = 0; i < this.Members.Count; i++)
-            {
-                var member = this.Members[i];
-
-                if (member.Name == name)
-                {
-                    return member;
-                }
-            }
-
-            throw new ArgumentException($"The type '{this.Name}' does not contain a member named '{name}'");
-        }
+        public object GetClrValue(string value) => Enum.Parse(this.ClrType, value);
     }
 }

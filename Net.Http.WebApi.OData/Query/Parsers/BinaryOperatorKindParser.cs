@@ -39,6 +39,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 case "gt":
                     return BinaryOperatorKind.GreaterThan;
 
+                case "has":
+                    return BinaryOperatorKind.Has;
+
                 case "le":
                     return BinaryOperatorKind.LessThanOrEqual;
 

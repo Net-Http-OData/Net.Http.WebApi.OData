@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessLevel.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Colour.cs" />
     <Compile Include="Customer.cs" />

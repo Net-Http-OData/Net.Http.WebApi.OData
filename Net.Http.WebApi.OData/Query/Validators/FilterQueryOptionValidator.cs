@@ -262,6 +262,13 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 throw new HttpResponseException(
                     queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("le")));
             }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Has) != AllowedLogicalOperators.Has
+                && rawFilterValue.Contains(" has "))
+            {
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("has")));
+            }
         }
 
         private static void ValidateMathFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)

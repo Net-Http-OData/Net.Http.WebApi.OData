@@ -85,6 +85,11 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// The binary operator is modulo.
         /// </summary>
-        Modulo = 13
+        Modulo = 13,
+
+        /// <summary>
+        /// The binary operator is has.
+        /// </summary>
+        Has = 14
     }
 }

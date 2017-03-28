@@ -262,6 +262,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqEnumFlagsValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("AccessLevel has NorthwindModel.AccessLevel'Read,Write'", EntityDataModel.Current.Collections["Employees"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("AccessLevel", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Has, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("NorthwindModel.AccessLevel'Read,Write'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<AccessLevel>(((ConstantNode)node.Right).Value);
+                Assert.Equal(AccessLevel.Read | AccessLevel.Write, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqEnumValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Colour eq NorthwindModel.Colour'Blue'", EntityDataModel.Current.Collections["Products"]);

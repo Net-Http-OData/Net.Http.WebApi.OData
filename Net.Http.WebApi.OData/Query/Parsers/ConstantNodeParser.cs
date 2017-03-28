@@ -58,10 +58,10 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 case TokenType.Enum:
                     var firstQuote = token.Value.IndexOf('\'');
                     var edmEnumTypeName = token.Value.Substring(0, firstQuote);
-                    var edmEnumMemberName = token.Value.Substring(firstQuote + 1, token.Value.Length - firstQuote - 2);
                     var edmEnumType = (EdmEnumType)EdmType.GetEdmType(edmEnumTypeName);
-                    var edmEnumMember = edmEnumType.GetMember(edmEnumMemberName);
-                    var enumValue = edmEnumType.GetClrValue(edmEnumMember);
+                    var edmEnumMemberName = token.Value.Substring(firstQuote + 1, token.Value.Length - firstQuote - 2);
+                    var enumValue = edmEnumType.GetClrValue(edmEnumMemberName);
+
                     return new ConstantNode(edmEnumType, token.Value, enumValue);
 
                 case TokenType.False:
