@@ -15,22 +15,23 @@ namespace Net.Http.WebApi.OData.Query.Parsers
     using System;
     using System.Globalization;
     using Expressions;
-    using Model;
 
     internal static class ConstantNodeParser
     {
-        private const string ODataDateFormat = "yyyy-MM-dd";
+        private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o", "yyyy-MM-ddTHH:mm:ss.fffZ" };
 
         internal static ConstantNode ParseConstantNode(Token token)
         {
             switch (token.TokenType)
             {
-                case TokenType.Date:
-                    var dateTimeValue = DateTime.ParseExact(token.Value, ODataDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                    return ConstantNode.Date(token.Value, dateTimeValue);
+                case TokenType.DateTime:
+                    var dateTimeText = token.Value.Substring(9, token.Value.Length - 10);
+                    var dateTimeValue = DateTime.ParseExact(dateTimeText, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    return ConstantNode.DateTime(token.Value, dateTimeValue);
 
                 case TokenType.DateTimeOffset:
-                    var dateTimeOffsetValue = DateTimeOffset.Parse(token.Value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    var dateTimeOffsetText = token.Value.Substring(15, token.Value.Length - 16);
+                    var dateTimeOffsetValue = DateTimeOffset.Parse(dateTimeOffsetText, CultureInfo.InvariantCulture, DateTimeStyles.None);
                     return ConstantNode.DateTimeOffset(token.Value, dateTimeOffsetValue);
 
                 case TokenType.Decimal:
@@ -45,30 +46,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     var doubleValue = double.Parse(doubleText, CultureInfo.InvariantCulture);
                     return ConstantNode.Double(token.Value, doubleValue);
 
-                case TokenType.Duration:
-                    var durationText = token.Value.Substring(9, token.Value.Length - 10)
-                        .Replace("P", string.Empty)
-                        .Replace("DT", ".")
-                        .Replace("H", ":")
-                        .Replace("M", ":")
-                        .Replace("S", string.Empty);
-                    var durationTimeSpanValue = TimeSpan.Parse(durationText, CultureInfo.InvariantCulture);
-                    return ConstantNode.Duration(token.Value, durationTimeSpanValue);
-
-                case TokenType.Enum:
-                    var firstQuote = token.Value.IndexOf('\'');
-                    var edmEnumTypeName = token.Value.Substring(0, firstQuote);
-                    var edmEnumType = (EdmEnumType)EdmType.GetEdmType(edmEnumTypeName);
-                    var edmEnumMemberName = token.Value.Substring(firstQuote + 1, token.Value.Length - firstQuote - 2);
-                    var enumValue = edmEnumType.GetClrValue(edmEnumMemberName);
-
-                    return new ConstantNode(edmEnumType, token.Value, enumValue);
-
                 case TokenType.False:
                     return ConstantNode.False;
 
                 case TokenType.Guid:
-                    var guidValue = Guid.ParseExact(token.Value, "D");
+                    var guidText = token.Value.Substring(5, token.Value.Length - 6);
+                    var guidValue = Guid.ParseExact(guidText, "D");
                     return ConstantNode.Guid(token.Value, guidValue);
 
                 case TokenType.Int32:
@@ -103,9 +86,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     var stringText = token.Value.Trim('\'').Replace("''", "'");
                     return ConstantNode.String(token.Value, stringText);
 
-                case TokenType.TimeOfDay:
-                    var timeSpanTimeOfDayValue = TimeSpan.Parse(token.Value, CultureInfo.InvariantCulture);
-                    return ConstantNode.Time(token.Value, timeSpanTimeOfDayValue);
+                case TokenType.Time:
+                    var timeSpanText = token.Value.Substring(5, token.Value.Length - 6)
+                        .Replace("P", string.Empty)
+                        .Replace("DT", ".")
+                        .Replace("H", ":")
+                        .Replace("M", ":")
+                        .Replace("S", string.Empty);
+                    var timeSpanValue = TimeSpan.Parse(timeSpanText, CultureInfo.InvariantCulture);
+                    return ConstantNode.Time(token.Value, timeSpanValue);
 
                 case TokenType.True:
                     return ConstantNode.True;

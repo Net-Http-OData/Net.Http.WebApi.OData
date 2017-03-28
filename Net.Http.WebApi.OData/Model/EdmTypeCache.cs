@@ -26,16 +26,14 @@ namespace Net.Http.WebApi.OData.Model
                 [typeof(bool?)] = EdmPrimitiveType.Boolean,
                 [typeof(byte)] = EdmPrimitiveType.Byte,
                 [typeof(byte?)] = EdmPrimitiveType.Byte,
-                [typeof(DateTime)] = EdmPrimitiveType.Date,
-                [typeof(DateTime?)] = EdmPrimitiveType.Date,
+                [typeof(DateTime)] = EdmPrimitiveType.DateTime,
+                [typeof(DateTime?)] = EdmPrimitiveType.DateTime,
                 [typeof(DateTimeOffset)] = EdmPrimitiveType.DateTimeOffset,
                 [typeof(DateTimeOffset?)] = EdmPrimitiveType.DateTimeOffset,
                 [typeof(decimal)] = EdmPrimitiveType.Decimal,
                 [typeof(decimal?)] = EdmPrimitiveType.Decimal,
                 [typeof(double)] = EdmPrimitiveType.Double,
                 [typeof(double?)] = EdmPrimitiveType.Double,
-                [typeof(TimeSpan)] = EdmPrimitiveType.Duration,
-                [typeof(TimeSpan?)] = EdmPrimitiveType.Duration,
                 [typeof(Guid)] = EdmPrimitiveType.Guid,
                 [typeof(Guid?)] = EdmPrimitiveType.Guid,
                 [typeof(short)] = EdmPrimitiveType.Int16,
@@ -51,8 +49,8 @@ namespace Net.Http.WebApi.OData.Model
                 [typeof(char)] = EdmPrimitiveType.String,
                 [typeof(char?)] = EdmPrimitiveType.String,
                 [typeof(string)] = EdmPrimitiveType.String,
-                ////[typeof(TimeSpan)] = EdmPrimitiveType.TimeOfDay,
-                ////[typeof(TimeSpan?)] = EdmPrimitiveType.TimeOfDay
+                [typeof(TimeSpan)] = EdmPrimitiveType.Time,
+                [typeof(TimeSpan?)] = EdmPrimitiveType.Time
             });
 
         internal static ConcurrentDictionary<Type, EdmType> Map => map;

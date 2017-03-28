@@ -26,7 +26,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$format=xml"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -55,7 +55,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$format=xml"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]

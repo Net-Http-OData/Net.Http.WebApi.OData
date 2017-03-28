@@ -45,12 +45,6 @@
         }
 
         [Fact]
-        public void ToBinaryOperatorKindReturnsHasForHas()
-        {
-            Assert.Equal(BinaryOperatorKind.Has, "has".ToBinaryOperatorKind());
-        }
-
-        [Fact]
         public void ToBinaryOperatorKindReturnsLessThanForLt()
         {
             Assert.Equal(BinaryOperatorKind.LessThan, "lt".ToBinaryOperatorKind());

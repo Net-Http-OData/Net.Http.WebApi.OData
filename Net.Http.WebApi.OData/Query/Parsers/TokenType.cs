@@ -29,15 +29,13 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         Int32,
         Int64,
         Single,
-        Date,
+        DateTime,
         DateTimeOffset,
         Guid,
         String,
         FunctionName,
         PropertyName,
         UnaryOperator,
-        TimeOfDay,
-        Duration,
-        Enum
+        Time
     }
 }

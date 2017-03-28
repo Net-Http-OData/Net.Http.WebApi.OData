@@ -20,7 +20,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void Parse_GroupedA_AndGroupedBandC_AndGroupedD()
             {
-                var queryNode = FilterExpressionParser.Parse("(Rating eq 5) and (ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59) and (Price eq 150.00M)", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("(Rating eq 5) and (ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59') and (Price eq 150.00M)", EntityDataModel.Current.EntitySets["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -37,7 +37,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                // node.Left = (Rating eq 5) and (ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59)
+                // node.Left = (Rating eq 5) and (ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59')
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
 
@@ -51,7 +51,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.IsType<ConstantNode>(nodeLeftLeft.Right);
                 Assert.Equal("5", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
 
-                // node.Left.Right = (ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59)
+                // node.Left.Right = (ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59')
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
 
@@ -62,7 +62,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("ReleaseDate", ((PropertyAccessNode)nodeLeftRightLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftRightLeft.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRightLeft.Right);
-                Assert.Equal("2015-02-06T00:00:00", ((ConstantNode)nodeLeftRightLeft.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftRightLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeftRight.OperatorKind);
 
@@ -73,7 +73,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("ReleaseDate", ((PropertyAccessNode)nodeLeftRightRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRightRight.OperatorKind);
                 Assert.IsType<ConstantNode>(nodeLeftRightRight.Right);
-                Assert.Equal("2015-02-06T23:59:59", ((ConstantNode)nodeLeftRightRight.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftRightRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
@@ -91,7 +91,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void Parse_GroupedAandBandC_And_GroupedDorEorF()
             {
-                var queryNode = FilterExpressionParser.Parse("(ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59 and Price eq 200.00M) and (Rating eq 3 or Rating eq 4 or Rating eq 5)", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("(ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59' and Price eq 200.00M) and (Rating eq 3 or Rating eq 4 or Rating eq 5)", EntityDataModel.Current.EntitySets["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -108,31 +108,31 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                // node.Left = (ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59 and Price eq 200.00M)
+                // node.Left = (ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59' and Price eq 200.00M)
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
 
-                // node.Left.Left = ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59
+                // node.Left.Left = ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59'
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
 
-                // node.Left.Left.Left = ReleaseDate ge 2015-02-06T00:00:00
+                // node.Left.Left.Left = ReleaseDate ge datetime'2015-02-06T00:00:00'
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Left);
                 var nodeLeftLeftLeft = (BinaryOperatorNode)nodeLeftLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftLeft.Left);
                 Assert.Equal("ReleaseDate", ((PropertyAccessNode)nodeLeftLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeftLeft.OperatorKind);
-                Assert.Equal("2015-02-06T00:00:00", ((ConstantNode)nodeLeftLeftLeft.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeftLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeftLeft.OperatorKind);
 
-                // node.Right.Left.Right = ReleaseDate le 2015-02-06T23:59:59
+                // node.Right.Left.Right = ReleaseDate le datetime'2015-02-06T23:59:59'
                 Assert.IsType<BinaryOperatorNode>(nodeLeftLeft.Right);
                 var nodeLeftLeftRight = (BinaryOperatorNode)nodeLeftLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeftRight.Left);
                 Assert.Equal("ReleaseDate", ((PropertyAccessNode)nodeLeftLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftLeftRight.OperatorKind);
-                Assert.Equal("2015-02-06T23:59:59", ((ConstantNode)nodeLeftLeftRight.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftLeftRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
 
@@ -192,7 +192,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void Parse_GroupedXandY_And_GroupedAorBorC()
             {
-                var queryNode = FilterExpressionParser.Parse("(ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59) and (Rating eq 3 or Rating eq 4 or Rating eq 5)", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("(ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59') and (Rating eq 3 or Rating eq 4 or Rating eq 5)", EntityDataModel.Current.EntitySets["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -209,27 +209,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 
                 var node = (BinaryOperatorNode)queryNode;
 
-                // node.Left = (ReleaseDate ge 2015-02-06T00:00:00 and ReleaseDate le 2015-02-06T23:59:59)
+                // node.Left = (ReleaseDate ge datetime'2015-02-06T00:00:00' and ReleaseDate le datetime'2015-02-06T23:59:59')
                 Assert.IsType<BinaryOperatorNode>(node.Left);
                 var nodeLeft = (BinaryOperatorNode)node.Left;
 
-                // node.Left.Left = ReleaseDate ge 2015-02-06T00:00:00
+                // node.Left.Left = ReleaseDate ge datetime'2015-02-06T00:00:00'
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Left);
                 var nodeLeftLeft = (BinaryOperatorNode)nodeLeft.Left;
                 Assert.IsType<PropertyAccessNode>(nodeLeftLeft.Left);
                 Assert.Equal("ReleaseDate", ((PropertyAccessNode)nodeLeftLeft.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.GreaterThanOrEqual, nodeLeftLeft.OperatorKind);
-                Assert.Equal("2015-02-06T00:00:00", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T00:00:00'", ((ConstantNode)nodeLeftLeft.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, nodeLeft.OperatorKind);
 
-                // node.Left.Right = ReleaseDate le 2015-02-06T23:59:59
+                // node.Left.Right = ReleaseDate le datetime'2015-02-06T23:59:59'
                 Assert.IsType<BinaryOperatorNode>(nodeLeft.Right);
                 var nodeLeftRight = (BinaryOperatorNode)nodeLeft.Right;
                 Assert.IsType<PropertyAccessNode>(nodeLeftRight.Left);
                 Assert.Equal("ReleaseDate", ((PropertyAccessNode)nodeLeftRight.Left).Property.Name);
                 Assert.Equal(BinaryOperatorKind.LessThanOrEqual, nodeLeftRight.OperatorKind);
-                Assert.Equal("2015-02-06T23:59:59", ((ConstantNode)nodeLeftRight.Right).LiteralText);
+                Assert.Equal("datetime'2015-02-06T23:59:59'", ((ConstantNode)nodeLeftRight.Right).LiteralText);
 
                 Assert.Equal(BinaryOperatorKind.And, node.OperatorKind);
 
@@ -276,7 +276,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void Parse_XsubY_gt_Z()
             {
-                var queryNode = FilterExpressionParser.Parse("(Price sub 5) gt 10", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("(Price sub 5) gt 10", EntityDataModel.Current.EntitySets["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -308,7 +308,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseFunctionCallAndGroupedPropertyEqValueOrPropertyEqValue()
             {
-                var queryNode = FilterExpressionParser.Parse("endswith(Forename, 'ohn') and (Surname eq 'Smith' or Surname eq 'Smythe')", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("endswith(Forename, 'ohn') and (Surname eq 'Smith' or Surname eq 'Smythe')", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -348,7 +348,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseFunctionCallAndPropertyEqValue()
             {
-                var queryNode = FilterExpressionParser.Parse("endswith(Forename, 'ohn') and Surname eq 'Smith'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("endswith(Forename, 'ohn') and Surname eq 'Smith'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -377,7 +377,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseGroupedPropertyEqValueAndPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' and Surname eq 'Smith')", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' and Surname eq 'Smith')", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -406,7 +406,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseGroupedPropertyEqValueAndPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' and Surname eq 'Smith') or Title eq 'Mr'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' and Surname eq 'Smith') or Title eq 'Mr'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -440,7 +440,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseGroupedPropertyEqValueOrPropertyEqValueAndFunctionCall()
             {
-                var queryNode = FilterExpressionParser.Parse("(Surname eq 'Smith' or Surname eq 'Smythe') and endswith(Forename, 'ohn')", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("(Surname eq 'Smith' or Surname eq 'Smythe') and endswith(Forename, 'ohn')", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -481,7 +481,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseGroupedPropertyEqValueorPropertyEqValueAndGroupedPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' or Forename eq 'Joe') and (Surname eq 'Smith' or Surname eq 'Bloggs')", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' or Forename eq 'Joe') and (Surname eq 'Smith' or Surname eq 'Bloggs')", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -528,7 +528,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseNestedFunctionCallEqFunctionCallExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("length(trim(CompanyName)) eq length(CompanyName)", EntityDataModel.Current.Collections["Customers"]);
+                var queryNode = FilterExpressionParser.Parse("length(trim(CompanyName)) eq length(CompanyName)", EntityDataModel.Current.EntitySets["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -560,7 +560,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseNestedFunctionCallEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("length(trim(CompanyName)) eq 50", EntityDataModel.Current.Collections["Customers"]);
+                var queryNode = FilterExpressionParser.Parse("length(trim(CompanyName)) eq 50", EntityDataModel.Current.EntitySets["Customers"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -592,7 +592,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseNestedGrouping()
             {
-                var queryNode = FilterExpressionParser.Parse("(ReleaseDate ge 2015-03-01T00:00:00 and ReleaseDate le 2015-03-31T23:59:59) and ((Deleted eq false and substringof('ilk', Description) eq true) or (Deleted eq false and substringof('rrots', Description) eq true))", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("(ReleaseDate ge datetime'2015-03-01T00:00:00' and ReleaseDate le datetime'2015-03-31T23:59:59') and ((Deleted eq false and substringof('ilk', Description) eq true) or (Deleted eq false and substringof('rrots', Description) eq true))", EntityDataModel.Current.EntitySets["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -650,7 +650,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseOuterGroupedExample1()
             {
-                var queryNode = FilterExpressionParser.Parse("(((Forename eq 'andrew') and (Surname eq 'davis')) or (Forename eq 'system'))", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("(((Forename eq 'andrew') and (Surname eq 'davis')) or (Forename eq 'system'))", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -684,7 +684,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseOuterGroupedPropertyEqValueAndGroupedPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' and (Surname eq 'Smith' or Surname eq 'Smythe'))", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("(Forename eq 'John' and (Surname eq 'Smith' or Surname eq 'Smythe'))", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -720,7 +720,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseOuterGroupedPropertyEqValueAndPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("((Forename eq 'John' and Surname eq 'Smith') or Title eq 'Mr')", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("((Forename eq 'John' and Surname eq 'Smith') or Title eq 'Mr')", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -754,7 +754,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParseOuterGroupedPropertyEqValueorPropertyEqValueAndGroupedPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("((Forename eq 'John' or Forename eq 'Joe') and (Surname eq 'Smith' or Surname eq 'Bloggs'))", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("((Forename eq 'John' or Forename eq 'Joe') and (Surname eq 'Smith' or Surname eq 'Bloggs'))", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -801,7 +801,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueAndGroupedPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and (Surname eq 'Smith' or Surname eq 'Smythe')", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and (Surname eq 'Smith' or Surname eq 'Smythe')", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -839,7 +839,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueAndPropertyEqValueAndPropertyEqValueAndPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith' and Title eq 'Dr' and Title eq 'Mr'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith' and Title eq 'Dr' and Title eq 'Mr'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -883,7 +883,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueAndPropertyEqValueAndPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith' and Title eq 'Mr'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith' and Title eq 'Mr'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -917,7 +917,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueAndPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -946,7 +946,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueAndPropertyEqValueOrPropertyEqValueUnGroupedExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith' or Title eq 'Mr'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith' or Title eq 'Mr'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -980,7 +980,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueAndYearFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Surname eq 'Smith' and year(BirthDate) eq 1971", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Surname eq 'Smith' and year(BirthDate) eq 1971", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -1012,7 +1012,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Surname eq 'Smith'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Surname eq 'Smith'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -1041,7 +1041,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueOrPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Surname eq 'Smith' or Title eq 'Mr'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Surname eq 'Smith' or Title eq 'Mr'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -1076,7 +1076,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueOrPropertyEqValueOrPropertyEqValueOrPropertyEqValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Surname eq 'Smith' or Title eq 'Dr' or Title eq 'Mr'", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Surname eq 'Smith' or Title eq 'Dr' or Title eq 'Mr'", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -1120,7 +1120,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqValueOrYearFunctionExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Surname eq 'Smith' or year(BirthDate) eq 1971", EntityDataModel.Current.Collections["Employees"]);
+                var queryNode = FilterExpressionParser.Parse("Surname eq 'Smith' or year(BirthDate) eq 1971", EntityDataModel.Current.EntitySets["Employees"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);

@@ -12,6 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
 
@@ -28,12 +30,52 @@ namespace Net.Http.WebApi.OData
         /// <param name="statusCode">The HTTP response status code.</param>
         /// <param name="value">The content of the HTTP response message.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're returining the HttpResponseMessage")]
         public static HttpResponseMessage CreateODataResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value)
         {
             var response = request.CreateResponse(statusCode, value);
-            response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
+            response.Headers.Add(ODataHeaderNames.DataServiceVersion, "3.0");
 
             return response;
+        }
+
+        internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
+        {
+            IEnumerable<string> values;
+            string value = null;
+
+            if (request.Headers.TryGetValues(name, out values))
+            {
+                value = values.FirstOrDefault();
+            }
+
+            return value;
+        }
+
+        internal static MetadataLevel ReadMetadataLevel(this HttpRequestMessage request)
+        {
+            foreach (var header in request.Headers.Accept)
+            {
+                foreach (var parameter in header.Parameters)
+                {
+                    if (parameter.Name == "odata")
+                    {
+                        switch (parameter.Value)
+                        {
+                            case "nometadata":
+                                return MetadataLevel.None;
+
+                            case "minimalmetadata":
+                                return MetadataLevel.Minimal;
+
+                            case "verbose":
+                                return MetadataLevel.Verbose;
+                        }
+                    }
+                }
+            }
+
+            return MetadataLevel.Minimal;
         }
     }
 }

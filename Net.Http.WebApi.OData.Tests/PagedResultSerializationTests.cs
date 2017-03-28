@@ -21,7 +21,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var result = JsonConvert.SerializeObject(inlineCount);
 
-            Assert.Equal("{\"@odata.count\":12,\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", result);
+            Assert.Equal("{\"odata.count\":12,\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", result);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var result = JsonConvert.SerializeObject(inlineCount);
 
-            Assert.Equal("{\"@odata.count\":12,\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", result);
+            Assert.Equal("{\"odata.count\":12,\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", result);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var result = JsonConvert.SerializeObject(inlineCount);
 
-            Assert.Equal("{\"@odata.count\":5,\"value\":[1,2,3]}", result);
+            Assert.Equal("{\"odata.count\":5,\"value\":[1,2,3]}", result);
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var result = stringBuilder.ToString();
 
-            Assert.Equal("<PagedResultOfPagedResultSerializationTests.ThingGcX6AYpO xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><_x0040_odata.count>12</_x0040_odata.count><value xmlns:d2p1=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData.Tests\"><d2p1:PagedResultSerializationTests.Thing><d2p1:Name>Coffee</d2p1:Name><d2p1:Total>2.55</d2p1:Total></d2p1:PagedResultSerializationTests.Thing></value></PagedResultOfPagedResultSerializationTests.ThingGcX6AYpO>", result);
+            Assert.Equal("<PagedResultOfPagedResultSerializationTests.ThingGcX6AYpO xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><odata.count>12</odata.count><value xmlns:d2p1=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData.Tests\"><d2p1:PagedResultSerializationTests.Thing><d2p1:Name>Coffee</d2p1:Name><d2p1:Total>2.55</d2p1:Total></d2p1:PagedResultSerializationTests.Thing></value></PagedResultOfPagedResultSerializationTests.ThingGcX6AYpO>", result);
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var result = stringBuilder.ToString();
 
-            Assert.Equal("<PagedResultOfint xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><_x0040_odata.count>5</_x0040_odata.count><value xmlns:d2p1=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><d2p1:int>1</d2p1:int><d2p1:int>2</d2p1:int><d2p1:int>3</d2p1:int></value></PagedResultOfint>", result);
+            Assert.Equal("<PagedResultOfint xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/Net.Http.WebApi.OData\"><odata.count>5</odata.count><value xmlns:d2p1=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><d2p1:int>1</d2p1:int><d2p1:int>2</d2p1:int><d2p1:int>3</d2p1:int></value></PagedResultOfint>", result);
         }
 
         [DataContract]

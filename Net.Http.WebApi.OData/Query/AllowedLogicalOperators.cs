@@ -66,13 +66,8 @@ namespace Net.Http.WebApi.OData.Query
         Or = 128,
 
         /// <summary>
-        /// Specifies that the 'has' logical operator is allowed in the $filter query option.
-        /// </summary>
-        Has = 256,
-
-        /// <summary>
         /// Specifies that all logical operators are allowed in the $filter query option.
         /// </summary>
-        All = Equal | NotEqual | GreaterThan | GreaterThanOrEqual | LessThan | LessThanOrEqual | And | Or | Has
+        All = Equal | NotEqual | GreaterThan | GreaterThanOrEqual | LessThan | LessThanOrEqual | And | Or
     }
 }

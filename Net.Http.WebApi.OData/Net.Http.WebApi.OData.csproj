@@ -72,12 +72,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="MetadataLevel.cs" />
     <Compile Include="Model\EdmComplexType.cs" />
-    <Compile Include="Model\EdmEnumMember.cs" />
-    <Compile Include="Model\EdmEnumType.cs" />
     <Compile Include="Model\EdmPrimitiveType.cs" />
     <Compile Include="Model\EdmProperty.cs" />
-    <Compile Include="ODataIsolationLevel.cs" />
     <Compile Include="Model\EdmType.cs" />
     <Compile Include="Model\EdmTypeCache.cs" />
     <Compile Include="Model\EntityDataModel.cs" />
@@ -103,6 +101,8 @@
     <Compile Include="Query\Expressions\UnaryOperatorNode.cs" />
     <Compile Include="Query\FilterQueryOption.cs" />
     <Compile Include="Query\FormatQueryOption.cs" />
+    <Compile Include="Query\InlineCount.cs" />
+    <Compile Include="Query\InlineCountQueryOption.cs" />
     <Compile Include="Query\ODataQueryOptions.cs" />
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
     <Compile Include="Query\ODataQueryOptionsParameterBindingAttribute.cs" />
@@ -123,13 +123,12 @@
     <Compile Include="Query\SelectExpandQueryOption.cs" />
     <Compile Include="Query\SkipTokenQueryOption.cs" />
     <Compile Include="Query\SplitCharacter.cs" />
-    <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\InlineCountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ODataQueryOptionsExtensions.cs" />
     <Compile Include="Query\Validators\OrderByQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\SearchQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SelectQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SkipQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SkipTokenQueryOptionValidator.cs" />
