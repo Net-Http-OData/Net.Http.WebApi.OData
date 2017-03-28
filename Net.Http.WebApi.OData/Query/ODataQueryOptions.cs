@@ -246,7 +246,7 @@ namespace Net.Http.WebApi.OData.Query
             if (headerValue != null && headerValue != "3.0")
             {
                 throw new HttpResponseException(
-                this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
         }
     }
