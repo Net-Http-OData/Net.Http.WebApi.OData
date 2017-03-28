@@ -118,7 +118,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             node = new FunctionCallNode(token.Value);
                             break;
 
-                        case TokenType.LogicalOperator:
+                        case TokenType.BinaryOperator:
                             binaryNode = new BinaryOperatorNode(node, token.Value.ToBinaryOperatorKind(), null);
                             break;
 
@@ -188,8 +188,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                     switch (token.TokenType)
                     {
-                        case TokenType.ArithmeticOperator:
-                        case TokenType.LogicalOperator:
+                        case TokenType.BinaryOperator:
                             if (operatorKind != BinaryOperatorKind.None)
                             {
                                 result = new BinaryOperatorNode(leftNode, operatorKind, rightNode);
