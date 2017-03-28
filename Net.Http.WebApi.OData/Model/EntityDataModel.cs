@@ -19,9 +19,9 @@ namespace Net.Http.WebApi.OData.Model
     /// </summary>
     public sealed class EntityDataModel
     {
-        internal EntityDataModel(IReadOnlyDictionary<string, EdmComplexType> collections)
+        internal EntityDataModel(IReadOnlyDictionary<string, EdmComplexType> entitySets)
         {
-            this.Collections = collections;
+            this.EntitySets = entitySets;
         }
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace Net.Http.WebApi.OData.Model
         }
 
         /// <summary>
-        /// Gets the collections defined in the Entity Data Model.
+        /// Gets the Entity Sets defined in the Entity Data Model.
         /// </summary>
-        public IReadOnlyDictionary<string, EdmComplexType> Collections
+        public IReadOnlyDictionary<string, EdmComplexType> EntitySets
         {
             get;
         }

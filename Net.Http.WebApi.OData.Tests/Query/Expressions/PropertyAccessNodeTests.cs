@@ -15,7 +15,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 this.property = model.GetProperty("CompanyName");
                 this.node = new PropertyAccessNode(this.property);

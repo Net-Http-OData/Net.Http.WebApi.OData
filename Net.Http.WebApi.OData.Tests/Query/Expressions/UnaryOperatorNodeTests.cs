@@ -16,7 +16,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Expressions
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 this.operand = new PropertyAccessNode(model.GetProperty("CompanyName"));
                 this.node = new UnaryOperatorNode(this.operand, unaryOperatorKind);

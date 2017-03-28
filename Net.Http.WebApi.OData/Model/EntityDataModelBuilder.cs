@@ -21,12 +21,12 @@ namespace Net.Http.WebApi.OData.Model
     /// </summary>
     public sealed class EntityDataModelBuilder
     {
-        private readonly Dictionary<string, EdmComplexType> collections;
+        private readonly Dictionary<string, EdmComplexType> entitySets;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
         /// </summary>
-        /// <remarks>Uses <see cref="StringComparer"/>.OrdinalIgnoreCase for the collection name comparer.</remarks>
+        /// <remarks>Uses <see cref="StringComparer"/>.OrdinalIgnoreCase for the entity set name comparer.</remarks>
         public EntityDataModelBuilder()
             : this(StringComparer.OrdinalIgnoreCase)
         {
@@ -35,10 +35,10 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
         /// </summary>
-        /// <param name="collectionNameComparer">The equality comparer to use.</param>
-        public EntityDataModelBuilder(IEqualityComparer<string> collectionNameComparer)
+        /// <param name="entitySetNameComparer">The equality comparer to use for the entity set name.</param>
+        public EntityDataModelBuilder(IEqualityComparer<string> entitySetNameComparer)
         {
-            this.collections = new Dictionary<string, EdmComplexType>(collectionNameComparer);
+            this.entitySets = new Dictionary<string, EdmComplexType>(entitySetNameComparer);
         }
 
         /// <summary>
@@ -47,21 +47,21 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>The Entity Data Model.</returns>
         public EntityDataModel BuildModel()
         {
-            EntityDataModel.Current = new EntityDataModel(this.collections);
+            EntityDataModel.Current = new EntityDataModel(this.entitySets);
 
             return EntityDataModel.Current;
         }
 
         /// <summary>
-        /// Registers the type as a collection in the Entity Data Model with the specified collection name.
+        /// Registers an Entity Set of the specified type to the Entity Data Model with the specified name.
         /// </summary>
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
-        /// <param name="collectionName">Name of the collection.</param>
-        public void RegisterCollection<T>(string collectionName)
+        /// <param name="entitySetName">Name of the Entity Set.</param>
+        public void RegisterEntitySet<T>(string entitySetName)
         {
             var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), EdmTypeResolver);
 
-            this.collections.Add(collectionName, edmType);
+            this.entitySets.Add(entitySetName, edmType);
         }
 
         private static EdmType EdmTypeResolver(Type clrType)

@@ -18,7 +18,7 @@
             TestHelper.EnsureEDM();
 
             Assert.Throws<ArgumentNullException>(
-                () => new ODataQueryOptions(null, EntityDataModel.Current.Collections["Products"]));
+                () => new ODataQueryOptions(null, EntityDataModel.Current.EntitySets["Products"]));
         }
 
         [Fact]
@@ -40,7 +40,7 @@
 
             var option = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=LegacyId+eq+2139+and+CompanyName+eq+'Pool+Farm+%26+Primrose+Hill+Nursery'&$top=1"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             Assert.NotNull(option);
             Assert.NotNull(option.Filter);
@@ -82,7 +82,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Products?$expand=Category&$filter=Name eq 'Milk'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Price&$skip=10&$skiptoken=5&$top=25");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -168,7 +168,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.DataServiceVersion, "1.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -185,7 +185,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.DataServiceVersion, "2.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -202,7 +202,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.DataServiceVersion, "3.0");
 
-                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
             }
         }
 
@@ -219,7 +219,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Products");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -311,7 +311,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename+eq+'John'&$orderby=Forename+asc");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Employees"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -376,7 +376,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename+eq+'John'+and+ImageData+eq+'TG9yZW0gaXBzdW0gZG9s%2Bb3Igc2l0IGF%3D'");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Employees"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]

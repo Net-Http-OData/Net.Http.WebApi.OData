@@ -11,9 +11,9 @@
         public void CollectionNamesCaseInsensitiveByDefault_RegisterCollectionThrowsArgumentExceptionForDuplicateKeyVaryingOnlyOnCasing()
         {
             var entityDataModelBuilder = new EntityDataModelBuilder();
-            entityDataModelBuilder.RegisterCollection<Category>("Categories");
+            entityDataModelBuilder.RegisterEntitySet<Category>("Categories");
 
-            var exception = Assert.Throws<ArgumentException>(() => entityDataModelBuilder.RegisterCollection<Category>("categories"));
+            var exception = Assert.Throws<ArgumentException>(() => entityDataModelBuilder.RegisterEntitySet<Category>("categories"));
             Assert.Equal("An item with the same key has already been added.", exception.Message);
         }
 
@@ -21,11 +21,11 @@
         public void CollectionNamesCaseInsensitiveByDefault_ResolveCollectionVaryingCollectionNameCasing()
         {
             var entityDataModelBuilder = new EntityDataModelBuilder();
-            entityDataModelBuilder.RegisterCollection<Category>("Categories");
+            entityDataModelBuilder.RegisterEntitySet<Category>("Categories");
 
             var entityDataModel = entityDataModelBuilder.BuildModel();
 
-            Assert.Same(entityDataModel.Collections["categories"], entityDataModel.Collections["Categories"]);
+            Assert.Same(entityDataModel.EntitySets["categories"], entityDataModel.EntitySets["Categories"]);
         }
 
         public class WhenCalling_BuildModelWith_Models
@@ -35,11 +35,11 @@
             public WhenCalling_BuildModelWith_Models()
             {
                 var entityDataModelBuilder = new EntityDataModelBuilder();
-                entityDataModelBuilder.RegisterCollection<Category>("Categories");
-                entityDataModelBuilder.RegisterCollection<Customer>("Customers");
-                entityDataModelBuilder.RegisterCollection<Employee>("Employees");
-                entityDataModelBuilder.RegisterCollection<Order>("Orders");
-                entityDataModelBuilder.RegisterCollection<Product>("Products");
+                entityDataModelBuilder.RegisterEntitySet<Category>("Categories");
+                entityDataModelBuilder.RegisterEntitySet<Customer>("Customers");
+                entityDataModelBuilder.RegisterEntitySet<Employee>("Employees");
+                entityDataModelBuilder.RegisterEntitySet<Order>("Orders");
+                entityDataModelBuilder.RegisterEntitySet<Product>("Products");
 
                 this.entityDataModel = entityDataModelBuilder.BuildModel();
             }
@@ -53,9 +53,9 @@
             [Fact]
             public void The_Categories_CollectionIsCorrect()
             {
-                Assert.True(this.entityDataModel.Collections.ContainsKey("Categories"));
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Categories"));
 
-                var edmComplexType = this.entityDataModel.Collections["Categories"];
+                var edmComplexType = this.entityDataModel.EntitySets["Categories"];
 
                 Assert.Equal(typeof(Category), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Category", edmComplexType.Name);
@@ -69,9 +69,9 @@
             [Fact]
             public void The_Customers_CollectionIsCorrect()
             {
-                Assert.True(this.entityDataModel.Collections.ContainsKey("Customers"));
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Customers"));
 
-                var edmComplexType = this.entityDataModel.Collections["Customers"];
+                var edmComplexType = this.entityDataModel.EntitySets["Customers"];
 
                 Assert.Equal(typeof(Customer), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Customer", edmComplexType.Name);
@@ -97,9 +97,9 @@
             [Fact]
             public void The_Employees_CollectionIsCorrect()
             {
-                Assert.True(this.entityDataModel.Collections.ContainsKey("Employees"));
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Employees"));
 
-                var edmComplexType = this.entityDataModel.Collections["Employees"];
+                var edmComplexType = this.entityDataModel.EntitySets["Employees"];
 
                 Assert.Equal(typeof(Employee), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Employee", edmComplexType.Name);
@@ -129,9 +129,9 @@
             [Fact]
             public void The_Orders_CollectionIsCorrect()
             {
-                Assert.True(this.entityDataModel.Collections.ContainsKey("Orders"));
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Orders"));
 
-                var edmComplexType = this.entityDataModel.Collections["Orders"];
+                var edmComplexType = this.entityDataModel.EntitySets["Orders"];
 
                 Assert.Equal(typeof(Order), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Order", edmComplexType.Name);
@@ -153,9 +153,9 @@
             [Fact]
             public void The_Products_CollectionIsCorrect()
             {
-                Assert.True(this.entityDataModel.Collections.ContainsKey("Products"));
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Products"));
 
-                var edmComplexType = this.entityDataModel.Collections["Products"];
+                var edmComplexType = this.entityDataModel.EntitySets["Products"];
 
                 Assert.Equal(typeof(Product), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Product", edmComplexType.Name);
@@ -193,7 +193,7 @@
             [Fact]
             public void ThereAre_5_RegisteredCollections()
             {
-                Assert.Equal(5, this.entityDataModel.Collections.Count);
+                Assert.Equal(5, this.entityDataModel.EntitySets.Count);
             }
         }
     }
