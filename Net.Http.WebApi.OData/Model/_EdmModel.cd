@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Net.Http.WebApi.OData.Model.EdmType">
-    <Position X="9" Y="1.75" Width="2.25" />
+    <Position X="9.25" Y="1.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAEgAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAAEgAAAAAQAAAAAAIAAgAAAAAAAAAA=</HashCode>
       <FileName>Model\EdmType.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Net.Http.WebApi.OData.Model.EdmPrimitiveType">
-    <Position X="10.5" Y="4.75" Width="2.25" />
+    <Position X="14.5" Y="4.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAQAgABgAQAAAAACAJAACBAQAEEAAAAAAAQA=</HashCode>
+      <HashCode>AAAAEAAAAQAiABgAQAAAAECAJAACBAABEEAAAAAAAAA=</HashCode>
       <FileName>Model\EdmPrimitiveType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Model.EdmComplexType">
-    <Position X="7" Y="4.75" Width="3" />
+    <Position X="5" Y="4.75" Width="3" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Model\EdmComplexType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Model.EdmProperty">
-    <Position X="13.5" Y="5.5" Width="2.5" />
+    <Position X="17.25" Y="5.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAACAAgAAAA=</HashCode>
       <FileName>Model\EdmProperty.cs</FileName>
@@ -44,10 +44,24 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Model.EdmTypeCache">
-    <Position X="11.75" Y="0.5" Width="3.75" />
+    <Position X="12.5" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\EdmTypeCache.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Net.Http.WebApi.OData.Model.EdmEnumType">
+    <Position X="8.5" Y="4.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAACAEAAAAAAA=</HashCode>
+      <FileName>Model\EdmEnumType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Net.Http.WebApi.OData.Model.EdmEnumMember">
+    <Position X="12" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Model\EdmEnumMember.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

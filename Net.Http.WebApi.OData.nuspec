@@ -12,7 +12,6 @@
 - Expression QueryNode objects refactored (partly for performance, partly to simplify)
 - Improved validation
 - Fixed parsing of Edm.DateTimeOffset
-- Fixed parsing of Edm.Time
 - Improved parsing of Edm.Decimal, now allows (+/-) without digit before decimal point
 - Improved parsing of Edm.Double, now allows (+/-) with exponent
 - Correctly returning HTTP 400 and HTTP 501 where appropriate instead of ODataException which resulted in HTTP 500
@@ -22,6 +21,16 @@
 - Improved AbstractFilterBinder and added an AbstractSelectExpandBinder and and AbstractOrderByBinder
 - Removed SkipQueryOption and TopQueryOption, they only contain an int so exposed that directly as int?
 - Added an Entity Data Model
+- substringof function removed
+- contains function added (replaces substringof)
+- Edm.DateTime &amp; Edm.Time removed
+- Edm.Date and Edm.TimeOfDay added
+- Edm.Duration added
+- Edm.DateTimeOffset parsing improved, also doesn't require prefix or quotes
+- Edm.Guid doesn't require prefix or quotes
+- $inlinecount=allpages replaced by $count=true
+- Added $search query option
+- Added FractionalSeconds, Now, MinDateTime and MaxDateTime functions
 </releaseNotes>
     <language>en-GB</language>
     <projectUrl>https://github.com/TrevorPilley/Net.Http.WebApi.OData/</projectUrl>

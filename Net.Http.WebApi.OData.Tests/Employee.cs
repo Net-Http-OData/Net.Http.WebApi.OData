@@ -4,6 +4,12 @@
 
     public class Employee
     {
+        public AccessLevel AccessLevel
+        {
+            get;
+            set;
+        }
+
         public DateTime BirthDate
         {
             get;

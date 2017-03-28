@@ -21,7 +21,13 @@
             public WhenCallingConstructorWithAllQueryOptions()
             {
                 this.rawQueryOptions = new ODataRawQueryOptions(
-                    "?$expand=*&$filter=Name eq 'Fred'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
+                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Id&$skip=10&$skiptoken=5&$top=25");
+            }
+
+            [Fact]
+            public void CountShouldBeSet()
+            {
+                Assert.Equal("$count=true", this.rawQueryOptions.Count);
             }
 
             [Fact]
@@ -43,15 +49,15 @@
             }
 
             [Fact]
-            public void InlineCountShouldBeSet()
-            {
-                Assert.Equal("$inlinecount=allpages", this.rawQueryOptions.InlineCount);
-            }
-
-            [Fact]
             public void OrderByShouldBeSet()
             {
                 Assert.Equal("$orderby=Name", this.rawQueryOptions.OrderBy);
+            }
+
+            [Fact]
+            public void SearchShouldBeSet()
+            {
+                Assert.Equal("$search=blue OR green", this.rawQueryOptions.Search);
             }
 
             [Fact]
@@ -82,7 +88,7 @@
             public void ToStringShouldReturnTheOriginalQuery()
             {
                 Assert.Equal(
-                    "?$expand=*&$filter=Name eq 'Fred'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$skiptoken=5&$top=25",
+                    "?$count=true&$expand=*&$filter=Name eq 'Fred'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Id&$skip=10&$skiptoken=5&$top=25",
                     rawQueryOptions.ToString());
             }
         }
@@ -117,6 +123,12 @@
             }
 
             [Fact]
+            public void CountShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Count);
+            }
+
+            [Fact]
             public void ExpandShouldBeNull()
             {
                 Assert.Null(this.rawQueryOptions.Expand);
@@ -135,15 +147,15 @@
             }
 
             [Fact]
-            public void InlineCountShouldBeNull()
-            {
-                Assert.Null(this.rawQueryOptions.InlineCount);
-            }
-
-            [Fact]
             public void OrderByShouldBeNull()
             {
                 Assert.Null(this.rawQueryOptions.OrderBy);
+            }
+
+            [Fact]
+            public void SearchShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Search);
             }
 
             [Fact]

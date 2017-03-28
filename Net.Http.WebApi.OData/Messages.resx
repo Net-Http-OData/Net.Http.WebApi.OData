@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InlineCountRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $inlinecount value must be either 'allpages' or 'none'.</value>
-  </data>
   <data name="OrderByPropertyRawValueInvalid" xml:space="preserve">
     <value>If specified, the $orderby direction must be either 'asc' or 'desc'.</value>
   </data>
@@ -130,7 +127,7 @@
     <value>The specified $top value exceeds the maximum value of '{0}' permitted by this service.</value>
   </data>
   <data name="UnknownQueryOption" xml:space="preserve">
-    <value>The query option '{0}' is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top</value>
+    <value>The query option '{0}' is not a valid query option. Valid query options are $count, $expand, $filter, $format, $orderby, $search, $select, $skip, $skiptoken and $top</value>
   </data>
   <data name="UnsupportedOperator" xml:space="preserve">
     <value>The '{0}' operator is not implemented by this service.</value>
@@ -148,7 +145,13 @@
     <value>The '{0}' function is not implemented by this service.</value>
   </data>
   <data name="UnsupportedODataVersion" xml:space="preserve">
-    <value>This service only supports OData 3.0</value>
+    <value>This service only supports OData 4.0</value>
+  </data>
+  <data name="CountRawValueInvalid" xml:space="preserve">
+    <value>If specified, the $count value must be 'true' or 'false'</value>
+  </data>
+  <data name="UnsupportedIsolationLevel" xml:space="preserve">
+    <value>If specified, the OData-IsolationLevel must be 'Snapshot'</value>
   </data>
   <data name="CollectionNameInvalid" xml:space="preserve">
     <value>This service does not contain a collection named '{0}'</value>

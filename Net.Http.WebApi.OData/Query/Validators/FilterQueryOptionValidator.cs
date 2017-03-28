@@ -144,6 +144,34 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 throw new HttpResponseException(
                     queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("second")));
             }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.FractionalSeconds) != AllowedFunctions.FractionalSeconds
+                && rawFilterValue.Contains("fractionalseconds("))
+            {
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("fractionalseconds")));
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Now) != AllowedFunctions.Now
+                && rawFilterValue.Contains("now("))
+            {
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("now")));
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.MinDateTime) != AllowedFunctions.MinDateTime
+                && rawFilterValue.Contains("mindatetime("))
+            {
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("mindatetime")));
+            }
+
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.MaxDateTime) != AllowedFunctions.MaxDateTime
+                && rawFilterValue.Contains("maxdatetime("))
+            {
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("maxdatetime")));
+            }
         }
 
         private static void ValidateFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
@@ -234,6 +262,13 @@ namespace Net.Http.WebApi.OData.Query.Validators
                 throw new HttpResponseException(
                     queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("le")));
             }
+
+            if ((validationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Has) != AllowedLogicalOperators.Has
+                && rawFilterValue.Contains(" has "))
+            {
+                throw new HttpResponseException(
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedOperator.FormatWith("has")));
+            }
         }
 
         private static void ValidateMathFunctions(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
@@ -292,11 +327,11 @@ namespace Net.Http.WebApi.OData.Query.Validators
                     queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("startswith")));
             }
 
-            if ((validationSettings.AllowedFunctions & AllowedFunctions.SubstringOf) != AllowedFunctions.SubstringOf
-                && rawFilterValue.Contains("substringof("))
+            if ((validationSettings.AllowedFunctions & AllowedFunctions.Contains) != AllowedFunctions.Contains
+                && rawFilterValue.Contains("contains("))
             {
                 throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("substringof")));
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedFunction.FormatWith("contains")));
             }
 
             if ((validationSettings.AllowedFunctions & AllowedFunctions.ToLower) != AllowedFunctions.ToLower

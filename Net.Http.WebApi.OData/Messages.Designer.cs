@@ -70,11 +70,11 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the $inlinecount value must be either &apos;allpages&apos; or &apos;none&apos;..
+        ///   Looks up a localized string similar to If specified, the $count value must be &apos;true&apos; or &apos;false&apos;.
         /// </summary>
-        internal static string InlineCountRawValueInvalid {
+        internal static string CountRawValueInvalid {
             get {
-                return ResourceManager.GetString("InlineCountRawValueInvalid", resourceCulture);
+                return ResourceManager.GetString("CountRawValueInvalid", resourceCulture);
             }
         }
         
@@ -115,7 +115,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $expand, $filter, $format, $inlinecount, $orderby, $select, $skip, $skiptoken and $top.
+        ///   Looks up a localized string similar to The query option &apos;{0}&apos; is not a valid query option. Valid query options are $count, $expand, $filter, $format, $orderby, $search, $select, $skip, $skiptoken and $top.
         /// </summary>
         internal static string UnknownQueryOption {
             get {
@@ -133,6 +133,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If specified, the OData-IsolationLevel must be &apos;Snapshot&apos;.
+        /// </summary>
+        internal static string UnsupportedIsolationLevel {
+            get {
+                return ResourceManager.GetString("UnsupportedIsolationLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Query nodes of type &apos;{0}&apos; are not supported..
         /// </summary>
         internal static string UnsupportedNodeType {
@@ -142,7 +151,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This service only supports OData 3.0.
+        ///   Looks up a localized string similar to This service only supports OData 4.0.
         /// </summary>
         internal static string UnsupportedODataVersion {
             get {

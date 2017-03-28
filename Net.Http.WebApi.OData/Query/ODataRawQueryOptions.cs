@@ -70,9 +70,9 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         this.Top = rawQueryOption;
                     }
-                    else if (rawQueryOption.StartsWith("$inlinecount=", StringComparison.Ordinal))
+                    else if (rawQueryOption.StartsWith("$count=", StringComparison.Ordinal))
                     {
-                        this.InlineCount = rawQueryOption;
+                        this.Count = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$format=", StringComparison.Ordinal))
                     {
@@ -81,6 +81,10 @@ namespace Net.Http.WebApi.OData.Query
                     else if (rawQueryOption.StartsWith("$expand=", StringComparison.Ordinal))
                     {
                         this.Expand = rawQueryOption;
+                    }
+                    else if (rawQueryOption.StartsWith("$search=", StringComparison.Ordinal))
+                    {
+                        this.Search = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
                     {
@@ -92,6 +96,14 @@ namespace Net.Http.WebApi.OData.Query
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the raw $count query value from the incoming request Uri if specified.
+        /// </summary>
+        public string Count
+        {
+            get;
         }
 
         /// <summary>
@@ -119,17 +131,17 @@ namespace Net.Http.WebApi.OData.Query
         }
 
         /// <summary>
-        /// Gets the raw $inlinecount query value from the incoming request Uri if specified.
+        /// Gets the raw $orderby query value from the incoming request Uri if specified.
         /// </summary>
-        public string InlineCount
+        public string OrderBy
         {
             get;
         }
 
         /// <summary>
-        /// Gets the raw $orderby query value from the incoming request Uri if specified.
+        /// Gets the raw $search query value from the incoming request Uri if specified.
         /// </summary>
-        public string OrderBy
+        public string Search
         {
             get;
         }

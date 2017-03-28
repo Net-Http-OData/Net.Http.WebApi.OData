@@ -68,7 +68,14 @@ namespace Net.Http.WebApi.OData.Model
         {
             if (clrType.IsEnum)
             {
-                throw new NotSupportedException("Enums are not supported in OData 3.0");
+                var members = new List<EdmEnumMember>();
+
+                foreach (var x in Enum.GetValues(clrType))
+                {
+                    members.Add(new EdmEnumMember(x.ToString(), (int)x));
+                }
+
+                return new EdmEnumType(clrType.FullName, clrType, members.AsReadOnly());
             }
 
             var clrTypeProperties = clrType.GetProperties().OrderBy(p => p.Name);

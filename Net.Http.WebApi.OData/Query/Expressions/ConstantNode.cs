@@ -27,7 +27,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="edmType">The <see cref="EdmType"/> of the value.</param>
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
-        private ConstantNode(EdmType edmType, string literalText, object value)
+        internal ConstantNode(EdmType edmType, string literalText, object value)
         {
             this.EdmType = edmType;
             this.LiteralText = literalText;
@@ -89,12 +89,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         internal static ConstantNode True { get; } = new ConstantNode(EdmPrimitiveType.Boolean, "true", true);
 
         /// <summary>
-        /// Gets a ConstantNode which represents a DateTime value.
+        /// Gets a ConstantNode which represents a Date value.
         /// </summary>
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
-        /// <returns>A ConstantNode representing a DateTime value.</returns>
-        internal static ConstantNode DateTime(string literalText, DateTime value) => new ConstantNode(EdmPrimitiveType.DateTime, literalText, value);
+        /// <returns>A ConstantNode representing a Date value.</returns>
+        internal static ConstantNode Date(string literalText, DateTime value) => new ConstantNode(EdmPrimitiveType.Date, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a DateTimeOffset value.
@@ -119,6 +119,14 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a double value.</returns>
         internal static ConstantNode Double(string literalText, double value) => new ConstantNode(EdmPrimitiveType.Double, literalText, value);
+
+        /// <summary>
+        /// Gets a ConstantNode which represents a duration value.
+        /// </summary>
+        /// <param name="literalText">The literal text.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>A ConstantNode representing a duration value.</returns>
+        internal static ConstantNode Duration(string literalText, TimeSpan value) => new ConstantNode(EdmPrimitiveType.Duration, literalText, value);
 
         /// <summary>
         /// Gets a ConstantNode which represents a Guid value.
@@ -166,6 +174,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <param name="literalText">The literal text.</param>
         /// <param name="value">The value.</param>
         /// <returns>A ConstantNode representing a time value.</returns>
-        internal static ConstantNode Time(string literalText, TimeSpan value) => new ConstantNode(EdmPrimitiveType.Time, literalText, value);
+        internal static ConstantNode Time(string literalText, TimeSpan value) => new ConstantNode(EdmPrimitiveType.TimeOfDay, literalText, value);
     }
 }

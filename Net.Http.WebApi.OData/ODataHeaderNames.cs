@@ -18,8 +18,13 @@ namespace Net.Http.WebApi.OData
     public static class ODataHeaderNames
     {
         /// <summary>
-        /// The data service version header.
+        /// The OData isolation header.
         /// </summary>
-        public const string DataServiceVersion = "DataServiceVersion";
+        public const string ODataIsolation = "OData-Isolation";
+
+        /// <summary>
+        /// The OData version header.
+        /// </summary>
+        public const string ODataVersion = "OData-Version";
     }
 }

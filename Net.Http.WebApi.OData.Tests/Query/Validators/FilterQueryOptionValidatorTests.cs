@@ -296,6 +296,63 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            public WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsNotSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=contains(CompanyName,'Alfreds')"),
+                    EntityDataModel.Current.Collections["Customers"]);
+            }
+
+            [Fact]
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
+            {
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("contains"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Contains,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal
+            };
+
+            public WhenTheFilterQueryOptionContainsTheContainsFunctionAndItIsSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=contains(CompanyName,'Alfreds')"),
+                    EntityDataModel.Current.Collections["Customers"]);
+            }
+
+            [Fact]
+            public void AnExceptionShouldNotBeThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheDayFunctionAndItIsNotSpecifiedInAllowedFunctions
         {
             private readonly ODataQueryOptions queryOptions;
@@ -581,6 +638,63 @@
             }
         }
 
+        public class WhenTheFilterQueryOptionContainsTheFractionalSecondsAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            public WhenTheFilterQueryOptionContainsTheFractionalSecondsAndItIsNotSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=fractionalseconds(BirthDate) lt 0.1"),
+                    EntityDataModel.Current.Collections["Employees"]);
+            }
+
+            [Fact]
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
+            {
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("fractionalseconds"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheFractionalSecondsFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.FractionalSeconds,
+                AllowedLogicalOperators = AllowedLogicalOperators.LessThan
+            };
+
+            public WhenTheFilterQueryOptionContainsTheFractionalSecondsFunctionAndItIsSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=fractionalseconds(BirthDate) lt 0.1"),
+                    EntityDataModel.Current.Collections["Employees"]);
+            }
+
+            [Fact]
+            public void AnExceptionShouldNotBeThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
         public class WhenTheFilterQueryOptionContainsTheGreaterThanOperatorGreaterThanItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions;
@@ -684,6 +798,62 @@
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price ge 35"),
                     EntityDataModel.Current.Collections["Products"]);
+            }
+
+            [Fact]
+            public void AnExceptionShouldNotBeThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsNotSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedLogicalOperators = AllowedLogicalOperators.None
+            };
+
+            public WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsNotSpecifiedInAllowedLogicalOperators()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=AccessLevel has NorthwindModel.AccessLevel'Write'"),
+                    EntityDataModel.Current.Collections["Employees"]);
+            }
+
+            [Fact]
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
+            {
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("has"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsSpecifiedInAllowedLogicalOperators
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedLogicalOperators = AllowedLogicalOperators.Has
+            };
+
+            public WhenTheFilterQueryOptionContainsTheHasOperatorHasItIsSpecifiedInAllowedLogicalOperators()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=AccessLevel has NorthwindModel.AccessLevel'Write'"),
+                    EntityDataModel.Current.Collections["Employees"]);
             }
 
             [Fact]
@@ -977,7 +1147,7 @@
             }
         }
 
-        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsNotSpecifiedInAllowedLogicalOperators
+        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions;
 
@@ -987,7 +1157,7 @@
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
-            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsNotSpecifiedInAllowedLogicalOperators()
+            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsNotSpecifiedInAllowedLogicalOperators()
             {
                 TestHelper.EnsureEDM();
 
@@ -1007,7 +1177,7 @@
             }
         }
 
-        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsSpecifiedInAllowedLogicalOperators
+        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions;
 
@@ -1017,12 +1187,126 @@
                 AllowedLogicalOperators = AllowedLogicalOperators.LessThanOrEqual
             };
 
-            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsSpecifiedInAllowedLogicalOperators()
+            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsSpecifiedInAllowedLogicalOperators()
             {
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price le 35"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
+
+            [Fact]
+            public void AnExceptionShouldNotBeThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheMaxDateTimeAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            public WhenTheFilterQueryOptionContainsTheMaxDateTimeAndItIsNotSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq maxdatetime()"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
+
+            [Fact]
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
+            {
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("maxdatetime"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheMaxDateTimeFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.MaxDateTime,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal
+            };
+
+            public WhenTheFilterQueryOptionContainsTheMaxDateTimeFunctionAndItIsSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq maxdatetime()"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
+
+            [Fact]
+            public void AnExceptionShouldNotBeThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheMinDateTimeAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None
+            };
+
+            public WhenTheFilterQueryOptionContainsTheMinDateTimeAndItIsNotSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq mindatetime()"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
+
+            [Fact]
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
+            {
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("mindatetime"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheMinDateTimeFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.MinDateTime,
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal
+            };
+
+            public WhenTheFilterQueryOptionContainsTheMinDateTimeFunctionAndItIsSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq mindatetime()"),
                     EntityDataModel.Current.Collections["Products"]);
             }
 
@@ -1310,6 +1594,64 @@
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename ne 'John'"),
                     EntityDataModel.Current.Collections["Employees"]);
+            }
+
+            [Fact]
+            public void AnExceptionShouldNotBeThrown()
+            {
+                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheNowAndItIsNotSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.None,
+                AllowedLogicalOperators = AllowedLogicalOperators.GreaterThanOrEqual
+            };
+
+            public WhenTheFilterQueryOptionContainsTheNowAndItIsNotSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq now()"),
+                    EntityDataModel.Current.Collections["Products"]);
+            }
+
+            [Fact]
+            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
+            {
+                var exception = Assert.Throws<HttpResponseException>(
+                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("now"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenTheFilterQueryOptionContainsTheNowFunctionAndItIsSpecifiedInAllowedFunctions
+        {
+            private readonly ODataQueryOptions queryOptions;
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                AllowedQueryOptions = AllowedQueryOptions.Filter,
+                AllowedFunctions = AllowedFunctions.Now,
+                AllowedLogicalOperators = AllowedLogicalOperators.GreaterThanOrEqual
+            };
+
+            public WhenTheFilterQueryOptionContainsTheNowFunctionAndItIsSpecifiedInAllowedFunctions()
+            {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate ge now()"),
+                    EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
@@ -1651,63 +1993,6 @@
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=substring(CompanyName, 1) eq 'lfreds Futterkiste'"),
                     EntityDataModel.Current.Collections["Customers"]);
-            }
-
-            [Fact]
-            public void AnExceptionShouldNotBeThrown()
-            {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsNotSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions;
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.None
-            };
-
-            public WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsNotSpecifiedInAllowedFunctions()
-            {
-                TestHelper.EnsureEDM();
-
-                this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=substringof('Hayes', Surname) eq true"),
-                    EntityDataModel.Current.Collections["Employees"]);
-            }
-
-            [Fact]
-            public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
-            {
-                var exception = Assert.Throws<HttpResponseException>(
-                    () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
-
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("substringof"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
-            }
-        }
-
-        public class WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsSpecifiedInAllowedFunctions
-        {
-            private readonly ODataQueryOptions queryOptions;
-
-            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter,
-                AllowedFunctions = AllowedFunctions.SubstringOf,
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal
-            };
-
-            public WhenTheFilterQueryOptionContainsTheSubstringOfFunctionAndItIsSpecifiedInAllowedFunctions()
-            {
-                TestHelper.EnsureEDM();
-
-                this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=substringof('Hayes', Surname) eq true"),
-                    EntityDataModel.Current.Collections["Employees"]);
             }
 
             [Fact]

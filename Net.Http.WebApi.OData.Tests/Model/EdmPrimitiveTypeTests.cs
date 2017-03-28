@@ -34,12 +34,12 @@
         }
 
         [Fact]
-        public void DateTime()
+        public void Date()
         {
-            Assert.Equal(typeof(DateTime), EdmPrimitiveType.DateTime.ClrType);
-            Assert.Equal("Edm.DateTime", EdmPrimitiveType.DateTime.Name);
-            Assert.Same(EdmPrimitiveType.DateTime, EdmPrimitiveType.DateTime);
-            Assert.Equal(EdmPrimitiveType.DateTime.ToString(), EdmPrimitiveType.DateTime.Name);
+            Assert.Equal(typeof(DateTime), EdmPrimitiveType.Date.ClrType);
+            Assert.Equal("Edm.Date", EdmPrimitiveType.Date.Name);
+            Assert.Same(EdmPrimitiveType.Date, EdmPrimitiveType.Date);
+            Assert.Equal(EdmPrimitiveType.Date.ToString(), EdmPrimitiveType.Date.Name);
         }
 
         [Fact]
@@ -67,6 +67,15 @@
             Assert.Equal("Edm.Double", EdmPrimitiveType.Double.Name);
             Assert.Same(EdmPrimitiveType.Double, EdmPrimitiveType.Double);
             Assert.Equal(EdmPrimitiveType.Double.ToString(), EdmPrimitiveType.Double.Name);
+        }
+
+        [Fact]
+        public void Duration()
+        {
+            Assert.Equal(typeof(TimeSpan), EdmPrimitiveType.Duration.ClrType);
+            Assert.Equal("Edm.Duration", EdmPrimitiveType.Duration.Name);
+            Assert.Same(EdmPrimitiveType.Duration, EdmPrimitiveType.Duration);
+            Assert.Equal(EdmPrimitiveType.Duration.ToString(), EdmPrimitiveType.Duration.Name);
         }
 
         [Fact]
@@ -133,12 +142,12 @@
         }
 
         [Fact]
-        public void Time()
+        public void TimeOfDay()
         {
-            Assert.Equal(typeof(TimeSpan), EdmPrimitiveType.Time.ClrType);
-            Assert.Equal("Edm.Time", EdmPrimitiveType.Time.Name);
-            Assert.Same(EdmPrimitiveType.Time, EdmPrimitiveType.Time);
-            Assert.Equal(EdmPrimitiveType.Time.ToString(), EdmPrimitiveType.Time.Name);
+            Assert.Equal(typeof(TimeSpan), EdmPrimitiveType.TimeOfDay.ClrType);
+            Assert.Equal("Edm.TimeOfDay", EdmPrimitiveType.TimeOfDay.Name);
+            Assert.Same(EdmPrimitiveType.TimeOfDay, EdmPrimitiveType.TimeOfDay);
+            Assert.Equal(EdmPrimitiveType.TimeOfDay.ToString(), EdmPrimitiveType.TimeOfDay.Name);
         }
     }
 }

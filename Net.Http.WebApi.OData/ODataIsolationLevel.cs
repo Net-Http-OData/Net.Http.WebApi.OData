@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="InlineCount.cs" company="Project Contributors">
+// <copyright file="ODataIsolationLevel.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,22 +10,21 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query
+namespace Net.Http.WebApi.OData
 {
     /// <summary>
-    /// The valid inline count options.
+    /// The OData isolation levels.
     /// </summary>
-    public enum InlineCount
+    public enum ODataIsolationLevel
     {
         /// <summary>
-        /// The OData service MUST NOT include a count in the response.
+        /// No isolation level is specified in the request.
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// The OData MUST include a count of the number of entities in the collection identified by the URI
-        /// (after applying any $filter System Query Options present on the URI)
+        /// Snapshot isolation level is specified in the request.
         /// </summary>
-        AllPages = 1
+        Snapshot
     }
 }

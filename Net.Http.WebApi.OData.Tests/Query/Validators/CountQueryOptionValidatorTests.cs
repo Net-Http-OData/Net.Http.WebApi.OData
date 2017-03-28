@@ -9,23 +9,23 @@
     using OData.Model;
     using Xunit;
 
-    public class InlineCountQueryOptionValidatorTests
+    public class CountQueryOptionValidatorTests
     {
-        public class WhenTheInlineCountQueryOptionIsSetAndItIsNotAValidValue
+        public class WhenTheCountQueryOptionIsSetAndItIsNotAValidValue
         {
             private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
-                AllowedQueryOptions = AllowedQueryOptions.InlineCount
+                AllowedQueryOptions = AllowedQueryOptions.Count
             };
 
-            public WhenTheInlineCountQueryOptionIsSetAndItIsNotAValidValue()
+            public WhenTheCountQueryOptionIsSetAndItIsNotAValidValue()
             {
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=x"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$count=x"),
                     EntityDataModel.Current.Collections["Products"]);
             }
 
@@ -33,14 +33,14 @@
             public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()
             {
                 var exception = Assert.Throws<HttpResponseException>(
-                    () => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
-                Assert.Equal(Messages.InlineCountRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(Messages.CountRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
-        public class WhenTheInlineCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
+        public class WhenTheCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
             private readonly ODataQueryOptions queryOptions;
 
@@ -49,12 +49,12 @@
                 AllowedQueryOptions = AllowedQueryOptions.None
             };
 
-            public WhenTheInlineCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
+            public WhenTheCountQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions()
             {
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$count=true"),
                     EntityDataModel.Current.Collections["Products"]);
             }
 
@@ -62,60 +62,60 @@
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
                 var exception = Assert.Throws<HttpResponseException>(
-                    () => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                    () => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$inlinecount"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$count"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
 
-        public class WhenTheInlineCountQueryOptionIsSetToAllPagesAndItIsSpecifiedInAllowedQueryOptions
+        public class WhenTheCountQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions
         {
             private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
-                AllowedQueryOptions = AllowedQueryOptions.InlineCount
+                AllowedQueryOptions = AllowedQueryOptions.Count
             };
 
-            public WhenTheInlineCountQueryOptionIsSetToAllPagesAndItIsSpecifiedInAllowedQueryOptions()
+            public WhenTheCountQueryOptionIsSetAndItIsSpecifiedInAllowedQueryOptions()
             {
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$count=true"),
                     EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
-        public class WhenTheInlineCountQueryOptionIsSetToNoneAndItIsSpecifiedInAllowedQueryOptions
+        public class WhenTheCountQueryOptionIsSetToFalseAndItIsSpecifiedInAllowedQueryOptions
         {
             private readonly ODataQueryOptions queryOptions;
 
             private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
             {
-                AllowedQueryOptions = AllowedQueryOptions.InlineCount
+                AllowedQueryOptions = AllowedQueryOptions.Count
             };
 
-            public WhenTheInlineCountQueryOptionIsSetToNoneAndItIsSpecifiedInAllowedQueryOptions()
+            public WhenTheCountQueryOptionIsSetToFalseAndItIsSpecifiedInAllowedQueryOptions()
             {
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=none"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$count=false"),
                     EntityDataModel.Current.Collections["Products"]);
             }
 
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => InlineCountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
     }

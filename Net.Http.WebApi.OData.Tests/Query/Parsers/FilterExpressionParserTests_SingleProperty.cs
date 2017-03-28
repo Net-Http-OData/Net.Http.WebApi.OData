@@ -1,6 +1,7 @@
 namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 {
     using System;
+    using NorthwindModel;
     using WebApi.OData.Model;
     using WebApi.OData.Query.Expressions;
     using WebApi.OData.Query.Parsers;
@@ -72,72 +73,9 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             }
 
             [Fact]
-            public void ParsePropertyEqDateHourMinuteValueExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetime'2013-06-18T09:30'", EntityDataModel.Current.Collections["Products"]);
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                Assert.IsType<PropertyAccessNode>(node.Left);
-                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
-
-                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
-
-                Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetime'2013-06-18T09:30'", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTime(2013, 6, 18, 9, 30, 0), ((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
-            public void ParsePropertyEqDateOnlyValueExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetime'2013-06-18'", EntityDataModel.Current.Collections["Products"]);
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                Assert.IsType<PropertyAccessNode>(node.Left);
-                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
-
-                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
-
-                Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetime'2013-06-18'", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTime(2013, 6, 18), ((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
-            public void ParsePropertyEqDateTimeMomentJsIsoStringFormatValueExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetime'2013-02-04T22:44:30.652Z'", EntityDataModel.Current.Collections["Products"]);
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                Assert.IsType<PropertyAccessNode>(node.Left);
-                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
-
-                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
-
-                Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetime'2013-02-04T22:44:30.652Z'", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTime(2013, 2, 4, 22, 44, 30, 652), ((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
             public void ParsePropertyEqDateTimeOffset_DateHourMinute_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2013-06-18T09:30'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2013-06-18T09:30", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -150,7 +88,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2013-06-18T09:30'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2013-06-18T09:30", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 0, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
             }
@@ -158,7 +96,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffset_DateHourMinuteSecond_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2013-06-18T09:30:54'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2013-06-18T09:30:54", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -171,7 +109,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2013-06-18T09:30:54'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2013-06-18T09:30:54", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 54, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
             }
@@ -179,7 +117,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffset_MinusOffset_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2002-10-15T17:34:23-02:00'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2002-10-15T17:34:23-02:00", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -192,7 +130,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2002-10-15T17:34:23-02:00'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2002-10-15T17:34:23-02:00", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.FromHours(-2)), ((ConstantNode)node.Right).Value);
             }
@@ -200,7 +138,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffset_MomentJsIsoStringFormat_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2013-02-04T22:44:30.652Z'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2013-02-04T22:44:30.652Z", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -213,7 +151,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2013-02-04T22:44:30.652Z'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2013-02-04T22:44:30.652Z", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2013, 2, 4, 22, 44, 30, 652, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
             }
@@ -221,7 +159,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffset_PlusOffset_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2002-10-15T17:34:23+02:00'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2002-10-15T17:34:23+02:00", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -234,7 +172,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2002-10-15T17:34:23+02:00'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2002-10-15T17:34:23+02:00", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.FromHours(2)), ((ConstantNode)node.Right).Value);
             }
@@ -242,7 +180,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffset_ToStringSFormat_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2013-06-18T09:30:20'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2013-06-18T09:30:20", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -255,7 +193,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2013-06-18T09:30:20'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2013-06-18T09:30:20", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 20, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
             }
@@ -263,7 +201,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffset_Z_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2002-10-15T17:34:23Z'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2002-10-15T17:34:23Z", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -276,7 +214,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2002-10-15T17:34:23Z'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2002-10-15T17:34:23Z", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
             }
@@ -284,7 +222,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqDateTimeOffset_ZeroOffset_ValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetimeoffset'2017-02-28T16:34:18'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2017-02-28T16:34:18", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -297,15 +235,15 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetimeoffset'2017-02-28T16:34:18'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2017-02-28T16:34:18", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new DateTimeOffset(2017, 2, 28, 16, 34, 18, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
-            public void ParsePropertyEqDateTimeSFormatValueExpression()
+            public void ParsePropertyEqDateValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq datetime'2013-06-18T09:30:20'", EntityDataModel.Current.Collections["Products"]);
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 2013-06-18", EntityDataModel.Current.Collections["Products"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -318,9 +256,51 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("datetime'2013-06-18T09:30:20'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("2013-06-18", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTime(2013, 6, 18, 9, 30, 20), ((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTime(2013, 6, 18), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqEnumFlagsValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("AccessLevel has NorthwindModel.AccessLevel'Read,Write'", EntityDataModel.Current.Collections["Employees"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("AccessLevel", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Has, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("NorthwindModel.AccessLevel'Read,Write'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<AccessLevel>(((ConstantNode)node.Right).Value);
+                Assert.Equal(AccessLevel.Read | AccessLevel.Write, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqEnumValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Colour eq NorthwindModel.Colour'Blue'", EntityDataModel.Current.Collections["Products"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Colour", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("NorthwindModel.Colour'Blue'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<Colour>(((ConstantNode)node.Right).Value);
+                Assert.Equal(Colour.Blue, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -345,7 +325,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqGuidValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("TransactionId eq guid'0D01B09B-38CD-4C53-AA04-181371087A00'", EntityDataModel.Current.Collections["Orders"]);
+                var queryNode = FilterExpressionParser.Parse("TransactionId eq 0D01B09B-38CD-4C53-AA04-181371087A00", EntityDataModel.Current.Collections["Orders"]);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -358,7 +338,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("guid'0D01B09B-38CD-4C53-AA04-181371087A00'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal("0D01B09B-38CD-4C53-AA04-181371087A00", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<Guid>(((ConstantNode)node.Right).Value);
                 Assert.Equal(new Guid("0D01B09B-38CD-4C53-AA04-181371087A00"), ((ConstantNode)node.Right).Value);
             }
@@ -486,6 +466,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqNegativeDurationValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq duration'-P6DT23H59M59.9999S'", EntityDataModel.Current.Collections["Products"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("duration'-P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(TimeSpan.Parse("-6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqNegativeFloatValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Rating eq -1234.567F", EntityDataModel.Current.Collections["Products"]);
@@ -546,27 +547,6 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("-1234L", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<long>(((ConstantNode)node.Right).Value);
                 Assert.Equal(-1234L, ((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
-            public void ParsePropertyEqNegativeTimeValueExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq time'-P6DT23H59M59.9999S'", EntityDataModel.Current.Collections["Products"]);
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                Assert.IsType<PropertyAccessNode>(node.Left);
-                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
-
-                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
-
-                Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("time'-P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
-                Assert.Equal(TimeSpan.Parse("-6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -673,6 +653,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqPositiveDurationValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq duration'P6DT23H59M59.9999S'", EntityDataModel.Current.Collections["Products"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("duration'P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(TimeSpan.Parse("6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqPositiveFloatValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Rating eq 1234.567F", EntityDataModel.Current.Collections["Products"]);
@@ -733,27 +734,6 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("1234L", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<long>(((ConstantNode)node.Right).Value);
                 Assert.Equal(1234L, ((ConstantNode)node.Right).Value);
-            }
-
-            [Fact]
-            public void ParsePropertyEqPositiveTimeValueExpression()
-            {
-                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq time'P6DT23H59M59.9999S'", EntityDataModel.Current.Collections["Products"]);
-
-                Assert.NotNull(queryNode);
-                Assert.IsType<BinaryOperatorNode>(queryNode);
-
-                var node = (BinaryOperatorNode)queryNode;
-
-                Assert.IsType<PropertyAccessNode>(node.Left);
-                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
-
-                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
-
-                Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("time'P6DT23H59M59.9999S'", ((ConstantNode)node.Right).LiteralText);
-                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
-                Assert.Equal(TimeSpan.Parse("6.23:59:59.9999"), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -836,6 +816,69 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("'O''Neil'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
                 Assert.Equal("O'Neil", ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqTimeOfDayHourMinuteSecondFractionalSecondValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 13:20:45.352", EntityDataModel.Current.Collections["Products"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("13:20:45.352", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new TimeSpan(0, 13, 20, 45, 352), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqTimeOfDayHourMinuteSecondValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 13:20:45", EntityDataModel.Current.Collections["Products"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("13:20:45", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new TimeSpan(13, 20, 45), ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqTimeOfDayHourMinuteValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("ReleaseDate eq 13:20", EntityDataModel.Current.Collections["Products"]);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("ReleaseDate", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("13:20", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<TimeSpan>(((ConstantNode)node.Right).Value);
+                Assert.Equal(new TimeSpan(13, 20, 0), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

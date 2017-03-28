@@ -28,11 +28,10 @@ namespace Net.Http.WebApi.OData
         /// <param name="statusCode">The HTTP response status code.</param>
         /// <param name="value">The content of the HTTP response message.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "We're returining the HttpResponseMessage")]
         public static HttpResponseMessage CreateODataResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value)
         {
             var response = request.CreateResponse(statusCode, value);
-            response.Headers.Add(ODataHeaderNames.DataServiceVersion, "3.0");
+            response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
             return response;
         }

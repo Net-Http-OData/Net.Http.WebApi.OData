@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="InlineCountQueryOptionValidator.cs" company="Project Contributors">
+// <copyright file="SearchQueryOptionValidator.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,9 +17,9 @@ namespace Net.Http.WebApi.OData.Query.Validators
     using System.Web.Http;
 
     /// <summary>
-    /// A class which validates the $inlinecount query option based upon the <see cref="ODataValidationSettings"/>.
+    /// A class which validates the $search query option based upon the <see cref="ODataValidationSettings"/>.
     /// </summary>
-    internal static class InlineCountQueryOptionValidator
+    internal static class SearchQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
@@ -29,22 +29,15 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.RawValues.InlineCount == null)
+            if (queryOptions.RawValues.Search == null)
             {
                 return;
             }
 
-            if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount) != AllowedQueryOptions.InlineCount)
+            if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Search) != AllowedQueryOptions.Search)
             {
                 throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$inlinecount")));
-            }
-
-            if (queryOptions.RawValues.InlineCount != "$inlinecount=allpages"
-                && queryOptions.RawValues.InlineCount != "$inlinecount=none")
-            {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.InlineCountRawValueInvalid));
+                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$search")));
             }
         }
     }

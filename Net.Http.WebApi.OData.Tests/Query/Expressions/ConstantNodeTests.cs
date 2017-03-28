@@ -58,7 +58,7 @@
 
             public DateTimeOffsetValue()
             {
-                this.node = ConstantNode.DateTimeOffset("datetimeoffset'2002-10-15T17:34:23Z'", new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero));
+                this.node = ConstantNode.DateTimeOffset("2002-10-15T17:34:23Z", new DateTimeOffset(2002, 10, 15, 17, 34, 23, TimeSpan.Zero));
             }
 
             [Fact]
@@ -76,7 +76,7 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("datetimeoffset'2002-10-15T17:34:23Z'", this.node.LiteralText);
+                Assert.Equal("2002-10-15T17:34:23Z", this.node.LiteralText);
             }
 
             [Fact]
@@ -87,19 +87,19 @@
             }
         }
 
-        public class DateTimeValue
+        public class DateValue
         {
             private readonly ConstantNode node;
 
-            public DateTimeValue()
+            public DateValue()
             {
-                this.node = ConstantNode.DateTime("datetime'2000-12-18T12:00'", new DateTime(2000, 12, 18, 12, 0, 0));
+                this.node = ConstantNode.Date("2000-12-18", new DateTime(2000, 12, 18));
             }
 
             [Fact]
             public void TheEdmPrimitiveTypeIsSet()
             {
-                Assert.Equal(EdmPrimitiveType.DateTime, this.node.EdmType);
+                Assert.Equal(EdmPrimitiveType.Date, this.node.EdmType);
             }
 
             [Fact]
@@ -111,14 +111,14 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("datetime'2000-12-18T12:00'", this.node.LiteralText);
+                Assert.Equal("2000-12-18", this.node.LiteralText);
             }
 
             [Fact]
             public void TheValuePropertyIsSet()
             {
                 Assert.IsType<DateTime>(this.node.Value);
-                Assert.Equal(new DateTime(2000, 12, 18, 12, 0, 0), this.node.Value);
+                Assert.Equal(new DateTime(2000, 12, 18), this.node.Value);
             }
         }
 
@@ -233,7 +233,7 @@
 
             public GuidValue()
             {
-                this.node = ConstantNode.Guid("guid'12345678-aaaa-bbbb-cccc-ddddeeeeffff'", new Guid("12345678-aaaa-bbbb-cccc-ddddeeeeffff"));
+                this.node = ConstantNode.Guid("12345678-aaaa-bbbb-cccc-ddddeeeeffff", new Guid("12345678-aaaa-bbbb-cccc-ddddeeeeffff"));
             }
 
             [Fact]
@@ -251,7 +251,7 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("guid'12345678-aaaa-bbbb-cccc-ddddeeeeffff'", this.node.LiteralText);
+                Assert.Equal("12345678-aaaa-bbbb-cccc-ddddeeeeffff", this.node.LiteralText);
             }
 
             [Fact]
@@ -504,19 +504,19 @@
             }
         }
 
-        public class TimeValue
+        public class TimeOfDayValue
         {
             private readonly ConstantNode node;
 
-            public TimeValue()
+            public TimeOfDayValue()
             {
-                this.node = ConstantNode.Time("time'13:20:00'", new TimeSpan(13, 20, 0));
+                this.node = ConstantNode.Time("13:20:00", new TimeSpan(13, 20, 0));
             }
 
             [Fact]
             public void TheEdmPrimitiveTypeIsSet()
             {
-                Assert.Equal(EdmPrimitiveType.Time, this.node.EdmType);
+                Assert.Equal(EdmPrimitiveType.TimeOfDay, this.node.EdmType);
             }
 
             [Fact]
@@ -528,7 +528,7 @@
             [Fact]
             public void TheLiteralTextPropertyIsSet()
             {
-                Assert.Equal("time'13:20:00'", this.node.LiteralText);
+                Assert.Equal("13:20:00", this.node.LiteralText);
             }
 
             [Fact]
