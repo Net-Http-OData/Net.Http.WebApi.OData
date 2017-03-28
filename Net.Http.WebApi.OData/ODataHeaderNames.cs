@@ -21,5 +21,15 @@ namespace Net.Http.WebApi.OData
         /// The data service version header.
         /// </summary>
         public const string DataServiceVersion = "DataServiceVersion";
+
+        /// <summary>
+        /// The max data service version header.
+        /// </summary>
+        public const string MaxDataServiceVersion = "MaxDataServiceVersion";
+
+        /// <summary>
+        /// The min data service version header.
+        /// </summary>
+        public const string MinDataServiceVersion = "MinDataServiceVersion";
     }
 }

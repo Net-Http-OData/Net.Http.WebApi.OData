@@ -248,6 +248,22 @@ namespace Net.Http.WebApi.OData.Query
                 throw new HttpResponseException(
                     this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
+
+            headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.MaxDataServiceVersion);
+
+            if (headerValue != null && headerValue != "3.0")
+            {
+                throw new HttpResponseException(
+                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+            }
+
+            headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.MinDataServiceVersion);
+
+            if (headerValue != null && headerValue != "3.0")
+            {
+                throw new HttpResponseException(
+                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+            }
         }
     }
 }
