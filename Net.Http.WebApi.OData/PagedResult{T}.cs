@@ -21,7 +21,7 @@ namespace Net.Http.WebApi.OData
     [System.Runtime.Serialization.DataContract]
     public sealed class PagedResult<T>
     {
-        [System.Runtime.Serialization.DataMember(Name = "@odata.count", Order = 0)]
+        [System.Runtime.Serialization.DataMember(Name = "odata.count", Order = 0)]
         private readonly int count;
 
         [System.Runtime.Serialization.DataMember(Name = "value", Order = 1)]

@@ -12,7 +12,7 @@
 
             public WhenAddingAParameter()
             {
-                this.node = new FunctionCallNode("contains");
+                this.node = new FunctionCallNode("substringof");
                 this.node.AddParameter(parameter);
             }
 
@@ -25,7 +25,7 @@
 
         public class WhenConstructed
         {
-            private readonly string functionName = "contains";
+            private readonly string functionName = "substringof";
             private readonly FunctionCallNode node;
 
             public WhenConstructed()

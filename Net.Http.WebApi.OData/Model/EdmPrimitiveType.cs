@@ -42,9 +42,9 @@ namespace Net.Http.WebApi.OData.Model
         public static EdmType Byte { get; } = new EdmPrimitiveType("Edm.Byte", typeof(byte));
 
         /// <summary>
-        /// Gets the EdmType which represents date with values ranging from January 1; 1753 A.D. through December 9999 A.D.
+        /// Gets the EdmType which represents date and time with values ranging from 12:00:00 midnight; January 1; 1753 A.D. through 11:59:59 P.M; December 9999 A.D.
         /// </summary>
-        public static EdmType Date { get; } = new EdmPrimitiveType("Edm.Date", typeof(DateTime));
+        public static EdmType DateTime { get; } = new EdmPrimitiveType("Edm.DateTime", typeof(DateTime));
 
         /// <summary>
         /// Gets the EdmType which represents date and time as an Offset in minutes from GMT; with values ranging from 12:00:00 midnight; January 1; 1753 A.D. through 11:59:59 P.M; December 9999 A.D.
@@ -60,11 +60,6 @@ namespace Net.Http.WebApi.OData.Model
         /// Gets the EdmType which represents a floating point number with 15 digits precision that can represent values with approximate range of ± 2.23e -308 through ± 1.79e +308
         /// </summary>
         public static EdmType Double { get; } = new EdmPrimitiveType("Edm.Double", typeof(double));
-
-        /// <summary>
-        /// Gets the EdmType which represents a duration.
-        /// </summary>
-        public static EdmType Duration { get; } = new EdmPrimitiveType("Edm.Duration", typeof(TimeSpan));
 
         /// <summary>
         /// Gets the EdmType which represents a 16-byte (128-bit) unique identifier value.
@@ -102,8 +97,8 @@ namespace Net.Http.WebApi.OData.Model
         public static EdmType String { get; } = new EdmPrimitiveType("Edm.String", typeof(string));
 
         /// <summary>
-        /// Gets the EdmType which represents the time of day with values ranging from 0:00:00.x to 23:59:59.y, where x and y depend upon the precision.
+        /// Gets the EdmType which represents the time of day with values ranging from 0:00:00.x to 23:59:59.y; where x and y depend upon the precision.
         /// </summary>
-        public static EdmType TimeOfDay { get; } = new EdmPrimitiveType("Edm.TimeOfDay", typeof(TimeSpan));
+        public static EdmType Time { get; } = new EdmPrimitiveType("Edm.Time", typeof(TimeSpan));
     }
 }

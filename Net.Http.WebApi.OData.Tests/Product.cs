@@ -10,12 +10,6 @@
             set;
         }
 
-        public Colour Colour
-        {
-            get;
-            set;
-        }
-
         public bool Deleted
         {
             get;

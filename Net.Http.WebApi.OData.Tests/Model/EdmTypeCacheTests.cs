@@ -17,8 +17,8 @@
             Assert.Equal(EdmType.GetEdmType(typeof(byte)), EdmPrimitiveType.Byte);
             Assert.Equal(EdmType.GetEdmType(typeof(byte?)), EdmPrimitiveType.Byte);
 
-            Assert.Equal(EdmType.GetEdmType(typeof(DateTime)), EdmPrimitiveType.Date);
-            Assert.Equal(EdmType.GetEdmType(typeof(DateTime?)), EdmPrimitiveType.Date);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTime)), EdmPrimitiveType.DateTime);
+            Assert.Equal(EdmType.GetEdmType(typeof(DateTime?)), EdmPrimitiveType.DateTime);
 
             Assert.Equal(EdmType.GetEdmType(typeof(DateTimeOffset)), EdmPrimitiveType.DateTimeOffset);
             Assert.Equal(EdmType.GetEdmType(typeof(DateTimeOffset?)), EdmPrimitiveType.DateTimeOffset);
@@ -28,9 +28,6 @@
 
             Assert.Equal(EdmType.GetEdmType(typeof(double)), EdmPrimitiveType.Double);
             Assert.Equal(EdmType.GetEdmType(typeof(double?)), EdmPrimitiveType.Double);
-
-            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan)), EdmPrimitiveType.Duration);
-            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan?)), EdmPrimitiveType.Duration);
 
             Assert.Equal(EdmType.GetEdmType(typeof(Guid)), EdmPrimitiveType.Guid);
             Assert.Equal(EdmType.GetEdmType(typeof(Guid?)), EdmPrimitiveType.Guid);
@@ -54,8 +51,8 @@
             Assert.Equal(EdmType.GetEdmType(typeof(char?)), EdmPrimitiveType.String);
             Assert.Equal(EdmType.GetEdmType(typeof(string)), EdmPrimitiveType.String);
 
-            ////Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan)), EdmPrimitiveType.TimeOfDay);
-            ////Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan?)), EdmPrimitiveType.TimeOfDay);
+            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan)), EdmPrimitiveType.Time);
+            Assert.Equal(EdmType.GetEdmType(typeof(TimeSpan?)), EdmPrimitiveType.Time);
         }
     }
 }

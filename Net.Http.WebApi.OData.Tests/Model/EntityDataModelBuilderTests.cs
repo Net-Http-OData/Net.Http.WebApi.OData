@@ -103,31 +103,27 @@
 
                 Assert.Equal(typeof(Employee), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Employee", edmComplexType.Name);
-                Assert.Equal(6, edmComplexType.Properties.Count);
+                Assert.Equal(5, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
-                Assert.Equal("AccessLevel", edmComplexType.Properties[0].Name);
-                Assert.Same(EdmType.GetEdmType(typeof(AccessLevel)), edmComplexType.Properties[0].PropertyType);
+                Assert.Equal("BirthDate", edmComplexType.Properties[0].Name);
+                Assert.Same(EdmPrimitiveType.DateTime, edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
-                Assert.Equal("BirthDate", edmComplexType.Properties[1].Name);
-                Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[1].PropertyType);
+                Assert.Equal("Forename", edmComplexType.Properties[1].Name);
+                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[1].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
-                Assert.Equal("Forename", edmComplexType.Properties[2].Name);
+                Assert.Equal("ImageData", edmComplexType.Properties[2].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[2].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[3].DeclaringType);
-                Assert.Equal("ImageData", edmComplexType.Properties[3].Name);
+                Assert.Equal("Surname", edmComplexType.Properties[3].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[3].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[4].DeclaringType);
-                Assert.Equal("Surname", edmComplexType.Properties[4].Name);
+                Assert.Equal("Title", edmComplexType.Properties[4].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[4].PropertyType);
-
-                Assert.Same(edmComplexType, edmComplexType.Properties[5].DeclaringType);
-                Assert.Equal("Title", edmComplexType.Properties[5].Name);
-                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[5].PropertyType);
             }
 
             [Fact]
@@ -163,50 +159,35 @@
 
                 Assert.Equal(typeof(Product), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Product", edmComplexType.Name);
-                Assert.Equal(8, edmComplexType.Properties.Count);
+                Assert.Equal(7, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
                 Assert.Equal("Category", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmType.GetEdmType(typeof(Category)), edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
-                Assert.Equal("Colour", edmComplexType.Properties[1].Name);
-                Assert.Same(EdmType.GetEdmType(typeof(Colour)), edmComplexType.Properties[1].PropertyType);
-
-                var edmEnumType = (EdmEnumType)EdmType.GetEdmType(typeof(Colour));
-                Assert.Equal(typeof(Colour), edmEnumType.ClrType);
-                Assert.Equal("NorthwindModel.Colour", edmEnumType.Name);
-                Assert.Equal(3, edmEnumType.Members.Count);
-                Assert.Equal("Green", edmEnumType.Members[0].Name);
-                Assert.Equal(1, edmEnumType.Members[0].Value);
-                Assert.Equal("Blue", edmEnumType.Members[1].Name);
-                Assert.Equal(2, edmEnumType.Members[1].Value);
-                Assert.Equal("Red", edmEnumType.Members[2].Name);
-                Assert.Equal(3, edmEnumType.Members[2].Value);
+                Assert.Equal("Deleted", edmComplexType.Properties[1].Name);
+                Assert.Same(EdmPrimitiveType.Boolean, edmComplexType.Properties[1].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
-                Assert.Equal("Deleted", edmComplexType.Properties[2].Name);
-                Assert.Same(EdmPrimitiveType.Boolean, edmComplexType.Properties[2].PropertyType);
+                Assert.Equal("Description", edmComplexType.Properties[2].Name);
+                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[2].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[3].DeclaringType);
-                Assert.Equal("Description", edmComplexType.Properties[3].Name);
+                Assert.Equal("Name", edmComplexType.Properties[3].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[3].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[4].DeclaringType);
-                Assert.Equal("Name", edmComplexType.Properties[4].Name);
-                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[4].PropertyType);
+                Assert.Equal("Price", edmComplexType.Properties[4].Name);
+                Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[4].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[5].DeclaringType);
-                Assert.Equal("Price", edmComplexType.Properties[5].Name);
-                Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[5].PropertyType);
+                Assert.Equal("Rating", edmComplexType.Properties[5].Name);
+                Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[5].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[6].DeclaringType);
-                Assert.Equal("Rating", edmComplexType.Properties[6].Name);
-                Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[6].PropertyType);
-
-                Assert.Same(edmComplexType, edmComplexType.Properties[7].DeclaringType);
-                Assert.Equal("ReleaseDate", edmComplexType.Properties[7].Name);
-                Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[7].PropertyType);
+                Assert.Equal("ReleaseDate", edmComplexType.Properties[6].Name);
+                Assert.Same(EdmPrimitiveType.DateTime, edmComplexType.Properties[6].PropertyType);
             }
 
             [Fact]

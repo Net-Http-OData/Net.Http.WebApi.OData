@@ -63,9 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessLevel.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Colour.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
@@ -86,6 +84,7 @@
     <Compile Include="Query\Expressions\UnaryOperatorNodeTests.cs" />
     <Compile Include="Query\FilterQueryOptionTests.cs" />
     <Compile Include="Query\FormatQueryOptionTests.cs" />
+    <Compile Include="Query\InlineCountQueryOptionTests.cs" />
     <Compile Include="Query\ODataQueryOptionsTests.cs" />
     <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
     <Compile Include="Query\ODataValidationSettingsTests.cs" />
@@ -100,9 +99,8 @@
     <Compile Include="Query\Validators\ExpandQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\CountQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\InlineCountQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\OrderByQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\SearchQueryValidatorTests.cs" />
     <Compile Include="Query\Validators\SelectQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\SkipQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\SkipTokenQueryOptionValidatorTests.cs" />

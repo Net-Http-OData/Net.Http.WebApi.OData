@@ -136,12 +136,10 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                             break;
 
-                        case TokenType.Date:
+                        case TokenType.DateTime:
                         case TokenType.DateTimeOffset:
                         case TokenType.Decimal:
                         case TokenType.Double:
-                        case TokenType.Duration:
-                        case TokenType.Enum:
                         case TokenType.False:
                         case TokenType.Guid:
                         case TokenType.Int32:
@@ -149,7 +147,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Null:
                         case TokenType.Single:
                         case TokenType.String:
-                        case TokenType.TimeOfDay:
+                        case TokenType.Time:
                         case TokenType.True:
                             var constantNode = ConstantNodeParser.ParseConstantNode(token);
 
@@ -233,12 +231,10 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                             break;
 
-                        case TokenType.Date:
+                        case TokenType.DateTime:
                         case TokenType.DateTimeOffset:
                         case TokenType.Decimal:
                         case TokenType.Double:
-                        case TokenType.Duration:
-                        case TokenType.Enum:
                         case TokenType.False:
                         case TokenType.Guid:
                         case TokenType.Int32:
@@ -246,7 +242,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Null:
                         case TokenType.Single:
                         case TokenType.String:
-                        case TokenType.TimeOfDay:
+                        case TokenType.Time:
                         case TokenType.True:
                             rightNode = ConstantNodeParser.ParseConstantNode(token);
                             break;

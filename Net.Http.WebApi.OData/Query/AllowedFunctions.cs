@@ -36,9 +36,9 @@ namespace Net.Http.WebApi.OData.Query
         EndsWith = 2,
 
         /// <summary>
-        /// Specifies that the 'Contains' function is allowed in the $filter query option.
+        /// Specifies that the 'SubstringOf' function is allowed in the $filter query option.
         /// </summary>
-        Contains = 4,
+        SubstringOf = 4,
 
         /// <summary>
         /// Specifies that the 'ToLower' function is allowed in the $filter query option.
@@ -136,34 +136,14 @@ namespace Net.Http.WebApi.OData.Query
         Cast = 2097152,
 
         /// <summary>
-        /// Specifies that the 'FractionalSeconds' function is allowed in the $filter query option.
-        /// </summary>
-        FractionalSeconds = 4194304,
-
-        /// <summary>
-        /// Specifies that the 'Now' function is allowed in the $filter query option.
-        /// </summary>
-        Now = 8388608,
-
-        /// <summary>
-        /// Specifies that the 'MinDateTime' function is allowed in the $filter query option.
-        /// </summary>
-        MinDateTime = 16777216,
-
-        /// <summary>
-        /// Specifies that the 'MaxDateTime' function is allowed in the $filter query option.
-        /// </summary>
-        MaxDateTime = 33554432,
-
-        /// <summary>
         /// Specifies that all string functions are allowed in the $filter query option.
         /// </summary>
-        AllStringFunctions = StartsWith | EndsWith | Contains | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
+        AllStringFunctions = StartsWith | EndsWith | SubstringOf | Length | IndexOf | Substring | ToLower | ToUpper | Trim | Replace | Concat,
 
         /// <summary>
         /// Specifies that all date/time functions are allowed in the $filter query option.
         /// </summary>
-        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second | FractionalSeconds | Now | MinDateTime | MaxDateTime,
+        AllDateTimeFunctions = Year | Month | Day | Hour | Minute | Second,
 
         /// <summary>
         /// Specifies that all math functions are allowed in the $filter query option.

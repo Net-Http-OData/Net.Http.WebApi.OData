@@ -29,6 +29,7 @@ namespace Net.Http.WebApi.OData.Query
         private SelectExpandQueryOption expand;
         private FilterQueryOption filter;
         private FormatQueryOption format;
+        private InlineCountQueryOption inlineCount;
         private OrderByQueryOption orderBy;
         private SelectExpandQueryOption select;
         private SkipTokenQueryOption skipToken;
@@ -58,11 +59,6 @@ namespace Net.Http.WebApi.OData.Query
             this.ReadHeaders();
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
-
-        /// <summary>
-        /// Gets a value indicating whether the count query option has been specified.
-        /// </summary>
-        public bool Count => this.RawValues.Count?.Equals("$count=true") == true;
 
         /// <summary>
         /// Gets the expand query option.
@@ -113,10 +109,20 @@ namespace Net.Http.WebApi.OData.Query
         }
 
         /// <summary>
-        /// Gets the OData-Isolation requested by the client.
+        /// Gets the inline count query option.
         /// </summary>
-        /// <remarks>If the OData-Isolation header is not present in the request, defaults to none.</remarks>
-        public ODataIsolationLevel IsolationLevel { get; private set; } = ODataIsolationLevel.None;
+        public InlineCountQueryOption InlineCount
+        {
+            get
+            {
+                if (this.inlineCount == null && this.RawValues.InlineCount != null)
+                {
+                    this.inlineCount = new InlineCountQueryOption(this.RawValues.InlineCount);
+                }
+
+                return this.inlineCount;
+            }
+        }
 
         /// <summary>
         /// Gets the <see cref="EdmComplexType"/> which the OData query relates to.
@@ -157,11 +163,6 @@ namespace Net.Http.WebApi.OData.Query
         {
             get;
         }
-
-        /// <summary>
-        /// Gets the search query option.
-        /// </summary>
-        public string Search => this.RawValues.Search?.Substring(this.RawValues.Search.IndexOf('=') + 1);
 
         /// <summary>
         /// Gets the select query option.
@@ -240,27 +241,12 @@ namespace Net.Http.WebApi.OData.Query
 
         private void ReadHeaders()
         {
-            var headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.ODataVersion);
+            var headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.DataServiceVersion);
 
-            if (headerValue != null && headerValue != "4.0")
+            if (headerValue != null && headerValue != "3.0")
             {
                 throw new HttpResponseException(
-                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
-            }
-
-            headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.ODataIsolation);
-
-            if (headerValue != null)
-            {
-                if (headerValue == "Snapshot")
-                {
-                    this.IsolationLevel = ODataIsolationLevel.Snapshot;
-                }
-                else
-                {
-                    throw new HttpResponseException(
-                        this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel));
-                }
+                this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
         }
     }
