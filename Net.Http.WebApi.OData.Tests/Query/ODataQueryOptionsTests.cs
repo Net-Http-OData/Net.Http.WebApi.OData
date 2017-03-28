@@ -69,6 +69,54 @@
             Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
         }
 
+        public class WhenConstructedWithAcceptHeaderContainingODataMinimalMetadata
+        {
+            [Fact]
+            public void TheMetadataLevelIsSetToMinimal()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata=minimalmetadata");
+
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+
+                Assert.Equal(MetadataLevel.Minimal, option.MetadataLevel);
+            }
+        }
+
+        public class WhenConstructedWithAcceptHeaderContainingODataNoMetadata
+        {
+            [Fact]
+            public void TheMetadataLevelIsSetToNone()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata=nometadata");
+
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+
+                Assert.Equal(MetadataLevel.None, option.MetadataLevel);
+            }
+        }
+
+        public class WhenConstructedWithAcceptHeaderContainingODataVerboseMetadata
+        {
+            [Fact]
+            public void TheMetadataLevelIsSetToVerbose()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata=verbose");
+
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+
+                Assert.Equal(MetadataLevel.Verbose, option.MetadataLevel);
+            }
+        }
+
         public class WhenConstructedWithAllQueryOptions
         {
             private readonly HttpRequestMessage httpRequestMessage;
@@ -107,6 +155,12 @@
             public void TheInlineCountOptionShouldBeSet()
             {
                 Assert.NotNull(this.option.InlineCount);
+            }
+
+            [Fact]
+            public void TheMetadataLevelShouldBeMinimal()
+            {
+                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
             }
 
             [Fact]
@@ -340,6 +394,12 @@
             public void TheInlineCountOptionShouldNotBeSet()
             {
                 Assert.Null(this.option.InlineCount);
+            }
+
+            [Fact]
+            public void TheMetadataLevelShouldBeMinimal()
+            {
+                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
             }
 
             [Fact]

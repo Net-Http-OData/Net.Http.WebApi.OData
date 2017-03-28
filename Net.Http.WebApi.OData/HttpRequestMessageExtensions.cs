@@ -51,5 +51,31 @@ namespace Net.Http.WebApi.OData
 
             return value;
         }
+
+        internal static MetadataLevel ReadMetadataLevel(this HttpRequestMessage request)
+        {
+            foreach (var header in request.Headers.Accept)
+            {
+                foreach (var parameter in header.Parameters)
+                {
+                    if (parameter.Name == "odata")
+                    {
+                        switch (parameter.Value)
+                        {
+                            case "nometadata":
+                                return MetadataLevel.None;
+
+                            case "minimalmetadata":
+                                return MetadataLevel.Minimal;
+
+                            case "verbose":
+                                return MetadataLevel.Verbose;
+                        }
+                    }
+                }
+            }
+
+            return MetadataLevel.Minimal;
+        }
     }
 }

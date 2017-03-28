@@ -13,8 +13,6 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
@@ -123,6 +121,11 @@ namespace Net.Http.WebApi.OData.Query
                 return this.inlineCount;
             }
         }
+
+        /// <summary>
+        /// Gets the metadata level to use in the response.
+        /// </summary>
+        public MetadataLevel MetadataLevel => this.Request.ReadMetadataLevel();
 
         /// <summary>
         /// Gets the <see cref="EdmComplexType"/> which the OData query relates to.
