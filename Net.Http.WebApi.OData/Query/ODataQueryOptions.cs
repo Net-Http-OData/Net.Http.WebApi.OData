@@ -13,8 +13,6 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
@@ -52,7 +50,7 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException(nameof(model));
             }
 
-            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.Collections[request.RequestUri.GetModelName()]), "The model appears to be incorrect for the URI");
+            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.EntitySets[request.RequestUri.GetModelName()]), "The model appears to be incorrect for the URI");
 
             this.Request = request;
             this.Model = model;
@@ -123,6 +121,11 @@ namespace Net.Http.WebApi.OData.Query
                 return this.inlineCount;
             }
         }
+
+        /// <summary>
+        /// Gets the metadata level to use in the response.
+        /// </summary>
+        public MetadataLevel MetadataLevel => this.Request.ReadMetadataLevel();
 
         /// <summary>
         /// Gets the <see cref="EdmComplexType"/> which the OData query relates to.
@@ -216,37 +219,40 @@ namespace Net.Http.WebApi.OData.Query
             var equals = rawValue.IndexOf('=') + 1;
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
-            int skip;
+            int integer;
 
-            if (int.TryParse(value, out skip))
+            if (int.TryParse(value, out integer))
             {
-                return skip;
+                return integer;
             }
 
             throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.IntRawValueInvalid.FormatWith(value.Substring(0, equals)));
         }
 
-        private static string ReadHeaderValue(HttpRequestMessage request, string name)
-        {
-            IEnumerable<string> values;
-            string value = null;
-
-            if (request.Headers.TryGetValues(name, out values))
-            {
-                value = values.FirstOrDefault();
-            }
-
-            return value;
-        }
-
         private void ReadHeaders()
         {
-            var headerValue = ReadHeaderValue(this.Request, ODataHeaderNames.DataServiceVersion);
+            var headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.DataServiceVersion);
 
             if (headerValue != null && headerValue != "3.0")
             {
                 throw new HttpResponseException(
-                this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+            }
+
+            headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.MaxDataServiceVersion);
+
+            if (headerValue != null && headerValue != "3.0")
+            {
+                throw new HttpResponseException(
+                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+            }
+
+            headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.MinDataServiceVersion);
+
+            if (headerValue != null && headerValue != "3.0")
+            {
+                throw new HttpResponseException(
+                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
             }
         }
     }

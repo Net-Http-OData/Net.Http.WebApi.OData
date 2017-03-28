@@ -8,11 +8,11 @@
         internal static void EnsureEDM()
         {
             var entityDataModelBuilder = new EntityDataModelBuilder();
-            entityDataModelBuilder.RegisterCollection<Category>("Categories");
-            entityDataModelBuilder.RegisterCollection<Customer>("Customers");
-            entityDataModelBuilder.RegisterCollection<Employee>("Employees");
-            entityDataModelBuilder.RegisterCollection<Order>("Orders");
-            entityDataModelBuilder.RegisterCollection<Product>("Products");
+            entityDataModelBuilder.RegisterEntitySet<Category>("Categories");
+            entityDataModelBuilder.RegisterEntitySet<Customer>("Customers");
+            entityDataModelBuilder.RegisterEntitySet<Employee>("Employees");
+            entityDataModelBuilder.RegisterEntitySet<Order>("Orders");
+            entityDataModelBuilder.RegisterEntitySet<Product>("Products");
 
             entityDataModelBuilder.BuildModel();
         }

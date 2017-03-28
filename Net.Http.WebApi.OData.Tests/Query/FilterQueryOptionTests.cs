@@ -15,7 +15,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 this.rawValue = "$filter=CompanyName eq 'Alfreds Futterkiste'";
                 this.option = new FilterQueryOption(this.rawValue, model);

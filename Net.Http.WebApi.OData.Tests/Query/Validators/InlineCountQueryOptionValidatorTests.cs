@@ -26,7 +26,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=x"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -55,7 +55,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -84,7 +84,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -109,7 +109,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=none"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]

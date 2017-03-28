@@ -12,6 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
 
@@ -35,6 +37,45 @@ namespace Net.Http.WebApi.OData
             response.Headers.Add(ODataHeaderNames.DataServiceVersion, "3.0");
 
             return response;
+        }
+
+        internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
+        {
+            IEnumerable<string> values;
+            string value = null;
+
+            if (request.Headers.TryGetValues(name, out values))
+            {
+                value = values.FirstOrDefault();
+            }
+
+            return value;
+        }
+
+        internal static MetadataLevel ReadMetadataLevel(this HttpRequestMessage request)
+        {
+            foreach (var header in request.Headers.Accept)
+            {
+                foreach (var parameter in header.Parameters)
+                {
+                    if (parameter.Name == "odata")
+                    {
+                        switch (parameter.Value)
+                        {
+                            case "nometadata":
+                                return MetadataLevel.None;
+
+                            case "minimalmetadata":
+                                return MetadataLevel.Minimal;
+
+                            case "verbose":
+                                return MetadataLevel.Verbose;
+                        }
+                    }
+                }
+            }
+
+            return MetadataLevel.Minimal;
         }
     }
 }

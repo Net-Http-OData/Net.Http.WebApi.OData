@@ -23,7 +23,7 @@
             TestHelper.EnsureEDM();
 
             Assert.Throws<ArgumentNullException>(
-                () => new OrderByProperty(null, EntityDataModel.Current.Collections["Customers"]));
+                () => new OrderByProperty(null, EntityDataModel.Current.EntitySets["Customers"]));
         }
 
         public class WhenConstructedWithAnIncorrectlyCasedValue
@@ -33,7 +33,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("CompanyName ASC", model));
 
@@ -48,7 +48,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("CompanyName wibble", model));
 
@@ -65,7 +65,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 this.rawValue = "CompanyName asc";
                 this.property = new OrderByProperty(this.rawValue, model);
@@ -99,7 +99,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 this.rawValue = "CompanyName desc";
                 this.property = new OrderByProperty(this.rawValue, model);
@@ -133,7 +133,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"];
 
                 this.rawValue = "CompanyName";
                 this.property = new OrderByProperty(this.rawValue, model);

@@ -15,7 +15,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Products"];
+                var model = EntityDataModel.Current.EntitySets["Products"];
 
                 this.rawValue = "$expand=Category";
                 this.option = new SelectExpandQueryOption(this.rawValue, model);
@@ -45,7 +45,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Products"];
+                var model = EntityDataModel.Current.EntitySets["Products"];
 
                 this.rawValue = "$expand=*";
                 this.option = new SelectExpandQueryOption(this.rawValue, model);
@@ -75,7 +75,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Products"];
+                var model = EntityDataModel.Current.EntitySets["Products"];
 
                 this.rawValue = "$select=Name,Price,ReleaseDate";
                 this.option = new SelectExpandQueryOption(this.rawValue, model);
@@ -107,7 +107,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.Collections["Products"];
+                var model = EntityDataModel.Current.EntitySets["Products"];
 
                 this.rawValue = "$select=Name";
                 this.option = new SelectExpandQueryOption(this.rawValue, model);
@@ -138,7 +138,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                this.model = EntityDataModel.Current.Collections["Products"];
+                this.model = EntityDataModel.Current.EntitySets["Products"];
                 this.rawValue = "$select=*";
                 this.option = new SelectExpandQueryOption(this.rawValue, this.model);
             }
