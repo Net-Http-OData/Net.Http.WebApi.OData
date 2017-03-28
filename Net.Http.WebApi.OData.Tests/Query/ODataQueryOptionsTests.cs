@@ -18,7 +18,7 @@
             TestHelper.EnsureEDM();
 
             Assert.Throws<ArgumentNullException>(
-                () => new ODataQueryOptions(null, EntityDataModel.Current.Collections["Products"]));
+                () => new ODataQueryOptions(null, EntityDataModel.Current.EntitySets["Products"]));
         }
 
         [Fact]
@@ -40,7 +40,7 @@
 
             var option = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=LegacyId+eq+2139+and+CompanyName+eq+'Pool+Farm+%26+Primrose+Hill+Nursery'&$top=1"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             Assert.NotNull(option);
             Assert.NotNull(option.Filter);
@@ -69,6 +69,54 @@
             Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
         }
 
+        public class WhenConstructedWithAcceptHeaderContainingODataMetadataFull
+        {
+            [Fact]
+            public void TheMetadataLevelIsSetToFull()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+
+                Assert.Equal(MetadataLevel.Full, option.MetadataLevel);
+            }
+        }
+
+        public class WhenConstructedWithAcceptHeaderContainingODataMetadataMinimal
+        {
+            [Fact]
+            public void TheMetadataLevelIsSetToMinimal()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+
+                Assert.Equal(MetadataLevel.Minimal, option.MetadataLevel);
+            }
+        }
+
+        public class WhenConstructedWithAcceptHeaderContainingODataMetadataNone
+        {
+            [Fact]
+            public void TheMetadataLevelIsSetToNone()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+
+                Assert.Equal(MetadataLevel.None, option.MetadataLevel);
+            }
+        }
+
         public class WhenConstructedWithAllQueryOptions
         {
             private readonly HttpRequestMessage httpRequestMessage;
@@ -82,7 +130,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$skip=10&$skiptoken=5&$top=25");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -113,6 +161,12 @@
             public void TheIsolationLevelIsNone()
             {
                 Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+            }
+
+            [Fact]
+            public void TheMetadataLevelShouldBeMinimal()
+            {
+                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
             }
 
             [Fact]
@@ -184,7 +238,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Products");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -215,6 +269,12 @@
             public void TheIsolationLevelIsNone()
             {
                 Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+            }
+
+            [Fact]
+            public void TheMetadataLevelShouldBeMinimal()
+            {
+                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
             }
 
             [Fact]
@@ -283,7 +343,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "Snapshot");
 
-                this.option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]);
+                this.option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -303,10 +363,75 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedIsolationLevel, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenConstructedWithODataMaxVersionHeaderContaining1_0
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrown()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "1.0");
+
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenConstructedWithODataMaxVersionHeaderContaining2_0
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrown()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "2.0");
+
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenConstructedWithODataMaxVersionHeaderContaining3_0
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrown()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "3.0");
+
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
+        public class WhenConstructedWithODataMaxVersionHeaderContaining4_0
+        {
+            [Fact]
+            public void AnExceptionIsNotThrown()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "4.0");
+
+                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
             }
         }
 
@@ -320,7 +445,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "1.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -337,7 +462,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "2.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -354,7 +479,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "3.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
@@ -371,7 +496,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
-                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.Collections["Products"]));
+                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
             }
         }
 
@@ -391,7 +516,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename+eq+'John'&$orderby=Forename+asc");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Employees"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -456,7 +581,7 @@
                     HttpMethod.Get,
                     "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename+eq+'John'+and+ImageData+eq+'TG9yZW0gaXBzdW0gZG9s%2Bb3Igc2l0IGF%3D'");
 
-                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.Collections["Employees"]);
+                this.option = new ODataQueryOptions(this.httpRequestMessage, EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataHeaderNames.cs" company="Project Contributors">
+// <copyright file="MetadataLevel.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,23 +13,23 @@
 namespace Net.Http.WebApi.OData
 {
     /// <summary>
-    /// The header names for OData HTTP Headers
+    /// The different levels of metadata which should be included in the response.
     /// </summary>
-    public static class ODataHeaderNames
+    public enum MetadataLevel
     {
         /// <summary>
-        /// The OData isolation header.
+        /// No metadata should be included in the response.
         /// </summary>
-        public const string ODataIsolation = "OData-Isolation";
+        None = 0,
 
         /// <summary>
-        /// The OData max version header.
+        /// The minimal metadata should be included in the response.
         /// </summary>
-        public const string ODataMaxVersion = "OData-MaxVersion";
+        Minimal = 1,
 
         /// <summary>
-        /// The OData version header.
+        /// The full metadata should be included in the response.
         /// </summary>
-        public const string ODataVersion = "OData-Version";
+        Full = 2
     }
 }

@@ -28,7 +28,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price add 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -59,7 +59,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price add 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -85,7 +85,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' and Surname eq 'Smith'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -115,7 +115,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' and Surname eq 'Smith'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -141,7 +141,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=cast(Price, 'Edm.Int64') eq 20"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -172,7 +172,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=cast(Price, 'Edm.Int64') eq 20"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -198,7 +198,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=ceiling(Freight) eq 32"),
-                    EntityDataModel.Current.Collections["Orders"]);
+                    EntityDataModel.Current.EntitySets["Orders"]);
             }
 
             [Fact]
@@ -229,7 +229,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=ceiling(Freight) eq 32"),
-                    EntityDataModel.Current.Collections["Orders"]);
+                    EntityDataModel.Current.EntitySets["Orders"]);
             }
 
             [Fact]
@@ -255,7 +255,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -286,7 +286,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -312,7 +312,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=contains(CompanyName,'Alfreds')"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -343,7 +343,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=contains(CompanyName,'Alfreds')"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -369,7 +369,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=day(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -400,7 +400,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=day(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -427,7 +427,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price div 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -458,7 +458,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price div 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -484,7 +484,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=endswith(Surname, 'yes') eq true"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -515,7 +515,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=endswith(Surname, 'yes') eq true"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -541,7 +541,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -571,7 +571,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -597,7 +597,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=floor(Freight) eq 32"),
-                    EntityDataModel.Current.Collections["Orders"]);
+                    EntityDataModel.Current.EntitySets["Orders"]);
             }
 
             [Fact]
@@ -628,7 +628,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=floor(Freight) eq 32"),
-                    EntityDataModel.Current.Collections["Orders"]);
+                    EntityDataModel.Current.EntitySets["Orders"]);
             }
 
             [Fact]
@@ -654,7 +654,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=fractionalseconds(BirthDate) lt 0.1"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -685,7 +685,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=fractionalseconds(BirthDate) lt 0.1"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -711,7 +711,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price gt 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -741,7 +741,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price gt 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -767,7 +767,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price ge 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -797,7 +797,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price ge 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -823,7 +823,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=AccessLevel has NorthwindModel.AccessLevel'Write'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -853,7 +853,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=AccessLevel has NorthwindModel.AccessLevel'Write'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -879,7 +879,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=hour(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -910,7 +910,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=hour(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -936,7 +936,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=indexof(Surname, 'Hayes') eq 1"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -967,7 +967,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=indexof(Surname, 'Hayes') eq 1"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -993,7 +993,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=isof(Price, 'Edm.Int64')"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1024,7 +1024,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=isof(Price, 'Edm.Int64')"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1050,7 +1050,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=length(CompanyName) eq 19"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -1081,7 +1081,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=length(CompanyName) eq 19"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -1107,7 +1107,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price lt 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1137,7 +1137,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price lt 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1163,7 +1163,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price le 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1193,7 +1193,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price le 35"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1219,7 +1219,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq maxdatetime()"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1250,7 +1250,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq maxdatetime()"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1276,7 +1276,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq mindatetime()"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1307,7 +1307,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq mindatetime()"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1333,7 +1333,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=minute(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1364,7 +1364,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=minute(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1391,7 +1391,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mod 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1422,7 +1422,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mod 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1448,7 +1448,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=month(BirthDate) eq 5"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1479,7 +1479,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=month(BirthDate) eq 5"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1506,7 +1506,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mul 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1537,7 +1537,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mul 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1563,7 +1563,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename ne 'John'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1593,7 +1593,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename ne 'John'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1620,7 +1620,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate eq now()"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1651,7 +1651,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=ReleaseDate ge now()"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -1677,7 +1677,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' or Surname eq 'Smith'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1707,7 +1707,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' or Surname eq 'Smith'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1733,7 +1733,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -1764,7 +1764,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -1790,7 +1790,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=round(Freight) eq 32"),
-                    EntityDataModel.Current.Collections["Orders"]);
+                    EntityDataModel.Current.EntitySets["Orders"]);
             }
 
             [Fact]
@@ -1821,7 +1821,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=round(Freight) eq 32"),
-                    EntityDataModel.Current.Collections["Orders"]);
+                    EntityDataModel.Current.EntitySets["Orders"]);
             }
 
             [Fact]
@@ -1847,7 +1847,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=second(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1878,7 +1878,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=second(BirthDate) eq 8"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1904,7 +1904,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=startswith(Surname, 'Hay') eq true"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1935,7 +1935,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=startswith(Surname, 'Hay') eq true"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -1961,7 +1961,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=substring(CompanyName, 1) eq 'lfreds Futterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -1992,7 +1992,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=substring(CompanyName, 1) eq 'lfreds Futterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -2019,7 +2019,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price sub 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -2050,7 +2050,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price sub 100 eq 150"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -2076,7 +2076,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=tolower(CompanyName) eq 'alfreds futterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -2107,7 +2107,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=tolower(CompanyName) eq 'alfreds futterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -2133,7 +2133,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -2164,7 +2164,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -2190,7 +2190,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=trim(CompanyName) eq 'Alfreds Futterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -2221,7 +2221,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=trim(CompanyName) eq 'Alfreds Futterkiste'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
             }
 
             [Fact]
@@ -2247,7 +2247,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=year(BirthDate) eq 1971"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -2278,7 +2278,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=year(BirthDate) eq 1971"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -2303,7 +2303,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Surname eq 'Smith'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]
@@ -2333,7 +2333,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Surname eq 'Smith'"),
-                    EntityDataModel.Current.Collections["Employees"]);
+                    EntityDataModel.Current.EntitySets["Employees"]);
             }
 
             [Fact]

@@ -20,16 +20,16 @@ public static class WebApiConfig
     {
         // Configure routes, etc
 
-        // Configure the OData Entity Data Model
+        // Build the OData Entity Data Model
         var entityDataModelBuilder = new EntityDataModelBuilder();
-        entityDataModelBuilder.RegisterCollection<Category>("Categories");
-        entityDataModelBuilder.RegisterCollection<Product>("Products");
+        entityDataModelBuilder.RegisterEntitySet<Category>("Categories");
+        entityDataModelBuilder.RegisterEntitySet<Product>("Products");
         entityDataModelBuilder.BuildModel();
     }
 }
 ```
 
-Note that when you register the type for a collection, you also specify the collection name. The collection name needs to match the URL you intend to use so if you use `http://myservice/api/Products` then register the collection as `.RegisterCollection<Product>("Products");`, if you use `http://myservice/api/Product` then register the collection as `.RegisterCollection<Product>("Product");`.
+Note that when you register an Entity Set, you also specify the name of the Entity Set. The name needs to match the URL you intend to use so if you use `http://myservice/api/Products` then register the Entity Set using `.RegisterEntitySet<Product>("Products");`, if you use `http://myservice/api/Product` then register the Entity Set using `.RegisterEntitySet<Product>("Product");`.
 
 ## Usage
 

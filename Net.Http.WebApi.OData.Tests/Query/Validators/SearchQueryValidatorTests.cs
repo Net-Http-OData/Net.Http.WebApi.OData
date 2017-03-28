@@ -27,7 +27,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$search=blue OR green"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
@@ -56,7 +56,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$search=blue OR green"),
-                    EntityDataModel.Current.Collections["Products"]);
+                    EntityDataModel.Current.EntitySets["Products"]);
             }
 
             [Fact]
