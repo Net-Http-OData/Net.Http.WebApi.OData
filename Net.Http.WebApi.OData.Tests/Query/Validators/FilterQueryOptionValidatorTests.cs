@@ -1091,7 +1091,7 @@
             }
         }
 
-        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsNotSpecifiedInAllowedLogicalOperators
+        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsNotSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions;
 
@@ -1101,7 +1101,7 @@
                 AllowedLogicalOperators = AllowedLogicalOperators.None
             };
 
-            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsNotSpecifiedInAllowedLogicalOperators()
+            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsNotSpecifiedInAllowedLogicalOperators()
             {
                 TestHelper.EnsureEDM();
 
@@ -1121,7 +1121,7 @@
             }
         }
 
-        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsSpecifiedInAllowedLogicalOperators
+        public class WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsSpecifiedInAllowedLogicalOperators
         {
             private readonly ODataQueryOptions queryOptions;
 
@@ -1131,7 +1131,7 @@
                 AllowedLogicalOperators = AllowedLogicalOperators.LessThanOrEqual
             };
 
-            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualsOperatorLessThanOrEqualsItIsSpecifiedInAllowedLogicalOperators()
+            public WhenTheFilterQueryOptionContainsTheLessThanOrEqualOperatorLessThanOrEqualItIsSpecifiedInAllowedLogicalOperators()
             {
                 TestHelper.EnsureEDM();
 
