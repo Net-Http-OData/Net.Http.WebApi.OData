@@ -216,11 +216,11 @@ namespace Net.Http.WebApi.OData.Query
             var equals = rawValue.IndexOf('=') + 1;
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
-            int skip;
+            int integer;
 
-            if (int.TryParse(value, out skip))
+            if (int.TryParse(value, out integer))
             {
-                return skip;
+                return integer;
             }
 
             throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.IntRawValueInvalid.FormatWith(value.Substring(0, equals)));
