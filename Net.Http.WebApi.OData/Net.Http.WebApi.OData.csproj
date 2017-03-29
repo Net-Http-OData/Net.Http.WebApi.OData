@@ -81,6 +81,7 @@
     <Compile Include="Model\EntityDataModel.cs" />
     <Compile Include="Model\EntityDataModelBuilder.cs" />
     <Compile Include="ODataHeaderNames.cs" />
+    <Compile Include="ODataRequestOptions.cs" />
     <Compile Include="PagedResult{T}.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\AllowedArithmeticOperators.cs" />

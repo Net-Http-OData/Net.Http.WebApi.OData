@@ -81,7 +81,7 @@
 
                 var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
 
-                Assert.Equal(MetadataLevel.Minimal, option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Minimal, option.RequestOptions.MetadataLevel);
             }
         }
 
@@ -97,7 +97,7 @@
 
                 var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
 
-                Assert.Equal(MetadataLevel.None, option.MetadataLevel);
+                Assert.Equal(MetadataLevel.None, option.RequestOptions.MetadataLevel);
             }
         }
 
@@ -113,7 +113,7 @@
 
                 var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
 
-                Assert.Equal(MetadataLevel.Verbose, option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Verbose, option.RequestOptions.MetadataLevel);
             }
         }
 
@@ -160,7 +160,7 @@
             [Fact]
             public void TheMetadataLevelShouldBeMinimal()
             {
-                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Minimal, this.option.RequestOptions.MetadataLevel);
             }
 
             [Fact]
@@ -399,7 +399,7 @@
             [Fact]
             public void TheMetadataLevelShouldBeMinimal()
             {
-                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Minimal, this.option.RequestOptions.MetadataLevel);
             }
 
             [Fact]
