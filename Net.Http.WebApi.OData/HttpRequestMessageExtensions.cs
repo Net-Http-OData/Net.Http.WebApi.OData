@@ -90,6 +90,10 @@ namespace Net.Http.WebApi.OData
 
                             case "full":
                                 return MetadataLevel.Full;
+
+                            default:
+                                throw new HttpResponseException(
+                                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.ODataMetadataValueInvalid));
                         }
                     }
                 }

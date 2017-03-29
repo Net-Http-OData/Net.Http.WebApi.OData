@@ -69,6 +69,25 @@
             Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
         }
 
+        public class WhenConstructedWithAcceptHeaderContaininAnInvalidODataMetadataValue
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrown()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=all");
+
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+
+                var exception = Assert.Throws<HttpResponseException>(() => option.RequestOptions.MetadataLevel);
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
+                Assert.Equal(Messages.ODataMetadataValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+            }
+        }
+
         public class WhenConstructedWithAcceptHeaderContainingODataMetadataFull
         {
             [Fact]

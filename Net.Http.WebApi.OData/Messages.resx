@@ -156,4 +156,7 @@
   <data name="CollectionNameInvalid" xml:space="preserve">
     <value>This service does not contain a collection named '{0}'</value>
   </data>
+  <data name="ODataMetadataValueInvalid" xml:space="preserve">
+    <value>If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'</value>
+  </data>
 </root>
