@@ -88,6 +88,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If specified, the odata value in the Accept header must be &apos;nometadata&apos;, &apos;minimalmetadata&apos; or &apos;verbose&apos;.
+        /// </summary>
+        internal static string ODataMetadataValueInvalid {
+            get {
+                return ResourceManager.GetString("ODataMetadataValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If specified, the $orderby direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {

@@ -16,6 +16,7 @@ namespace Net.Http.WebApi.OData
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Web.Http;
 
     /// <summary>
     /// Extensions for the <see cref="HttpRequestMessage"/> class
@@ -70,6 +71,10 @@ namespace Net.Http.WebApi.OData
 
                             case "verbose":
                                 return MetadataLevel.Verbose;
+
+                            default:
+                                throw new HttpResponseException(
+                                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.ODataMetadataValueInvalid));
                         }
                     }
                 }
