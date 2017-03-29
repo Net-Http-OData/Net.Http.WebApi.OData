@@ -16,6 +16,7 @@ namespace Net.Http.WebApi.OData
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Web.Http;
 
     /// <summary>
     /// Extensions for the <see cref="HttpRequestMessage"/> class
@@ -49,6 +50,26 @@ namespace Net.Http.WebApi.OData
             }
 
             return value;
+        }
+
+        internal static ODataIsolationLevel ReadIsolationLevel(this HttpRequestMessage request)
+        {
+            var headerValue = request.ReadHeaderValue(ODataHeaderNames.ODataIsolation);
+
+            if (headerValue != null)
+            {
+                if (headerValue == "Snapshot")
+                {
+                    return ODataIsolationLevel.Snapshot;
+                }
+                else
+                {
+                    throw new HttpResponseException(
+                        request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel));
+                }
+            }
+
+            return ODataIsolationLevel.None;
         }
 
         internal static MetadataLevel ReadMetadataLevel(this HttpRequestMessage request)

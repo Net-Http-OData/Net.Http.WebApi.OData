@@ -28,13 +28,14 @@ namespace Net.Http.WebApi.OData.Query
         private FilterQueryOption filter;
         private FormatQueryOption format;
         private OrderByQueryOption orderBy;
+        private ODataRequestOptions requestOptions;
         private SelectExpandQueryOption select;
         private SkipTokenQueryOption skipToken;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataQueryOptions" /> class.
         /// </summary>
-        /// <param name="request">The request.</param>
+        /// <param name="request">The current http request message.</param>
         /// <param name="model">The model.</param>
         /// <exception cref="ArgumentNullException">Thrown if the request or model are null.</exception>
         public ODataQueryOptions(HttpRequestMessage request, EdmComplexType model)
@@ -111,17 +112,6 @@ namespace Net.Http.WebApi.OData.Query
         }
 
         /// <summary>
-        /// Gets the OData-Isolation requested by the client.
-        /// </summary>
-        /// <remarks>If the OData-Isolation header is not present in the request, defaults to none.</remarks>
-        public ODataIsolationLevel IsolationLevel { get; private set; } = ODataIsolationLevel.None;
-
-        /// <summary>
-        /// Gets the metadata level to use in the response.
-        /// </summary>
-        public MetadataLevel MetadataLevel => this.Request.ReadMetadataLevel();
-
-        /// <summary>
         /// Gets the <see cref="EdmComplexType"/> which the OData query relates to.
         /// </summary>
         public EdmComplexType Model
@@ -159,6 +149,22 @@ namespace Net.Http.WebApi.OData.Query
         public HttpRequestMessage Request
         {
             get;
+        }
+
+        /// <summary>
+        /// Gets the OData options for the request.
+        /// </summary>
+        public ODataRequestOptions RequestOptions
+        {
+            get
+            {
+                if (this.requestOptions == null)
+                {
+                    this.requestOptions = new ODataRequestOptions(this.Request);
+                }
+
+                return this.requestOptions;
+            }
         }
 
         /// <summary>
@@ -244,21 +250,6 @@ namespace Net.Http.WebApi.OData.Query
             {
                 throw new HttpResponseException(
                     this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
-            }
-
-            headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.ODataIsolation);
-
-            if (headerValue != null)
-            {
-                if (headerValue == "Snapshot")
-                {
-                    this.IsolationLevel = ODataIsolationLevel.Snapshot;
-                }
-                else
-                {
-                    throw new HttpResponseException(
-                        this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel));
-                }
             }
         }
     }

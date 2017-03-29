@@ -81,7 +81,7 @@
 
                 var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
 
-                Assert.Equal(MetadataLevel.Full, option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Full, option.RequestOptions.MetadataLevel);
             }
         }
 
@@ -97,7 +97,7 @@
 
                 var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
 
-                Assert.Equal(MetadataLevel.Minimal, option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Minimal, option.RequestOptions.MetadataLevel);
             }
         }
 
@@ -113,7 +113,7 @@
 
                 var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
 
-                Assert.Equal(MetadataLevel.None, option.MetadataLevel);
+                Assert.Equal(MetadataLevel.None, option.RequestOptions.MetadataLevel);
             }
         }
 
@@ -160,13 +160,13 @@
             [Fact]
             public void TheIsolationLevelIsNone()
             {
-                Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+                Assert.Equal(ODataIsolationLevel.None, this.option.RequestOptions.IsolationLevel);
             }
 
             [Fact]
             public void TheMetadataLevelShouldBeMinimal()
             {
-                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Minimal, this.option.RequestOptions.MetadataLevel);
             }
 
             [Fact]
@@ -268,13 +268,13 @@
             [Fact]
             public void TheIsolationLevelIsNone()
             {
-                Assert.Equal(ODataIsolationLevel.None, this.option.IsolationLevel);
+                Assert.Equal(ODataIsolationLevel.None, this.option.RequestOptions.IsolationLevel);
             }
 
             [Fact]
             public void TheMetadataLevelShouldBeMinimal()
             {
-                Assert.Equal(MetadataLevel.Minimal, this.option.MetadataLevel);
+                Assert.Equal(MetadataLevel.Minimal, this.option.RequestOptions.MetadataLevel);
             }
 
             [Fact]
@@ -349,21 +349,22 @@
             [Fact]
             public void TheIsolationLevelIsSet()
             {
-                Assert.Equal(ODataIsolationLevel.Snapshot, this.option.IsolationLevel);
+                Assert.Equal(ODataIsolationLevel.Snapshot, this.option.RequestOptions.IsolationLevel);
             }
         }
 
         public class WhenConstructedWithODataIsolationHeaderNotContainingSnapshot
         {
             [Fact]
-            public void AnHttpResponseExceptionIsThrown()
+            public void AnHttpResponseExceptionIsThrownWhenReadingTheIsolationLevel()
             {
                 TestHelper.EnsureEDM();
 
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                var option = new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
+                var exception = Assert.Throws<HttpResponseException>(() => option.RequestOptions.IsolationLevel);
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
                 Assert.Equal(Messages.UnsupportedIsolationLevel, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
