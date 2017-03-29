@@ -123,7 +123,7 @@
     <Compile Include="Query\QueryOption.cs" />
     <Compile Include="Query\SelectExpandQueryOption.cs" />
     <Compile Include="Query\SkipTokenQueryOption.cs" />
-    <Compile Include="Query\SplitCharacter.cs" />
+    <Compile Include="SplitCharacter.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />
