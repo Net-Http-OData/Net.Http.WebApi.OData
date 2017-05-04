@@ -133,6 +133,7 @@
     <Compile Include="Query\Validators\SkipQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SkipTokenQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\TopQueryOptionValidator.cs" />
+    <Compile Include="Result{T}.cs" />
     <Compile Include="SplitCharacter.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="UriExtensions.cs" />

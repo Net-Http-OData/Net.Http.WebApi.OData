@@ -1,11 +1,11 @@
-namespace Net.Http.WebApi.OData.Tests
+﻿namespace Net.Http.WebApi.OData.Tests
 {
     using System.Dynamic;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
     using Xunit;
 
-    public class PagedResultSerializationTests
+    public class ResultSerializationTests
     {
         [Fact]
         public void JsonSerializationWithClassContent()
@@ -14,11 +14,11 @@ namespace Net.Http.WebApi.OData.Tests
             item.Name = "Coffee";
             item.Total = 2.55M;
 
-            var pagedResult = new PagedResult<Thing>(new[] { item }, count: 12);
+            var result = new Result<Thing>(new[] { item });
 
-            var jsonResult = JsonConvert.SerializeObject(pagedResult);
+            var jsonResult = JsonConvert.SerializeObject(result);
 
-            Assert.Equal("{\"odata.count\":12,\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", jsonResult);
+            Assert.Equal("{\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", jsonResult);
         }
 
         [Fact]
@@ -28,21 +28,21 @@ namespace Net.Http.WebApi.OData.Tests
             item.Id = 14225;
             item.Name = "Fred";
 
-            var pagedResult = new PagedResult<dynamic>(new[] { item }, count: 12);
+            var result = new Result<dynamic>(new[] { item });
 
-            var jsonResult = JsonConvert.SerializeObject(pagedResult);
+            var jsonResult = JsonConvert.SerializeObject(result);
 
-            Assert.Equal("{\"odata.count\":12,\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", jsonResult);
+            Assert.Equal("{\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", jsonResult);
         }
 
         [Fact]
         public void JsonSerializationWithSimpleContent()
         {
-            var pagedResult = new PagedResult<int>(new[] { 1, 2, 3 }, count: 5);
+            var result = new Result<int>(new[] { 1, 2, 3 });
 
-            var jsonResult = JsonConvert.SerializeObject(pagedResult);
+            var jsonResult = JsonConvert.SerializeObject(result);
 
-            Assert.Equal("{\"odata.count\":5,\"value\":[1,2,3]}", jsonResult);
+            Assert.Equal("{\"value\":[1,2,3]}", jsonResult);
         }
 
         [DataContract]

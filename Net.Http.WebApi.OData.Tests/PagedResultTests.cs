@@ -1,7 +1,6 @@
 namespace Net.Http.WebApi.OData.Tests
 {
     using System.Collections.Generic;
-    using Net.Http.WebApi.OData;
     using Xunit;
 
     public class PagedResultTests
