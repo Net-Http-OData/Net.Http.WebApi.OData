@@ -39,6 +39,25 @@ namespace Net.Http.WebApi.OData
             return response;
         }
 
+        /// <summary>
+        /// Reads the OData request options.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <returns>The OData request options for the request.</returns>
+        public static ODataRequestOptions ReadODataRequestOptions(this HttpRequestMessage request)
+        {
+            object requestOptions;
+
+            if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out requestOptions))
+            {
+                requestOptions = new ODataRequestOptions(request);
+
+                request.Properties.Add(typeof(ODataRequestOptions).FullName, requestOptions);
+            }
+
+            return (ODataRequestOptions)requestOptions;
+        }
+
         internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
         {
             IEnumerable<string> values;
