@@ -29,7 +29,6 @@ namespace Net.Http.WebApi.OData.Query
         private FormatQueryOption format;
         private InlineCountQueryOption inlineCount;
         private OrderByQueryOption orderBy;
-        private ODataRequestOptions requestOptions;
         private SelectExpandQueryOption select;
         private SkipTokenQueryOption skipToken;
 
@@ -161,22 +160,6 @@ namespace Net.Http.WebApi.OData.Query
         public HttpRequestMessage Request
         {
             get;
-        }
-
-        /// <summary>
-        /// Gets the OData options for the request.
-        /// </summary>
-        public ODataRequestOptions RequestOptions
-        {
-            get
-            {
-                if (this.requestOptions == null)
-                {
-                    this.requestOptions = new ODataRequestOptions(this.Request);
-                }
-
-                return this.requestOptions;
-            }
         }
 
         /// <summary>
