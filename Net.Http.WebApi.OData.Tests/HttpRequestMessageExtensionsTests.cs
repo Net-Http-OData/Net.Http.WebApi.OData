@@ -20,7 +20,7 @@
                     "http://services.odata.org/OData/OData.svc/Products?$filter=Price eq 21.39M");
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new PagedResult<dynamic>(new object[0], 0));
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
             }
 
             [Fact]
