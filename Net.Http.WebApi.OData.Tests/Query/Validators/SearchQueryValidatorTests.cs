@@ -26,7 +26,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$search=blue OR green"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$search=blue OR green"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -55,7 +55,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$search=blue OR green"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$search=blue OR green"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 

@@ -33,13 +33,13 @@ namespace Net.Http.WebApi.OData.Tests
             item.Total = 2.55M;
 
             var responseContent = new ODataResponseContent(
-                new Uri("http://services.odata.org/OData/OData.svc/$metadata#Products"),
+                new Uri("http://services.odata.org/OData/$metadata#Products"),
                 new[] { item },
                 count: 12);
 
             var jsonResult = JsonConvert.SerializeObject(responseContent);
 
-            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/OData.svc/$metadata#Products\",\"@odata.count\":12,\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", jsonResult);
+            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/$metadata#Products\",\"@odata.count\":12,\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", jsonResult);
         }
 
         [Fact]
@@ -50,14 +50,14 @@ namespace Net.Http.WebApi.OData.Tests
             item.Total = 2.55M;
 
             var responseContent = new ODataResponseContent(
-                new Uri("http://services.odata.org/OData/OData.svc/$metadata#Products"),
+                new Uri("http://services.odata.org/OData/$metadata#Products"),
                 new[] { item },
                 count: 12,
-                nextLink: new Uri("http://services.odata.org/OData/OData.svc/Products?$skip=5"));
+                nextLink: new Uri("http://services.odata.org/OData/Products?$skip=5"));
 
             var jsonResult = JsonConvert.SerializeObject(responseContent);
 
-            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/OData.svc/$metadata#Products\",\"@odata.count\":12,\"@odata.nextLink\":\"http://services.odata.org/OData/OData.svc/Products?$skip=5\",\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", jsonResult);
+            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/$metadata#Products\",\"@odata.count\":12,\"@odata.nextLink\":\"http://services.odata.org/OData/Products?$skip=5\",\"value\":[{\"Name\":\"Coffee\",\"Total\":2.55}]}", jsonResult);
         }
 
         [Fact]
@@ -68,13 +68,13 @@ namespace Net.Http.WebApi.OData.Tests
             item.Name = "Fred";
 
             var responseContent = new ODataResponseContent(
-                new Uri("http://services.odata.org/OData/OData.svc/$metadata#Products"),
+                new Uri("http://services.odata.org/OData/$metadata#Products"),
                 new[] { item },
                 count: 12);
 
             var jsonResult = JsonConvert.SerializeObject(responseContent);
 
-            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/OData.svc/$metadata#Products\",\"@odata.count\":12,\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", jsonResult);
+            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/$metadata#Products\",\"@odata.count\":12,\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", jsonResult);
         }
 
         [Fact]
@@ -85,14 +85,14 @@ namespace Net.Http.WebApi.OData.Tests
             item.Name = "Fred";
 
             var responseContent = new ODataResponseContent(
-                new Uri("http://services.odata.org/OData/OData.svc/$metadata#Products"),
+                new Uri("http://services.odata.org/OData/$metadata#Products"),
                 new[] { item },
                 count: 12,
-                nextLink: new Uri("http://services.odata.org/OData/OData.svc/Products?$skip=5"));
+                nextLink: new Uri("http://services.odata.org/OData/Products?$skip=5"));
 
             var jsonResult = JsonConvert.SerializeObject(responseContent);
 
-            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/OData.svc/$metadata#Products\",\"@odata.count\":12,\"@odata.nextLink\":\"http://services.odata.org/OData/OData.svc/Products?$skip=5\",\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", jsonResult);
+            Assert.Equal("{\"@odata.context\":\"http://services.odata.org/OData/$metadata#Products\",\"@odata.count\":12,\"@odata.nextLink\":\"http://services.odata.org/OData/Products?$skip=5\",\"value\":[{\"Id\":14225,\"Name\":\"Fred\"}]}", jsonResult);
         }
 
         [Fact]

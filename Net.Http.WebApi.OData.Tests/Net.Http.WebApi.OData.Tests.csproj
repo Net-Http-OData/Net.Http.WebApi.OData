@@ -69,6 +69,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
+    <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
     <Compile Include="Model\EdmComplexTypeTests.cs" />
     <Compile Include="Model\EdmPrimitiveTypeTests.cs" />
     <Compile Include="Model\EdmPropertyTests.cs" />

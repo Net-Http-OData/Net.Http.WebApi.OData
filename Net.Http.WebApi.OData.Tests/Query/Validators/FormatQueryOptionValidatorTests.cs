@@ -25,7 +25,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$format=xml"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$format=xml"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -54,7 +54,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$format=xml"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$format=xml"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 

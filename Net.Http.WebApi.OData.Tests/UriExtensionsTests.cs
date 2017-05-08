@@ -8,7 +8,7 @@
         [Fact]
         public void GetModelName()
         {
-            var requestUri = new Uri("http://services.odata.org/OData/OData.svc/Products");
+            var requestUri = new Uri("http://services.odata.org/OData/Products");
 
             Assert.Equal("Products", requestUri.GetModelName());
         }
@@ -16,9 +16,25 @@
         [Fact]
         public void GetModelNameWithTrailingSlash()
         {
-            var requestUri = new Uri("http://services.odata.org/OData/OData.svc/Products/");
+            var requestUri = new Uri("http://services.odata.org/OData/Products/");
 
             Assert.Equal("Products", requestUri.GetModelName());
+        }
+
+        [Fact]
+        public void GetODataServiceUri()
+        {
+            var requestUri = new Uri("http://services.odata.org/OData/Products");
+
+            Assert.Equal("http://services.odata.org/OData/", requestUri.GetODataServiceUri().ToString());
+        }
+
+        [Fact]
+        public void GetODataServiceUriWithTrailingSlash()
+        {
+            var requestUri = new Uri("http://services.odata.org/OData/Products/");
+
+            Assert.Equal("http://services.odata.org/OData/", requestUri.GetODataServiceUri().ToString());
         }
     }
 }
