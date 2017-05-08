@@ -73,6 +73,8 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="MetadataLevel.cs" />
+    <Compile Include="Metadata\ServiceDocumentItem.cs" />
+    <Compile Include="Metadata\ServiceDocumentODataController.cs" />
     <Compile Include="Model\EdmComplexType.cs" />
     <Compile Include="Model\EdmPrimitiveType.cs" />
     <Compile Include="Model\EdmProperty.cs" />

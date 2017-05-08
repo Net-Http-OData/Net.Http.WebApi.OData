@@ -17,7 +17,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://services.odata.org/OData/OData.svc/Products?$filter=Price eq 21.39M");
+                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
                 this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
@@ -38,7 +38,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata=minimalmetadata");
 
                 var requestOptions1 = httpRequestMessage.ReadODataRequestOptions();
@@ -57,7 +57,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata=all");
 
                 var exception = Assert.Throws<HttpResponseException>(() => httpRequestMessage.ReadODataRequestOptions());
@@ -74,7 +74,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata=minimalmetadata");
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
@@ -90,7 +90,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata=nometadata");
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
@@ -106,7 +106,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products");
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata=verbose");
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();

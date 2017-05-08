@@ -25,7 +25,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=x"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$inlinecount=x"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -54,7 +54,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$inlinecount=allpages"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -83,7 +83,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$inlinecount=allpages"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -108,7 +108,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$inlinecount=none"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$inlinecount=none"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 

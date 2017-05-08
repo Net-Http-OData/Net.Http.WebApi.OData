@@ -27,7 +27,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price add 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price add 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -58,7 +58,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price add 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price add 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -84,7 +84,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' and Surname eq 'Smith'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename eq 'John' and Surname eq 'Smith'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -114,7 +114,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' and Surname eq 'Smith'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename eq 'John' and Surname eq 'Smith'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -140,7 +140,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=cast(Price, 'Edm.Int64') eq 20"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=cast(Price, 'Edm.Int64') eq 20"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -171,7 +171,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=cast(Price, 'Edm.Int64') eq 20"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=cast(Price, 'Edm.Int64') eq 20"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -197,7 +197,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=ceiling(Freight) eq 32"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Orders?$filter=ceiling(Freight) eq 32"),
                     EntityDataModel.Current.EntitySets["Orders"]);
             }
 
@@ -228,7 +228,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=ceiling(Freight) eq 32"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Orders?$filter=ceiling(Freight) eq 32"),
                     EntityDataModel.Current.EntitySets["Orders"]);
             }
 
@@ -254,7 +254,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -285,7 +285,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=concat(concat(City, ', '), Country) eq 'Berlin, Germany'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -311,7 +311,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=day(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=day(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -342,7 +342,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=day(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=day(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -369,7 +369,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price div 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price div 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -400,7 +400,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price div 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price div 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -426,7 +426,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=endswith(Surname, 'yes') eq true"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=endswith(Surname, 'yes') eq true"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -457,7 +457,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=endswith(Surname, 'yes') eq true"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=endswith(Surname, 'yes') eq true"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -483,7 +483,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename eq 'John'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -513,7 +513,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename eq 'John'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -539,7 +539,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=floor(Freight) eq 32"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Orders?$filter=floor(Freight) eq 32"),
                     EntityDataModel.Current.EntitySets["Orders"]);
             }
 
@@ -570,7 +570,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=floor(Freight) eq 32"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Orders?$filter=floor(Freight) eq 32"),
                     EntityDataModel.Current.EntitySets["Orders"]);
             }
 
@@ -596,7 +596,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price gt 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price gt 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -626,7 +626,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price gt 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price gt 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -652,7 +652,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price ge 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price ge 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -682,7 +682,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price ge 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price ge 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -708,7 +708,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=hour(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=hour(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -739,7 +739,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=hour(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=hour(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -765,7 +765,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=indexof(Surname, 'Hayes') eq 1"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=indexof(Surname, 'Hayes') eq 1"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -796,7 +796,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=indexof(Surname, 'Hayes') eq 1"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=indexof(Surname, 'Hayes') eq 1"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -822,7 +822,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=isof(Price, 'Edm.Int64')"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=isof(Price, 'Edm.Int64')"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -853,7 +853,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=isof(Price, 'Edm.Int64')"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=isof(Price, 'Edm.Int64')"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -879,7 +879,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=length(CompanyName) eq 19"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=length(CompanyName) eq 19"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -910,7 +910,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=length(CompanyName) eq 19"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=length(CompanyName) eq 19"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -936,7 +936,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price lt 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price lt 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -966,7 +966,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price lt 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price lt 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -992,7 +992,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price le 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price le 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1022,7 +1022,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price le 35"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price le 35"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1048,7 +1048,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=minute(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=minute(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1079,7 +1079,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=minute(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=minute(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1106,7 +1106,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mod 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price mod 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1137,7 +1137,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mod 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price mod 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1163,7 +1163,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=month(BirthDate) eq 5"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=month(BirthDate) eq 5"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1194,7 +1194,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=month(BirthDate) eq 5"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=month(BirthDate) eq 5"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1221,7 +1221,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mul 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price mul 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1252,7 +1252,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price mul 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price mul 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1278,7 +1278,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename ne 'John'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename ne 'John'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1308,7 +1308,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename ne 'John'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename ne 'John'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1334,7 +1334,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' or Surname eq 'Smith'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename eq 'John' or Surname eq 'Smith'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1364,7 +1364,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Forename eq 'John' or Surname eq 'Smith'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Forename eq 'John' or Surname eq 'Smith'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1390,7 +1390,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1421,7 +1421,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=replace(CompanyName, ' ', '') eq 'AlfredsFutterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1447,7 +1447,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=round(Freight) eq 32"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Orders?$filter=round(Freight) eq 32"),
                     EntityDataModel.Current.EntitySets["Orders"]);
             }
 
@@ -1478,7 +1478,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Orders?$filter=round(Freight) eq 32"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Orders?$filter=round(Freight) eq 32"),
                     EntityDataModel.Current.EntitySets["Orders"]);
             }
 
@@ -1504,7 +1504,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=second(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=second(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1535,7 +1535,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=second(BirthDate) eq 8"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=second(BirthDate) eq 8"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1561,7 +1561,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=startswith(Surname, 'Hay') eq true"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=startswith(Surname, 'Hay') eq true"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1592,7 +1592,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=startswith(Surname, 'Hay') eq true"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=startswith(Surname, 'Hay') eq true"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1618,7 +1618,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=substring(CompanyName, 1) eq 'lfreds Futterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=substring(CompanyName, 1) eq 'lfreds Futterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1649,7 +1649,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=substring(CompanyName, 1) eq 'lfreds Futterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=substring(CompanyName, 1) eq 'lfreds Futterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1675,7 +1675,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=substringof('Hayes', Surname) eq true"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=substringof('Hayes', Surname) eq true"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1706,7 +1706,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=substringof('Hayes', Surname) eq true"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=substringof('Hayes', Surname) eq true"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1733,7 +1733,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price sub 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price sub 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1764,7 +1764,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Products?$filter=Price sub 100 eq 150"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$filter=Price sub 100 eq 150"),
                     EntityDataModel.Current.EntitySets["Products"]);
             }
 
@@ -1790,7 +1790,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=tolower(CompanyName) eq 'alfreds futterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=tolower(CompanyName) eq 'alfreds futterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1821,7 +1821,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=tolower(CompanyName) eq 'alfreds futterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=tolower(CompanyName) eq 'alfreds futterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1847,7 +1847,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1878,7 +1878,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=toupper(CompanyName) eq 'ALFREDS FUTTERKISTE'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1904,7 +1904,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=trim(CompanyName) eq 'Alfreds Futterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=trim(CompanyName) eq 'Alfreds Futterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1935,7 +1935,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Customers?$filter=trim(CompanyName) eq 'Alfreds Futterkiste'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$filter=trim(CompanyName) eq 'Alfreds Futterkiste'"),
                     EntityDataModel.Current.EntitySets["Customers"]);
             }
 
@@ -1961,7 +1961,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=year(BirthDate) eq 1971"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=year(BirthDate) eq 1971"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -1992,7 +1992,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=year(BirthDate) eq 1971"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=year(BirthDate) eq 1971"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -2017,7 +2017,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Surname eq 'Smith'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Surname eq 'Smith'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -2047,7 +2047,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/OData.svc/Employees?$filter=Surname eq 'Smith'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=Surname eq 'Smith'"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
