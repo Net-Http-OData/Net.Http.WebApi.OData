@@ -17,10 +17,10 @@ namespace Net.Http.WebApi.OData
 
     internal static class MetadataLevelExtensions
     {
-        internal const string HeaderKey = "odata.metadata";
-        private static readonly NameValueHeaderValue MetadataLevelFull = new NameValueHeaderValue(HeaderKey, "full");
-        private static readonly NameValueHeaderValue MetadataLevelMinimal = new NameValueHeaderValue(HeaderKey, "minimal");
-        private static readonly NameValueHeaderValue MetadataLevelNone = new NameValueHeaderValue(HeaderKey, "none");
+        internal const string HeaderName = "odata.metadata";
+        private static readonly NameValueHeaderValue MetadataLevelFull = new NameValueHeaderValue(HeaderName, "full");
+        private static readonly NameValueHeaderValue MetadataLevelMinimal = new NameValueHeaderValue(HeaderName, "minimal");
+        private static readonly NameValueHeaderValue MetadataLevelNone = new NameValueHeaderValue(HeaderName, "none");
 
         internal static NameValueHeaderValue ToNameValueHeaderValue(this MetadataLevel metadataLevel)
         {
