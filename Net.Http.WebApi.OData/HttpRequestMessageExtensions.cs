@@ -80,7 +80,7 @@ namespace Net.Http.WebApi.OData
             {
                 foreach (var parameter in header.Parameters)
                 {
-                    if (parameter.Name == "odata")
+                    if (parameter.Name == MetadataLevelExtensions.HeaderName)
                     {
                         switch (parameter.Value)
                         {

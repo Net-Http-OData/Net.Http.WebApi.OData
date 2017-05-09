@@ -34,7 +34,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("minimalmetadata", metadataParameter.Value);
@@ -66,7 +66,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("nometadata", metadataParameter.Value);
@@ -98,7 +98,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("verbose", metadataParameter.Value);
@@ -129,7 +129,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("minimalmetadata", metadataParameter.Value);
