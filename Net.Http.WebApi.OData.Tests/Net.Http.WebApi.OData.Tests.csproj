@@ -86,6 +86,7 @@
     <Compile Include="Query\FilterQueryOptionTests.cs" />
     <Compile Include="Query\FormatQueryOptionTests.cs" />
     <Compile Include="Query\InlineCountQueryOptionTests.cs" />
+    <Compile Include="Query\ODataQueryOptionsExtensionsTests.cs" />
     <Compile Include="Query\ODataQueryOptionsTests.cs" />
     <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
     <Compile Include="Query\ODataValidationSettingsTests.cs" />
