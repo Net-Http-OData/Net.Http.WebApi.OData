@@ -108,6 +108,7 @@
     <Compile Include="Query\FilterQueryOption.cs" />
     <Compile Include="Query\FormatQueryOption.cs" />
     <Compile Include="Query\ODataQueryOptions.cs" />
+    <Compile Include="Query\ODataQueryOptionsExtensions.cs" />
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
     <Compile Include="Query\ODataQueryOptionsParameterBindingAttribute.cs" />
     <Compile Include="Query\ODataRawQueryOptions.cs" />
