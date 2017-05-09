@@ -9,11 +9,107 @@
 
     public class HttpRequestMessageExtensionsTests
     {
-        public class CreateODataResponse
+        public class CreateODataResponse_WithAcceptHeaderContainingODataMetadataFull
         {
             private readonly HttpResponseMessage httpResponseMessage;
 
-            public CreateODataResponse()
+            public CreateODataResponse_WithAcceptHeaderContainingODataMetadataFull()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("full", metadataParameter.Value);
+            }
+        }
+
+        public class CreateODataResponse_WithAcceptHeaderContainingODataMetadataMinimal
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_WithAcceptHeaderContainingODataMetadataMinimal()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("minimal", metadataParameter.Value);
+            }
+        }
+
+        public class CreateODataResponse_WithAcceptHeaderContainingODataMetadataNone
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_WithAcceptHeaderContainingODataMetadataNone()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("none", metadataParameter.Value);
+            }
+        }
+
+        public class CreateODataResponse_WithoutMetadataLevelSpecifiedInRequest
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_WithoutMetadataLevelSpecifiedInRequest()
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -28,6 +124,15 @@
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
                 Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("minimal", metadataParameter.Value);
             }
         }
 
@@ -50,40 +155,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsODataIsolationHeaderContainingSnapshot
-        {
-            [Fact]
-            public void TheIsolationLevelIsSet()
-            {
-                TestHelper.EnsureEDM();
-
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
-                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "Snapshot");
-
-                var requestOptions = httpRequestMessage.ReadODataRequestOptions();
-
-                Assert.Equal(ODataIsolationLevel.Snapshot, requestOptions.IsolationLevel);
-            }
-        }
-
-        public class ReadODataRequestOptionsODataIsolationHeaderNotContainingSnapshot
-        {
-            [Fact]
-            public void AnHttpResponseExceptionIsThrownWhenReadingTheIsolationLevel()
-            {
-                TestHelper.EnsureEDM();
-
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
-                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
-
-                var exception = Assert.Throws<HttpResponseException>(() => httpRequestMessage.ReadODataRequestOptions());
-
-                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedIsolationLevel, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
-            }
-        }
-
-        public class ReadODataRequestOptionsWithAcceptHeaderContaininAnInvalidODataMetadataValue
+        public class ReadODataRequestOptions_WithAcceptHeaderContaininAnInvalidODataMetadataValue
         {
             [Fact]
             public void AnHttpResponseExceptionIsThrown()
@@ -100,7 +172,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsWithAcceptHeaderContainingODataMetadataFull
+        public class ReadODataRequestOptions_WithAcceptHeaderContainingODataMetadataFull
         {
             [Fact]
             public void TheMetadataLevelIsSetToVerbose()
@@ -116,7 +188,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsWithAcceptHeaderContainingODataMetadataMinimal
+        public class ReadODataRequestOptions_WithAcceptHeaderContainingODataMetadataMinimal
         {
             [Fact]
             public void TheMetadataLevelIsSetToMinimal()
@@ -132,7 +204,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsWithAcceptHeaderContainingODataMetadataNone
+        public class ReadODataRequestOptions_WithAcceptHeaderContainingODataMetadataNone
         {
             [Fact]
             public void TheMetadataLevelIsSetToNone()
@@ -145,6 +217,39 @@
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
 
                 Assert.Equal(MetadataLevel.None, requestOptions.MetadataLevel);
+            }
+        }
+
+        public class ReadODataRequestOptions_WithODataIsolationHeaderContainingSnapshot
+        {
+            [Fact]
+            public void TheIsolationLevelIsSet()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "Snapshot");
+
+                var requestOptions = httpRequestMessage.ReadODataRequestOptions();
+
+                Assert.Equal(ODataIsolationLevel.Snapshot, requestOptions.IsolationLevel);
+            }
+        }
+
+        public class ReadODataRequestOptions_WithODataIsolationHeaderNotContainingSnapshot
+        {
+            [Fact]
+            public void AnHttpResponseExceptionIsThrownWhenReadingTheIsolationLevel()
+            {
+                TestHelper.EnsureEDM();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
+
+                var exception = Assert.Throws<HttpResponseException>(() => httpRequestMessage.ReadODataRequestOptions());
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
+                Assert.Equal(Messages.UnsupportedIsolationLevel, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
             }
         }
     }

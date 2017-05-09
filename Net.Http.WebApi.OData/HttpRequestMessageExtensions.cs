@@ -34,6 +34,8 @@ namespace Net.Http.WebApi.OData
         public static HttpResponseMessage CreateODataResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value)
         {
             var response = request.CreateResponse(statusCode, value);
+
+            response.Content.Headers.ContentType.Parameters.Add(request.ReadODataRequestOptions().MetadataLevel.ToNameValueHeaderValue());
             response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
             return response;
