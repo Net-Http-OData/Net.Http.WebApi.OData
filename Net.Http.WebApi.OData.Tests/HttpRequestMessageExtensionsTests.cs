@@ -9,11 +9,107 @@
 
     public class HttpRequestMessageExtensionsTests
     {
-        public class CreateODataResponse
+        public class CreateODataResponse_WithAcceptHeaderContainingODataMinimalMetadata
         {
             private readonly HttpResponseMessage httpResponseMessage;
 
-            public CreateODataResponse()
+            public CreateODataResponse_WithAcceptHeaderContainingODataMinimalMetadata()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata=minimalmetadata");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.DataServiceVersion));
+                Assert.Equal("3.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.DataServiceVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("minimalmetadata", metadataParameter.Value);
+            }
+        }
+
+        public class CreateODataResponse_WithAcceptHeaderContainingODataNoMetadata
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_WithAcceptHeaderContainingODataNoMetadata()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata=nometadata");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.DataServiceVersion));
+                Assert.Equal("3.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.DataServiceVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("nometadata", metadataParameter.Value);
+            }
+        }
+
+        public class CreateODataResponse_WithAcceptHeaderContainingODataVerboseMetadata
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_WithAcceptHeaderContainingODataVerboseMetadata()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata=verbose");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.DataServiceVersion));
+                Assert.Equal("3.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.DataServiceVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("verbose", metadataParameter.Value);
+            }
+        }
+
+        public class CreateODataResponse_WithoutMetadataLevelSpecifiedInRequest
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_WithoutMetadataLevelSpecifiedInRequest()
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -28,6 +124,15 @@
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.DataServiceVersion));
                 Assert.Equal("3.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.DataServiceVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderKey);
+
+                Assert.NotNull(metadataParameter);
+                Assert.Equal("minimalmetadata", metadataParameter.Value);
             }
         }
 
@@ -50,7 +155,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsWithAcceptHeaderContaininAnInvalidODataMetadataValue
+        public class ReadODataRequestOptions_WithAcceptHeaderContaininAnInvalidODataMetadataValue
         {
             [Fact]
             public void AnHttpResponseExceptionIsThrown()
@@ -67,7 +172,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsWithAcceptHeaderContainingODataMinimalMetadata
+        public class ReadODataRequestOptions_WithAcceptHeaderContainingODataMinimalMetadata
         {
             [Fact]
             public void TheMetadataLevelIsSetToMinimal()
@@ -83,7 +188,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsWithAcceptHeaderContainingODataNoMetadata
+        public class ReadODataRequestOptions_WithAcceptHeaderContainingODataNoMetadata
         {
             [Fact]
             public void TheMetadataLevelIsSetToNone()
@@ -99,7 +204,7 @@
             }
         }
 
-        public class ReadODataRequestOptionsWithAcceptHeaderContainingODataVerboseMetadata
+        public class ReadODataRequestOptions_WithAcceptHeaderContainingODataVerboseMetadata
         {
             [Fact]
             public void TheMetadataLevelIsSetToVerbose()
