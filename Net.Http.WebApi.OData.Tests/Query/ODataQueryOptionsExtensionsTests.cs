@@ -14,10 +14,10 @@
             TestHelper.EnsureEDM();
 
             var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$expand=Category&$filter=Name eq 'Milk'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Price&$skip=25&$top=25"),
+                new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25"),
                 EntityDataModel.Current.EntitySets["Customers"]);
 
-            Assert.Equal(new Uri("http://services.odata.org/OData/Customers?skip=75&$expand=Category&$filter=Name eq 'Milk'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Price&$top=25"), queryOptions.NextLink(50, 25));
+            Assert.Equal(new Uri("http://services.odata.org/OData/Customers?skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25"), queryOptions.NextLink(50, 25));
         }
 
         [Fact]

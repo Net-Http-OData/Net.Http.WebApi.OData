@@ -38,6 +38,11 @@ namespace Net.Http.WebApi.OData.Query
                 .Append(requestUri.LocalPath)
                 .Append("?skip=").Append((skip + resultsPerPage).ToString());
 
+            if (queryOptions.RawValues.Count != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Count);
+            }
+
             if (queryOptions.RawValues.Expand != null)
             {
                 uriBuilder.Append('&').Append(queryOptions.RawValues.Expand);
@@ -53,14 +58,14 @@ namespace Net.Http.WebApi.OData.Query
                 uriBuilder.Append('&').Append(queryOptions.RawValues.Format);
             }
 
-            if (queryOptions.RawValues.InlineCount != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.InlineCount);
-            }
-
             if (queryOptions.RawValues.OrderBy != null)
             {
                 uriBuilder.Append('&').Append(queryOptions.RawValues.OrderBy);
+            }
+
+            if (queryOptions.RawValues.Search != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Search);
             }
 
             if (queryOptions.RawValues.Select != null)
