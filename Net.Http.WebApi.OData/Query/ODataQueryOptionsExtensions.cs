@@ -36,7 +36,7 @@ namespace Net.Http.WebApi.OData.Query
                 .Append(Uri.SchemeDelimiter)
                 .Append(requestUri.Authority)
                 .Append(requestUri.LocalPath)
-                .Append("?skip=").Append((skip + resultsPerPage).ToString());
+                .Append("?$skip=").Append((skip + resultsPerPage).ToString());
 
             if (queryOptions.RawValues.Count != null)
             {
