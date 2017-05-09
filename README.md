@@ -18,13 +18,13 @@ public static class WebApiConfig
 {
     public static void Register(HttpConfiguration config)
     {
-        // Configure routes, etc
-
-        // Build the OData Entity Data Model
+        // Build the OData Entity Data Model first
         var entityDataModelBuilder = new EntityDataModelBuilder();
         entityDataModelBuilder.RegisterEntitySet<Category>("Categories");
         entityDataModelBuilder.RegisterEntitySet<Product>("Products");
         entityDataModelBuilder.BuildModel();
+
+        // Configure routes, etc
     }
 }
 ```
