@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Net.Http.WebApi.OData.Query.QueryOption">
-    <Position X="6.75" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Query\QueryOption.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Net.Http.WebApi.OData.Query.SelectExpandQueryOption">
-    <Position X="9.75" Y="3.25" Width="2.25" />
+    <Position X="7.5" Y="3.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Query\SelectExpandQueryOption.cs</FileName>
@@ -42,32 +42,11 @@
       <FileName>Query\OrderByProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.SkipQueryOption">
-    <Position X="12" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Query\SkipQueryOption.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Net.Http.WebApi.OData.Query.SkipTokenQueryOption">
-    <Position X="14" Y="3.25" Width="2" />
+    <Position X="10.25" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Query\SkipTokenQueryOption.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.TopQueryOption">
-    <Position X="16.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Query\TopQueryOption.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.SearchQueryOption">
-    <Position X="7.5" Y="3.25" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Query\SearchQueryOption.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="Net.Http.WebApi.OData.Query.OrderByDirection">
