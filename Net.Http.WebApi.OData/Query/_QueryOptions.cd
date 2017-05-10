@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Net.Http.WebApi.OData.Query.QueryOption">
-    <Position X="10" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Query\QueryOption.cs</FileName>
@@ -49,25 +49,11 @@
       <FileName>Query\OrderByProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.SkipQueryOption">
-    <Position X="12.75" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Query\SkipQueryOption.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Net.Http.WebApi.OData.Query.SkipTokenQueryOption">
-    <Position X="14.75" Y="3.25" Width="2" />
+    <Position X="12.75" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Query\SkipTokenQueryOption.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Net.Http.WebApi.OData.Query.TopQueryOption">
-    <Position X="17.25" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Query\TopQueryOption.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="Net.Http.WebApi.OData.Query.InlineCount">
