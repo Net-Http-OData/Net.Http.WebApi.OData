@@ -22,8 +22,8 @@ namespace Net.Http.WebApi.OData.Model
     [System.Diagnostics.DebuggerDisplay("{Name}: {ClrType}")]
     public sealed class EdmEnumType : EdmType
     {
-        internal EdmEnumType(string name, Type clrType, IReadOnlyList<EdmEnumMember> members)
-            : base(name, clrType)
+        internal EdmEnumType(Type clrType, IReadOnlyList<EdmEnumMember> members)
+            : base(clrType.Name, clrType.FullName, clrType)
         {
             if (members == null)
             {

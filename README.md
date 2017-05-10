@@ -20,8 +20,10 @@ public static class WebApiConfig
     {
         // Build the OData Entity Data Model first
         var entityDataModelBuilder = new EntityDataModelBuilder();
-        entityDataModelBuilder.RegisterEntitySet<Category>("Categories");
-        entityDataModelBuilder.RegisterEntitySet<Product>("Products");
+        entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
+        entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
+        entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId);
+        entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.Name);
         entityDataModelBuilder.BuildModel();
 
         // Configure routes, etc
@@ -29,7 +31,7 @@ public static class WebApiConfig
 }
 ```
 
-Note that when you register an Entity Set, you also specify the name of the Entity Set. The name needs to match the URL you intend to use so if you use `http://myservice/api/Products` then register the Entity Set using `.RegisterEntitySet<Product>("Products");`, if you use `http://myservice/api/Product` then register the Entity Set using `.RegisterEntitySet<Product>("Product");`.
+Note that when you register an Entity Set, you also specify the name of the Entity Set. The name needs to match the URL you intend to use so if you use `http://myservice/odata/Products` then register the Entity Set using `.RegisterEntitySet<Product>("Products", x => x.Name);`, if you use `http://myservice/odata/Product` then register the Entity Set using `.RegisterEntitySet<Product>("Product", x => x.Name);`.
 
 ## Usage
 

@@ -14,24 +14,34 @@ namespace Net.Http.WebApi.OData.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Represents a complex type in the Entity Data Model.
     /// </summary>
     /// <seealso cref="Net.Http.WebApi.OData.Model.EdmType" />
-    [System.Diagnostics.DebuggerDisplay("{Name}: {ClrType}")]
+    [System.Diagnostics.DebuggerDisplay("{FullName}: {ClrType}")]
     public sealed class EdmComplexType : EdmType
     {
-        internal EdmComplexType(string name, Type clrType, IReadOnlyList<EdmProperty> properties)
-            : base(name, clrType)
+        private readonly string entityKey;
+
+        internal EdmComplexType(Type clrType, string entityKey, IReadOnlyList<EdmProperty> properties)
+            : base(clrType.Name, clrType.FullName, clrType)
         {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
             }
 
+            // TODO: Figure out how to re-design this so that we don't get the linq query for every call to EntityKey
+            this.entityKey = entityKey;
             this.Properties = properties;
         }
+
+        /// <summary>
+        /// Gets the entity key property.
+        /// </summary>
+        public EdmProperty EntityKey => this.Properties.Single(x => x.Name == this.entityKey);
 
         /// <summary>
         /// Gets the properties defined on the type.
@@ -59,7 +69,7 @@ namespace Net.Http.WebApi.OData.Model
                 }
             }
 
-            throw new ArgumentException($"The type '{this.Name}' does not contain a property named '{name}'");
+            throw new ArgumentException($"The type '{this.FullName}' does not contain a property named '{name}'");
         }
     }
 }

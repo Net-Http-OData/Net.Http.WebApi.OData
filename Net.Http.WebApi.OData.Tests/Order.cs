@@ -10,6 +10,12 @@
             set;
         }
 
+        public long OrderId
+        {
+            get;
+            set;
+        }
+
         public string ShipCountry
         {
             get;

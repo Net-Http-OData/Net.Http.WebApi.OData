@@ -17,19 +17,25 @@ namespace Net.Http.WebApi.OData.Model
     /// <summary>
     /// Represents a type in the Entity Data Model.
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("{Name}: {ClrType}")]
+    [System.Diagnostics.DebuggerDisplay("{FullName}: {ClrType}")]
     public abstract class EdmType : IEquatable<EdmType>
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="EdmType"/> class.
         /// </summary>
         /// <param name="name">The name of the type.</param>
+        /// <param name="fullName">The full name of the type.</param>
         /// <param name="clrType">The CLR type.</param>
-        protected EdmType(string name, Type clrType)
+        protected EdmType(string name, string fullName, Type clrType)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Name must be specified", nameof(name));
+            }
+
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                throw new ArgumentException("FullName must be specified", nameof(fullName));
             }
 
             if (clrType == null)
@@ -38,6 +44,7 @@ namespace Net.Http.WebApi.OData.Model
             }
 
             this.Name = name;
+            this.FullName = fullName;
             this.ClrType = clrType;
         }
 
@@ -45,6 +52,14 @@ namespace Net.Http.WebApi.OData.Model
         /// Gets the CLR type.
         /// </summary>
         public Type ClrType
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the full name.
+        /// </summary>
+        public string FullName
         {
             get;
         }
@@ -64,9 +79,10 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>The EdmType with the specified name, if found; otherwise, null.</returns>
         public static EdmType GetEdmType(string edmTypeName)
         {
+            // TODO: Do we need this method?
             foreach (var edmType in EdmTypeCache.Map.Values)
             {
-                if (edmType.Name.Equals(edmTypeName))
+                if (edmType.FullName.Equals(edmTypeName))
                 {
                     return edmType;
                 }
@@ -120,7 +136,7 @@ namespace Net.Http.WebApi.OData.Model
                 return true;
             }
 
-            return this.ClrType.Equals(other.ClrType) && this.Name.Equals(other.Name);
+            return this.ClrType.Equals(other.ClrType);
         }
 
         /// <summary>
@@ -129,7 +145,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode() => this.ClrType.GetHashCode() ^ this.Name.GetHashCode();
+        public override int GetHashCode() => this.ClrType.GetHashCode();
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -137,6 +153,6 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public override string ToString() => this.Name;
+        public override string ToString() => this.FullName;
     }
 }
