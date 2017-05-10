@@ -10,6 +10,12 @@
             set;
         }
 
+        public string EmailAddress
+        {
+            get;
+            set;
+        }
+
         public string Forename
         {
             get;

@@ -15,6 +15,8 @@ namespace Net.Http.WebApi.OData.Model
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
 
     /// <summary>
     /// A class which builds the <see cref="EntityDataModel"/>.
@@ -57,14 +59,17 @@ namespace Net.Http.WebApi.OData.Model
         /// </summary>
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
         /// <param name="entitySetName">Name of the Entity Set.</param>
-        public void RegisterEntitySet<T>(string entitySetName)
+        /// <param name="entityKeyExpression">The entity key expression.</param>
+        public void RegisterEntitySet<T>(string entitySetName, Expression<Func<T, object>> entityKeyExpression)
         {
-            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), EdmTypeResolver);
+            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(
+                typeof(T),
+                t => EdmTypeResolver(t, entityKeyExpression.GetMemberInfo()));
 
             this.entitySets.Add(entitySetName, edmType);
         }
 
-        private static EdmType EdmTypeResolver(Type clrType)
+        private static EdmType EdmTypeResolver(Type clrType, MemberInfo entityKeyMember)
         {
             if (clrType.IsEnum)
             {
@@ -74,13 +79,16 @@ namespace Net.Http.WebApi.OData.Model
             var clrTypeProperties = clrType.GetProperties().OrderBy(p => p.Name);
 
             var edmProperties = new List<EdmProperty>();
-            var edmComplexType = new EdmComplexType(clrType.FullName, clrType, edmProperties.AsReadOnly());
+            var edmComplexType = new EdmComplexType(
+                clrType,
+                entityKeyMember.Name,
+                edmProperties);
 
             edmProperties.AddRange(
                 clrTypeProperties.Select(
                     p => new EdmProperty(
                         p.Name,
-                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver),
+                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, t => EdmTypeResolver(t, null)),
                         edmComplexType)));
 
             return edmComplexType;

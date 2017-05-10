@@ -83,6 +83,7 @@
     <Compile Include="Model\EdmTypeCache.cs" />
     <Compile Include="Model\EntityDataModel.cs" />
     <Compile Include="Model\EntityDataModelBuilder.cs" />
+    <Compile Include="Model\ExpressionExtensions.cs" />
     <Compile Include="ODataHeaderNames.cs" />
     <Compile Include="ODataRequestOptions.cs" />
     <Compile Include="ODataResponseContent.cs" />
