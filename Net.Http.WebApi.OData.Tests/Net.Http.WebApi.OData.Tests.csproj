@@ -90,7 +90,6 @@
     <Compile Include="Query\ODataQueryOptionsExtensionsTests.cs" />
     <Compile Include="Query\ODataQueryOptionsTests.cs" />
     <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
-    <Compile Include="Query\ODataValidationSettingsTests.cs" />
     <Compile Include="Query\OrderByPropertyTests.cs" />
     <Compile Include="Query\OrderByQueryOptionTests.cs" />
     <Compile Include="Query\Parsers\BinaryOperatorKindParserTests.cs" />
@@ -103,6 +102,7 @@
     <Compile Include="Query\Validators\FilterQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\CountQueryOptionValidatorTests.cs" />
+    <Compile Include="Query\Validators\ODataValidationSettingsTests.cs" />
     <Compile Include="Query\Validators\OrderByQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validators\SearchQueryValidatorTests.cs" />
     <Compile Include="Query\Validators\SelectQueryOptionValidatorTests.cs" />

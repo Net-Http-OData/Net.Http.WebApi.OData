@@ -91,10 +91,6 @@
     <Compile Include="ODataRequestOptions.cs" />
     <Compile Include="ODataResponseContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\AllowedArithmeticOperators.cs" />
-    <Compile Include="Query\AllowedFunctions.cs" />
-    <Compile Include="Query\AllowedLogicalOperators.cs" />
-    <Compile Include="Query\AllowedQueryOptions.cs" />
     <Compile Include="Query\Binders\AbstractFilterBinder.cs" />
     <Compile Include="Query\Binders\AbstractOrderByBinder.cs" />
     <Compile Include="Query\Binders\AbstractSelectExpandBinder.cs" />
@@ -114,7 +110,6 @@
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
     <Compile Include="Query\ODataQueryOptionsParameterBindingAttribute.cs" />
     <Compile Include="Query\ODataRawQueryOptions.cs" />
-    <Compile Include="Query\ODataValidationSettings.cs" />
     <Compile Include="Query\OrderByDirection.cs" />
     <Compile Include="Query\OrderByProperty.cs" />
     <Compile Include="Query\OrderByQueryOption.cs" />
@@ -130,10 +125,15 @@
     <Compile Include="Query\SelectExpandQueryOption.cs" />
     <Compile Include="Query\SkipTokenQueryOption.cs" />
     <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
+    <Compile Include="Query\Validators\AllowedArithmeticOperators.cs" />
+    <Compile Include="Query\Validators\AllowedFunctions.cs" />
+    <Compile Include="Query\Validators\AllowedLogicalOperators.cs" />
+    <Compile Include="Query\Validators\AllowedQueryOptions.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ODataQueryOptionsExtensions.cs" />
+    <Compile Include="Query\Validators\ODataValidationSettings.cs" />
     <Compile Include="Query\Validators\OrderByQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SearchQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\SelectQueryOptionValidator.cs" />
