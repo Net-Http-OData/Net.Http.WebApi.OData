@@ -1,6 +1,7 @@
 namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 {
     using System;
+    using System.Globalization;
     using NorthwindModel;
     using WebApi.OData.Model;
     using WebApi.OData.Query.Expressions;
@@ -90,7 +91,9 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.IsType<ConstantNode>(node.Right);
                 Assert.Equal("2013-06-18T09:30", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 0, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
+
+                // Since the request string doesn't contain a timezone offset, assume local
+                Assert.Equal(DateTimeOffset.Parse("2013-06-18T09:30", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -111,7 +114,9 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.IsType<ConstantNode>(node.Right);
                 Assert.Equal("2013-06-18T09:30:54", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 54, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
+
+                // Since the request string doesn't contain a timezone offset, assume local
+                Assert.Equal(DateTimeOffset.Parse("2013-06-18T09:30:54", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -195,7 +200,9 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.IsType<ConstantNode>(node.Right);
                 Assert.Equal("2013-06-18T09:30:20", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTimeOffset(2013, 6, 18, 9, 30, 20, TimeSpan.FromHours(1)), ((ConstantNode)node.Right).Value);
+
+                // Since the request string doesn't contain a timezone offset, assume local
+                Assert.Equal(DateTimeOffset.Parse("2013-06-18T09:30:20", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -237,7 +244,9 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.IsType<ConstantNode>(node.Right);
                 Assert.Equal("2017-02-28T16:34:18", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTimeOffset>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTimeOffset(2017, 2, 28, 16, 34, 18, TimeSpan.Zero), ((ConstantNode)node.Right).Value);
+
+                // Since the request string doesn't contain a timezone offset, assume local
+                Assert.Equal(DateTimeOffset.Parse("2017-02-28T16:34:18", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -258,7 +267,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.IsType<ConstantNode>(node.Right);
                 Assert.Equal("2013-06-18", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<DateTime>(((ConstantNode)node.Right).Value);
-                Assert.Equal(new DateTime(2013, 6, 18), ((ConstantNode)node.Right).Value);
+                Assert.Equal(new DateTime(2013, 6, 18, 0, 0, 0, DateTimeKind.Local), ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

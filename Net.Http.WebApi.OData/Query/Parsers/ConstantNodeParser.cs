@@ -26,11 +26,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             switch (token.TokenType)
             {
                 case TokenType.Date:
-                    var dateTimeValue = DateTime.ParseExact(token.Value, ODataDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    var dateTimeValue = DateTime.ParseExact(token.Value, ODataDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
                     return ConstantNode.Date(token.Value, dateTimeValue);
 
                 case TokenType.DateTimeOffset:
-                    var dateTimeOffsetValue = DateTimeOffset.Parse(token.Value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    var dateTimeOffsetValue = DateTimeOffset.Parse(token.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
                     return ConstantNode.DateTimeOffset(token.Value, dateTimeOffsetValue);
 
                 case TokenType.Decimal:
