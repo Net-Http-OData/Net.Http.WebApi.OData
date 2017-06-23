@@ -98,7 +98,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => new ODataRawQueryOptions("wibble=*"));
+                new ODataRawQueryOptions("wibble=*");
             }
         }
 

@@ -61,7 +61,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => SkipTokenQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                SkipTokenQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
     }

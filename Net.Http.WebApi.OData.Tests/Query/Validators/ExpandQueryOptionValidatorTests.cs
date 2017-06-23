@@ -61,7 +61,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => ExpandQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                ExpandQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
     }

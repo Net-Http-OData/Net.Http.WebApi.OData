@@ -90,7 +90,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -115,7 +115,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
     }

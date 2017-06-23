@@ -65,7 +65,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -121,7 +121,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -178,7 +178,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -235,7 +235,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -292,7 +292,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -349,7 +349,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -406,7 +406,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -464,7 +464,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -521,7 +521,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -577,7 +577,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -634,7 +634,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -691,7 +691,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -747,7 +747,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -803,7 +803,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -859,7 +859,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -916,7 +916,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -973,7 +973,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1030,7 +1030,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1087,7 +1087,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1143,7 +1143,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1199,7 +1199,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1256,7 +1256,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1313,7 +1313,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1370,7 +1370,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1428,7 +1428,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1485,7 +1485,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1543,7 +1543,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1599,7 +1599,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1657,7 +1657,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1713,7 +1713,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1770,7 +1770,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1827,7 +1827,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1884,7 +1884,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1941,7 +1941,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -1998,7 +1998,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -2056,7 +2056,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -2113,7 +2113,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -2170,7 +2170,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -2227,7 +2227,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -2284,7 +2284,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -2339,7 +2339,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
     }

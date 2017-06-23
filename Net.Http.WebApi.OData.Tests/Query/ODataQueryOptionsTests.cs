@@ -321,7 +321,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "4.0");
 
-                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
             }
         }
 
@@ -386,7 +386,7 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
-                Assert.DoesNotThrow(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]);
             }
         }
 

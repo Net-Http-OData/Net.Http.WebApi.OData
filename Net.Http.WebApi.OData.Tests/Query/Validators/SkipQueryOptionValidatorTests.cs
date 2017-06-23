@@ -61,7 +61,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -81,7 +81,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => SkipQueryOptionValidator.Validate(this.queryOptions, ODataValidationSettings.All));
+                SkipQueryOptionValidator.Validate(this.queryOptions, ODataValidationSettings.All);
             }
         }
 

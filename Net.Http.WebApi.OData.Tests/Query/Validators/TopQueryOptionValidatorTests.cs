@@ -62,7 +62,7 @@
             [Fact]
             public void AnExceptionShouldNotBeThrown()
             {
-                Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -117,7 +117,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
@@ -142,7 +142,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+                TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings);
             }
         }
 
