@@ -26,6 +26,36 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Creates the OData response message from the specified request message.
         /// </summary>
+        /// <param name="request">The HTTP request message which led to this response message.</param>
+        /// <param name="value">The string content of the HTTP response message.</param>
+        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, string value)
+            => CreateODataResponse(request, value == null ? HttpStatusCode.NoContent : HttpStatusCode.OK, value);
+
+        /// <summary>
+        /// Creates the OData response message from the specified request message.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this response message.</param>
+        /// <param name="statusCode">The HTTP response status code.</param>
+        /// <param name="value">The string content of the HTTP response message.</param>
+        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string value)
+        {
+            var response = new HttpResponseMessage(statusCode);
+
+            if (value != null)
+            {
+                response.Content = new StringContent(value);
+            }
+
+            response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
+
+            return response;
+        }
+
+        /// <summary>
+        /// Creates the OData response message from the specified request message.
+        /// </summary>
         /// <typeparam name="T">The type of the HTTP response message.</typeparam>
         /// <param name="request">The HTTP request message which led to this response message.</param>
         /// <param name="statusCode">The HTTP response status code.</param>

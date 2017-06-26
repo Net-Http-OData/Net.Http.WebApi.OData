@@ -9,11 +9,97 @@
 
     public class HttpRequestMessageExtensionsTests
     {
-        public class CreateODataResponse_WithAcceptHeaderContainingODataMetadataFull
+        public class CreateODataResponse_String_WithNonNullValue
         {
             private readonly HttpResponseMessage httpResponseMessage;
 
-            public CreateODataResponse_WithAcceptHeaderContainingODataMetadataFull()
+            public CreateODataResponse_String_WithNonNullValue()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products('Milk')/Code/$value");
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse("MLK");
+            }
+
+            [Fact]
+            public void TheContentIsSet()
+            {
+                Assert.Equal("MLK", ((StringContent)this.httpResponseMessage.Content).ReadAsStringAsync().Result);
+            }
+
+            [Fact]
+            public void TheContentIsStringContent()
+            {
+                Assert.IsType<StringContent>(this.httpResponseMessage.Content);
+            }
+
+            [Fact]
+            public void TheContentTypeIsTextPlain()
+            {
+                Assert.Equal("text/plain", this.httpResponseMessage.Content.Headers.ContentType.MediaType);
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheMetadataLevelContentTypeParameterIsNotSet()
+            {
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
+
+                Assert.Null(metadataParameter);
+            }
+
+            [Fact]
+            public void TheStatusCodeIsOk()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.httpResponseMessage.StatusCode);
+            }
+        }
+
+        public class CreateODataResponse_String_WithNullValue
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_String_WithNullValue()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://services.odata.org/OData/Products('Milk')/Code/$value");
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataResponse(default(string));
+            }
+
+            [Fact]
+            public void TheContentIsNull()
+            {
+                Assert.Null(this.httpResponseMessage.Content);
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheStatusCodeIsNoContent()
+            {
+                Assert.Equal(HttpStatusCode.NoContent, this.httpResponseMessage.StatusCode);
+            }
+        }
+
+        public class CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataFull
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataFull()
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -41,11 +127,11 @@
             }
         }
 
-        public class CreateODataResponse_WithAcceptHeaderContainingODataMetadataMinimal
+        public class CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataMinimal
         {
             private readonly HttpResponseMessage httpResponseMessage;
 
-            public CreateODataResponse_WithAcceptHeaderContainingODataMetadataMinimal()
+            public CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataMinimal()
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -73,11 +159,11 @@
             }
         }
 
-        public class CreateODataResponse_WithAcceptHeaderContainingODataMetadataNone
+        public class CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataNone
         {
             private readonly HttpResponseMessage httpResponseMessage;
 
-            public CreateODataResponse_WithAcceptHeaderContainingODataMetadataNone()
+            public CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataNone()
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
@@ -105,11 +191,11 @@
             }
         }
 
-        public class CreateODataResponse_WithoutMetadataLevelSpecifiedInRequest
+        public class CreateODataResponse_T_WithoutMetadataLevelSpecifiedInRequest
         {
             private readonly HttpResponseMessage httpResponseMessage;
 
-            public CreateODataResponse_WithoutMetadataLevelSpecifiedInRequest()
+            public CreateODataResponse_T_WithoutMetadataLevelSpecifiedInRequest()
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
