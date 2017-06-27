@@ -10,7 +10,7 @@
     public class ServiceDocumentODataControllerTests
     {
         [Fact]
-        public void WhenFullMetadataIsRequested_TheEntitySetUrlIsRelative()
+        public void WhenFullMetadataIsRequested_TheEntitySetUrlIsRelative_AndTheContextUriIsSet()
         {
             TestHelper.EnsureEDM();
 
@@ -22,19 +22,21 @@
             var response = controller.Get();
             var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
 
-            Assert.Null(result.Context);
+            Assert.NotNull(result.Context);
+            Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
+
             Assert.Null(result.Count);
             Assert.Null(result.NextLink);
 
             var serviceDocument = JsonConvert.SerializeObject(result);
 
             Assert.Equal(
-                "{\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
+                "{\"@odata.context\":\"http://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
                 serviceDocument);
         }
 
         [Fact]
-        public void WhenMinimalMetadataIsRequested_TheEntitySetUrlIsRelative()
+        public void WhenMinimalMetadataIsRequested_TheEntitySetUrlIsRelative_AndTheContextUriIsSet()
         {
             TestHelper.EnsureEDM();
 
@@ -46,19 +48,21 @@
             var response = controller.Get();
             var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
 
-            Assert.Null(result.Context);
+            Assert.NotNull(result.Context);
+            Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
+
             Assert.Null(result.Count);
             Assert.Null(result.NextLink);
 
             var serviceDocument = JsonConvert.SerializeObject(result);
 
             Assert.Equal(
-                "{\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
+                "{\"@odata.context\":\"http://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
                 serviceDocument);
         }
 
         [Fact]
-        public void WhenNoMetadataIsRequested_TheEntitySetUrlIsFullUrl()
+        public void WhenNoMetadataIsRequested_TheEntitySetUrlIsFullUrl_AndTheContextUriIsNotSet()
         {
             TestHelper.EnsureEDM();
 

@@ -33,9 +33,10 @@ namespace Net.Http.WebApi.OData.Metadata
         public HttpResponseMessage Get()
         {
             var requestOptions = this.Request.ReadODataRequestOptions();
+            Uri contextUri = requestOptions.MetadataLevel != ODataMetadataLevel.None ? this.Request.RequestUri.ResolveODataContextUri() : null;
 
             var serviceDocumentResponse = new ODataResponseContent(
-                null,
+                contextUri,
                 EntityDataModel.Current.EntitySets.Select(
                     kvp =>
                     {

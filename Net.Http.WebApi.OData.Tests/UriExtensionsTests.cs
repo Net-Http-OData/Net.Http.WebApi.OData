@@ -30,6 +30,15 @@
         }
 
         [Fact]
+        public void ResolveODataContextUri()
+        {
+            var requestUri = new Uri("http://services.odata.org/OData");
+            var contextUri = requestUri.ResolveODataContextUri();
+
+            Assert.Equal("http://services.odata.org/OData/$metadata", contextUri.ToString());
+        }
+
+        [Fact]
         public void ResolveODataServiceUri()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products");
