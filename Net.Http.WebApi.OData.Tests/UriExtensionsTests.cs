@@ -6,51 +6,51 @@
     public class UriExtensionsTests
     {
         [Fact]
-        public void GetModelName()
+        public void ResolveModelName()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products");
 
-            Assert.Equal("Products", requestUri.GetModelName());
+            Assert.Equal("Products", requestUri.ResolveModelName());
         }
 
         [Fact]
-        public void GetModelNameWithEntityKey()
+        public void ResolveModelName_WithEntityKey()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products(1)");
 
-            Assert.Equal("Products", requestUri.GetModelName());
+            Assert.Equal("Products", requestUri.ResolveModelName());
         }
 
         [Fact]
-        public void GetModelNameWithTrailingSlash()
+        public void ResolveModelName_WithTrailingSlash()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products/");
 
-            Assert.Equal("Products", requestUri.GetModelName());
+            Assert.Equal("Products", requestUri.ResolveModelName());
         }
 
         [Fact]
-        public void GetODataServiceUri()
+        public void ResolveODataServiceUri()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products");
 
-            Assert.Equal("http://services.odata.org/OData/", requestUri.GetODataServiceUri().ToString());
+            Assert.Equal("http://services.odata.org/OData/", requestUri.ResolveODataServiceUri().ToString());
         }
 
         [Fact]
-        public void GetODataServiceUriWithEntityKey()
+        public void ResolveODataServiceUri_WithEntityKey()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products(1)");
 
-            Assert.Equal("http://services.odata.org/OData/", requestUri.GetODataServiceUri().ToString());
+            Assert.Equal("http://services.odata.org/OData/", requestUri.ResolveODataServiceUri().ToString());
         }
 
         [Fact]
-        public void GetODataServiceUriWithTrailingSlash()
+        public void ResolveODataServiceUri_WithTrailingSlash()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products/");
 
-            Assert.Equal("http://services.odata.org/OData/", requestUri.GetODataServiceUri().ToString());
+            Assert.Equal("http://services.odata.org/OData/", requestUri.ResolveODataServiceUri().ToString());
         }
     }
 }

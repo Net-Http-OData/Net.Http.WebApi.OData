@@ -17,6 +17,7 @@ namespace Net.Http.WebApi.OData
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// Extensions for the <see cref="HttpRequestMessage"/> class
@@ -63,9 +64,10 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value)
         {
-            var response = request.CreateResponse(statusCode, value);
+            var requestOptions = request.ReadODataRequestOptions();
 
-            response.Content.Headers.ContentType.Parameters.Add(request.ReadODataRequestOptions().MetadataLevel.ToNameValueHeaderValue());
+            var response = request.CreateResponse(statusCode, value);
+            response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
             response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
             return response;
@@ -113,34 +115,32 @@ namespace Net.Http.WebApi.OData
                 {
                     return ODataIsolationLevel.Snapshot;
                 }
-                else
-                {
-                    throw new HttpResponseException(
-                        request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel));
-                }
+
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel));
             }
 
             return ODataIsolationLevel.None;
         }
 
-        internal static MetadataLevel ReadMetadataLevel(this HttpRequestMessage request)
+        internal static ODataMetadataLevel ReadMetadataLevel(this HttpRequestMessage request)
         {
             foreach (var header in request.Headers.Accept)
             {
                 foreach (var parameter in header.Parameters)
                 {
-                    if (parameter.Name == MetadataLevelExtensions.HeaderName)
+                    if (parameter.Name == ODataMetadataLevelExtensions.HeaderName)
                     {
                         switch (parameter.Value)
                         {
                             case "none":
-                                return MetadataLevel.None;
+                                return ODataMetadataLevel.None;
 
                             case "minimal":
-                                return MetadataLevel.Minimal;
+                                return ODataMetadataLevel.Minimal;
 
                             case "full":
-                                return MetadataLevel.Full;
+                                return ODataMetadataLevel.Full;
 
                             default:
                                 throw new HttpResponseException(
@@ -150,7 +150,21 @@ namespace Net.Http.WebApi.OData
                 }
             }
 
-            return MetadataLevel.Minimal;
+            return ODataMetadataLevel.Minimal;
+        }
+
+        internal static EdmComplexType ResolveModel(this HttpRequestMessage request)
+        {
+            var modelName = request.RequestUri.ResolveModelName();
+            EdmComplexType model;
+
+            if (!EntityDataModel.Current.EntitySets.TryGetValue(modelName, out model))
+            {
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(modelName)));
+            }
+
+            return model;
         }
     }
 }

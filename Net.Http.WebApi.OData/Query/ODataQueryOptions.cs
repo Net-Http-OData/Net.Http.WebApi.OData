@@ -49,7 +49,7 @@ namespace Net.Http.WebApi.OData.Query
                 throw new ArgumentNullException(nameof(model));
             }
 
-            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.EntitySets[request.RequestUri.GetModelName()]), "The model appears to be incorrect for the URI");
+            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.EntitySets[request.RequestUri.ResolveModelName()]), "The model appears to be incorrect for the URI");
 
             this.Request = request;
             this.Model = model;

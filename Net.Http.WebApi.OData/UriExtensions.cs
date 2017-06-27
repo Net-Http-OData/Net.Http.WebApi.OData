@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData
 
     internal static class UriExtensions
     {
-        internal static string GetModelName(this Uri requestUri)
+        internal static string ResolveModelName(this Uri requestUri)
         {
             var modelNameSegment = requestUri.Segments[requestUri.Segments.Length - 1];
 
@@ -31,7 +31,7 @@ namespace Net.Http.WebApi.OData
             return modelNameSegment.TrimEnd('/');
         }
 
-        internal static Uri GetODataServiceUri(this Uri requestUri)
+        internal static Uri ResolveODataServiceUri(this Uri requestUri)
             => new Uri(ODataServiceUriBuilder(requestUri).ToString());
 
         private static StringBuilder ODataServiceUriBuilder(Uri requestUri)

@@ -22,7 +22,6 @@ namespace Net.Http.WebApi.OData.Metadata
     /// <summary>
     /// An API controller which exposes the OData service document.
     /// </summary>
-    /// <seealso cref="System.Web.Http.ApiController" />
     [RoutePrefix("odata")]
     public sealed class ServiceDocumentODataController : ApiController
     {
@@ -33,24 +32,18 @@ namespace Net.Http.WebApi.OData.Metadata
         [HttpGet, Route("")]
         public HttpResponseMessage Get()
         {
-            Uri serviceUri = null;
-
-            if (this.Request.ReadODataRequestOptions().MetadataLevel == MetadataLevel.None)
-            {
-                serviceUri = this.Request.RequestUri.GetODataServiceUri();
-            }
+            var requestOptions = this.Request.ReadODataRequestOptions();
 
             var serviceDocumentResponse = new ODataResponseContent(
-                     null,
-                     EntityDataModel.Current.EntitySets.Select(
-                         kvp =>
-                         {
-                             var setUri = new Uri(kvp.Key, UriKind.Relative);
+                null,
+                EntityDataModel.Current.EntitySets.Select(
+                    kvp =>
+                    {
+                        var setUri = new Uri(kvp.Key, UriKind.Relative);
+                        setUri = requestOptions.MetadataLevel == ODataMetadataLevel.None ? new Uri(requestOptions.DataServiceUri, setUri) : setUri;
 
-                             return ServiceDocumentItem.EntitySet(
-                                  kvp.Key,
-                                  serviceUri != null ? new Uri(serviceUri, setUri) : setUri);
-                         }));
+                        return ServiceDocumentItem.EntitySet(kvp.Key, setUri);
+                    }));
 
             return this.Request.CreateODataResponse(HttpStatusCode.OK, serviceDocumentResponse);
         }

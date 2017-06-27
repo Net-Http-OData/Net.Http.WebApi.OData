@@ -50,7 +50,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsNotSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.Null(metadataParameter);
             }
@@ -120,7 +120,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("full", metadataParameter.Value);
@@ -152,7 +152,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("minimal", metadataParameter.Value);
@@ -184,7 +184,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("none", metadataParameter.Value);
@@ -215,7 +215,7 @@
             [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
-                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == MetadataLevelExtensions.HeaderName);
+                var metadataParameter = this.httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("minimal", metadataParameter.Value);
@@ -270,7 +270,7 @@
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
 
-                Assert.Equal(MetadataLevel.Full, requestOptions.MetadataLevel);
+                Assert.Equal(ODataMetadataLevel.Full, requestOptions.MetadataLevel);
             }
         }
 
@@ -286,7 +286,7 @@
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
 
-                Assert.Equal(MetadataLevel.Minimal, requestOptions.MetadataLevel);
+                Assert.Equal(ODataMetadataLevel.Minimal, requestOptions.MetadataLevel);
             }
         }
 
@@ -302,7 +302,7 @@
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
 
-                Assert.Equal(MetadataLevel.None, requestOptions.MetadataLevel);
+                Assert.Equal(ODataMetadataLevel.None, requestOptions.MetadataLevel);
             }
         }
 

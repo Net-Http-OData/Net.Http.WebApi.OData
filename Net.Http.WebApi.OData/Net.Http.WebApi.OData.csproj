@@ -71,8 +71,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="MetadataLevel.cs" />
-    <Compile Include="MetadataLevelExtensions.cs" />
+    <Compile Include="ODataMetadataLevel.cs" />
+    <Compile Include="ODataMetadataLevelExtensions.cs" />
     <Compile Include="Metadata\ServiceDocumentItem.cs" />
     <Compile Include="Metadata\ServiceDocumentODataController.cs" />
     <Compile Include="Model\EdmComplexType.cs" />

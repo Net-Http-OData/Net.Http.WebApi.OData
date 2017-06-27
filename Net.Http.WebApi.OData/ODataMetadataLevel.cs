@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MetadataLevel.cs" company="Project Contributors">
+// <copyright file="ODataMetadataLevel.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData
     /// <summary>
     /// The different levels of metadata which should be included in the response.
     /// </summary>
-    public enum MetadataLevel
+    public enum ODataMetadataLevel
     {
         /// <summary>
         /// No metadata should be included in the response.
