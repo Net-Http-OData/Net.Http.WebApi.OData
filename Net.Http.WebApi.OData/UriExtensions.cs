@@ -19,7 +19,16 @@ namespace Net.Http.WebApi.OData
     {
         internal static string GetModelName(this Uri requestUri)
         {
-            return requestUri.Segments[requestUri.Segments.Length - 1].TrimEnd('/');
+            var modelNameSegment = requestUri.Segments[requestUri.Segments.Length - 1];
+
+            var parenthesisIndex = modelNameSegment.IndexOf('(');
+
+            if (parenthesisIndex > 0)
+            {
+                modelNameSegment = modelNameSegment.Substring(0, parenthesisIndex);
+            }
+
+            return modelNameSegment.TrimEnd('/');
         }
 
         internal static Uri GetODataServiceUri(this Uri requestUri)

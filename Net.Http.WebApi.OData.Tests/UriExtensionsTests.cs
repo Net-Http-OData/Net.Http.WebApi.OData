@@ -14,6 +14,14 @@
         }
 
         [Fact]
+        public void GetModelNameWithEntityKey()
+        {
+            var requestUri = new Uri("http://services.odata.org/OData/Products(1)");
+
+            Assert.Equal("Products", requestUri.GetModelName());
+        }
+
+        [Fact]
         public void GetModelNameWithTrailingSlash()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products/");
