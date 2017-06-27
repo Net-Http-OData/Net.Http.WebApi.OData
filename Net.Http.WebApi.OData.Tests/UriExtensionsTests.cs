@@ -38,6 +38,14 @@
         }
 
         [Fact]
+        public void GetODataServiceUriWithEntityKey()
+        {
+            var requestUri = new Uri("http://services.odata.org/OData/Products(1)");
+
+            Assert.Equal("http://services.odata.org/OData/", requestUri.GetODataServiceUri().ToString());
+        }
+
+        [Fact]
         public void GetODataServiceUriWithTrailingSlash()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products/");
