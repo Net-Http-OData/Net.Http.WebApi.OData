@@ -153,18 +153,18 @@ namespace Net.Http.WebApi.OData
             return ODataMetadataLevel.Minimal;
         }
 
-        internal static EdmComplexType ResolveModel(this HttpRequestMessage request)
+        internal static EntitySet ResolveEntitySet(this HttpRequestMessage request)
         {
-            var modelName = request.RequestUri.ResolveModelName();
-            EdmComplexType model;
+            var entitySetName = request.RequestUri.ResolveEntitySetName();
+            EntitySet entitySet;
 
-            if (!EntityDataModel.Current.EntitySets.TryGetValue(modelName, out model))
+            if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out entitySet))
             {
                 throw new HttpResponseException(
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(modelName)));
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(entitySetName)));
             }
 
-            return model;
+            return entitySet;
         }
     }
 }

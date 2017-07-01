@@ -6,27 +6,27 @@
     public class UriExtensionsTests
     {
         [Fact]
-        public void ResolveModelName()
+        public void ResolveEntitySetName()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products");
 
-            Assert.Equal("Products", requestUri.ResolveModelName());
+            Assert.Equal("Products", requestUri.ResolveEntitySetName());
         }
 
         [Fact]
-        public void ResolveModelName_WithEntityKey()
+        public void ResolveEntitySetName_WithEntityKey()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products(1)");
 
-            Assert.Equal("Products", requestUri.ResolveModelName());
+            Assert.Equal("Products", requestUri.ResolveEntitySetName());
         }
 
         [Fact]
-        public void ResolveModelName_WithTrailingSlash()
+        public void ResolveEntitySetName_WithTrailingSlash()
         {
             var requestUri = new Uri("http://services.odata.org/OData/Products/");
 
-            Assert.Equal("Products", requestUri.ResolveModelName());
+            Assert.Equal("Products", requestUri.ResolveEntitySetName());
         }
 
         [Fact]

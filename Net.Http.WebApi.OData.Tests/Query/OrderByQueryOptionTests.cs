@@ -15,7 +15,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.EntitySets["Products"];
+                var model = EntityDataModel.Current.EntitySets["Products"].EdmType;
 
                 this.rawValue = "$orderby=Name";
                 this.option = new OrderByQueryOption(this.rawValue, model);
@@ -46,7 +46,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.EntitySets["Products"];
+                var model = EntityDataModel.Current.EntitySets["Products"].EdmType;
 
                 this.rawValue = "$orderby=Name,Price desc,Rating asc";
                 this.option = new OrderByQueryOption(this.rawValue, model);

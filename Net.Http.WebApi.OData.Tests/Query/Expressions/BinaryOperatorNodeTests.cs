@@ -17,7 +17,7 @@
             {
                 TestHelper.EnsureEDM();
 
-                var model = EntityDataModel.Current.EntitySets["Customers"];
+                var model = EntityDataModel.Current.EntitySets["Customers"].EdmType;
 
                 this.left = new PropertyAccessNode(model.GetProperty("CompanyName"));
                 this.node = new BinaryOperatorNode(this.left, binaryOperatorKind, this.right);

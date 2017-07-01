@@ -55,7 +55,11 @@
             {
                 Assert.True(this.entityDataModel.EntitySets.ContainsKey("Categories"));
 
-                var edmComplexType = this.entityDataModel.EntitySets["Categories"];
+                var entitySet = this.entityDataModel.EntitySets["Categories"];
+
+                Assert.Equal("Categories", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
 
                 Assert.Equal(typeof(Category), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Category", edmComplexType.FullName);
@@ -74,7 +78,11 @@
             {
                 Assert.True(this.entityDataModel.EntitySets.ContainsKey("Customers"));
 
-                var edmComplexType = this.entityDataModel.EntitySets["Customers"];
+                var entitySet = this.entityDataModel.EntitySets["Customers"];
+
+                Assert.Equal("Customers", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
 
                 Assert.Equal(typeof(Customer), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Customer", edmComplexType.FullName);
@@ -105,7 +113,11 @@
             {
                 Assert.True(this.entityDataModel.EntitySets.ContainsKey("Employees"));
 
-                var edmComplexType = this.entityDataModel.EntitySets["Employees"];
+                var entitySet = this.entityDataModel.EntitySets["Employees"];
+
+                Assert.Equal("Employees", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
 
                 Assert.Equal(typeof(Employee), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Employee", edmComplexType.FullName);
@@ -148,7 +160,11 @@
             {
                 Assert.True(this.entityDataModel.EntitySets.ContainsKey("Orders"));
 
-                var edmComplexType = this.entityDataModel.EntitySets["Orders"];
+                var entitySet = this.entityDataModel.EntitySets["Orders"];
+
+                Assert.Equal("Orders", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
 
                 Assert.Equal(typeof(Order), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Order", edmComplexType.FullName);
@@ -179,7 +195,11 @@
             {
                 Assert.True(this.entityDataModel.EntitySets.ContainsKey("Products"));
 
-                var edmComplexType = this.entityDataModel.EntitySets["Products"];
+                var entitySet = this.entityDataModel.EntitySets["Products"];
+
+                Assert.Equal("Products", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
 
                 Assert.Equal(typeof(Product), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Product", edmComplexType.FullName);

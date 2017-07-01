@@ -80,7 +80,7 @@
         {
             TestHelper.EnsureEDM();
 
-            var edmComplexType = EntityDataModel.Current.EntitySets["Customers"];
+            var edmComplexType = EntityDataModel.Current.EntitySets["Customers"].EdmType;
 
             var edmProperty = edmComplexType.GetProperty("CompanyName");
 
@@ -93,7 +93,7 @@
         {
             TestHelper.EnsureEDM();
 
-            var edmComplexType = EntityDataModel.Current.EntitySets["Customers"];
+            var edmComplexType = EntityDataModel.Current.EntitySets["Customers"].EdmType;
 
             var exception = Assert.Throws<ArgumentException>(() => edmComplexType.GetProperty("Name"));
 

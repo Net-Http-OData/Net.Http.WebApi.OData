@@ -92,6 +92,12 @@
             }
 
             [Fact]
+            public void TheEntitySetShouldBeSet()
+            {
+                Assert.NotNull(this.option.EntitySet);
+            }
+
+            [Fact]
             public void TheExpandOptionShouldBeSet()
             {
                 Assert.NotNull(this.option.Expand);
@@ -107,12 +113,6 @@
             public void TheFormatOptionShouldBeSet()
             {
                 Assert.NotNull(this.option.Format);
-            }
-
-            [Fact]
-            public void TheModelShouldBeSet()
-            {
-                Assert.NotNull(this.option.Model);
             }
 
             [Fact]
@@ -188,6 +188,12 @@
             }
 
             [Fact]
+            public void TheEntitySetShouldBeSet()
+            {
+                Assert.NotNull(this.option.EntitySet);
+            }
+
+            [Fact]
             public void TheExpandOptionShouldNotBeSet()
             {
                 Assert.Null(this.option.Expand);
@@ -203,12 +209,6 @@
             public void TheFormatOptionShouldNotBeSet()
             {
                 Assert.Null(this.option.Format);
-            }
-
-            [Fact]
-            public void TheModelShouldBeSet()
-            {
-                Assert.NotNull(this.option.Model);
             }
 
             [Fact]

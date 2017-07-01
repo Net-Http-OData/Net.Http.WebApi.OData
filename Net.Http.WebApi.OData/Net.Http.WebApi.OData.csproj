@@ -71,8 +71,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="ODataMetadataLevel.cs" />
-    <Compile Include="ODataMetadataLevelExtensions.cs" />
     <Compile Include="Metadata\ServiceDocumentItem.cs" />
     <Compile Include="Metadata\ServiceDocumentODataController.cs" />
     <Compile Include="Model\EdmComplexType.cs" />
@@ -84,9 +82,12 @@
     <Compile Include="Model\EdmTypeCache.cs" />
     <Compile Include="Model\EntityDataModel.cs" />
     <Compile Include="Model\EntityDataModelBuilder.cs" />
+    <Compile Include="Model\EntitySet.cs" />
     <Compile Include="Model\ExpressionExtensions.cs" />
     <Compile Include="ODataHeaderNames.cs" />
     <Compile Include="ODataIsolationLevel.cs" />
+    <Compile Include="ODataMetadataLevel.cs" />
+    <Compile Include="ODataMetadataLevelExtensions.cs" />
     <Compile Include="ODataRequestOptions.cs" />
     <Compile Include="ODataResponseContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,11 +124,11 @@
     <Compile Include="Query\QueryOption.cs" />
     <Compile Include="Query\SelectExpandQueryOption.cs" />
     <Compile Include="Query\SkipTokenQueryOption.cs" />
-    <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\AllowedArithmeticOperators.cs" />
     <Compile Include="Query\Validators\AllowedFunctions.cs" />
     <Compile Include="Query\Validators\AllowedLogicalOperators.cs" />
     <Compile Include="Query\Validators\AllowedQueryOptions.cs" />
+    <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
     <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />

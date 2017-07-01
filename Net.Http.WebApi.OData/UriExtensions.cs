@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData
 
     internal static class UriExtensions
     {
-        internal static string ResolveModelName(this Uri requestUri)
+        internal static string ResolveEntitySetName(this Uri requestUri)
         {
             var modelNameSegment = requestUri.Segments[requestUri.Segments.Length - 1];
 

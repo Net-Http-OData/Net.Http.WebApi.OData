@@ -23,7 +23,7 @@ namespace Net.Http.WebApi.OData.Model
     /// </summary>
     public sealed class EntityDataModelBuilder
     {
-        private readonly Dictionary<string, EdmComplexType> entitySets;
+        private readonly Dictionary<string, EntitySet> entitySets;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
@@ -40,7 +40,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <param name="entitySetNameComparer">The equality comparer to use for the entity set name.</param>
         public EntityDataModelBuilder(IEqualityComparer<string> entitySetNameComparer)
         {
-            this.entitySets = new Dictionary<string, EdmComplexType>(entitySetNameComparer);
+            this.entitySets = new Dictionary<string, EntitySet>(entitySetNameComparer);
         }
 
         /// <summary>
@@ -66,7 +66,9 @@ namespace Net.Http.WebApi.OData.Model
                 typeof(T),
                 t => EdmTypeResolver(t, entityKeyExpression.GetMemberInfo()));
 
-            this.entitySets.Add(entitySetName, edmType);
+            var entitySet = new EntitySet(entitySetName, edmType);
+
+            this.entitySets.Add(entitySet.Name, entitySet);
         }
 
         private static EdmType EdmTypeResolver(Type clrType, MemberInfo entityKeyMember)

@@ -49,9 +49,9 @@ namespace Net.Http.WebApi.OData.Query
             CancellationToken cancellationToken)
         {
             var request = actionContext.Request;
-            var model = request.ResolveModel();
+            var entitySet = request.ResolveEntitySet();
 
-            var queryOptions = new ODataQueryOptions(request, model);
+            var queryOptions = new ODataQueryOptions(request, entitySet);
 
             this.SetValue(actionContext, queryOptions);
 

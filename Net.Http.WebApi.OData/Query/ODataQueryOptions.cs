@@ -35,24 +35,24 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="ODataQueryOptions" /> class.
         /// </summary>
         /// <param name="request">The current http request message.</param>
-        /// <param name="model">The model.</param>
+        /// <param name="entitySet">The Entity Set to apply the OData query against.</param>
         /// <exception cref="ArgumentNullException">Thrown if the request or model are null.</exception>
-        public ODataQueryOptions(HttpRequestMessage request, EdmComplexType model)
+        public ODataQueryOptions(HttpRequestMessage request, EntitySet entitySet)
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (model == null)
+            if (entitySet == null)
             {
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException(nameof(entitySet));
             }
 
-            System.Diagnostics.Debug.Assert(model.Equals(EntityDataModel.Current.EntitySets[request.RequestUri.ResolveModelName()]), "The model appears to be incorrect for the URI");
+            System.Diagnostics.Debug.Assert(entitySet.Equals(EntityDataModel.Current.EntitySets[request.RequestUri.ResolveEntitySetName()]), "The model appears to be incorrect for the URI");
 
             this.Request = request;
-            this.Model = model;
+            this.EntitySet = entitySet;
             this.ReadHeaders();
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
@@ -63,6 +63,14 @@ namespace Net.Http.WebApi.OData.Query
         public bool Count => this.RawValues.Count?.Equals("$count=true") == true;
 
         /// <summary>
+        /// Gets the <see cref="EntitySet"/> to apply the OData query against.
+        /// </summary>
+        public EntitySet EntitySet
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets the expand query option.
         /// </summary>
         public SelectExpandQueryOption Expand
@@ -71,7 +79,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.expand == null && this.RawValues.Expand != null)
                 {
-                    this.expand = new SelectExpandQueryOption(this.RawValues.Expand, this.Model);
+                    this.expand = new SelectExpandQueryOption(this.RawValues.Expand, this.EntitySet.EdmType);
                 }
 
                 return this.expand;
@@ -87,7 +95,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.filter == null && this.RawValues.Filter != null)
                 {
-                    this.filter = new FilterQueryOption(this.RawValues.Filter, this.Model);
+                    this.filter = new FilterQueryOption(this.RawValues.Filter, this.EntitySet.EdmType);
                 }
 
                 return this.filter;
@@ -111,14 +119,6 @@ namespace Net.Http.WebApi.OData.Query
         }
 
         /// <summary>
-        /// Gets the <see cref="EdmComplexType"/> which the OData query relates to.
-        /// </summary>
-        public EdmComplexType Model
-        {
-            get;
-        }
-
-        /// <summary>
         /// Gets the order by query option.
         /// </summary>
         public OrderByQueryOption OrderBy
@@ -127,7 +127,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.orderBy == null && this.RawValues.OrderBy != null)
                 {
-                    this.orderBy = new OrderByQueryOption(this.RawValues.OrderBy, this.Model);
+                    this.orderBy = new OrderByQueryOption(this.RawValues.OrderBy, this.EntitySet.EdmType);
                 }
 
                 return this.orderBy;
@@ -164,7 +164,7 @@ namespace Net.Http.WebApi.OData.Query
             {
                 if (this.select == null && this.RawValues.Select != null)
                 {
-                    this.select = new SelectExpandQueryOption(this.RawValues.Select, this.Model);
+                    this.select = new SelectExpandQueryOption(this.RawValues.Select, this.EntitySet.EdmType);
                 }
 
                 return this.select;
