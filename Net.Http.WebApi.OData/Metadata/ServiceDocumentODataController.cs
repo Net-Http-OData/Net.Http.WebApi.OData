@@ -33,7 +33,7 @@ namespace Net.Http.WebApi.OData.Metadata
         public HttpResponseMessage Get()
         {
             var requestOptions = this.Request.ReadODataRequestOptions();
-            Uri contextUri = requestOptions.MetadataLevel != ODataMetadataLevel.None ? this.Request.RequestUri.ResolveODataContextUri() : null;
+            Uri contextUri = this.Request.ResolveODataContextUri();
 
             var serviceDocumentResponse = new ODataResponseContent(
                 contextUri,

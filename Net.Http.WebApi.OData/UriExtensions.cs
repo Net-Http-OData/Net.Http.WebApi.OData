@@ -14,9 +14,55 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Text;
+    using Net.Http.WebApi.OData.Model;
 
+    /// <summary>
+    /// Extensions for the Uri class.
+    /// </summary>
     internal static class UriExtensions
     {
+        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri)
+        {
+            var contextUriBuilder = ODataServiceUriBuilder(requestUri);
+            contextUriBuilder.Append("$metadata");
+
+            return contextUriBuilder;
+        }
+
+        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet)
+        {
+            var contextUriBuilder = ODataContextUriBuilder(requestUri);
+            contextUriBuilder.Append("#").Append(entitySet.Name);
+
+            return contextUriBuilder;
+        }
+
+        internal static StringBuilder ODataContextUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey)
+        {
+            var contextUriBuilder = ODataContextUriBuilder(requestUri, entitySet);
+            contextUriBuilder.Append("/$entity");
+
+            return contextUriBuilder;
+        }
+
+        internal static StringBuilder ODataContextUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey, string propertyName)
+        {
+            var contextUriBuilder = ODataContextUriBuilder(requestUri, entitySet);
+
+            if (typeof(TEntityKey) == typeof(string))
+            {
+                contextUriBuilder.Append("('").Append(entityKey.ToString()).Append("')");
+            }
+            else
+            {
+                contextUriBuilder.Append("(").Append(entityKey.ToString()).Append(")");
+            }
+
+            contextUriBuilder.Append('/').Append(propertyName);
+
+            return contextUriBuilder;
+        }
+
         internal static string ResolveEntitySetName(this Uri requestUri)
         {
             var modelNameSegment = requestUri.Segments[requestUri.Segments.Length - 1];
@@ -31,19 +77,8 @@ namespace Net.Http.WebApi.OData
             return modelNameSegment.TrimEnd('/');
         }
 
-        internal static Uri ResolveODataContextUri(this Uri requestUri)
-            => new Uri(ODataContextUriBuilder(requestUri).ToString());
-
         internal static Uri ResolveODataServiceUri(this Uri requestUri)
             => new Uri(ODataServiceUriBuilder(requestUri).ToString());
-
-        private static StringBuilder ODataContextUriBuilder(Uri requestUri)
-        {
-            var contextUriBuilder = ODataServiceUriBuilder(requestUri);
-            contextUriBuilder.Append("$metadata");
-
-            return contextUriBuilder;
-        }
 
         private static StringBuilder ODataServiceUriBuilder(Uri requestUri)
         {

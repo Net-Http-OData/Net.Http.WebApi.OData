@@ -1,14 +1,235 @@
 ﻿namespace Net.Http.WebApi.OData.Tests
 {
+    using System;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Http.Hosting;
+    using Net.Http.WebApi.OData.Model;
     using Xunit;
 
     public class HttpRequestMessageExtensionsTests
     {
+        [Fact]
+        public void ResolveODataContextUri_ReturnsNull_IfMetadataIsNone()
+        {
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri();
+
+            Assert.Null(contextUri);
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_ReturnsUri_IfMetadataIsFull()
+        {
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri();
+
+            Assert.Equal("http://services.odata.org/OData/$metadata", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_ReturnsUri_IfMetadataIsMinimal()
+        {
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri();
+
+            Assert.Equal("http://services.odata.org/OData/$metadata", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndEntityKey_ReturnsNull_IfMetadataIsNone()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products('Milk')"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"], "Milk");
+
+            Assert.Null(contextUri);
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndEntityKey_ReturnsUri_IfMetadataIsFull()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products('Milk')"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"], "Milk");
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Products/$entity", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndEntityKey_ReturnsUri_IfMetadataIsMinimal()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products('Milk')"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"], "Milk");
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Products/$entity", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndIntEntityKey_AndProperty_ReturnsNull_IfMetadataIsNone()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Orders(12345)/Name"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
+
+            Assert.Null(contextUri);
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndIntEntityKey_AndProperty_ReturnsUri_IfMetadataIsFull()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Orders(12345)/Name"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Orders(12345)/Name", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndIntEntityKey_AndProperty_ReturnsUri_IfMetadataIsMinimal()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Orders(12345)/Name"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Orders(12345)/Name", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndStringEntityKey_AndProperty_ReturnsNull_IfMetadataIsNone()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products('Milk')/Name"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
+
+            Assert.Null(contextUri);
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndStringEntityKey_AndProperty_ReturnsUri_IfMetadataIsFull()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products('Milk')/Name"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Products('Milk')/Name", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_AndStringEntityKey_AndProperty_ReturnsUri_IfMetadataIsMinimal()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products('Milk')/Name"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Products('Milk')/Name", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_ReturnsNull_IfMetadataIsNone()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products/"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"]);
+
+            Assert.Null(contextUri);
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_ReturnsUri_IfMetadataIsFull()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products/"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"]);
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Products", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataContextUri_WithEntitySet_ReturnsUri_IfMetadataIsMinimal()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products/"));
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+
+            var contextUri = httpRequestMessage.ResolveODataContextUri(EntityDataModel.Current.EntitySets["Products"]);
+
+            Assert.Equal("http://services.odata.org/OData/$metadata#Products", contextUri.ToString());
+        }
+
         public class CreateODataResponse_String_WithNonNullValue
         {
             private readonly HttpResponseMessage httpResponseMessage;
@@ -17,7 +238,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://services.odata.org/OData/Products('Milk')/Code/$value");
+                    new Uri("http://services.odata.org/OData/Products('Milk')/Code/$value"));
 
                 this.httpResponseMessage = httpRequestMessage.CreateODataResponse("MLK");
             }
@@ -70,7 +291,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://services.odata.org/OData/Products('Milk')/Code/$value");
+                    new Uri("http://services.odata.org/OData/Products('Milk')/Code/$value"));
 
                 this.httpResponseMessage = httpRequestMessage.CreateODataResponse(default(string));
             }
@@ -103,7 +324,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                    new Uri("http://services.odata.org/OData/Products?$filter=Price eq 21.39M"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
@@ -135,7 +356,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                    new Uri("http://services.odata.org/OData/Products?$filter=Price eq 21.39M"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
@@ -167,7 +388,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                    new Uri("http://services.odata.org/OData/Products?$filter=Price eq 21.39M"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
@@ -199,7 +420,7 @@
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://services.odata.org/OData/Products?$filter=Price eq 21.39M");
+                    new Uri("http://services.odata.org/OData/Products?$filter=Price eq 21.39M"));
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
                 this.httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
@@ -229,7 +450,9 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
 
                 var requestOptions1 = httpRequestMessage.ReadODataRequestOptions();
@@ -248,7 +471,9 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=all");
 
                 var exception = Assert.Throws<HttpResponseException>(() => httpRequestMessage.ReadODataRequestOptions());
@@ -265,7 +490,9 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
@@ -281,7 +508,9 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
@@ -297,7 +526,9 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
@@ -313,7 +544,9 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "Snapshot");
 
                 var requestOptions = httpRequestMessage.ReadODataRequestOptions();
@@ -329,7 +562,9 @@
             {
                 TestHelper.EnsureEDM();
 
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
 
                 var exception = Assert.Throws<HttpResponseException>(() => httpRequestMessage.ReadODataRequestOptions());

@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
@@ -90,6 +91,80 @@ namespace Net.Http.WebApi.OData
             }
 
             return (ODataRequestOptions)requestOptions;
+        }
+
+        /// <summary>
+        /// Resolves the @odata.context URI for the specified request.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
+        public static Uri ResolveODataContextUri(this HttpRequestMessage request)
+        {
+            var requestOptions = request.ReadODataRequestOptions();
+
+            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
+            {
+                return null;
+            }
+
+            return new Uri(request.RequestUri.ODataContextUriBuilder().ToString());
+        }
+
+        /// <summary>
+        /// Resolves the @odata.context URI for the specified request and Entity Set.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <param name="entitySet">The EntitySet used in the request.</param>
+        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
+        public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet)
+        {
+            var requestOptions = request.ReadODataRequestOptions();
+
+            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
+            {
+                return null;
+            }
+
+            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet).ToString());
+        }
+
+        /// <summary>
+        /// Resolves the @odata.context URI for the specified request and Entity Set.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <param name="entitySet">The EntitySet used in the request.</param>
+        /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
+        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
+        public static Uri ResolveODataContextUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
+        {
+            var requestOptions = request.ReadODataRequestOptions();
+
+            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
+            {
+                return null;
+            }
+
+            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, entityKey).ToString());
+        }
+
+        /// <summary>
+        /// Resolves the @odata.context URI for the specified request and Entity Set.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <param name="entitySet">The EntitySet used in the request.</param>
+        /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
+        public static Uri ResolveODataContextUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey, string propertyName)
+        {
+            var requestOptions = request.ReadODataRequestOptions();
+
+            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
+            {
+                return null;
+            }
+
+            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, entityKey, propertyName).ToString());
         }
 
         internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
