@@ -29,10 +29,15 @@ namespace Net.Http.WebApi.OData
         /// Creates the OData response message from the specified request message.
         /// </summary>
         /// <param name="request">The HTTP request message which led to this response message.</param>
-        /// <param name="value">The string content of the HTTP response message.</param>
+        /// <param name="statusCode">The HTTP response status code.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
-        public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, string value)
-            => CreateODataResponse(request, value == null ? HttpStatusCode.NoContent : HttpStatusCode.OK, value);
+        public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
+        {
+            var response = new HttpResponseMessage(statusCode);
+            response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
+
+            return response;
+        }
 
         /// <summary>
         /// Creates the OData response message from the specified request message.
@@ -54,6 +59,15 @@ namespace Net.Http.WebApi.OData
 
             return response;
         }
+
+        /// <summary>
+        /// Creates the OData response message from the specified request message.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this response message.</param>
+        /// <param name="value">The string content of the HTTP response message.</param>
+        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, string value)
+            => CreateODataResponse(request, value == null ? HttpStatusCode.NoContent : HttpStatusCode.OK, value);
 
         /// <summary>
         /// Creates the OData response message from the specified request message.
@@ -91,6 +105,25 @@ namespace Net.Http.WebApi.OData
             }
 
             return (ODataRequestOptions)requestOptions;
+        }
+
+        /// <summary>
+        /// Resolves the <see cref="EntitySet"/> for the OData request.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <returns>The EntitySet the OData request relates to.</returns>
+        public static EntitySet ResolveEntitySet(this HttpRequestMessage request)
+        {
+            var entitySetName = request.RequestUri.ResolveEntitySetName();
+            EntitySet entitySet;
+
+            if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out entitySet))
+            {
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(entitySetName)));
+            }
+
+            return entitySet;
         }
 
         /// <summary>
@@ -226,20 +259,6 @@ namespace Net.Http.WebApi.OData
             }
 
             return ODataMetadataLevel.Minimal;
-        }
-
-        internal static EntitySet ResolveEntitySet(this HttpRequestMessage request)
-        {
-            var entitySetName = request.RequestUri.ResolveEntitySetName();
-            EntitySet entitySet;
-
-            if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out entitySet))
-            {
-                throw new HttpResponseException(
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(entitySetName)));
-            }
-
-            return entitySet;
         }
     }
 }
