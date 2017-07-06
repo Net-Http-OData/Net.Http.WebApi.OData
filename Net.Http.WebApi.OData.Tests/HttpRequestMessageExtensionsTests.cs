@@ -230,6 +230,129 @@
             Assert.Equal("http://services.odata.org/OData/$metadata#Products", contextUri.ToString());
         }
 
+        public class CreateODataErrorResponse_WithHttpStatusCode_AndMessage
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataErrorResponse_WithHttpStatusCode_AndMessage()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products?$select=Foo"));
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");
+            }
+
+            [Fact]
+            public void TheContentIsSet()
+            {
+                Assert.IsType<ObjectContent<ODataErrorContent>>(this.httpResponseMessage.Content);
+                Assert.IsType<ODataErrorContent>(((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value);
+
+                var errorContent = (ODataErrorContent)((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value;
+
+                Assert.NotNull(errorContent.Error);
+                Assert.Equal("", errorContent.Error.Code);
+                Assert.Equal("The type 'NorthwindModel.Product' does not contain a property named 'Foo'.", errorContent.Error.Message);
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheStatusCodeIsBadRequest()
+            {
+                Assert.Equal(HttpStatusCode.BadRequest, this.httpResponseMessage.StatusCode);
+            }
+        }
+
+        public class CreateODataErrorResponse_WithHttpStatusCode_Code_AndMessage
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataErrorResponse_WithHttpStatusCode_Code_AndMessage()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products?$select=Foo"));
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "400", "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");
+            }
+
+            [Fact]
+            public void TheContentIsSet()
+            {
+                Assert.IsType<ObjectContent<ODataErrorContent>>(this.httpResponseMessage.Content);
+                Assert.IsType<ODataErrorContent>(((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value);
+
+                var errorContent = (ODataErrorContent)((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value;
+
+                Assert.NotNull(errorContent.Error);
+                Assert.Equal("400", errorContent.Error.Code);
+                Assert.Equal("The type 'NorthwindModel.Product' does not contain a property named 'Foo'.", errorContent.Error.Message);
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheStatusCodeIsBadRequest()
+            {
+                Assert.Equal(HttpStatusCode.BadRequest, this.httpResponseMessage.StatusCode);
+            }
+        }
+
+        public class CreateODataErrorResponse_WithODataException
+        {
+            private readonly HttpResponseMessage httpResponseMessage;
+
+            public CreateODataErrorResponse_WithODataException()
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    new Uri("http://services.odata.org/OData/Products?$select=Foo"));
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(new ODataException(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'."));
+            }
+
+            [Fact]
+            public void TheContentIsSet()
+            {
+                Assert.IsType<ObjectContent<ODataErrorContent>>(this.httpResponseMessage.Content);
+                Assert.IsType<ODataErrorContent>(((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value);
+
+                var errorContent = (ODataErrorContent)((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value;
+
+                Assert.NotNull(errorContent.Error);
+                Assert.Equal("BadRequest", errorContent.Error.Code);
+                Assert.Equal("The type 'NorthwindModel.Product' does not contain a property named 'Foo'.", errorContent.Error.Message);
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+
+            [Fact]
+            public void TheStatusCodeIsBadRequest()
+            {
+                Assert.Equal(HttpStatusCode.BadRequest, this.httpResponseMessage.StatusCode);
+            }
+        }
+
         public class CreateODataResponse_String_WithNonNullValue
         {
             private readonly HttpResponseMessage httpResponseMessage;

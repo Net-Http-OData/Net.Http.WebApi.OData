@@ -25,6 +25,73 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     public static class HttpRequestMessageExtensions
     {
+        private const string ODataVersion = "4.0";
+
+        /// <summary>
+        /// Creates the OData error response message from the specified request message with the specified status code, code and message text.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to the excetion.</param>
+        /// <param name="statusCode">The <see cref="HttpStatusCode"/> applicable.</param>
+        /// <param name="code">The code for the error response.</param>
+        /// <param name="message">The message to return in the error detail.</param>
+        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        /// <example>
+        /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "400", "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");</code>
+        /// <para>{ "error": { "code": "400", "message": "The type 'NorthwindModel.Product' does not contain a property named 'Foo'." } }</para>
+        /// </example>
+        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string code, string message)
+        {
+            var value = new ODataErrorContent
+            {
+                Error = new ODataError
+                {
+                    Code = code,
+                    Message = message
+                }
+            };
+
+            var response = request.CreateResponse(statusCode, value);
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
+
+            return response;
+        }
+
+        /// <summary>
+        /// Creates the OData error response message from the specified request message with the specified status code and message text.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to the excetion.</param>
+        /// <param name="statusCode">The <see cref="HttpStatusCode"/> applicable.</param>
+        /// <param name="message">The message to return in the error detail.</param>
+        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        /// <example>
+        /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");</code>
+        /// <para>{ "error": { "code": "", "message": "The type 'NorthwindModel.Product' does not contain a property named 'Foo'." } }</para>
+        /// </example>
+        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message)
+            => CreateODataErrorResponse(request, statusCode, string.Empty, message);
+
+        /// <summary>
+        /// Creates the OData response message from the specified request message for the <see cref="ODataException"/>.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to the excetion.</param>
+        /// <param name="exception">The <see cref="ODataException"/> to create a response from.</param>
+        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        /// <example>
+        /// <code>
+        /// try
+        /// {
+        ///     throw new new ODataException(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");
+        /// }
+        /// catch (ODataException e)
+        /// {
+        ///     request.CreateODataErrorResponse(e);
+        /// }
+        /// </code>
+        /// <para>{ "error": { "code": "BadRequest", "message": "The type 'NorthwindModel.Product' does not contain a property named 'Foo'." } }</para>
+        /// </example>
+        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, ODataException exception)
+            => CreateODataErrorResponse(request, exception.StatusCode, exception.StatusCode.ToString(), exception.Message);
+
         /// <summary>
         /// Creates the OData response message from the specified request message.
         /// </summary>
@@ -34,7 +101,7 @@ namespace Net.Http.WebApi.OData
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
         {
             var response = new HttpResponseMessage(statusCode);
-            response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
 
             return response;
         }
@@ -55,7 +122,7 @@ namespace Net.Http.WebApi.OData
                 response.Content = new StringContent(value);
             }
 
-            response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
 
             return response;
         }
@@ -83,7 +150,7 @@ namespace Net.Http.WebApi.OData
 
             var response = request.CreateResponse(statusCode, value);
             response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
-            response.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
 
             return response;
         }
