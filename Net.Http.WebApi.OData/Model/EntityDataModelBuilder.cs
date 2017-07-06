@@ -16,7 +16,6 @@ namespace Net.Http.WebApi.OData.Model
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
 
     /// <summary>
     /// A class which builds the <see cref="EntityDataModel"/>.
@@ -60,18 +59,21 @@ namespace Net.Http.WebApi.OData.Model
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
         /// <param name="entitySetName">Name of the Entity Set.</param>
         /// <param name="entityKeyExpression">The entity key expression.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "The method signature isn't correct otherwise")]
         public void RegisterEntitySet<T>(string entitySetName, Expression<Func<T, object>> entityKeyExpression)
         {
             var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(
                 typeof(T),
-                t => EdmTypeResolver(t, entityKeyExpression.GetMemberInfo()));
+                t => EdmTypeResolver(t));
 
-            var entitySet = new EntitySet(entitySetName, edmType);
+            var entityKey = edmType.GetProperty(entityKeyExpression.GetMemberInfo().Name);
+
+            var entitySet = new EntitySet(entitySetName, edmType, entityKey);
 
             this.entitySets.Add(entitySet.Name, entitySet);
         }
 
-        private static EdmType EdmTypeResolver(Type clrType, MemberInfo entityKeyMember)
+        private static EdmType EdmTypeResolver(Type clrType)
         {
             if (clrType.IsEnum)
             {
@@ -85,19 +87,28 @@ namespace Net.Http.WebApi.OData.Model
                 return new EdmEnumType(clrType, members.AsReadOnly());
             }
 
+            if (clrType.IsGenericType)
+            {
+                var innerType = clrType.GetGenericArguments()[0];
+
+                if (typeof(IEnumerable<>).MakeGenericType(innerType).IsAssignableFrom(clrType))
+                {
+                    return EdmTypeCache.Map.GetOrAdd(innerType, EdmTypeResolver(innerType));
+                }
+            }
+
             var clrTypeProperties = clrType.GetProperties().OrderBy(p => p.Name);
 
             var edmProperties = new List<EdmProperty>();
             var edmComplexType = new EdmComplexType(
                 clrType,
-                entityKeyMember.Name,
                 edmProperties);
 
             edmProperties.AddRange(
                 clrTypeProperties.Select(
                     p => new EdmProperty(
                         p.Name,
-                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, t => EdmTypeResolver(t, null)),
+                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, t => EdmTypeResolver(t)),
                         edmComplexType)));
 
             return edmComplexType;

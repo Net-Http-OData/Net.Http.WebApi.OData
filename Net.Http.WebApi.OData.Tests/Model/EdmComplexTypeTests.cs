@@ -13,7 +13,7 @@
             var type = typeof(Customer);
             var properties = new EdmProperty[0];
 
-            var edmComplexType = new EdmComplexType(type, "Name", properties);
+            var edmComplexType = new EdmComplexType(type, properties);
 
             Assert.Same(type, edmComplexType.ClrType);
             Assert.Equal(type.FullName, edmComplexType.FullName);
@@ -26,7 +26,7 @@
         {
             var type = typeof(Customer);
 
-            Assert.Throws<ArgumentNullException>(() => new EdmComplexType(type, "Name", null));
+            Assert.Throws<ArgumentNullException>(() => new EdmComplexType(type, null));
         }
 
         [Fact]
@@ -35,7 +35,7 @@
             var type = typeof(Customer);
             var properties = new EdmProperty[0];
 
-            var edmComplexType1 = new EdmComplexType(type, "Name", properties);
+            var edmComplexType1 = new EdmComplexType(type, properties);
 
             Assert.False(edmComplexType1.Equals("Customer"));
         }
@@ -46,7 +46,7 @@
             var type = typeof(Customer);
             var properties = new EdmProperty[0];
 
-            var edmComplexType1 = new EdmComplexType(type, "Name", properties);
+            var edmComplexType1 = new EdmComplexType(type, properties);
 
             Assert.False(edmComplexType1.Equals(null));
         }
@@ -57,7 +57,7 @@
             var type = typeof(Customer);
             var properties = new EdmProperty[0];
 
-            var edmComplexType1 = new EdmComplexType(type, "Name", properties);
+            var edmComplexType1 = new EdmComplexType(type, properties);
             var edmComplexType2 = edmComplexType1;
 
             Assert.True(edmComplexType1.Equals(edmComplexType2));
@@ -69,8 +69,8 @@
             var type = typeof(Customer);
             var properties = new EdmProperty[0];
 
-            var edmComplexType1 = new EdmComplexType(type, "Name", properties);
-            var edmComplexType2 = new EdmComplexType(type, "Name", properties);
+            var edmComplexType1 = new EdmComplexType(type, properties);
+            var edmComplexType2 = new EdmComplexType(type, properties);
 
             Assert.True(edmComplexType1.Equals(edmComplexType2));
         }
@@ -106,7 +106,7 @@
             var type = typeof(Customer);
             var properties = new EdmProperty[0];
 
-            var edmComplexType = new EdmComplexType(type, "Name", properties);
+            var edmComplexType = new EdmComplexType(type, properties);
 
             Assert.Equal(edmComplexType.ToString(), edmComplexType.FullName);
         }

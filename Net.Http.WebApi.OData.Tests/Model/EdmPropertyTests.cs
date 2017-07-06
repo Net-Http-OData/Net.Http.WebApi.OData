@@ -11,7 +11,7 @@
         public void Constructor_SetsProperties()
         {
             var type = typeof(Customer);
-            var edmComplexType = new EdmComplexType(type, "Name", new EdmProperty[0]);
+            var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
             var edmProperty = new EdmProperty("CompanyName", EdmPrimitiveType.String, edmComplexType);
 
@@ -24,7 +24,7 @@
         public void Constructor_ThrowsArgumentException_ForEmptyName()
         {
             var type = typeof(Customer);
-            var edmComplexType = new EdmComplexType(type, "Name", new EdmProperty[0]);
+            var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
             Assert.Throws<ArgumentException>(() => new EdmProperty("", EdmPrimitiveType.String, edmComplexType));
         }
@@ -33,7 +33,7 @@
         public void Constructor_ThrowsArgumentException_ForNullName()
         {
             var type = typeof(Customer);
-            var edmComplexType = new EdmComplexType(type, "Name", new EdmProperty[0]);
+            var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
             Assert.Throws<ArgumentException>(() => new EdmProperty(null, EdmPrimitiveType.String, edmComplexType));
         }
@@ -48,7 +48,7 @@
         public void Constructor_ThrowsArgumentNullException_ForNullPropertyType()
         {
             var type = typeof(Customer);
-            var edmComplexType = new EdmComplexType(type, "Name", new EdmProperty[0]);
+            var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
             Assert.Throws<ArgumentNullException>(() => new EdmProperty("CompanyName", null, edmComplexType));
         }
@@ -57,7 +57,7 @@
         public void ToString_ReturnsName()
         {
             var type = typeof(Customer);
-            var edmComplexType = new EdmComplexType(type, "Name", new EdmProperty[0]);
+            var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
             var edmProperty = new EdmProperty("CompanyName", EdmPrimitiveType.String, edmComplexType);
 

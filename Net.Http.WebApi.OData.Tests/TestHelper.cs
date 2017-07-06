@@ -12,7 +12,7 @@
             entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName);
             entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
             entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId);
-            entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.Name);
+            entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.ProductId);
 
             entityDataModelBuilder.BuildModel();
         }

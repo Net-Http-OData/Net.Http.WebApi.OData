@@ -1,10 +1,17 @@
 ﻿namespace NorthwindModel
 {
     using System;
+    using System.Collections.Generic;
 
     public class Order
     {
         public decimal Freight
+        {
+            get;
+            set;
+        }
+
+        public IList<OrderDetail> OrderDetails
         {
             get;
             set;

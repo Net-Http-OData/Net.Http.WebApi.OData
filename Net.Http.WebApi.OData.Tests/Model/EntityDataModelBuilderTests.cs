@@ -39,7 +39,7 @@
                 entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName);
                 entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
                 entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId);
-                entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.Name);
+                entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.ProductId);
 
                 this.entityDataModel = entityDataModelBuilder.BuildModel();
             }
@@ -70,7 +70,7 @@
                 Assert.Equal("Name", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[0].PropertyType);
 
-                Assert.Same(edmComplexType.Properties[0], edmComplexType.EntityKey);
+                Assert.Same(edmComplexType.Properties[0], entitySet.EntityKey);
             }
 
             [Fact]
@@ -105,7 +105,7 @@
                 Assert.Equal("LegacyId", edmComplexType.Properties[3].Name);
                 Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[3].PropertyType);
 
-                Assert.Same(edmComplexType.Properties[1], edmComplexType.EntityKey);
+                Assert.Same(edmComplexType.Properties[1], entitySet.EntityKey);
             }
 
             [Fact]
@@ -152,7 +152,7 @@
                 Assert.Equal("Title", edmComplexType.Properties[6].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[6].PropertyType);
 
-                Assert.Same(edmComplexType.Properties[2], edmComplexType.EntityKey);
+                Assert.Same(edmComplexType.Properties[2], entitySet.EntityKey);
             }
 
             [Fact]
@@ -169,25 +169,29 @@
                 Assert.Equal(typeof(Order), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Order", edmComplexType.FullName);
                 Assert.Equal("Order", edmComplexType.Name);
-                Assert.Equal(4, edmComplexType.Properties.Count);
+                Assert.Equal(5, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
                 Assert.Equal("Freight", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
-                Assert.Equal("OrderId", edmComplexType.Properties[1].Name);
-                Assert.Same(EdmPrimitiveType.Int64, edmComplexType.Properties[1].PropertyType);
+                Assert.Equal("OrderDetails", edmComplexType.Properties[1].Name);
+                Assert.Same(EdmType.GetEdmType(typeof(OrderDetail)), edmComplexType.Properties[1].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
-                Assert.Equal("ShipCountry", edmComplexType.Properties[2].Name);
-                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[2].PropertyType);
+                Assert.Equal("OrderId", edmComplexType.Properties[2].Name);
+                Assert.Same(EdmPrimitiveType.Int64, edmComplexType.Properties[2].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[3].DeclaringType);
-                Assert.Equal("TransactionId", edmComplexType.Properties[3].Name);
-                Assert.Same(EdmPrimitiveType.Guid, edmComplexType.Properties[3].PropertyType);
+                Assert.Equal("ShipCountry", edmComplexType.Properties[3].Name);
+                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[3].PropertyType);
 
-                Assert.Same(edmComplexType.Properties[1], edmComplexType.EntityKey);
+                Assert.Same(edmComplexType, edmComplexType.Properties[4].DeclaringType);
+                Assert.Equal("TransactionId", edmComplexType.Properties[4].Name);
+                Assert.Same(EdmPrimitiveType.Guid, edmComplexType.Properties[4].PropertyType);
+
+                Assert.Same(edmComplexType.Properties[2], entitySet.EntityKey);
             }
 
             [Fact]
@@ -204,7 +208,7 @@
                 Assert.Equal(typeof(Product), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Product", edmComplexType.FullName);
                 Assert.Equal("Product", edmComplexType.Name);
-                Assert.Equal(8, edmComplexType.Properties.Count);
+                Assert.Equal(9, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
                 Assert.Equal("Category", edmComplexType.Properties[0].Name);
@@ -243,14 +247,18 @@
                 Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[5].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[6].DeclaringType);
-                Assert.Equal("Rating", edmComplexType.Properties[6].Name);
+                Assert.Equal("ProductId", edmComplexType.Properties[6].Name);
                 Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[6].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[7].DeclaringType);
-                Assert.Equal("ReleaseDate", edmComplexType.Properties[7].Name);
-                Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[7].PropertyType);
+                Assert.Equal("Rating", edmComplexType.Properties[7].Name);
+                Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[7].PropertyType);
 
-                Assert.Same(edmComplexType.Properties[4], edmComplexType.EntityKey);
+                Assert.Same(edmComplexType, edmComplexType.Properties[8].DeclaringType);
+                Assert.Equal("ReleaseDate", edmComplexType.Properties[8].Name);
+                Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[8].PropertyType);
+
+                Assert.Same(edmComplexType.Properties[6], entitySet.EntityKey);
             }
 
             [Fact]

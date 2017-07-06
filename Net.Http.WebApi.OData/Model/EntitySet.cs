@@ -17,16 +17,25 @@ namespace Net.Http.WebApi.OData.Model
     /// </summary>
     public sealed class EntitySet
     {
-        internal EntitySet(string name, EdmComplexType edmType)
+        internal EntitySet(string name, EdmComplexType edmType, EdmProperty entityKey)
         {
             this.Name = name;
             this.EdmType = edmType;
+            this.EntityKey = entityKey;
         }
 
         /// <summary>
         /// Gets the <see cref="EdmComplexType"/> of the entities in the set.
         /// </summary>
         public EdmComplexType EdmType
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the entity key property.
+        /// </summary>
+        public EdmProperty EntityKey
         {
             get;
         }
