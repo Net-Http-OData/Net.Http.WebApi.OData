@@ -36,6 +36,7 @@ namespace Net.Http.WebApi.OData.Query
             }
             else if (rawValue == "$expand=*")
             {
+                // TODO: Expand is actually for navigation properties, not complex types...
                 this.Properties = model.Properties
                     .Where(p => p.PropertyType is EdmComplexType)
                     .ToList();
