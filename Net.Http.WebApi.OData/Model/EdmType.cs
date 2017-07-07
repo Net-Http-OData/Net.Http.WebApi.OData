@@ -79,7 +79,6 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>The EdmType with the specified name, if found; otherwise, null.</returns>
         public static EdmType GetEdmType(string edmTypeName)
         {
-            // TODO: Do we need this method?
             foreach (var edmType in EdmTypeCache.Map.Values)
             {
                 if (edmType.FullName.Equals(edmTypeName))
