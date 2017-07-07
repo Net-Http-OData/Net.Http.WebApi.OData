@@ -25,8 +25,6 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     public static class HttpRequestMessageExtensions
     {
-        private const string ODataVersion = "4.0";
-
         /// <summary>
         /// Creates the OData error response message from the specified request message with the specified status code, code and message text.
         /// </summary>
@@ -51,7 +49,7 @@ namespace Net.Http.WebApi.OData
             };
 
             var response = request.CreateResponse(statusCode, value);
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
         }
@@ -101,7 +99,7 @@ namespace Net.Http.WebApi.OData
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
         {
             var response = new HttpResponseMessage(statusCode);
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
         }
@@ -122,7 +120,7 @@ namespace Net.Http.WebApi.OData
                 response.Content = new StringContent(value);
             }
 
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
         }
@@ -150,7 +148,7 @@ namespace Net.Http.WebApi.OData
 
             var response = request.CreateResponse(statusCode, value);
             response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataVersion);
+            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
         }
