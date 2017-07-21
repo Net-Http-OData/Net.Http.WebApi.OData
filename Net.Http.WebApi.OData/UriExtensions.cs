@@ -63,9 +63,30 @@ namespace Net.Http.WebApi.OData
             return contextUriBuilder;
         }
 
+        /// <summary>
+        /// Resolves the name of the Entity Set referenced in the request.
+        /// </summary>
+        /// <param name="requestUri">The HTTP request message which led to ths OData request.</param>
+        /// <returns>The name of the Entity Set referenced in the request, or null if no entity set was referenced.</returns>
         internal static string ResolveEntitySetName(this Uri requestUri)
         {
-            var modelNameSegment = requestUri.Segments[requestUri.Segments.Length - 1];
+            var modelNameSegmentIndex = -1;
+
+            for (int i = 0; i < requestUri.Segments.Length; i++)
+            {
+                if (requestUri.Segments[i].StartsWith("odata", StringComparison.OrdinalIgnoreCase))
+                {
+                    modelNameSegmentIndex = i + 1;
+                    break;
+                }
+            }
+
+            if (modelNameSegmentIndex < 0 || modelNameSegmentIndex >= requestUri.Segments.Length)
+            {
+                return null;
+            }
+
+            var modelNameSegment = Uri.UnescapeDataString(requestUri.Segments[modelNameSegmentIndex]);
 
             var parenthesisIndex = modelNameSegment.IndexOf('(');
 
