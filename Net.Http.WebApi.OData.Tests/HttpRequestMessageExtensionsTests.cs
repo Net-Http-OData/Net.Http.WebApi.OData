@@ -230,6 +230,34 @@
             Assert.Equal("http://services.odata.org/OData/$metadata#Products", contextUri.ToString());
         }
 
+        [Fact]
+        public void ResolveODataEntityUri_WithIntEntityKey()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Orders"));
+
+            var contextUri = httpRequestMessage.ResolveODataEntityUri(EntityDataModel.Current.EntitySets["Orders"], 12345);
+
+            Assert.Equal("http://services.odata.org/OData/Orders(12345)", contextUri.ToString());
+        }
+
+        [Fact]
+        public void ResolveODataEntityUri_WithStringEntityKey()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri("http://services.odata.org/OData/Products"));
+
+            var contextUri = httpRequestMessage.ResolveODataEntityUri(EntityDataModel.Current.EntitySets["Products"], "Milk");
+
+            Assert.Equal("http://services.odata.org/OData/Products('Milk')", contextUri.ToString());
+        }
+
         public class CreateODataErrorResponse_WithHttpStatusCode_AndMessage
         {
             private readonly HttpResponseMessage httpResponseMessage;

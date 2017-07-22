@@ -65,6 +65,23 @@ namespace Net.Http.WebApi.OData
             return contextUriBuilder;
         }
 
+        internal static StringBuilder ODataEntityUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey)
+        {
+            var contextUriBuilder = ODataServiceUriBuilder(requestUri);
+            contextUriBuilder.Append(entitySet.Name);
+
+            if (typeof(TEntityKey) == typeof(string))
+            {
+                contextUriBuilder.Append("('").Append(entityKey.ToString()).Append("')");
+            }
+            else
+            {
+                contextUriBuilder.Append("(").Append(entityKey.ToString()).Append(")");
+            }
+
+            return contextUriBuilder;
+        }
+
         /// <summary>
         /// Resolves the name of the Entity Set referenced in the request.
         /// </summary>

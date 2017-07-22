@@ -229,6 +229,7 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Resolves the @odata.context URI for the specified request and Entity Set.
         /// </summary>
+        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
@@ -248,6 +249,7 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Resolves the @odata.context URI for the specified request and Entity Set.
         /// </summary>
+        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
@@ -264,6 +266,17 @@ namespace Net.Http.WebApi.OData
 
             return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, entityKey, propertyName).ToString());
         }
+
+        /// <summary>
+        /// Resolves the URI for an entity with the specified Entity Key.
+        /// </summary>
+        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <param name="entitySet">The EntitySet used in the request.</param>
+        /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
+        /// <returns>A <see cref="Uri"/> containing the address of the Entity with the specified Entity Key.</returns>
+        public static Uri ResolveODataEntityUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
+            => new Uri(request.RequestUri.ODataEntityUriBuilder(entitySet, entityKey).ToString());
 
         internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
         {
