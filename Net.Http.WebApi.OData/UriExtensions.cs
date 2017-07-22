@@ -21,6 +21,8 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     internal static class UriExtensions
     {
+        private static readonly char[] nonNameCharacters = new[] { '(', '/', '$', '%' };
+
         internal static StringBuilder ODataContextUriBuilder(this Uri requestUri)
         {
             var contextUriBuilder = ODataServiceUriBuilder(requestUri);
@@ -68,7 +70,7 @@ namespace Net.Http.WebApi.OData
         /// </summary>
         /// <param name="requestUri">The HTTP request message which led to ths OData request.</param>
         /// <returns>The name of the Entity Set referenced in the request, or null if no entity set was referenced.</returns>
-        internal static string ResolveEntitySetName(this Uri requestUri)
+        internal static string ResolveODataEntitySetName(this Uri requestUri)
         {
             var modelNameSegmentIndex = -1;
 
@@ -86,16 +88,16 @@ namespace Net.Http.WebApi.OData
                 return null;
             }
 
-            var modelNameSegment = Uri.UnescapeDataString(requestUri.Segments[modelNameSegmentIndex]);
+            var modelNameSegment = requestUri.Segments[modelNameSegmentIndex];
 
-            var parenthesisIndex = modelNameSegment.IndexOf('(');
+            var nonNameCharacterIndex = modelNameSegment.IndexOfAny(nonNameCharacters);
 
-            if (parenthesisIndex > 0)
+            if (nonNameCharacterIndex > 0)
             {
-                modelNameSegment = modelNameSegment.Substring(0, parenthesisIndex);
+                modelNameSegment = modelNameSegment.Substring(0, nonNameCharacterIndex);
             }
 
-            return modelNameSegment.TrimEnd('/');
+            return modelNameSegment;
         }
 
         internal static Uri ResolveODataServiceUri(this Uri requestUri)

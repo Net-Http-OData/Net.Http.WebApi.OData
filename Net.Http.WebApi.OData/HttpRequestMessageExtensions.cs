@@ -179,7 +179,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>The EntitySet the OData request relates to.</returns>
         public static EntitySet ResolveEntitySet(this HttpRequestMessage request)
         {
-            var entitySetName = request.RequestUri.ResolveEntitySetName();
+            var entitySetName = request.RequestUri.ResolveODataEntitySetName();
             EntitySet entitySet;
 
             if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out entitySet))
