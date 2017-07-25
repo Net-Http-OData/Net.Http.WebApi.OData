@@ -43,7 +43,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\build\4.5\Net.Http.WebApi.OData.dll" target="lib\net45" />
-    <file src="..\build\4.5\Net.Http.WebApi.OData.xml" target="lib\net45" />
+    <file src="Net.Http.WebApi.OData\bin\Release\Net.Http.WebApi.OData.dll" target="lib\net45" />
+    <file src="Net.Http.WebApi.OData\bin\Release\Net.Http.WebApi.OData.xml" target="lib\net45" />
   </files>
 </package>
