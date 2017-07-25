@@ -1,7 +1,7 @@
 Net.Http.WebApi.OData
 =====================
 
-[![VSTS](https://trevorpilley.visualstudio.com/_apis/public/build/definitions/fc5359a3-f836-4a04-b0f1-794c853037c8/1/badge)
+[![VSTS](https://trevorpilley.visualstudio.com/_apis/public/build/definitions/fc5359a3-f836-4a04-b0f1-794c853037c8/1/badge)]
 [![NuGet version](https://badge.fury.io/nu/Net.Http.WebApi.OData.svg)](http://badge.fury.io/nu/Net.Http.WebApi.OData)
 
 Net.Http.WebApi.OData is a C# library which parses an OData query uri into an object model which can be used to query custom data sources which are not IQueryable. It was extracted from the [MicroLite.Extensions.WebApi](https://github.com/TrevorPilley/MicroLite.Extensions.WebApi) library into a separate project so that it could be easily used by others.
