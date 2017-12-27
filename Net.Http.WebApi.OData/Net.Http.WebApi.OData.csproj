@@ -153,11 +153,13 @@
     <None Include="..\Net.Http.WebApi.OData.snk">
       <Link>Net.Http.WebApi.OData.snk</Link>
     </None>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
     <None Include="Model\_EdmModel.cd" />
     <None Include="packages.config" />
     <None Include="Query\Expressions\_QueryNodes.cd" />
     <None Include="Query\_QueryOptions.cd" />
-    <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
