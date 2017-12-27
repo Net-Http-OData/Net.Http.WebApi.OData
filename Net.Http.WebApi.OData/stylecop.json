@@ -11,8 +11,38 @@
             "companyName": "Project Contributors",
             "copyrightText": "Copyright 2012 - 2017 {companyName}\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0\n",
             "documentationCulture": "en-GB",
+            "documentExposedElements": true,
+            "documentInterfaces": true,
+            "documentInternalElements": false,
+            "documentPrivateElements": false,
+            "documentPrivateFields": false,
+            "fileNamingConvention": "stylecop",
             "headerDecoration": "-----------------------------------------------------------------------",
             "xmlHeader": true
+        },
+        "indentation": {
+        },
+        "layoutRules": {
+            "newlineAtEndOfFile": "omit",
+            "allowConsecutiveUsings": true
+        },
+        "maintainabilityRules": {
+            "topLevelTypes": [
+                "class",
+                "enum",
+                "interface",
+                "struct"
+            ]
+        },
+        "namingRules": {
+        },
+        "orderingRules": {
+            "systemUsingDirectivesFirst": true,
+            "usingDirectivesPlacement": "insideNamespace"
+        },
+        "readabilityRules": {
+        },
+        "spacingRules": {
         }
     }
 }
