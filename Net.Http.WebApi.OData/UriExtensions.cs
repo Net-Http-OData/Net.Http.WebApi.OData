@@ -21,7 +21,7 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     internal static class UriExtensions
     {
-        private static readonly char[] nonNameCharacters = new[] { '(', '/', '$', '%' };
+        private static readonly char[] NonNameCharacters = new[] { '(', '/', '$', '%' };
 
         internal static StringBuilder ODataContextUriBuilder(this Uri requestUri)
         {
@@ -107,7 +107,7 @@ namespace Net.Http.WebApi.OData
 
             var modelNameSegment = requestUri.Segments[modelNameSegmentIndex];
 
-            var nonNameCharacterIndex = modelNameSegment.IndexOfAny(nonNameCharacters);
+            var nonNameCharacterIndex = modelNameSegment.IndexOfAny(NonNameCharacters);
 
             if (nonNameCharacterIndex > 0)
             {

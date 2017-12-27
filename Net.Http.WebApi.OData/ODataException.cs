@@ -52,7 +52,7 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Gets the HTTP status code that describes the error.
+        /// Gets or sets the HTTP status code that describes the error.
         /// </summary>
         public HttpStatusCode StatusCode
         {

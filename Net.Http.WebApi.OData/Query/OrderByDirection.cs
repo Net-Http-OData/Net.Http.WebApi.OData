@@ -25,6 +25,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// The results are to be filtered by the named property in descending order.
         /// </summary>
-        Descending = 1
+        Descending = 1,
     }
 }

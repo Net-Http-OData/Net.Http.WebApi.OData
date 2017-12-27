@@ -53,6 +53,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <summary>
         /// Specifies that all logical arithmetic are allowed in the $filter query option.
         /// </summary>
-        All = Add | Subtract | Multiply | Divide | Modulo
+        All = Add | Subtract | Multiply | Divide | Modulo,
     }
 }

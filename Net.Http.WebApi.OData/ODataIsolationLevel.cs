@@ -25,6 +25,6 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Snapshot isolation level is specified in the request.
         /// </summary>
-        Snapshot
+        Snapshot,
     }
 }

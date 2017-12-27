@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
+    using System.Globalization;
     using System.Text;
 
     /// <summary>
@@ -36,7 +37,7 @@ namespace Net.Http.WebApi.OData.Query
                 .Append(Uri.SchemeDelimiter)
                 .Append(requestUri.Authority)
                 .Append(requestUri.LocalPath)
-                .Append("?$skip=").Append((skip + resultsPerPage).ToString());
+                .Append("?$skip=").Append((skip + resultsPerPage).ToString(CultureInfo.InvariantCulture));
 
             if (queryOptions.RawValues.Count != null)
             {

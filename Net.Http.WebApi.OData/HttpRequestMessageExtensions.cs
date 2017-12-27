@@ -44,8 +44,8 @@ namespace Net.Http.WebApi.OData
                 Error = new ODataError
                 {
                     Code = code,
-                    Message = message
-                }
+                    Message = message,
+                },
             };
 
             var response = request.CreateResponse(statusCode, value);
@@ -98,7 +98,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
         {
-            var response = new HttpResponseMessage(statusCode);
+            var response = request.CreateResponse(statusCode);
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
@@ -113,7 +113,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string value)
         {
-            var response = new HttpResponseMessage(statusCode);
+            var response = request.CreateResponse(statusCode);
 
             if (value != null)
             {

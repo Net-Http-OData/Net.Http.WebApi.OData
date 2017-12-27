@@ -44,7 +44,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             new TokenDefinition(TokenType.Enum,                 @"\w+(\.\w+)+'\w+(\,\w+)*'"),
             new TokenDefinition(TokenType.PropertyName,         @"\w+"),
             new TokenDefinition(TokenType.String,               @"'(?:''|[\w\s-.~!$&()*+,;=@]*)*'"),
-            new TokenDefinition(TokenType.Whitespace,           @"\s", ignore: true)
+            new TokenDefinition(TokenType.Whitespace,           @"\s", ignore: true),
         };
 
         private readonly string content;

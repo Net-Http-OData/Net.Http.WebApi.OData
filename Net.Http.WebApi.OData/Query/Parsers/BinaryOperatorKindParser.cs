@@ -13,59 +13,39 @@
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
+    using System.Collections.Generic;
     using Expressions;
 
     internal static class BinaryOperatorKindParser
     {
+        private static Dictionary<string, BinaryOperatorKind> operatorTypeMap = new Dictionary<string, BinaryOperatorKind>
+        {
+            ["add"] = BinaryOperatorKind.Add,
+            ["and"] = BinaryOperatorKind.And,
+            ["div"] = BinaryOperatorKind.Divide,
+            ["eq"] = BinaryOperatorKind.Equal,
+            ["ge"] = BinaryOperatorKind.GreaterThanOrEqual,
+            ["gt"] = BinaryOperatorKind.GreaterThan,
+            ["has"] = BinaryOperatorKind.Has,
+            ["le"] = BinaryOperatorKind.LessThanOrEqual,
+            ["lt"] = BinaryOperatorKind.LessThan,
+            ["mul"] = BinaryOperatorKind.Multiply,
+            ["mod"] = BinaryOperatorKind.Modulo,
+            ["ne"] = BinaryOperatorKind.NotEqual,
+            ["or"] = BinaryOperatorKind.Or,
+            ["sub"] = BinaryOperatorKind.Subtract,
+        };
+
         internal static BinaryOperatorKind ToBinaryOperatorKind(this string operatorType)
         {
-            switch (operatorType)
+            BinaryOperatorKind binaryOperatorKind;
+
+            if (operatorTypeMap.TryGetValue(operatorType, out binaryOperatorKind))
             {
-                case "add":
-                    return BinaryOperatorKind.Add;
-
-                case "and":
-                    return BinaryOperatorKind.And;
-
-                case "div":
-                    return BinaryOperatorKind.Divide;
-
-                case "eq":
-                    return BinaryOperatorKind.Equal;
-
-                case "ge":
-                    return BinaryOperatorKind.GreaterThanOrEqual;
-
-                case "gt":
-                    return BinaryOperatorKind.GreaterThan;
-
-                case "has":
-                    return BinaryOperatorKind.Has;
-
-                case "le":
-                    return BinaryOperatorKind.LessThanOrEqual;
-
-                case "lt":
-                    return BinaryOperatorKind.LessThan;
-
-                case "mul":
-                    return BinaryOperatorKind.Multiply;
-
-                case "mod":
-                    return BinaryOperatorKind.Modulo;
-
-                case "ne":
-                    return BinaryOperatorKind.NotEqual;
-
-                case "or":
-                    return BinaryOperatorKind.Or;
-
-                case "sub":
-                    return BinaryOperatorKind.Subtract;
-
-                default:
-                    throw new ArgumentException(Messages.UnknownOperator.FormatWith(operatorType), nameof(operatorType));
+                return binaryOperatorKind;
             }
+
+            throw new ArgumentException(Messages.UnknownOperator.FormatWith(operatorType), nameof(operatorType));
         }
     }
 }

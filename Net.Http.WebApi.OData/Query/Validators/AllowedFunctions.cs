@@ -173,6 +173,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <summary>
         /// Specifies that all functions are allowed in the $filter query option.
         /// </summary>
-        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions | IsOf | Cast
+        AllFunctions = AllStringFunctions | AllDateTimeFunctions | AllMathFunctions | IsOf | Cast,
     }
 }

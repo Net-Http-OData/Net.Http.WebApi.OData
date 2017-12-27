@@ -29,7 +29,8 @@ namespace Net.Http.WebApi.OData.Metadata
         /// Gets the <see cref="HttpResponseMessage"/> which contains the service document.
         /// </summary>
         /// <returns>The <see cref="HttpResponseMessage"/> which contains the service document.</returns>
-        [HttpGet, Route("")]
+        [HttpGet]
+        [Route("")]
         public HttpResponseMessage Get()
         {
             var requestOptions = this.Request.ReadODataRequestOptions();

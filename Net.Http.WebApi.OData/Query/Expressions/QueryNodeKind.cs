@@ -45,6 +45,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// The query node is a unary operator query node.
         /// </summary>
-        UnaryOperator = 5
+        UnaryOperator = 5,
     }
 }

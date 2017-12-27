@@ -90,6 +90,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// The binary operator is has.
         /// </summary>
-        Has = 14
+        Has = 14,
     }
 }

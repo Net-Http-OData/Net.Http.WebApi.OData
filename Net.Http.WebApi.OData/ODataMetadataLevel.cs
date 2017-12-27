@@ -30,6 +30,6 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// The full metadata should be included in the response.
         /// </summary>
-        Full = 2
+        Full = 2,
     }
 }

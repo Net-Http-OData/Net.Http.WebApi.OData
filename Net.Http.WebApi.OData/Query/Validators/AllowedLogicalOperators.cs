@@ -73,6 +73,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <summary>
         /// Specifies that all logical operators are allowed in the $filter query option.
         /// </summary>
-        All = Equal | NotEqual | GreaterThan | GreaterThanOrEqual | LessThan | LessThanOrEqual | And | Or | Has
+        All = Equal | NotEqual | GreaterThan | GreaterThanOrEqual | LessThan | LessThanOrEqual | And | Or | Has,
     }
 }
