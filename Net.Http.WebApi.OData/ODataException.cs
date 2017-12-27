@@ -67,7 +67,10 @@ namespace Net.Http.WebApi.OData
         /// <param name="context">The System.Runtime.Serialization.StreamingContext that contains contextual information about the source or destination.</param>
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("StatusCode", this.StatusCode.ToString());
+            if (info != null)
+            {
+                info.AddValue("StatusCode", this.StatusCode.ToString());
+            }
 
             base.GetObjectData(info, context);
         }

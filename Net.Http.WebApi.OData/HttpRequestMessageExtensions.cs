@@ -160,6 +160,11 @@ namespace Net.Http.WebApi.OData
         /// <returns>The OData request options for the request.</returns>
         public static ODataRequestOptions ReadODataRequestOptions(this HttpRequestMessage request)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             object requestOptions;
 
             if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out requestOptions))
@@ -179,6 +184,11 @@ namespace Net.Http.WebApi.OData
         /// <returns>The EntitySet the OData request relates to.</returns>
         public static EntitySet ResolveEntitySet(this HttpRequestMessage request)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             var entitySetName = request.RequestUri.ResolveODataEntitySetName();
             EntitySet entitySet;
 

@@ -30,6 +30,11 @@ namespace Net.Http.WebApi.OData.Query
         /// <returns>The next link for a paged OData query.</returns>
         public static Uri NextLink(this ODataQueryOptions queryOptions, int skip, int resultsPerPage)
         {
+            if (queryOptions == null)
+            {
+                throw new ArgumentNullException(nameof(queryOptions));
+            }
+
             var requestUri = queryOptions.Request.RequestUri;
 
             var uriBuilder = new StringBuilder()
