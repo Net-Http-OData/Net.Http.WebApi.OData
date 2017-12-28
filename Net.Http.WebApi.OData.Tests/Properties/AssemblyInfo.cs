@@ -6,9 +6,9 @@ using Xunit;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Net.Http.WebApi.OData.Tests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Unit Tests for the Net.Http.WebApi.OData library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Project Contributors")]
 [assembly: AssemblyProduct("Net.Http.WebApi.OData.Tests")]
 [assembly: AssemblyCopyright("Copyright 2012 - 2017 Project Contributors all rights reserved.")]
 [assembly: AssemblyTrademark("")]
