@@ -26,7 +26,8 @@ public static class WebApiConfig
         entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.Name);
         entityDataModelBuilder.BuildModel();
 
-        // Configure routes, etc
+        // Use Attribute Mapping for the OData controllers
+        config.MapHttpAttributeRoutes();
     }
 }
 ```
