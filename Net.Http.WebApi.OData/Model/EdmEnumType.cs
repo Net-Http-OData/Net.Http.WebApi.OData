@@ -25,12 +25,7 @@ namespace Net.Http.WebApi.OData.Model
         internal EdmEnumType(Type clrType, IReadOnlyList<EdmEnumMember> members)
             : base(clrType.Name, clrType.FullName, clrType)
         {
-            if (members == null)
-            {
-                throw new ArgumentNullException(nameof(members));
-            }
-
-            this.Members = members;
+            this.Members = members ?? throw new ArgumentNullException(nameof(members));
         }
 
         /// <summary>

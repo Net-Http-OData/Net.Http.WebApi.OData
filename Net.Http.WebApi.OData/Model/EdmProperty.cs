@@ -35,19 +35,9 @@ namespace Net.Http.WebApi.OData.Model
                 throw new ArgumentException("Property name must be specified", nameof(name));
             }
 
-            if (propertyType == null)
-            {
-                throw new ArgumentNullException(nameof(propertyType));
-            }
-
-            if (declaringType == null)
-            {
-                throw new ArgumentNullException(nameof(declaringType));
-            }
-
             this.Name = name;
-            this.PropertyType = propertyType;
-            this.DeclaringType = declaringType;
+            this.PropertyType = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
+            this.DeclaringType = declaringType ?? throw new ArgumentNullException(nameof(declaringType));
         }
 
         /// <summary>

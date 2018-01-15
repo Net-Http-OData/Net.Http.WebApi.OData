@@ -30,17 +30,12 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ArgumentOutOfRangeException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
         internal OrderByProperty(string rawValue, EdmComplexType model)
         {
-            if (rawValue == null)
-            {
-                throw new ArgumentNullException(nameof(rawValue));
-            }
-
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
             }
 
-            this.RawValue = rawValue;
+            this.RawValue = rawValue ?? throw new ArgumentNullException(nameof(rawValue));
 
             var space = rawValue.IndexOf(' ');
 

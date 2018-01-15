@@ -25,12 +25,7 @@ namespace Net.Http.WebApi.OData.Model
         internal EdmComplexType(Type clrType, IReadOnlyList<EdmProperty> properties)
             : base(clrType.Name, clrType.FullName, clrType)
         {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            this.Properties = properties;
+            this.Properties = properties ?? throw new ArgumentNullException(nameof(properties));
         }
 
         /// <summary>

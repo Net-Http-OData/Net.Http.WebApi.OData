@@ -39,20 +39,8 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ArgumentNullException">Thrown if the request or model are null.</exception>
         public ODataQueryOptions(HttpRequestMessage request, EntitySet entitySet)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            if (entitySet == null)
-            {
-                throw new ArgumentNullException(nameof(entitySet));
-            }
-
-            System.Diagnostics.Debug.Assert(entitySet.Equals(EntityDataModel.Current.EntitySets[request.RequestUri.ResolveODataEntitySetName()]), "The model appears to be incorrect for the URI");
-
-            this.Request = request;
-            this.EntitySet = entitySet;
+            this.Request = request ?? throw new ArgumentNullException(nameof(request));
+            this.EntitySet = entitySet ?? throw new ArgumentNullException(nameof(entitySet));
             this.ReadHeaders();
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
@@ -219,6 +207,8 @@ namespace Net.Http.WebApi.OData.Query
 
         private void ReadHeaders()
         {
+            System.Diagnostics.Debug.Assert(this.EntitySet.Equals(EntityDataModel.Current.EntitySets[this.Request.RequestUri.ResolveODataEntitySetName()]), "The model appears to be incorrect for the URI");
+
             var headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.ODataVersion);
 
             if (headerValue != null && headerValue != "4.0")

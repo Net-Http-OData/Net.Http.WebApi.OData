@@ -27,12 +27,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="System.ArgumentNullException">Thrown if raw value is null.</exception>
         protected QueryOption(string rawValue)
         {
-            if (rawValue == null)
-            {
-                throw new ArgumentNullException(nameof(rawValue));
-            }
-
-            this.RawValue = rawValue;
+            this.RawValue = rawValue ?? throw new ArgumentNullException(nameof(rawValue));
         }
 
         /// <summary>

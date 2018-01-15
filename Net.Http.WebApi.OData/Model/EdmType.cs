@@ -38,14 +38,9 @@ namespace Net.Http.WebApi.OData.Model
                 throw new ArgumentException("FullName must be specified", nameof(fullName));
             }
 
-            if (clrType == null)
-            {
-                throw new ArgumentNullException(nameof(clrType));
-            }
-
             this.Name = name;
             this.FullName = fullName;
-            this.ClrType = clrType;
+            this.ClrType = clrType ?? throw new ArgumentNullException(nameof(clrType));
         }
 
         /// <summary>
