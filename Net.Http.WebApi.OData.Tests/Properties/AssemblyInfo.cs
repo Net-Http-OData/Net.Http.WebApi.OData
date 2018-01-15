@@ -10,7 +10,7 @@ using Xunit;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Project Contributors")]
 [assembly: AssemblyProduct("Net.Http.WebApi.OData.Tests")]
-[assembly: AssemblyCopyright("Copyright 2012 - 2017 Project Contributors all rights reserved.")]
+[assembly: AssemblyCopyright("Copyright 2012 - 2018 Project Contributors all rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -9,7 +9,7 @@
     "settings": {
         "documentationRules": {
             "companyName": "Project Contributors",
-            "copyrightText": "Copyright 2012 - 2017 {companyName}\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0",
+            "copyrightText": "Copyright 2012 - 2018 {companyName}\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0",
             "documentationCulture": "en-GB",
             "documentExposedElements": true,
             "documentInterfaces": true,
