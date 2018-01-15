@@ -7,7 +7,7 @@ Net.Http.WebApi.OData is a C# library which parses an OData query uri into an ob
 
 ## Installation
 
-To use it in your own Web API you need to install the nuget package `Install-Package Net.Http.WebApi.OData -Version 4.0.0`
+To use it in your own Web API you need to install the nuget package `Install-Package Net.Http.WebApi.OData`
 
 ## Configuration
 
