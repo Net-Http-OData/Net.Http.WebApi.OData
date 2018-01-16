@@ -54,6 +54,14 @@ namespace Net.Http.WebApi.OData.Model
         }
 
         /// <summary>
+        /// Registers an Entity Set of the specified type to the Entity Data Model with the name of the type as the entity set name.
+        /// </summary>
+        /// <typeparam name="T">The type exposed by the collection.</typeparam>
+        /// <param name="entityKeyExpression">The entity key expression.</param>
+        public void RegisterEntitySet<T>(Expression<Func<T, object>> entityKeyExpression)
+            => this.RegisterEntitySet<T>(typeof(T).Name, entityKeyExpression);
+
+        /// <summary>
         /// Registers an Entity Set of the specified type to the Entity Data Model with the specified name.
         /// </summary>
         /// <typeparam name="T">The type exposed by the collection.</typeparam>

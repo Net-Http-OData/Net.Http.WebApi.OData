@@ -28,11 +28,11 @@
             Assert.Same(entityDataModel.EntitySets["categories"], entityDataModel.EntitySets["Categories"]);
         }
 
-        public class WhenCalling_BuildModelWith_Models
+        public class WhenCalling_BuildModelWith_Models_AndCustomEntitySetName
         {
             private readonly EntityDataModel entityDataModel;
 
-            public WhenCalling_BuildModelWith_Models()
+            public WhenCalling_BuildModelWith_Models_AndCustomEntitySetName()
             {
                 var entityDataModelBuilder = new EntityDataModelBuilder();
                 entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
@@ -259,6 +259,97 @@
                 Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[8].PropertyType);
 
                 Assert.Same(edmComplexType.Properties[6], entitySet.EntityKey);
+            }
+
+            [Fact]
+            public void ThereAre_5_RegisteredCollections()
+            {
+                Assert.Equal(5, this.entityDataModel.EntitySets.Count);
+            }
+        }
+
+        public class WhenCalling_BuildModelWith_Models_AndTypeNameForEntitySetName
+        {
+            private readonly EntityDataModel entityDataModel;
+
+            public WhenCalling_BuildModelWith_Models_AndTypeNameForEntitySetName()
+            {
+                var entityDataModelBuilder = new EntityDataModelBuilder();
+                entityDataModelBuilder.RegisterEntitySet<Category>(x => x.Name);
+                entityDataModelBuilder.RegisterEntitySet<Customer>(x => x.CompanyName);
+                entityDataModelBuilder.RegisterEntitySet<Employee>(x => x.EmailAddress);
+                entityDataModelBuilder.RegisterEntitySet<Order>(x => x.OrderId);
+                entityDataModelBuilder.RegisterEntitySet<Product>(x => x.ProductId);
+
+                this.entityDataModel = entityDataModelBuilder.BuildModel();
+            }
+
+            [Fact]
+            public void The_Categories_CollectionIsCorrect()
+            {
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Category"));
+
+                var entitySet = this.entityDataModel.EntitySets["Category"];
+
+                Assert.Equal("Category", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
+
+                Assert.Equal(typeof(Category), edmComplexType.ClrType);
+            }
+
+            [Fact]
+            public void The_Customers_CollectionIsCorrect()
+            {
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Customer"));
+
+                var entitySet = this.entityDataModel.EntitySets["Customer"];
+
+                Assert.Equal("Customer", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
+            }
+
+            [Fact]
+            public void The_Employees_CollectionIsCorrect()
+            {
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Employee"));
+
+                var entitySet = this.entityDataModel.EntitySets["Employee"];
+
+                Assert.Equal("Employee", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
+
+                Assert.Equal(typeof(Employee), edmComplexType.ClrType);
+            }
+
+            [Fact]
+            public void The_Orders_CollectionIsCorrect()
+            {
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Order"));
+
+                var entitySet = this.entityDataModel.EntitySets["Order"];
+
+                Assert.Equal("Order", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
+
+                Assert.Equal(typeof(Order), edmComplexType.ClrType);
+            }
+
+            [Fact]
+            public void The_Products_CollectionIsCorrect()
+            {
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Product"));
+
+                var entitySet = this.entityDataModel.EntitySets["Product"];
+
+                Assert.Equal("Product", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
+
+                Assert.Equal(typeof(Product), edmComplexType.ClrType);
             }
 
             [Fact]
