@@ -203,25 +203,6 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Resolves the @odata.context URI for the specified request and Entity Set and select query option.
-        /// </summary>
-        /// <param name="request">The HTTP request message which led to this OData request.</param>
-        /// <param name="entitySet">The EntitySet used in the request.</param>
-        /// <param name="selectExpandQueryOption">The select query option.</param>
-        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
-        {
-            var requestOptions = request.ReadODataRequestOptions();
-
-            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
-            {
-                return null;
-            }
-
-            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, selectExpandQueryOption).ToString());
-        }
-
-        /// <summary>
         /// Resolves the @odata.context URI for the specified request.
         /// </summary>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
@@ -254,6 +235,25 @@ namespace Net.Http.WebApi.OData
             }
 
             return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet).ToString());
+        }
+
+        /// <summary>
+        /// Resolves the @odata.context URI for the specified request and Entity Set and select query option.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <param name="entitySet">The EntitySet used in the request.</param>
+        /// <param name="selectExpandQueryOption">The select query option.</param>
+        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
+        public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
+        {
+            var requestOptions = request.ReadODataRequestOptions();
+
+            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
+            {
+                return null;
+            }
+
+            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, selectExpandQueryOption).ToString());
         }
 
         /// <summary>
