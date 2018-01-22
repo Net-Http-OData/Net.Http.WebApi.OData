@@ -24,7 +24,7 @@
         },
         "layoutRules": {
             "newlineAtEndOfFile": "omit",
-            "allowConsecutiveUsings": true
+            "allowConsecutiveUsings": false
         },
         "maintainabilityRules": {
             "topLevelTypes": [
