@@ -386,7 +386,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -427,7 +427,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -468,7 +468,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -513,7 +513,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -554,7 +554,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -583,7 +583,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -615,7 +615,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -647,7 +647,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -678,7 +678,7 @@
             public void TheDataServiceVersionHeaderIsSet()
             {
                 Assert.True(this.httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal("4.0", this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+                Assert.Equal(ODataHeaderValues.ODataVersionString, this.httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]

@@ -121,7 +121,7 @@
     <value>If specified, the $orderby direction must be either 'asc' or 'desc'.</value>
   </data>
   <data name="IntRawValueInvalid" xml:space="preserve">
-    <value>If specified, the {0} value must be a non-negative numeric value.</value>
+    <value>If specified, the '{0}' value must be a non-negative numeric value.</value>
   </data>
   <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
     <value>The specified $top value exceeds the maximum value of '{0}' permitted by this service.</value>
@@ -158,5 +158,8 @@
   </data>
   <data name="ODataMetadataValueInvalid" xml:space="preserve">
     <value>If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'</value>
+  </data>
+  <data name="ODataQueryCannotBeEmpty" xml:space="preserve">
+    <value>The value for OData query '{0}' cannot be empty.</value>
   </data>
 </root>

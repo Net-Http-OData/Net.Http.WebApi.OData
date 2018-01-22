@@ -203,7 +203,7 @@ namespace Net.Http.WebApi.OData.Query
                 return integer;
             }
 
-            throw new ODataException(HttpStatusCode.BadRequest, $"The value for OData query '{queryOption}' must be a non-negative numeric value.");
+            throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith(queryOption));
         }
 
         private void ReadHeaders()
@@ -212,7 +212,7 @@ namespace Net.Http.WebApi.OData.Query
 
             var headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.ODataVersion);
 
-            if (headerValue != null && headerValue != "4.0")
+            if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
             {
                 throw new HttpResponseException(
                     this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
@@ -220,7 +220,7 @@ namespace Net.Http.WebApi.OData.Query
 
             headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.ODataMaxVersion);
 
-            if (headerValue != null && headerValue != "4.0")
+            if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
             {
                 throw new HttpResponseException(
                     this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
