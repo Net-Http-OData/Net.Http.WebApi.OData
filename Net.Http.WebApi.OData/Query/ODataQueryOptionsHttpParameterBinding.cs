@@ -42,18 +42,20 @@ namespace Net.Http.WebApi.OData.Query
         /// <returns>
         /// A task object representing the asynchronous operation.
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Justification = "This method is only called by the ASP.NET runtime.")]
         public override Task ExecuteBindingAsync(
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             CancellationToken cancellationToken)
         {
-            var request = actionContext.Request;
-            var entitySet = request.ResolveEntitySet();
+            if (actionContext != null)
+            {
+                var request = actionContext.Request;
+                var entitySet = request.ResolveEntitySet();
 
-            var queryOptions = new ODataQueryOptions(request, entitySet);
+                var queryOptions = new ODataQueryOptions(request, entitySet);
 
-            this.SetValue(actionContext, queryOptions);
+                this.SetValue(actionContext, queryOptions);
+            }
 
             return CompletedTask;
         }

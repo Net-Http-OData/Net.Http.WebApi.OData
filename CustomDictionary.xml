@@ -7,10 +7,14 @@
     <Recognized>
       <Word>Api</Word>
       <Word>Asc</Word>
+      <Word>Callback</Word>
       <Word>Concat</Word>
       <Word>Desc</Word>
       <Word>Edm</Word>
       <Word>mul</Word>
+      <Word>odata</Word>
+      <Word>orderby</Word>
+      <Word>skiptoken</Word>
     </Recognized>
     <Deprecated>
       <Term PreferredAlternate=""></Term>
@@ -19,7 +23,9 @@
       <Term CompoundAlternate=""></Term>
     </Compound>
     <DiscreteExceptions>
-      <Term></Term>
+      <Term>OData</Term>
+      <Term>OrderBy</Term>
+      <Term>SkipToken</Term>
     </DiscreteExceptions>
   </Words>
   <Acronyms>
