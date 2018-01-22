@@ -69,6 +69,36 @@
             Assert.Equal("Pool Farm & Primrose Hill Nursery", ((ConstantNode)nodeRight.Right).Value);
         }
 
+        [Fact]
+        public void SkipThrowsODataExceptionForNonNumeric()
+        {
+            TestHelper.EnsureEDM();
+
+            var option = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$skip=A"),
+                EntityDataModel.Current.EntitySets["Customers"]);
+
+            var exception = Assert.Throws<ODataException>(() => option.Skip);
+
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+            Assert.Equal("The value for OData query '$skip' must be a non-negative numeric value.", exception.Message);
+        }
+
+        [Fact]
+        public void TopThrowsODataExceptionForNonNumeric()
+        {
+            TestHelper.EnsureEDM();
+
+            var option = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$top=A"),
+                EntityDataModel.Current.EntitySets["Customers"]);
+
+            var exception = Assert.Throws<ODataException>(() => option.Top);
+
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+            Assert.Equal("The value for OData query '$top' must be a non-negative numeric value.", exception.Message);
+        }
+
         public class WhenConstructedWithAllQueryOptions
         {
             private readonly HttpRequestMessage httpRequestMessage;

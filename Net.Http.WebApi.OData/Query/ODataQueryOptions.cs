@@ -193,6 +193,7 @@ namespace Net.Http.WebApi.OData.Query
             }
 
             var equals = rawValue.IndexOf('=') + 1;
+            var queryOption = rawValue.Substring(0, equals - 1);
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
             int integer;
@@ -202,7 +203,7 @@ namespace Net.Http.WebApi.OData.Query
                 return integer;
             }
 
-            throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.IntRawValueInvalid.FormatWith(value.Substring(0, equals)));
+            throw new ODataException(HttpStatusCode.BadRequest, $"The value for OData query '{queryOption}' must be a non-negative numeric value.");
         }
 
         private void ReadHeaders()
