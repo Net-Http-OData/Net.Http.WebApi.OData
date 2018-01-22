@@ -41,6 +41,7 @@ namespace Net.Http.WebApi.OData.Query
 
             if (this.rawQuery.Length > 0)
             {
+                // Drop the ?
                 var query = this.rawQuery.Substring(1, this.rawQuery.Length - 1);
 
                 var queryOptions = query.Split(SplitCharacter.Ampersand, StringSplitOptions.RemoveEmptyEntries);
@@ -52,42 +53,92 @@ namespace Net.Http.WebApi.OData.Query
 
                     if (rawQueryOption.StartsWith("$select=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$select=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$select' cannot be empty.");
+                        }
+
                         this.Select = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$filter=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$filter=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$filter' cannot be empty.");
+                        }
+
                         this.Filter = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$orderby=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$orderby=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$orderby' cannot be empty.");
+                        }
+
                         this.OrderBy = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$skip=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$skip=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$skip' cannot be empty.");
+                        }
+
                         this.Skip = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$top=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$top=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$top' cannot be empty.");
+                        }
+
                         this.Top = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$count=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$count=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$count' cannot be empty.");
+                        }
+
                         this.Count = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$format=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$format=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$format' cannot be empty.");
+                        }
+
                         this.Format = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$expand=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$expand=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$expand' cannot be empty.");
+                        }
+
                         this.Expand = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$search=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$search=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$search' cannot be empty.");
+                        }
+
                         this.Search = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$skiptoken=", StringComparison.Ordinal))
                     {
+                        if (rawQueryOption.Equals("$skiptoken=", StringComparison.Ordinal))
+                        {
+                            throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query '$skiptoken' cannot be empty.");
+                        }
+
                         this.SkipToken = rawQueryOption;
                     }
                     else if (rawQueryOption.StartsWith("$", StringComparison.Ordinal))

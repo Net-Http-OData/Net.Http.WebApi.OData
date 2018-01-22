@@ -93,6 +93,126 @@
             }
         }
 
+        public class WhenCallingConstructorWithAnEmptyCount
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$count="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$count' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptyExpand
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$expand="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$expand' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptyFilter
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$filter="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$filter' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptyFormat
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$format="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$format' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptyOrderBy
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$orderby="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$orderby' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptySearch
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$search="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$search' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptySelect
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$select="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$select' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptySkip
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$skip="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$skip' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptySkipToken
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$skiptoken="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$skiptoken' cannot be empty.", exception.Message);
+            }
+        }
+
+        public class WhenCallingConstructorWithAnEmptyTop
+        {
+            [Fact]
+            public void AnHttpResponseExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$top="));
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal("The value for OData query '$top' cannot be empty.", exception.Message);
+            }
+        }
+
         public class WhenCallingConstructorWithAnUnknownQueryOptionWhichDoesNotStartsWithADollar
         {
             [Fact]
