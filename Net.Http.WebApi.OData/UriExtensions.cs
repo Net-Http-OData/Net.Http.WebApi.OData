@@ -15,6 +15,7 @@ namespace Net.Http.WebApi.OData
     using System;
     using System.Text;
     using Net.Http.WebApi.OData.Model;
+    using Net.Http.WebApi.OData.Query;
 
     /// <summary>
     /// Extensions for the Uri class.
@@ -27,6 +28,23 @@ namespace Net.Http.WebApi.OData
         {
             var contextUriBuilder = ODataServiceUriBuilder(requestUri);
             contextUriBuilder.Append("$metadata");
+
+            return contextUriBuilder;
+        }
+
+        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
+        {
+            var contextUriBuilder = ODataContextUriBuilder(requestUri);
+            contextUriBuilder.Append("#").Append(entitySet.Name);
+
+            if (selectExpandQueryOption?.RawValue.Equals("$select=*") == true)
+            {
+                contextUriBuilder.Append("(*)");
+            }
+            else if (selectExpandQueryOption?.Properties.Count > 0)
+            {
+                contextUriBuilder.AppendFormat("({0})", string.Join(",", selectExpandQueryOption.Properties));
+            }
 
             return contextUriBuilder;
         }
