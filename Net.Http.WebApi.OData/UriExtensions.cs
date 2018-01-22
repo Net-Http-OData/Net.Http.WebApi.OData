@@ -32,6 +32,14 @@ namespace Net.Http.WebApi.OData
             return contextUriBuilder;
         }
 
+        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet)
+        {
+            var contextUriBuilder = ODataContextUriBuilder(requestUri);
+            contextUriBuilder.Append("#").Append(entitySet.Name);
+
+            return contextUriBuilder;
+        }
+
         internal static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
         {
             var contextUriBuilder = ODataContextUriBuilder(requestUri);
@@ -45,14 +53,6 @@ namespace Net.Http.WebApi.OData
             {
                 contextUriBuilder.AppendFormat("({0})", string.Join(",", selectExpandQueryOption.Properties));
             }
-
-            return contextUriBuilder;
-        }
-
-        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet)
-        {
-            var contextUriBuilder = ODataContextUriBuilder(requestUri);
-            contextUriBuilder.Append("#").Append(entitySet.Name);
 
             return contextUriBuilder;
         }
