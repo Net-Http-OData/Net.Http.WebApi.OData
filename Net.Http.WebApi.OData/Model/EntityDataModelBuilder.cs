@@ -28,6 +28,7 @@ namespace Net.Http.WebApi.OData.Model
         /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
         /// </summary>
         /// <remarks>Uses <see cref="StringComparer"/>.OrdinalIgnoreCase for the entity set name comparer.</remarks>
+        [Obsolete("The entity data model builder should not be created directly, please use the new UseOData() extension method for HttpConfiguration. The public constructor will be removed in a future version of the library.", false)]
         public EntityDataModelBuilder()
             : this(StringComparer.OrdinalIgnoreCase)
         {
@@ -37,8 +38,13 @@ namespace Net.Http.WebApi.OData.Model
         /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
         /// </summary>
         /// <param name="entitySetNameComparer">The equality comparer to use for the entity set name.</param>
-        public EntityDataModelBuilder(IEqualityComparer<string> entitySetNameComparer)
+        internal EntityDataModelBuilder(IEqualityComparer<string> entitySetNameComparer)
         {
+            if (entitySetNameComparer == null)
+            {
+                throw new ArgumentNullException(nameof(entitySetNameComparer));
+            }
+
             this.entitySets = new Dictionary<string, EntitySet>(entitySetNameComparer);
         }
 
@@ -58,6 +64,7 @@ namespace Net.Http.WebApi.OData.Model
         /// </summary>
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
         /// <param name="entityKeyExpression">The entity key expression.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
         public void RegisterEntitySet<T>(Expression<Func<T, object>> entityKeyExpression)
             => this.RegisterEntitySet<T>(typeof(T).Name, entityKeyExpression);
 
@@ -67,6 +74,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
         /// <param name="entitySetName">Name of the Entity Set.</param>
         /// <param name="entityKeyExpression">The entity key expression.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "The method signature isn't correct otherwise")]
         public void RegisterEntitySet<T>(string entitySetName, Expression<Func<T, object>> entityKeyExpression)
         {

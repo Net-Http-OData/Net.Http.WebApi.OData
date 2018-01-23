@@ -10,7 +10,7 @@
         [Fact]
         public void CollectionNamesCaseInsensitiveByDefault_RegisterCollectionThrowsArgumentExceptionForDuplicateKeyVaryingOnlyOnCasing()
         {
-            var entityDataModelBuilder = new EntityDataModelBuilder();
+            var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
             entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
 
             var exception = Assert.Throws<ArgumentException>(() => entityDataModelBuilder.RegisterEntitySet<Category>("categories", x => x.Name));
@@ -20,7 +20,7 @@
         [Fact]
         public void CollectionNamesCaseInsensitiveByDefault_ResolveCollectionVaryingCollectionNameCasing()
         {
-            var entityDataModelBuilder = new EntityDataModelBuilder();
+            var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
             entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
 
             var entityDataModel = entityDataModelBuilder.BuildModel();
@@ -34,7 +34,7 @@
 
             public WhenCalling_BuildModelWith_Models_AndCustomEntitySetName()
             {
-                var entityDataModelBuilder = new EntityDataModelBuilder();
+                var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
                 entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
                 entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName);
                 entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
@@ -274,7 +274,7 @@
 
             public WhenCalling_BuildModelWith_Models_AndTypeNameForEntitySetName()
             {
-                var entityDataModelBuilder = new EntityDataModelBuilder();
+                var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
                 entityDataModelBuilder.RegisterEntitySet<Category>(x => x.Name);
                 entityDataModelBuilder.RegisterEntitySet<Customer>(x => x.CompanyName);
                 entityDataModelBuilder.RegisterEntitySet<Employee>(x => x.EmailAddress);

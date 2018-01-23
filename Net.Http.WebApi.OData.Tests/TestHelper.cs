@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.OData.Tests
 {
+    using System;
     using NorthwindModel;
     using OData.Model;
 
@@ -7,7 +8,7 @@
     {
         internal static void EnsureEDM()
         {
-            var entityDataModelBuilder = new EntityDataModelBuilder();
+            var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
             entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
             entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName);
             entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);

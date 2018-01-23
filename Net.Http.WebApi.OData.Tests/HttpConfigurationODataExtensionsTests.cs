@@ -11,7 +11,10 @@
         {
             var configuration = new HttpConfiguration();
 
-            configuration.UseOData();
+            configuration.UseOData(
+                _ =>
+                {
+                });
 
             Assert.IsType<ODataExceptionFilterAttribute>(configuration.Filters.ToList()[0].Instance);
         }
