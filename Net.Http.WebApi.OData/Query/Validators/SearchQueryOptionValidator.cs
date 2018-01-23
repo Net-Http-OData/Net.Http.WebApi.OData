@@ -13,7 +13,6 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     using System.Net;
-    using System.Net.Http;
     using System.Web.Http;
 
     /// <summary>
@@ -36,8 +35,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Search) != AllowedQueryOptions.Search)
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$search")));
+                throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$search"));
             }
         }
     }

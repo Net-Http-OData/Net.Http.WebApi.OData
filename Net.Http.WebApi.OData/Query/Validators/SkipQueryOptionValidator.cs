@@ -13,7 +13,6 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     using System.Net;
-    using System.Net.Http;
     using System.Web.Http;
 
     /// <summary>
@@ -36,14 +35,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip) != AllowedQueryOptions.Skip)
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$skip")));
+                throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$skip"));
             }
 
             if (queryOptions.Skip.Value < 0)
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$skip")));
+                throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$skip"));
             }
         }
     }

@@ -2,7 +2,6 @@
 {
     using System.Net;
     using System.Net.Http;
-    using System.Web.Http;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
@@ -32,11 +31,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithBadRequest()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
-                Assert.Equal(Messages.CountRawValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.CountRawValueInvalid, exception.Message);
             }
         }
 
@@ -61,11 +60,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$count"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$count"), exception.Message);
             }
         }
 

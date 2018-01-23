@@ -30,5 +30,12 @@ namespace Net.Http.WebApi.OData
             get;
             set;
         }
+
+        [Newtonsoft.Json.JsonProperty("target", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 2)]
+        public string Target
+        {
+            get;
+            set;
+        }
     }
 }

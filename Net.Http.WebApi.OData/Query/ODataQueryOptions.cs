@@ -15,7 +15,6 @@ namespace Net.Http.WebApi.OData.Query
     using System;
     using System.Net;
     using System.Net.Http;
-    using System.Web.Http;
     using Model;
 
     /// <summary>
@@ -214,16 +213,14 @@ namespace Net.Http.WebApi.OData.Query
 
             if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
             {
-                throw new HttpResponseException(
-                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+                throw new ODataException(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
             }
 
             headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.ODataMaxVersion);
 
             if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
             {
-                throw new HttpResponseException(
-                    this.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion));
+                throw new ODataException(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
             }
         }
     }

@@ -14,7 +14,6 @@ namespace Net.Http.WebApi.OData.Query.Validators
 {
     using System.Globalization;
     using System.Net;
-    using System.Net.Http;
     using System.Web.Http;
 
     /// <summary>
@@ -37,20 +36,17 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$top")));
+                throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$top"));
             }
 
             if (queryOptions.Top.Value < 0)
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$top")));
+                throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$top"));
             }
 
             if (queryOptions.Top.Value > validationSettings.MaxTop)
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.TopValueExceedsMaxAllowed.FormatWith(validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture))));
+                throw new ODataException(HttpStatusCode.BadRequest, Messages.TopValueExceedsMaxAllowed.FormatWith(validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture)));
             }
         }
     }

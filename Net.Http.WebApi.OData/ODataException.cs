@@ -34,27 +34,38 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="ODataException"/> class.
+        /// Initialises a new instance of the <see cref="ODataException" /> class.
         /// </summary>
         /// <param name="statusCode">The HTTP status code that describes the error.</param>
         /// <param name="message">The message that describes the error.</param>
-        /// <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
-        public ODataException(HttpStatusCode statusCode, string message, Exception innerException)
-            : base(message, innerException)
+        /// <param name="target">The target of the exception.</param>
+        public ODataException(HttpStatusCode statusCode, string message, string target)
+            : base(message)
         {
             this.StatusCode = statusCode;
+            this.Target = target;
         }
 
         private ODataException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             this.StatusCode = (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), info.GetString("StatusCode"));
+            this.Target = info.GetString("Target");
         }
 
         /// <summary>
         /// Gets or sets the HTTP status code that describes the error.
         /// </summary>
         public HttpStatusCode StatusCode
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the target of the exception.
+        /// </summary>
+        public string Target
         {
             get;
             set;
@@ -70,6 +81,7 @@ namespace Net.Http.WebApi.OData
             if (info != null)
             {
                 info.AddValue("StatusCode", this.StatusCode.ToString());
+                info.AddValue("Target", this.Target);
             }
 
             base.GetObjectData(info, context);

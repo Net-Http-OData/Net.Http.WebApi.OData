@@ -3,7 +3,6 @@
     using System;
     using System.Net;
     using System.Net.Http;
-    using System.Web.Http;
     using Net.Http.WebApi.OData.Query;
     using WebApi.OData;
     using WebApi.OData.Model;
@@ -300,10 +299,10 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "1.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                var exception = Assert.Throws<ODataException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
-                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, exception.Message);
             }
         }
 
@@ -317,10 +316,10 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "2.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                var exception = Assert.Throws<ODataException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
-                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, exception.Message);
             }
         }
 
@@ -334,10 +333,10 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataMaxVersion, "3.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                var exception = Assert.Throws<ODataException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
-                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, exception.Message);
             }
         }
 
@@ -365,10 +364,10 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "1.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                var exception = Assert.Throws<ODataException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
-                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, exception.Message);
             }
         }
 
@@ -382,10 +381,10 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "2.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                var exception = Assert.Throws<ODataException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
-                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, exception.Message);
             }
         }
 
@@ -399,10 +398,10 @@
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "3.0");
 
-                var exception = Assert.Throws<HttpResponseException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
+                var exception = Assert.Throws<ODataException>(() => new ODataQueryOptions(httpRequestMessage, EntityDataModel.Current.EntitySets["Products"]));
 
-                Assert.Equal(HttpStatusCode.NotAcceptable, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotAcceptable, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedODataVersion, exception.Message);
             }
         }
 

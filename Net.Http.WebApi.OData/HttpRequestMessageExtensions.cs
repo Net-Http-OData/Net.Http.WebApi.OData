@@ -14,10 +14,10 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
-    using System.Web.Http;
     using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
 
@@ -27,25 +27,40 @@ namespace Net.Http.WebApi.OData
     public static class HttpRequestMessageExtensions
     {
         /// <summary>
+        /// Creates the OData error response message from the specified request message with the specified status code and message text.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to the excetion.</param>
+        /// <param name="statusCode">The <see cref="HttpStatusCode"/> applicable.</param>
+        /// <param name="message">The message to return in the error detail.</param>
+        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        /// <example>
+        /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "Path segment not supported: 'Foo'.");</code>
+        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'." } }</para>
+        /// </example>
+        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message)
+            => CreateODataErrorResponse(request, statusCode, message, null);
+
+        /// <summary>
         /// Creates the OData error response message from the specified request message with the specified status code, code and message text.
         /// </summary>
         /// <param name="request">The HTTP request message which led to the excetion.</param>
         /// <param name="statusCode">The <see cref="HttpStatusCode"/> applicable.</param>
-        /// <param name="code">The code for the error response.</param>
         /// <param name="message">The message to return in the error detail.</param>
+        /// <param name="target">The target of the exception.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         /// <example>
-        /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "400", "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");</code>
-        /// <para>{ "error": { "code": "400", "message": "The type 'NorthwindModel.Product' does not contain a property named 'Foo'." } }</para>
+        /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "400", "Path segment not supported: 'Foo'.");</code>
+        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'." } }</para>
         /// </example>
-        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string code, string message)
+        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, string target)
         {
             var value = new ODataErrorContent
             {
                 Error = new ODataError
                 {
-                    Code = code,
+                    Code = ((int)statusCode).ToString(CultureInfo.InvariantCulture),
                     Message = message,
+                    Target = target,
                 },
             };
 
@@ -54,20 +69,6 @@ namespace Net.Http.WebApi.OData
 
             return response;
         }
-
-        /// <summary>
-        /// Creates the OData error response message from the specified request message with the specified status code and message text.
-        /// </summary>
-        /// <param name="request">The HTTP request message which led to the excetion.</param>
-        /// <param name="statusCode">The <see cref="HttpStatusCode"/> applicable.</param>
-        /// <param name="message">The message to return in the error detail.</param>
-        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
-        /// <example>
-        /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");</code>
-        /// <para>{ "error": { "code": "", "message": "The type 'NorthwindModel.Product' does not contain a property named 'Foo'." } }</para>
-        /// </example>
-        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message)
-            => CreateODataErrorResponse(request, statusCode, string.Empty, message);
 
         /// <summary>
         /// Creates the OData response message from the specified request message for the <see cref="ODataException"/>.
@@ -79,17 +80,17 @@ namespace Net.Http.WebApi.OData
         /// <code>
         /// try
         /// {
-        ///     throw new new ODataException(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");
+        ///     throw new new ODataException(HttpStatusCode.BadRequest, "Path segment not supported: 'Foo'.", "Foo");
         /// }
         /// catch (ODataException e)
         /// {
         ///     request.CreateODataErrorResponse(e);
         /// }
         /// </code>
-        /// <para>{ "error": { "code": "BadRequest", "message": "The type 'NorthwindModel.Product' does not contain a property named 'Foo'." } }</para>
+        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'.", "target": "Foo" } }</para>
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, ODataException exception)
-            => CreateODataErrorResponse(request, exception.StatusCode, exception.StatusCode.ToString(), exception.Message);
+            => CreateODataErrorResponse(request, exception.StatusCode, exception.Message, exception.Target);
 
         /// <summary>
         /// Creates the OData response message from the specified request message.
@@ -195,8 +196,7 @@ namespace Net.Http.WebApi.OData
 
             if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out entitySet))
             {
-                throw new HttpResponseException(
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(entitySetName)));
+                throw new ODataException(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(entitySetName));
             }
 
             return entitySet;
@@ -332,8 +332,7 @@ namespace Net.Http.WebApi.OData
                     return ODataIsolationLevel.Snapshot;
                 }
 
-                throw new HttpResponseException(
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel));
+                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel);
             }
 
             return ODataIsolationLevel.None;
@@ -359,8 +358,7 @@ namespace Net.Http.WebApi.OData
                                 return ODataMetadataLevel.Full;
 
                             default:
-                                throw new HttpResponseException(
-                                    request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.ODataMetadataValueInvalid));
+                                throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataMetadataValueInvalid);
                         }
                     }
                 }

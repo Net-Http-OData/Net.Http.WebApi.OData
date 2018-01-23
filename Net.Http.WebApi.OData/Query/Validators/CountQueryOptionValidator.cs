@@ -13,7 +13,6 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     using System.Net;
-    using System.Net.Http;
     using System.Web.Http;
 
     /// <summary>
@@ -36,15 +35,13 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Count) != AllowedQueryOptions.Count)
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$count")));
+                throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$count"));
             }
 
             if (queryOptions.RawValues.Count != "$count=true"
                 && queryOptions.RawValues.Count != "$count=false")
             {
-                throw new HttpResponseException(
-                    queryOptions.Request.CreateErrorResponse(HttpStatusCode.BadRequest, Messages.CountRawValueInvalid));
+                throw new ODataException(HttpStatusCode.BadRequest, Messages.CountRawValueInvalid);
             }
         }
     }

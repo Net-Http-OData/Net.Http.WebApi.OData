@@ -366,7 +366,7 @@
                     new Uri("http://services.odata.org/OData/Products?$select=Foo"));
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");
+                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "Path segment not supported: 'Foo'.");
             }
 
             [Fact]
@@ -378,8 +378,9 @@
                 var errorContent = (ODataErrorContent)((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value;
 
                 Assert.NotNull(errorContent.Error);
-                Assert.Equal("", errorContent.Error.Code);
-                Assert.Equal("The type 'NorthwindModel.Product' does not contain a property named 'Foo'.", errorContent.Error.Message);
+                Assert.Equal("400", errorContent.Error.Code);
+                Assert.Equal("Path segment not supported: 'Foo'.", errorContent.Error.Message);
+                Assert.Null(errorContent.Error.Target);
             }
 
             [Fact]
@@ -396,18 +397,18 @@
             }
         }
 
-        public class CreateODataErrorResponse_WithHttpStatusCode_Code_AndMessage
+        public class CreateODataErrorResponse_WithHttpStatusCode_Message_AndTarget
         {
             private readonly HttpResponseMessage httpResponseMessage;
 
-            public CreateODataErrorResponse_WithHttpStatusCode_Code_AndMessage()
+            public CreateODataErrorResponse_WithHttpStatusCode_Message_AndTarget()
             {
                 var httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
                     new Uri("http://services.odata.org/OData/Products?$select=Foo"));
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "400", "The type 'NorthwindModel.Product' does not contain a property named 'Foo'.");
+                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "Path segment not supported: 'Foo'.", "query");
             }
 
             [Fact]
@@ -420,7 +421,8 @@
 
                 Assert.NotNull(errorContent.Error);
                 Assert.Equal("400", errorContent.Error.Code);
-                Assert.Equal("The type 'NorthwindModel.Product' does not contain a property named 'Foo'.", errorContent.Error.Message);
+                Assert.Equal("Path segment not supported: 'Foo'.", errorContent.Error.Message);
+                Assert.Equal("query", errorContent.Error.Target);
             }
 
             [Fact]
@@ -448,7 +450,7 @@
                     new Uri("http://services.odata.org/OData/Products?$select=Foo"));
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(new ODataException(HttpStatusCode.BadRequest, "The type 'NorthwindModel.Product' does not contain a property named 'Foo'."));
+                this.httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(new ODataException(HttpStatusCode.NotImplemented, "$search query option not supported.", "query"));
             }
 
             [Fact]
@@ -460,8 +462,9 @@
                 var errorContent = (ODataErrorContent)((ObjectContent<ODataErrorContent>)this.httpResponseMessage.Content).Value;
 
                 Assert.NotNull(errorContent.Error);
-                Assert.Equal("BadRequest", errorContent.Error.Code);
-                Assert.Equal("The type 'NorthwindModel.Product' does not contain a property named 'Foo'.", errorContent.Error.Message);
+                Assert.Equal("501", errorContent.Error.Code);
+                Assert.Equal("$search query option not supported.", errorContent.Error.Message);
+                Assert.Equal("query", errorContent.Error.Target);
             }
 
             [Fact]
@@ -472,9 +475,9 @@
             }
 
             [Fact]
-            public void TheStatusCodeIsBadRequest()
+            public void TheStatusCodeIsNotImplemented()
             {
-                Assert.Equal(HttpStatusCode.BadRequest, this.httpResponseMessage.StatusCode);
+                Assert.Equal(HttpStatusCode.NotImplemented, this.httpResponseMessage.StatusCode);
             }
         }
 
@@ -724,10 +727,10 @@
                     new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=all");
 
-                var exception = Assert.Throws<HttpResponseException>(() => httpRequestMessage.ReadODataRequestOptions());
+                var exception = Assert.Throws<ODataException>(() => httpRequestMessage.ReadODataRequestOptions());
 
-                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
-                Assert.Equal(Messages.ODataMetadataValueInvalid, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.ODataMetadataValueInvalid, exception.Message);
             }
         }
 
@@ -815,10 +818,10 @@
                     new Uri("http://services.odata.org/OData/Products"));
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "ReadCommitted");
 
-                var exception = Assert.Throws<HttpResponseException>(() => httpRequestMessage.ReadODataRequestOptions());
+                var exception = Assert.Throws<ODataException>(() => httpRequestMessage.ReadODataRequestOptions());
 
-                Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedIsolationLevel, ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedIsolationLevel, exception.Message);
             }
         }
     }

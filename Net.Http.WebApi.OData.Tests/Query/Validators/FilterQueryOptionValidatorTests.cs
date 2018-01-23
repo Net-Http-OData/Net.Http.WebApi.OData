@@ -2,7 +2,6 @@
 {
     using System.Net;
     using System.Net.Http;
-    using System.Web.Http;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
@@ -34,11 +33,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("add"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("add"), exception.Message);
             }
         }
 
@@ -91,11 +90,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("and"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("and"), exception.Message);
             }
         }
 
@@ -147,11 +146,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("cast"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("cast"), exception.Message);
             }
         }
 
@@ -204,11 +203,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("ceiling"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("ceiling"), exception.Message);
             }
         }
 
@@ -261,11 +260,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("concat"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("concat"), exception.Message);
             }
         }
 
@@ -318,11 +317,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("contains"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("contains"), exception.Message);
             }
         }
 
@@ -375,11 +374,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("day"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("day"), exception.Message);
             }
         }
 
@@ -433,11 +432,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("div"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("div"), exception.Message);
             }
         }
 
@@ -490,11 +489,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("endswith"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("endswith"), exception.Message);
             }
         }
 
@@ -547,11 +546,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("eq"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("eq"), exception.Message);
             }
         }
 
@@ -603,11 +602,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("floor"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("floor"), exception.Message);
             }
         }
 
@@ -660,11 +659,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("fractionalseconds"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("fractionalseconds"), exception.Message);
             }
         }
 
@@ -717,11 +716,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("gt"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("gt"), exception.Message);
             }
         }
 
@@ -773,11 +772,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ge"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ge"), exception.Message);
             }
         }
 
@@ -829,11 +828,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("has"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("has"), exception.Message);
             }
         }
 
@@ -885,11 +884,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("hour"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("hour"), exception.Message);
             }
         }
 
@@ -942,11 +941,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("indexof"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("indexof"), exception.Message);
             }
         }
 
@@ -999,11 +998,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("isof"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("isof"), exception.Message);
             }
         }
 
@@ -1056,11 +1055,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("length"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("length"), exception.Message);
             }
         }
 
@@ -1113,11 +1112,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("lt"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("lt"), exception.Message);
             }
         }
 
@@ -1169,11 +1168,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("le"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("le"), exception.Message);
             }
         }
 
@@ -1225,11 +1224,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("maxdatetime"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("maxdatetime"), exception.Message);
             }
         }
 
@@ -1282,11 +1281,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("mindatetime"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("mindatetime"), exception.Message);
             }
         }
 
@@ -1339,11 +1338,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("minute"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("minute"), exception.Message);
             }
         }
 
@@ -1397,11 +1396,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mod"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mod"), exception.Message);
             }
         }
 
@@ -1454,11 +1453,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("month"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("month"), exception.Message);
             }
         }
 
@@ -1512,11 +1511,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mul"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mul"), exception.Message);
             }
         }
 
@@ -1569,11 +1568,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ne"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ne"), exception.Message);
             }
         }
 
@@ -1626,11 +1625,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("now"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("now"), exception.Message);
             }
         }
 
@@ -1683,11 +1682,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("or"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("or"), exception.Message);
             }
         }
 
@@ -1739,11 +1738,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("replace"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("replace"), exception.Message);
             }
         }
 
@@ -1796,11 +1795,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("round"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("round"), exception.Message);
             }
         }
 
@@ -1853,11 +1852,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("second"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("second"), exception.Message);
             }
         }
 
@@ -1910,11 +1909,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("startswith"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("startswith"), exception.Message);
             }
         }
 
@@ -1967,11 +1966,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("substring"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("substring"), exception.Message);
             }
         }
 
@@ -2025,11 +2024,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("sub"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedOperator.FormatWith("sub"), exception.Message);
             }
         }
 
@@ -2082,11 +2081,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("tolower"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("tolower"), exception.Message);
             }
         }
 
@@ -2139,11 +2138,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("toupper"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("toupper"), exception.Message);
             }
         }
 
@@ -2196,11 +2195,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("trim"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("trim"), exception.Message);
             }
         }
 
@@ -2253,11 +2252,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("year"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedFunction.FormatWith("year"), exception.Message);
             }
         }
 
@@ -2309,11 +2308,11 @@
             [Fact]
             public void AnHttpResponseExceptionExceptionIsThrownWithNotImplemented()
             {
-                var exception = Assert.Throws<HttpResponseException>(
+                var exception = Assert.Throws<ODataException>(
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
-                Assert.Equal(HttpStatusCode.NotImplemented, exception.Response.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$filter"), ((HttpError)((ObjectContent<HttpError>)exception.Response.Content).Value).Message);
+                Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
+                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$filter"), exception.Message);
             }
         }
 
