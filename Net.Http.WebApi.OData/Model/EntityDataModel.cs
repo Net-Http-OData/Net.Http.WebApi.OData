@@ -22,6 +22,36 @@ namespace Net.Http.WebApi.OData.Model
         internal EntityDataModel(IReadOnlyDictionary<string, EntitySet> entitySets)
         {
             this.EntitySets = entitySets;
+
+            this.FilterFunctions = new[]
+            {
+                "contains",
+                "endswith",
+                "startswith",
+                "length",
+                "indexof",
+                "substring",
+                "tolower",
+                "toupper",
+                "trim",
+                "concat",
+                "year",
+                "month",
+                "day",
+                "hour",
+                "second",
+                "round",
+                "floor",
+                "ceiling",
+                "cast",
+                "isof",
+            };
+
+            this.SupportedFormats = new[]
+            {
+                "application/json;odata.metadata=none",
+                "application/json;odata.metadata=minimal",
+            };
         }
 
         /// <summary>
@@ -40,6 +70,22 @@ namespace Net.Http.WebApi.OData.Model
         /// Gets the Entity Sets defined in the Entity Data Model.
         /// </summary>
         public IReadOnlyDictionary<string, EntitySet> EntitySets
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the filter functions provided by the service.
+        /// </summary>
+        public IReadOnlyCollection<string> FilterFunctions
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the formats supported by the service.
+        /// </summary>
+        public IReadOnlyCollection<string> SupportedFormats
         {
             get;
         }

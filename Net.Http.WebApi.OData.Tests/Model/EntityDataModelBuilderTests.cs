@@ -35,11 +35,11 @@
             public WhenCalling_BuildModelWith_Models_AndCustomEntitySetName()
             {
                 var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
-                entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
-                entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName);
+                entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name, Capabilities.Insertable | Capabilities.Updatable | Capabilities.Deletable);
+                entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName, Capabilities.Updatable);
                 entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
-                entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId);
-                entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.ProductId);
+                entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId, Capabilities.Insertable | Capabilities.Updatable);
+                entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.ProductId, Capabilities.Insertable | Capabilities.Updatable);
 
                 this.entityDataModel = entityDataModelBuilder.BuildModel();
             }
@@ -58,6 +58,7 @@
                 var entitySet = this.entityDataModel.EntitySets["Categories"];
 
                 Assert.Equal("Categories", entitySet.Name);
+                Assert.Equal(Capabilities.Insertable | Capabilities.Updatable | Capabilities.Deletable, entitySet.Capabilities);
 
                 var edmComplexType = entitySet.EdmType;
 
@@ -81,6 +82,7 @@
                 var entitySet = this.entityDataModel.EntitySets["Customers"];
 
                 Assert.Equal("Customers", entitySet.Name);
+                Assert.Equal(Capabilities.Updatable, entitySet.Capabilities);
 
                 var edmComplexType = entitySet.EdmType;
 
@@ -116,6 +118,7 @@
                 var entitySet = this.entityDataModel.EntitySets["Employees"];
 
                 Assert.Equal("Employees", entitySet.Name);
+                Assert.Equal(Capabilities.None, entitySet.Capabilities);
 
                 var edmComplexType = entitySet.EdmType;
 
@@ -163,6 +166,7 @@
                 var entitySet = this.entityDataModel.EntitySets["Orders"];
 
                 Assert.Equal("Orders", entitySet.Name);
+                Assert.Equal(Capabilities.Insertable | Capabilities.Updatable, entitySet.Capabilities);
 
                 var edmComplexType = entitySet.EdmType;
 
@@ -202,6 +206,7 @@
                 var entitySet = this.entityDataModel.EntitySets["Products"];
 
                 Assert.Equal("Products", entitySet.Name);
+                Assert.Equal(Capabilities.Insertable | Capabilities.Updatable, entitySet.Capabilities);
 
                 var edmComplexType = entitySet.EdmType;
 

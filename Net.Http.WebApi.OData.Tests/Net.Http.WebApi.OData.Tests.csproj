@@ -65,6 +65,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +87,8 @@
     <Compile Include="Employee.cs" />
     <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
+    <Compile Include="Metadata\MetadataProviderTests.cs" />
+    <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
     <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
     <Compile Include="Model\EdmComplexTypeTests.cs" />
     <Compile Include="Model\EdmPrimitiveTypeTests.cs" />

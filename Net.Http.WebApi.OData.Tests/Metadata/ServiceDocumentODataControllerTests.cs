@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Metadata
 {
+    using System.Net;
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Http.Hosting;
@@ -20,6 +21,9 @@
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
             var response = controller.Get();
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
             var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
 
             Assert.NotNull(result.Context);
@@ -46,6 +50,9 @@
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
             var response = controller.Get();
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
             var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
 
             Assert.NotNull(result.Context);
@@ -72,6 +79,9 @@
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
             var response = controller.Get();
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
             var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
 
             Assert.Null(result.Context);
