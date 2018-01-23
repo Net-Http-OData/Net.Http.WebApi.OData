@@ -194,9 +194,7 @@ namespace Net.Http.WebApi.OData.Query
             var queryOption = rawValue.Substring(0, equals - 1);
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
-            int integer;
-
-            if (int.TryParse(value, out integer))
+            if (int.TryParse(value, out int integer))
             {
                 return integer;
             }
