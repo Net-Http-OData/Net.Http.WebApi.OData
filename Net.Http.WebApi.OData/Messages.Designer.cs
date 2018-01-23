@@ -70,7 +70,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the $count value must be &apos;true&apos; or &apos;false&apos;.
+        ///   Looks up a localized string similar to The value for OData query $count must be either &apos;true&apos; or &apos;false&apos;.
         /// </summary>
         internal static string CountRawValueInvalid {
             get {
@@ -79,7 +79,7 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If specified, the &apos;{0}&apos; value must be a non-negative numeric value..
+        ///   Looks up a localized string similar to The value for OData query &apos;{0}&apos; must be a non-negative numeric value..
         /// </summary>
         internal static string IntRawValueInvalid {
             get {

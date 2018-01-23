@@ -121,7 +121,7 @@
     <value>If specified, the $orderby direction must be either 'asc' or 'desc'.</value>
   </data>
   <data name="IntRawValueInvalid" xml:space="preserve">
-    <value>If specified, the '{0}' value must be a non-negative numeric value.</value>
+    <value>The value for OData query '{0}' must be a non-negative numeric value.</value>
   </data>
   <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
     <value>The specified $top value exceeds the maximum value of '{0}' permitted by this service.</value>
@@ -148,7 +148,7 @@
     <value>This service only supports OData 4.0</value>
   </data>
   <data name="CountRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $count value must be 'true' or 'false'</value>
+    <value>The value for OData query $count must be either 'true' or 'false'</value>
   </data>
   <data name="UnsupportedIsolationLevel" xml:space="preserve">
     <value>If specified, the OData-IsolationLevel must be 'Snapshot'</value>
