@@ -14,7 +14,6 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Net;
-    using System.Net.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
 
@@ -38,7 +37,7 @@ namespace Net.Http.WebApi.OData
                 if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
                 {
                     actionContext.Response =
-                        actionContext.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
+                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
                 }
 
                 headerValue = actionContext.Request.ReadHeaderValue(ODataHeaderNames.ODataMaxVersion);
@@ -46,7 +45,7 @@ namespace Net.Http.WebApi.OData
                 if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
                 {
                     actionContext.Response =
-                        actionContext.Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
+                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
                 }
             }
 
