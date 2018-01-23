@@ -18,5 +18,18 @@
 
             Assert.IsType<ODataExceptionFilterAttribute>(configuration.Filters.ToList()[0].Instance);
         }
+
+        [Fact]
+        public void UseOData_Adds_ODataVersionHeaderValidationAttribute_ToFilters()
+        {
+            var configuration = new HttpConfiguration();
+
+            configuration.UseOData(
+                _ =>
+                {
+                });
+
+            Assert.IsType<ODataVersionHeaderValidationAttribute>(configuration.Filters.ToList()[1].Instance);
+        }
     }
 }

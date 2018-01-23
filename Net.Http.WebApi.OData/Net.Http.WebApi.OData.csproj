@@ -96,6 +96,7 @@
     <Compile Include="ODataMetadataLevelExtensions.cs" />
     <Compile Include="ODataRequestOptions.cs" />
     <Compile Include="ODataResponseContent.cs" />
+    <Compile Include="ODataVersionHeaderValidationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\Binders\AbstractFilterBinder.cs" />
     <Compile Include="Query\Binders\AbstractOrderByBinder.cs" />

@@ -40,7 +40,6 @@ namespace Net.Http.WebApi.OData.Query
         {
             this.Request = request ?? throw new ArgumentNullException(nameof(request));
             this.EntitySet = entitySet ?? throw new ArgumentNullException(nameof(entitySet));
-            this.ReadHeaders();
             this.RawValues = new ODataRawQueryOptions(request.RequestUri.Query);
         }
 
@@ -203,25 +202,6 @@ namespace Net.Http.WebApi.OData.Query
             }
 
             throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith(queryOption));
-        }
-
-        private void ReadHeaders()
-        {
-            System.Diagnostics.Debug.Assert(this.EntitySet.Equals(EntityDataModel.Current.EntitySets[this.Request.RequestUri.ResolveODataEntitySetName()]), "The model appears to be incorrect for the URI");
-
-            var headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.ODataVersion);
-
-            if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
-            {
-                throw new ODataException(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
-            }
-
-            headerValue = this.Request.ReadHeaderValue(ODataHeaderNames.ODataMaxVersion);
-
-            if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
-            {
-                throw new ODataException(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
-            }
         }
     }
 }

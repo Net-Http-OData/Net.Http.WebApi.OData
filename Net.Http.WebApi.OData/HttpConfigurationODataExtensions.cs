@@ -54,6 +54,7 @@ namespace System.Web.Http
             }
 
             configuration.Filters.Add(new ODataExceptionFilterAttribute());
+            configuration.Filters.Add(new ODataVersionHeaderValidationAttribute());
 
             var entityDataModelBuilder = new EntityDataModelBuilder(entitySetNameComparer);
             entityDataModelBuilderCallback(entityDataModelBuilder);
