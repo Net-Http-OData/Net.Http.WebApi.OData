@@ -92,9 +92,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <returns>The EdmType for the specified CLR type, if found; otherwise, null.</returns>
         public static EdmType GetEdmType(Type clrType)
         {
-            EdmType edmType;
-
-            if (EdmTypeCache.Map.TryGetValue(clrType, out edmType))
+            if (EdmTypeCache.Map.TryGetValue(clrType, out EdmType edmType))
             {
                 return edmType;
             }

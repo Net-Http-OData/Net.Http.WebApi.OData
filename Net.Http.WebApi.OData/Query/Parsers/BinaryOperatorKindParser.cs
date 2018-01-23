@@ -38,9 +38,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
         internal static BinaryOperatorKind ToBinaryOperatorKind(this string operatorType)
         {
-            BinaryOperatorKind binaryOperatorKind;
-
-            if (operatorTypeMap.TryGetValue(operatorType, out binaryOperatorKind))
+            if (operatorTypeMap.TryGetValue(operatorType, out BinaryOperatorKind binaryOperatorKind))
             {
                 return binaryOperatorKind;
             }

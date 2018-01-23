@@ -167,9 +167,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            object requestOptions;
-
-            if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out requestOptions))
+            if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out object requestOptions))
             {
                 requestOptions = new ODataRequestOptions(request);
 
@@ -192,9 +190,8 @@ namespace Net.Http.WebApi.OData
             }
 
             var entitySetName = request.RequestUri.ResolveODataEntitySetName();
-            EntitySet entitySet;
 
-            if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out entitySet))
+            if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out EntitySet entitySet))
             {
                 throw new ODataException(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(entitySetName));
             }
@@ -310,10 +307,9 @@ namespace Net.Http.WebApi.OData
 
         internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
         {
-            IEnumerable<string> values;
             string value = null;
 
-            if (request.Headers.TryGetValues(name, out values))
+            if (request.Headers.TryGetValues(name, out IEnumerable<string> values))
             {
                 value = values.FirstOrDefault();
             }
