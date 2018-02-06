@@ -20,7 +20,7 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Reflection;
     using System.Text;
     using System.Xml.Linq;
-    using Net.Http.WebApi.OData.Model;
+    using Model;
 
     internal static class MetadataProvider
     {

@@ -14,8 +14,8 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Text;
-    using Net.Http.WebApi.OData.Model;
-    using Net.Http.WebApi.OData.Query;
+    using Model;
+    using Query;
 
     /// <summary>
     /// Extensions for the Uri class.
