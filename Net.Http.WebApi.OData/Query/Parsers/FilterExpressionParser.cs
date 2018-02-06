@@ -316,9 +316,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     {
                         var leftNode = this.nodeStack.Pop();
 
-                        var binaryNode = leftNode as BinaryOperatorNode;
-
-                        if (binaryNode != null && binaryNode.Right == null)
+                        if (leftNode is BinaryOperatorNode binaryNode && binaryNode.Right == null)
                         {
                             binaryNode.Right = node;
 

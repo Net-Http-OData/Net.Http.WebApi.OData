@@ -30,9 +30,7 @@ namespace Net.Http.WebApi.OData
         {
             if (actionExecutedContext != null)
             {
-                var odataException = actionExecutedContext.Exception as ODataException;
-
-                if (odataException != null)
+                if (actionExecutedContext.Exception is ODataException odataException)
                 {
                     actionExecutedContext.Response = actionExecutedContext.Request.CreateODataErrorResponse(odataException);
                 }
