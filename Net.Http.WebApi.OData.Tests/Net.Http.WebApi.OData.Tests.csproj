@@ -144,7 +144,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj">
       <Project>{67fbeb32-944e-4022-8b80-5589762b2b05}</Project>
-      <Name>Net.Http.WebApi.OData.NET45</Name>
+      <Name>Net.Http.WebApi.OData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
