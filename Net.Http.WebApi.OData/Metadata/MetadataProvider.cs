@@ -109,7 +109,7 @@ namespace Net.Http.WebApi.OData.Metadata
                     t.Properties.Select(p => new XElement(
                         edmNs + "Property",
                         new XAttribute("Name", p.Name),
-                        new XAttribute("Type", p.PropertyType.Name),
+                        new XAttribute("Type", p.PropertyType.FullName),
                         new XAttribute("Nullable", "false"))))); // TODO: nullable needs to be set in model (use data annotations?)
 
             return complexTypes;
@@ -176,7 +176,7 @@ namespace Net.Http.WebApi.OData.Metadata
                         new XElement(
                             edmNs + "Property",
                             new XAttribute("Name", p.Name),
-                            new XAttribute("Type", p.PropertyType.Name),
+                            new XAttribute("Type", p.PropertyType.FullName),
                             new XAttribute("Nullable", "false"))))); // TODO: nullable needs to be set in model (use data annotations?)
 
             return entityTypes;

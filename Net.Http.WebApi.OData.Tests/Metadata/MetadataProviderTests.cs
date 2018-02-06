@@ -28,61 +28,61 @@
         <Member Name=""Red"" Value=""3"" />
       </EnumType>
       <ComplexType Name=""OrderDetail"">
-        <Property Name=""OrderId"" Type=""Int64"" Nullable=""false"" />
-        <Property Name=""ProductId"" Type=""Int32"" Nullable=""false"" />
-        <Property Name=""Quantity"" Type=""Int16"" Nullable=""false"" />
-        <Property Name=""UnitPrice"" Type=""Decimal"" Nullable=""false"" />
+        <Property Name=""OrderId"" Type=""Edm.Int64"" Nullable=""false"" />
+        <Property Name=""ProductId"" Type=""Edm.Int32"" Nullable=""false"" />
+        <Property Name=""Quantity"" Type=""Edm.Int16"" Nullable=""false"" />
+        <Property Name=""UnitPrice"" Type=""Edm.Decimal"" Nullable=""false"" />
       </ComplexType>
       <EntityType Name=""Categories"">
         <Key>
           <PropertyRef Name=""Name"" />
         </Key>
-        <Property Name=""Name"" Type=""String"" Nullable=""false"" />
+        <Property Name=""Name"" Type=""Edm.String"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Customers"">
         <Key>
           <PropertyRef Name=""CompanyName"" />
         </Key>
-        <Property Name=""City"" Type=""String"" Nullable=""false"" />
-        <Property Name=""CompanyName"" Type=""String"" Nullable=""false"" />
-        <Property Name=""Country"" Type=""String"" Nullable=""false"" />
-        <Property Name=""LegacyId"" Type=""Int32"" Nullable=""false"" />
+        <Property Name=""City"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""CompanyName"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Country"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""LegacyId"" Type=""Edm.Int32"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Employees"">
         <Key>
           <PropertyRef Name=""EmailAddress"" />
         </Key>
-        <Property Name=""AccessLevel"" Type=""AccessLevel"" Nullable=""false"" />
-        <Property Name=""BirthDate"" Type=""Date"" Nullable=""false"" />
-        <Property Name=""EmailAddress"" Type=""String"" Nullable=""false"" />
-        <Property Name=""Forename"" Type=""String"" Nullable=""false"" />
-        <Property Name=""ImageData"" Type=""String"" Nullable=""false"" />
-        <Property Name=""Surname"" Type=""String"" Nullable=""false"" />
-        <Property Name=""Title"" Type=""String"" Nullable=""false"" />
+        <Property Name=""AccessLevel"" Type=""NorthwindModel.AccessLevel"" Nullable=""false"" />
+        <Property Name=""BirthDate"" Type=""Edm.Date"" Nullable=""false"" />
+        <Property Name=""EmailAddress"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Forename"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""ImageData"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Surname"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Title"" Type=""Edm.String"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Orders"">
         <Key>
           <PropertyRef Name=""OrderId"" />
         </Key>
-        <Property Name=""Freight"" Type=""Decimal"" Nullable=""false"" />
-        <Property Name=""OrderDetails"" Type=""OrderDetail"" Nullable=""false"" />
-        <Property Name=""OrderId"" Type=""Int64"" Nullable=""false"" />
-        <Property Name=""ShipCountry"" Type=""String"" Nullable=""false"" />
-        <Property Name=""TransactionId"" Type=""Guid"" Nullable=""false"" />
+        <Property Name=""Freight"" Type=""Edm.Decimal"" Nullable=""false"" />
+        <Property Name=""OrderDetails"" Type=""NorthwindModel.OrderDetail"" Nullable=""false"" />
+        <Property Name=""OrderId"" Type=""Edm.Int64"" Nullable=""false"" />
+        <Property Name=""ShipCountry"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""TransactionId"" Type=""Edm.Guid"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Products"">
         <Key>
           <PropertyRef Name=""ProductId"" />
         </Key>
-        <Property Name=""Category"" Type=""Category"" Nullable=""false"" />
-        <Property Name=""Colour"" Type=""Colour"" Nullable=""false"" />
-        <Property Name=""Deleted"" Type=""Boolean"" Nullable=""false"" />
-        <Property Name=""Description"" Type=""String"" Nullable=""false"" />
-        <Property Name=""Name"" Type=""String"" Nullable=""false"" />
-        <Property Name=""Price"" Type=""Decimal"" Nullable=""false"" />
-        <Property Name=""ProductId"" Type=""Int32"" Nullable=""false"" />
-        <Property Name=""Rating"" Type=""Int32"" Nullable=""false"" />
-        <Property Name=""ReleaseDate"" Type=""Date"" Nullable=""false"" />
+        <Property Name=""Category"" Type=""NorthwindModel.Category"" Nullable=""false"" />
+        <Property Name=""Colour"" Type=""NorthwindModel.Colour"" Nullable=""false"" />
+        <Property Name=""Deleted"" Type=""Edm.Boolean"" Nullable=""false"" />
+        <Property Name=""Description"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Name"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Price"" Type=""Edm.Decimal"" Nullable=""false"" />
+        <Property Name=""ProductId"" Type=""Edm.Int32"" Nullable=""false"" />
+        <Property Name=""Rating"" Type=""Edm.Int32"" Nullable=""false"" />
+        <Property Name=""ReleaseDate"" Type=""Edm.Date"" Nullable=""false"" />
       </EntityType>
       <EntityContainer Name=""DefaultContainer"">
         <EntitySet Name=""Categories"" EntityType=""NorthwindModel.Category"">
