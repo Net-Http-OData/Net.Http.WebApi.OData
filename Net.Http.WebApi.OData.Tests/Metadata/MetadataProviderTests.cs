@@ -65,7 +65,7 @@
           <PropertyRef Name=""OrderId"" />
         </Key>
         <Property Name=""Freight"" Type=""Edm.Decimal"" Nullable=""false"" />
-        <Property Name=""OrderDetails"" Type=""NorthwindModel.OrderDetail"" Nullable=""false"" />
+        <Property Name=""OrderDetails"" Type=""Collection(NorthwindModel.OrderDetail)"" Nullable=""false"" />
         <Property Name=""OrderId"" Type=""Edm.Int64"" Nullable=""false"" />
         <Property Name=""ShipCountry"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""TransactionId"" Type=""Edm.Guid"" Nullable=""false"" />

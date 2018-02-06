@@ -97,10 +97,18 @@ namespace Net.Http.WebApi.OData.Metadata
         private static IEnumerable<XElement> GetComplexTypes(EntityDataModel entityDataModel)
         {
             // Any types used in the model which aren't Entity Sets.
+            var complexCollectionTypes = entityDataModel.EntitySets
+                .SelectMany(kvp => kvp.Value.EdmType.Properties)
+                .Select(p => p.PropertyType)
+                .OfType<EdmCollectionType>()
+                .Select(t => t.ContainedType)
+                .OfType<EdmComplexType>();
+
             var complexTypes = entityDataModel.EntitySets
                 .SelectMany(kvp => kvp.Value.EdmType.Properties)
                 .Select(p => p.PropertyType)
                 .OfType<EdmComplexType>()
+                .Concat(complexCollectionTypes)
                 .Where(t => !entityDataModel.EntitySets.Any(es => es.Value.EdmType == t))
                 .Distinct()
                 .Select(t => new XElement(

@@ -181,7 +181,8 @@
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
                 Assert.Equal("OrderDetails", edmComplexType.Properties[1].Name);
-                Assert.Same(EdmType.GetEdmType(typeof(OrderDetail)), edmComplexType.Properties[1].PropertyType);
+                Assert.IsType<EdmCollectionType>(edmComplexType.Properties[1].PropertyType);
+                Assert.Equal(EdmType.GetEdmType(typeof(OrderDetail)), ((EdmCollectionType)edmComplexType.Properties[1].PropertyType).ContainedType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
                 Assert.Equal("OrderId", edmComplexType.Properties[2].Name);

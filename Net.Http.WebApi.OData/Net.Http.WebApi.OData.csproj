@@ -77,6 +77,7 @@
     <Compile Include="Metadata\ServiceDocumentItem.cs" />
     <Compile Include="Metadata\ServiceDocumentODataController.cs" />
     <Compile Include="Model\Capabilities.cs" />
+    <Compile Include="Model\EdmCollectionType.cs" />
     <Compile Include="Model\EdmComplexType.cs" />
     <Compile Include="Model\EdmEnumMember.cs" />
     <Compile Include="Model\EdmEnumType.cs" />

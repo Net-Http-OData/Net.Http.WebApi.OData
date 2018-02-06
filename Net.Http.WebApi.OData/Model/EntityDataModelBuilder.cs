@@ -131,7 +131,9 @@ namespace Net.Http.WebApi.OData.Model
 
                 if (typeof(IEnumerable<>).MakeGenericType(innerType).IsAssignableFrom(clrType))
                 {
-                    return EdmTypeCache.Map.GetOrAdd(innerType, EdmTypeResolver(innerType));
+                    var containedType = EdmTypeCache.Map.GetOrAdd(innerType, EdmTypeResolver(innerType));
+
+                    return EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmCollectionType(t, containedType));
                 }
             }
 
