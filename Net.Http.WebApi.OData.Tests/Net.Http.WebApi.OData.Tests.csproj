@@ -87,6 +87,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="Metadata\MetadataProviderTests.cs" />
     <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
     <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />

@@ -28,6 +28,12 @@
             set;
         }
 
+        public string Id
+        {
+            get;
+            set;
+        }
+
         public string ImageData
         {
             get;

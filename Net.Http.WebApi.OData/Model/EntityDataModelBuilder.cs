@@ -16,6 +16,7 @@ namespace Net.Http.WebApi.OData.Model
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     /// <summary>
     /// A class which builds the <see cref="EntityDataModel"/>.
@@ -104,7 +105,7 @@ namespace Net.Http.WebApi.OData.Model
                 typeof(T),
                 t => EdmTypeResolver(t));
 
-            var entityKey = edmType.GetProperty(entityKeyExpression.GetMemberInfo().Name);
+            var entityKey = edmType.BaseType == null ? edmType.GetProperty(entityKeyExpression.GetMemberInfo().Name) : null;
 
             var entitySet = new EntitySet(entitySetName, edmType, entityKey, capabilities);
 
@@ -137,12 +138,14 @@ namespace Net.Http.WebApi.OData.Model
                 }
             }
 
-            var clrTypeProperties = clrType.GetProperties().OrderBy(p => p.Name);
+            EdmType baseType = clrType.BaseType != typeof(object) ? baseType = EdmTypeResolver(clrType.BaseType) : null;
+
+            var clrTypeProperties = clrType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .OrderBy(p => p.Name);
 
             var edmProperties = new List<EdmProperty>();
-            var edmComplexType = new EdmComplexType(
-                clrType,
-                edmProperties);
+            var edmComplexType = new EdmComplexType(clrType, baseType, edmProperties);
 
             edmProperties.AddRange(
                 clrTypeProperties.Select(

@@ -33,12 +33,13 @@ namespace Net.Http.WebApi.OData.Metadata
                 new XDeclaration("1.0", "utf-8", null),
                 new XElement(
                     edmxNs + "Edmx",
-                    new XAttribute("Version", "4.0"),
                     new XAttribute(XNamespace.Xmlns + "edmx", edmxNs),
+                    new XAttribute("Version", "4.0"),
                     new XElement(
                         edmxNs + "DataServices",
                         new XElement(
                             edmNs + "Schema",
+                            new XAttribute("xmlns", edmNs),
                             new XAttribute("Namespace", entityDataModel.EntitySets.First().Value.EdmType.ClrType.Namespace),
                             GetEnumTypes(entityDataModel),
                             GetComplexTypes(entityDataModel),
@@ -97,28 +98,34 @@ namespace Net.Http.WebApi.OData.Metadata
         private static IEnumerable<XElement> GetComplexTypes(EntityDataModel entityDataModel)
         {
             // Any types used in the model which aren't Entity Sets.
-            var complexCollectionTypes = entityDataModel.EntitySets
-                .SelectMany(kvp => kvp.Value.EdmType.Properties)
+            var complexCollectionTypes = entityDataModel.EntitySets.Values
+                .SelectMany(t => t.EdmType.Properties)
                 .Select(p => p.PropertyType)
                 .OfType<EdmCollectionType>()
                 .Select(t => t.ContainedType)
                 .OfType<EdmComplexType>();
 
-            var complexTypes = entityDataModel.EntitySets
-                .SelectMany(kvp => kvp.Value.EdmType.Properties)
+            var complexTypes = entityDataModel.EntitySets.Values
+                .SelectMany(t => t.EdmType.Properties)
                 .Select(p => p.PropertyType)
                 .OfType<EdmComplexType>()
                 .Concat(complexCollectionTypes)
-                .Where(t => !entityDataModel.EntitySets.Any(es => es.Value.EdmType == t))
+                .Where(t => !entityDataModel.EntitySets.Values.Any(es => es.EdmType == t))
                 .Distinct()
-                .Select(t => new XElement(
-                    edmNs + "ComplexType",
-                    new XAttribute("Name", t.Name),
-                    t.Properties.Select(p => new XElement(
-                        edmNs + "Property",
-                        new XAttribute("Name", p.Name),
-                        new XAttribute("Type", p.PropertyType.FullName),
-                        new XAttribute("Nullable", "false"))))); // TODO: nullable needs to be set in model (use data annotations?)
+                .Select(t =>
+                {
+                    var element = new XElement(
+                       edmNs + "ComplexType",
+                       new XAttribute("Name", t.Name),
+                       GetProperties(t.Properties));
+
+                    if (t.BaseType != null)
+                    {
+                        element.Add(new XAttribute("BaseType", t.BaseType.FullName));
+                    }
+
+                    return element;
+                });
 
             return complexTypes;
         }
@@ -169,23 +176,34 @@ namespace Net.Http.WebApi.OData.Metadata
             return entityContainer;
         }
 
+        private static XElement GetEntityKey(EdmProperty edmProperty)
+            => new XElement(
+                edmNs + "Key",
+                new XElement(
+                    edmNs + "PropertyRef",
+                    new XAttribute("Name", edmProperty.Name)));
+
         private static IEnumerable<XElement> GetEntityTypes(EntityDataModel entityDataModel)
         {
-            var entityTypes = entityDataModel.EntitySets.Select(
-                kvp => new XElement(
-                    edmNs + "EntityType",
-                    new XAttribute("Name", kvp.Value.Name),
-                    new XElement(
-                        edmNs + "Key",
-                        new XElement(
-                            edmNs + "PropertyRef",
-                            new XAttribute("Name", kvp.Value.EntityKey.Name))),
-                    kvp.Value.EdmType.Properties.Select(p =>
-                        new XElement(
-                            edmNs + "Property",
-                            new XAttribute("Name", p.Name),
-                            new XAttribute("Type", p.PropertyType.FullName),
-                            new XAttribute("Nullable", "false"))))); // TODO: nullable needs to be set in model (use data annotations?)
+            var entityTypes = entityDataModel.EntitySets.Values.Select(
+                t =>
+                {
+                    var element = new XElement(
+                      edmNs + "EntityType",
+                      new XAttribute("Name", t.Name),
+                      GetProperties(t.EdmType.Properties));
+
+                    if (t.EdmType.BaseType == null)
+                    {
+                        element.AddFirst(GetEntityKey(t.EntityKey));
+                    }
+                    else
+                    {
+                        element.Add(new XAttribute("BaseType", t.EdmType.BaseType.FullName));
+                    }
+
+                    return element;
+                });
 
             return entityTypes;
         }
@@ -212,6 +230,14 @@ namespace Net.Http.WebApi.OData.Metadata
         }
 
         private static IEnumerable<XElement> GetFunctions(EntityDataModel entityDataModel) => Enumerable.Empty<XElement>();
+
+        private static IEnumerable<XElement> GetProperties(IEnumerable<EdmProperty> properties)
+            => properties.Select(p =>
+                new XElement(
+                    edmNs + "Property",
+                    new XAttribute("Name", p.Name),
+                    new XAttribute("Type", p.PropertyType.FullName),
+                    new XAttribute("Nullable", "false"))); // TODO: nullable needs to be set in model (use data annotations?)
 
         internal sealed class Utf8StringWriter : StringWriter
         {

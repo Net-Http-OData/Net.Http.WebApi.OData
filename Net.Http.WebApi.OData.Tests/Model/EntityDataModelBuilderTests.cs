@@ -37,7 +37,8 @@
                 var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
                 entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name, Capabilities.Insertable | Capabilities.Updatable | Capabilities.Deletable);
                 entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName, Capabilities.Updatable);
-                entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
+                entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.Id);
+                entityDataModelBuilder.RegisterEntitySet<Manager>("Managers", x => x.Id);
                 entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId, Capabilities.Insertable | Capabilities.Updatable);
                 entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.ProductId, Capabilities.Insertable | Capabilities.Updatable);
 
@@ -62,6 +63,7 @@
 
                 var edmComplexType = entitySet.EdmType;
 
+                Assert.Null(edmComplexType.BaseType);
                 Assert.Equal(typeof(Category), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Category", edmComplexType.FullName);
                 Assert.Equal("Category", edmComplexType.Name);
@@ -86,6 +88,7 @@
 
                 var edmComplexType = entitySet.EdmType;
 
+                Assert.Null(edmComplexType.BaseType);
                 Assert.Equal(typeof(Customer), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Customer", edmComplexType.FullName);
                 Assert.Equal("Customer", edmComplexType.Name);
@@ -122,10 +125,11 @@
 
                 var edmComplexType = entitySet.EdmType;
 
+                Assert.Null(edmComplexType.BaseType);
                 Assert.Equal(typeof(Employee), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Employee", edmComplexType.FullName);
                 Assert.Equal("Employee", edmComplexType.Name);
-                Assert.Equal(7, edmComplexType.Properties.Count);
+                Assert.Equal(8, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
                 Assert.Equal("AccessLevel", edmComplexType.Properties[0].Name);
@@ -144,18 +148,47 @@
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[3].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[4].DeclaringType);
-                Assert.Equal("ImageData", edmComplexType.Properties[4].Name);
+                Assert.Equal("Id", edmComplexType.Properties[4].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[4].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[5].DeclaringType);
-                Assert.Equal("Surname", edmComplexType.Properties[5].Name);
+                Assert.Equal("ImageData", edmComplexType.Properties[5].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[5].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[6].DeclaringType);
-                Assert.Equal("Title", edmComplexType.Properties[6].Name);
+                Assert.Equal("Surname", edmComplexType.Properties[6].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[6].PropertyType);
 
-                Assert.Same(edmComplexType.Properties[2], entitySet.EntityKey);
+                Assert.Same(edmComplexType, edmComplexType.Properties[7].DeclaringType);
+                Assert.Equal("Title", edmComplexType.Properties[7].Name);
+                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[7].PropertyType);
+
+                Assert.Same(edmComplexType.Properties[4], entitySet.EntityKey);
+            }
+
+            [Fact]
+            public void The_Managers_CollectionIsCorrect()
+            {
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Managers"));
+
+                var entitySet = this.entityDataModel.EntitySets["Managers"];
+
+                Assert.Equal("Managers", entitySet.Name);
+                Assert.Equal(Capabilities.None, entitySet.Capabilities);
+
+                var edmComplexType = entitySet.EdmType;
+
+                Assert.Equal(EdmType.GetEdmType(typeof(Employee)), edmComplexType.BaseType);
+                Assert.Equal(typeof(Manager), edmComplexType.ClrType);
+                Assert.Equal("NorthwindModel.Manager", edmComplexType.FullName);
+                Assert.Equal("Manager", edmComplexType.Name);
+                Assert.Equal(1, edmComplexType.Properties.Count); // Does not include inherited properties
+
+                Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
+                Assert.Equal("AnnualBudget", edmComplexType.Properties[0].Name);
+                Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[0].PropertyType);
+
+                Assert.Null(entitySet.EntityKey);
             }
 
             [Fact]
@@ -170,6 +203,7 @@
 
                 var edmComplexType = entitySet.EdmType;
 
+                Assert.Null(edmComplexType.BaseType);
                 Assert.Equal(typeof(Order), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Order", edmComplexType.FullName);
                 Assert.Equal("Order", edmComplexType.Name);
@@ -211,6 +245,7 @@
 
                 var edmComplexType = entitySet.EdmType;
 
+                Assert.Null(edmComplexType.BaseType);
                 Assert.Equal(typeof(Product), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Product", edmComplexType.FullName);
                 Assert.Equal("Product", edmComplexType.Name);
@@ -268,9 +303,9 @@
             }
 
             [Fact]
-            public void ThereAre_5_RegisteredCollections()
+            public void ThereAre_6_RegisteredCollections()
             {
-                Assert.Equal(5, this.entityDataModel.EntitySets.Count);
+                Assert.Equal(6, this.entityDataModel.EntitySets.Count);
             }
         }
 
@@ -283,7 +318,8 @@
                 var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
                 entityDataModelBuilder.RegisterEntitySet<Category>(x => x.Name);
                 entityDataModelBuilder.RegisterEntitySet<Customer>(x => x.CompanyName);
-                entityDataModelBuilder.RegisterEntitySet<Employee>(x => x.EmailAddress);
+                entityDataModelBuilder.RegisterEntitySet<Employee>(x => x.Id);
+                entityDataModelBuilder.RegisterEntitySet<Manager>(x => x.Id);
                 entityDataModelBuilder.RegisterEntitySet<Order>(x => x.OrderId);
                 entityDataModelBuilder.RegisterEntitySet<Product>(x => x.ProductId);
 
@@ -314,6 +350,8 @@
                 Assert.Equal("Customer", entitySet.Name);
 
                 var edmComplexType = entitySet.EdmType;
+
+                Assert.Equal(typeof(Customer), edmComplexType.ClrType);
             }
 
             [Fact]
@@ -328,6 +366,20 @@
                 var edmComplexType = entitySet.EdmType;
 
                 Assert.Equal(typeof(Employee), edmComplexType.ClrType);
+            }
+
+            [Fact]
+            public void The_Managers_CollectionIsCorrect()
+            {
+                Assert.True(this.entityDataModel.EntitySets.ContainsKey("Manager"));
+
+                var entitySet = this.entityDataModel.EntitySets["Manager"];
+
+                Assert.Equal("Manager", entitySet.Name);
+
+                var edmComplexType = entitySet.EdmType;
+
+                Assert.Equal(typeof(Manager), edmComplexType.ClrType);
             }
 
             [Fact]
@@ -359,9 +411,9 @@
             }
 
             [Fact]
-            public void ThereAre_5_RegisteredCollections()
+            public void ThereAre_6_RegisteredCollections()
             {
-                Assert.Equal(5, this.entityDataModel.EntitySets.Count);
+                Assert.Equal(6, this.entityDataModel.EntitySets.Count);
             }
         }
     }

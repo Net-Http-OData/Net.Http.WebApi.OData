@@ -23,9 +23,23 @@ namespace Net.Http.WebApi.OData.Model
     public sealed class EdmComplexType : EdmType
     {
         internal EdmComplexType(Type clrType, IReadOnlyList<EdmProperty> properties)
+            : this(clrType, null, properties)
+        {
+        }
+
+        internal EdmComplexType(Type clrType, EdmType baseType, IReadOnlyList<EdmProperty> properties)
             : base(clrType.Name, clrType.FullName, clrType)
         {
+            this.BaseType = baseType;
             this.Properties = properties ?? throw new ArgumentNullException(nameof(properties));
+        }
+
+        /// <summary>
+        /// Gets the <see cref="EdmType"/> from which the current <see cref="EdmComplexType"/> directly inherits.
+        /// </summary>
+        public EdmType BaseType
+        {
+            get;
         }
 
         /// <summary>

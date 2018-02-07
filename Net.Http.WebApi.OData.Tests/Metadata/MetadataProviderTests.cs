@@ -13,9 +13,9 @@
 
             var csdlDocument = MetadataProvider.Create(EntityDataModel.Current);
 
-            Assert.Equal(@"<edmx:Edmx Version=""4.0"" xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"">
+            Assert.Equal(@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""4.0"">
   <edmx:DataServices>
-    <Schema Namespace=""NorthwindModel"" xmlns=""http://docs.oasis-open.org/odata/ns/edm"">
+    <Schema xmlns=""http://docs.oasis-open.org/odata/ns/edm"" Namespace=""NorthwindModel"">
       <EnumType Name=""AccessLevel"" UnderlyingType=""Edm.Int32"" IsFlags=""True"">
         <Member Name=""None"" Value=""0"" />
         <Member Name=""Read"" Value=""1"" />
@@ -50,15 +50,19 @@
       </EntityType>
       <EntityType Name=""Employees"">
         <Key>
-          <PropertyRef Name=""EmailAddress"" />
+          <PropertyRef Name=""Id"" />
         </Key>
         <Property Name=""AccessLevel"" Type=""NorthwindModel.AccessLevel"" Nullable=""false"" />
         <Property Name=""BirthDate"" Type=""Edm.Date"" Nullable=""false"" />
         <Property Name=""EmailAddress"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Forename"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Id"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""ImageData"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Surname"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Title"" Type=""Edm.String"" Nullable=""false"" />
+      </EntityType>
+      <EntityType Name=""Managers"" BaseType=""NorthwindModel.Employee"">
+        <Property Name=""AnnualBudget"" Type=""Edm.Decimal"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Orders"">
         <Key>
@@ -123,6 +127,24 @@
         </EntitySet>
         <EntitySet Name=""Employees"" EntityType=""NorthwindModel.Employee"">
           <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Employees"" />
+          <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
+            <Record>
+              <PropertyValue Property=""Insertable"" Bool=""False"" />
+            </Record>
+          </Annotation>
+          <Annotation Term=""Org.OData.Capabilities.V1.UpdateRestrictions"">
+            <Record>
+              <PropertyValue Property=""Updatable"" Bool=""False"" />
+            </Record>
+          </Annotation>
+          <Annotation Term=""Org.OData.Capabilities.V1.DeleteRestrictions"">
+            <Record>
+              <PropertyValue Property=""Deletable"" Bool=""False"" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name=""Managers"" EntityType=""NorthwindModel.Manager"">
+          <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Managers"" />
           <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
             <Record>
               <PropertyValue Property=""Insertable"" Bool=""False"" />
