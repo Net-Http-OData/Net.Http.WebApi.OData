@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Hosting;
     using Net.Http.WebApi.OData.Model;
@@ -495,9 +496,9 @@
             }
 
             [Fact]
-            public void TheContentIsSet()
+            public async Task TheContentIsSet()
             {
-                Assert.Equal("MLK", ((StringContent)this.httpResponseMessage.Content).ReadAsStringAsync().Result);
+                Assert.Equal("MLK", await ((StringContent)this.httpResponseMessage.Content).ReadAsStringAsync());
             }
 
             [Fact]

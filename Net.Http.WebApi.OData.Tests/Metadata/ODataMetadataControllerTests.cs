@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Hosting;
     using OData.Metadata;
@@ -11,7 +12,7 @@
     public class ODataMetadataControllerTests
     {
         [Fact]
-        public void GetReturnsCsdlXmlDocument()
+        public async Task GetReturnsCsdlXmlDocument()
         {
             TestHelper.EnsureEDM();
 
@@ -25,7 +26,7 @@
             Assert.True(response.Headers.Contains(ODataHeaderNames.ODataVersion));
             Assert.Equal(ODataHeaderValues.ODataVersionString, response.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
 
-            var result = ((StringContent)response.Content).ReadAsStringAsync().Result;
+            var result = await ((StringContent)response.Content).ReadAsStringAsync();
 
             Assert.NotNull(result);
         }
