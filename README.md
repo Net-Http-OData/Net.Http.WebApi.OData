@@ -18,13 +18,14 @@ public static class WebApiConfig
 {
     public static void Register(HttpConfiguration config)
     {
-        // Build the OData Entity Data Model first
-        var entityDataModelBuilder = new EntityDataModelBuilder();
-        entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
-        entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
-        entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId);
-        entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.Name);
-        entityDataModelBuilder.BuildModel();
+        // Wire-up OData and define the Entity Data Model
+        config.UseOData(entityDataModelBuilder =>
+        {
+            entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name);
+            entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.EmailAddress);
+            entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId);
+            entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.Name);
+        });
 
         // Use Attribute Mapping for the OData controllers
         config.MapHttpAttributeRoutes();
@@ -53,6 +54,6 @@ The library supports OData 4.0
 
 The NuGet Package contains binaries compiled against:
 
-* .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.2.3
+* .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.2.4
 
 To find out more, head over to the [Wiki](https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki).
