@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
+    using System.Net;
 
     internal struct Lexer
     {
@@ -22,13 +23,13 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         {
             new TokenDefinition(TokenType.OpenParentheses,      @"\("),
             new TokenDefinition(TokenType.CloseParentheses,     @"\)"),
-            new TokenDefinition(TokenType.And,                  @"and(?=\s)"),
-            new TokenDefinition(TokenType.Or,                   @"or(?=\s)"),
+            new TokenDefinition(TokenType.And,                  @"and(?=\s|$)"),
+            new TokenDefinition(TokenType.Or,                   @"or(?=\s|$)"),
             new TokenDefinition(TokenType.True,                 @"true"),
             new TokenDefinition(TokenType.False,                @"false"),
             new TokenDefinition(TokenType.Null,                 @"null"),
-            new TokenDefinition(TokenType.UnaryOperator,        @"not(?=\s)"),
-            new TokenDefinition(TokenType.BinaryOperator,       @"(eq|ne|gt|ge|lt|le|has|add|sub|mul|div|mod)(?=\s)"),
+            new TokenDefinition(TokenType.UnaryOperator,        @"not(?=\s|$)"),
+            new TokenDefinition(TokenType.BinaryOperator,       @"(eq|ne|gt|ge|lt|le|has|add|sub|mul|div|mod)(?=\s|$)"),
             new TokenDefinition(TokenType.DateTimeOffset,       @"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,12})?(Z|[+-]\d{2}:\d{2})?)?"),
             new TokenDefinition(TokenType.Date,                 @"\d{4}-\d{2}-\d{2}"),
             new TokenDefinition(TokenType.TimeOfDay,            @"\d{2}:\d{2}(:\d{2}(\.\d{1,12})?)?"),
@@ -90,6 +91,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                     return true;
                 }
+            }
+
+            if (this.content.Length != this.position)
+            {
+                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
             }
 
             return false;

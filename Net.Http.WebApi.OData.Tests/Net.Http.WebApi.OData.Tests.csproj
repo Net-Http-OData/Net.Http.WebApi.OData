@@ -114,6 +114,7 @@
     <Compile Include="Query\OrderByPropertyTests.cs" />
     <Compile Include="Query\OrderByQueryOptionTests.cs" />
     <Compile Include="Query\Parsers\BinaryOperatorKindParserTests.cs" />
+    <Compile Include="Query\Parsers\FilterExpressionParserTests.cs" />
     <Compile Include="Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs" />
     <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleFunction.cs" />
     <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleProperty.cs" />

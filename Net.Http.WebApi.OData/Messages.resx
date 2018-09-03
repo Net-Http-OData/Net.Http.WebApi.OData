@@ -162,4 +162,7 @@
   <data name="ODataQueryCannotBeEmpty" xml:space="preserve">
     <value>The value for OData query '{0}' cannot be empty.</value>
   </data>
+  <data name="UnableToParseFilter" xml:space="preserve">
+    <value>The $filter query option could not be parsed by this service.</value>
+  </data>
 </root>
