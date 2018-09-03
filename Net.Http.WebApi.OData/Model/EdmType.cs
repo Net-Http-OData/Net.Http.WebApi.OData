@@ -46,26 +46,17 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the CLR type.
         /// </summary>
-        public Type ClrType
-        {
-            get;
-        }
+        public Type ClrType { get; }
 
         /// <summary>
         /// Gets the full name.
         /// </summary>
-        public string FullName
-        {
-            get;
-        }
+        public string FullName { get; }
 
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the type with the specified name in the Entity Data Model.
@@ -123,7 +114,7 @@ namespace Net.Http.WebApi.OData.Model
                 return false;
             }
 
-            if (object.ReferenceEquals(this, other))
+            if (ReferenceEquals(this, other))
             {
                 return true;
             }

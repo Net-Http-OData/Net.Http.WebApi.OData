@@ -51,10 +51,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the <see cref="EntitySet"/> to apply the OData query against.
         /// </summary>
-        public EntitySet EntitySet
-        {
-            get;
-        }
+        public EntitySet EntitySet { get; }
 
         /// <summary>
         /// Gets the expand query option.
@@ -123,18 +120,12 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the raw values of the OData query request.
         /// </summary>
-        public ODataRawQueryOptions RawValues
-        {
-            get;
-        }
+        public ODataRawQueryOptions RawValues { get; }
 
         /// <summary>
         /// Gets the request message associated with this OData query.
         /// </summary>
-        public HttpRequestMessage Request
-        {
-            get;
-        }
+        public HttpRequestMessage Request { get; }
 
         /// <summary>
         /// Gets the search query option.

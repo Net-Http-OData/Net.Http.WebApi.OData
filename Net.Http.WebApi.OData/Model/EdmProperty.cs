@@ -43,26 +43,17 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the type in the Entity Data Model which declares this property.
         /// </summary>
-        public EdmComplexType DeclaringType
-        {
-            get;
-        }
+        public EdmComplexType DeclaringType { get; }
 
         /// <summary>
         /// Gets the name of the property.
         /// </summary>
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the type of the property in the Entity Data Model.
         /// </summary>
-        public EdmType PropertyType
-        {
-            get;
-        }
+        public EdmType PropertyType { get; }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

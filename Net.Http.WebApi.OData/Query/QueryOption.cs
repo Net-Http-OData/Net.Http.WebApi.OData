@@ -33,9 +33,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the raw request value.
         /// </summary>
-        public string RawValue
-        {
-            get;
-        }
+        public string RawValue { get; }
     }
 }

@@ -60,34 +60,21 @@ namespace Net.Http.WebApi.OData.Model
         /// <remarks>
         /// Will be null until <see cref="EntityDataModelBuilder" />.BuildModel() has been called.
         /// </remarks>
-        public static EntityDataModel Current
-        {
-            get;
-            internal set;
-        }
+        public static EntityDataModel Current { get; internal set; }
 
         /// <summary>
         /// Gets the Entity Sets defined in the Entity Data Model.
         /// </summary>
-        public IReadOnlyDictionary<string, EntitySet> EntitySets
-        {
-            get;
-        }
+        public IReadOnlyDictionary<string, EntitySet> EntitySets { get; }
 
         /// <summary>
         /// Gets the filter functions provided by the service.
         /// </summary>
-        public IReadOnlyCollection<string> FilterFunctions
-        {
-            get;
-        }
+        public IReadOnlyCollection<string> FilterFunctions { get; }
 
         /// <summary>
         /// Gets the formats supported by the service.
         /// </summary>
-        public IReadOnlyCollection<string> SupportedFormats
-        {
-            get;
-        }
+        public IReadOnlyCollection<string> SupportedFormats { get; }
     }
 }

@@ -30,9 +30,6 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the <see cref="EdmType"/> type contained in the collection.
         /// </summary>
-        public EdmType ContainedType
-        {
-            get;
-        }
+        public EdmType ContainedType { get; }
     }
 }

@@ -34,25 +34,16 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Gets the root URI of the OData Service.
         /// </summary>
-        public Uri DataServiceUri
-        {
-            get;
-        }
+        public Uri DataServiceUri { get; }
 
         /// <summary>
         /// Gets the OData-Isolation requested by the client, or None if not otherwise specified.
         /// </summary>
-        public ODataIsolationLevel IsolationLevel
-        {
-            get;
-        }
+        public ODataIsolationLevel IsolationLevel { get; }
 
         /// <summary>
         /// Gets the odata.metadata level specified in the ACCEPT header by the client, or Minimal if not otherwise specified.
         /// </summary>
-        public ODataMetadataLevel MetadataLevel
-        {
-            get;
-        }
+        public ODataMetadataLevel MetadataLevel { get; }
     }
 }

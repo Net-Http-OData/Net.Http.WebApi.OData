@@ -36,9 +36,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the expression.
         /// </summary>
-        public QueryNode Expression
-        {
-            get;
-        }
+        public QueryNode Expression { get; }
     }
 }

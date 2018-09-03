@@ -30,28 +30,19 @@ namespace Net.Http.WebApi.OData.Metadata
         /// Gets the name of the item.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("kind", Order = 1)]
-        public string Kind
-        {
-            get;
-        }
+        public string Kind { get; }
 
         /// <summary>
         /// Gets the name of the item.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Order = 0)]
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the URL of the item.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("url", Order = 2)]
-        public Uri Url
-        {
-            get;
-        }
+        public Uri Url { get; }
 
         /// <summary>
         /// Creates a service document item which represents an Entity Set in the Entity Data Model.

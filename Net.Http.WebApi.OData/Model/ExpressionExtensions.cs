@@ -21,9 +21,8 @@ namespace Net.Http.WebApi.OData.Model
         internal static MemberInfo GetMemberInfo(this Expression expression)
         {
             var lambdaExpression = (LambdaExpression)expression;
-            var unaryExpression = lambdaExpression.Body as UnaryExpression;
 
-            var memberExpression = unaryExpression != null
+            var memberExpression = lambdaExpression.Body is UnaryExpression unaryExpression
                 ? (MemberExpression)unaryExpression.Operand
                 : (MemberExpression)lambdaExpression.Body;
 

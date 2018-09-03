@@ -37,10 +37,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the <see cref="EdmType"/> of the value.
         /// </summary>
-        public EdmType EdmType
-        {
-            get;
-        }
+        public EdmType EdmType { get; }
 
         /// <summary>
         /// Gets the kind of query node.
@@ -50,18 +47,12 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the literal text if the constant value.
         /// </summary>
-        public string LiteralText
-        {
-            get;
-        }
+        public string LiteralText { get; }
 
         /// <summary>
         /// Gets the constant value as an object.
         /// </summary>
-        public object Value
-        {
-            get;
-        }
+        public object Value { get; }
 
         /// <summary>
         /// Gets the ConstantNode which represents a value of false.

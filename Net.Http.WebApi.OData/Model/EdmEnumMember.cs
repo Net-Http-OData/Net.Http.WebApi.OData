@@ -27,17 +27,11 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the name of the enum member.
         /// </summary>
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the integer value of the enum member.
         /// </summary>
-        public int Value
-        {
-            get;
-        }
+        public int Value { get; }
     }
 }

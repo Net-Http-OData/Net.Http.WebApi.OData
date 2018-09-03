@@ -37,18 +37,12 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the <see cref="EdmType"/> from which the current <see cref="EdmComplexType"/> directly inherits.
         /// </summary>
-        public EdmType BaseType
-        {
-            get;
-        }
+        public EdmType BaseType { get; }
 
         /// <summary>
         /// Gets the properties defined on the type.
         /// </summary>
-        public IReadOnlyList<EdmProperty> Properties
-        {
-            get;
-        }
+        public IReadOnlyList<EdmProperty> Properties { get; }
 
         /// <summary>
         /// Gets the property with the specified name.

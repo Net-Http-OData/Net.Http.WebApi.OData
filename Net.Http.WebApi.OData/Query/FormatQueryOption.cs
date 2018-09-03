@@ -57,9 +57,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the media type header value.
         /// </summary>
-        public MediaTypeHeaderValue MediaTypeHeaderValue
-        {
-            get;
-        }
+        public MediaTypeHeaderValue MediaTypeHeaderValue { get; }
     }
 }
