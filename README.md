@@ -54,6 +54,6 @@ The library supports OData 4.0
 
 The NuGet Package contains binaries compiled against:
 
-* .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.2.4
+* .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.2.6
 
 To find out more, head over to the [Wiki](https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki).

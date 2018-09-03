@@ -66,25 +66,16 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the direction the property should be ordered by.
         /// </summary>
-        public OrderByDirection Direction
-        {
-            get;
-        }
+        public OrderByDirection Direction { get; }
 
         /// <summary>
         /// Gets the property to order by.
         /// </summary>
-        public EdmProperty Property
-        {
-            get;
-        }
+        public EdmProperty Property { get; }
 
         /// <summary>
         /// Gets the raw request value.
         /// </summary>
-        public string RawValue
-        {
-            get;
-        }
+        public string RawValue { get; }
     }
 }

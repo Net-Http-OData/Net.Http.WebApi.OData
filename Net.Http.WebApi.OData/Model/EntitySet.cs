@@ -28,33 +28,21 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the <see cref="Capabilities"/> of the Entity Set.
         /// </summary>
-        public Capabilities Capabilities
-        {
-            get;
-        }
+        public Capabilities Capabilities { get; }
 
         /// <summary>
         /// Gets the <see cref="EdmComplexType"/> of the entities in the set.
         /// </summary>
-        public EdmComplexType EdmType
-        {
-            get;
-        }
+        public EdmComplexType EdmType { get; }
 
         /// <summary>
         /// Gets the entity key property.
         /// </summary>
-        public EdmProperty EntityKey
-        {
-            get;
-        }
+        public EdmProperty EntityKey { get; }
 
         /// <summary>
         /// Gets the name of the Entity Set.
         /// </summary>
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
     }
 }

@@ -153,82 +153,52 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the raw $count query value from the incoming request Uri if specified.
         /// </summary>
-        public string Count
-        {
-            get;
-        }
+        public string Count { get; }
 
         /// <summary>
         /// Gets the raw $expand query value from the incoming request Uri if specified.
         /// </summary>
-        public string Expand
-        {
-            get;
-        }
+        public string Expand { get; }
 
         /// <summary>
         /// Gets the raw $filter query value from the incoming request Uri if specified.
         /// </summary>
-        public string Filter
-        {
-            get;
-        }
+        public string Filter { get; }
 
         /// <summary>
         /// Gets the raw $format query value from the incoming request Uri if specified.
         /// </summary>
-        public string Format
-        {
-            get;
-        }
+        public string Format { get; }
 
         /// <summary>
         /// Gets the raw $orderby query value from the incoming request Uri if specified.
         /// </summary>
-        public string OrderBy
-        {
-            get;
-        }
+        public string OrderBy { get; }
 
         /// <summary>
         /// Gets the raw $search query value from the incoming request Uri if specified.
         /// </summary>
-        public string Search
-        {
-            get;
-        }
+        public string Search { get; }
 
         /// <summary>
         /// Gets the raw $select query value from the incoming request Uri if specified.
         /// </summary>
-        public string Select
-        {
-            get;
-        }
+        public string Select { get; }
 
         /// <summary>
         /// Gets the raw $skip query value from the incoming request Uri if specified.
         /// </summary>
-        public string Skip
-        {
-            get;
-        }
+        public string Skip { get; }
 
         /// <summary>
         /// Gets the raw $skip token query value from the incoming request Uri if specified.
         /// </summary>
-        public string SkipToken
-        {
-            get;
-        }
+        public string SkipToken { get; }
 
         /// <summary>
         /// Gets the raw $top query value from the incoming request Uri if specified.
         /// </summary>
-        public string Top
-        {
-            get;
-        }
+        public string Top { get; }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

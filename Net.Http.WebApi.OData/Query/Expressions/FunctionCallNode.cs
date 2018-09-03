@@ -37,10 +37,7 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the name of the function.
         /// </summary>
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the parameters for the function call.
@@ -48,8 +45,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         public IReadOnlyList<QueryNode> Parameters { get; } = new List<QueryNode>();
 
         internal void AddParameter(QueryNode queryNode)
-        {
-            ((IList<QueryNode>)this.Parameters).Add(queryNode);
-        }
+            => ((IList<QueryNode>)this.Parameters).Add(queryNode);
     }
 }

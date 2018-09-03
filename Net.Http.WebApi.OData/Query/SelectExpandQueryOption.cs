@@ -57,9 +57,6 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the properties specified in the query.
         /// </summary>
-        public IReadOnlyList<EdmProperty> Properties
-        {
-            get;
-        }
+        public IReadOnlyList<EdmProperty> Properties { get; }
     }
 }

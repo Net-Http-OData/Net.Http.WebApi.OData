@@ -39,27 +39,16 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the left query node.
         /// </summary>
-        public QueryNode Left
-        {
-            get;
-            internal set;
-        }
+        public QueryNode Left { get; internal set; }
 
         /// <summary>
         /// Gets the kind of the operator.
         /// </summary>
-        public BinaryOperatorKind OperatorKind
-        {
-            get;
-        }
+        public BinaryOperatorKind OperatorKind { get; }
 
         /// <summary>
         /// Gets the right query node.
         /// </summary>
-        public QueryNode Right
-        {
-            get;
-            internal set;
-        }
+        public QueryNode Right { get; internal set; }
     }
 }

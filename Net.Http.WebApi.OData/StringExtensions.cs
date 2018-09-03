@@ -17,8 +17,6 @@ namespace Net.Http.WebApi.OData
     internal static class StringExtensions
     {
         internal static string FormatWith(this string value, string arg0)
-        {
-            return string.Format(CultureInfo.InvariantCulture, value, arg0);
-        }
+            => string.Format(CultureInfo.InvariantCulture, value, arg0);
     }
 }

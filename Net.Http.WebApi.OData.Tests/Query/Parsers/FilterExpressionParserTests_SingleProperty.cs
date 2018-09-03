@@ -767,7 +767,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             [Fact]
             public void ParsePropertyEqStringFullCharacterSetValueExpression()
             {
-                var queryNode = FilterExpressionParser.Parse("Name eq 'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&('')*+,;=@'", EntityDataModel.Current.EntitySets["Products"].EdmType);
+                var queryNode = FilterExpressionParser.Parse(@"Name eq 'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&('')*+,;=@\/'", EntityDataModel.Current.EntitySets["Products"].EdmType);
 
                 Assert.NotNull(queryNode);
                 Assert.IsType<BinaryOperatorNode>(queryNode);
@@ -780,9 +780,9 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
 
                 Assert.IsType<ConstantNode>(node.Right);
-                Assert.Equal("'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&('')*+,;=@'", ((ConstantNode)node.Right).LiteralText);
+                Assert.Equal(@"'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&('')*+,;=@\/'", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<string>(((ConstantNode)node.Right).Value);
-                Assert.Equal("ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&(')*+,;=@", ((ConstantNode)node.Right).Value);
+                Assert.Equal(@"ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&(')*+,;=@\/", ((ConstantNode)node.Right).Value);
             }
 
             [Fact]

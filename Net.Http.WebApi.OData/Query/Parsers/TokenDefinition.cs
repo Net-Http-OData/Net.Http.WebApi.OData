@@ -31,15 +31,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             this.Ignore = ignore;
         }
 
-        internal bool Ignore
-        {
-            get;
-        }
+        internal bool Ignore { get; }
 
-        internal Regex Regex
-        {
-            get;
-        }
+        internal Regex Regex { get; }
 
         internal Token CreateToken(Match match) => new Token(match.Value, this.tokenType);
     }

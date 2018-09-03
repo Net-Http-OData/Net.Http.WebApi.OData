@@ -67,7 +67,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <param name="entityKeyExpression">The Entity Key expression.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
         public void RegisterEntitySet<T>(Expression<Func<T, object>> entityKeyExpression)
-            => this.RegisterEntitySet<T>(typeof(T).Name, entityKeyExpression, Capabilities.None);
+            => this.RegisterEntitySet(typeof(T).Name, entityKeyExpression, Capabilities.None);
 
         /// <summary>
         /// Registers an Entity Set of the specified type to the Entity Data Model with the name of the type as the Entity Set name.
@@ -77,7 +77,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <param name="capabilities">The capabilities of the Entity Set.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
         public void RegisterEntitySet<T>(Expression<Func<T, object>> entityKeyExpression, Capabilities capabilities)
-            => this.RegisterEntitySet<T>(typeof(T).Name, entityKeyExpression, capabilities);
+            => this.RegisterEntitySet(typeof(T).Name, entityKeyExpression, capabilities);
 
         /// <summary>
         /// Registers an Entity Set of the specified type to the Entity Data Model with the specified name.
@@ -88,7 +88,7 @@ namespace Net.Http.WebApi.OData.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "The method signature isn't correct otherwise")]
         public void RegisterEntitySet<T>(string entitySetName, Expression<Func<T, object>> entityKeyExpression)
-            => this.RegisterEntitySet<T>(entitySetName, entityKeyExpression, Capabilities.None);
+            => this.RegisterEntitySet(entitySetName, entityKeyExpression, Capabilities.None);
 
         /// <summary>
         /// Registers an Entity Set of the specified type to the Entity Data Model with the specified name.

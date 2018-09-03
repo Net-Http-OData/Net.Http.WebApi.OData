@@ -31,10 +31,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Gets the enum members.
         /// </summary>
-        public IReadOnlyList<EdmEnumMember> Members
-        {
-            get;
-        }
+        public IReadOnlyList<EdmEnumMember> Members { get; }
 
         /// <summary>
         /// Gets the CLR Enum value for the specified Enum member in the Entity Data Model.

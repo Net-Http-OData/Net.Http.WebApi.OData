@@ -37,17 +37,11 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the operand of the unary operator.
         /// </summary>
-        public QueryNode Operand
-        {
-            get;
-        }
+        public QueryNode Operand { get; }
 
         /// <summary>
         /// Gets the kind of the operator.
         /// </summary>
-        public UnaryOperatorKind OperatorKind
-        {
-            get;
-        }
+        public UnaryOperatorKind OperatorKind { get; }
     }
 }

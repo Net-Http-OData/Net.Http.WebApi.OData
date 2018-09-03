@@ -37,9 +37,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the property being referenced in the query.
         /// </summary>
-        public EdmProperty Property
-        {
-            get;
-        }
+        public EdmProperty Property { get; }
     }
 }

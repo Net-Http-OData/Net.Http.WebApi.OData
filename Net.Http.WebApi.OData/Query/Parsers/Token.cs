@@ -21,14 +21,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             this.TokenType = tokenType;
         }
 
-        internal TokenType TokenType
-        {
-            get;
-        }
+        internal TokenType TokenType { get; }
 
-        internal string Value
-        {
-            get;
-        }
+        internal string Value { get; }
     }
 }

@@ -20,9 +20,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// <summary>
         /// Gets the kind of query node.
         /// </summary>
-        public abstract QueryNodeKind Kind
-        {
-            get;
-        }
+        public abstract QueryNodeKind Kind { get; }
     }
 }
