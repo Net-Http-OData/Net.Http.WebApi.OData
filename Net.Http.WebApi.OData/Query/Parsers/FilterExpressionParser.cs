@@ -108,6 +108,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.CloseParentheses:
+                            if (this.groupingDepth == 0)
+                            {
+                                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                            }
+
                             this.groupingDepth--;
 
                             if (stack.Count > 0)

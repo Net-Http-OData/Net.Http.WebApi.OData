@@ -25,6 +25,26 @@
             }
 
             [Fact]
+            public void ParseFunctionExtraBeginParenthesisEqExpression()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => FilterExpressionParser.Parse("(ceiling(Freight) eq 32", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+            }
+
+            [Fact]
+            public void ParseFunctionExtraEndParenthesisEqExpression()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => FilterExpressionParser.Parse("ceiling(Freight) eq 32)", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+            }
+
+            [Fact]
             public void ParseFunctionMissingParameterExpression()
             {
                 var exception = Assert.Throws<ODataException>(
