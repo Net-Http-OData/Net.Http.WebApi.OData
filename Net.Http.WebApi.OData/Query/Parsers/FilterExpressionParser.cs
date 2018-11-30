@@ -168,8 +168,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Enum:
                         case TokenType.False:
                         case TokenType.Guid:
-                        case TokenType.Int32:
-                        case TokenType.Int64:
+                        case TokenType.Integer:
                         case TokenType.Null:
                         case TokenType.Single:
                         case TokenType.String:
@@ -274,8 +273,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Enum:
                         case TokenType.False:
                         case TokenType.Guid:
-                        case TokenType.Int32:
-                        case TokenType.Int64:
+                        case TokenType.Integer:
                         case TokenType.Null:
                         case TokenType.Single:
                         case TokenType.String:
