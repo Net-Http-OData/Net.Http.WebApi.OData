@@ -5,7 +5,7 @@
     <version>0.0.0</version>
     <authors>Trevor Pilley and Project Contributors</authors>
     <owners>Trevor Pilley</owners>
-    <description>A library which makes it easy to consume an OData Query with ASP.NET WebApi.</description>
+    <description>A library which makes it easy to consume an OData 4.0 Query with ASP.NET WebApi.</description>
     <releaseNotes>See https://github.com/TrevorPilley/Net.Http.WebApi.OData/releases for a summary of changes made in this release of the package.
 </releaseNotes>
     <language>en-GB</language>
@@ -15,7 +15,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>OData Parser WebApi ASP.NET</tags>
     <dependencies>
-      <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2.6,6.0)" />
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2.7,6.0)" />
     </dependencies>
   </metadata>
   <files>

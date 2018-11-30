@@ -71,23 +71,26 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     var guidValue = Guid.ParseExact(token.Value, "D");
                     return ConstantNode.Guid(token.Value, guidValue);
 
-                case TokenType.Int32:
-                    var int32Text = token.Value;
-                    if (int32Text == "0")
+                case TokenType.Integer:
+                    var integerText = token.Value;
+
+                    if (integerText == "0")
                     {
                         return ConstantNode.Int32Zero;
                     }
-
-                    var int32Value = int.Parse(int32Text, CultureInfo.InvariantCulture);
-                    return ConstantNode.Int32(token.Value, int32Value);
-
-                case TokenType.Int64:
-                    if (token.Value == "0l" || token.Value == "0L")
+                    else if (integerText == "0l" || integerText == "0L")
                     {
                         return ConstantNode.Int64Zero;
                     }
 
-                    var int64Text = token.Value.Substring(0, token.Value.Length - 1);
+                    var is64BitSuffix = integerText.EndsWith("l", StringComparison.OrdinalIgnoreCase);
+
+                    if (!is64BitSuffix && int.TryParse(integerText, out int int32Value))
+                    {
+                        return ConstantNode.Int32(token.Value, int32Value);
+                    }
+
+                    var int64Text = !is64BitSuffix ? integerText : integerText.Substring(0, integerText.Length - 1);
                     var int64Value = long.Parse(int64Text, CultureInfo.InvariantCulture);
                     return ConstantNode.Int64(token.Value, int64Value);
 

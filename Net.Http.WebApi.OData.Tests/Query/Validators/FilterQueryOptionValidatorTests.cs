@@ -652,7 +652,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=fractionalseconds(BirthDate) lt 0.1"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=fractionalseconds(BirthDate) lt 0.1m"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 
@@ -683,7 +683,7 @@
                 TestHelper.EnsureEDM();
 
                 this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=fractionalseconds(BirthDate) lt 0.1"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Employees?$filter=fractionalseconds(BirthDate) lt 0.1m"),
                     EntityDataModel.Current.EntitySets["Employees"]);
             }
 

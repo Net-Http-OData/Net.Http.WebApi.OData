@@ -124,6 +124,15 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The $filter query option could not be parsed by this service..
+        /// </summary>
+        internal static string UnableToParseFilter {
+            get {
+                return ResourceManager.GetString("UnableToParseFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; operator is not a valid operator..
         /// </summary>
         internal static string UnknownOperator {

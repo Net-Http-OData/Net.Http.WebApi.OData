@@ -14,6 +14,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using Expressions;
     using Model;
 
@@ -67,7 +68,19 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                 this.nextBinaryOperatorKind = BinaryOperatorKind.None;
                 this.UpdateExpressionTree();
 
-                return this.nodeStack.Pop();
+                if (this.groupingDepth != 0 || this.nodeStack.Count != 1)
+                {
+                    throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                }
+
+                var node = this.nodeStack.Pop();
+
+                if (node is BinaryOperatorNode binaryNode && (binaryNode.Left == null || binaryNode.Right == null))
+                {
+                    throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                }
+
+                return node;
             }
 
             private QueryNode ParseFunctionCallNode()
@@ -84,11 +97,22 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     switch (token.TokenType)
                     {
                         case TokenType.OpenParentheses:
+                            if (this.tokens.Peek().TokenType == TokenType.CloseParentheses)
+                            {
+                                // All OData functions have at least 1 or 2 parameters
+                                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                            }
+
                             this.groupingDepth++;
                             stack.Push(node);
                             break;
 
                         case TokenType.CloseParentheses:
+                            if (this.groupingDepth == 0)
+                            {
+                                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                            }
+
                             this.groupingDepth--;
 
                             if (stack.Count > 0)
@@ -144,8 +168,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Enum:
                         case TokenType.False:
                         case TokenType.Guid:
-                        case TokenType.Int32:
-                        case TokenType.Int64:
+                        case TokenType.Integer:
                         case TokenType.Null:
                         case TokenType.Single:
                         case TokenType.String:
@@ -160,6 +183,15 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             else
                             {
                                 binaryNode.Right = constantNode;
+                            }
+
+                            break;
+
+                        case TokenType.Comma:
+                            if (this.tokens.Count < 2)
+                            {
+                                // If there is a comma in a function call, there should be another argument followed by a closing comma
+                                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
                             }
 
                             break;
@@ -241,8 +273,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Enum:
                         case TokenType.False:
                         case TokenType.Guid:
-                        case TokenType.Int32:
-                        case TokenType.Int64:
+                        case TokenType.Integer:
                         case TokenType.Null:
                         case TokenType.Single:
                         case TokenType.String:
@@ -263,6 +294,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             private QueryNode ParseQueryNode()
             {
                 QueryNode node = null;
+
+                if (this.tokens.Count == 0)
+                {
+                    throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                }
 
                 switch (this.tokens.Peek().TokenType)
                 {
