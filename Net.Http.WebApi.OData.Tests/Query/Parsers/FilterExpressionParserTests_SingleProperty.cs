@@ -517,6 +517,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqNegativeInt32MinValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Rating eq -2147483648", EntityDataModel.Current.EntitySets["Products"].EdmType);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Rating", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("-2147483648", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<int>(((ConstantNode)node.Right).Value);
+                Assert.Equal(int.MinValue, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqNegativeInt32ValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Rating eq -1234", EntityDataModel.Current.EntitySets["Products"].EdmType);
@@ -535,6 +556,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("-1234", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<int>(((ConstantNode)node.Right).Value);
                 Assert.Equal(-1234, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqNegativeInt64MinValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Rating eq -9223372036854775808L", EntityDataModel.Current.EntitySets["Products"].EdmType);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Rating", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("-9223372036854775808L", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<long>(((ConstantNode)node.Right).Value);
+                Assert.Equal(long.MinValue, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
@@ -767,6 +809,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             }
 
             [Fact]
+            public void ParsePropertyEqPositiveInt32MaxValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Rating eq 2147483647", EntityDataModel.Current.EntitySets["Products"].EdmType);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Rating", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("2147483647", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<int>(((ConstantNode)node.Right).Value);
+                Assert.Equal(int.MaxValue, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
             public void ParsePropertyEqPositiveInt32SignedValueExpression()
             {
                 var queryNode = FilterExpressionParser.Parse("Rating eq +1234", EntityDataModel.Current.EntitySets["Products"].EdmType);
@@ -806,6 +869,27 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
                 Assert.Equal("1234", ((ConstantNode)node.Right).LiteralText);
                 Assert.IsType<int>(((ConstantNode)node.Right).Value);
                 Assert.Equal(1234, ((ConstantNode)node.Right).Value);
+            }
+
+            [Fact]
+            public void ParsePropertyEqPositiveInt64MaxValueExpression()
+            {
+                var queryNode = FilterExpressionParser.Parse("Rating eq 9223372036854775807L", EntityDataModel.Current.EntitySets["Products"].EdmType);
+
+                Assert.NotNull(queryNode);
+                Assert.IsType<BinaryOperatorNode>(queryNode);
+
+                var node = (BinaryOperatorNode)queryNode;
+
+                Assert.IsType<PropertyAccessNode>(node.Left);
+                Assert.Equal("Rating", ((PropertyAccessNode)node.Left).Property.Name);
+
+                Assert.Equal(BinaryOperatorKind.Equal, node.OperatorKind);
+
+                Assert.IsType<ConstantNode>(node.Right);
+                Assert.Equal("9223372036854775807L", ((ConstantNode)node.Right).LiteralText);
+                Assert.IsType<long>(((ConstantNode)node.Right).Value);
+                Assert.Equal(long.MaxValue, ((ConstantNode)node.Right).Value);
             }
 
             [Fact]
