@@ -1,5 +1,6 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Metadata
 {
+    using System.Xml.Linq;
     using Net.Http.WebApi.OData.Metadata;
     using Net.Http.WebApi.OData.Model;
     using Xunit;
@@ -11,9 +12,7 @@
         {
             TestHelper.EnsureEDM();
 
-            var csdlDocument = MetadataProvider.Create(EntityDataModel.Current);
-
-            Assert.Equal(@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""4.0"">
+            var expected = XDocument.Parse(@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""4.0"">
   <edmx:DataServices>
     <Schema xmlns=""http://docs.oasis-open.org/odata/ns/edm"" Namespace=""NorthwindModel"">
       <EnumType Name=""AccessLevel"" UnderlyingType=""Edm.Int32"" IsFlags=""True"">
@@ -239,7 +238,11 @@
       </Annotations>
     </Schema>
   </edmx:DataServices>
-</edmx:Edmx>", csdlDocument.ToString());
+</edmx:Edmx>");
+
+            var csdlDocument = MetadataProvider.Create(EntityDataModel.Current);
+
+            Assert.Equal(expected.ToString(), csdlDocument.ToString());
         }
     }
 }
