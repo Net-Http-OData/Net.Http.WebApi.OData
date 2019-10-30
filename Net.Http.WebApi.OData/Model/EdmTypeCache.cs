@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Model
 
     internal static class EdmTypeCache
     {
-        private static ConcurrentDictionary<Type, EdmType> map = new ConcurrentDictionary<Type, EdmType>(
+        internal static ConcurrentDictionary<Type, EdmType> Map { get; } = new ConcurrentDictionary<Type, EdmType>(
             new Dictionary<Type, EdmType>
             {
                 [typeof(byte[])] = EdmPrimitiveType.Binary,
@@ -54,7 +54,5 @@ namespace Net.Http.WebApi.OData.Model
                 ////[typeof(TimeSpan)] = EdmPrimitiveType.TimeOfDay,
                 ////[typeof(TimeSpan?)] = EdmPrimitiveType.TimeOfDay
             });
-
-        internal static ConcurrentDictionary<Type, EdmType> Map => map;
     }
 }

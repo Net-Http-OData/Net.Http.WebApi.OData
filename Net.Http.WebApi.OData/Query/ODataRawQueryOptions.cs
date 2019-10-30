@@ -29,7 +29,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ArgumentNullException">Thrown if raw query is null.</exception>
         internal ODataRawQueryOptions(string rawQuery)
         {
-            if (rawQuery == null)
+            if (rawQuery is null)
             {
                 throw new ArgumentNullException(nameof(rawQuery));
             }

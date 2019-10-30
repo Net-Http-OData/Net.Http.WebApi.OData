@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Binders
 {
     using System;
-    using Expressions;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     /// <summary>
     /// A base class for binding the $filter query option.
@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <param name="filterQueryOption">The filter query option.</param>
         public void Bind(FilterQueryOption filterQueryOption)
         {
-            if (filterQueryOption == null)
+            if (filterQueryOption is null)
             {
                 return;
             }
@@ -53,7 +53,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <exception cref="System.NotSupportedException">Thrown if the <see cref="QueryNodeKind"/> is not supported.</exception>
         protected void Bind(QueryNode queryNode)
         {
-            if (queryNode == null)
+            if (queryNode is null)
             {
                 throw new ArgumentNullException(nameof(queryNode));
             }

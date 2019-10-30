@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
-    using Expressions;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class UnaryOperatorKindParser
     {

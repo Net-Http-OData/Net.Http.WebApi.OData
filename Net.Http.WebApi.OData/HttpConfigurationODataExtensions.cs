@@ -43,12 +43,12 @@ namespace System.Web.Http
             Action<EntityDataModelBuilder> entityDataModelBuilderCallback,
             IEqualityComparer<string> entitySetNameComparer)
         {
-            if (configuration == null)
+            if (configuration is null)
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            if (entityDataModelBuilderCallback == null)
+            if (entityDataModelBuilderCallback is null)
             {
                 throw new ArgumentNullException(nameof(entityDataModelBuilderCallback));
             }

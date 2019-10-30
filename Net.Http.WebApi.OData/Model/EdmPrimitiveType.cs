@@ -51,55 +51,87 @@ namespace Net.Http.WebApi.OData.Model
         /// </summary>
         public static EdmType DateTimeOffset { get; } = new EdmPrimitiveType("DateTimeOffset", "Edm.DateTimeOffset", typeof(DateTimeOffset));
 
+#pragma warning disable CA1720 // Identifier contains type name
+
         /// <summary>
-        /// Gets the EdmType which represents numeric values with fixed precision and scale. This type can describe a numeric value ranging from negative 10^255 + 1 to positive 10^255 -1
+        /// Gets the EdmType which represents numeric values with fixed precision and scale. This type can describe a numeric value ranging from negative 10^255 + 1 to positive 10^255 -1.
         /// </summary>
         public static EdmType Decimal { get; } = new EdmPrimitiveType("Decimal", "Edm.Decimal", typeof(decimal));
 
+#pragma warning restore CA1720 // Identifier contains type name
+
+#pragma warning disable CA1720 // Identifier contains type name
+
         /// <summary>
-        /// Gets the EdmType which represents a floating point number with 15 digits precision that can represent values with approximate range of ± 2.23e -308 through ± 1.79e +308
+        /// Gets the EdmType which represents a floating point number with 15 digits precision that can represent values with approximate range of ± 2.23e -308 through ± 1.79e +308.
         /// </summary>
         public static EdmType Double { get; } = new EdmPrimitiveType("Double", "Edm.Double", typeof(double));
+
+#pragma warning restore CA1720 // Identifier contains type name
 
         /// <summary>
         /// Gets the EdmType which represents a duration.
         /// </summary>
         public static EdmType Duration { get; } = new EdmPrimitiveType("Duration", "Edm.Duration", typeof(TimeSpan));
 
+#pragma warning disable CA1720 // Identifier contains type name
+
         /// <summary>
         /// Gets the EdmType which represents a 16-byte (128-bit) unique identifier value.
         /// </summary>
         public static EdmType Guid { get; } = new EdmPrimitiveType("Guid", "Edm.Guid", typeof(Guid));
+
+#pragma warning restore CA1720 // Identifier contains type name
+
+#pragma warning disable CA1720 // Identifier contains type name
 
         /// <summary>
         /// Gets the EdmType which represents a signed 16-bit integer value.
         /// </summary>
         public static EdmType Int16 { get; } = new EdmPrimitiveType("Int16", "Edm.Int16", typeof(short));
 
+#pragma warning restore CA1720 // Identifier contains type name
+
+#pragma warning disable CA1720 // Identifier contains type name
+
         /// <summary>
         /// Gets the EdmType which represents a signed 32-bit integer value.
         /// </summary>
         public static EdmType Int32 { get; } = new EdmPrimitiveType("Int32", "Edm.Int32", typeof(int));
+
+#pragma warning restore CA1720 // Identifier contains type name
+
+#pragma warning disable CA1720 // Identifier contains type name
 
         /// <summary>
         /// Gets the EdmType which represents a signed 64-bit integer value.
         /// </summary>
         public static EdmType Int64 { get; } = new EdmPrimitiveType("Int64", "Edm.Int64", typeof(long));
 
+#pragma warning restore CA1720 // Identifier contains type name
+
         /// <summary>
         /// Gets the EdmType which represents a signed 8-bit integer value.
         /// </summary>
         public static EdmType SByte { get; } = new EdmPrimitiveType("SByte", "Edm.SByte", typeof(sbyte));
 
+#pragma warning disable CA1720 // Identifier contains type name
+
         /// <summary>
-        /// Gets the EdmType which represents a floating point number with 7 digits precision that can represent values with approximate range of ± 1.18e -38 through ± 3.40e +38
+        /// Gets the EdmType which represents a floating point number with 7 digits precision that can represent values with approximate range of ± 1.18e -38 through ± 3.40e +38.
         /// </summary>
         public static EdmType Single { get; } = new EdmPrimitiveType("Single", "Edm.Single", typeof(float));
+
+#pragma warning restore CA1720 // Identifier contains type name
+
+#pragma warning disable CA1720 // Identifier contains type name
 
         /// <summary>
         /// Gets the EdmType which represents fixed- or variable-length character data.
         /// </summary>
         public static EdmType String { get; } = new EdmPrimitiveType("String", "Edm.String", typeof(string));
+
+#pragma warning restore CA1720 // Identifier contains type name
 
         /// <summary>
         /// Gets the EdmType which represents the time of day with values ranging from 0:00:00.x to 23:59:59.y, where x and y depend upon the precision.

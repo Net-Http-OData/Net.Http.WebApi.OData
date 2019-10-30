@@ -15,8 +15,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
     using System;
     using System.Collections.Generic;
     using System.Net;
-    using Expressions;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class FilterExpressionParser
     {
@@ -75,7 +75,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                 var node = this.nodeStack.Pop();
 
-                if (node is BinaryOperatorNode binaryNode && (binaryNode.Left == null || binaryNode.Right == null))
+                if (node is BinaryOperatorNode binaryNode && (binaryNode.Left is null || binaryNode.Right is null))
                 {
                     throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
                 }
@@ -240,11 +240,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.FunctionName:
-                            if (leftNode == null)
+                            if (leftNode is null)
                             {
                                 leftNode = new FunctionCallNode(token.Value);
                             }
-                            else if (rightNode == null)
+                            else if (rightNode is null)
                             {
                                 rightNode = new FunctionCallNode(token.Value);
                             }
@@ -254,11 +254,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.PropertyName:
                             var propertyAccessNode = new PropertyAccessNode(this.model.GetProperty(token.Value));
 
-                            if (leftNode == null)
+                            if (leftNode is null)
                             {
                                 leftNode = propertyAccessNode;
                             }
-                            else if (rightNode == null)
+                            else if (rightNode is null)
                             {
                                 rightNode = propertyAccessNode;
                             }
@@ -284,7 +284,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     }
                 }
 
-                result = result == null
+                result = result is null
                     ? new BinaryOperatorNode(leftNode, operatorKind, rightNode)
                     : new BinaryOperatorNode(result, operatorKind, leftNode ?? rightNode);
 
@@ -293,12 +293,12 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
             private QueryNode ParseQueryNode()
             {
-                QueryNode node = null;
-
                 if (this.tokens.Count == 0)
                 {
                     throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
                 }
+
+                QueryNode node;
 
                 switch (this.tokens.Peek().TokenType)
                 {
@@ -352,7 +352,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     {
                         var leftNode = this.nodeStack.Pop();
 
-                        if (leftNode is BinaryOperatorNode binaryNode && binaryNode.Right == null)
+                        if (leftNode is BinaryOperatorNode binaryNode && binaryNode.Right is null)
                         {
                             binaryNode.Right = node;
 

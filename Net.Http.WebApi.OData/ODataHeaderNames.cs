@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData
 {
     /// <summary>
-    /// The header names for OData HTTP Headers
+    /// The header names for OData HTTP Headers.
     /// </summary>
     public static class ODataHeaderNames
     {

@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// A class containing deserialised values from the $orderby query option.
@@ -30,7 +30,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ArgumentOutOfRangeException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
         internal OrderByProperty(string rawValue, EdmComplexType model)
         {
-            if (model == null)
+            if (model is null)
             {
                 throw new ArgumentNullException(nameof(model));
             }

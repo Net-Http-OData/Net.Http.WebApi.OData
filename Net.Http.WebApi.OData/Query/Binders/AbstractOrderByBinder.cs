@@ -23,7 +23,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <param name="orderByQueryOption">The order by query option.</param>
         public void Bind(OrderByQueryOption orderByQueryOption)
         {
-            if (orderByQueryOption == null)
+            if (orderByQueryOption is null)
             {
                 return;
             }

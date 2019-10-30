@@ -12,7 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Binders
 {
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// A base class for binding the $select and $expand query options.
@@ -25,7 +25,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <param name="selectExpandQueryOption">The select/expand query option.</param>
         public void Bind(SelectExpandQueryOption selectExpandQueryOption)
         {
-            if (selectExpandQueryOption == null)
+            if (selectExpandQueryOption is null)
             {
                 return;
             }

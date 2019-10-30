@@ -28,7 +28,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.Filter == null)
+            if (queryOptions.Filter is null)
             {
                 return;
             }

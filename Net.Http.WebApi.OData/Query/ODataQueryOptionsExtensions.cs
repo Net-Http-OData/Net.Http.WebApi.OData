@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Query
     using System.Text;
 
     /// <summary>
-    /// Extensions for the <see cref="ODataQueryOptions"/> class
+    /// Extensions for the <see cref="ODataQueryOptions"/> class.
     /// </summary>
     public static class ODataQueryOptionsExtensions
     {
@@ -30,7 +30,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <returns>The next link for a paged OData query.</returns>
         public static Uri NextLink(this ODataQueryOptions queryOptions, int skip, int resultsPerPage)
         {
-            if (queryOptions == null)
+            if (queryOptions is null)
             {
                 throw new ArgumentNullException(nameof(queryOptions));
             }

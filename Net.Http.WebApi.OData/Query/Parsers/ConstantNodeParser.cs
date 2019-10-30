@@ -14,8 +14,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
     using System.Globalization;
-    using Expressions;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class ConstantNodeParser
     {

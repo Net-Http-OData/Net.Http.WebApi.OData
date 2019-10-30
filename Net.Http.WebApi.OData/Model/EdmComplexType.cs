@@ -56,7 +56,7 @@ namespace Net.Http.WebApi.OData.Model
             {
                 var property = this.Properties[i];
 
-                if (property.Name == name)
+                if (property.Name.Equals(name, StringComparison.Ordinal))
                 {
                     return property;
                 }

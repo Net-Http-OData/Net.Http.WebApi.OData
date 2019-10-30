@@ -16,7 +16,7 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Net.Http;
     using System.Text;
     using System.Web.Http;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// An API controller which exposes the OData service metadata.
@@ -32,9 +32,11 @@ namespace Net.Http.WebApi.OData.Metadata
         /// <returns>The <see cref="HttpResponseMessage"/> which contains the service metadata.</returns>
         [HttpGet]
         [Route("$metadata")]
+#pragma warning disable CA1822 // Mark members as static
         public HttpResponseMessage Get()
+#pragma warning restore CA1822 // Mark members as static
         {
-            if (metadataXml == null)
+            if (metadataXml is null)
             {
                 using (var stringWriter = new MetadataProvider.Utf8StringWriter())
                 {
@@ -45,8 +47,10 @@ namespace Net.Http.WebApi.OData.Metadata
                 }
             }
 
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StringContent(metadataXml, Encoding.UTF8, "application/xml");
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(metadataXml, Encoding.UTF8, "application/xml"),
+            };
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;

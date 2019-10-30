@@ -44,7 +44,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// </summary>
         public IReadOnlyList<QueryNode> Parameters { get; } = new List<QueryNode>();
 
-        internal void AddParameter(QueryNode queryNode)
-            => ((IList<QueryNode>)this.Parameters).Add(queryNode);
+        internal void AddParameter(QueryNode queryNode) => ((IList<QueryNode>)this.Parameters).Add(queryNode);
     }
 }

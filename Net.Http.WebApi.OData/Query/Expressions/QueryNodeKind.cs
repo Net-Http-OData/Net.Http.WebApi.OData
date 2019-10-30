@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Expressions
 {
     /// <summary>
-    /// Gets the kinds of query node
+    /// Gets the kinds of query node.
     /// </summary>
     public enum QueryNodeKind
     {

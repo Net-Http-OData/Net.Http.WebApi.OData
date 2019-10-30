@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData.Metadata
     using System;
 
     /// <summary>
-    /// Represents an item in the service document
+    /// Represents an item in the service document.
     /// </summary>
     public sealed class ServiceDocumentItem
     {
@@ -50,7 +50,6 @@ namespace Net.Http.WebApi.OData.Metadata
         /// <param name="name">The name of the item.</param>
         /// <param name="url">The URL of the item.</param>
         /// <returns>A service document item which represents an Entity Set in the Entity Data Model.</returns>
-        internal static ServiceDocumentItem EntitySet(string name, Uri url)
-            => new ServiceDocumentItem(name, "EntitySet", url);
+        internal static ServiceDocumentItem EntitySet(string name, Uri url) => new ServiceDocumentItem(name, "EntitySet", url);
     }
 }

@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData.Query
     using System;
     using System.Net;
     using System.Net.Http;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// An object which contains the query options in an OData query.
@@ -46,7 +46,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets a value indicating whether the count query option has been specified.
         /// </summary>
-        public bool Count => this.RawValues.Count?.Equals("$count=true") == true;
+        public bool Count => this.RawValues.Count?.Equals("$count=true", StringComparison.Ordinal) == true;
 
         /// <summary>
         /// Gets the <see cref="EntitySet"/> to apply the OData query against.
@@ -60,7 +60,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.expand == null && this.RawValues.Expand != null)
+                if (this.expand is null && this.RawValues.Expand != null)
                 {
                     this.expand = new SelectExpandQueryOption(this.RawValues.Expand, this.EntitySet.EdmType);
                 }
@@ -76,7 +76,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.filter == null && this.RawValues.Filter != null)
+                if (this.filter is null && this.RawValues.Filter != null)
                 {
                     this.filter = new FilterQueryOption(this.RawValues.Filter, this.EntitySet.EdmType);
                 }
@@ -92,7 +92,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.format == null && this.RawValues.Format != null)
+                if (this.format is null && this.RawValues.Format != null)
                 {
                     this.format = new FormatQueryOption(this.RawValues.Format);
                 }
@@ -108,7 +108,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.orderBy == null && this.RawValues.OrderBy != null)
+                if (this.orderBy is null && this.RawValues.OrderBy != null)
                 {
                     this.orderBy = new OrderByQueryOption(this.RawValues.OrderBy, this.EntitySet.EdmType);
                 }
@@ -139,7 +139,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.select == null && this.RawValues.Select != null)
+                if (this.select is null && this.RawValues.Select != null)
                 {
                     this.select = new SelectExpandQueryOption(this.RawValues.Select, this.EntitySet.EdmType);
                 }
@@ -160,7 +160,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             get
             {
-                if (this.skipToken == null && this.RawValues.SkipToken != null)
+                if (this.skipToken is null && this.RawValues.SkipToken != null)
                 {
                     this.skipToken = new SkipTokenQueryOption(this.RawValues.SkipToken);
                 }
@@ -176,7 +176,7 @@ namespace Net.Http.WebApi.OData.Query
 
         private static int? ParseInt(string rawValue)
         {
-            if (rawValue == null)
+            if (rawValue is null)
             {
                 return null;
             }

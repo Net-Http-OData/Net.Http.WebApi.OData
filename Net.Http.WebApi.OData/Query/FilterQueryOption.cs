@@ -12,9 +12,9 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
-    using Expressions;
-    using Model;
-    using Parsers;
+    using Net.Http.WebApi.OData.Model;
+    using Net.Http.WebApi.OData.Query.Expressions;
+    using Net.Http.WebApi.OData.Query.Parsers;
 
     /// <summary>
     /// A class containing deserialised values from the $filter query option.

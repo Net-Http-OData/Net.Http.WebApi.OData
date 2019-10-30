@@ -144,9 +144,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </returns>
         public override bool Equals(object obj)
         {
-            var other = obj as ODataValidationSettings;
-
-            if (other == null)
+            if (!(obj is ODataValidationSettings other))
             {
                 return false;
             }
@@ -163,7 +161,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </returns>
         public bool Equals(ODataValidationSettings other)
         {
-            if (other == null)
+            if (other is null)
             {
                 return false;
             }

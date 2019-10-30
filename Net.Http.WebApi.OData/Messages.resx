@@ -165,4 +165,13 @@
   <data name="UnableToParseFilter" xml:space="preserve">
     <value>The $filter query option could not be parsed by this service.</value>
   </data>
+  <data name="FullNameMustBeSpecified" xml:space="preserve">
+    <value>FullName must be specified</value>
+  </data>
+  <data name="NameMustBeSpecified" xml:space="preserve">
+    <value>Name must be specified</value>
+  </data>
+  <data name="PropertyNameMustBeSpecified" xml:space="preserve">
+    <value>Property name must be specified</value>
+  </data>
 </root>

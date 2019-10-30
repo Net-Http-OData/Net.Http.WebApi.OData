@@ -54,11 +54,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         internal Lexer(string content)
         {
             this.content = content;
-            this.current = default(Token);
+            this.current = default;
 
-            this.position = this.content.StartsWith("$filter=", StringComparison.Ordinal)
-                ? content.IndexOf('=') + 1
-                : 0;
+            this.position = this.content.StartsWith("$filter=", StringComparison.Ordinal) ? content.IndexOf('=') + 1 : 0;
         }
 
         internal Token Current => this.current;

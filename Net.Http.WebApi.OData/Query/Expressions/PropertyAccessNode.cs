@@ -12,7 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Expressions
 {
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// A QueryNode which represents a property.

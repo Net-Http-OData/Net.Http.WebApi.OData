@@ -14,7 +14,7 @@ namespace Net.Http.WebApi.OData.Query
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// A class containing deserialised values from the $select or $expand query option.
