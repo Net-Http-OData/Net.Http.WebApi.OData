@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="FilterQueryOption.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,9 +12,9 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
-    using Expressions;
-    using Model;
-    using Parsers;
+    using Net.Http.WebApi.OData.Model;
+    using Net.Http.WebApi.OData.Query.Expressions;
+    using Net.Http.WebApi.OData.Query.Parsers;
 
     /// <summary>
     /// A class containing deserialised values from the $filter query option.

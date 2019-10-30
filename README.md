@@ -48,7 +48,7 @@ public IEnumerable<Category> Get(ODataQueryOptions queryOptions)
 
 ### Supported OData Versions
 
-The library supports OData 4.0
+The library supports OData 4.0 query syntax, for a full list of supported features see [Supported OData Query](https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki/Supported-OData-Query) in the Wiki.
 
 ### Supported .NET Framework Versions
 

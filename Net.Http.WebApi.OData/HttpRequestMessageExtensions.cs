@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="HttpRequestMessageExtensions.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@ namespace Net.Http.WebApi.OData
     using System.Linq;
     using System.Net;
     using System.Net.Http;
-    using Model;
-    using Query;
+    using Net.Http.WebApi.OData.Model;
+    using Net.Http.WebApi.OData.Query;
 
     /// <summary>
-    /// Extensions for the <see cref="HttpRequestMessage"/> class
+    /// Extensions for the <see cref="HttpRequestMessage"/> class.
     /// </summary>
     public static class HttpRequestMessageExtensions
     {
@@ -35,7 +35,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         /// <example>
         /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "Path segment not supported: 'Foo'.");</code>
-        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'." } }</para>
+        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'." } }.</para>
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message)
             => CreateODataErrorResponse(request, statusCode, message, null);
@@ -50,7 +50,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         /// <example>
         /// <code>request.CreateODataErrorResponse(HttpStatusCode.BadRequest, "400", "Path segment not supported: 'Foo'.");</code>
-        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'." } }</para>
+        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'." } }.</para>
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, string target)
         {
@@ -87,10 +87,22 @@ namespace Net.Http.WebApi.OData
         ///     request.CreateODataErrorResponse(e);
         /// }
         /// </code>
-        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'.", "target": "Foo" } }</para>
+        /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'.", "target": "Foo" } }.</para>
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, ODataException exception)
-            => CreateODataErrorResponse(request, exception.StatusCode, exception.Message, exception.Target);
+        {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (exception is null)
+            {
+                throw new ArgumentNullException(nameof(exception));
+            }
+
+            return request.CreateODataErrorResponse(exception.StatusCode, exception.Message, exception.Target);
+        }
 
         /// <summary>
         /// Creates the OData response message from the specified request message.
@@ -134,7 +146,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="value">The string content of the HTTP response message.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, string value)
-            => CreateODataResponse(request, value == null ? HttpStatusCode.NoContent : HttpStatusCode.OK, value);
+            => CreateODataResponse(request, value is null ? HttpStatusCode.NoContent : HttpStatusCode.OK, value);
 
         /// <summary>
         /// Creates the OData response message from the specified request message.
@@ -162,7 +174,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>The OData request options for the request.</returns>
         public static ODataRequestOptions ReadODataRequestOptions(this HttpRequestMessage request)
         {
-            if (request == null)
+            if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -184,7 +196,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>The EntitySet the OData request relates to.</returns>
         public static EntitySet ResolveEntitySet(this HttpRequestMessage request)
         {
-            if (request == null)
+            if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -206,6 +218,11 @@ namespace Net.Http.WebApi.OData
         /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
         public static Uri ResolveODataContextUri(this HttpRequestMessage request)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             var requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
@@ -224,6 +241,16 @@ namespace Net.Http.WebApi.OData
         /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
         public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (entitySet is null)
+            {
+                throw new ArgumentNullException(nameof(entitySet));
+            }
+
             var requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
@@ -243,6 +270,16 @@ namespace Net.Http.WebApi.OData
         /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
         public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (entitySet is null)
+            {
+                throw new ArgumentNullException(nameof(entitySet));
+            }
+
             var requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
@@ -263,6 +300,11 @@ namespace Net.Http.WebApi.OData
         /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
         public static Uri ResolveODataContextUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             var requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
@@ -284,6 +326,16 @@ namespace Net.Http.WebApi.OData
         /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
         public static Uri ResolveODataContextUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey, string propertyName)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (entitySet is null)
+            {
+                throw new ArgumentNullException(nameof(entitySet));
+            }
+
             var requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
@@ -303,7 +355,19 @@ namespace Net.Http.WebApi.OData
         /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
         /// <returns>A <see cref="Uri"/> containing the address of the Entity with the specified Entity Key.</returns>
         public static Uri ResolveODataEntityUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
-            => new Uri(request.RequestUri.ODataEntityUriBuilder(entitySet, entityKey).ToString());
+        {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (entitySet is null)
+            {
+                throw new ArgumentNullException(nameof(entitySet));
+            }
+
+            return new Uri(request.RequestUri.ODataEntityUriBuilder(entitySet, entityKey).ToString());
+        }
 
         internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
         {

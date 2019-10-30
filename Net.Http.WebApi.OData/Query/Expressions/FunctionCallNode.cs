@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="FunctionCallNode.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,7 +44,6 @@ namespace Net.Http.WebApi.OData.Query.Expressions
         /// </summary>
         public IReadOnlyList<QueryNode> Parameters { get; } = new List<QueryNode>();
 
-        internal void AddParameter(QueryNode queryNode)
-            => ((IList<QueryNode>)this.Parameters).Add(queryNode);
+        internal void AddParameter(QueryNode queryNode) => ((IList<QueryNode>)this.Parameters).Add(queryNode);
     }
 }

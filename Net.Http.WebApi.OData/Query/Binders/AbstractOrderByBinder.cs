@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="AbstractOrderByBinder.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <param name="orderByQueryOption">The order by query option.</param>
         public void Bind(OrderByQueryOption orderByQueryOption)
         {
-            if (orderByQueryOption == null)
+            if (orderByQueryOption is null)
             {
                 return;
             }

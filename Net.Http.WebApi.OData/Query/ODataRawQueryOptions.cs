@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataRawQueryOptions.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ArgumentNullException">Thrown if raw query is null.</exception>
         internal ODataRawQueryOptions(string rawQuery)
         {
-            if (rawQuery == null)
+            if (rawQuery is null)
             {
                 throw new ArgumentNullException(nameof(rawQuery));
             }

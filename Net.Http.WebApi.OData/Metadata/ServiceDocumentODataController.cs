@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ServiceDocumentODataController.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// An API controller which exposes the OData service document.

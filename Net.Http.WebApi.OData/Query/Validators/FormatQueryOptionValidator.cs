@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="FormatQueryOptionValidator.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     using System.Net;
-    using System.Web.Http;
 
     /// <summary>
     /// A class which validates the $format query option based upon the <see cref="ODataValidationSettings"/>.
@@ -25,10 +24,10 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </summary>
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
-        /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
+        /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.RawValues.Format == null)
+            if (queryOptions.RawValues.Format is null)
             {
                 return;
             }

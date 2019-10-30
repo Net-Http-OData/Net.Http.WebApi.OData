@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataQueryOptionsExtensions.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,10 +12,10 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validators
 {
-    using Query;
+    using Net.Http.WebApi.OData.Query;
 
     /// <summary>
-    /// Extension methods for validating the <see cref="ODataQueryOptions"/>
+    /// Extension methods for validating the <see cref="ODataQueryOptions"/>.
     /// </summary>
     public static class ODataQueryOptionsExtensions
     {
@@ -26,6 +26,16 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <param name="validationSettings">The validation settings.</param>
         public static void Validate(this ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
+            if (queryOptions is null)
+            {
+                throw new System.ArgumentNullException(nameof(queryOptions));
+            }
+
+            if (validationSettings is null)
+            {
+                throw new System.ArgumentNullException(nameof(validationSettings));
+            }
+
             CountQueryOptionValidator.Validate(queryOptions, validationSettings);
             ExpandQueryOptionValidator.Validate(queryOptions, validationSettings);
             FilterQueryOptionValidator.Validate(queryOptions, validationSettings);

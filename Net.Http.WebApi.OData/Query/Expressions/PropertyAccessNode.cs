@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="PropertyAccessNode.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Expressions
 {
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// A QueryNode which represents a property.

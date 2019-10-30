@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="BinaryOperatorKindParser.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
     using System.Collections.Generic;
-    using Expressions;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class BinaryOperatorKindParser
     {
-        private static Dictionary<string, BinaryOperatorKind> operatorTypeMap = new Dictionary<string, BinaryOperatorKind>
+        private static readonly Dictionary<string, BinaryOperatorKind> OperatorTypeMap = new Dictionary<string, BinaryOperatorKind>
         {
             ["add"] = BinaryOperatorKind.Add,
             ["and"] = BinaryOperatorKind.And,
@@ -37,13 +37,6 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         };
 
         internal static BinaryOperatorKind ToBinaryOperatorKind(this string operatorType)
-        {
-            if (operatorTypeMap.TryGetValue(operatorType, out BinaryOperatorKind binaryOperatorKind))
-            {
-                return binaryOperatorKind;
-            }
-
-            throw new ArgumentException(Messages.UnknownOperator.FormatWith(operatorType), nameof(operatorType));
-        }
+            => OperatorTypeMap.TryGetValue(operatorType, out BinaryOperatorKind binaryOperatorKind) ? binaryOperatorKind : throw new ArgumentException(Messages.UnknownOperator.FormatWith(operatorType), nameof(operatorType));
     }
 }

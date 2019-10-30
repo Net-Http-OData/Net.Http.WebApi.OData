@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="OrderByProperty.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
-    using Model;
+    using Net.Http.WebApi.OData.Model;
 
     /// <summary>
     /// A class containing deserialised values from the $orderby query option.
@@ -30,7 +30,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ArgumentOutOfRangeException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
         internal OrderByProperty(string rawValue, EdmComplexType model)
         {
-            if (model == null)
+            if (model is null)
             {
                 throw new ArgumentNullException(nameof(model));
             }

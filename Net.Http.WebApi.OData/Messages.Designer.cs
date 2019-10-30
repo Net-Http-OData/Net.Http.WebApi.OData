@@ -19,7 +19,7 @@ namespace Net.Http.WebApi.OData {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Messages {
@@ -79,11 +79,29 @@ namespace Net.Http.WebApi.OData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FullName must be specified.
+        /// </summary>
+        internal static string FullNameMustBeSpecified {
+            get {
+                return ResourceManager.GetString("FullNameMustBeSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value for OData query &apos;{0}&apos; must be a non-negative numeric value..
         /// </summary>
         internal static string IntRawValueInvalid {
             get {
                 return ResourceManager.GetString("IntRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name must be specified.
+        /// </summary>
+        internal static string NameMustBeSpecified {
+            get {
+                return ResourceManager.GetString("NameMustBeSpecified", resourceCulture);
             }
         }
         
@@ -111,6 +129,15 @@ namespace Net.Http.WebApi.OData {
         internal static string OrderByPropertyRawValueInvalid {
             get {
                 return ResourceManager.GetString("OrderByPropertyRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property name must be specified.
+        /// </summary>
+        internal static string PropertyNameMustBeSpecified {
+            get {
+                return ResourceManager.GetString("PropertyNameMustBeSpecified", resourceCulture);
             }
         }
         

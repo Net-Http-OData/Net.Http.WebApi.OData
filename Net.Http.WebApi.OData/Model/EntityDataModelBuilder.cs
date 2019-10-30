@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="EntityDataModelBuilder.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ namespace Net.Http.WebApi.OData.Model
         /// <param name="entitySetNameComparer">The equality comparer to use for the Entity Set name.</param>
         internal EntityDataModelBuilder(IEqualityComparer<string> entitySetNameComparer)
         {
-            if (entitySetNameComparer == null)
+            if (entitySetNameComparer is null)
             {
                 throw new ArgumentNullException(nameof(entitySetNameComparer));
             }
@@ -65,7 +65,6 @@ namespace Net.Http.WebApi.OData.Model
         /// </summary>
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
         /// <param name="entityKeyExpression">The Entity Key expression.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
         public void RegisterEntitySet<T>(Expression<Func<T, object>> entityKeyExpression)
             => this.RegisterEntitySet(typeof(T).Name, entityKeyExpression, Capabilities.None);
 
@@ -75,7 +74,6 @@ namespace Net.Http.WebApi.OData.Model
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
         /// <param name="entityKeyExpression">The Entity Key expression.</param>
         /// <param name="capabilities">The capabilities of the Entity Set.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
         public void RegisterEntitySet<T>(Expression<Func<T, object>> entityKeyExpression, Capabilities capabilities)
             => this.RegisterEntitySet(typeof(T).Name, entityKeyExpression, capabilities);
 
@@ -85,8 +83,6 @@ namespace Net.Http.WebApi.OData.Model
         /// <typeparam name="T">The type exposed by the collection.</typeparam>
         /// <param name="entitySetName">Name of the Entity Set.</param>
         /// <param name="entityKeyExpression">The Entity Key expression.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "The method signature isn't correct otherwise")]
         public void RegisterEntitySet<T>(string entitySetName, Expression<Func<T, object>> entityKeyExpression)
             => this.RegisterEntitySet(entitySetName, entityKeyExpression, Capabilities.None);
 
@@ -97,15 +93,16 @@ namespace Net.Http.WebApi.OData.Model
         /// <param name="entitySetName">Name of the Entity Set.</param>
         /// <param name="entityKeyExpression">The Entity Key expression.</param>
         /// <param name="capabilities">The capabilities of the Entity Set.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "You can't achieve a typed expression as a parameter without doing this")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "The method signature isn't correct otherwise")]
         public void RegisterEntitySet<T>(string entitySetName, Expression<Func<T, object>> entityKeyExpression, Capabilities capabilities)
         {
-            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(
-                typeof(T),
-                t => EdmTypeResolver(t));
+            if (entityKeyExpression is null)
+            {
+                throw new ArgumentNullException(nameof(entityKeyExpression));
+            }
 
-            var entityKey = edmType.BaseType == null ? edmType.GetProperty(entityKeyExpression.GetMemberInfo().Name) : null;
+            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), t => EdmTypeResolver(t));
+
+            var entityKey = edmType.BaseType is null ? edmType.GetProperty(entityKeyExpression.GetMemberInfo().Name) : null;
 
             var entitySet = new EntitySet(entitySetName, edmType, entityKey, capabilities);
 
@@ -118,9 +115,9 @@ namespace Net.Http.WebApi.OData.Model
             {
                 var members = new List<EdmEnumMember>();
 
-                foreach (var x in Enum.GetValues(clrType))
+                foreach (var value in Enum.GetValues(clrType))
                 {
-                    members.Add(new EdmEnumMember(x.ToString(), (int)x));
+                    members.Add(new EdmEnumMember(value.ToString(), (int)value));
                 }
 
                 return new EdmEnumType(clrType, members.AsReadOnly());

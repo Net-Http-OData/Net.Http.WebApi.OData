@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="AbstractFilterBinder.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Binders
 {
     using System;
-    using Expressions;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     /// <summary>
     /// A base class for binding the $filter query option.
@@ -26,7 +26,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// <param name="filterQueryOption">The filter query option.</param>
         public void Bind(FilterQueryOption filterQueryOption)
         {
-            if (filterQueryOption == null)
+            if (filterQueryOption is null)
             {
                 return;
             }
@@ -50,10 +50,10 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// Binds the specified <see cref="QueryNode"/>.
         /// </summary>
         /// <param name="queryNode">The <see cref="QueryNode"/> to bind.</param>
-        /// <exception cref="System.NotSupportedException">Thrown if the <see cref="QueryNodeKind"/> is not supported.</exception>
+        /// <exception cref="NotSupportedException">Thrown if the <see cref="QueryNodeKind"/> is not supported.</exception>
         protected void Bind(QueryNode queryNode)
         {
-            if (queryNode == null)
+            if (queryNode is null)
             {
                 throw new ArgumentNullException(nameof(queryNode));
             }

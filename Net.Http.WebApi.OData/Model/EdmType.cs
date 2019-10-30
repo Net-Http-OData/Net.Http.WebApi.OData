@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="EdmType.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,12 +30,12 @@ namespace Net.Http.WebApi.OData.Model
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException("Name must be specified", nameof(name));
+                throw new ArgumentException(Messages.NameMustBeSpecified, nameof(name));
             }
 
             if (string.IsNullOrWhiteSpace(fullName))
             {
-                throw new ArgumentException("FullName must be specified", nameof(fullName));
+                throw new ArgumentException(Messages.FullNameMustBeSpecified, nameof(fullName));
             }
 
             this.Name = name;
@@ -67,7 +67,7 @@ namespace Net.Http.WebApi.OData.Model
         {
             foreach (var edmType in EdmTypeCache.Map.Values)
             {
-                if (edmType.FullName.Equals(edmTypeName))
+                if (edmType.FullName.Equals(edmTypeName, StringComparison.Ordinal))
                 {
                     return edmType;
                 }
@@ -81,15 +81,7 @@ namespace Net.Http.WebApi.OData.Model
         /// </summary>
         /// <param name="clrType">The CLR type to find in the Entity Data Model.</param>
         /// <returns>The EdmType for the specified CLR type, if found; otherwise, null.</returns>
-        public static EdmType GetEdmType(Type clrType)
-        {
-            if (EdmTypeCache.Map.TryGetValue(clrType, out EdmType edmType))
-            {
-                return edmType;
-            }
-
-            return null;
-        }
+        public static EdmType GetEdmType(Type clrType) => EdmTypeCache.Map.TryGetValue(clrType, out EdmType edmType) ? edmType : default;
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -109,7 +101,7 @@ namespace Net.Http.WebApi.OData.Model
         /// </returns>
         public bool Equals(EdmType other)
         {
-            if (other == null)
+            if (other is null)
             {
                 return false;
             }

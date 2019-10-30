@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------
 // <copyright file="Lexer.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -54,11 +54,9 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         internal Lexer(string content)
         {
             this.content = content;
-            this.current = default(Token);
+            this.current = default;
 
-            this.position = this.content.StartsWith("$filter=", StringComparison.Ordinal)
-                ? content.IndexOf('=') + 1
-                : 0;
+            this.position = this.content.StartsWith("$filter=", StringComparison.Ordinal) ? content.IndexOf('=') + 1 : 0;
         }
 
         internal Token Current => this.current;

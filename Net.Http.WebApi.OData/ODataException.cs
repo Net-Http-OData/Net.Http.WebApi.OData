@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataException.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,10 +19,35 @@ namespace Net.Http.WebApi.OData
     /// <summary>
     /// An exception which is thrown in relation to an OData request.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "We don't need them for this type of exception")]
     [Serializable]
     public sealed class ODataException : Exception
     {
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ODataException"/> class.
+        /// </summary>
+        public ODataException()
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ODataException"/> class.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
+        public ODataException(string message)
+            : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ODataException"/> class.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
+        /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        public ODataException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataException"/> class.
         /// </summary>
@@ -56,20 +81,12 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Gets or sets the HTTP status code that describes the error.
         /// </summary>
-        public HttpStatusCode StatusCode
-        {
-            get;
-            set;
-        }
+        public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.InternalServerError;
 
         /// <summary>
         /// Gets or sets the target of the exception.
         /// </summary>
-        public string Target
-        {
-            get;
-            set;
-        }
+        public string Target { get; set; }
 
         /// <summary>
         /// sets the System.Runtime.Serialization.SerializationInfo with information about the exception.

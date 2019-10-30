@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ServiceDocumentItem.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData.Metadata
     using System;
 
     /// <summary>
-    /// Represents an item in the service document
+    /// Represents an item in the service document.
     /// </summary>
     public sealed class ServiceDocumentItem
     {
@@ -50,7 +50,6 @@ namespace Net.Http.WebApi.OData.Metadata
         /// <param name="name">The name of the item.</param>
         /// <param name="url">The URL of the item.</param>
         /// <returns>A service document item which represents an Entity Set in the Entity Data Model.</returns>
-        internal static ServiceDocumentItem EntitySet(string name, Uri url)
-            => new ServiceDocumentItem(name, "EntitySet", url);
+        internal static ServiceDocumentItem EntitySet(string name, Uri url) => new ServiceDocumentItem(name, "EntitySet", url);
     }
 }

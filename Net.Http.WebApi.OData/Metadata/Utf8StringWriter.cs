@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="QueryNode.cs" company="Project Contributors">
+// <copyright file="Utf8StringWriter.cs" company="Project Contributors">
 // Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,16 +10,13 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query.Expressions
+namespace Net.Http.WebApi.OData.Metadata
 {
-    /// <summary>
-    /// The base class for a query node.
-    /// </summary>
-    public abstract class QueryNode
+    using System.IO;
+    using System.Text;
+
+    internal sealed class Utf8StringWriter : StringWriter
     {
-        /// <summary>
-        /// Gets the kind of query node.
-        /// </summary>
-        public abstract QueryNodeKind Kind { get; }
+        public override Encoding Encoding { get; } = Encoding.UTF8;
     }
 }

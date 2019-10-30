@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="EdmComplexType.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,14 +49,14 @@ namespace Net.Http.WebApi.OData.Model
         /// </summary>
         /// <param name="name">The name of the property.</param>
         /// <returns>The <see cref="EdmProperty"/> declared in this type with the specified name.</returns>
-        /// <exception cref="System.ArgumentException">The type does not contain a property with the specified name.</exception>
+        /// <exception cref="ArgumentException">The type does not contain a property with the specified name.</exception>
         public EdmProperty GetProperty(string name)
         {
             for (int i = 0; i < this.Properties.Count; i++)
             {
                 var property = this.Properties[i];
 
-                if (property.Name == name)
+                if (property.Name.Equals(name, StringComparison.Ordinal))
                 {
                     return property;
                 }

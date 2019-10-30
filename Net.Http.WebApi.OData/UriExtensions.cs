@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="UriExtensions.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Text;
-    using Model;
-    using Query;
+    using Net.Http.WebApi.OData.Model;
+    using Net.Http.WebApi.OData.Query;
 
     /// <summary>
     /// Extensions for the Uri class.
@@ -45,7 +45,7 @@ namespace Net.Http.WebApi.OData
             var contextUriBuilder = ODataContextUriBuilder(requestUri);
             contextUriBuilder.Append("#").Append(entitySet.Name);
 
-            if (selectExpandQueryOption?.RawValue.Equals("$select=*") == true)
+            if (selectExpandQueryOption?.RawValue.Equals("$select=*", StringComparison.Ordinal) == true)
             {
                 contextUriBuilder.Append("(*)");
             }

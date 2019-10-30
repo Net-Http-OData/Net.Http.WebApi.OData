@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="QueryOption.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="QueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw value.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if raw value is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if raw value is null.</exception>
         protected QueryOption(string rawValue)
         {
             this.RawValue = rawValue ?? throw new ArgumentNullException(nameof(rawValue));

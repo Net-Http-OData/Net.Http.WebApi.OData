@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataValidationSettings.cs" company="Project Contributors">
-// Copyright 2012 - 2018 Project Contributors
+// Copyright 2012 - 2019 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -144,9 +144,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </returns>
         public override bool Equals(object obj)
         {
-            var other = obj as ODataValidationSettings;
-
-            if (other == null)
+            if (!(obj is ODataValidationSettings other))
             {
                 return false;
             }
@@ -163,7 +161,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </returns>
         public bool Equals(ODataValidationSettings other)
         {
-            if (other == null)
+            if (other is null)
             {
                 return false;
             }
