@@ -44,7 +44,7 @@
     <DocumentationFile>bin\Release\Net.Http.WebApi.OData.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\Net.Http.WebApi.OData.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
