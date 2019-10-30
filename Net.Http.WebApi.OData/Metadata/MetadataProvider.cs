@@ -15,10 +15,8 @@ namespace Net.Http.WebApi.OData.Metadata
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Text;
     using System.Xml.Linq;
     using Net.Http.WebApi.OData.Model;
 
@@ -238,10 +236,5 @@ namespace Net.Http.WebApi.OData.Metadata
                     new XAttribute("Name", p.Name),
                     new XAttribute("Type", p.PropertyType.FullName),
                     new XAttribute("Nullable", "false"))); // TODO: nullable needs to be set in model (use data annotations?)
-
-        internal sealed class Utf8StringWriter : StringWriter
-        {
-            public override Encoding Encoding { get; } = Encoding.UTF8;
-        }
     }
 }

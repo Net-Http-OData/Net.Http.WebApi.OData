@@ -38,7 +38,7 @@ namespace Net.Http.WebApi.OData.Metadata
         {
             if (metadataXml is null)
             {
-                using (var stringWriter = new MetadataProvider.Utf8StringWriter())
+                using (var stringWriter = new Utf8StringWriter())
                 {
                     var metadataDocument = MetadataProvider.Create(EntityDataModel.Current);
                     metadataDocument.Save(stringWriter);

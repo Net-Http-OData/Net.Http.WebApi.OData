@@ -81,6 +81,7 @@
     <Compile Include="Metadata\ODataMetadataController.cs" />
     <Compile Include="Metadata\ServiceDocumentItem.cs" />
     <Compile Include="Metadata\ServiceDocumentODataController.cs" />
+    <Compile Include="Metadata\Utf8StringWriter.cs" />
     <Compile Include="Model\Capabilities.cs" />
     <Compile Include="Model\EdmCollectionType.cs" />
     <Compile Include="Model\EdmComplexType.cs" />
