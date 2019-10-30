@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query
         /// Initialises a new instance of the <see cref="QueryOption"/> class.
         /// </summary>
         /// <param name="rawValue">The raw value.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if raw value is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if raw value is null.</exception>
         protected QueryOption(string rawValue)
         {
             this.RawValue = rawValue ?? throw new ArgumentNullException(nameof(rawValue));

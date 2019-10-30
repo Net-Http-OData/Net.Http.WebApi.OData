@@ -26,8 +26,8 @@ namespace Net.Http.WebApi.OData.Model
         /// <param name="name">The name of the property.</param>
         /// <param name="propertyType">Type of the edm.</param>
         /// <param name="declaringType">Type of the declaring.</param>
-        /// <exception cref="System.ArgumentException">Property name must be specified.</exception>
-        /// <exception cref="System.ArgumentNullException">Property type and declaring type must be specified.</exception>
+        /// <exception cref="ArgumentException">Property name must be specified.</exception>
+        /// <exception cref="ArgumentNullException">Property type and declaring type must be specified.</exception>
         internal EdmProperty(string name, EdmType propertyType, EdmComplexType declaringType)
         {
             if (string.IsNullOrWhiteSpace(name))

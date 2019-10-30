@@ -50,7 +50,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
         /// Binds the specified <see cref="QueryNode"/>.
         /// </summary>
         /// <param name="queryNode">The <see cref="QueryNode"/> to bind.</param>
-        /// <exception cref="System.NotSupportedException">Thrown if the <see cref="QueryNodeKind"/> is not supported.</exception>
+        /// <exception cref="NotSupportedException">Thrown if the <see cref="QueryNodeKind"/> is not supported.</exception>
         protected void Bind(QueryNode queryNode)
         {
             if (queryNode is null)

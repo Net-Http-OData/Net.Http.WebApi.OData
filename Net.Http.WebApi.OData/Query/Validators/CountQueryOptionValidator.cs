@@ -13,7 +13,6 @@
 namespace Net.Http.WebApi.OData.Query.Validators
 {
     using System.Net;
-    using System.Web.Http;
 
     /// <summary>
     /// A class which validates the $count query option based upon the <see cref="ODataValidationSettings"/>.
@@ -25,7 +24,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// </summary>
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
-        /// <exception cref="HttpResponseException">Thrown if the validation fails.</exception>
+        /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (queryOptions.RawValues.Count is null)

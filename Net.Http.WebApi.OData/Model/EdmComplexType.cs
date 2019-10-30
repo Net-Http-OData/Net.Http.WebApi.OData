@@ -49,7 +49,7 @@ namespace Net.Http.WebApi.OData.Model
         /// </summary>
         /// <param name="name">The name of the property.</param>
         /// <returns>The <see cref="EdmProperty"/> declared in this type with the specified name.</returns>
-        /// <exception cref="System.ArgumentException">The type does not contain a property with the specified name.</exception>
+        /// <exception cref="ArgumentException">The type does not contain a property with the specified name.</exception>
         public EdmProperty GetProperty(string name)
         {
             for (int i = 0; i < this.Properties.Count; i++)
