@@ -223,7 +223,4 @@
     <Rule Id="IDE0004" Action="Info" />
     <Rule Id="IDE0005" Action="Info" />
   </Rules>
-  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
-    <Rule Id="SA1412" Action="Warning" />
-  </Rules>
 </RuleSet>
