@@ -16,6 +16,7 @@ namespace System.Web.Http
     using System.Collections.Generic;
     using global::Net.Http.WebApi.OData;
     using global::Net.Http.WebApi.OData.Model;
+    using global::Net.Http.WebApi.OData.Query;
 
     /// <summary>
     /// Contains extension methods for the <see cref="HttpConfiguration"/> class.
@@ -55,6 +56,8 @@ namespace System.Web.Http
 
             configuration.Filters.Add(new ODataExceptionFilterAttribute());
             configuration.Filters.Add(new ODataVersionHeaderValidationAttribute());
+
+            configuration.ParameterBindingRules.Add(p => p.ParameterType == typeof(ODataQueryOptions) ? new ODataQueryOptionsHttpParameterBinding(p) : null);
 
             var entityDataModelBuilder = new EntityDataModelBuilder(entitySetNameComparer);
             entityDataModelBuilderCallback(entityDataModelBuilder);

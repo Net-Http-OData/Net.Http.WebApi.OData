@@ -20,7 +20,6 @@ namespace Net.Http.WebApi.OData.Query
     /// <summary>
     /// An object which contains the query options in an OData query.
     /// </summary>
-    [ODataQueryOptionsParameterBinding]
     public sealed class ODataQueryOptions
     {
         private SelectExpandQueryOption expand;
