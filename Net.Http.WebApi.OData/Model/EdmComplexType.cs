@@ -14,6 +14,7 @@ namespace Net.Http.WebApi.OData.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
 
     /// <summary>
     /// Represents a complex type in the Entity Data Model.
@@ -62,7 +63,7 @@ namespace Net.Http.WebApi.OData.Model
                 }
             }
 
-            throw new ArgumentException($"The type '{this.FullName}' does not contain a property named '{name}'");
+            throw new ODataException(HttpStatusCode.BadRequest, $"The type '{this.FullName}' does not contain a property named '{name}'");
         }
     }
 }
