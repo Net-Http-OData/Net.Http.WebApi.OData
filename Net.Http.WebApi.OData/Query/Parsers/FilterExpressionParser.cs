@@ -97,7 +97,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     switch (token.TokenType)
                     {
                         case TokenType.OpenParentheses:
-                            if (this.tokens.Peek().TokenType == TokenType.CloseParentheses)
+                            if (this.tokens.Count > 0 && this.tokens.Peek().TokenType == TokenType.CloseParentheses)
                             {
                                 // All OData functions have at least 1 or 2 parameters
                                 throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
@@ -188,7 +188,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             break;
 
                         case TokenType.Comma:
-                            if (this.tokens.Count < 2)
+                            if (this.tokens.Count > 0 && this.tokens.Peek().TokenType == TokenType.CloseParentheses)
                             {
                                 // If there is a comma in a function call, there should be another argument followed by a closing comma
                                 throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
