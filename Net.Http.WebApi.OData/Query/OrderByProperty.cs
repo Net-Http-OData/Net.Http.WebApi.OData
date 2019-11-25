@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Query
 {
     using System;
+    using System.Net;
     using Net.Http.WebApi.OData.Model;
 
     /// <summary>
@@ -58,7 +59,7 @@ namespace Net.Http.WebApi.OData.Query
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(rawValue), Messages.OrderByPropertyRawValueInvalid);
+                        throw new ODataException(HttpStatusCode.BadRequest, Messages.OrderByPropertyRawValueInvalid);
                 }
             }
         }

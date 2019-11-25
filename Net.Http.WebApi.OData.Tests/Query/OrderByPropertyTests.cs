@@ -1,6 +1,7 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
     using System;
+    using System.Net;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using WebApi.OData.Model;
@@ -35,9 +36,10 @@
 
                 var model = EntityDataModel.Current.EntitySets["Customers"].EdmType;
 
-                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("CompanyName ASC", model));
+                var exception = Assert.Throws<ODataException>(() => new OrderByProperty("CompanyName ASC", model));
 
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
             }
         }
 
@@ -50,9 +52,10 @@
 
                 var model = EntityDataModel.Current.EntitySets["Customers"].EdmType;
 
-                var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new OrderByProperty("CompanyName wibble", model));
+                var exception = Assert.Throws<ODataException>(() => new OrderByProperty("CompanyName wibble", model));
 
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid + "\r\nParameter name: rawValue", exception.Message);
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
             }
         }
 

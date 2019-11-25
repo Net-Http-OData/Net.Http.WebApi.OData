@@ -14,6 +14,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 {
     using System;
     using System.Globalization;
+    using System.Net;
     using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query.Expressions;
 
@@ -114,7 +115,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return ConstantNode.True;
 
                 default:
-                    throw new NotSupportedException(token.TokenType.ToString());
+                    throw new ODataException(HttpStatusCode.NotImplemented, token.TokenType.ToString());
             }
         }
     }
