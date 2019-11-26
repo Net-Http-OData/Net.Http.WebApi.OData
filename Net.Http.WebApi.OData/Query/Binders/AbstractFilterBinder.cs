@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Query.Binders
 {
     using System;
+    using System.Net;
     using Net.Http.WebApi.OData.Query.Expressions;
 
     /// <summary>
@@ -81,7 +82,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
                     break;
 
                 default:
-                    throw new NotSupportedException(Messages.UnsupportedNodeType.FormatWith(queryNode.Kind.ToString()));
+                    throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedNodeType.FormatWith(queryNode.Kind.ToString()));
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Model
 {
     using System;
+    using System.Net;
     using NorthwindModel;
     using OData.Model;
     using Xunit;
@@ -106,14 +107,15 @@
         }
 
         [Fact]
-        public void GetProperty_ThrowsArgumentExceptionIfPropertyNameNotFound()
+        public void GetProperty_ThrowsODataExceptionIfPropertyNameNotFound()
         {
             TestHelper.EnsureEDM();
 
             var edmComplexType = EntityDataModel.Current.EntitySets["Customers"].EdmType;
 
-            var exception = Assert.Throws<ArgumentException>(() => edmComplexType.GetProperty("Name"));
+            var exception = Assert.Throws<ODataException>(() => edmComplexType.GetProperty("Name"));
 
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
             Assert.Equal("The type 'NorthwindModel.Customer' does not contain a property named 'Name'", exception.Message);
         }
 

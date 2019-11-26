@@ -65,6 +65,16 @@
             }
 
             [Fact]
+            public void ParseFunctionMissingSecondParameterExpression()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => FilterExpressionParser.Parse("cast(Colour,) eq 20", EntityDataModel.Current.EntitySets["Products"].EdmType)); ;
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+            }
+
+            [Fact]
             public void ParseNotMissingExpression()
             {
                 var exception = Assert.Throws<ODataException>(
@@ -99,6 +109,16 @@
             {
                 var exception = Assert.Throws<ODataException>(
                     () => FilterExpressionParser.Parse("Deleted eq true or", EntityDataModel.Current.EntitySets["Products"].EdmType)); ;
+
+                Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+            }
+
+            [Fact]
+            public void ParseSingleOpeningParenthesis()
+            {
+                var exception = Assert.Throws<ODataException>(
+                    () => FilterExpressionParser.Parse("(", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
                 Assert.Equal(Messages.UnableToParseFilter, exception.Message);

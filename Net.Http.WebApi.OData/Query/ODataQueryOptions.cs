@@ -181,13 +181,14 @@ namespace Net.Http.WebApi.OData.Query
             }
 
             var equals = rawValue.IndexOf('=') + 1;
-            var queryOption = rawValue.Substring(0, equals - 1);
             var value = rawValue.Substring(equals, rawValue.Length - equals);
 
             if (int.TryParse(value, out int integer))
             {
                 return integer;
             }
+
+            var queryOption = rawValue.Substring(0, equals - 1);
 
             throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith(queryOption));
         }

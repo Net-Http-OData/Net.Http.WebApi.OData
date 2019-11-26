@@ -12,7 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
-    using System;
+    using System.Net;
     using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class UnaryOperatorKindParser
@@ -25,7 +25,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                     return UnaryOperatorKind.Not;
 
                 default:
-                    throw new ArgumentException(Messages.UnknownOperator.FormatWith(operatorType), nameof(operatorType));
+                    throw new ODataException(HttpStatusCode.BadRequest, Messages.UnknownOperator.FormatWith(operatorType));
             }
         }
     }

@@ -12,8 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Parsers
 {
-    using System;
     using System.Collections.Generic;
+    using System.Net;
     using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class BinaryOperatorKindParser
@@ -37,6 +37,6 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         };
 
         internal static BinaryOperatorKind ToBinaryOperatorKind(this string operatorType)
-            => OperatorTypeMap.TryGetValue(operatorType, out BinaryOperatorKind binaryOperatorKind) ? binaryOperatorKind : throw new ArgumentException(Messages.UnknownOperator.FormatWith(operatorType), nameof(operatorType));
+            => OperatorTypeMap.TryGetValue(operatorType, out BinaryOperatorKind binaryOperatorKind) ? binaryOperatorKind : throw new ODataException(HttpStatusCode.BadRequest, Messages.UnknownOperator.FormatWith(operatorType));
     }
 }
