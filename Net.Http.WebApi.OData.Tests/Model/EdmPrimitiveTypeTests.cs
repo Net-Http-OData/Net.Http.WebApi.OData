@@ -1,6 +1,7 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Model
 {
     using System;
+    using System.IO;
     using OData.Model;
     using Xunit;
 
@@ -144,6 +145,16 @@
             Assert.Equal("Single", EdmPrimitiveType.Single.Name);
             Assert.Same(EdmPrimitiveType.Single, EdmPrimitiveType.Single);
             Assert.Equal(EdmPrimitiveType.Single.ToString(), EdmPrimitiveType.Single.FullName);
+        }
+
+        [Fact]
+        public void Stream()
+        {
+            Assert.Equal(typeof(Stream), EdmPrimitiveType.Stream.ClrType);
+            Assert.Equal("Edm.Stream", EdmPrimitiveType.Stream.FullName);
+            Assert.Equal("Stream", EdmPrimitiveType.Stream.Name);
+            Assert.Same(EdmPrimitiveType.Stream, EdmPrimitiveType.Stream);
+            Assert.Equal(EdmPrimitiveType.Stream.ToString(), EdmPrimitiveType.Stream.FullName);
         }
 
         [Fact]
