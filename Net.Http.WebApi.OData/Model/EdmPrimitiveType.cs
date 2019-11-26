@@ -13,11 +13,12 @@
 namespace Net.Http.WebApi.OData.Model
 {
     using System;
+    using System.IO;
 
     /// <summary>
     /// Represents a primitive type in the Entity Data Model.
     /// </summary>
-    /// <seealso cref="Net.Http.WebApi.OData.Model.EdmType" />
+    /// <seealso cref="EdmType" />
     [System.Diagnostics.DebuggerDisplay("{FullName}: {ClrType}")]
     public sealed class EdmPrimitiveType : EdmType
     {
@@ -123,6 +124,11 @@ namespace Net.Http.WebApi.OData.Model
         public static EdmType Single { get; } = new EdmPrimitiveType("Single", "Edm.Single", typeof(float));
 
 #pragma warning restore CA1720 // Identifier contains type name
+
+        /// <summary>
+        /// Gets the EdmType which represents a binary data stream.
+        /// </summary>
+        public static EdmType Stream { get; } = new EdmPrimitiveType("Stream", "Edm.Stream", typeof(Stream));
 
 #pragma warning disable CA1720 // Identifier contains type name
 

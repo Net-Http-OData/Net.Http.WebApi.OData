@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Model
     /// <summary>
     /// Represents a collection type in the Entity Data Model.
     /// </summary>
-    /// <seealso cref="Net.Http.WebApi.OData.Model.EdmType" />
+    /// <seealso cref="EdmType"/>
     [System.Diagnostics.DebuggerDisplay("{FullName}: {ClrType}")]
     public sealed class EdmCollectionType : EdmType
     {

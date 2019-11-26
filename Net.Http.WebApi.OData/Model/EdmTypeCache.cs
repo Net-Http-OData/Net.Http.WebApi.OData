@@ -48,6 +48,7 @@ namespace Net.Http.WebApi.OData.Model
                 [typeof(sbyte?)] = EdmPrimitiveType.SByte,
                 [typeof(float)] = EdmPrimitiveType.Single,
                 [typeof(float?)] = EdmPrimitiveType.Single,
+                ////[typeof(Stream)] = EdmPrimitiveType.Stream,
                 [typeof(char)] = EdmPrimitiveType.String,
                 [typeof(char?)] = EdmPrimitiveType.String,
                 [typeof(string)] = EdmPrimitiveType.String,
