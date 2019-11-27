@@ -28,12 +28,9 @@ namespace Net.Http.WebApi.OData
         /// <param name="actionExecutedContext">The context for the action.</param>
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            if (actionExecutedContext != null)
+            if (actionExecutedContext?.Exception is ODataException odataException)
             {
-                if (actionExecutedContext.Exception is ODataException odataException)
-                {
-                    actionExecutedContext.Response = actionExecutedContext.Request.CreateODataErrorResponse(odataException);
-                }
+                actionExecutedContext.Response = actionExecutedContext.Request.CreateODataErrorResponse(odataException);
             }
 
             base.OnException(actionExecutedContext);
