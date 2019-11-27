@@ -20,13 +20,26 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Xml.Linq;
     using Net.Http.WebApi.OData.Model;
 
+    /// <summary>
+    /// Provides the Metadata XML document for the Entity Data Model.
+    /// </summary>
     internal static class MetadataProvider
     {
         private static readonly XNamespace EdmNs = "http://docs.oasis-open.org/odata/ns/edm";
         private static readonly XNamespace EdmxNs = "http://docs.oasis-open.org/odata/ns/edmx";
 
+        /// <summary>
+        /// Creates an <see cref="XDocument"/> containing the Metadata XML document for the Entity Data Model.
+        /// </summary>
+        /// <param name="entityDataModel">The Entity Data Model to include the Metadata for.</param>
+        /// <returns>An <see cref="XDocument"/> containing the Metadata XML document for the Entity Data Model.</returns>
         internal static XDocument Create(EntityDataModel entityDataModel)
         {
+            if (entityDataModel is null)
+            {
+                throw new ArgumentNullException(nameof(entityDataModel));
+            }
+
             var document = new XDocument(
                 new XDeclaration("1.0", "utf-8", null),
                 new XElement(
