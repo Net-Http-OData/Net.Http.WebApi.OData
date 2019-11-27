@@ -28,25 +28,10 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
         /// </summary>
-        /// <remarks>Uses <see cref="StringComparer"/>.OrdinalIgnoreCase for the Entity Set name comparer.</remarks>
-        [Obsolete("The entity data model builder should not be created directly, please use the new UseOData() extension method for HttpConfiguration. The public constructor will be removed in a future version of the library.", false)]
-        public EntityDataModelBuilder()
-            : this(StringComparer.OrdinalIgnoreCase)
-        {
-        }
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="EntityDataModelBuilder"/> class.
-        /// </summary>
         /// <param name="entitySetNameComparer">The equality comparer to use for the Entity Set name.</param>
         internal EntityDataModelBuilder(IEqualityComparer<string> entitySetNameComparer)
         {
-            if (entitySetNameComparer is null)
-            {
-                throw new ArgumentNullException(nameof(entitySetNameComparer));
-            }
-
-            this.entitySets = new Dictionary<string, EntitySet>(entitySetNameComparer);
+            this.entitySets = new Dictionary<string, EntitySet>(entitySetNameComparer) ?? throw new ArgumentNullException(nameof(entitySetNameComparer));
         }
 
         /// <summary>
