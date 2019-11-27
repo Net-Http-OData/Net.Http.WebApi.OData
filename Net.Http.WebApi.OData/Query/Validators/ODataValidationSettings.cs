@@ -58,38 +58,22 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <summary>
         /// Gets or sets the allowed arithmetic operators.
         /// </summary>
-        public AllowedArithmeticOperators AllowedArithmeticOperators
-        {
-            get;
-            set;
-        }
+        public AllowedArithmeticOperators AllowedArithmeticOperators { get; set; }
 
         /// <summary>
         /// Gets or sets the allowed functions.
         /// </summary>
-        public AllowedFunctions AllowedFunctions
-        {
-            get;
-            set;
-        }
+        public AllowedFunctions AllowedFunctions { get; set; }
 
         /// <summary>
         /// Gets or sets the allowed logical operators.
         /// </summary>
-        public AllowedLogicalOperators AllowedLogicalOperators
-        {
-            get;
-            set;
-        }
+        public AllowedLogicalOperators AllowedLogicalOperators { get; set; }
 
         /// <summary>
         /// Gets or sets the allowed query options.
         /// </summary>
-        public AllowedQueryOptions AllowedQueryOptions
-        {
-            get;
-            set;
-        }
+        public AllowedQueryOptions AllowedQueryOptions { get; set; }
 
         /// <summary>
         /// Gets or sets the max value allowed in the $top query option.
@@ -97,11 +81,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
         /// <remarks>
         /// This is used to ensure that 'paged' queries do not return excessive results on each call.
         /// </remarks>
-        public int MaxTop
-        {
-            get;
-            set;
-        }
+        public int MaxTop { get; set; }
 
         /// <summary>
         /// Checks whether two separate ODataValidationSettings instances are not equal.

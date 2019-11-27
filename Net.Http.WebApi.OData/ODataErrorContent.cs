@@ -18,10 +18,6 @@ namespace Net.Http.WebApi.OData
     internal sealed class ODataErrorContent
     {
         [Newtonsoft.Json.JsonProperty("error", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 0)]
-        public ODataError Error
-        {
-            get;
-            set;
-        }
+        public ODataError Error { get; set; }
     }
 }
