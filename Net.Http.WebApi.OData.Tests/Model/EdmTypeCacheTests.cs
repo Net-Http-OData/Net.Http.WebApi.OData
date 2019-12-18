@@ -1,7 +1,7 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Model
 {
     using System;
-    using OData.Model;
+    using Net.Http.WebApi.OData.Model;
     using Xunit;
 
     public class EdmTypeCacheTests

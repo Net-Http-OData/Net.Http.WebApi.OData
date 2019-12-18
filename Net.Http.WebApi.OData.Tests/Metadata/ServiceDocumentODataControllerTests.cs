@@ -4,8 +4,8 @@
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Http.Hosting;
+    using Net.Http.WebApi.OData.Metadata;
     using Newtonsoft.Json;
-    using OData.Metadata;
     using Xunit;
 
     public class ServiceDocumentODataControllerTests

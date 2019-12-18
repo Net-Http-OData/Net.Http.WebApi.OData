@@ -1,8 +1,8 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Model
 {
     using System;
+    using Net.Http.WebApi.OData.Model;
     using NorthwindModel;
-    using OData.Model;
     using Xunit;
 
     public class EdmPropertyTests

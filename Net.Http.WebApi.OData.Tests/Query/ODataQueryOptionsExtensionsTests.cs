@@ -1,7 +1,7 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
     using System.Net.Http;
-    using OData.Model;
+    using Net.Http.WebApi.OData.Model;
     using OData.Query;
     using Xunit;
 

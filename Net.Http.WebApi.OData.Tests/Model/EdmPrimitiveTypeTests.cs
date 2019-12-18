@@ -2,7 +2,7 @@
 {
     using System;
     using System.IO;
-    using OData.Model;
+    using Net.Http.WebApi.OData.Model;
     using Xunit;
 
     public class EdmPrimitiveTypeTests
