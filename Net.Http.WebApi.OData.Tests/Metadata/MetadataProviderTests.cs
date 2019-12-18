@@ -62,6 +62,7 @@
       </EntityType>
       <EntityType Name=""Managers"" BaseType=""NorthwindModel.Employee"">
         <Property Name=""AnnualBudget"" Type=""Edm.Decimal"" Nullable=""false"" />
+        <Property Name=""Employees"" Type=""Collection(NorthwindModel.Employee)"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Orders"">
         <Key>

@@ -182,11 +182,16 @@
                 Assert.Equal(typeof(Manager), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Manager", edmComplexType.FullName);
                 Assert.Equal("Manager", edmComplexType.Name);
-                Assert.Equal(1, edmComplexType.Properties.Count); // Does not include inherited properties
+                Assert.Equal(2, edmComplexType.Properties.Count); // Does not include inherited properties
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
                 Assert.Equal("AnnualBudget", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[0].PropertyType);
+
+                Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
+                Assert.Equal("Employees", edmComplexType.Properties[1].Name);
+                Assert.IsType<EdmCollectionType>(edmComplexType.Properties[1].PropertyType);
+                Assert.Equal(EdmType.GetEdmType(typeof(Employee)), ((EdmCollectionType)edmComplexType.Properties[1].PropertyType).ContainedType);
 
                 Assert.Null(entitySet.EntityKey);
             }
