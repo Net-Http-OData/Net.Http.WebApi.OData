@@ -87,7 +87,7 @@ namespace Net.Http.WebApi.OData.Model
                 throw new ArgumentNullException(nameof(entityKeyExpression));
             }
 
-            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), t => EdmTypeResolver(t));
+            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), EdmTypeResolver);
 
             var entityKey = edmType.BaseType is null ? edmType.GetProperty(entityKeyExpression.GetMemberInfo().Name) : null;
 
@@ -116,26 +116,26 @@ namespace Net.Http.WebApi.OData.Model
 
                 if (typeof(IEnumerable<>).MakeGenericType(innerType).IsAssignableFrom(clrType))
                 {
-                    var containedType = EdmTypeCache.Map.GetOrAdd(innerType, EdmTypeResolver(innerType));
+                    var containedType = EdmTypeCache.Map.GetOrAdd(innerType, EdmTypeResolver);
 
                     return EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmCollectionType(t, containedType));
                 }
             }
 
-            EdmType baseType = clrType.BaseType != typeof(object) ? baseType = EdmTypeResolver(clrType.BaseType) : null;
+            EdmType baseEdmType = clrType.BaseType != typeof(object) ? EdmTypeResolver(clrType.BaseType) : null;
 
             var clrTypeProperties = clrType
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                 .OrderBy(p => p.Name);
 
             var edmProperties = new List<EdmProperty>();
-            var edmComplexType = new EdmComplexType(clrType, baseType, edmProperties);
+            var edmComplexType = new EdmComplexType(clrType, baseEdmType, edmProperties);
 
             edmProperties.AddRange(
                 clrTypeProperties.Select(
                     p => new EdmProperty(
                         p.Name,
-                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, t => EdmTypeResolver(t)),
+                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver),
                         edmComplexType)));
 
             return edmComplexType;
