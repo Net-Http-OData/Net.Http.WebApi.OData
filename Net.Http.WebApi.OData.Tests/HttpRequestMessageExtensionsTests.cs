@@ -731,7 +731,7 @@
                 var exception = Assert.Throws<ODataException>(() => httpRequestMessage.ReadODataRequestOptions());
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataMetadataValueInvalid, exception.Message);
+                Assert.Equal("If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'", exception.Message);
             }
         }
 
@@ -822,7 +822,7 @@
                 var exception = Assert.Throws<ODataException>(() => httpRequestMessage.ReadODataRequestOptions());
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedIsolationLevel, exception.Message);
+                Assert.Equal("If specified, the OData-IsolationLevel must be 'Snapshot'", exception.Message);
             }
         }
     }

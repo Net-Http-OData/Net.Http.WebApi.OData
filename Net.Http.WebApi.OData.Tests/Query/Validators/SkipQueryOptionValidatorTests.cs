@@ -3,9 +3,9 @@
     using System.Net;
     using System.Net.Http;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
-    using OData.Model;
     using Xunit;
 
     public class SkipQueryOptionValidatorTests
@@ -35,7 +35,7 @@
                     () => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$skip"), exception.Message);
+                Assert.Equal("The query option $skip is not implemented by this service", exception.Message);
             }
         }
 
@@ -109,7 +109,7 @@
                     () => SkipQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.IntRawValueInvalid.FormatWith("$skip"), exception.Message);
+                Assert.Equal("The value for OData query $skip must be a non-negative numeric value", exception.Message);
             }
         }
     }

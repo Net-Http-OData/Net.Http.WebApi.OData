@@ -35,17 +35,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Top) != AllowedQueryOptions.Top)
             {
-                throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$top"));
+                throw new ODataException(HttpStatusCode.NotImplemented, "The query option $top is not implemented by this service");
             }
 
-            if (queryOptions.Top.Value < 0)
+            if (queryOptions.Top.Value < 0 || queryOptions.Top.Value > validationSettings.MaxTop)
             {
-                throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$top"));
-            }
-
-            if (queryOptions.Top.Value > validationSettings.MaxTop)
-            {
-                throw new ODataException(HttpStatusCode.BadRequest, Messages.TopValueExceedsMaxAllowed.FormatWith(validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture)));
+                throw new ODataException(HttpStatusCode.BadRequest, $"The integer value for $top is invalid, it must be an integer greater than zero and below the max value of {validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture)} allowed by this service");
             }
         }
     }

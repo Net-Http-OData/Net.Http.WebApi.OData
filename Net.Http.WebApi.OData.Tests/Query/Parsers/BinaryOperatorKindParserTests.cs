@@ -98,7 +98,7 @@
             var exception = Assert.Throws<ODataException>(() => "wibble".ToBinaryOperatorKind());
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-            Assert.Equal(Messages.UnknownOperator.FormatWith("wibble"), exception.Message);
+            Assert.Equal("The operator 'wibble' is not a valid OData operator.", exception.Message);
         }
     }
 }

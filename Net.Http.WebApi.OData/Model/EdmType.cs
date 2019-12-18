@@ -30,12 +30,12 @@ namespace Net.Http.WebApi.OData.Model
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException(Messages.NameMustBeSpecified, nameof(name));
+                throw new ArgumentException("Name must be specified", nameof(name));
             }
 
             if (string.IsNullOrWhiteSpace(fullName))
             {
-                throw new ArgumentException(Messages.FullNameMustBeSpecified, nameof(fullName));
+                throw new ArgumentException("FullName must be specified", nameof(fullName));
             }
 
             this.Name = name;

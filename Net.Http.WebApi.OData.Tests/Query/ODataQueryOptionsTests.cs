@@ -80,7 +80,7 @@
             var exception = Assert.Throws<ODataException>(() => option.Skip);
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-            Assert.Equal(Messages.IntRawValueInvalid.FormatWith("$skip"), exception.Message);
+            Assert.Equal("The value for OData query $skip must be a non-negative numeric value", exception.Message);
         }
 
         [Fact]
@@ -95,7 +95,7 @@
             var exception = Assert.Throws<ODataException>(() => option.Top);
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-            Assert.Equal(Messages.IntRawValueInvalid.FormatWith("$top"), exception.Message);
+            Assert.Equal("The value for OData query $top must be a non-negative numeric value", exception.Message);
         }
 
         public class WhenConstructedWithAllQueryOptions

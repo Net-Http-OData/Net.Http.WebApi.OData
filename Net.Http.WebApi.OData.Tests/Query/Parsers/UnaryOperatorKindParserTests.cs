@@ -20,7 +20,7 @@ namespace Net.Http.WebApi.OData.Tests.Query.Parsers
             var exception = Assert.Throws<ODataException>(() => "wibble".ToUnaryOperatorKind());
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-            Assert.Equal(Messages.UnknownOperator.FormatWith("wibble"), exception.Message);
+            Assert.Equal("The operator 'wibble' is not a valid OData operator.", exception.Message);
         }
     }
 }

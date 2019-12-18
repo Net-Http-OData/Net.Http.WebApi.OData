@@ -33,7 +33,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 
@@ -59,7 +59,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 
@@ -85,7 +85,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 
@@ -135,7 +135,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 
@@ -161,7 +161,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 
@@ -187,7 +187,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 
@@ -213,7 +213,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 
@@ -263,7 +263,7 @@
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
                 Assert.Equal("406", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Code);
-                Assert.Equal(Messages.UnsupportedODataVersion, ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
+                Assert.Equal("This service only supports OData 4.0", ((ODataErrorContent)((ObjectContent<ODataErrorContent>)actionContext.Response.Content).Value).Error.Message);
             }
         }
 

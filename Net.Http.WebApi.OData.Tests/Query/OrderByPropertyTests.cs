@@ -39,7 +39,7 @@
                 var exception = Assert.Throws<ODataException>(() => new OrderByProperty("CompanyName ASC", model));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
+                Assert.Equal("The supplied order value for CompanyName is invalid, valid options are 'asc' and 'desc'", exception.Message);
             }
         }
 
@@ -55,7 +55,7 @@
                 var exception = Assert.Throws<ODataException>(() => new OrderByProperty("CompanyName wibble", model));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
+                Assert.Equal("The supplied order value for CompanyName is invalid, valid options are 'asc' and 'desc'", exception.Message);
             }
         }
 

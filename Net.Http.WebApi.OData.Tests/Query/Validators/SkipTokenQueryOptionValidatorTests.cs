@@ -3,9 +3,9 @@
     using System.Net;
     using System.Net.Http;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
-    using OData.Model;
     using Xunit;
 
     public class SkipTokenQueryOptionValidatorTests
@@ -35,7 +35,7 @@
                     () => SkipTokenQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$skiptoken"), exception.Message);
+                Assert.Equal("The query option $skiptoken is not implemented by this service", exception.Message);
             }
         }
 

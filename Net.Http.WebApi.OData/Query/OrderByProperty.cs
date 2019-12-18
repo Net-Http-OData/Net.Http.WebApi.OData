@@ -59,7 +59,7 @@ namespace Net.Http.WebApi.OData.Query
                         break;
 
                     default:
-                        throw new ODataException(HttpStatusCode.BadRequest, Messages.OrderByPropertyRawValueInvalid);
+                        throw new ODataException(HttpStatusCode.BadRequest, $"The supplied order value for {this.Property.Name} is invalid, valid options are 'asc' and 'desc'");
                 }
             }
         }

@@ -36,7 +36,7 @@
                     () => SearchQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$search"), exception.Message);
+                Assert.Equal("The query option $search is not implemented by this service", exception.Message);
             }
         }
 

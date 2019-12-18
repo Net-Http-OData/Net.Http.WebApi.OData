@@ -82,7 +82,7 @@ namespace Net.Http.WebApi.OData.Query.Binders
                     break;
 
                 default:
-                    throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedNodeType.FormatWith(queryNode.Kind.ToString()));
+                    throw new ODataException(HttpStatusCode.NotImplemented, $"Query nodes of type '{queryNode.Kind.ToString()}' are not supported.");
             }
         }
 

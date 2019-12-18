@@ -32,7 +32,7 @@ namespace Net.Http.WebApi.OData.Model
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException(Messages.PropertyNameMustBeSpecified, nameof(name));
+                throw new ArgumentException("Property name must be specified", nameof(name));
             }
 
             this.Name = name;
