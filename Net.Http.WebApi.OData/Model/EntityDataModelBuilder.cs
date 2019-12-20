@@ -126,7 +126,7 @@ namespace Net.Http.WebApi.OData.Model
                 }
             }
 
-            EdmType baseEdmType = clrType.BaseType != typeof(object) ? EdmTypeResolver(clrType.BaseType) : null;
+            EdmType baseEdmType = clrType.BaseType != typeof(object) ? EdmTypeCache.Map.GetOrAdd(clrType.BaseType, EdmTypeResolver) : null;
 
             var clrTypeProperties = clrType
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)

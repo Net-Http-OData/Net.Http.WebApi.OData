@@ -24,6 +24,8 @@
 
         public DateTime? LeavingDate { get; set; }
 
+        public Manager Manager { get; set; }
+
         [Required]
         public string Surname { get; set; }
 

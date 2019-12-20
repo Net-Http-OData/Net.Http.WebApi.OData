@@ -134,7 +134,7 @@
                 Assert.Equal(typeof(Employee), edmComplexType.ClrType);
                 Assert.Equal("NorthwindModel.Employee", edmComplexType.FullName);
                 Assert.Equal("Employee", edmComplexType.Name);
-                Assert.Equal(10, edmComplexType.Properties.Count);
+                Assert.Equal(11, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
                 Assert.False(edmComplexType.Properties[0].IsNullable);
@@ -177,14 +177,19 @@
                 Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[1].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[8].DeclaringType);
-                Assert.False(edmComplexType.Properties[8].IsNullable);
-                Assert.Equal("Surname", edmComplexType.Properties[8].Name);
-                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[8].PropertyType);
+                Assert.True(edmComplexType.Properties[8].IsNullable);
+                Assert.Equal("Manager", edmComplexType.Properties[8].Name);
+                Assert.Equal(EdmType.GetEdmType(typeof(Manager)), (EdmComplexType)edmComplexType.Properties[8].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[9].DeclaringType);
                 Assert.False(edmComplexType.Properties[9].IsNullable);
-                Assert.Equal("Title", edmComplexType.Properties[9].Name);
+                Assert.Equal("Surname", edmComplexType.Properties[9].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[9].PropertyType);
+
+                Assert.Same(edmComplexType, edmComplexType.Properties[10].DeclaringType);
+                Assert.False(edmComplexType.Properties[10].IsNullable);
+                Assert.Equal("Title", edmComplexType.Properties[10].Name);
+                Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[10].PropertyType);
 
                 Assert.Same(edmComplexType.Properties[4], entitySet.EntityKey);
             }

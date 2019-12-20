@@ -62,6 +62,7 @@
         <Property Name=""LeavingDate"" Type=""Edm.Date"" />
         <Property Name=""Surname"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Title"" Type=""Edm.String"" Nullable=""false"" />
+        <NavigationProperty Name=""Manager"" Type=""NorthwindModel.Manager"" />
       </EntityType>
       <EntityType Name=""Managers"" BaseType=""NorthwindModel.Employee"">
         <Property Name=""AnnualBudget"" Type=""Edm.Decimal"" Nullable=""false"" />
