@@ -31,6 +31,7 @@
         <Property Name=""ProductId"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""Quantity"" Type=""Edm.Int16"" Nullable=""false"" />
         <Property Name=""UnitPrice"" Type=""Edm.Decimal"" Nullable=""false"" />
+        <NavigationProperty Name=""Order"" Type=""NorthwindModel.Order"" />
       </ComplexType>
       <EntityType Name=""Categories"">
         <Key>
@@ -80,7 +81,6 @@
         <Key>
           <PropertyRef Name=""ProductId"" />
         </Key>
-        <Property Name=""Category"" Type=""NorthwindModel.Category"" />
         <Property Name=""Colour"" Type=""NorthwindModel.Colour"" Nullable=""false"" />
         <Property Name=""Deleted"" Type=""Edm.Boolean"" Nullable=""false"" />
         <Property Name=""Description"" Type=""Edm.String"" />
@@ -89,6 +89,7 @@
         <Property Name=""ProductId"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""Rating"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""ReleaseDate"" Type=""Edm.Date"" Nullable=""false"" />
+        <NavigationProperty Name=""Category"" Type=""NorthwindModel.Category"" />
       </EntityType>
       <EntityContainer Name=""DefaultContainer"">
         <EntitySet Name=""Categories"" EntityType=""NorthwindModel.Category"">

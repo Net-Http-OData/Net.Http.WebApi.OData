@@ -107,7 +107,7 @@ namespace Net.Http.WebApi.OData.Model
                     members.Add(new EdmEnumMember(value.ToString(), (int)value));
                 }
 
-                return new EdmEnumType(clrType, members.AsReadOnly());
+                return EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmEnumType(clrType, members.AsReadOnly()));
             }
 
             if (clrType.IsGenericType)
@@ -133,7 +133,7 @@ namespace Net.Http.WebApi.OData.Model
                 .OrderBy(p => p.Name);
 
             var edmProperties = new List<EdmProperty>();
-            var edmComplexType = new EdmComplexType(clrType, baseEdmType, edmProperties);
+            var edmComplexType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmComplexType(t, baseEdmType, edmProperties));
 
             edmProperties.AddRange(
                 clrTypeProperties.Select(

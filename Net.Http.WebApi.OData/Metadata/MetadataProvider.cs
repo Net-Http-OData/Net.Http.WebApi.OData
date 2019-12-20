@@ -128,7 +128,7 @@ namespace Net.Http.WebApi.OData.Metadata
                     var element = new XElement(
                        EdmNs + "ComplexType",
                        new XAttribute("Name", t.Name),
-                       GetProperties(t.Properties));
+                       GetProperties(entityDataModel, t.Properties));
 
                     if (t.BaseType != null)
                     {
@@ -202,7 +202,7 @@ namespace Net.Http.WebApi.OData.Metadata
                     var element = new XElement(
                       EdmNs + "EntityType",
                       new XAttribute("Name", t.Name),
-                      GetProperties(t.EdmType.Properties));
+                      GetProperties(entityDataModel, t.EdmType.Properties));
 
                     if (t.EdmType.BaseType is null)
                     {
@@ -242,8 +242,10 @@ namespace Net.Http.WebApi.OData.Metadata
 
         private static IEnumerable<XElement> GetFunctions() => Enumerable.Empty<XElement>();
 
-        private static IEnumerable<XElement> GetProperties(IEnumerable<EdmProperty> properties)
-            => properties.Select(p =>
+        private static IEnumerable<XElement> GetProperties(EntityDataModel entityDataModel, IEnumerable<EdmProperty> properties)
+            => properties
+            .Where(p => !entityDataModel.EntitySets.Values.Any(x => x.EdmType == p.PropertyType))
+            .Select(p =>
             {
                 if (p.IsNullable)
                 {
@@ -258,6 +260,9 @@ namespace Net.Http.WebApi.OData.Metadata
                       new XAttribute("Name", p.Name),
                       new XAttribute("Type", p.PropertyType.FullName),
                       new XAttribute("Nullable", "false"));
-            });
+            })
+            .Concat(properties
+                .Where(p => entityDataModel.EntitySets.Values.Any(x => x.EdmType == p.PropertyType))
+                .Select(p => new XElement(EdmNs + "NavigationProperty", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName))));
     }
 }

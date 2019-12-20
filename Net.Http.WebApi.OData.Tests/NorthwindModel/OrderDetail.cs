@@ -2,6 +2,8 @@
 {
     public class OrderDetail
     {
+        public Order Order { get; set; }
+
         public long OrderId { get; set; }
 
         public int ProductId { get; set; }
