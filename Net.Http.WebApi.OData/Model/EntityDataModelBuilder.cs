@@ -107,7 +107,7 @@ namespace Net.Http.WebApi.OData.Model
                     members.Add(new EdmEnumMember(value.ToString(), (int)value));
                 }
 
-                return EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmEnumType(clrType, members.AsReadOnly()));
+                return EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmEnumType(t, members.AsReadOnly()));
             }
 
             if (clrType.IsGenericType)
@@ -128,16 +128,14 @@ namespace Net.Http.WebApi.OData.Model
 
             EdmType baseEdmType = clrType.BaseType != typeof(object) ? EdmTypeCache.Map.GetOrAdd(clrType.BaseType, EdmTypeResolver) : null;
 
-            var clrTypeProperties = clrType
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .OrderBy(p => p.Name);
+            var clrTypeProperties = clrType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
-            var edmProperties = new List<EdmProperty>();
-            var edmComplexType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmComplexType(t, baseEdmType, edmProperties));
+            var edmProperties = new List<EdmProperty>(clrTypeProperties.Length);
+            var edmComplexType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmComplexType(t, baseEdmType, edmProperties.AsReadOnly()));
 
-            edmProperties.AddRange(
-                clrTypeProperties.Select(
-                    p => new EdmProperty(p, EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver), edmComplexType)));
+            edmProperties.AddRange(clrTypeProperties
+                .OrderBy(p => p.Name)
+                .Select(p => new EdmProperty(p, EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver), edmComplexType)));
 
             return edmComplexType;
         }
