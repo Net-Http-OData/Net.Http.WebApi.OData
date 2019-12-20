@@ -36,15 +36,15 @@
         <Key>
           <PropertyRef Name=""Name"" />
         </Key>
-        <Property Name=""Name"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Name"" Type=""Edm.String"" />
       </EntityType>
       <EntityType Name=""Customers"">
         <Key>
           <PropertyRef Name=""CompanyName"" />
         </Key>
-        <Property Name=""City"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""CompanyName"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""Country"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""City"" Type=""Edm.String"" />
+        <Property Name=""CompanyName"" Type=""Edm.String"" />
+        <Property Name=""Country"" Type=""Edm.String"" />
         <Property Name=""LegacyId"" Type=""Edm.Int32"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Employees"">
@@ -56,33 +56,35 @@
         <Property Name=""EmailAddress"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Forename"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Id"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""ImageData"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""ImageData"" Type=""Edm.String"" />
+        <Property Name=""JoiningDate"" Type=""Edm.Date"" Nullable=""false"" />
+        <Property Name=""LeavingDate"" Type=""Edm.Date"" />
         <Property Name=""Surname"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Title"" Type=""Edm.String"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Managers"" BaseType=""NorthwindModel.Employee"">
         <Property Name=""AnnualBudget"" Type=""Edm.Decimal"" Nullable=""false"" />
-        <Property Name=""Employees"" Type=""Collection(NorthwindModel.Employee)"" Nullable=""false"" />
+        <Property Name=""Employees"" Type=""Collection(NorthwindModel.Employee)"" />
       </EntityType>
       <EntityType Name=""Orders"">
         <Key>
           <PropertyRef Name=""OrderId"" />
         </Key>
         <Property Name=""Freight"" Type=""Edm.Decimal"" Nullable=""false"" />
-        <Property Name=""OrderDetails"" Type=""Collection(NorthwindModel.OrderDetail)"" Nullable=""false"" />
+        <Property Name=""OrderDetails"" Type=""Collection(NorthwindModel.OrderDetail)"" />
         <Property Name=""OrderId"" Type=""Edm.Int64"" Nullable=""false"" />
-        <Property Name=""ShipCountry"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""ShipCountry"" Type=""Edm.String"" />
         <Property Name=""TransactionId"" Type=""Edm.Guid"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Products"">
         <Key>
           <PropertyRef Name=""ProductId"" />
         </Key>
-        <Property Name=""Category"" Type=""NorthwindModel.Category"" Nullable=""false"" />
+        <Property Name=""Category"" Type=""NorthwindModel.Category"" />
         <Property Name=""Colour"" Type=""NorthwindModel.Colour"" Nullable=""false"" />
         <Property Name=""Deleted"" Type=""Edm.Boolean"" Nullable=""false"" />
-        <Property Name=""Description"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""Name"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Description"" Type=""Edm.String"" />
+        <Property Name=""Name"" Type=""Edm.String"" />
         <Property Name=""Price"" Type=""Edm.Decimal"" Nullable=""false"" />
         <Property Name=""ProductId"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""Rating"" Type=""Edm.Int32"" Nullable=""false"" />

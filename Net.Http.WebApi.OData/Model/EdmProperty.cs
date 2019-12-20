@@ -13,6 +13,8 @@
 namespace Net.Http.WebApi.OData.Model
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Reflection;
 
     /// <summary>
     /// A class which represents an entity property in the Entity Data Model.
@@ -23,27 +25,29 @@ namespace Net.Http.WebApi.OData.Model
         /// <summary>
         /// Initialises a new instance of the <see cref="EdmProperty" /> class.
         /// </summary>
-        /// <param name="name">The name of the property.</param>
+        /// <param name="propertyInfo">The PropertyInfo for the property.</param>
         /// <param name="propertyType">Type of the edm.</param>
         /// <param name="declaringType">Type of the declaring.</param>
-        /// <exception cref="ArgumentException">Property name must be specified.</exception>
-        /// <exception cref="ArgumentNullException">Property type and declaring type must be specified.</exception>
-        internal EdmProperty(string name, EdmType propertyType, EdmComplexType declaringType)
+        /// <exception cref="ArgumentNullException">Constructor argument not specified.</exception>
+        internal EdmProperty(PropertyInfo propertyInfo, EdmType propertyType, EdmComplexType declaringType)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("Property name must be specified", nameof(name));
-            }
-
-            this.Name = name;
+            this.Name = propertyInfo?.Name ?? throw new ArgumentNullException(nameof(propertyInfo));
             this.PropertyType = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
             this.DeclaringType = declaringType ?? throw new ArgumentNullException(nameof(declaringType));
+
+            this.IsNullable = Nullable.GetUnderlyingType(propertyType.ClrType) != null
+                || ((propertyType.ClrType.IsClass || propertyType.ClrType.IsInterface) && propertyInfo.GetCustomAttribute<RequiredAttribute>() == null);
         }
 
         /// <summary>
         /// Gets the type in the Entity Data Model which declares this property.
         /// </summary>
         public EdmComplexType DeclaringType { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the property is nullable.
+        /// </summary>
+        public bool IsNullable { get; }
 
         /// <summary>
         /// Gets the name of the property.

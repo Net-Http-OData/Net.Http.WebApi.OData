@@ -244,10 +244,20 @@ namespace Net.Http.WebApi.OData.Metadata
 
         private static IEnumerable<XElement> GetProperties(IEnumerable<EdmProperty> properties)
             => properties.Select(p =>
-                new XElement(
-                    EdmNs + "Property",
-                    new XAttribute("Name", p.Name),
-                    new XAttribute("Type", p.PropertyType.FullName),
-                    new XAttribute("Nullable", "false"))); // TODO: nullable needs to be set in model (use data annotations?)
+            {
+                if (p.IsNullable)
+                {
+                    return new XElement(
+                          EdmNs + "Property",
+                          new XAttribute("Name", p.Name),
+                          new XAttribute("Type", p.PropertyType.FullName));
+                }
+
+                return new XElement(
+                      EdmNs + "Property",
+                      new XAttribute("Name", p.Name),
+                      new XAttribute("Type", p.PropertyType.FullName),
+                      new XAttribute("Nullable", "false"));
+            });
     }
 }

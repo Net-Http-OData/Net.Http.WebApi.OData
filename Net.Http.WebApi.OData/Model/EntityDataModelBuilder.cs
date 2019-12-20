@@ -120,6 +120,10 @@ namespace Net.Http.WebApi.OData.Model
 
                     return EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmCollectionType(t, containedType));
                 }
+                else
+                {
+                    throw new NotSupportedException(clrType.FullName);
+                }
             }
 
             EdmType baseEdmType = clrType.BaseType != typeof(object) ? EdmTypeResolver(clrType.BaseType) : null;
@@ -133,10 +137,7 @@ namespace Net.Http.WebApi.OData.Model
 
             edmProperties.AddRange(
                 clrTypeProperties.Select(
-                    p => new EdmProperty(
-                        p.Name,
-                        EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver),
-                        edmComplexType)));
+                    p => new EdmProperty(p, EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver), edmComplexType)));
 
             return edmComplexType;
         }
