@@ -218,26 +218,32 @@
         <Annotation Term=""Org.OData.Capabilities.V1.BatchContinueOnErrorSupported"" Bool=""false"" />
         <Annotation Term=""Org.OData.Capabilities.V1.FilterFunctions"">
           <Collection>
-            <String>contains</String>
+            <String>cast</String>
+            <String>isof</String>
             <String>endswith</String>
             <String>startswith</String>
-            <String>length</String>
-            <String>indexof</String>
-            <String>substring</String>
+            <String>contains</String>
             <String>tolower</String>
             <String>toupper</String>
             <String>trim</String>
+            <String>length</String>
+            <String>indexof</String>
+            <String>replace</String>
+            <String>substring</String>
             <String>concat</String>
             <String>year</String>
             <String>month</String>
             <String>day</String>
             <String>hour</String>
+            <String>minute</String>
             <String>second</String>
+            <String>fractionalseconds</String>
+            <String>now</String>
+            <String>mindatetime</String>
+            <String>maxdatetime</String>
             <String>round</String>
-            <String>floor</String>
             <String>ceiling</String>
-            <String>cast</String>
-            <String>isof</String>
+            <String>floor</String>
           </Collection>
         </Annotation>
       </Annotations>
