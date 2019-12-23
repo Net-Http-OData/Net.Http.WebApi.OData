@@ -17,13 +17,20 @@ namespace Net.Http.WebApi.OData
     [DataContract]
     internal sealed class ODataError
     {
+        internal ODataError(string code, string message, string target)
+        {
+            this.Code = code;
+            this.Message = message;
+            this.Target = target;
+        }
+
         [Newtonsoft.Json.JsonProperty("code", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 0)]
-        public string Code { get; set; }
+        public string Code { get; }
 
         [Newtonsoft.Json.JsonProperty("message", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 1)]
-        public string Message { get; set; }
+        public string Message { get; }
 
         [Newtonsoft.Json.JsonProperty("target", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 2)]
-        public string Target { get; set; }
+        public string Target { get; }
     }
 }

@@ -14,7 +14,6 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
@@ -54,15 +53,7 @@ namespace Net.Http.WebApi.OData
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, string target)
         {
-            var value = new ODataErrorContent
-            {
-                Error = new ODataError
-                {
-                    Code = ((int)statusCode).ToString(CultureInfo.InvariantCulture),
-                    Message = message,
-                    Target = target,
-                },
-            };
+            var value = ODataErrorContent.Create((int)statusCode, message, target);
 
             var response = request.CreateResponse(statusCode, value);
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
