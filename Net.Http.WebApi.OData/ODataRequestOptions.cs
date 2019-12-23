@@ -13,7 +13,6 @@
 namespace Net.Http.WebApi.OData
 {
     using System;
-    using System.Net.Http;
 
     /// <summary>
     /// Contains OData options for the request.
@@ -23,12 +22,14 @@ namespace Net.Http.WebApi.OData
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataRequestOptions"/> class.
         /// </summary>
-        /// <param name="request">The current http request message.</param>
-        internal ODataRequestOptions(HttpRequestMessage request)
+        /// <param name="dataServiceUri">The root URI of the OData Service.</param>
+        /// <param name="isolationLevel">The OData-Isolation requested by the client, or None if not otherwise specified.</param>
+        /// <param name="metadataLevel">The odata.metadata level specified in the ACCEPT header by the client, or Minimal if not otherwise specified.</param>
+        public ODataRequestOptions(Uri dataServiceUri, ODataIsolationLevel isolationLevel, ODataMetadataLevel metadataLevel)
         {
-            this.DataServiceUri = request.RequestUri.ResolveODataServiceUri();
-            this.IsolationLevel = request.ReadIsolationLevel();
-            this.MetadataLevel = request.ReadMetadataLevel();
+            this.DataServiceUri = dataServiceUri;
+            this.IsolationLevel = isolationLevel;
+            this.MetadataLevel = metadataLevel;
         }
 
         /// <summary>

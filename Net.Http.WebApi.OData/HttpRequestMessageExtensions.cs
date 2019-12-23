@@ -172,7 +172,7 @@ namespace Net.Http.WebApi.OData
 
             if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out object requestOptions))
             {
-                requestOptions = new ODataRequestOptions(request);
+                requestOptions = new ODataRequestOptions(request.RequestUri.ResolveODataServiceUri(), request.ReadIsolationLevel(), request.ReadMetadataLevel());
 
                 request.Properties.Add(typeof(ODataRequestOptions).FullName, requestOptions);
             }
