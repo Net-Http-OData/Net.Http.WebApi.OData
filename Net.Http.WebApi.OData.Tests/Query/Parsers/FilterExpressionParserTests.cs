@@ -1,8 +1,8 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 {
     using System.Net;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query.Parsers;
-    using WebApi.OData.Model;
     using Xunit;
 
     public partial class FilterExpressionParserTests

@@ -3,10 +3,10 @@
     using System.Net;
     using System.Net.Http;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
-    using WebApi.OData.Model;
-    using WebApi.OData.Tests;
+    using Net.Http.WebApi.OData.Tests;
     using Xunit;
 
     public class SearchQueryValidatorTests

@@ -3,10 +3,10 @@
     using System;
     using System.Net;
     using System.Net.Http;
+    using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
-    using WebApi.OData;
-    using WebApi.OData.Model;
-    using WebApi.OData.Query.Expressions;
+    using Net.Http.WebApi.OData.Query.Expressions;
     using Xunit;
 
     public class ODataQueryOptionsTests

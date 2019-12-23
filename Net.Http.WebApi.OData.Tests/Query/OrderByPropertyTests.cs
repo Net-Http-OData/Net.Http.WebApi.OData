@@ -3,8 +3,8 @@
     using System;
     using System.Net;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
-    using WebApi.OData.Model;
     using Xunit;
 
     public class OrderByPropertyTests
