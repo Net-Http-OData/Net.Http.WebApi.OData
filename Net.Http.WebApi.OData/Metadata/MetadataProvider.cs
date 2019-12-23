@@ -250,19 +250,14 @@ namespace Net.Http.WebApi.OData.Metadata
             .Where(p => !EdmTypeIsEntitySet(p.PropertyType, entityDataModel))
             .Select(p =>
             {
-                if (p.IsNullable)
+                var element = new XElement(EdmNs + "Property", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName));
+
+                if (!p.IsNullable)
                 {
-                    return new XElement(
-                          EdmNs + "Property",
-                          new XAttribute("Name", p.Name),
-                          new XAttribute("Type", p.PropertyType.FullName));
+                    element.Add(new XAttribute("Nullable", "false"));
                 }
 
-                return new XElement(
-                      EdmNs + "Property",
-                      new XAttribute("Name", p.Name),
-                      new XAttribute("Type", p.PropertyType.FullName),
-                      new XAttribute("Nullable", "false"));
+                return element;
             })
             .Concat(properties
                 .Where(p => EdmTypeIsEntitySet(p.PropertyType, entityDataModel))
