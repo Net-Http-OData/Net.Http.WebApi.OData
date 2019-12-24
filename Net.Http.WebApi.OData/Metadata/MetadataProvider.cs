@@ -128,7 +128,7 @@ namespace Net.Http.WebApi.OData.Metadata
                     var element = new XElement(
                        EdmNs + "ComplexType",
                        new XAttribute("Name", t.Name),
-                       GetProperties(entityDataModel, t.Properties));
+                       GetProperties(t.Properties));
 
                     if (t.BaseType != null)
                     {
@@ -202,7 +202,7 @@ namespace Net.Http.WebApi.OData.Metadata
                     var element = new XElement(
                       EdmNs + "EntityType",
                       new XAttribute("Name", t.Name),
-                      GetProperties(entityDataModel, t.EdmType.Properties));
+                      GetProperties(t.EdmType.Properties));
 
                     if (t.EdmType.BaseType is null)
                     {
@@ -242,9 +242,9 @@ namespace Net.Http.WebApi.OData.Metadata
 
         private static IEnumerable<XElement> GetFunctions() => Enumerable.Empty<XElement>();
 
-        private static IEnumerable<XElement> GetProperties(EntityDataModel entityDataModel, IEnumerable<EdmProperty> properties)
+        private static IEnumerable<XElement> GetProperties(IEnumerable<EdmProperty> properties)
             => properties
-            .Where(p => !entityDataModel.IsEntitySet(p.PropertyType))
+            .Where(p => !p.IsNavigable)
             .Select(p =>
             {
                 var element = new XElement(EdmNs + "Property", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName));
@@ -257,7 +257,7 @@ namespace Net.Http.WebApi.OData.Metadata
                 return element;
             })
             .Concat(properties
-                .Where(p => entityDataModel.IsEntitySet(p.PropertyType))
+                .Where(p => p.IsNavigable)
                 .Select(p => new XElement(EdmNs + "NavigationProperty", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName))));
     }
 }

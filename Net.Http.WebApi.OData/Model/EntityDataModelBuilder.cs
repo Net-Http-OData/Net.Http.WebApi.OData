@@ -23,6 +23,7 @@ namespace Net.Http.WebApi.OData.Model
     /// </summary>
     public sealed class EntityDataModelBuilder
     {
+        private readonly EntityDataModel entityDataModel;
         private readonly Dictionary<string, EntitySet> entitySets;
 
         /// <summary>
@@ -32,18 +33,14 @@ namespace Net.Http.WebApi.OData.Model
         internal EntityDataModelBuilder(IEqualityComparer<string> entitySetNameComparer)
         {
             this.entitySets = new Dictionary<string, EntitySet>(entitySetNameComparer) ?? throw new ArgumentNullException(nameof(entitySetNameComparer));
+            this.entityDataModel = new EntityDataModel(this.entitySets);
         }
 
         /// <summary>
         /// Builds the Entity Data Model containing the collections registered.
         /// </summary>
         /// <returns>The Entity Data Model.</returns>
-        public EntityDataModel BuildModel()
-        {
-            EntityDataModel.Current = new EntityDataModel(this.entitySets);
-
-            return EntityDataModel.Current;
-        }
+        public EntityDataModel BuildModel() => EntityDataModel.Current = this.entityDataModel;
 
         /// <summary>
         /// Registers an Entity Set of the specified type to the Entity Data Model with the name of the type as the Entity Set name which can only be queried.
@@ -87,7 +84,7 @@ namespace Net.Http.WebApi.OData.Model
                 throw new ArgumentNullException(nameof(entityKeyExpression));
             }
 
-            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), EdmTypeResolver);
+            var edmType = (EdmComplexType)EdmTypeCache.Map.GetOrAdd(typeof(T), this.EdmTypeResolver);
 
             var entityKey = edmType.BaseType is null ? edmType.GetProperty(entityKeyExpression.GetMemberInfo().Name) : null;
 
@@ -96,7 +93,7 @@ namespace Net.Http.WebApi.OData.Model
             this.entitySets.Add(entitySet.Name, entitySet);
         }
 
-        private static EdmType EdmTypeResolver(Type clrType)
+        private EdmType EdmTypeResolver(Type clrType)
         {
             if (clrType.IsEnum)
             {
@@ -116,7 +113,7 @@ namespace Net.Http.WebApi.OData.Model
 
                 if (typeof(IEnumerable<>).MakeGenericType(innerType).IsAssignableFrom(clrType))
                 {
-                    var containedType = EdmTypeCache.Map.GetOrAdd(innerType, EdmTypeResolver);
+                    var containedType = EdmTypeCache.Map.GetOrAdd(innerType, this.EdmTypeResolver);
 
                     return EdmTypeCache.Map.GetOrAdd(clrType, t => new EdmCollectionType(t, containedType));
                 }
@@ -126,7 +123,7 @@ namespace Net.Http.WebApi.OData.Model
                 }
             }
 
-            EdmType baseEdmType = clrType.BaseType != typeof(object) ? EdmTypeCache.Map.GetOrAdd(clrType.BaseType, EdmTypeResolver) : null;
+            EdmType baseEdmType = clrType.BaseType != typeof(object) ? EdmTypeCache.Map.GetOrAdd(clrType.BaseType, this.EdmTypeResolver) : null;
 
             var clrTypeProperties = clrType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
@@ -135,7 +132,7 @@ namespace Net.Http.WebApi.OData.Model
 
             edmProperties.AddRange(clrTypeProperties
                 .OrderBy(p => p.Name)
-                .Select(p => new EdmProperty(p, EdmTypeCache.Map.GetOrAdd(p.PropertyType, EdmTypeResolver), edmComplexType)));
+                .Select(p => new EdmProperty(p, EdmTypeCache.Map.GetOrAdd(p.PropertyType, this.EdmTypeResolver), edmComplexType, this.entityDataModel.IsEntitySet)));
 
             return edmComplexType;
         }

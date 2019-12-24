@@ -13,9 +13,10 @@
             var type = typeof(Customer);
             var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
-            var edmProperty = new EdmProperty(type.GetProperty("CompanyName"), EdmPrimitiveType.String, edmComplexType);
+            var edmProperty = new EdmProperty(type.GetProperty("CompanyName"), EdmPrimitiveType.String, edmComplexType, (_) => true);
 
             Assert.Same(edmComplexType, edmProperty.DeclaringType);
+            Assert.True(edmProperty.IsNavigable);
             Assert.Equal("CompanyName", edmProperty.Name);
             Assert.Same(EdmPrimitiveType.String, edmProperty.PropertyType);
         }
@@ -23,7 +24,7 @@
         [Fact]
         public void Constructor_ThrowsArgumentNullException_ForNullDeclaringType()
         {
-            Assert.Throws<ArgumentNullException>(() => new EdmProperty(typeof(Customer).GetProperty("CompanyName"), EdmPrimitiveType.String, null));
+            Assert.Throws<ArgumentNullException>(() => new EdmProperty(typeof(Customer).GetProperty("CompanyName"), EdmPrimitiveType.String, null, (_) => false));
         }
 
         [Fact]
@@ -32,7 +33,7 @@
             var type = typeof(Customer);
             var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
-            Assert.Throws<ArgumentNullException>(() => new EdmProperty(null, EdmPrimitiveType.String, edmComplexType));
+            Assert.Throws<ArgumentNullException>(() => new EdmProperty(null, EdmPrimitiveType.String, edmComplexType, (_) => false));
         }
 
         [Fact]
@@ -41,7 +42,7 @@
             var type = typeof(Customer);
             var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
-            Assert.Throws<ArgumentNullException>(() => new EdmProperty(type.GetProperty("CompanyName"), null, edmComplexType));
+            Assert.Throws<ArgumentNullException>(() => new EdmProperty(type.GetProperty("CompanyName"), null, edmComplexType, (_) => false));
         }
 
         [Fact]
@@ -49,7 +50,7 @@
         {
             var type = typeof(Employee);
             EdmTypeCache.Map.TryGetValue(typeof(string), out EdmType edmType);
-            var edmProperty = new EdmProperty(type.GetProperty("Forename"), edmType, new EdmComplexType(type, new EdmProperty[0]));
+            var edmProperty = new EdmProperty(type.GetProperty("Forename"), edmType, new EdmComplexType(type, new EdmProperty[0]), (_) => false);
 
             Assert.False(edmProperty.IsNullable);
         }
@@ -59,7 +60,7 @@
         {
             var type = typeof(Customer);
             EdmTypeCache.Map.TryGetValue(typeof(int), out EdmType edmType);
-            var edmProperty = new EdmProperty(type.GetProperty("LegacyId"), edmType, new EdmComplexType(type, new EdmProperty[0]));
+            var edmProperty = new EdmProperty(type.GetProperty("LegacyId"), edmType, new EdmComplexType(type, new EdmProperty[0]), (_) => false);
 
             Assert.False(edmProperty.IsNullable);
         }
@@ -69,7 +70,7 @@
         {
             var type = typeof(Customer);
             EdmTypeCache.Map.TryGetValue(typeof(string), out EdmType edmType);
-            var edmProperty = new EdmProperty(type.GetProperty("CompanyName"), edmType, new EdmComplexType(type, new EdmProperty[0]));
+            var edmProperty = new EdmProperty(type.GetProperty("CompanyName"), edmType, new EdmComplexType(type, new EdmProperty[0]), (_) => false);
 
             Assert.True(edmProperty.IsNullable);
         }
@@ -79,7 +80,7 @@
         {
             var type = typeof(Order);
             EdmTypeCache.Map.TryGetValue(typeof(OrderDetail), out EdmType edmType);
-            var edmProperty = new EdmProperty(type.GetProperty("OrderDetails"), new EdmCollectionType(type, edmType), new EdmComplexType(typeof(Customer), new EdmProperty[0]));
+            var edmProperty = new EdmProperty(type.GetProperty("OrderDetails"), new EdmCollectionType(type, edmType), new EdmComplexType(typeof(Customer), new EdmProperty[0]), (_) => false);
 
             Assert.True(edmProperty.IsNullable);
         }
@@ -89,7 +90,7 @@
         {
             var type = typeof(Employee);
             EdmTypeCache.Map.TryGetValue(typeof(int?), out EdmType edmType);
-            var edmProperty = new EdmProperty(type.GetProperty("LeavingDate"), edmType, new EdmComplexType(type, new EdmProperty[0]));
+            var edmProperty = new EdmProperty(type.GetProperty("LeavingDate"), edmType, new EdmComplexType(type, new EdmProperty[0]), (_) => false);
 
             Assert.True(edmProperty.IsNullable);
         }
@@ -100,7 +101,7 @@
             var type = typeof(Customer);
             var edmComplexType = new EdmComplexType(type, new EdmProperty[0]);
 
-            var edmProperty = new EdmProperty(type.GetProperty("CompanyName"), EdmPrimitiveType.String, edmComplexType);
+            var edmProperty = new EdmProperty(type.GetProperty("CompanyName"), EdmPrimitiveType.String, edmComplexType, (_) => false);
 
             Assert.Equal(edmProperty.ToString(), edmProperty.Name);
         }

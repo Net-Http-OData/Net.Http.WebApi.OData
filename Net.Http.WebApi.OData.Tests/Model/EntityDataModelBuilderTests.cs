@@ -70,6 +70,7 @@
                 Assert.Equal(1, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
+                Assert.False(edmComplexType.Properties[0].IsNavigable);
                 Assert.True(edmComplexType.Properties[0].IsNullable);
                 Assert.Equal("Name", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[0].PropertyType);
@@ -96,21 +97,25 @@
                 Assert.Equal(4, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
+                Assert.False(edmComplexType.Properties[0].IsNavigable);
                 Assert.True(edmComplexType.Properties[0].IsNullable);
                 Assert.Equal("City", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
+                Assert.False(edmComplexType.Properties[1].IsNavigable);
                 Assert.True(edmComplexType.Properties[1].IsNullable);
                 Assert.Equal("CompanyName", edmComplexType.Properties[1].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[1].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
+                Assert.False(edmComplexType.Properties[2].IsNavigable);
                 Assert.True(edmComplexType.Properties[2].IsNullable);
                 Assert.Equal("Country", edmComplexType.Properties[2].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[2].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[3].DeclaringType);
+                Assert.False(edmComplexType.Properties[3].IsNavigable);
                 Assert.False(edmComplexType.Properties[3].IsNullable);
                 Assert.Equal("LegacyId", edmComplexType.Properties[3].Name);
                 Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[3].PropertyType);
@@ -137,56 +142,67 @@
                 Assert.Equal(11, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
+                Assert.False(edmComplexType.Properties[0].IsNavigable);
                 Assert.False(edmComplexType.Properties[0].IsNullable);
                 Assert.Equal("AccessLevel", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmType.GetEdmType(typeof(AccessLevel)), edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
+                Assert.False(edmComplexType.Properties[1].IsNavigable);
                 Assert.False(edmComplexType.Properties[1].IsNullable);
                 Assert.Equal("BirthDate", edmComplexType.Properties[1].Name);
                 Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[1].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
+                Assert.False(edmComplexType.Properties[2].IsNavigable);
                 Assert.False(edmComplexType.Properties[2].IsNullable);
                 Assert.Equal("EmailAddress", edmComplexType.Properties[2].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[2].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[3].DeclaringType);
+                Assert.False(edmComplexType.Properties[3].IsNavigable);
                 Assert.False(edmComplexType.Properties[3].IsNullable);
                 Assert.Equal("Forename", edmComplexType.Properties[3].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[3].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[4].DeclaringType);
+                Assert.False(edmComplexType.Properties[4].IsNavigable);
                 Assert.False(edmComplexType.Properties[4].IsNullable);
                 Assert.Equal("Id", edmComplexType.Properties[4].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[4].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[5].DeclaringType);
+                Assert.False(edmComplexType.Properties[5].IsNavigable);
                 Assert.True(edmComplexType.Properties[5].IsNullable);
                 Assert.Equal("ImageData", edmComplexType.Properties[5].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[5].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[6].DeclaringType);
+                Assert.False(edmComplexType.Properties[6].IsNavigable);
                 Assert.False(edmComplexType.Properties[6].IsNullable);
                 Assert.Equal("JoiningDate", edmComplexType.Properties[6].Name);
                 Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[6].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[7].DeclaringType);
+                Assert.False(edmComplexType.Properties[7].IsNavigable);
                 Assert.True(edmComplexType.Properties[7].IsNullable);
                 Assert.Equal("LeavingDate", edmComplexType.Properties[7].Name);
                 Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[1].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[8].DeclaringType);
+                Assert.True(edmComplexType.Properties[8].IsNavigable);
                 Assert.True(edmComplexType.Properties[8].IsNullable);
                 Assert.Equal("Manager", edmComplexType.Properties[8].Name);
                 Assert.Equal(EdmType.GetEdmType(typeof(Manager)), (EdmComplexType)edmComplexType.Properties[8].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[9].DeclaringType);
+                Assert.False(edmComplexType.Properties[9].IsNavigable);
                 Assert.False(edmComplexType.Properties[9].IsNullable);
                 Assert.Equal("Surname", edmComplexType.Properties[9].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[9].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[10].DeclaringType);
+                Assert.False(edmComplexType.Properties[10].IsNavigable);
                 Assert.False(edmComplexType.Properties[10].IsNullable);
                 Assert.Equal("Title", edmComplexType.Properties[10].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[10].PropertyType);
@@ -213,11 +229,13 @@
                 Assert.Equal(2, edmComplexType.Properties.Count); // Does not include inherited properties
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
+                Assert.False(edmComplexType.Properties[0].IsNavigable);
                 Assert.False(edmComplexType.Properties[0].IsNullable);
                 Assert.Equal("AnnualBudget", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
+                Assert.True(edmComplexType.Properties[1].IsNavigable);
                 Assert.True(edmComplexType.Properties[1].IsNullable);
                 Assert.Equal("Employees", edmComplexType.Properties[1].Name);
                 Assert.IsType<EdmCollectionType>(edmComplexType.Properties[1].PropertyType);
@@ -245,27 +263,32 @@
                 Assert.Equal(5, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
+                Assert.False(edmComplexType.Properties[0].IsNavigable);
                 Assert.False(edmComplexType.Properties[0].IsNullable);
                 Assert.Equal("Freight", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
+                Assert.False(edmComplexType.Properties[1].IsNavigable);
                 Assert.True(edmComplexType.Properties[1].IsNullable);
                 Assert.Equal("OrderDetails", edmComplexType.Properties[1].Name);
                 Assert.IsType<EdmCollectionType>(edmComplexType.Properties[1].PropertyType);
                 Assert.Equal(EdmType.GetEdmType(typeof(OrderDetail)), ((EdmCollectionType)edmComplexType.Properties[1].PropertyType).ContainedType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
+                Assert.False(edmComplexType.Properties[2].IsNavigable);
                 Assert.False(edmComplexType.Properties[2].IsNullable);
                 Assert.Equal("OrderId", edmComplexType.Properties[2].Name);
                 Assert.Same(EdmPrimitiveType.Int64, edmComplexType.Properties[2].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[3].DeclaringType);
+                Assert.False(edmComplexType.Properties[3].IsNavigable);
                 Assert.True(edmComplexType.Properties[3].IsNullable);
                 Assert.Equal("ShipCountry", edmComplexType.Properties[3].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[3].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[4].DeclaringType);
+                Assert.False(edmComplexType.Properties[4].IsNavigable);
                 Assert.False(edmComplexType.Properties[4].IsNullable);
                 Assert.Equal("TransactionId", edmComplexType.Properties[4].Name);
                 Assert.Same(EdmPrimitiveType.Guid, edmComplexType.Properties[4].PropertyType);
@@ -292,11 +315,13 @@
                 Assert.Equal(9, edmComplexType.Properties.Count);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[0].DeclaringType);
+                Assert.True(edmComplexType.Properties[0].IsNavigable);
                 Assert.True(edmComplexType.Properties[0].IsNullable);
                 Assert.Equal("Category", edmComplexType.Properties[0].Name);
                 Assert.Same(EdmType.GetEdmType(typeof(Category)), edmComplexType.Properties[0].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[1].DeclaringType);
+                Assert.False(edmComplexType.Properties[1].IsNavigable);
                 Assert.False(edmComplexType.Properties[1].IsNullable);
                 Assert.Equal("Colour", edmComplexType.Properties[1].Name);
                 Assert.Same(EdmType.GetEdmType(typeof(Colour)), edmComplexType.Properties[1].PropertyType);
@@ -314,36 +339,43 @@
                 Assert.Equal(3, edmEnumType.Members[2].Value);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[2].DeclaringType);
+                Assert.False(edmComplexType.Properties[2].IsNavigable);
                 Assert.False(edmComplexType.Properties[2].IsNullable);
                 Assert.Equal("Deleted", edmComplexType.Properties[2].Name);
                 Assert.Same(EdmPrimitiveType.Boolean, edmComplexType.Properties[2].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[3].DeclaringType);
+                Assert.False(edmComplexType.Properties[3].IsNavigable);
                 Assert.True(edmComplexType.Properties[3].IsNullable);
                 Assert.Equal("Description", edmComplexType.Properties[3].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[3].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[4].DeclaringType);
+                Assert.False(edmComplexType.Properties[4].IsNavigable);
                 Assert.True(edmComplexType.Properties[4].IsNullable);
                 Assert.Equal("Name", edmComplexType.Properties[4].Name);
                 Assert.Same(EdmPrimitiveType.String, edmComplexType.Properties[4].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[5].DeclaringType);
+                Assert.False(edmComplexType.Properties[5].IsNavigable);
                 Assert.False(edmComplexType.Properties[5].IsNullable);
                 Assert.Equal("Price", edmComplexType.Properties[5].Name);
                 Assert.Same(EdmPrimitiveType.Decimal, edmComplexType.Properties[5].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[6].DeclaringType);
+                Assert.False(edmComplexType.Properties[6].IsNavigable);
                 Assert.False(edmComplexType.Properties[6].IsNullable);
                 Assert.Equal("ProductId", edmComplexType.Properties[6].Name);
                 Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[6].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[7].DeclaringType);
+                Assert.False(edmComplexType.Properties[7].IsNavigable);
                 Assert.False(edmComplexType.Properties[7].IsNullable);
                 Assert.Equal("Rating", edmComplexType.Properties[7].Name);
                 Assert.Same(EdmPrimitiveType.Int32, edmComplexType.Properties[7].PropertyType);
 
                 Assert.Same(edmComplexType, edmComplexType.Properties[8].DeclaringType);
+                Assert.False(edmComplexType.Properties[8].IsNavigable);
                 Assert.False(edmComplexType.Properties[8].IsNullable);
                 Assert.Equal("ReleaseDate", edmComplexType.Properties[8].Name);
                 Assert.Same(EdmPrimitiveType.Date, edmComplexType.Properties[8].PropertyType);
