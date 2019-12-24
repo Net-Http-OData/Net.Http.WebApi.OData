@@ -63,9 +63,6 @@ namespace Net.Http.WebApi.OData.Metadata
             return document;
         }
 
-        private static bool EdmTypeIsEntitySet(EdmType edmType, EntityDataModel entityDataModel)
-            => entityDataModel.EntitySets.Values.Any(x => x.EdmType == edmType);
-
         private static IEnumerable<XElement> GetActions() => Enumerable.Empty<XElement>();
 
         private static XElement GetAnnotations(EntityDataModel entityDataModel)
@@ -124,7 +121,7 @@ namespace Net.Http.WebApi.OData.Metadata
                 .Select(p => p.PropertyType)
                 .OfType<EdmComplexType>()
                 .Concat(complexCollectionTypes)
-                .Where(t => !EdmTypeIsEntitySet(t, entityDataModel))
+                .Where(t => !entityDataModel.IsEntitySet(t))
                 .Distinct()
                 .Select(t =>
                 {
@@ -247,7 +244,7 @@ namespace Net.Http.WebApi.OData.Metadata
 
         private static IEnumerable<XElement> GetProperties(EntityDataModel entityDataModel, IEnumerable<EdmProperty> properties)
             => properties
-            .Where(p => !EdmTypeIsEntitySet(p.PropertyType, entityDataModel))
+            .Where(p => !entityDataModel.IsEntitySet(p.PropertyType))
             .Select(p =>
             {
                 var element = new XElement(EdmNs + "Property", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName));
@@ -260,7 +257,7 @@ namespace Net.Http.WebApi.OData.Metadata
                 return element;
             })
             .Concat(properties
-                .Where(p => EdmTypeIsEntitySet(p.PropertyType, entityDataModel))
+                .Where(p => entityDataModel.IsEntitySet(p.PropertyType))
                 .Select(p => new XElement(EdmNs + "NavigationProperty", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName))));
     }
 }

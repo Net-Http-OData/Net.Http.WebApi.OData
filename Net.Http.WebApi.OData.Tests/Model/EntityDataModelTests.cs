@@ -56,6 +56,18 @@ namespace Net.Http.WebApi.OData.Tests.Model
         }
 
         [Fact]
+        public void IsEntitySet_ReturnsFalse_IfEdmTypeIsNotEntitySet()
+        {
+            Assert.True(this.entityDataModel.IsEntitySet(EdmType.GetEdmType(typeof(Category))));
+        }
+
+        [Fact]
+        public void IsEntitySet_ReturnsTrue_IfEdmTypeIsEntitySet()
+        {
+            Assert.True(this.entityDataModel.IsEntitySet(EdmType.GetEdmType(typeof(Customer))));
+        }
+
+        [Fact]
         public void SupportedFormats_AreSet()
         {
             Assert.Equal(2, this.entityDataModel.SupportedFormats.Count);
