@@ -31,20 +31,21 @@
         <Property Name=""ProductId"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""Quantity"" Type=""Edm.Int16"" Nullable=""false"" />
         <Property Name=""UnitPrice"" Type=""Edm.Decimal"" Nullable=""false"" />
+        <NavigationProperty Name=""Order"" Type=""NorthwindModel.Order"" />
       </ComplexType>
       <EntityType Name=""Categories"">
         <Key>
           <PropertyRef Name=""Name"" />
         </Key>
-        <Property Name=""Name"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Name"" Type=""Edm.String"" />
       </EntityType>
       <EntityType Name=""Customers"">
         <Key>
           <PropertyRef Name=""CompanyName"" />
         </Key>
-        <Property Name=""City"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""CompanyName"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""Country"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""City"" Type=""Edm.String"" />
+        <Property Name=""CompanyName"" Type=""Edm.String"" />
+        <Property Name=""Country"" Type=""Edm.String"" />
         <Property Name=""LegacyId"" Type=""Edm.Int32"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Employees"">
@@ -56,36 +57,40 @@
         <Property Name=""EmailAddress"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Forename"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Id"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""ImageData"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""ImageData"" Type=""Edm.String"" />
+        <Property Name=""JoiningDate"" Type=""Edm.Date"" Nullable=""false"" />
+        <Property Name=""LeavingDate"" Type=""Edm.Date"" />
         <Property Name=""Surname"" Type=""Edm.String"" Nullable=""false"" />
         <Property Name=""Title"" Type=""Edm.String"" Nullable=""false"" />
+        <NavigationProperty Name=""Manager"" Type=""NorthwindModel.Manager"" />
       </EntityType>
       <EntityType Name=""Managers"" BaseType=""NorthwindModel.Employee"">
         <Property Name=""AnnualBudget"" Type=""Edm.Decimal"" Nullable=""false"" />
+        <NavigationProperty Name=""Employees"" Type=""Collection(NorthwindModel.Employee)"" />
       </EntityType>
       <EntityType Name=""Orders"">
         <Key>
           <PropertyRef Name=""OrderId"" />
         </Key>
         <Property Name=""Freight"" Type=""Edm.Decimal"" Nullable=""false"" />
-        <Property Name=""OrderDetails"" Type=""Collection(NorthwindModel.OrderDetail)"" Nullable=""false"" />
+        <Property Name=""OrderDetails"" Type=""Collection(NorthwindModel.OrderDetail)"" />
         <Property Name=""OrderId"" Type=""Edm.Int64"" Nullable=""false"" />
-        <Property Name=""ShipCountry"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""ShipCountry"" Type=""Edm.String"" />
         <Property Name=""TransactionId"" Type=""Edm.Guid"" Nullable=""false"" />
       </EntityType>
       <EntityType Name=""Products"">
         <Key>
           <PropertyRef Name=""ProductId"" />
         </Key>
-        <Property Name=""Category"" Type=""NorthwindModel.Category"" Nullable=""false"" />
         <Property Name=""Colour"" Type=""NorthwindModel.Colour"" Nullable=""false"" />
         <Property Name=""Deleted"" Type=""Edm.Boolean"" Nullable=""false"" />
-        <Property Name=""Description"" Type=""Edm.String"" Nullable=""false"" />
-        <Property Name=""Name"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""Description"" Type=""Edm.String"" />
+        <Property Name=""Name"" Type=""Edm.String"" />
         <Property Name=""Price"" Type=""Edm.Decimal"" Nullable=""false"" />
         <Property Name=""ProductId"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""Rating"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""ReleaseDate"" Type=""Edm.Date"" Nullable=""false"" />
+        <NavigationProperty Name=""Category"" Type=""NorthwindModel.Category"" />
       </EntityType>
       <EntityContainer Name=""DefaultContainer"">
         <EntitySet Name=""Categories"" EntityType=""NorthwindModel.Category"">
@@ -213,26 +218,32 @@
         <Annotation Term=""Org.OData.Capabilities.V1.BatchContinueOnErrorSupported"" Bool=""false"" />
         <Annotation Term=""Org.OData.Capabilities.V1.FilterFunctions"">
           <Collection>
-            <String>contains</String>
+            <String>cast</String>
+            <String>isof</String>
             <String>endswith</String>
             <String>startswith</String>
-            <String>length</String>
-            <String>indexof</String>
-            <String>substring</String>
+            <String>contains</String>
             <String>tolower</String>
             <String>toupper</String>
             <String>trim</String>
+            <String>length</String>
+            <String>indexof</String>
+            <String>replace</String>
+            <String>substring</String>
             <String>concat</String>
             <String>year</String>
             <String>month</String>
             <String>day</String>
             <String>hour</String>
+            <String>minute</String>
             <String>second</String>
+            <String>fractionalseconds</String>
+            <String>now</String>
+            <String>mindatetime</String>
+            <String>maxdatetime</String>
             <String>round</String>
-            <String>floor</String>
             <String>ceiling</String>
-            <String>cast</String>
-            <String>isof</String>
+            <String>floor</String>
           </Collection>
         </Annotation>
       </Annotations>

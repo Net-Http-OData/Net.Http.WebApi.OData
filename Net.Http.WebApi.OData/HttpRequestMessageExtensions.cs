@@ -14,7 +14,6 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
@@ -54,15 +53,7 @@ namespace Net.Http.WebApi.OData
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, string target)
         {
-            var value = new ODataErrorContent
-            {
-                Error = new ODataError
-                {
-                    Code = ((int)statusCode).ToString(CultureInfo.InvariantCulture),
-                    Message = message,
-                    Target = target,
-                },
-            };
+            var value = ODataErrorContent.Create((int)statusCode, message, target);
 
             var response = request.CreateResponse(statusCode, value);
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
@@ -181,7 +172,7 @@ namespace Net.Http.WebApi.OData
 
             if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out object requestOptions))
             {
-                requestOptions = new ODataRequestOptions(request);
+                requestOptions = new ODataRequestOptions(request.RequestUri.ResolveODataServiceUri(), request.ReadIsolationLevel(), request.ReadMetadataLevel());
 
                 request.Properties.Add(typeof(ODataRequestOptions).FullName, requestOptions);
             }
@@ -205,7 +196,7 @@ namespace Net.Http.WebApi.OData
 
             if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out EntitySet entitySet))
             {
-                throw new ODataException(HttpStatusCode.BadRequest, Messages.CollectionNameInvalid.FormatWith(entitySetName));
+                throw new ODataException(HttpStatusCode.BadRequest, $"This service does not contain a collection named '{entitySetName}'");
             }
 
             return entitySet;
@@ -392,7 +383,7 @@ namespace Net.Http.WebApi.OData
                     return ODataIsolationLevel.Snapshot;
                 }
 
-                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnsupportedIsolationLevel);
+                throw new ODataException(HttpStatusCode.BadRequest, "If specified, the OData-IsolationLevel must be 'Snapshot'");
             }
 
             return ODataIsolationLevel.None;
@@ -418,7 +409,7 @@ namespace Net.Http.WebApi.OData
                                 return ODataMetadataLevel.Full;
 
                             default:
-                                throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataMetadataValueInvalid);
+                                throw new ODataException(HttpStatusCode.BadRequest, "If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'");
                         }
                     }
                 }

@@ -13,6 +13,7 @@
 namespace Net.Http.WebApi.OData.Model
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// A class which represents the Entity Data Model.
@@ -25,26 +26,32 @@ namespace Net.Http.WebApi.OData.Model
 
             this.FilterFunctions = new[]
             {
-                "contains",
+                "cast",
+                "isof",
                 "endswith",
                 "startswith",
-                "length",
-                "indexof",
-                "substring",
+                "contains",
                 "tolower",
                 "toupper",
                 "trim",
+                "length",
+                "indexof",
+                "replace",
+                "substring",
                 "concat",
                 "year",
                 "month",
                 "day",
                 "hour",
+                "minute",
                 "second",
+                "fractionalseconds",
+                "now",
+                "mindatetime",
+                "maxdatetime",
                 "round",
-                "floor",
                 "ceiling",
-                "cast",
-                "isof",
+                "floor",
             };
 
             this.SupportedFormats = new[]
@@ -76,5 +83,12 @@ namespace Net.Http.WebApi.OData.Model
         /// Gets the formats supported by the service.
         /// </summary>
         public IReadOnlyCollection<string> SupportedFormats { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the specified <see cref="EdmType"/> is an <see cref="EntitySet"/>.
+        /// </summary>
+        /// <param name="edmType">The <see cref="EdmType"/> to check.</param>
+        /// <returns>True if the <see cref="EdmType"/> is an <see cref="EntitySet"/> in the Entity Data Model; otherwise false.</returns>
+        public bool IsEntitySet(EdmType edmType) => this.EntitySets.Values.Any(x => x.EdmType == edmType);
     }
 }

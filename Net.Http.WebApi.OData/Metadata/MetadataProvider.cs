@@ -20,13 +20,26 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Xml.Linq;
     using Net.Http.WebApi.OData.Model;
 
+    /// <summary>
+    /// Provides the Metadata XML document for the Entity Data Model.
+    /// </summary>
     internal static class MetadataProvider
     {
         private static readonly XNamespace EdmNs = "http://docs.oasis-open.org/odata/ns/edm";
         private static readonly XNamespace EdmxNs = "http://docs.oasis-open.org/odata/ns/edmx";
 
+        /// <summary>
+        /// Creates an <see cref="XDocument"/> containing the Metadata XML document for the Entity Data Model.
+        /// </summary>
+        /// <param name="entityDataModel">The Entity Data Model to include the Metadata for.</param>
+        /// <returns>An <see cref="XDocument"/> containing the Metadata XML document for the Entity Data Model.</returns>
         internal static XDocument Create(EntityDataModel entityDataModel)
         {
+            if (entityDataModel is null)
+            {
+                throw new ArgumentNullException(nameof(entityDataModel));
+            }
+
             var document = new XDocument(
                 new XDeclaration("1.0", "utf-8", null),
                 new XElement(
@@ -108,7 +121,7 @@ namespace Net.Http.WebApi.OData.Metadata
                 .Select(p => p.PropertyType)
                 .OfType<EdmComplexType>()
                 .Concat(complexCollectionTypes)
-                .Where(t => !entityDataModel.EntitySets.Values.Any(es => es.EdmType == t))
+                .Where(t => !entityDataModel.IsEntitySet(t))
                 .Distinct()
                 .Select(t =>
                 {
@@ -230,11 +243,21 @@ namespace Net.Http.WebApi.OData.Metadata
         private static IEnumerable<XElement> GetFunctions() => Enumerable.Empty<XElement>();
 
         private static IEnumerable<XElement> GetProperties(IEnumerable<EdmProperty> properties)
-            => properties.Select(p =>
-                new XElement(
-                    EdmNs + "Property",
-                    new XAttribute("Name", p.Name),
-                    new XAttribute("Type", p.PropertyType.FullName),
-                    new XAttribute("Nullable", "false"))); // TODO: nullable needs to be set in model (use data annotations?)
+            => properties
+            .Where(p => !p.IsNavigable)
+            .Select(p =>
+            {
+                var element = new XElement(EdmNs + "Property", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName));
+
+                if (!p.IsNullable)
+                {
+                    element.Add(new XAttribute("Nullable", "false"));
+                }
+
+                return element;
+            })
+            .Concat(properties
+                .Where(p => p.IsNavigable)
+                .Select(p => new XElement(EdmNs + "NavigationProperty", new XAttribute("Name", p.Name), new XAttribute("Type", p.PropertyType.FullName))));
     }
 }

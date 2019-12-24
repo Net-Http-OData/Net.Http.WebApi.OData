@@ -37,6 +37,6 @@ namespace Net.Http.WebApi.OData.Query.Parsers
         };
 
         internal static BinaryOperatorKind ToBinaryOperatorKind(this string operatorType)
-            => OperatorTypeMap.TryGetValue(operatorType, out BinaryOperatorKind binaryOperatorKind) ? binaryOperatorKind : throw new ODataException(HttpStatusCode.BadRequest, Messages.UnknownOperator.FormatWith(operatorType));
+            => OperatorTypeMap.TryGetValue(operatorType, out BinaryOperatorKind binaryOperatorKind) ? binaryOperatorKind : throw new ODataException(HttpStatusCode.BadRequest, $"The operator '{operatorType}' is not a valid OData operator.");
     }
 }

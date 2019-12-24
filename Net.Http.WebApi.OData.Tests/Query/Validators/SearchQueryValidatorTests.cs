@@ -3,10 +3,10 @@
     using System.Net;
     using System.Net.Http;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
-    using WebApi.OData.Model;
-    using WebApi.OData.Tests;
+    using Net.Http.WebApi.OData.Tests;
     using Xunit;
 
     public class SearchQueryValidatorTests
@@ -36,7 +36,7 @@
                     () => SearchQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$search"), exception.Message);
+                Assert.Equal("The query option $search is not implemented by this service", exception.Message);
             }
         }
 

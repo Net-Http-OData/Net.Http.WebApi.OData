@@ -34,12 +34,12 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip) != AllowedQueryOptions.Skip)
             {
-                throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$skip"));
+                throw new ODataException(HttpStatusCode.NotImplemented, "The query option $skip is not implemented by this service");
             }
 
             if (queryOptions.Skip.Value < 0)
             {
-                throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith("$skip"));
+                throw new ODataException(HttpStatusCode.BadRequest, "The value for OData query $skip must be a non-negative numeric value");
             }
         }
     }

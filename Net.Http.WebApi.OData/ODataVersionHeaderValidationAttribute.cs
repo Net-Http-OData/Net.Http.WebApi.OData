@@ -37,7 +37,7 @@ namespace Net.Http.WebApi.OData
                 if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
                 {
                     actionContext.Response =
-                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
+                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, "This service only supports OData 4.0");
                 }
 
                 headerValue = actionContext.Request.ReadHeaderValue(ODataHeaderNames.ODataMaxVersion);
@@ -45,7 +45,7 @@ namespace Net.Http.WebApi.OData
                 if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
                 {
                     actionContext.Response =
-                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, Messages.UnsupportedODataVersion);
+                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, "This service only supports OData 4.0");
                 }
             }
 

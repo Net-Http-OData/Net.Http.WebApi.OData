@@ -2,8 +2,8 @@
 {
     using System;
     using System.Net;
+    using Net.Http.WebApi.OData.Model;
     using NorthwindModel;
-    using OData.Model;
     using Xunit;
 
     public class EdmComplexTypeTests

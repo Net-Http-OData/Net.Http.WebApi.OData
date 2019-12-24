@@ -100,7 +100,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$count="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$count"), exception.Message);
+                Assert.Equal("The OData query option $count cannot be empty", exception.Message);
             }
         }
 
@@ -112,7 +112,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$expand="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$expand"), exception.Message);
+                Assert.Equal("The OData query option $expand cannot be empty", exception.Message);
             }
         }
 
@@ -124,7 +124,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$filter="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$filter"), exception.Message);
+                Assert.Equal("The OData query option $filter cannot be empty", exception.Message);
             }
         }
 
@@ -136,7 +136,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$format="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$format"), exception.Message);
+                Assert.Equal("The OData query option $format cannot be empty", exception.Message);
             }
         }
 
@@ -148,7 +148,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$orderby="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$orderby"), exception.Message);
+                Assert.Equal("The OData query option $orderby cannot be empty", exception.Message);
             }
         }
 
@@ -160,7 +160,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$search="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$search"), exception.Message);
+                Assert.Equal("The OData query option $search cannot be empty", exception.Message);
             }
         }
 
@@ -172,7 +172,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$select="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$select"), exception.Message);
+                Assert.Equal("The OData query option $select cannot be empty", exception.Message);
             }
         }
 
@@ -184,7 +184,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$skip="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$skip"), exception.Message);
+                Assert.Equal("The OData query option $skip cannot be empty", exception.Message);
             }
         }
 
@@ -196,7 +196,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$skiptoken="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$skiptoken"), exception.Message);
+                Assert.Equal("The OData query option $skiptoken cannot be empty", exception.Message);
             }
         }
 
@@ -208,7 +208,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$top="));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.ODataQueryCannotBeEmpty.FormatWith("$top"), exception.Message);
+                Assert.Equal("The OData query option $top cannot be empty", exception.Message);
             }
         }
 
@@ -229,7 +229,7 @@
                 var exception = Assert.Throws<ODataException>(() => new ODataRawQueryOptions("?$wibble=*"));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnknownQueryOption.FormatWith("$wibble"), exception.Message);
+                Assert.Equal("Unknown OData query option $wibble", exception.Message);
             }
         }
 

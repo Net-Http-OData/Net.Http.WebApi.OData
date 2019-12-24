@@ -34,7 +34,7 @@ namespace Net.Http.WebApi.OData.Query.Validators
 
             if ((validationSettings.AllowedQueryOptions & AllowedQueryOptions.Select) != AllowedQueryOptions.Select)
             {
-                throw new ODataException(HttpStatusCode.NotImplemented, Messages.UnsupportedQueryOption.FormatWith("$select"));
+                throw new ODataException(HttpStatusCode.NotImplemented, "The query option $select is not implemented by this service");
             }
         }
     }

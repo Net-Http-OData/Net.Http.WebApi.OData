@@ -12,6 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Model
 {
+    using System;
+
     /// <summary>
     /// Represents an Entity Set in the Entity Data Model.
     /// </summary>
@@ -19,8 +21,13 @@ namespace Net.Http.WebApi.OData.Model
     {
         internal EntitySet(string name, EdmComplexType edmType, EdmProperty entityKey, Capabilities capabilities)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Entity Set name must be specified", nameof(name));
+            }
+
             this.Name = name;
-            this.EdmType = edmType;
+            this.EdmType = edmType ?? throw new ArgumentNullException(nameof(edmType));
             this.EntityKey = entityKey;
             this.Capabilities = capabilities;
         }

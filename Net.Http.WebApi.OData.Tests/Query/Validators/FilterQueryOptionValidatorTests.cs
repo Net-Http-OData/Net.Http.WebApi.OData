@@ -3,9 +3,9 @@
     using System.Net;
     using System.Net.Http;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
-    using OData.Model;
     using Xunit;
 
     public class FilterQueryOptionValidatorTests
@@ -37,7 +37,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("add"), exception.Message);
+                Assert.Equal("Unsupported operator add", exception.Message);
             }
         }
 
@@ -94,7 +94,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("and"), exception.Message);
+                Assert.Equal("Unsupported operator and", exception.Message);
             }
         }
 
@@ -150,7 +150,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("cast"), exception.Message);
+                Assert.Equal("Unsupported function cast", exception.Message);
             }
         }
 
@@ -207,7 +207,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("ceiling"), exception.Message);
+                Assert.Equal("Unsupported function ceiling", exception.Message);
             }
         }
 
@@ -264,7 +264,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("concat"), exception.Message);
+                Assert.Equal("Unsupported function concat", exception.Message);
             }
         }
 
@@ -321,7 +321,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("contains"), exception.Message);
+                Assert.Equal("Unsupported function contains", exception.Message);
             }
         }
 
@@ -378,7 +378,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("day"), exception.Message);
+                Assert.Equal("Unsupported function day", exception.Message);
             }
         }
 
@@ -436,7 +436,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("div"), exception.Message);
+                Assert.Equal("Unsupported operator div", exception.Message);
             }
         }
 
@@ -493,7 +493,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("endswith"), exception.Message);
+                Assert.Equal("Unsupported function endswith", exception.Message);
             }
         }
 
@@ -550,7 +550,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("eq"), exception.Message);
+                Assert.Equal("Unsupported operator eq", exception.Message);
             }
         }
 
@@ -606,7 +606,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("floor"), exception.Message);
+                Assert.Equal("Unsupported function floor", exception.Message);
             }
         }
 
@@ -663,7 +663,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("fractionalseconds"), exception.Message);
+                Assert.Equal("Unsupported function fractionalseconds", exception.Message);
             }
         }
 
@@ -720,7 +720,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("gt"), exception.Message);
+                Assert.Equal("Unsupported operator gt", exception.Message);
             }
         }
 
@@ -776,7 +776,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ge"), exception.Message);
+                Assert.Equal("Unsupported operator ge", exception.Message);
             }
         }
 
@@ -832,7 +832,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("has"), exception.Message);
+                Assert.Equal("Unsupported operator has", exception.Message);
             }
         }
 
@@ -888,7 +888,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("hour"), exception.Message);
+                Assert.Equal("Unsupported function hour", exception.Message);
             }
         }
 
@@ -945,7 +945,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("indexof"), exception.Message);
+                Assert.Equal("Unsupported function indexof", exception.Message);
             }
         }
 
@@ -1002,7 +1002,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("isof"), exception.Message);
+                Assert.Equal("Unsupported function isof", exception.Message);
             }
         }
 
@@ -1059,7 +1059,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("length"), exception.Message);
+                Assert.Equal("Unsupported function length", exception.Message);
             }
         }
 
@@ -1116,7 +1116,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("lt"), exception.Message);
+                Assert.Equal("Unsupported operator lt", exception.Message);
             }
         }
 
@@ -1172,7 +1172,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("le"), exception.Message);
+                Assert.Equal("Unsupported operator le", exception.Message);
             }
         }
 
@@ -1228,7 +1228,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("maxdatetime"), exception.Message);
+                Assert.Equal("Unsupported function maxdatetime", exception.Message);
             }
         }
 
@@ -1285,7 +1285,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("mindatetime"), exception.Message);
+                Assert.Equal("Unsupported function mindatetime", exception.Message);
             }
         }
 
@@ -1342,7 +1342,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("minute"), exception.Message);
+                Assert.Equal("Unsupported function minute", exception.Message);
             }
         }
 
@@ -1400,7 +1400,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mod"), exception.Message);
+                Assert.Equal("Unsupported operator mod", exception.Message);
             }
         }
 
@@ -1457,7 +1457,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("month"), exception.Message);
+                Assert.Equal("Unsupported function month", exception.Message);
             }
         }
 
@@ -1515,7 +1515,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("mul"), exception.Message);
+                Assert.Equal("Unsupported operator mul", exception.Message);
             }
         }
 
@@ -1572,7 +1572,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("ne"), exception.Message);
+                Assert.Equal("Unsupported operator ne", exception.Message);
             }
         }
 
@@ -1629,7 +1629,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("now"), exception.Message);
+                Assert.Equal("Unsupported function now", exception.Message);
             }
         }
 
@@ -1686,7 +1686,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("or"), exception.Message);
+                Assert.Equal("Unsupported operator or", exception.Message);
             }
         }
 
@@ -1742,7 +1742,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("replace"), exception.Message);
+                Assert.Equal("Unsupported function replace", exception.Message);
             }
         }
 
@@ -1799,7 +1799,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("round"), exception.Message);
+                Assert.Equal("Unsupported function round", exception.Message);
             }
         }
 
@@ -1856,7 +1856,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("second"), exception.Message);
+                Assert.Equal("Unsupported function second", exception.Message);
             }
         }
 
@@ -1913,7 +1913,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("startswith"), exception.Message);
+                Assert.Equal("Unsupported function startswith", exception.Message);
             }
         }
 
@@ -1970,7 +1970,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("substring"), exception.Message);
+                Assert.Equal("Unsupported function substring", exception.Message);
             }
         }
 
@@ -2028,7 +2028,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedOperator.FormatWith("sub"), exception.Message);
+                Assert.Equal("Unsupported operator sub", exception.Message);
             }
         }
 
@@ -2085,7 +2085,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("tolower"), exception.Message);
+                Assert.Equal("Unsupported function tolower", exception.Message);
             }
         }
 
@@ -2142,7 +2142,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("toupper"), exception.Message);
+                Assert.Equal("Unsupported function toupper", exception.Message);
             }
         }
 
@@ -2199,7 +2199,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("trim"), exception.Message);
+                Assert.Equal("Unsupported function trim", exception.Message);
             }
         }
 
@@ -2256,7 +2256,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedFunction.FormatWith("year"), exception.Message);
+                Assert.Equal("Unsupported function year", exception.Message);
             }
         }
 
@@ -2312,7 +2312,7 @@
                     () => FilterQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$filter"), exception.Message);
+                Assert.Equal("The query option $filter is not implemented by this service", exception.Message);
             }
         }
 

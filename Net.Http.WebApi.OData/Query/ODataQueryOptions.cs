@@ -190,7 +190,7 @@ namespace Net.Http.WebApi.OData.Query
 
             var queryOption = rawValue.Substring(0, equals - 1);
 
-            throw new ODataException(HttpStatusCode.BadRequest, Messages.IntRawValueInvalid.FormatWith(queryOption));
+            throw new ODataException(HttpStatusCode.BadRequest, $"The value for OData query {queryOption} must be a non-negative numeric value");
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Model
         internal EdmCollectionType(Type clrType, EdmType containedType)
             : base("Collection", $"Collection({containedType.FullName})", clrType)
         {
-            this.ContainedType = containedType;
+            this.ContainedType = containedType ?? throw new ArgumentNullException(nameof(containedType));
         }
 
         /// <summary>

@@ -20,11 +20,6 @@ namespace Net.Http.WebApi.OData
     [System.Runtime.Serialization.DataContract]
     public sealed class ODataResponseContent
     {
-        private readonly Uri context;
-        private readonly int? count;
-        private readonly Uri nextLink;
-        private readonly object value;
-
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataResponseContent"/> class.
         /// </summary>
@@ -55,34 +50,34 @@ namespace Net.Http.WebApi.OData
         /// <param name="nextLink">The URI to the next results in a paged response.</param>
         public ODataResponseContent(Uri context, object value, int? count, Uri nextLink)
         {
-            this.context = context;
-            this.value = value;
-            this.count = count;
-            this.nextLink = nextLink;
+            this.Context = context;
+            this.Value = value;
+            this.Count = count;
+            this.NextLink = nextLink;
         }
 
         /// <summary>
         /// Gets the URI to the metadata.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("@odata.context", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 0)]
-        public Uri Context => this.context;
+        public Uri Context { get; }
 
         /// <summary>
         /// Gets the total result count.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("@odata.count", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 1)]
-        public int? Count => this.count;
+        public int? Count { get; }
 
         /// <summary>
         /// Gets the URI to the next results in a paged response.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("@odata.nextLink", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 2)]
-        public Uri NextLink => this.nextLink;
+        public Uri NextLink { get; }
 
         /// <summary>
         /// Gets the value to be returned.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("value", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 3)]
-        public object Value => this.value;
+        public object Value { get; }
     }
 }

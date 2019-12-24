@@ -1,8 +1,8 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Query.Parsers
 {
     using System.Net;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query.Parsers;
-    using WebApi.OData.Model;
     using Xunit;
 
     public partial class FilterExpressionParserTests
@@ -21,7 +21,7 @@
                     () => FilterExpressionParser.Parse("ceiling(Freight) eq", EntityDataModel.Current.EntitySets["Orders"].EdmType));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, the binary operator Equal has no right node", exception.Message);
             }
 
             [Fact]
@@ -31,7 +31,7 @@
                     () => FilterExpressionParser.Parse("(ceiling(Freight) eq 32", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, an extra opening or missing closing parenthesis may be present", exception.Message);
             }
 
             [Fact]
@@ -41,7 +41,7 @@
                     () => FilterExpressionParser.Parse("ceiling(Freight) eq 32)", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, closing parenthesis not expected", exception.Message);
             }
 
             [Fact]
@@ -51,7 +51,7 @@
                     () => FilterExpressionParser.Parse("ceiling() eq 32", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, the function ceiling has no parameters", exception.Message);
             }
 
             [Fact]
@@ -61,7 +61,7 @@
                     () => FilterExpressionParser.Parse("ceiling(Freight eq 32", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, an extra opening or missing closing parenthesis may be present", exception.Message);
             }
 
             [Fact]
@@ -71,7 +71,7 @@
                     () => FilterExpressionParser.Parse("cast(Colour,) eq 20", EntityDataModel.Current.EntitySets["Products"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, the function cast has a missing parameter or extra comma", exception.Message);
             }
 
             [Fact]
@@ -81,7 +81,7 @@
                     () => FilterExpressionParser.Parse("not", EntityDataModel.Current.EntitySets["Products"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, an incomplete filter has been specified", exception.Message);
             }
 
             [Fact]
@@ -91,7 +91,7 @@
                     () => FilterExpressionParser.Parse("Deleted eq", EntityDataModel.Current.EntitySets["Products"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, the binary operator Equal has no right node", exception.Message);
             }
 
             [Fact]
@@ -101,7 +101,7 @@
                     () => FilterExpressionParser.Parse("Deleted eq true and", EntityDataModel.Current.EntitySets["Products"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, an incomplete filter has been specified", exception.Message);
             }
 
             [Fact]
@@ -111,7 +111,7 @@
                     () => FilterExpressionParser.Parse("Deleted eq true or", EntityDataModel.Current.EntitySets["Products"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, an incomplete filter has been specified", exception.Message);
             }
 
             [Fact]
@@ -121,7 +121,7 @@
                     () => FilterExpressionParser.Parse("(", EntityDataModel.Current.EntitySets["Orders"].EdmType)); ;
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.UnableToParseFilter, exception.Message);
+                Assert.Equal("Unable to parse the specified $filter system query option, an incomplete filter has been specified", exception.Message);
             }
         }
     }

@@ -12,6 +12,9 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData
 {
+    /// <summary>
+    /// Performance/Allocations: Contains character arrays for characters used in string.Split() calls to avoid the array being created each time.
+    /// </summary>
     internal static class SplitCharacter
     {
         internal static char[] Ampersand { get; } = new[] { '&' };

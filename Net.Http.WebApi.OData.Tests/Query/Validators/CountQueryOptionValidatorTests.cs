@@ -3,9 +3,9 @@
     using System.Net;
     using System.Net.Http;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
-    using OData.Model;
     using Xunit;
 
     public class CountQueryOptionValidatorTests
@@ -35,7 +35,7 @@
                     () => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.CountRawValueInvalid, exception.Message);
+                Assert.Equal("The supplied value for OData query $count is invalid, valid options are 'true' and 'false'", exception.Message);
             }
         }
 
@@ -64,7 +64,7 @@
                     () => CountQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
 
                 Assert.Equal(HttpStatusCode.NotImplemented, exception.StatusCode);
-                Assert.Equal(Messages.UnsupportedQueryOption.FormatWith("$count"), exception.Message);
+                Assert.Equal("The query option $count is not implemented by this service", exception.Message);
             }
         }
 

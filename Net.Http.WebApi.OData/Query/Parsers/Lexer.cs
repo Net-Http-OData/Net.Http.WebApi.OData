@@ -92,7 +92,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
             if (this.content.Length != this.position)
             {
-                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                throw new ODataException(HttpStatusCode.BadRequest, "Unable to parse the specified $filter system query option");
             }
 
             return false;

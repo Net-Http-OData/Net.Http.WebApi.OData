@@ -70,14 +70,14 @@ namespace Net.Http.WebApi.OData.Query.Parsers
 
                 if (this.groupingDepth != 0 || this.nodeStack.Count != 1)
                 {
-                    throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                    throw new ODataException(HttpStatusCode.BadRequest, "Unable to parse the specified $filter system query option, an extra opening or missing closing parenthesis may be present");
                 }
 
                 var node = this.nodeStack.Pop();
 
                 if (node is BinaryOperatorNode binaryNode && (binaryNode.Left is null || binaryNode.Right is null))
                 {
-                    throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                    throw new ODataException(HttpStatusCode.BadRequest, $"Unable to parse the specified $filter system query option, the binary operator {binaryNode.OperatorKind.ToString()} has no {(binaryNode.Left is null ? "left" : "right")} node");
                 }
 
                 return node;
@@ -100,7 +100,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                             if (this.tokens.Count > 0 && this.tokens.Peek().TokenType == TokenType.CloseParentheses)
                             {
                                 // All OData functions have at least 1 or 2 parameters
-                                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                                throw new ODataException(HttpStatusCode.BadRequest, $"Unable to parse the specified $filter system query option, the function {node?.Name} has no parameters");
                             }
 
                             this.groupingDepth++;
@@ -110,7 +110,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.CloseParentheses:
                             if (this.groupingDepth == 0)
                             {
-                                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                                throw new ODataException(HttpStatusCode.BadRequest, "Unable to parse the specified $filter system query option, closing parenthesis not expected");
                             }
 
                             this.groupingDepth--;
@@ -190,8 +190,8 @@ namespace Net.Http.WebApi.OData.Query.Parsers
                         case TokenType.Comma:
                             if (this.tokens.Count > 0 && this.tokens.Peek().TokenType == TokenType.CloseParentheses)
                             {
-                                // If there is a comma in a function call, there should be another argument followed by a closing comma
-                                throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                                // If there is a comma in a function call, there should be another parameter followed by a closing comma
+                                throw new ODataException(HttpStatusCode.BadRequest, $"Unable to parse the specified $filter system query option, the function {node?.Name} has a missing parameter or extra comma");
                             }
 
                             break;
@@ -295,7 +295,7 @@ namespace Net.Http.WebApi.OData.Query.Parsers
             {
                 if (this.tokens.Count == 0)
                 {
-                    throw new ODataException(HttpStatusCode.BadRequest, Messages.UnableToParseFilter);
+                    throw new ODataException(HttpStatusCode.BadRequest, "Unable to parse the specified $filter system query option, an incomplete filter has been specified");
                 }
 
                 QueryNode node;

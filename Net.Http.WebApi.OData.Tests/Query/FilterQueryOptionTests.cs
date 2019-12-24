@@ -1,7 +1,7 @@
 ﻿namespace Net.Http.WebApi.OData.Tests.Query
 {
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
-    using WebApi.OData.Model;
     using Xunit;
 
     public class FilterQueryOptionTests

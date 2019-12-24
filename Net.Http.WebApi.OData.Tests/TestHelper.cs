@@ -1,8 +1,8 @@
 ﻿namespace Net.Http.WebApi.OData.Tests
 {
     using System;
+    using Net.Http.WebApi.OData.Model;
     using NorthwindModel;
-    using OData.Model;
 
     internal static class TestHelper
     {

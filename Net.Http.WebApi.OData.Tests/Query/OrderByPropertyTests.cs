@@ -3,8 +3,8 @@
     using System;
     using System.Net;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
-    using WebApi.OData.Model;
     using Xunit;
 
     public class OrderByPropertyTests
@@ -39,7 +39,7 @@
                 var exception = Assert.Throws<ODataException>(() => new OrderByProperty("CompanyName ASC", model));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
+                Assert.Equal("The supplied order value for CompanyName is invalid, valid options are 'asc' and 'desc'", exception.Message);
             }
         }
 
@@ -55,7 +55,7 @@
                 var exception = Assert.Throws<ODataException>(() => new OrderByProperty("CompanyName wibble", model));
 
                 Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
-                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
+                Assert.Equal("The supplied order value for CompanyName is invalid, valid options are 'asc' and 'desc'", exception.Message);
             }
         }
 

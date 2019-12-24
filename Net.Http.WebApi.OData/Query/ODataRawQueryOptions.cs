@@ -54,7 +54,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$select=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$select"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $select cannot be empty");
                         }
 
                         this.Select = rawQueryOption;
@@ -63,7 +63,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$filter=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$filter"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $filter cannot be empty");
                         }
 
                         this.Filter = rawQueryOption;
@@ -72,7 +72,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$orderby=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$orderby"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $orderby cannot be empty");
                         }
 
                         this.OrderBy = rawQueryOption;
@@ -81,7 +81,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$skip=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$skip"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $skip cannot be empty");
                         }
 
                         this.Skip = rawQueryOption;
@@ -90,7 +90,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$top=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$top"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $top cannot be empty");
                         }
 
                         this.Top = rawQueryOption;
@@ -99,7 +99,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$count=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$count"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $count cannot be empty");
                         }
 
                         this.Count = rawQueryOption;
@@ -108,7 +108,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$format=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$format"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $format cannot be empty");
                         }
 
                         this.Format = rawQueryOption;
@@ -117,7 +117,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$expand=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$expand"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $expand cannot be empty");
                         }
 
                         this.Expand = rawQueryOption;
@@ -126,7 +126,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$search=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$search"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $search cannot be empty");
                         }
 
                         this.Search = rawQueryOption;
@@ -135,7 +135,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         if (rawQueryOption.Equals("$skiptoken=", StringComparison.Ordinal))
                         {
-                            throw new ODataException(HttpStatusCode.BadRequest, Messages.ODataQueryCannotBeEmpty.FormatWith("$skiptoken"));
+                            throw new ODataException(HttpStatusCode.BadRequest, "The OData query option $skiptoken cannot be empty");
                         }
 
                         this.SkipToken = rawQueryOption;
@@ -144,7 +144,7 @@ namespace Net.Http.WebApi.OData.Query
                     {
                         var optionName = rawQueryOption.Substring(0, rawQueryOption.IndexOf('='));
 
-                        throw new ODataException(HttpStatusCode.BadRequest, Messages.UnknownQueryOption.FormatWith(optionName));
+                        throw new ODataException(HttpStatusCode.BadRequest, $"Unknown OData query option {optionName}");
                     }
                 }
             }
