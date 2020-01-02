@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Net.Http.WebApi.OData")]
-[assembly: AssemblyDescription("A library which makes it easy to consume an OData Query with ASP.NET WebApi")]
+[assembly: AssemblyDescription("A library which makes it easy to consume an OData 4.0 Query with ASP.NET WebApi")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Project Contributors")]
 [assembly: AssemblyProduct("Net.Http.WebApi.OData")]
