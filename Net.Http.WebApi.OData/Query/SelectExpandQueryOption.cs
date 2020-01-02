@@ -32,7 +32,7 @@ namespace Net.Http.WebApi.OData.Query
         {
             if (rawValue == "$select=*")
             {
-                this.Properties = model.Properties;
+                this.Properties = model.Properties.Where(p => !p.IsNavigable).ToList();
             }
             else if (rawValue == "$expand=*")
             {

@@ -22,7 +22,7 @@
             }
 
             [Fact]
-            public void ThePropertiesShouldContainEachSpecifiedValue()
+            public void ThePropertiesShouldContainSpecifiedNavigationProperty()
             {
                 Assert.Equal(1, this.option.Properties.Count);
 
@@ -52,7 +52,7 @@
             }
 
             [Fact]
-            public void ThePropertiesShouldContainEachExpandableProperty()
+            public void ThePropertiesShouldContainAllNavigationProperties()
             {
                 Assert.Equal(1, this.option.Properties.Count);
 
@@ -82,7 +82,7 @@
             }
 
             [Fact]
-            public void ThePropertiesShouldContainEachSpecifiedValue()
+            public void ThePropertiesShouldContainSpecifiedProperties()
             {
                 Assert.Equal(3, this.option.Properties.Count);
 
@@ -114,7 +114,7 @@
             }
 
             [Fact]
-            public void ThePropertiesShouldContainEachSpecifiedValue()
+            public void ThePropertiesShouldContainSpecifiedProperty()
             {
                 Assert.Equal(1, this.option.Properties.Count);
 
@@ -144,9 +144,18 @@
             }
 
             [Fact]
-            public void ThePropertiesShouldContainEachProperty()
+            public void ThePropertiesShouldContainAllProperties()
             {
-                Assert.Same(this.option.Properties, this.model.Properties);
+                Assert.Equal(8, this.option.Properties.Count);
+
+                Assert.Equal("Colour", this.option.Properties[0].Name);
+                Assert.Equal("Deleted", this.option.Properties[1].Name);
+                Assert.Equal("Description", this.option.Properties[2].Name);
+                Assert.Equal("Name", this.option.Properties[3].Name);
+                Assert.Equal("Price", this.option.Properties[4].Name);
+                Assert.Equal("ProductId", this.option.Properties[5].Name);
+                Assert.Equal("Rating", this.option.Properties[6].Name);
+                Assert.Equal("ReleaseDate", this.option.Properties[7].Name);
             }
 
             [Fact]
