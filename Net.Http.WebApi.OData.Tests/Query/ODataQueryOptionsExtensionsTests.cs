@@ -2,7 +2,7 @@
 {
     using System.Net.Http;
     using Net.Http.WebApi.OData.Model;
-    using OData.Query;
+    using Net.Http.WebApi.OData.Query;
     using Xunit;
 
     public class ODataQueryOptionsExtensionsTests
@@ -13,10 +13,10 @@
             TestHelper.EnsureEDM();
 
             var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25"),
-                EntityDataModel.Current.EntitySets["Customers"]);
+                new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25"),
+                EntityDataModel.Current.EntitySets["Products"]);
 
-            Assert.Equal("http://services.odata.org/OData/Customers?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25", queryOptions.NextLink(50, 25).ToString());
+            Assert.Equal("http://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25", queryOptions.NextLink(50, 25).ToString());
         }
 
         [Fact]
