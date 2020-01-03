@@ -86,15 +86,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\AccessLevel.cs">
+      <Link>NorthwindModel\AccessLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Category.cs">
+      <Link>NorthwindModel\Category.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Colour.cs">
+      <Link>NorthwindModel\Colour.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Customer.cs">
+      <Link>NorthwindModel\Customer.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Employee.cs">
+      <Link>NorthwindModel\Employee.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Manager.cs">
+      <Link>NorthwindModel\Manager.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Order.cs">
+      <Link>NorthwindModel\Order.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\OrderDetail.cs">
+      <Link>NorthwindModel\OrderDetail.cs</Link>
+    </Compile>
+    <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Product.cs">
+      <Link>NorthwindModel\Product.cs</Link>
+    </Compile>
     <Compile Include="Model\EntityDataModelTests.cs" />
-    <Compile Include="NorthwindModel\AccessLevel.cs" />
-    <Compile Include="NorthwindModel\Category.cs" />
-    <Compile Include="NorthwindModel\Colour.cs" />
-    <Compile Include="NorthwindModel\Customer.cs" />
-    <Compile Include="NorthwindModel\Employee.cs" />
     <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
-    <Compile Include="NorthwindModel\Manager.cs" />
     <Compile Include="Metadata\MetadataProviderTests.cs" />
     <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
     <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
@@ -104,11 +125,8 @@
     <Compile Include="Model\EdmTypeCacheTests.cs" />
     <Compile Include="Model\EntityDataModelBuilderTests.cs" />
     <Compile Include="ODataVersionHeaderValidationAttributeTests.cs" />
-    <Compile Include="NorthwindModel\Order.cs" />
     <Compile Include="ODataResponseContentSerializationTests.cs" />
     <Compile Include="ODataResponseContentTests.cs" />
-    <Compile Include="NorthwindModel\OrderDetail.cs" />
-    <Compile Include="NorthwindModel\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
     <Compile Include="Query\Expressions\ConstantNodeTests.cs" />
