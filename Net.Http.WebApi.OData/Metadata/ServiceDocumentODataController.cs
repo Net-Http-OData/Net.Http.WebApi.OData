@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
-    using Net.Http.WebApi.OData.Model;
+    using Net.Http.OData.Model;
 
     /// <summary>
     /// An API controller which exposes the OData service document.

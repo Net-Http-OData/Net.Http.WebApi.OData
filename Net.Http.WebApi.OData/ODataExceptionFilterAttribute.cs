@@ -14,6 +14,7 @@ namespace Net.Http.WebApi.OData
 {
     using System;
     using System.Web.Http.Filters;
+    using Net.Http.OData;
 
     /// <summary>
     /// An <see cref="ExceptionFilterAttribute"/> which returns the correct response for an <see cref="ODataException"/>.

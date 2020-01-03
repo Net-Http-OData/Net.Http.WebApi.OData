@@ -79,22 +79,8 @@
     <Compile Include="Metadata\ServiceDocumentItem.cs" />
     <Compile Include="Metadata\ServiceDocumentODataController.cs" />
     <Compile Include="Metadata\Utf8StringWriter.cs" />
-    <Compile Include="Model\Capabilities.cs" />
-    <Compile Include="Model\EdmCollectionType.cs" />
-    <Compile Include="Model\EdmComplexType.cs" />
-    <Compile Include="Model\EdmEnumMember.cs" />
-    <Compile Include="Model\EdmEnumType.cs" />
-    <Compile Include="Model\EdmPrimitiveType.cs" />
-    <Compile Include="Model\EdmProperty.cs" />
-    <Compile Include="Model\EdmType.cs" />
-    <Compile Include="Model\EdmTypeCache.cs" />
-    <Compile Include="Model\EntityDataModel.cs" />
-    <Compile Include="Model\EntityDataModelBuilder.cs" />
-    <Compile Include="Model\EntitySet.cs" />
-    <Compile Include="Model\ExpressionExtensions.cs" />
     <Compile Include="ODataError.cs" />
     <Compile Include="ODataErrorContent.cs" />
-    <Compile Include="ODataException.cs" />
     <Compile Include="ODataExceptionFilterAttribute.cs" />
     <Compile Include="ODataHeaderNames.cs" />
     <Compile Include="ODataHeaderValues.cs" />
@@ -105,55 +91,7 @@
     <Compile Include="ODataResponseContent.cs" />
     <Compile Include="ODataVersionHeaderValidationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\Binders\AbstractFilterBinder.cs" />
-    <Compile Include="Query\Binders\AbstractOrderByBinder.cs" />
-    <Compile Include="Query\Binders\AbstractSelectExpandBinder.cs" />
-    <Compile Include="Query\Expressions\BinaryOperatorKind.cs" />
-    <Compile Include="Query\Expressions\BinaryOperatorNode.cs" />
-    <Compile Include="Query\Expressions\ConstantNode.cs" />
-    <Compile Include="Query\Expressions\FunctionCallNode.cs" />
-    <Compile Include="Query\Expressions\PropertyAccessNode.cs" />
-    <Compile Include="Query\Expressions\QueryNode.cs" />
-    <Compile Include="Query\Expressions\QueryNodeKind.cs" />
-    <Compile Include="Query\Expressions\UnaryOperatorKind.cs" />
-    <Compile Include="Query\Expressions\UnaryOperatorNode.cs" />
-    <Compile Include="Query\FilterQueryOption.cs" />
-    <Compile Include="Query\FormatQueryOption.cs" />
-    <Compile Include="Query\ODataQueryOptions.cs" />
-    <Compile Include="Query\ODataQueryOptionsExtensions.cs" />
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
-    <Compile Include="Query\ODataRawQueryOptions.cs" />
-    <Compile Include="Query\OrderByDirection.cs" />
-    <Compile Include="Query\OrderByProperty.cs" />
-    <Compile Include="Query\OrderByQueryOption.cs" />
-    <Compile Include="Query\Parsers\BinaryOperatorKindParser.cs" />
-    <Compile Include="Query\Parsers\ConstantNodeParser.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParser.cs" />
-    <Compile Include="Query\Parsers\Lexer.cs" />
-    <Compile Include="Query\Parsers\Token.cs" />
-    <Compile Include="Query\Parsers\TokenDefinition.cs" />
-    <Compile Include="Query\Parsers\TokenType.cs" />
-    <Compile Include="Query\Parsers\UnaryOperatorKindParser.cs" />
-    <Compile Include="Query\QueryOption.cs" />
-    <Compile Include="Query\SelectExpandQueryOption.cs" />
-    <Compile Include="Query\SkipTokenQueryOption.cs" />
-    <Compile Include="Query\Validators\AllowedArithmeticOperators.cs" />
-    <Compile Include="Query\Validators\AllowedFunctions.cs" />
-    <Compile Include="Query\Validators\AllowedLogicalOperators.cs" />
-    <Compile Include="Query\Validators\AllowedQueryOptions.cs" />
-    <Compile Include="Query\Validators\CountQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\ExpandQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\FilterQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\FormatQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\ODataQueryOptionsExtensions.cs" />
-    <Compile Include="Query\Validators\ODataValidationSettings.cs" />
-    <Compile Include="Query\Validators\OrderByQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\SearchQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\SelectQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\SkipQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\SkipTokenQueryOptionValidator.cs" />
-    <Compile Include="Query\Validators\TopQueryOptionValidator.cs" />
-    <Compile Include="SplitCharacter.cs" />
     <Compile Include="UriExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,10 +102,7 @@
       <Link>stylecop.json</Link>
     </AdditionalFiles>
     <None Include="app.config" />
-    <None Include="Model\_EdmModel.cd" />
     <None Include="packages.config" />
-    <None Include="Query\Expressions\_QueryNodes.cd" />
-    <None Include="Query\_QueryOptions.cd" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
@@ -188,6 +123,12 @@
     <Analyzer Include="..\packages\SecurityCodeScan.3.3.0.0\analyzers\dotnet\YamlDotNet.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Net.Http.OData\Net.Http.OData.csproj">
+      <Project>{a46329c6-ed56-429f-be8a-c2ce8c760c12}</Project>
+      <Name>Net.Http.OData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -16,6 +16,7 @@ namespace Net.Http.WebApi.OData.Query
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
     using System.Web.Http.Metadata;
+    using Net.Http.OData.Query;
 
     /// <summary>
     /// The <see cref="HttpParameterBinding"/> which can create an <see cref="ODataQueryOptions"/> from the request parameters.

@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Linq;
     using System.Reflection;
     using System.Xml.Linq;
-    using Net.Http.WebApi.OData.Model;
+    using Net.Http.OData.Model;
 
     /// <summary>
     /// Provides the Metadata XML document for the Entity Data Model.

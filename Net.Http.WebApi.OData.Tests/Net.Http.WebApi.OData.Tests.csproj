@@ -113,52 +113,18 @@
     <Compile Include="..\Net.Http.OData.Tests\NorthwindModel\Product.cs">
       <Link>NorthwindModel\Product.cs</Link>
     </Compile>
-    <Compile Include="Model\EntityDataModelTests.cs" />
+    <Compile Include="..\Net.Http.OData.Tests\TestHelper.cs">
+      <Link>TestHelper.cs</Link>
+    </Compile>
     <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
     <Compile Include="Metadata\MetadataProviderTests.cs" />
     <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
     <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
-    <Compile Include="Model\EdmComplexTypeTests.cs" />
-    <Compile Include="Model\EdmPrimitiveTypeTests.cs" />
-    <Compile Include="Model\EdmPropertyTests.cs" />
-    <Compile Include="Model\EdmTypeCacheTests.cs" />
-    <Compile Include="Model\EntityDataModelBuilderTests.cs" />
     <Compile Include="ODataVersionHeaderValidationAttributeTests.cs" />
     <Compile Include="ODataResponseContentSerializationTests.cs" />
     <Compile Include="ODataResponseContentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
-    <Compile Include="Query\Expressions\ConstantNodeTests.cs" />
-    <Compile Include="Query\Expressions\FunctionCallNodeTests.cs" />
-    <Compile Include="Query\Expressions\PropertyAccessNodeTests.cs" />
-    <Compile Include="Query\Expressions\UnaryOperatorNodeTests.cs" />
-    <Compile Include="Query\FilterQueryOptionTests.cs" />
-    <Compile Include="Query\FormatQueryOptionTests.cs" />
-    <Compile Include="Query\ODataQueryOptionsExtensionsTests.cs" />
-    <Compile Include="Query\ODataQueryOptionsTests.cs" />
-    <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
-    <Compile Include="Query\OrderByPropertyTests.cs" />
-    <Compile Include="Query\OrderByQueryOptionTests.cs" />
-    <Compile Include="Query\Parsers\BinaryOperatorKindParserTests.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleFunction.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleProperty.cs" />
-    <Compile Include="Query\Parsers\UnaryOperatorKindParserTests.cs" />
-    <Compile Include="Query\SelectExpandQueryOptionTests.cs" />
-    <Compile Include="Query\Validators\ExpandQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\FilterQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\FormatQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\CountQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\ODataValidationSettingsTests.cs" />
-    <Compile Include="Query\Validators\OrderByQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\SearchQueryValidatorTests.cs" />
-    <Compile Include="Query\Validators\SelectQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\SkipQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\SkipTokenQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\TopQueryOptionValidatorTests.cs" />
-    <Compile Include="TestHelper.cs" />
     <Compile Include="UriExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +135,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Net.Http.OData\Net.Http.OData.csproj">
+      <Project>{a46329c6-ed56-429f-be8a-c2ce8c760c12}</Project>
+      <Name>Net.Http.OData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj">
       <Project>{67fbeb32-944e-4022-8b80-5589762b2b05}</Project>
       <Name>Net.Http.WebApi.OData</Name>

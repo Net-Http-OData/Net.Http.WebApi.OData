@@ -7,8 +7,10 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Hosting;
-    using Net.Http.WebApi.OData.Model;
-    using Net.Http.WebApi.OData.Query;
+    using Net.Http.OData;
+    using Net.Http.OData.Model;
+    using Net.Http.OData.Query;
+    using Net.Http.OData.Tests;
     using Xunit;
 
     public class HttpRequestMessageExtensionsTests

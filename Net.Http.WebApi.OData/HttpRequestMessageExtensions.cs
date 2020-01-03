@@ -17,8 +17,9 @@ namespace Net.Http.WebApi.OData
     using System.Linq;
     using System.Net;
     using System.Net.Http;
-    using Net.Http.WebApi.OData.Model;
-    using Net.Http.WebApi.OData.Query;
+    using Net.Http.OData;
+    using Net.Http.OData.Model;
+    using Net.Http.OData.Query;
 
     /// <summary>
     /// Extensions for the <see cref="HttpRequestMessage"/> class.
