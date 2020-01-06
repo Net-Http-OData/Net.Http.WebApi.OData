@@ -7,6 +7,7 @@
     using System.Web.Http.Hosting;
     using System.Web.Http.Routing;
     using Moq;
+    using Net.Http.OData;
     using Net.Http.OData.Tests;
     using Xunit;
 

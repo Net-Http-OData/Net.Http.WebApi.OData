@@ -10,20 +10,20 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData
+namespace Net.Http.OData
 {
     using System.Globalization;
     using System.Runtime.Serialization;
 
     [DataContract]
-    internal sealed class ODataErrorContent
+    public sealed class ODataErrorContent
     {
         private ODataErrorContent(ODataError error) => this.Error = error;
 
         [Newtonsoft.Json.JsonProperty("error", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, Order = 0)]
         public ODataError Error { get; }
 
-        internal static ODataErrorContent Create(int code, string message, string target)
+        public static ODataErrorContent Create(int code, string message, string target)
             => new ODataErrorContent(new ODataError(code.ToString(CultureInfo.InvariantCulture), message, target));
     }
 }

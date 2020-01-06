@@ -17,6 +17,8 @@ namespace Net.Http.WebApi.OData.Metadata
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+    using Net.Http.OData;
+    using Net.Http.OData.Metadata;
     using Net.Http.OData.Model;
 
     /// <summary>

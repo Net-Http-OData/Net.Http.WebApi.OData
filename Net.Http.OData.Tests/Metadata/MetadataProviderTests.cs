@@ -1,9 +1,9 @@
-﻿namespace Net.Http.WebApi.OData.Tests.Metadata
+﻿namespace Net.Http.OData.Tests.Metadata
 {
     using System.Xml.Linq;
+    using Net.Http.OData.Metadata;
     using Net.Http.OData.Model;
     using Net.Http.OData.Tests;
-    using Net.Http.WebApi.OData.Metadata;
     using Xunit;
 
     public class MetadataProviderTests

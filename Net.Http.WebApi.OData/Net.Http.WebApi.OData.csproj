@@ -74,25 +74,13 @@
   <ItemGroup>
     <Compile Include="HttpConfigurationODataExtensions.cs" />
     <Compile Include="HttpRequestMessageExtensions.cs" />
-    <Compile Include="Metadata\MetadataProvider.cs" />
     <Compile Include="Metadata\ODataMetadataController.cs" />
-    <Compile Include="Metadata\ServiceDocumentItem.cs" />
     <Compile Include="Metadata\ServiceDocumentODataController.cs" />
     <Compile Include="Metadata\Utf8StringWriter.cs" />
-    <Compile Include="ODataError.cs" />
-    <Compile Include="ODataErrorContent.cs" />
     <Compile Include="ODataExceptionFilterAttribute.cs" />
-    <Compile Include="ODataHeaderNames.cs" />
-    <Compile Include="ODataHeaderValues.cs" />
-    <Compile Include="ODataIsolationLevel.cs" />
-    <Compile Include="ODataMetadataLevel.cs" />
-    <Compile Include="ODataMetadataLevelExtensions.cs" />
-    <Compile Include="ODataRequestOptions.cs" />
-    <Compile Include="ODataResponseContent.cs" />
     <Compile Include="ODataVersionHeaderValidationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
-    <Compile Include="UriExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">

@@ -16,6 +16,7 @@ namespace Net.Http.WebApi.OData
     using System.Net;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
+    using Net.Http.OData;
 
     /// <summary>
     /// An <see cref="ActionFilterAttribute"/> which validates the OData-Version header in a request.

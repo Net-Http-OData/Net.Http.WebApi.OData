@@ -10,19 +10,19 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData
+namespace Net.Http.OData
 {
     using System;
     using System.Net.Http.Headers;
 
-    internal static class ODataMetadataLevelExtensions
+    public static class ODataMetadataLevelExtensions
     {
-        internal const string HeaderName = "odata.metadata";
+        public const string HeaderName = "odata.metadata";
         private static readonly NameValueHeaderValue MetadataLevelFull = new NameValueHeaderValue(HeaderName, "full");
         private static readonly NameValueHeaderValue MetadataLevelMinimal = new NameValueHeaderValue(HeaderName, "minimal");
         private static readonly NameValueHeaderValue MetadataLevelNone = new NameValueHeaderValue(HeaderName, "none");
 
-        internal static NameValueHeaderValue ToNameValueHeaderValue(this ODataMetadataLevel metadataLevel)
+        public static NameValueHeaderValue ToNameValueHeaderValue(this ODataMetadataLevel metadataLevel)
         {
             switch (metadataLevel)
             {

@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Metadata
+namespace Net.Http.OData.Metadata
 {
     using System;
     using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Net.Http.WebApi.OData.Metadata
     /// <summary>
     /// Provides the Metadata XML document for the Entity Data Model.
     /// </summary>
-    internal static class MetadataProvider
+    public static class MetadataProvider
     {
         private static readonly XNamespace EdmNs = "http://docs.oasis-open.org/odata/ns/edm";
         private static readonly XNamespace EdmxNs = "http://docs.oasis-open.org/odata/ns/edmx";
@@ -33,7 +33,7 @@ namespace Net.Http.WebApi.OData.Metadata
         /// </summary>
         /// <param name="entityDataModel">The Entity Data Model to include the Metadata for.</param>
         /// <returns>An <see cref="XDocument"/> containing the Metadata XML document for the Entity Data Model.</returns>
-        internal static XDocument Create(EntityDataModel entityDataModel)
+        public static XDocument Create(EntityDataModel entityDataModel)
         {
             if (entityDataModel is null)
             {

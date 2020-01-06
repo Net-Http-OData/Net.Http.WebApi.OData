@@ -1,8 +1,9 @@
-namespace Net.Http.WebApi.OData.Tests
+namespace Net.Http.OData.Tests
 {
     using System;
     using System.Dynamic;
     using System.Runtime.Serialization;
+    using Net.Http.WebApi.OData;
     using Newtonsoft.Json;
     using Xunit;
 

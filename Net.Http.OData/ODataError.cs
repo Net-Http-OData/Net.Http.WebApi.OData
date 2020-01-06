@@ -10,14 +10,14 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData
+namespace Net.Http.OData
 {
     using System.Runtime.Serialization;
 
     [DataContract]
-    internal sealed class ODataError
+    public sealed class ODataError
     {
-        internal ODataError(string code, string message, string target)
+        public ODataError(string code, string message, string target)
         {
             this.Code = code;
             this.Message = message;

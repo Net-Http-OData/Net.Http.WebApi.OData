@@ -1,4 +1,4 @@
-﻿namespace Net.Http.WebApi.OData.Tests
+﻿namespace Net.Http.OData.Tests
 {
     using System;
     using Xunit;

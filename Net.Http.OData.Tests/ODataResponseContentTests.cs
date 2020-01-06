@@ -1,7 +1,8 @@
-namespace Net.Http.WebApi.OData.Tests
+namespace Net.Http.OData.Tests
 {
     using System;
     using System.Collections.Generic;
+    using Net.Http.WebApi.OData;
     using Xunit;
 
     public class ODataResponseContentTests

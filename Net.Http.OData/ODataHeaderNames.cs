@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataIsolationLevel.cs" company="Project Contributors">
+// <copyright file="ODataHeaderNames.cs" company="Project Contributors">
 // Copyright 2012 - 2020 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,21 +10,26 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData
+namespace Net.Http.OData
 {
     /// <summary>
-    /// The OData isolation levels.
+    /// The header names for OData HTTP Headers.
     /// </summary>
-    public enum ODataIsolationLevel
+    public static class ODataHeaderNames
     {
         /// <summary>
-        /// No isolation level is specified in the request.
+        /// The OData isolation header.
         /// </summary>
-        None = 0,
+        public const string ODataIsolation = "OData-Isolation";
 
         /// <summary>
-        /// Snapshot isolation level is specified in the request.
+        /// The OData max version header.
         /// </summary>
-        Snapshot,
+        public const string ODataMaxVersion = "OData-MaxVersion";
+
+        /// <summary>
+        /// The OData version header.
+        /// </summary>
+        public const string ODataVersion = "OData-Version";
     }
 }

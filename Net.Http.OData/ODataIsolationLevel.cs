@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataMetadataLevel.cs" company="Project Contributors">
+// <copyright file="ODataIsolationLevel.cs" company="Project Contributors">
 // Copyright 2012 - 2020 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,26 +10,21 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData
+namespace Net.Http.OData
 {
     /// <summary>
-    /// The different levels of metadata which should be included in the response.
+    /// The OData isolation levels.
     /// </summary>
-    public enum ODataMetadataLevel
+    public enum ODataIsolationLevel
     {
         /// <summary>
-        /// No metadata should be included in the response.
+        /// No isolation level is specified in the request.
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// The minimal metadata should be included in the response.
+        /// Snapshot isolation level is specified in the request.
         /// </summary>
-        Minimal = 1,
-
-        /// <summary>
-        /// The full metadata should be included in the response.
-        /// </summary>
-        Full = 2,
+        Snapshot,
     }
 }

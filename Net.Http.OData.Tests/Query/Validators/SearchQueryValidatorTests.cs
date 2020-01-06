@@ -1,4 +1,4 @@
-﻿namespace Net.Http.Tests.OData.Query.Validators
+﻿namespace Net.Http.OData.Tests.Query.Validators
 {
     using System.Net;
     using System.Net.Http;

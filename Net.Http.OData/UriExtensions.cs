@@ -10,9 +10,10 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData
+namespace Net.Http.OData
 {
     using System;
+    using System.Globalization;
     using System.Text;
     using Net.Http.OData.Model;
     using Net.Http.OData.Query;
@@ -20,11 +21,11 @@ namespace Net.Http.WebApi.OData
     /// <summary>
     /// Extensions for the Uri class.
     /// </summary>
-    internal static class UriExtensions
+    public static class UriExtensions
     {
         private static readonly char[] NonNameCharacters = new[] { '(', '/', '$', '%' };
 
-        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri)
+        public static StringBuilder ODataContextUriBuilder(this Uri requestUri)
         {
             var contextUriBuilder = ODataServiceUriBuilder(requestUri);
             contextUriBuilder.Append("$metadata");
@@ -32,16 +33,31 @@ namespace Net.Http.WebApi.OData
             return contextUriBuilder;
         }
 
-        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet)
+        public static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet)
         {
+            if (entitySet is null)
+            {
+                throw new ArgumentNullException(nameof(entitySet));
+            }
+
             var contextUriBuilder = ODataContextUriBuilder(requestUri);
             contextUriBuilder.Append("#").Append(entitySet.Name);
 
             return contextUriBuilder;
         }
 
-        internal static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
+        public static StringBuilder ODataContextUriBuilder(this Uri requestUri, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
         {
+            if (entitySet is null)
+            {
+                throw new ArgumentNullException(nameof(entitySet));
+            }
+
+            if (selectExpandQueryOption is null)
+            {
+                throw new ArgumentNullException(nameof(selectExpandQueryOption));
+            }
+
             var contextUriBuilder = ODataContextUriBuilder(requestUri);
             contextUriBuilder.Append("#").Append(entitySet.Name);
 
@@ -51,13 +67,13 @@ namespace Net.Http.WebApi.OData
             }
             else if (selectExpandQueryOption?.Properties.Count > 0)
             {
-                contextUriBuilder.AppendFormat("({0})", string.Join(",", selectExpandQueryOption.Properties));
+                contextUriBuilder.AppendFormat(CultureInfo.InvariantCulture, "({0})", string.Join(",", selectExpandQueryOption.Properties));
             }
 
             return contextUriBuilder;
         }
 
-        internal static StringBuilder ODataContextUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey)
+        public static StringBuilder ODataContextUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey)
         {
             var contextUriBuilder = ODataContextUriBuilder(requestUri, entitySet);
             contextUriBuilder.Append("/$entity");
@@ -65,7 +81,7 @@ namespace Net.Http.WebApi.OData
             return contextUriBuilder;
         }
 
-        internal static StringBuilder ODataContextUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey, string propertyName)
+        public static StringBuilder ODataContextUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey, string propertyName)
         {
             var contextUriBuilder = ODataContextUriBuilder(requestUri, entitySet);
 
@@ -83,8 +99,13 @@ namespace Net.Http.WebApi.OData
             return contextUriBuilder;
         }
 
-        internal static StringBuilder ODataEntityUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey)
+        public static StringBuilder ODataEntityUriBuilder<TEntityKey>(this Uri requestUri, EntitySet entitySet, TEntityKey entityKey)
         {
+            if (entitySet is null)
+            {
+                throw new ArgumentNullException(nameof(entitySet));
+            }
+
             var contextUriBuilder = ODataServiceUriBuilder(requestUri);
             contextUriBuilder.Append(entitySet.Name);
 
@@ -105,8 +126,13 @@ namespace Net.Http.WebApi.OData
         /// </summary>
         /// <param name="requestUri">The HTTP request message which led to ths OData request.</param>
         /// <returns>The name of the Entity Set referenced in the request, or null if no entity set was referenced.</returns>
-        internal static string ResolveODataEntitySetName(this Uri requestUri)
+        public static string ResolveODataEntitySetName(this Uri requestUri)
         {
+            if (requestUri is null)
+            {
+                throw new ArgumentNullException(nameof(requestUri));
+            }
+
             var modelNameSegmentIndex = -1;
 
             for (int i = 0; i < requestUri.Segments.Length; i++)
@@ -135,11 +161,16 @@ namespace Net.Http.WebApi.OData
             return modelNameSegment;
         }
 
-        internal static Uri ResolveODataServiceUri(this Uri requestUri)
+        public static Uri ResolveODataServiceUri(this Uri requestUri)
             => new Uri(ODataServiceUriBuilder(requestUri).ToString());
 
         private static StringBuilder ODataServiceUriBuilder(Uri requestUri)
         {
+            if (requestUri is null)
+            {
+                throw new ArgumentNullException(nameof(requestUri));
+            }
+
             var uriBuilder = new StringBuilder()
                 .Append(requestUri.Scheme)
                 .Append(Uri.SchemeDelimiter)

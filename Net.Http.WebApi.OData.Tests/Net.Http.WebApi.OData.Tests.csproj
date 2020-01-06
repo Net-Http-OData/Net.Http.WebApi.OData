@@ -118,14 +118,10 @@
     </Compile>
     <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
-    <Compile Include="Metadata\MetadataProviderTests.cs" />
     <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
     <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
     <Compile Include="ODataVersionHeaderValidationAttributeTests.cs" />
-    <Compile Include="ODataResponseContentSerializationTests.cs" />
-    <Compile Include="ODataResponseContentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UriExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">
