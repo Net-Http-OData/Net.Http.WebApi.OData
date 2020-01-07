@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Net.Http.AspNetCore.OData.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +12,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Net.Http.OData\Net.Http.OData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Net.Http.AspNetCore.OData.snk" Link="Net.Http.AspNetCore.OData.snk" />
   </ItemGroup>
 
 </Project>

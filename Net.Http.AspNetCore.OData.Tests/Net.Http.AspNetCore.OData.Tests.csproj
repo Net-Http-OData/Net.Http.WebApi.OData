@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Net.Http.AspNetCore.OData.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
