@@ -22,7 +22,7 @@ namespace Net.Http.OData.Model
     public sealed class EdmCollectionType : EdmType
     {
         internal EdmCollectionType(Type clrType, EdmType containedType)
-            : base("Collection", $"Collection({containedType.FullName})", clrType)
+            : base("Collection", $"Collection({containedType?.FullName})", clrType)
         {
             this.ContainedType = containedType ?? throw new ArgumentNullException(nameof(containedType));
         }

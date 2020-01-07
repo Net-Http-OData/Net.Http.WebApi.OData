@@ -28,7 +28,7 @@
             Assert.Same(type, edmComplexType.ClrType);
             Assert.Equal(type.FullName, edmComplexType.FullName);
             Assert.Equal(type.Name, edmComplexType.Name);
-            Assert.Same(properties, properties);
+            Assert.Same(properties, edmComplexType.Properties);
         }
 
         [Fact]
@@ -44,7 +44,7 @@
             Assert.Same(type, edmComplexType.ClrType);
             Assert.Equal(type.FullName, edmComplexType.FullName);
             Assert.Equal(type.Name, edmComplexType.Name);
-            Assert.Same(properties, properties);
+            Assert.Same(properties, edmComplexType.Properties);
         }
 
         [Fact]
