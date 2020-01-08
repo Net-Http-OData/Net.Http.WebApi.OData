@@ -13,9 +13,7 @@
 namespace Net.Http.OData
 {
     using System.Globalization;
-    using System.Runtime.Serialization;
 
-    [DataContract]
     public sealed class ODataErrorContent
     {
         private ODataErrorContent(ODataError error) => this.Error = error;

@@ -17,7 +17,6 @@ namespace Net.Http.WebApi.OData
     /// <summary>
     /// A class which is used to return OData content.
     /// </summary>
-    [System.Runtime.Serialization.DataContract]
     public sealed class ODataResponseContent
     {
         /// <summary>

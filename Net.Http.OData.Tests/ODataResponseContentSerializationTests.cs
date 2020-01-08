@@ -126,17 +126,14 @@ namespace Net.Http.OData.Tests
             Assert.Equal("{\"@odata.count\":5,\"value\":[1,2,3]}", jsonResult);
         }
 
-        [DataContract]
         public class Thing
         {
-            [DataMember]
             public string Name
             {
                 get;
                 set;
             }
 
-            [DataMember]
             public decimal Total
             {
                 get;

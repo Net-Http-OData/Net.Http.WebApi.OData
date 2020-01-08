@@ -12,9 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.OData
 {
-    using System.Runtime.Serialization;
-
-    [DataContract]
     public sealed class ODataError
     {
         public ODataError(string code, string message, string target)
