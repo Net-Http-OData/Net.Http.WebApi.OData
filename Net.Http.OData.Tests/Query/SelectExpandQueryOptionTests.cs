@@ -25,10 +25,10 @@
             [Fact]
             public void ThePropertiesShouldContainSpecifiedNavigationProperty()
             {
-                Assert.Equal(1, this.option.Properties.Count);
-                Assert.All(this.option.Properties, p => Assert.Null(p.Next));
+                Assert.Equal(1, this.option.PropertyPaths.Count);
+                Assert.All(this.option.PropertyPaths, p => Assert.Null(p.Next));
 
-                Assert.Equal("Category", this.option.Properties[0].Property.Name);
+                Assert.Equal("Category", this.option.PropertyPaths[0].Property.Name);
             }
 
             [Fact]
@@ -56,10 +56,10 @@
             [Fact]
             public void ThePropertiesShouldContainAllNavigationProperties()
             {
-                Assert.Equal(1, this.option.Properties.Count);
-                Assert.All(this.option.Properties, p => Assert.Null(p.Next));
+                Assert.Equal(1, this.option.PropertyPaths.Count);
+                Assert.All(this.option.PropertyPaths, p => Assert.Null(p.Next));
 
-                Assert.Equal("Category", this.option.Properties[0].Property.Name);
+                Assert.Equal("Category", this.option.PropertyPaths[0].Property.Name);
             }
 
             [Fact]
@@ -87,12 +87,12 @@
             [Fact]
             public void ThePropertiesShouldContainSpecifiedProperties()
             {
-                Assert.Equal(3, this.option.Properties.Count);
-                Assert.All(this.option.Properties, p => Assert.Null(p.Next));
+                Assert.Equal(3, this.option.PropertyPaths.Count);
+                Assert.All(this.option.PropertyPaths, p => Assert.Null(p.Next));
 
-                Assert.Equal("Name", this.option.Properties[0].Property.Name);
-                Assert.Equal("Price", this.option.Properties[1].Property.Name);
-                Assert.Equal("ReleaseDate", this.option.Properties[2].Property.Name);
+                Assert.Equal("Name", this.option.PropertyPaths[0].Property.Name);
+                Assert.Equal("Price", this.option.PropertyPaths[1].Property.Name);
+                Assert.Equal("ReleaseDate", this.option.PropertyPaths[2].Property.Name);
             }
 
             [Fact]
@@ -120,9 +120,9 @@
             [Fact]
             public void ThePropertiesShouldContainSpecifiedProperty()
             {
-                Assert.Equal(1, this.option.Properties.Count);
+                Assert.Equal(1, this.option.PropertyPaths.Count);
 
-                var propertyPathSegment = this.option.Properties[0];
+                var propertyPathSegment = this.option.PropertyPaths[0];
 
                 Assert.Equal("Category", propertyPathSegment.Property.Name);
                 Assert.Equal("Product", propertyPathSegment.Property.DeclaringType.Name);
@@ -160,10 +160,10 @@
             [Fact]
             public void ThePropertiesShouldContainSpecifiedProperty()
             {
-                Assert.Equal(1, this.option.Properties.Count);
-                Assert.All(this.option.Properties, p => Assert.Null(p.Next));
+                Assert.Equal(1, this.option.PropertyPaths.Count);
+                Assert.All(this.option.PropertyPaths, p => Assert.Null(p.Next));
 
-                Assert.Equal("Name", this.option.Properties[0].Property.Name);
+                Assert.Equal("Name", this.option.PropertyPaths[0].Property.Name);
             }
 
             [Fact]
@@ -191,17 +191,17 @@
             [Fact]
             public void ThePropertiesShouldContainAllProperties()
             {
-                Assert.Equal(8, this.option.Properties.Count);
-                Assert.All(this.option.Properties, p => Assert.Null(p.Next));
+                Assert.Equal(8, this.option.PropertyPaths.Count);
+                Assert.All(this.option.PropertyPaths, p => Assert.Null(p.Next));
 
-                Assert.Equal("Colour", this.option.Properties[0].Property.Name);
-                Assert.Equal("Deleted", this.option.Properties[1].Property.Name);
-                Assert.Equal("Description", this.option.Properties[2].Property.Name);
-                Assert.Equal("Name", this.option.Properties[3].Property.Name);
-                Assert.Equal("Price", this.option.Properties[4].Property.Name);
-                Assert.Equal("ProductId", this.option.Properties[5].Property.Name);
-                Assert.Equal("Rating", this.option.Properties[6].Property.Name);
-                Assert.Equal("ReleaseDate", this.option.Properties[7].Property.Name);
+                Assert.Equal("Colour", this.option.PropertyPaths[0].Property.Name);
+                Assert.Equal("Deleted", this.option.PropertyPaths[1].Property.Name);
+                Assert.Equal("Description", this.option.PropertyPaths[2].Property.Name);
+                Assert.Equal("Name", this.option.PropertyPaths[3].Property.Name);
+                Assert.Equal("Price", this.option.PropertyPaths[4].Property.Name);
+                Assert.Equal("ProductId", this.option.PropertyPaths[5].Property.Name);
+                Assert.Equal("Rating", this.option.PropertyPaths[6].Property.Name);
+                Assert.Equal("ReleaseDate", this.option.PropertyPaths[7].Property.Name);
             }
 
             [Fact]

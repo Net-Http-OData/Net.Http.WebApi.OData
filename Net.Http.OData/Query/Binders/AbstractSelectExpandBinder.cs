@@ -12,8 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.OData.Query.Binders
 {
-    using Net.Http.OData.Model;
-
     /// <summary>
     /// A base class for binding the $select and $expand query options.
     /// </summary>
@@ -30,18 +28,18 @@ namespace Net.Http.OData.Query.Binders
                 return;
             }
 
-            for (int i = 0; i < selectExpandQueryOption.Properties.Count; i++)
+            for (int i = 0; i < selectExpandQueryOption.PropertyPaths.Count; i++)
             {
-                var property = selectExpandQueryOption.Properties[i];
+                var propertyPath = selectExpandQueryOption.PropertyPaths[i];
 
-                this.Bind(property);
+                this.Bind(propertyPath);
             }
         }
 
         /// <summary>
         /// Binds the specified <see cref="PropertyPathSegment"/>.
         /// </summary>
-        /// <param name="propertyPathSegment">The <see cref="PropertyPathSegment"/> to bind.</param>
-        protected abstract void Bind(PropertyPathSegment propertyPathSegment);
+        /// <param name="propertyPath">The <see cref="PropertyPathSegment"/> to bind.</param>
+        protected abstract void Bind(PropertyPathSegment propertyPath);
     }
 }

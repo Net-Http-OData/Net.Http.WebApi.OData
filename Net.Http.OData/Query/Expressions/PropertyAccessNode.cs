@@ -15,7 +15,7 @@ namespace Net.Http.OData.Query.Expressions
     /// <summary>
     /// A QueryNode which represents a property.
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("{Property}")]
+    [System.Diagnostics.DebuggerDisplay("{PropertyPath}")]
     public sealed class PropertyAccessNode : QueryNode
     {
         /// <summary>
@@ -24,7 +24,7 @@ namespace Net.Http.OData.Query.Expressions
         /// <param name="property">The property being referenced in the query.</param>
         internal PropertyAccessNode(PropertyPathSegment propertyPathSegment)
         {
-            this.PropertyPathSegment = propertyPathSegment;
+            this.PropertyPath = propertyPathSegment;
         }
 
         /// <summary>
@@ -35,6 +35,6 @@ namespace Net.Http.OData.Query.Expressions
         /// <summary>
         /// Gets the property path being referenced in the query.
         /// </summary>
-        public PropertyPathSegment PropertyPathSegment { get; }
+        public PropertyPathSegment PropertyPath { get; }
     }
 }

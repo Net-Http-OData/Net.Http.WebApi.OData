@@ -18,6 +18,7 @@ namespace Net.Http.OData.Query
     /// <summary>
     /// A class which represents a segment of a property path.
     /// </summary>
+    [System.Diagnostics.DebuggerDisplay("{Property}/{Next}")]
     public sealed class PropertyPathSegment
     {
         /// <summary>

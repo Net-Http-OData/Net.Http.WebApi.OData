@@ -42,11 +42,11 @@ namespace Net.Http.OData.Query
 
             if (space == -1)
             {
-                this.Property = model.GetProperty(rawValue);
+                this.PropertyPath = PropertyPathSegment.For(rawValue, model);
             }
             else
             {
-                this.Property = model.GetProperty(rawValue.Substring(0, space));
+                this.PropertyPath = PropertyPathSegment.For(rawValue.Substring(0, space), model);
 
                 switch (rawValue.Substring(space + 1, rawValue.Length - (space + 1)))
                 {
@@ -59,7 +59,7 @@ namespace Net.Http.OData.Query
                         break;
 
                     default:
-                        throw new ODataException(HttpStatusCode.BadRequest, $"The supplied order value for {this.Property.Name} is invalid, valid options are 'asc' and 'desc'");
+                        throw new ODataException(HttpStatusCode.BadRequest, $"The supplied order value for {this.PropertyPath.Property.Name} is invalid, valid options are 'asc' and 'desc'");
                 }
             }
         }
@@ -70,9 +70,9 @@ namespace Net.Http.OData.Query
         public OrderByDirection Direction { get; }
 
         /// <summary>
-        /// Gets the property to order by.
+        /// Gets the property path to order by.
         /// </summary>
-        public EdmProperty Property { get; }
+        public PropertyPathSegment PropertyPath { get; }
 
         /// <summary>
         /// Gets the raw request value.

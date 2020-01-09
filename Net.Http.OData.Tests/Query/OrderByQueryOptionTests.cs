@@ -27,7 +27,7 @@
             {
                 Assert.Equal(1, this.option.Properties.Count);
 
-                Assert.Equal("Name", this.option.Properties[0].Property.Name);
+                Assert.Equal("Name", this.option.Properties[0].PropertyPath.Property.Name);
                 Assert.Equal(OrderByDirection.Ascending, this.option.Properties[0].Direction);
             }
 
@@ -49,23 +49,27 @@
 
                 var model = EntityDataModel.Current.EntitySets["Products"].EdmType;
 
-                this.rawValue = "$orderby=Name,Price desc,Rating asc";
+                this.rawValue = "$orderby=Category/Name,Name,Price desc,Rating asc";
                 this.option = new OrderByQueryOption(this.rawValue, model);
             }
 
             [Fact]
             public void ThePropertiesShouldContainTheCorrectItems()
             {
-                Assert.Equal(3, this.option.Properties.Count);
+                Assert.Equal(4, this.option.Properties.Count);
 
-                Assert.Equal("Name", this.option.Properties[0].Property.Name);
+                Assert.Equal("Category", this.option.Properties[0].PropertyPath.Property.Name);
+                Assert.Equal("Name", this.option.Properties[0].PropertyPath.Next.Property.Name);
                 Assert.Equal(OrderByDirection.Ascending, this.option.Properties[0].Direction);
 
-                Assert.Equal("Price", this.option.Properties[1].Property.Name);
-                Assert.Equal(OrderByDirection.Descending, this.option.Properties[1].Direction);
+                Assert.Equal("Name", this.option.Properties[1].PropertyPath.Property.Name);
+                Assert.Equal(OrderByDirection.Ascending, this.option.Properties[1].Direction);
 
-                Assert.Equal("Rating", this.option.Properties[2].Property.Name);
-                Assert.Equal(OrderByDirection.Ascending, this.option.Properties[2].Direction);
+                Assert.Equal("Price", this.option.Properties[2].PropertyPath.Property.Name);
+                Assert.Equal(OrderByDirection.Descending, this.option.Properties[2].Direction);
+
+                Assert.Equal("Rating", this.option.Properties[3].PropertyPath.Property.Name);
+                Assert.Equal(OrderByDirection.Ascending, this.option.Properties[3].Direction);
             }
 
             [Fact]

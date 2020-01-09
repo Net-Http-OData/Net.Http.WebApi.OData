@@ -24,15 +24,15 @@
             }
 
             [Fact]
-            public void TheKindIsQueryNodeKindSingleValuePropertyAccess()
+            public void TheKindIsQueryNodeKindPropertyAccess()
             {
                 Assert.Equal(QueryNodeKind.PropertyAccess, this.node.Kind);
             }
 
             [Fact]
-            public void ThePropertyPropertyIsSet()
+            public void ThePropertyPathIsSet()
             {
-                Assert.Equal(this.propertyPathSegment, this.node.PropertyPathSegment);
+                Assert.Equal(this.propertyPathSegment, this.node.PropertyPath);
             }
         }
     }

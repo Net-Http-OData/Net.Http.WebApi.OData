@@ -33,7 +33,7 @@ namespace Net.Http.OData.Query
             var equals = rawValue.IndexOf('=') + 1;
             var properties = rawValue.Substring(equals, rawValue.Length - equals);
 
-            if (properties.Contains(','))
+            if (properties.IndexOf(',') > 0)
             {
                 this.Properties = properties.Split(SplitCharacter.Comma)
                     .Select(raw => new OrderByProperty(raw, model))

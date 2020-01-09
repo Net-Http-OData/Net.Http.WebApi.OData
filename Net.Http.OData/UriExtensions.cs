@@ -66,9 +66,9 @@ namespace Net.Http.OData
             {
                 contextUriBuilder.Append("(*)");
             }
-            else if (selectExpandQueryOption?.Properties.Count > 0)
+            else if (selectExpandQueryOption?.PropertyPaths.Count > 0)
             {
-                contextUriBuilder.AppendFormat(CultureInfo.InvariantCulture, "({0})", string.Join(",", selectExpandQueryOption.Properties.Select(p => p.Property.Name)));
+                contextUriBuilder.AppendFormat(CultureInfo.InvariantCulture, "({0})", string.Join(",", selectExpandQueryOption.PropertyPaths.Select(p => p.Property.Name)));
             }
 
             return contextUriBuilder;
