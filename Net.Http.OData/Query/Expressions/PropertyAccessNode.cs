@@ -12,8 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.OData.Query.Expressions
 {
-    using Net.Http.OData.Model;
-
     /// <summary>
     /// A QueryNode which represents a property.
     /// </summary>
@@ -24,9 +22,9 @@ namespace Net.Http.OData.Query.Expressions
         /// Initialises a new instance of the <see cref="PropertyAccessNode"/> class.
         /// </summary>
         /// <param name="property">The property being referenced in the query.</param>
-        internal PropertyAccessNode(EdmProperty property)
+        internal PropertyAccessNode(PropertyPathSegment propertyPathSegment)
         {
-            this.Property = property;
+            this.PropertyPathSegment = propertyPathSegment;
         }
 
         /// <summary>
@@ -35,8 +33,8 @@ namespace Net.Http.OData.Query.Expressions
         public override QueryNodeKind Kind { get; } = QueryNodeKind.PropertyAccess;
 
         /// <summary>
-        /// Gets the property being referenced in the query.
+        /// Gets the property path being referenced in the query.
         /// </summary>
-        public EdmProperty Property { get; }
+        public PropertyPathSegment PropertyPathSegment { get; }
     }
 }

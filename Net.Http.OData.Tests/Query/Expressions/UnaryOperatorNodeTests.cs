@@ -1,6 +1,7 @@
 namespace Net.Http.OData.Tests.Query.Expressions
 {
     using Net.Http.OData.Model;
+    using Net.Http.OData.Query;
     using Net.Http.OData.Query.Expressions;
     using Net.Http.OData.Tests;
     using Xunit;
@@ -19,7 +20,7 @@ namespace Net.Http.OData.Tests.Query.Expressions
 
                 var model = EntityDataModel.Current.EntitySets["Customers"].EdmType;
 
-                this.operand = new PropertyAccessNode(model.GetProperty("CompanyName"));
+                this.operand = new PropertyAccessNode(new PropertyPathSegment(model.GetProperty("CompanyName")));
                 this.node = new UnaryOperatorNode(this.operand, unaryOperatorKind);
             }
 

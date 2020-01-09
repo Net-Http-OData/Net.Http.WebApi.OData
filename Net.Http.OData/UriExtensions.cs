@@ -14,6 +14,7 @@ namespace Net.Http.OData
 {
     using System;
     using System.Globalization;
+    using System.Linq;
     using System.Text;
     using Net.Http.OData.Model;
     using Net.Http.OData.Query;
@@ -67,7 +68,7 @@ namespace Net.Http.OData
             }
             else if (selectExpandQueryOption?.Properties.Count > 0)
             {
-                contextUriBuilder.AppendFormat(CultureInfo.InvariantCulture, "({0})", string.Join(",", selectExpandQueryOption.Properties));
+                contextUriBuilder.AppendFormat(CultureInfo.InvariantCulture, "({0})", string.Join(",", selectExpandQueryOption.Properties.Select(p => p.Property.Name)));
             }
 
             return contextUriBuilder;

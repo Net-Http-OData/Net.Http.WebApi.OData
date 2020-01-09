@@ -37,11 +37,11 @@ namespace Net.Http.OData.Query
 
             if (rawValue == "$select=*")
             {
-                this.Properties = model.Properties.Where(p => !p.IsNavigable).ToList();
+                this.Properties = model.Properties.Where(p => !p.IsNavigable).Select(p => new PropertyPathSegment(p)).ToList();
             }
             else if (rawValue == "$expand=*")
             {
-                this.Properties = model.Properties.Where(p => p.IsNavigable).ToList();
+                this.Properties = model.Properties.Where(p => p.IsNavigable).Select(p => new PropertyPathSegment(p)).ToList();
             }
             else
             {
@@ -49,7 +49,7 @@ namespace Net.Http.OData.Query
 
                 var properties = rawValue.Substring(equals, rawValue.Length - equals)
                     .Split(SplitCharacter.Comma)
-                    .Select(p => model.GetProperty(p))
+                    .Select(p => PropertyPathSegment.For(p, model))
                     .ToList();
 
                 this.Properties = properties;
@@ -57,8 +57,8 @@ namespace Net.Http.OData.Query
         }
 
         /// <summary>
-        /// Gets the properties specified in the query.
+        /// Gets the property paths specified in the query.
         /// </summary>
-        public IReadOnlyList<EdmProperty> Properties { get; }
+        public IReadOnlyList<PropertyPathSegment> Properties { get; }
     }
 }
