@@ -39,7 +39,7 @@ namespace Net.Http.OData.Query.Binders
         }
 
         /// <summary>
-        /// Binds the specified <see cref="EdmProperty"/>.
+        /// Binds the specified <see cref="PropertyPathSegment"/>.
         /// </summary>
         /// <param name="propertyPathSegment">The <see cref="PropertyPathSegment"/> to bind.</param>
         protected abstract void Bind(PropertyPathSegment propertyPathSegment);
