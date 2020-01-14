@@ -7,8 +7,8 @@
     using System.Web.Http;
     using System.Web.Http.Hosting;
     using Net.Http.OData;
-    using Net.Http.OData.Tests;
     using Net.Http.WebApi.OData.Metadata;
+    using Net.Http.WebApi.OData.Tests;
     using Xunit;
 
     public class ODataMetadataControllerTests
