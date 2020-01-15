@@ -10,17 +10,18 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Net.Http.OData;
+using Net.Http.OData.Model;
+using Net.Http.OData.Query;
+
 namespace Net.Http.WebApi.OData
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using Net.Http.OData;
-    using Net.Http.OData.Model;
-    using Net.Http.OData.Query;
-
     /// <summary>
     /// Extensions for the <see cref="HttpRequestMessage"/> class.
     /// </summary>
@@ -56,7 +57,7 @@ namespace Net.Http.WebApi.OData
         {
             var value = ODataErrorContent.Create((int)statusCode, message, target);
 
-            var response = request.CreateResponse(statusCode, value);
+            HttpResponseMessage response = request.CreateResponse(statusCode, value);
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
@@ -104,7 +105,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
         {
-            var response = request.CreateResponse(statusCode);
+            HttpResponseMessage response = request.CreateResponse(statusCode);
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
@@ -119,7 +120,7 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string value)
         {
-            var response = request.CreateResponse(statusCode);
+            HttpResponseMessage response = request.CreateResponse(statusCode);
 
             if (value != null)
             {
@@ -150,9 +151,9 @@ namespace Net.Http.WebApi.OData
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value)
         {
-            var requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            var response = request.CreateResponse(statusCode, value);
+            HttpResponseMessage response = request.CreateResponse(statusCode, value);
             response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
@@ -193,7 +194,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var entitySetName = request.RequestUri.ResolveODataEntitySetName();
+            string entitySetName = request.RequestUri.ResolveODataEntitySetName();
 
             if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out EntitySet entitySet))
             {
@@ -215,7 +216,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
             {
@@ -243,7 +244,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(entitySet));
             }
 
-            var requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
             {
@@ -272,7 +273,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(entitySet));
             }
 
-            var requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
             {
@@ -297,7 +298,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
             {
@@ -328,7 +329,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(entitySet));
             }
 
-            var requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
             if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
             {
@@ -375,7 +376,7 @@ namespace Net.Http.WebApi.OData
 
         internal static ODataIsolationLevel ReadIsolationLevel(this HttpRequestMessage request)
         {
-            var headerValue = request.ReadHeaderValue(ODataHeaderNames.ODataIsolation);
+            string headerValue = request.ReadHeaderValue(ODataHeaderNames.ODataIsolation);
 
             if (headerValue != null)
             {
@@ -392,9 +393,9 @@ namespace Net.Http.WebApi.OData
 
         internal static ODataMetadataLevel ReadMetadataLevel(this HttpRequestMessage request)
         {
-            foreach (var header in request.Headers.Accept)
+            foreach (MediaTypeWithQualityHeaderValue header in request.Headers.Accept)
             {
-                foreach (var parameter in header.Parameters)
+                foreach (NameValueHeaderValue parameter in header.Parameters)
                 {
                     if (parameter.Name == ODataMetadataLevelExtensions.HeaderName)
                     {

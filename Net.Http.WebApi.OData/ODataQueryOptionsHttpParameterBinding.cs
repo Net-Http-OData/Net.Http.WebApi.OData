@@ -10,20 +10,22 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Net.Http.WebApi.OData.Query
-{
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Metadata;
-    using Net.Http.OData.Query;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Http.Controllers;
+using System.Web.Http.Metadata;
+using Net.Http.OData.Model;
+using Net.Http.OData.Query;
 
+namespace Net.Http.WebApi.OData
+{
     /// <summary>
     /// The <see cref="HttpParameterBinding"/> which can create an <see cref="ODataQueryOptions"/> from the request parameters.
     /// </summary>
     internal sealed class ODataQueryOptionsHttpParameterBinding : HttpParameterBinding
     {
-        private static readonly Task CompletedTask = Task.FromResult(0);
+        private static readonly Task s_completedTask = Task.FromResult(0);
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataQueryOptionsHttpParameterBinding"/> class.
@@ -50,15 +52,15 @@ namespace Net.Http.WebApi.OData.Query
         {
             if (actionContext != null)
             {
-                var request = actionContext.Request;
-                var entitySet = request.ResolveEntitySet();
+                HttpRequestMessage request = actionContext.Request;
+                EntitySet entitySet = request.ResolveEntitySet();
 
                 var queryOptions = new ODataQueryOptions(request, entitySet);
 
-                this.SetValue(actionContext, queryOptions);
+                SetValue(actionContext, queryOptions);
             }
 
-            return CompletedTask;
+            return s_completedTask;
         }
     }
 }

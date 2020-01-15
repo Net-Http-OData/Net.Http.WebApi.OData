@@ -1,9 +1,9 @@
-﻿namespace Net.Http.WebApi.OData.Tests
-{
-    using System.Linq;
-    using System.Web.Http;
-    using Xunit;
+﻿using System.Linq;
+using System.Web.Http;
+using Xunit;
 
+namespace Net.Http.WebApi.OData.Tests
+{
     public class HttpConfigurationODataExtensionsTests
     {
         [Fact]
@@ -23,7 +23,7 @@
         public void UseOData_Adds_ODataQueryOptionsHttpParameterBinding_ToParameterBindingRules()
         {
             var configuration = new HttpConfiguration();
-            var parameterBindingRuleCount = configuration.ParameterBindingRules.Count;
+            int parameterBindingRuleCount = configuration.ParameterBindingRules.Count;
 
             configuration.UseOData(
                 _ =>

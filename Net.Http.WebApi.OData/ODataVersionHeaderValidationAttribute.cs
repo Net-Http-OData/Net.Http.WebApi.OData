@@ -10,14 +10,14 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Net;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+using Net.Http.OData;
+
 namespace Net.Http.WebApi.OData
 {
-    using System;
-    using System.Net;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Filters;
-    using Net.Http.OData;
-
     /// <summary>
     /// An <see cref="ActionFilterAttribute"/> which validates the OData-Version header in a request.
     /// </summary>
@@ -33,7 +33,7 @@ namespace Net.Http.WebApi.OData
         {
             if (actionContext != null)
             {
-                var headerValue = actionContext.Request.ReadHeaderValue(ODataHeaderNames.ODataVersion);
+                string headerValue = actionContext.Request.ReadHeaderValue(ODataHeaderNames.ODataVersion);
 
                 if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
                 {

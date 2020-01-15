@@ -1,15 +1,15 @@
-﻿namespace Net.Http.WebApi.OData.Tests
-{
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Hosting;
-    using System.Web.Http.Routing;
-    using Moq;
-    using Net.Http.OData;
-    using Xunit;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Hosting;
+using System.Web.Http.Routing;
+using Moq;
+using Net.Http.OData;
+using Xunit;
 
+namespace Net.Http.WebApi.OData.Tests
+{
     public class ODataVersionHeaderValidationAttributeTests
     {
         public class WhenCallingOnActionExecuting_WithODataMaxVersionHeaderContaining1_0

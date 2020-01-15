@@ -10,15 +10,13 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System.Collections.Generic;
+using global::Net.Http.OData.Model;
+using global::Net.Http.OData.Query;
+using global::Net.Http.WebApi.OData;
+
 namespace System.Web.Http
 {
-    using System;
-    using System.Collections.Generic;
-    using global::Net.Http.OData.Model;
-    using global::Net.Http.OData.Query;
-    using global::Net.Http.WebApi.OData;
-    using global::Net.Http.WebApi.OData.Query;
-
     /// <summary>
     /// Contains extension methods for the <see cref="HttpConfiguration"/> class.
     /// </summary>

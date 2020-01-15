@@ -10,17 +10,17 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using Net.Http.OData;
+using Net.Http.OData.Metadata;
+using Net.Http.OData.Model;
+
 namespace Net.Http.WebApi.OData.Metadata
 {
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using Net.Http.OData;
-    using Net.Http.OData.Metadata;
-    using Net.Http.OData.Model;
-
     /// <summary>
     /// An API controller which exposes the OData service document.
     /// </summary>
@@ -35,8 +35,8 @@ namespace Net.Http.WebApi.OData.Metadata
         [Route("")]
         public HttpResponseMessage Get()
         {
-            var requestOptions = this.Request.ReadODataRequestOptions();
-            Uri contextUri = this.Request.ResolveODataContextUri();
+            ODataRequestOptions requestOptions = Request.ReadODataRequestOptions();
+            Uri contextUri = Request.ResolveODataContextUri();
 
             var serviceDocumentResponse = new ODataResponseContent(
                 contextUri,
@@ -49,7 +49,7 @@ namespace Net.Http.WebApi.OData.Metadata
                         return ServiceDocumentItem.EntitySet(kvp.Key, setUri);
                     }));
 
-            return this.Request.CreateODataResponse(HttpStatusCode.OK, serviceDocumentResponse);
+            return Request.CreateODataResponse(HttpStatusCode.OK, serviceDocumentResponse);
         }
     }
 }

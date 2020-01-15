@@ -10,11 +10,11 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System.IO;
+using System.Text;
+
 namespace Net.Http.WebApi.OData.Metadata
 {
-    using System.IO;
-    using System.Text;
-
     internal sealed class Utf8StringWriter : StringWriter
     {
         public override Encoding Encoding { get; } = Encoding.UTF8;

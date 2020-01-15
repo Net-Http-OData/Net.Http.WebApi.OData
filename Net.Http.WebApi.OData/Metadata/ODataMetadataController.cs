@@ -10,23 +10,23 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Web.Http;
+using Net.Http.OData;
+using Net.Http.OData.Metadata;
+using Net.Http.OData.Model;
+
 namespace Net.Http.WebApi.OData.Metadata
 {
-    using System.Net;
-    using System.Net.Http;
-    using System.Text;
-    using System.Web.Http;
-    using Net.Http.OData;
-    using Net.Http.OData.Metadata;
-    using Net.Http.OData.Model;
-
     /// <summary>
     /// An API controller which exposes the OData service metadata.
     /// </summary>
     [RoutePrefix("odata")]
     public sealed class ODataMetadataController : ApiController
     {
-        private static string metadataXml;
+        private static string s_metadataXml;
 
         /// <summary>
         /// Gets the <see cref="HttpResponseMessage"/> which contains the service metadata.
@@ -38,20 +38,20 @@ namespace Net.Http.WebApi.OData.Metadata
         public HttpResponseMessage Get()
 #pragma warning restore CA1822 // Mark members as static
         {
-            if (metadataXml is null)
+            if (s_metadataXml is null)
             {
                 using (var stringWriter = new Utf8StringWriter())
                 {
-                    var metadataDocument = MetadataProvider.Create(EntityDataModel.Current);
+                    System.Xml.Linq.XDocument metadataDocument = MetadataProvider.Create(EntityDataModel.Current);
                     metadataDocument.Save(stringWriter);
 
-                    metadataXml = stringWriter.ToString();
+                    s_metadataXml = stringWriter.ToString();
                 }
             }
 
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(metadataXml, Encoding.UTF8, "application/xml"),
+                Content = new StringContent(s_metadataXml, Encoding.UTF8, "application/xml"),
             };
             response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
