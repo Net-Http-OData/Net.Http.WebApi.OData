@@ -4,8 +4,15 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
-- develop
+  branches:
+    include:
+      - master
+      - develop
+  paths:
+    exclude:
+      - .editorconfig
+      - README.md
+      - stylecop.json
 
 pool:
   vmImage: 'windows-latest'
