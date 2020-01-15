@@ -1,9 +1,11 @@
 Net.Http.WebApi.OData
 =====================
 
-[![NuGet version](https://badge.fury.io/nu/Net.Http.WebApi.OData.svg)](http://badge.fury.io/nu/Net.Http.WebApi.OData) [![Build Status](https://dev.azure.com/trevorpilley/Net.Http.WebApi.OData/_apis/build/status/Net.Http.WebApi.OData-CI?branchName=develop)](https://dev.azure.com/trevorpilley/Net.Http.WebApi.OData/_build/latest?definitionId=1&branchName=develop)
+[![NuGet version](https://badge.fury.io/nu/Net.Http.WebApi.OData.svg)](http://badge.fury.io/nu/Net.Http.WebApi.OData)
+[![Build Status - /develop](https://dev.azure.com/trevorpilley/Net.Http.OData/_apis/build/status/Net-Http-OData.Net.Http.WebApi.OData?branchName=develop)](https://dev.azure.com/trevorpilley/Net.Http.OData/_build/latest?definitionId=20&branchName=develop)
+[![Build Status - /master](https://dev.azure.com/trevorpilley/Net.Http.OData/_apis/build/status/Net-Http-OData.Net.Http.WebApi.OData?branchName=master)](https://dev.azure.com/trevorpilley/Net.Http.OData/_build/latest?definitionId=20&branchName=master)
 
-Net.Http.WebApi.OData is a C# library which parses an OData 4.0 query uri into an object model which can be used to query custom data sources which are not IQueryable. It was extracted from the [MicroLite.Extensions.WebApi](https://github.com/TrevorPilley/MicroLite.Extensions.WebApi) library into a separate project so that it could be easily used by others.
+Net.Http.WebApi.OData is a .NET 4.5 library which uses [Net.Http.OData](https://github.com/Net-Http-OData/Net.Http.OData) with an implementation for ASP.NET WebApi.
 
 ## Installation
 
@@ -48,12 +50,14 @@ public IEnumerable<Category> Get(ODataQueryOptions queryOptions)
 
 ### Supported OData Versions
 
-The library supports OData 4.0 query syntax, for a full list of supported features see [Supported OData Query](https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki/Supported-OData-Query) in the Wiki.
+The library supports OData 4.0 query syntax, for a full list of supported features see [Supported OData Query](https://github.com/Net-Http-OData/Net.Http.WebApi.OData/wiki/Supported-OData-Query) in the Wiki.
 
-### Supported .NET Framework Versions
+### Supported .NET Versions
 
 The NuGet Package contains binaries compiled against:
 
-* .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.2.7
+* .NET Framework 4.5
+* - Microsoft.AspNet.WebApi.Core 5.2.7
+* - Net.Http.OData 5.0.0
 
-To find out more, head over to the [Wiki](https://github.com/TrevorPilley/Net.Http.WebApi.OData/wiki).
+To find out more, head over to the [Wiki](https://github.com/Net-Http-OData/Net.Http.WebApi.OData/wiki).
