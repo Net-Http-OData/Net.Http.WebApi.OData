@@ -45,7 +45,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Net.Http.OData" Version="5.0.0-beta216" />
+    <PackageReference Include="Net.Http.OData" Version="5.0.0-preview229" />
     <PackageReference Include="Newtonsoft.Json" PrivateAssets="All" Version="10.0.3" />
     <PackageReference Include="SecurityCodeScan" Version="3.4.0">
       <PrivateAssets>all</PrivateAssets>
