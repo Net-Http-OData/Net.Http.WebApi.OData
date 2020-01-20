@@ -363,16 +363,7 @@ namespace Net.Http.WebApi.OData
         }
 
         internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
-        {
-            string value = null;
-
-            if (request.Headers.TryGetValues(name, out IEnumerable<string> values))
-            {
-                value = values.FirstOrDefault();
-            }
-
-            return value;
-        }
+            => request.Headers.TryGetValues(name, out IEnumerable<string> values) ? values.FirstOrDefault() : default;
 
         internal static ODataIsolationLevel ReadIsolationLevel(this HttpRequestMessage request)
         {
