@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
 using Moq;
@@ -10,12 +12,59 @@ using Xunit;
 
 namespace Net.Http.WebApi.OData.Tests
 {
-    public class ODataVersionHeaderValidationAttributeTests
+    public class ODataVersionHeaderActionFilterAttributeTests
     {
+        public class WhenCallingOnActionExecuted_WithAnODataUri
+        {
+            [Fact]
+            public void TheODataVersionHeaderIsSet()
+            {
+                var httpConfiguration = new HttpConfiguration();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, httpConfiguration);
+
+                var controllerContext = new HttpControllerContext(httpConfiguration, new Mock<IHttpRouteData>().Object, httpRequestMessage);
+
+                var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
+
+                var actionExecutedContext = new HttpActionExecutedContext(actionContext, null) { Response = new HttpResponseMessage() };
+
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
+                attribute.OnActionExecuted(actionExecutedContext);
+
+                Assert.True(actionExecutedContext.Response.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal(ODataHeaderValues.ODataVersionString, actionExecutedContext.Response.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+        }
+
+        public class WhenCallingOnActionExecuted_WithoutAnODataUri
+        {
+            [Fact]
+            public void TheODataVersionHeaderIsNotSet()
+            {
+                var httpConfiguration = new HttpConfiguration();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, httpConfiguration);
+
+                var controllerContext = new HttpControllerContext(httpConfiguration, new Mock<IHttpRouteData>().Object, httpRequestMessage);
+
+                var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
+
+                var actionExecutedContext = new HttpActionExecutedContext(actionContext, null) { Response = new HttpResponseMessage() };
+
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
+                attribute.OnActionExecuted(actionExecutedContext);
+
+                Assert.False(actionExecutedContext.Response.Headers.Contains(ODataHeaderNames.ODataVersion));
+            }
+        }
+
         public class WhenCallingOnActionExecuting_WithODataMaxVersionHeaderContaining1_0
         {
             [Fact]
-            public void AnHttpResponseExceptionIsThrown()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -29,7 +78,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -41,7 +90,7 @@ namespace Net.Http.WebApi.OData.Tests
         public class WhenCallingOnActionExecuting_WithODataMaxVersionHeaderContaining2_0
         {
             [Fact]
-            public void AnHttpResponseExceptionIsThrown()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -55,7 +104,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -67,7 +116,7 @@ namespace Net.Http.WebApi.OData.Tests
         public class WhenCallingOnActionExecuting_WithODataMaxVersionHeaderContaining3_0
         {
             [Fact]
-            public void AnHttpResponseExceptionIsThrown()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -81,7 +130,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -107,7 +156,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Null(actionContext.Response);
@@ -117,7 +166,7 @@ namespace Net.Http.WebApi.OData.Tests
         public class WhenCallingOnActionExecuting_WithODataMaxVersionHeaderContaining5_0
         {
             [Fact]
-            public void AnHttpResponseExceptionIsThrown()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -131,7 +180,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -143,7 +192,7 @@ namespace Net.Http.WebApi.OData.Tests
         public class WhenCallingOnActionExecuting_WithODataVersionHeaderContaining1_0
         {
             [Fact]
-            public void TheResponseStatusCodeShouldBeSetToNotAcceptable()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -157,7 +206,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -169,7 +218,7 @@ namespace Net.Http.WebApi.OData.Tests
         public class WhenCallingOnActionExecuting_WithODataVersionHeaderContaining2_0
         {
             [Fact]
-            public void TheResponseStatusCodeShouldBeSetToNotAcceptable()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -183,7 +232,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -195,7 +244,7 @@ namespace Net.Http.WebApi.OData.Tests
         public class WhenCallingOnActionExecuting_WithODataVersionHeaderContaining3_0
         {
             [Fact]
-            public void TheResponseStatusCodeShouldBeSetToNotAcceptable()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -209,7 +258,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -235,7 +284,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Null(actionContext.Response);
@@ -245,7 +294,7 @@ namespace Net.Http.WebApi.OData.Tests
         public class WhenCallingOnActionExecuting_WithODataVersionHeaderContaining5_0
         {
             [Fact]
-            public void TheResponseStatusCodeShouldBeSetToNotAcceptable()
+            public void TheResponseIsSetToAnODataErrorContent_WithStatusNotAcceptable()
             {
                 TestHelper.EnsureEDM();
 
@@ -259,7 +308,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.NotAcceptable, actionContext.Response.StatusCode);
@@ -284,7 +333,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
 
-                var attribute = new ODataVersionHeaderValidationAttribute();
+                var attribute = new ODataVersionHeaderActionFilterAttribute();
                 attribute.OnActionExecuting(actionContext);
 
                 Assert.Null(actionContext.Response);

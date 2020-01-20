@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataVersionHeaderValidationAttribute.cs" company="Project Contributors">
+// <copyright file="ODataVersionHeaderActionFilterAttribute.cs" company="Project Contributors">
 // Copyright 2012 - 2020 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,8 +23,22 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     /// <seealso cref="System.Web.Http.Filters.ActionFilterAttribute" />
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public sealed class ODataVersionHeaderValidationAttribute : ActionFilterAttribute
+    public sealed class ODataVersionHeaderActionFilterAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// Occurs after the action method is invoked.
+        /// </summary>
+        /// <param name="actionExecutedContext">The action executed context.</param>
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        {
+            if (actionExecutedContext?.Request.IsODataUri() == true)
+            {
+                actionExecutedContext.Response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
+            }
+
+            base.OnActionExecuted(actionExecutedContext);
+        }
+
         /// <summary>
         /// Occurs before the action method is invoked.
         /// </summary>

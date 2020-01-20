@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Hosting;
-using Net.Http.OData;
 using Net.Http.WebApi.OData.Metadata;
 using Xunit;
 
@@ -26,8 +24,6 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             HttpResponseMessage response = controller.Get();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.True(response.Headers.Contains(ODataHeaderNames.ODataVersion));
-            Assert.Equal(ODataHeaderValues.ODataVersionString, response.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
 
             string result = await ((StringContent)response.Content).ReadAsStringAsync();
 

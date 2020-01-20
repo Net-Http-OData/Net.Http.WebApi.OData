@@ -399,13 +399,6 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
-            }
-
-            [Fact]
             public void TheStatusCodeIsBadRequest()
             {
                 Assert.Equal(HttpStatusCode.BadRequest, _httpResponseMessage.StatusCode);
@@ -441,13 +434,6 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
-            }
-
-            [Fact]
             public void TheStatusCodeIsBadRequest()
             {
                 Assert.Equal(HttpStatusCode.BadRequest, _httpResponseMessage.StatusCode);
@@ -480,13 +466,6 @@ namespace Net.Http.WebApi.OData.Tests
                 Assert.Equal("501", errorContent.Error.Code);
                 Assert.Equal("$search query option not supported.", errorContent.Error.Message);
                 Assert.Equal("query", errorContent.Error.Target);
-            }
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -528,13 +507,6 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
-            }
-
-            [Fact]
             public void TheMetadataLevelContentTypeParameterIsNotSet()
             {
                 NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
@@ -569,13 +541,6 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
-            }
-
-            [Fact]
             public void TheStatusCodeIsNoContent()
             {
                 Assert.Equal(HttpStatusCode.NoContent, _httpResponseMessage.StatusCode);
@@ -595,13 +560,6 @@ namespace Net.Http.WebApi.OData.Tests
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
                 _httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
-            }
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]
@@ -630,13 +588,6 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
-            }
-
-            [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
                 NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
@@ -662,13 +613,6 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
-            }
-
-            [Fact]
             public void TheMetadataLevelContentTypeParameterIsSet()
             {
                 NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
@@ -690,13 +634,6 @@ namespace Net.Http.WebApi.OData.Tests
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
                 _httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, new object[0]));
-            }
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
-                Assert.Equal(ODataHeaderValues.ODataVersionString, _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
             }
 
             [Fact]

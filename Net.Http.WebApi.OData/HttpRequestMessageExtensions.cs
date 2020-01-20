@@ -54,14 +54,7 @@ namespace Net.Http.WebApi.OData
         /// <para>{ "error": { "code": "400", "message": "Path segment not supported: 'Foo'." } }.</para>
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, string target)
-        {
-            var value = ODataErrorContent.Create((int)statusCode, message, target);
-
-            HttpResponseMessage response = request.CreateResponse(statusCode, value);
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
-
-            return response;
-        }
+            => request.CreateResponse(statusCode, ODataErrorContent.Create((int)statusCode, message, target));
 
         /// <summary>
         /// Creates the OData response message from the specified request message for the <see cref="ODataException"/>.
@@ -104,12 +97,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="statusCode">The HTTP response status code.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
-        {
-            HttpResponseMessage response = request.CreateResponse(statusCode);
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
-
-            return response;
-        }
+            => request.CreateResponse(statusCode);
 
         /// <summary>
         /// Creates the OData response message from the specified request message.
@@ -126,8 +114,6 @@ namespace Net.Http.WebApi.OData
             {
                 response.Content = new StringContent(value);
             }
-
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
         }
@@ -155,9 +141,33 @@ namespace Net.Http.WebApi.OData
 
             HttpResponseMessage response = request.CreateResponse(statusCode, value);
             response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the specified URI is an OData URI.
+        /// </summary>
+        /// <param name="request">The HTTP request message for the current request.</param>
+        /// <returns>True if the URI is an OData URI, otherwise false.</returns>
+        public static bool IsODataUri(this HttpRequestMessage request)
+        {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            Uri uri = request.RequestUri;
+
+            for (int i = 0; i < uri.Segments.Length; i++)
+            {
+                if (uri.Segments[i].StartsWith("odata", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

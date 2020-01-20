@@ -15,7 +15,6 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Xml.Linq;
-using Net.Http.OData;
 using Net.Http.OData.Metadata;
 using Net.Http.OData.Model;
 
@@ -54,7 +53,6 @@ namespace Net.Http.WebApi.OData.Metadata
             {
                 Content = new StringContent(s_metadataXml, Encoding.UTF8, "application/xml"),
             };
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
 
             return response;
         }
