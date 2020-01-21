@@ -12,10 +12,12 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using Net.Http.OData;
 using Net.Http.OData.Model;
 using Net.Http.OData.Query;
@@ -145,7 +147,7 @@ namespace Net.Http.WebApi.OData
         /// </summary>
         /// <param name="request">The HTTP request message for the current request.</param>
         /// <returns>True if the URI is an OData URI, otherwise false.</returns>
-        public static bool IsODataUri(this HttpRequestMessage request)
+        public static bool IsODataRequest(this HttpRequestMessage request)
         {
             if (request is null)
             {
@@ -163,6 +165,73 @@ namespace Net.Http.WebApi.OData
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Gets the next link for a paged OData query.
+        /// </summary>
+        /// <param name="request">The HTTP request message which led to this OData request.</param>
+        /// <param name="queryOptions">The query options.</param>
+        /// <param name="skip">The skip.</param>
+        /// <param name="resultsPerPage">The results per page.</param>
+        /// <returns>The next link for a paged OData query.</returns>
+        public static Uri NextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
+        {
+            if (queryOptions is null)
+            {
+                throw new ArgumentNullException(nameof(queryOptions));
+            }
+
+            Uri requestUri = request.RequestUri;
+
+            StringBuilder uriBuilder = new StringBuilder()
+                .Append(requestUri.Scheme)
+                .Append(Uri.SchemeDelimiter)
+                .Append(requestUri.Authority)
+                .Append(requestUri.LocalPath)
+                .Append("?$skip=").Append((skip + resultsPerPage).ToString(CultureInfo.InvariantCulture));
+
+            if (queryOptions.RawValues.Count != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Count);
+            }
+
+            if (queryOptions.RawValues.Expand != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Expand);
+            }
+
+            if (queryOptions.RawValues.Filter != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Filter);
+            }
+
+            if (queryOptions.RawValues.Format != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Format);
+            }
+
+            if (queryOptions.RawValues.OrderBy != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.OrderBy);
+            }
+
+            if (queryOptions.RawValues.Search != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Search);
+            }
+
+            if (queryOptions.RawValues.Select != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Select);
+            }
+
+            if (queryOptions.RawValues.Top != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Top);
+            }
+
+            return new Uri(uriBuilder.ToString());
         }
 
         /// <summary>
@@ -193,21 +262,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <returns>The EntitySet the OData request relates to.</returns>
         public static EntitySet ResolveEntitySet(this HttpRequestMessage request)
-        {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            string entitySetName = request.RequestUri.ResolveODataEntitySetName();
-
-            if (!EntityDataModel.Current.EntitySets.TryGetValue(entitySetName, out EntitySet entitySet))
-            {
-                throw new ODataException(HttpStatusCode.BadRequest, $"This service does not contain a collection named '{entitySetName}'");
-            }
-
-            return entitySet;
-        }
+            => EntityDataModel.Current.EntitySetForPath(request?.RequestUri.LocalPath);
 
         /// <summary>
         /// Resolves the @odata.context URI for the specified request.

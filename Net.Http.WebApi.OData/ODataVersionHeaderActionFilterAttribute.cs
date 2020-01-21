@@ -30,7 +30,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="actionExecutedContext">The action executed context.</param>
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            if (actionExecutedContext?.Request.IsODataUri() == true)
+            if (actionExecutedContext?.Request.IsODataRequest() == true)
             {
                 actionExecutedContext.Response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
             }

@@ -16,6 +16,54 @@ namespace Net.Http.WebApi.OData.Tests
     public class HttpRequestMessageExtensionsTests
     {
         [Fact]
+        public void IsODataRequest_False()
+        {
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri("http://services.odata.org/"));
+
+            Assert.False(httpRequestMessage.IsODataRequest());
+        }
+
+        [Theory]
+        [InlineData("http://services.odata.org/OData")]
+        [InlineData("http://services.odata.org/OData/Products")]
+        public void IsODataRequest_True(string uri)
+        {
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri(uri));
+
+            Assert.True(httpRequestMessage.IsODataRequest());
+        }
+
+        [Fact]
+        public void NextLink_WithAllQueryOptions()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://services.odata.org/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25");
+
+            var queryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, EntityDataModel.Current.EntitySets["Products"]);
+
+            Assert.Equal(
+                "http://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25",
+                httpRequestMessage.NextLink(queryOptions, 50, 25).ToString());
+        }
+
+        [Fact]
+        public void NextLink_WithNoQueryOptions()
+        {
+            TestHelper.EnsureEDM();
+
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers");
+
+            var queryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, EntityDataModel.Current.EntitySets["Customers"]);
+
+            Assert.Equal(
+                "http://services.odata.org/OData/Customers?$skip=75",
+                httpRequestMessage.NextLink(queryOptions, 50, 25).ToString());
+        }
+
+        [Fact]
         public void ResolveODataContextUri_ReturnsNull_IfMetadataIsNone()
         {
             var httpRequestMessage = new HttpRequestMessage(
@@ -245,7 +293,7 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
 
             Uri contextUri = httpRequestMessage.ResolveODataContextUri(entitySet, odataQueryOptions.Select);
 
@@ -263,7 +311,7 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
 
             Uri contextUri = httpRequestMessage.ResolveODataContextUri(entitySet, odataQueryOptions.Select);
 
@@ -281,7 +329,7 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
 
             Uri contextUri = httpRequestMessage.ResolveODataContextUri(entitySet, odataQueryOptions.Select);
 
@@ -299,7 +347,7 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
 
             Uri contextUri = httpRequestMessage.ResolveODataContextUri(entitySet, odataQueryOptions.Select);
 
@@ -317,7 +365,7 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
 
             Uri contextUri = httpRequestMessage.ResolveODataContextUri(entitySet, odataQueryOptions.Select);
 
@@ -335,7 +383,7 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=minimal");
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
 
             Uri contextUri = httpRequestMessage.ResolveODataContextUri(entitySet, odataQueryOptions.Select);
 

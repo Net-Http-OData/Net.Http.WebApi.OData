@@ -10,7 +10,6 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
@@ -52,10 +51,10 @@ namespace Net.Http.WebApi.OData
         {
             if (actionContext != null)
             {
-                HttpRequestMessage request = actionContext.Request;
-                EntitySet entitySet = request.ResolveEntitySet();
+                string query = actionContext.Request.RequestUri.Query;
+                EntitySet entitySet = actionContext.Request.ResolveEntitySet();
 
-                var queryOptions = new ODataQueryOptions(request, entitySet);
+                var queryOptions = new ODataQueryOptions(query, entitySet);
 
                 SetValue(actionContext, queryOptions);
             }
