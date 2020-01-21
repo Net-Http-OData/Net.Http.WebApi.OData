@@ -19,7 +19,6 @@ namespace Net.Http.WebApi.OData
     /// <summary>
     /// An <see cref="ExceptionFilterAttribute"/> which returns the correct response for an <see cref="ODataException"/>.
     /// </summary>
-    /// <seealso cref="System.Web.Http.Filters.ExceptionFilterAttribute" />
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public sealed class ODataExceptionFilterAttribute : ExceptionFilterAttribute
     {
