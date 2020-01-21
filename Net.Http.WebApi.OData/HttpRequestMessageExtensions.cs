@@ -60,7 +60,7 @@ namespace Net.Http.WebApi.OData
         /// Creates the OData response message from the specified request message for the <see cref="ODataException"/>.
         /// </summary>
         /// <param name="request">The HTTP request message which led to the excetion.</param>
-        /// <param name="exception">The <see cref="ODataException"/> to create a response from.</param>
+        /// <param name="exception">The <see cref="ODataException"/> indicating the error.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
         /// <example>
         /// <code>
@@ -77,17 +77,12 @@ namespace Net.Http.WebApi.OData
         /// </example>
         public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, ODataException exception)
         {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
             if (exception is null)
             {
                 throw new ArgumentNullException(nameof(exception));
             }
 
-            return request.CreateODataErrorResponse(exception.StatusCode, exception.Message, exception.Target);
+            return CreateODataErrorResponse(request, exception.StatusCode, exception.Message, exception.Target);
         }
 
         /// <summary>
