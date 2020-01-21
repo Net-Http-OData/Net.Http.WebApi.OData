@@ -21,7 +21,6 @@ namespace Net.Http.WebApi.OData
     /// <summary>
     /// An <see cref="ActionFilterAttribute"/> which validates the OData-Version header in a request.
     /// </summary>
-    /// <seealso cref="System.Web.Http.Filters.ActionFilterAttribute" />
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public sealed class ODataVersionHeaderActionFilterAttribute : ActionFilterAttribute
     {
@@ -45,23 +44,20 @@ namespace Net.Http.WebApi.OData
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (actionContext != null)
+            string headerValue = actionContext?.Request.ReadHeaderValue(ODataHeaderNames.ODataVersion);
+
+            if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
             {
-                string headerValue = actionContext.Request.ReadHeaderValue(ODataHeaderNames.ODataVersion);
+                actionContext.Response =
+                    actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, "This service only supports OData 4.0");
+            }
 
-                if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
-                {
-                    actionContext.Response =
-                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, "This service only supports OData 4.0");
-                }
+            headerValue = actionContext?.Request.ReadHeaderValue(ODataHeaderNames.ODataMaxVersion);
 
-                headerValue = actionContext.Request.ReadHeaderValue(ODataHeaderNames.ODataMaxVersion);
-
-                if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
-                {
-                    actionContext.Response =
-                        actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, "This service only supports OData 4.0");
-                }
+            if (headerValue != null && headerValue != ODataHeaderValues.ODataVersionString)
+            {
+                actionContext.Response =
+                    actionContext.Request.CreateODataErrorResponse(HttpStatusCode.NotAcceptable, "This service only supports OData 4.0");
             }
 
             base.OnActionExecuting(actionContext);
