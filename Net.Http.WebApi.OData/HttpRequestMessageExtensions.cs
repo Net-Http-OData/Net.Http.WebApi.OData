@@ -177,6 +177,11 @@ namespace Net.Http.WebApi.OData
         /// <returns>The next link for a paged OData query.</returns>
         public static Uri NextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             if (queryOptions is null)
             {
                 throw new ArgumentNullException(nameof(queryOptions));
@@ -248,7 +253,10 @@ namespace Net.Http.WebApi.OData
 
             if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out object requestOptions))
             {
-                requestOptions = new ODataRequestOptions(request.RequestUri.ResolveODataServiceUri(), request.ReadIsolationLevel(), request.ReadMetadataLevel());
+                requestOptions = new ODataRequestOptions(
+                    UriUtility.ODataServiceRootUri(request.RequestUri.Scheme, request.RequestUri.Host, request.RequestUri.LocalPath),
+                    request.ReadIsolationLevel(),
+                    request.ReadMetadataLevel());
 
                 request.Properties.Add(typeof(ODataRequestOptions).FullName, requestOptions);
             }
@@ -278,12 +286,11 @@ namespace Net.Http.WebApi.OData
 
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
-            {
-                return null;
-            }
-
-            return new Uri(request.RequestUri.ODataContextUriBuilder().ToString());
+            return UriUtility.ODataServiceContextUri(
+                requestOptions.MetadataLevel,
+                request.RequestUri.Scheme,
+                request.RequestUri.Host,
+                request.RequestUri.LocalPath);
         }
 
         /// <summary>
@@ -299,19 +306,14 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (entitySet is null)
-            {
-                throw new ArgumentNullException(nameof(entitySet));
-            }
-
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
-            {
-                return null;
-            }
-
-            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet).ToString());
+            return UriUtility.ODataServiceContextUri(
+                requestOptions.MetadataLevel,
+                request.RequestUri.Scheme,
+                request.RequestUri.Host,
+                request.RequestUri.LocalPath,
+                entitySet);
         }
 
         /// <summary>
@@ -319,28 +321,24 @@ namespace Net.Http.WebApi.OData
         /// </summary>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
-        /// <param name="selectExpandQueryOption">The select query option.</param>
+        /// <param name="selectQueryOption">The select query option.</param>
         /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectExpandQueryOption)
+        public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectQueryOption)
         {
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (entitySet is null)
-            {
-                throw new ArgumentNullException(nameof(entitySet));
-            }
-
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
-            {
-                return null;
-            }
-
-            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, selectExpandQueryOption).ToString());
+            return UriUtility.ODataServiceContextUri(
+                requestOptions.MetadataLevel,
+                request.RequestUri.Scheme,
+                request.RequestUri.Host,
+                request.RequestUri.LocalPath,
+                entitySet,
+                selectQueryOption);
         }
 
         /// <summary>
@@ -360,12 +358,13 @@ namespace Net.Http.WebApi.OData
 
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
-            {
-                return null;
-            }
-
-            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, entityKey).ToString());
+            return UriUtility.ODataServiceContextUri(
+                requestOptions.MetadataLevel,
+                request.RequestUri.Scheme,
+                request.RequestUri.Host,
+                request.RequestUri.LocalPath,
+                entitySet,
+                entityKey);
         }
 
         /// <summary>
@@ -384,19 +383,16 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (entitySet is null)
-            {
-                throw new ArgumentNullException(nameof(entitySet));
-            }
-
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            if (requestOptions.MetadataLevel == ODataMetadataLevel.None)
-            {
-                return null;
-            }
-
-            return new Uri(request.RequestUri.ODataContextUriBuilder(entitySet, entityKey, propertyName).ToString());
+            return UriUtility.ODataServiceContextUri(
+                requestOptions.MetadataLevel,
+                request.RequestUri.Scheme,
+                request.RequestUri.Host,
+                request.RequestUri.LocalPath,
+                entitySet,
+                entityKey,
+                propertyName);
         }
 
         /// <summary>
@@ -414,12 +410,12 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (entitySet is null)
-            {
-                throw new ArgumentNullException(nameof(entitySet));
-            }
-
-            return new Uri(request.RequestUri.ODataEntityUriBuilder(entitySet, entityKey).ToString());
+            return UriUtility.ODataEntityUri(
+                request.RequestUri.Scheme,
+                request.RequestUri.Host,
+                request.RequestUri.LocalPath,
+                entitySet,
+                entityKey);
         }
 
         internal static string ReadHeaderValue(this HttpRequestMessage request, string name)

@@ -11,7 +11,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -37,17 +37,9 @@ namespace Net.Http.WebApi.OData.Metadata
         {
             ODataRequestOptions requestOptions = Request.ReadODataRequestOptions();
             Uri contextUri = Request.ResolveODataContextUri();
+            IEnumerable<ServiceDocumentItem> serviceDocumentItems = ServiceDocumentProvider.Create(EntityDataModel.Current, requestOptions);
 
-            var serviceDocumentResponse = new ODataResponseContent(
-                contextUri,
-                EntityDataModel.Current.EntitySets.Select(
-                    kvp =>
-                    {
-                        var setUri = new Uri(kvp.Key, UriKind.Relative);
-                        setUri = requestOptions.MetadataLevel == ODataMetadataLevel.None ? new Uri(requestOptions.DataServiceUri, setUri) : setUri;
-
-                        return ServiceDocumentItem.EntitySet(kvp.Key, setUri);
-                    }));
+            var serviceDocumentResponse = new ODataResponseContent(contextUri, serviceDocumentItems);
 
             return Request.CreateODataResponse(HttpStatusCode.OK, serviceDocumentResponse);
         }
