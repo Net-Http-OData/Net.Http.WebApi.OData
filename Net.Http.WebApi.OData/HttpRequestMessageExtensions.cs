@@ -11,12 +11,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using Net.Http.OData;
 using Net.Http.OData.Model;
@@ -251,17 +248,7 @@ namespace Net.Http.WebApi.OData
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (!request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out object requestOptions))
-            {
-                requestOptions = new ODataRequestOptions(
-                    UriUtility.ODataServiceRootUri(request.RequestUri.Scheme, request.RequestUri.Host, request.RequestUri.LocalPath),
-                    request.ReadIsolationLevel(),
-                    request.ReadMetadataLevel());
-
-                request.Properties.Add(typeof(ODataRequestOptions).FullName, requestOptions);
-            }
-
-            return (ODataRequestOptions)requestOptions;
+            return (ODataRequestOptions)request.Properties[typeof(ODataRequestOptions).FullName];
         }
 
         /// <summary>
@@ -416,55 +403,6 @@ namespace Net.Http.WebApi.OData
                 request.RequestUri.LocalPath,
                 entitySet,
                 entityKey);
-        }
-
-        internal static string ReadHeaderValue(this HttpRequestMessage request, string name)
-            => request.Headers.TryGetValues(name, out IEnumerable<string> values) ? values.FirstOrDefault() : default;
-
-        internal static ODataIsolationLevel ReadIsolationLevel(this HttpRequestMessage request)
-        {
-            string headerValue = request.ReadHeaderValue(ODataHeaderNames.ODataIsolation);
-
-            if (headerValue != null)
-            {
-                if (headerValue == "Snapshot")
-                {
-                    return ODataIsolationLevel.Snapshot;
-                }
-
-                throw new ODataException(HttpStatusCode.BadRequest, "If specified, the OData-IsolationLevel must be 'Snapshot'");
-            }
-
-            return ODataIsolationLevel.None;
-        }
-
-        internal static ODataMetadataLevel ReadMetadataLevel(this HttpRequestMessage request)
-        {
-            foreach (MediaTypeWithQualityHeaderValue header in request.Headers.Accept)
-            {
-                foreach (NameValueHeaderValue parameter in header.Parameters)
-                {
-                    if (parameter.Name == ODataMetadataLevelExtensions.HeaderName)
-                    {
-                        switch (parameter.Value)
-                        {
-                            case "none":
-                                return ODataMetadataLevel.None;
-
-                            case "minimal":
-                                return ODataMetadataLevel.Minimal;
-
-                            case "full":
-                                return ODataMetadataLevel.Full;
-
-                            default:
-                                throw new ODataException(HttpStatusCode.BadRequest, "If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'");
-                        }
-                    }
-                }
-            }
-
-            return ODataMetadataLevel.Minimal;
         }
     }
 }

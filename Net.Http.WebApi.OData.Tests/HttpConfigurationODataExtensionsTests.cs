@@ -35,7 +35,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
-        public void UseOData_Adds_ODataVersionHeaderActionFilterAttribute_ToFilters()
+        public void UseOData_Adds_ODataRequestActionFilterAttribute_ToFilters()
         {
             var configuration = new HttpConfiguration();
 
@@ -44,7 +44,7 @@ namespace Net.Http.WebApi.OData.Tests
                 {
                 });
 
-            Assert.IsType<ODataVersionHeaderActionFilterAttribute>(configuration.Filters.ToList()[1].Instance);
+            Assert.IsType<ODataRequestActionFilterAttribute>(configuration.Filters.ToList()[1].Instance);
         }
     }
 }

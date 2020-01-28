@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using Net.Http.OData;
 using Net.Http.WebApi.OData.Metadata;
 using Newtonsoft.Json;
 using Xunit;
@@ -19,8 +21,8 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             {
                 Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/")
             };
-            controller.Request.Headers.Add("Accept", "application/json;odata.metadata=full");
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Full, ODataVersion.OData40));
 
             HttpResponseMessage response = controller.Get();
 
@@ -50,8 +52,8 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             {
                 Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/")
             };
-            controller.Request.Headers.Add("Accept", "application/json;odata.metadata=minimal");
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Minimal, ODataVersion.OData40));
 
             HttpResponseMessage response = controller.Get();
 
@@ -81,8 +83,8 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             {
                 Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/")
             };
-            controller.Request.Headers.Add("Accept", "application/json;odata.metadata=none");
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.None, ODataVersion.OData40));
 
             HttpResponseMessage response = controller.Get();
 
