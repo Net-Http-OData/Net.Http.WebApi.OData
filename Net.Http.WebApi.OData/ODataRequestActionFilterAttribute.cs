@@ -132,7 +132,7 @@ namespace Net.Http.WebApi.OData
                 }
                 else
                 {
-                    throw new ODataException(HttpStatusCode.BadRequest, $"If specified, the {ODataHeaderNames.ODataVersion} header must be a valid OData version such as 4.0");
+                    throw new ODataException(HttpStatusCode.BadRequest, $"If specified, the {ODataHeaderNames.ODataVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}");
                 }
             }
 
@@ -146,7 +146,7 @@ namespace Net.Http.WebApi.OData
                 }
                 else
                 {
-                    throw new ODataException(HttpStatusCode.BadRequest, $"If specified, the {ODataHeaderNames.ODataMaxVersion} header must be a valid OData version such as 4.0");
+                    throw new ODataException(HttpStatusCode.BadRequest, $"If specified, the {ODataHeaderNames.ODataMaxVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}");
                 }
             }
 

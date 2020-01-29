@@ -52,7 +52,7 @@ namespace Net.Http.WebApi.OData.Tests
             var attribute = new ODataRequestActionFilterAttribute();
             var exception = Assert.Throws<ODataException>(() => attribute.OnActionExecuting(actionContext));
 
-            Assert.Equal("If specified, the OData-MaxVersion header must be a valid OData version such as 4.0", exception.Message);
+            Assert.Equal("If specified, the OData-MaxVersion header must be a valid OData version supported by this service between version 4.0 and 4.0", exception.Message);
             Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
         }
 
@@ -92,7 +92,7 @@ namespace Net.Http.WebApi.OData.Tests
             var attribute = new ODataRequestActionFilterAttribute();
             var exception = Assert.Throws<ODataException>(() => attribute.OnActionExecuting(actionContext));
 
-            Assert.Equal("If specified, the OData-Version header must be a valid OData version such as 4.0", exception.Message);
+            Assert.Equal("If specified, the OData-Version header must be a valid OData version supported by this service between version 4.0 and 4.0", exception.Message);
             Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
         }
 
