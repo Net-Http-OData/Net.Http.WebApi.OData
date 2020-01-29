@@ -101,6 +101,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Null(contextUri);
         }
+
         [Fact]
         public void ResolveODataContext_WithEntitySet_AndEntityKey_ReturnsContext_IfMetadataIsFull()
         {
@@ -145,6 +146,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Null(contextUri);
         }
+
         [Fact]
         public void ResolveODataContext_WithEntitySet_AndIntEntityKey_AndProperty_ReturnsContext_IfMetadataIsFull()
         {
@@ -189,6 +191,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Null(contextUri);
         }
+
         [Fact]
         public void ResolveODataContext_WithEntitySet_AndStringEntityKey_AndProperty_ReturnsContext_IfMetadataIsFull()
         {
@@ -233,6 +236,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Null(contextUri);
         }
+
         [Fact]
         public void ResolveODataContext_WithEntitySet_ReturnsContext_IfMetadataIsFull()
         {
@@ -277,6 +281,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Null(contextUri);
         }
+
         [Fact]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionAll_ReturnsContext_IfMetadataIsFull()
         {
@@ -330,6 +335,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Null(contextUri);
         }
+
         [Fact]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionProperties_ReturnsContext_IfMetadataIsFull()
         {
@@ -383,6 +389,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Null(contextUri);
         }
+
         [Fact]
         public void ResolveODataId_WithIntEntityKey()
         {
@@ -585,81 +592,6 @@ namespace Net.Http.WebApi.OData.Tests
             public void TheStatusCodeIsNoContent()
             {
                 Assert.Equal(HttpStatusCode.NoContent, _httpResponseMessage.StatusCode);
-            }
-        }
-
-        public class CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataFull
-        {
-            private readonly HttpResponseMessage _httpResponseMessage;
-
-            public CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataFull()
-            {
-                var httpRequestMessage = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri("http://services.odata.org/OData/Products?$filter=Price eq 21.39M"));
-                httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Full, ODataVersion.OData40));
-                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
-                _httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(new object[0], null));
-            }
-
-            [Fact]
-            public void TheMetadataLevelContentTypeParameterIsSet()
-            {
-                NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
-
-                Assert.NotNull(metadataParameter);
-                Assert.Equal("full", metadataParameter.Value);
-            }
-        }
-
-        public class CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataMinimal
-        {
-            private readonly HttpResponseMessage _httpResponseMessage;
-
-            public CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataMinimal()
-            {
-                var httpRequestMessage = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri("http://services.odata.org/OData/Products?$filter=Price eq 21.39M"));
-                httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Minimal, ODataVersion.OData40));
-                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
-                _httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(new object[0], null));
-            }
-
-            [Fact]
-            public void TheMetadataLevelContentTypeParameterIsSet()
-            {
-                NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
-
-                Assert.NotNull(metadataParameter);
-                Assert.Equal("minimal", metadataParameter.Value);
-            }
-        }
-
-        public class CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataNone
-        {
-            private readonly HttpResponseMessage _httpResponseMessage;
-
-            public CreateODataResponse_T_WithAcceptHeaderContainingODataMetadataNone()
-            {
-                var httpRequestMessage = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri("http://services.odata.org/OData/Products?$filter=Price eq 21.39M"));
-                httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.None, ODataVersion.OData40));
-                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
-                _httpResponseMessage = httpRequestMessage.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(new object[0], null));
-            }
-
-            [Fact]
-            public void TheMetadataLevelContentTypeParameterIsSet()
-            {
-                NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
-
-                Assert.NotNull(metadataParameter);
-                Assert.Equal("none", metadataParameter.Value);
             }
         }
     }

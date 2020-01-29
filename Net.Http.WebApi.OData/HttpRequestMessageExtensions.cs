@@ -90,6 +90,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="request">The HTTP request message which led to this response message.</param>
         /// <param name="statusCode">The HTTP response status code.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        [Obsolete("No longer required, call HttpRequestMessageExtensions.CreateResponse(this HttpRequestMessage request, HttpStatusCode statusCode) directly")]
         public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
             => request.CreateResponse(statusCode);
 
@@ -129,15 +130,9 @@ namespace Net.Http.WebApi.OData
         /// <param name="statusCode">The HTTP response status code.</param>
         /// <param name="value">The content of the HTTP response message.</param>
         /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
+        [Obsolete("No longer required, call HttpRequestMessageExtensions.CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value) directly")]
         public static HttpResponseMessage CreateODataResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value)
-        {
-            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
-
-            HttpResponseMessage response = request.CreateResponse(statusCode, value);
-            response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
-
-            return response;
-        }
+            => request.CreateResponse(statusCode, value);
 
         /// <summary>
         /// Gets a value indicating whether the specified URI is an OData URI.

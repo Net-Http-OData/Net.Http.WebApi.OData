@@ -40,7 +40,7 @@ namespace Net.Http.WebApi.OData.Metadata
 
             var serviceDocumentResponse = new ODataResponseContent(serviceDocumentItems, contextUri);
 
-            return Request.CreateODataResponse(HttpStatusCode.OK, serviceDocumentResponse);
+            return Request.CreateResponse(HttpStatusCode.OK, serviceDocumentResponse);
         }
     }
 }
