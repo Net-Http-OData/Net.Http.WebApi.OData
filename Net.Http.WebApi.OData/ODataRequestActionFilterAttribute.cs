@@ -58,7 +58,7 @@ namespace Net.Http.WebApi.OData
                 HttpRequestMessage request = actionContext.Request;
 
                 var requestOptions = new ODataRequestOptions(
-                    UriUtility.ODataServiceRootUri(request.RequestUri.Scheme, request.RequestUri.Host, request.RequestUri.LocalPath),
+                    ODataUtility.ODataServiceRootUri(request.RequestUri.Scheme, request.RequestUri.Host, request.RequestUri.LocalPath),
                     ReadIsolationLevel(request),
                     ReadMetadataLevel(request),
                     ReadODataVersion(request));

@@ -260,11 +260,11 @@ namespace Net.Http.WebApi.OData
             => EntityDataModel.Current.EntitySetForPath(request?.RequestUri.LocalPath);
 
         /// <summary>
-        /// Resolves the @odata.context URI for the specified request.
+        /// Resolves the @odata.context for the specified request.
         /// </summary>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
-        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static Uri ResolveODataContextUri(this HttpRequestMessage request)
+        /// <returns>A <see cref="string"/> containing the @odata.context, or null if the metadata for the request is none.</returns>
+        public static string ResolveODataContext(this HttpRequestMessage request)
         {
             if (request is null)
             {
@@ -273,7 +273,7 @@ namespace Net.Http.WebApi.OData
 
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            return UriUtility.ODataServiceContextUri(
+            return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
                 request.RequestUri.Scheme,
                 request.RequestUri.Host,
@@ -281,12 +281,12 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Resolves the @odata.context URI for the specified request and Entity Set.
+        /// Resolves the @odata.context for the specified request and Entity Set.
         /// </summary>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
-        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet)
+        /// <returns>A <see cref="string"/> containing the @odata.context, or null if the metadata for the request is none.</returns>
+        public static string ResolveODataContext(this HttpRequestMessage request, EntitySet entitySet)
         {
             if (request is null)
             {
@@ -295,7 +295,7 @@ namespace Net.Http.WebApi.OData
 
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            return UriUtility.ODataServiceContextUri(
+            return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
                 request.RequestUri.Scheme,
                 request.RequestUri.Host,
@@ -304,13 +304,13 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Resolves the @odata.context URI for the specified request and Entity Set and select query option.
+        /// Resolves the @odata.context for the specified request and Entity Set and select query option.
         /// </summary>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <param name="selectQueryOption">The select query option.</param>
-        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static Uri ResolveODataContextUri(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectQueryOption)
+        /// <returns>A <see cref="string"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
+        public static string ResolveODataContext(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectQueryOption)
         {
             if (request is null)
             {
@@ -319,7 +319,7 @@ namespace Net.Http.WebApi.OData
 
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            return UriUtility.ODataServiceContextUri(
+            return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
                 request.RequestUri.Scheme,
                 request.RequestUri.Host,
@@ -329,14 +329,13 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Resolves the @odata.context URI for the specified request and Entity Set.
+        /// Resolves the @odata.context for the specified request and Entity Set.
         /// </summary>
-        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
-        /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
-        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static Uri ResolveODataContextUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
+        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
+        /// <returns>A <see cref="string"/> containing the @odata.context, or null if the metadata for the request is none.</returns>
+        public static string ResolveODataContext<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet)
         {
             if (request is null)
             {
@@ -345,25 +344,24 @@ namespace Net.Http.WebApi.OData
 
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            return UriUtility.ODataServiceContextUri(
+            return ODataUtility.ODataContext<TEntityKey>(
                 requestOptions.MetadataLevel,
                 request.RequestUri.Scheme,
                 request.RequestUri.Host,
                 request.RequestUri.LocalPath,
-                entitySet,
-                entityKey);
+                entitySet);
         }
 
         /// <summary>
-        /// Resolves the @odata.context URI for the specified request and Entity Set.
+        /// Resolves the @odata.context for the specified request and Entity Set.
         /// </summary>
-        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
         /// <param name="propertyName">The name of the property.</param>
-        /// <returns>A <see cref="Uri"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static Uri ResolveODataContextUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey, string propertyName)
+        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
+        /// <returns>A <see cref="string"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
+        public static string ResolveODataContext<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey, string propertyName)
         {
             if (request is null)
             {
@@ -372,7 +370,7 @@ namespace Net.Http.WebApi.OData
 
             ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
 
-            return UriUtility.ODataServiceContextUri(
+            return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
                 request.RequestUri.Scheme,
                 request.RequestUri.Host,
@@ -383,21 +381,21 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Resolves the URI for an entity with the specified Entity Key.
+        /// Resolves the @odata.id for the specified request and Entity Set.
         /// </summary>
-        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
-        /// <returns>A <see cref="Uri"/> containing the address of the Entity with the specified Entity Key.</returns>
-        public static Uri ResolveODataEntityUri<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
+        /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
+        /// <returns>A <see cref="string"/> containing the address of the Entity with the specified Entity Key.</returns>
+        public static string ResolveODataId<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
         {
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return UriUtility.ODataEntityUri(
+            return ODataUtility.ODataId(
                 request.RequestUri.Scheme,
                 request.RequestUri.Host,
                 request.RequestUri.LocalPath,

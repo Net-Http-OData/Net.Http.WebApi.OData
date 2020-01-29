@@ -10,7 +10,6 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -36,10 +35,10 @@ namespace Net.Http.WebApi.OData.Metadata
         public HttpResponseMessage Get()
         {
             ODataRequestOptions requestOptions = Request.ReadODataRequestOptions();
-            Uri contextUri = Request.ResolveODataContextUri();
+            string contextUri = Request.ResolveODataContext();
             IEnumerable<ServiceDocumentItem> serviceDocumentItems = ServiceDocumentProvider.Create(EntityDataModel.Current, requestOptions);
 
-            var serviceDocumentResponse = new ODataResponseContent(contextUri, serviceDocumentItems);
+            var serviceDocumentResponse = new ODataResponseContent(serviceDocumentItems, contextUri);
 
             return Request.CreateODataResponse(HttpStatusCode.OK, serviceDocumentResponse);
         }
