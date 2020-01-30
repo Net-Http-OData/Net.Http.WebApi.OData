@@ -11,7 +11,6 @@ trigger:
   paths:
     exclude:
       - .editorconfig
-      - build.ps1
       - README.md
       - stylecop.json
 
@@ -21,15 +20,28 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  buildPlatform: 'Any CPU'
   buildVersion: '0.0.0'
   projectPath: '.\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj'
+  solution: '**/*.sln'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: NuGetToolInstaller@1
 
-- script: dotnet test
-  displayName: 'dotnet test'
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
 - task: PowerShell@2
   inputs:
@@ -39,11 +51,11 @@ steps:
 
       Write-Host "##vso[task.setvariable variable=buildVersion]$projVersion"
 
-- script: dotnet pack "$(projectPath)" --no-build -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion="$(buildVersion)-preview$(Build.BuildNumber)"
+- script: dotnet pack "$(projectPath)" -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion="$(buildVersion)-preview$(Build.BuildNumber)"
   displayName: 'dotnet pack (pre)'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
 
-- script: dotnet pack "$(projectPath)" --no-build -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion=$(buildVersion)
+- script: dotnet pack "$(projectPath)" -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion=$(buildVersion)
   displayName: 'dotnet pack'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
