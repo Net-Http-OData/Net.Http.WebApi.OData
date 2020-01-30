@@ -19,10 +19,11 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  buildPlatform: 'Any CPU'
   buildVersion: '0.0.0'
+  projectPath: '.\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj'
+  solution: '**/*.sln'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -46,15 +47,15 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $projVersion = ([xml](Get-Content ".\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj")) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
+      $projVersion = ([xml](Get-Content "$(projectPath)")) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
 
       Write-Host "##vso[task.setvariable variable=buildVersion]$projVersion"
 
-- script: dotnet pack ".\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj" -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion="$(buildVersion)-preview$(Build.BuildNumber)"
+- script: dotnet pack "$(projectPath)" -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion="$(buildVersion)-preview$(Build.BuildNumber)"
   displayName: 'dotnet pack (pre)'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
 
-- script: dotnet pack ".\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj" -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion=$(buildVersion)
+- script: dotnet pack "$(projectPath)" -o:$(Build.ArtifactStagingDirectory) -p:PackageVersion=$(buildVersion)
   displayName: 'dotnet pack'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
