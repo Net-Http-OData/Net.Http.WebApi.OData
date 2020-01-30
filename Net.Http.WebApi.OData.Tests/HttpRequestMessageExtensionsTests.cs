@@ -46,7 +46,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal(
                 "http://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25",
-                httpRequestMessage.NextLink(queryOptions, 50, 25).ToString());
+                httpRequestMessage.NextLink(queryOptions, 50, 25));
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal(
                 "http://services.odata.org/OData/Customers?$skip=75",
-                httpRequestMessage.NextLink(queryOptions, 50, 25).ToString());
+                httpRequestMessage.NextLink(queryOptions, 50, 25));
         }
 
         [Fact]

@@ -160,14 +160,14 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
-        /// Gets the next link for a paged OData query.
+        /// Gets the @odata.nextLink for a paged OData query.
         /// </summary>
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <param name="queryOptions">The query options.</param>
         /// <param name="skip">The skip.</param>
         /// <param name="resultsPerPage">The results per page.</param>
         /// <returns>The next link for a paged OData query.</returns>
-        public static Uri NextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
+        public static string NextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
         {
             if (request is null)
             {
@@ -228,7 +228,7 @@ namespace Net.Http.WebApi.OData
                 uriBuilder.Append('&').Append(queryOptions.RawValues.Top);
             }
 
-            return new Uri(uriBuilder.ToString());
+            return uriBuilder.ToString();
         }
 
         /// <summary>
@@ -237,14 +237,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="request">The HTTP request message which led to this OData request.</param>
         /// <returns>The OData request options for the request.</returns>
         public static ODataRequestOptions ReadODataRequestOptions(this HttpRequestMessage request)
-        {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            return (ODataRequestOptions)request.Properties[typeof(ODataRequestOptions).FullName];
-        }
+            => request?.Properties[typeof(ODataRequestOptions).FullName] as ODataRequestOptions;
 
         /// <summary>
         /// Resolves the <see cref="EntitySet"/> for the OData request.
