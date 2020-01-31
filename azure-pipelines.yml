@@ -42,6 +42,7 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    codeCoverageEnabled: true
 
 - task: PowerShell@2
   inputs:
