@@ -53,7 +53,7 @@
       <HintPath>..\packages\Moq.4.13.1\lib\net45\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Net.Http.OData, Version=5.0.0.0, Culture=neutral, PublicKeyToken=74e1ef70f5770817, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net.Http.OData.5.0.0-preview20200129.3\lib\net45\Net.Http.OData.dll</HintPath>
+      <HintPath>..\packages\Net.Http.OData.5.0.0-preview20200131.1\lib\net45\Net.Http.OData.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -106,7 +106,8 @@
     <Compile Include="NorthwindModel\Order.cs" />
     <Compile Include="NorthwindModel\OrderDetail.cs" />
     <Compile Include="NorthwindModel\Product.cs" />
-    <Compile Include="ODataRequestActionFilterAttributeTests.cs" />
+    <Compile Include="ODataQueryOptionsHttpParameterBindingTests.cs" />
+    <Compile Include="ODataRequestDelegatingHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />
   </ItemGroup>

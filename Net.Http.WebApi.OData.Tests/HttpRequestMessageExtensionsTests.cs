@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using Moq;
 using Net.Http.OData;
 using Net.Http.OData.Model;
 using Net.Http.OData.Query;
@@ -42,7 +43,10 @@ namespace Net.Http.WebApi.OData.Tests
                 HttpMethod.Get,
                 "http://services.odata.org/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25");
 
-            var queryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, EntityDataModel.Current.EntitySets["Products"]);
+            var queryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                EntityDataModel.Current.EntitySets["Products"],
+                Mock.Of<IODataQueryOptionsValidator>());
 
             Assert.Equal(
                 "http://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25",
@@ -56,7 +60,10 @@ namespace Net.Http.WebApi.OData.Tests
 
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers");
 
-            var queryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, EntityDataModel.Current.EntitySets["Customers"]);
+            var queryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                EntityDataModel.Current.EntitySets["Customers"],
+                Mock.Of<IODataQueryOptionsValidator>());
 
             Assert.Equal(
                 "http://services.odata.org/OData/Customers?$skip=75",
@@ -293,7 +300,10 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Full, ODataVersion.OData40));
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                entitySet,
+                Mock.Of<IODataQueryOptionsValidator>());
 
             string contextUri = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
@@ -311,7 +321,10 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Minimal, ODataVersion.OData40));
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                entitySet,
+                Mock.Of<IODataQueryOptionsValidator>());
 
             string contextUri = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
@@ -329,7 +342,10 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.None, ODataVersion.OData40));
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                entitySet,
+                Mock.Of<IODataQueryOptionsValidator>());
 
             string contextUri = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
@@ -347,7 +363,10 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Full, ODataVersion.OData40));
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                entitySet,
+                Mock.Of<IODataQueryOptionsValidator>());
 
             string contextUri = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
@@ -365,7 +384,10 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Minimal, ODataVersion.OData40));
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                entitySet,
+                Mock.Of<IODataQueryOptionsValidator>());
 
             string contextUri = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
@@ -383,7 +405,10 @@ namespace Net.Http.WebApi.OData.Tests
             httpRequestMessage.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.None, ODataVersion.OData40));
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
-            var odataQueryOptions = new ODataQueryOptions(httpRequestMessage.RequestUri.Query, entitySet);
+            var odataQueryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                entitySet,
+                Mock.Of<IODataQueryOptionsValidator>());
 
             string contextUri = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
 

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataRequestActionFilterAttribute.cs" company="Project Contributors">
+// <copyright file="ODataRequestDelegatingHandler.cs" company="Project Contributors">
 // Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,63 +10,54 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
+using System.Threading;
+using System.Threading.Tasks;
 using Net.Http.OData;
 
 namespace Net.Http.WebApi.OData
 {
     /// <summary>
-    /// An <see cref="ActionFilterAttribute"/> which parses the OData request.
+    /// An <see cref="DelegatingHandler"/> which parses the OData request.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public sealed class ODataRequestActionFilterAttribute : ActionFilterAttribute
+    public sealed class ODataRequestDelegatingHandler : DelegatingHandler
     {
-        /// <summary>
-        /// Occurs after the action method is invoked.
-        /// </summary>
-        /// <param name="actionExecutedContext">The action executed context.</param>
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        /// <inheritdoc/>
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (actionExecutedContext?.Request.IsODataRequest() == true)
+            ODataRequestOptions requestOptions = default;
+
+            if (request?.IsODataRequest() == true)
             {
-                ODataRequestOptions requestOptions = actionExecutedContext.Request.ReadODataRequestOptions();
+                try
+                {
+                    requestOptions = new ODataRequestOptions(
+                        ODataUtility.ODataServiceRootUri(request.RequestUri.Scheme, request.RequestUri.Host, request.RequestUri.LocalPath),
+                        ReadIsolationLevel(request),
+                        ReadMetadataLevel(request),
+                        ReadODataVersion(request));
 
-                HttpResponseMessage response = actionExecutedContext.Response;
+                    request.Properties.Add(typeof(ODataRequestOptions).FullName, requestOptions);
+                }
+                catch (ODataException exception)
+                {
+                    return request.CreateODataErrorResponse(exception);
+                }
+            }
 
+            HttpResponseMessage response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+
+            if (request?.IsODataRequest() == true)
+            {
                 response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
                 response.Headers.Add(ODataHeaderNames.ODataVersion, requestOptions.Version.ToString());
             }
 
-            base.OnActionExecuted(actionExecutedContext);
-        }
-
-        /// <summary>
-        /// Occurs before the action method is invoked.
-        /// </summary>
-        /// <param name="actionContext">The action context.</param>
-        public override void OnActionExecuting(HttpActionContext actionContext)
-        {
-            if (actionContext?.Request.IsODataRequest() == true)
-            {
-                HttpRequestMessage request = actionContext.Request;
-
-                var requestOptions = new ODataRequestOptions(
-                    ODataUtility.ODataServiceRootUri(request.RequestUri.Scheme, request.RequestUri.Host, request.RequestUri.LocalPath),
-                    ReadIsolationLevel(request),
-                    ReadMetadataLevel(request),
-                    ReadODataVersion(request));
-
-                request.Properties.Add(typeof(ODataRequestOptions).FullName, requestOptions);
-            }
-
-            base.OnActionExecuting(actionContext);
+            return response;
         }
 
         private static string ReadHeaderValue(HttpRequestMessage request, string name)

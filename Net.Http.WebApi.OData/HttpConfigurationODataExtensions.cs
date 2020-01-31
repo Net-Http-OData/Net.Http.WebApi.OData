@@ -54,7 +54,8 @@ namespace System.Web.Http
             }
 
             configuration.Filters.Add(new ODataExceptionFilterAttribute());
-            configuration.Filters.Add(new ODataRequestActionFilterAttribute());
+
+            configuration.MessageHandlers.Add(new ODataRequestDelegatingHandler());
 
             configuration.ParameterBindingRules.Add(p => p.ParameterType == typeof(ODataQueryOptions) ? new ODataQueryOptionsHttpParameterBinding(p) : null);
 

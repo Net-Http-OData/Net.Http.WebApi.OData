@@ -35,7 +35,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
-        public void UseOData_Adds_ODataRequestActionFilterAttribute_ToFilters()
+        public void UseOData_Adds_ODataRequestDelegatingHandler_ToMessageHandlers()
         {
             var configuration = new HttpConfiguration();
 
@@ -44,7 +44,7 @@ namespace Net.Http.WebApi.OData.Tests
                 {
                 });
 
-            Assert.IsType<ODataRequestActionFilterAttribute>(configuration.Filters.ToList()[1].Instance);
+            Assert.IsType<ODataRequestDelegatingHandler>(configuration.MessageHandlers.ToList()[0]);
         }
     }
 }

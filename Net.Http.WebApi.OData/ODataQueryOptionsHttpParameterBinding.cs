@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Metadata;
+using Net.Http.OData;
 using Net.Http.OData.Model;
 using Net.Http.OData.Query;
 
@@ -53,8 +54,10 @@ namespace Net.Http.WebApi.OData
             {
                 string query = actionContext.Request.RequestUri.Query;
                 EntitySet entitySet = actionContext.Request.ResolveEntitySet();
+                ODataRequestOptions odataRequestOptions = actionContext.Request.ReadODataRequestOptions();
+                IODataQueryOptionsValidator validator = ODataQueryOptionsValidator.GetValidator(odataRequestOptions.Version);
 
-                var queryOptions = new ODataQueryOptions(query, entitySet);
+                var queryOptions = new ODataQueryOptions(query, entitySet, validator);
 
                 SetValue(actionContext, queryOptions);
             }
