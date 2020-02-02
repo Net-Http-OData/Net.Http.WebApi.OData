@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using System.Web.Http.Results;
 using Net.Http.OData;
 using Net.Http.WebApi.OData.Metadata;
 using Newtonsoft.Json;
@@ -25,11 +25,9 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Full, ODataVersion.OData40));
 
-            HttpResponseMessage response = controller.Get();
+            var response = (OkNegotiatedContentResult<ODataResponseContent>)controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-            var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
+            var result = response.Content;
 
             Assert.NotNull(result.Context);
             Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
@@ -57,11 +55,9 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Minimal, ODataVersion.OData40));
 
-            HttpResponseMessage response = controller.Get();
+            var response = (OkNegotiatedContentResult<ODataResponseContent>)controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-            var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
+            var result = response.Content;
 
             Assert.NotNull(result.Context);
             Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
@@ -89,11 +85,9 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.None, ODataVersion.OData40));
 
-            HttpResponseMessage response = controller.Get();
+            var response = (OkNegotiatedContentResult<ODataResponseContent>)controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-            var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
+            var result = response.Content;
 
             Assert.Null(result.Context);
             Assert.Null(result.Count);

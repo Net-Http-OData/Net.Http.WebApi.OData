@@ -11,7 +11,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Net.Http.OData;
@@ -32,7 +31,7 @@ namespace Net.Http.WebApi.OData.Metadata
         /// <returns>The <see cref="HttpResponseMessage"/> which contains the service document.</returns>
         [HttpGet]
         [Route("")]
-        public HttpResponseMessage Get()
+        public IHttpActionResult Get()
         {
             ODataRequestOptions requestOptions = Request.ReadODataRequestOptions();
             string contextUri = Request.ResolveODataContext();
@@ -40,7 +39,7 @@ namespace Net.Http.WebApi.OData.Metadata
 
             var serviceDocumentResponse = new ODataResponseContent(serviceDocumentItems, contextUri);
 
-            return Request.CreateResponse(HttpStatusCode.OK, serviceDocumentResponse);
+            return Ok(serviceDocumentResponse);
         }
     }
 }
