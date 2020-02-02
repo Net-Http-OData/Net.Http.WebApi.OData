@@ -95,7 +95,9 @@
   <ItemGroup>
     <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
+    <Compile Include="Integration\EmployeeController.cs" />
     <Compile Include="Integration\GetMetadataTests.cs" />
+    <Compile Include="Integration\GetQueryOptionsTests.cs" />
     <Compile Include="Integration\GetServiceDocumentTests.cs" />
     <Compile Include="Integration\IntegrationTest.cs" />
     <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
