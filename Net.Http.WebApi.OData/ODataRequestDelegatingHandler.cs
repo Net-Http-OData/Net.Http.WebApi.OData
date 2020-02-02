@@ -73,14 +73,12 @@ namespace Net.Http.WebApi.OData
 
             if (headerValue != null)
             {
-                switch (headerValue)
+                if (headerValue == "Snapshot")
                 {
-                    case "Snapshot":
-                        return ODataIsolationLevel.Snapshot;
-
-                    default:
-                        throw new ODataException(HttpStatusCode.BadRequest, $"If specified, the {ODataHeaderNames.ODataIsolation} must be 'Snapshot'");
+                    return ODataIsolationLevel.Snapshot;
                 }
+
+                throw new ODataException(HttpStatusCode.BadRequest, $"If specified, the {ODataHeaderNames.ODataIsolation} must be 'Snapshot'");
             }
 
             return ODataIsolationLevel.None;
