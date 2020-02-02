@@ -135,6 +135,31 @@ namespace Net.Http.WebApi.OData
             => request.CreateResponse(statusCode, value);
 
         /// <summary>
+        /// Gets a value indicating whether the specified URI is an OData Metadata URI.
+        /// </summary>
+        /// <param name="request">The HTTP request message for the current request.</param>
+        /// <returns>True if the URI is an OData Metadata URI, otherwise false.</returns>
+        public static bool IsODataMetadataRequest(this HttpRequestMessage request)
+        {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            Uri uri = request.RequestUri;
+
+            for (int i = 0; i < uri.Segments.Length; i++)
+            {
+                if (uri.Segments[i].StartsWith("$metadata", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Gets a value indicating whether the specified URI is an OData URI.
         /// </summary>
         /// <param name="request">The HTTP request message for the current request.</param>

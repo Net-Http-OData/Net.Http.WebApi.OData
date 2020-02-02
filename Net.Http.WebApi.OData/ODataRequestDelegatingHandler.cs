@@ -53,7 +53,11 @@ namespace Net.Http.WebApi.OData
 
             if (request?.IsODataRequest() == true)
             {
-                response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
+                if (!request.IsODataMetadataRequest())
+                {
+                    response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
+                }
+
                 response.Headers.Add(ODataHeaderNames.ODataVersion, requestOptions.Version.ToString());
             }
 

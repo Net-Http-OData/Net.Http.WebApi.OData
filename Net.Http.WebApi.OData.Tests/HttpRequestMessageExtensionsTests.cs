@@ -16,6 +16,26 @@ namespace Net.Http.WebApi.OData.Tests
 {
     public class HttpRequestMessageExtensionsTests
     {
+        [Theory]
+        [InlineData("http://services.odata.org/OData")]
+        [InlineData("http://services.odata.org/OData/Products")]
+        [Trait("Category", "Unit")]
+        public void IsODataMetadataRequest_False(string uri)
+        {
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri(uri));
+
+            Assert.False(httpRequestMessage.IsODataMetadataRequest());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void IsODataMetadataRequest_True()
+        {
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri("http://services.odata.org/odata/$metadata"));
+
+            Assert.True(httpRequestMessage.IsODataMetadataRequest());
+        }
+
         [Fact]
         [Trait("Category", "Unit")]
         public void IsODataRequest_False()
