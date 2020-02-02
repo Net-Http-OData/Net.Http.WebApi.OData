@@ -10,7 +10,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
 {
     public class GetMetadataTests : IntegrationTest
     {
-        private HttpResponseMessage _httpResponseMessage;
+        private readonly HttpResponseMessage _httpResponseMessage;
 
         public GetMetadataTests()
         {

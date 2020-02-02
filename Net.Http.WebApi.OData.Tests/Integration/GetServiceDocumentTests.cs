@@ -9,7 +9,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
 {
     public class GetServiceDocumentTests : IntegrationTest
     {
-        private HttpResponseMessage _httpResponseMessage;
+        private readonly HttpResponseMessage _httpResponseMessage;
 
         public GetServiceDocumentTests()
         {
