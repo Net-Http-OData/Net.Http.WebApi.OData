@@ -17,6 +17,7 @@ namespace Net.Http.WebApi.OData.Tests
     public class HttpRequestMessageExtensionsTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public void IsODataRequest_False()
         {
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri("http://services.odata.org/"));
@@ -27,6 +28,7 @@ namespace Net.Http.WebApi.OData.Tests
         [Theory]
         [InlineData("http://services.odata.org/OData")]
         [InlineData("http://services.odata.org/OData/Products")]
+        [Trait("Category", "Unit")]
         public void IsODataRequest_True(string uri)
         {
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri(uri));
@@ -35,6 +37,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void NextLink_WithAllQueryOptions()
         {
             TestHelper.EnsureEDM();
@@ -54,6 +57,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void NextLink_WithNoQueryOptions()
         {
             TestHelper.EnsureEDM();
@@ -71,6 +75,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_ReturnsContext_IfMetadataIsFull()
         {
             var httpRequestMessage = new HttpRequestMessage(
@@ -84,6 +89,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_ReturnsContext_IfMetadataIsMinimal()
         {
             var httpRequestMessage = new HttpRequestMessage(
@@ -97,6 +103,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_ReturnsNull_IfMetadataIsNone()
         {
             var httpRequestMessage = new HttpRequestMessage(
@@ -110,6 +117,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndEntityKey_ReturnsContext_IfMetadataIsFull()
         {
             TestHelper.EnsureEDM();
@@ -125,6 +133,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndEntityKey_ReturnsContext_IfMetadataIsMinimal()
         {
             TestHelper.EnsureEDM();
@@ -140,6 +149,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndEntityKey_ReturnsNull_IfMetadataIsNone()
         {
             TestHelper.EnsureEDM();
@@ -155,6 +165,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndIntEntityKey_AndProperty_ReturnsContext_IfMetadataIsFull()
         {
             TestHelper.EnsureEDM();
@@ -170,6 +181,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndIntEntityKey_AndProperty_ReturnsContext_IfMetadataIsMinimal()
         {
             TestHelper.EnsureEDM();
@@ -185,6 +197,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndIntEntityKey_AndProperty_ReturnsNull_IfMetadataIsNone()
         {
             TestHelper.EnsureEDM();
@@ -200,6 +213,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndStringEntityKey_AndProperty_ReturnsContext_IfMetadataIsFull()
         {
             TestHelper.EnsureEDM();
@@ -215,6 +229,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndStringEntityKey_AndProperty_ReturnsContext_IfMetadataIsMinimal()
         {
             TestHelper.EnsureEDM();
@@ -230,6 +245,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_AndStringEntityKey_AndProperty_ReturnsNull_IfMetadataIsNone()
         {
             TestHelper.EnsureEDM();
@@ -245,6 +261,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_ReturnsContext_IfMetadataIsFull()
         {
             TestHelper.EnsureEDM();
@@ -260,6 +277,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_ReturnsContext_IfMetadataIsMinimal()
         {
             TestHelper.EnsureEDM();
@@ -275,6 +293,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySet_ReturnsNull_IfMetadataIsNone()
         {
             TestHelper.EnsureEDM();
@@ -290,6 +309,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionAll_ReturnsContext_IfMetadataIsFull()
         {
             TestHelper.EnsureEDM();
@@ -311,6 +331,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionAll_ReturnsContext_IfMetadataIsMinimal()
         {
             TestHelper.EnsureEDM();
@@ -332,6 +353,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionAll_ReturnsNull_IfMetadataIsNone()
         {
             TestHelper.EnsureEDM();
@@ -353,6 +375,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionProperties_ReturnsContext_IfMetadataIsFull()
         {
             TestHelper.EnsureEDM();
@@ -374,6 +397,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionProperties_ReturnsContext_IfMetadataIsMinimal()
         {
             TestHelper.EnsureEDM();
@@ -395,6 +419,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataContext_WithEntitySetAndSelectExpandQueryOptionProperties_ReturnsNull_IfMetadataIsNone()
         {
             TestHelper.EnsureEDM();
@@ -416,6 +441,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataId_WithIntEntityKey()
         {
             TestHelper.EnsureEDM();
@@ -430,6 +456,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ResolveODataId_WithStringEntityKey()
         {
             TestHelper.EnsureEDM();
@@ -458,6 +485,7 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheContentIsSet()
             {
                 Assert.IsType<ObjectContent<ODataErrorContent>>(_httpResponseMessage.Content);
@@ -472,6 +500,7 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheStatusCodeIsBadRequest()
             {
                 Assert.Equal(HttpStatusCode.BadRequest, _httpResponseMessage.StatusCode);
@@ -493,6 +522,7 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheContentIsSet()
             {
                 Assert.IsType<ObjectContent<ODataErrorContent>>(_httpResponseMessage.Content);
@@ -507,6 +537,7 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheStatusCodeIsBadRequest()
             {
                 Assert.Equal(HttpStatusCode.BadRequest, _httpResponseMessage.StatusCode);
@@ -528,6 +559,7 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheContentIsSet()
             {
                 Assert.IsType<ObjectContent<ODataErrorContent>>(_httpResponseMessage.Content);
@@ -542,6 +574,7 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheStatusCodeIsNotImplemented()
             {
                 Assert.Equal(HttpStatusCode.NotImplemented, _httpResponseMessage.StatusCode);
@@ -562,24 +595,28 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public async Task TheContentIsSet()
             {
                 Assert.Equal("MLK", await ((StringContent)_httpResponseMessage.Content).ReadAsStringAsync());
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheContentIsStringContent()
             {
                 Assert.IsType<StringContent>(_httpResponseMessage.Content);
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheContentTypeIsTextPlain()
             {
                 Assert.Equal("text/plain", _httpResponseMessage.Content.Headers.ContentType.MediaType);
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsNotSet()
             {
                 NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
@@ -588,6 +625,7 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheStatusCodeIsOk()
             {
                 Assert.Equal(HttpStatusCode.OK, _httpResponseMessage.StatusCode);
@@ -608,12 +646,14 @@ namespace Net.Http.WebApi.OData.Tests
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheContentIsNull()
             {
                 Assert.Null(_httpResponseMessage.Content);
             }
 
             [Fact]
+            [Trait("Category", "Unit")]
             public void TheStatusCodeIsNoContent()
             {
                 Assert.Equal(HttpStatusCode.NoContent, _httpResponseMessage.StatusCode);

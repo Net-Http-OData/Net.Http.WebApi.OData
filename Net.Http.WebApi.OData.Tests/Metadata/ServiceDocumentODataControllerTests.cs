@@ -13,6 +13,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
     public class ServiceDocumentODataControllerTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public void WhenFullMetadataIsRequested_TheEntitySetUrlIsRelative_AndTheContextUriIsSet()
         {
             TestHelper.EnsureEDM();
@@ -44,6 +45,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void WhenMinimalMetadataIsRequested_TheEntitySetUrlIsRelative_AndTheContextUriIsSet()
         {
             TestHelper.EnsureEDM();
@@ -75,6 +77,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void WhenNoMetadataIsRequested_TheEntitySetUrlIsFullUrl_AndTheContextUriIsNotSet()
         {
             TestHelper.EnsureEDM();

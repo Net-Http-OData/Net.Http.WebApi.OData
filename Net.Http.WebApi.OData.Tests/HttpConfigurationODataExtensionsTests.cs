@@ -7,6 +7,7 @@ namespace Net.Http.WebApi.OData.Tests
     public class HttpConfigurationODataExtensionsTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public void UseOData_Adds_ODataExceptionFilterAttribute_ToFilters()
         {
             var configuration = new HttpConfiguration();
@@ -20,6 +21,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void UseOData_Adds_ODataQueryOptionsHttpParameterBinding_ToParameterBindingRules()
         {
             var configuration = new HttpConfiguration();
@@ -35,6 +37,7 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void UseOData_Adds_ODataRequestDelegatingHandler_ToMessageHandlers()
         {
             var configuration = new HttpConfiguration();

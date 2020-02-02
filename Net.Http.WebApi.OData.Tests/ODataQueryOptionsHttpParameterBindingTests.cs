@@ -16,6 +16,7 @@ namespace Net.Http.WebApi.OData.Tests
     public class ODataQueryOptionsHttpParameterBindingTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public void ExecuteBindingAsync_SetsODataQueryOptions()
         {
             TestHelper.EnsureEDM();

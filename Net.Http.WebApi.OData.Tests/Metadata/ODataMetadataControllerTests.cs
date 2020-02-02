@@ -12,6 +12,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
     public class ODataMetadataControllerTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public async Task GetReturnsCsdlXmlDocument()
         {
             TestHelper.EnsureEDM();
