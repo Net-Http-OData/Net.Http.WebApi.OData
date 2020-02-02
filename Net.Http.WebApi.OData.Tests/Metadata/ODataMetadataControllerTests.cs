@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using System.Xml.Linq;
 using Net.Http.WebApi.OData.Metadata;
 using Xunit;
 
@@ -28,6 +29,10 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             string result = await ((StringContent)response.Content).ReadAsStringAsync();
 
             Assert.NotNull(result);
+
+            var resultXml = XDocument.Parse(result);
+
+            Assert.Equal("Edmx", resultXml.Root.Name.LocalName);
         }
     }
 }
