@@ -26,9 +26,9 @@ namespace Net.Http.WebApi.OData.Metadata
     public sealed class ServiceDocumentODataController : ApiController
     {
         /// <summary>
-        /// Gets the <see cref="HttpResponseMessage"/> which contains the service document.
+        /// Gets the <see cref="IHttpActionResult"/> which contains the service document.
         /// </summary>
-        /// <returns>The <see cref="HttpResponseMessage"/> which contains the service document.</returns>
+        /// <returns>The <see cref="IHttpActionResult"/> which contains the service document.</returns>
         [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
