@@ -10,6 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
@@ -25,8 +26,6 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     internal sealed class ODataQueryOptionsHttpParameterBinding : HttpParameterBinding
     {
-        private static readonly Task s_completedTask = Task.FromResult(0);
-
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataQueryOptionsHttpParameterBinding"/> class.
         /// </summary>
@@ -52,9 +51,11 @@ namespace Net.Http.WebApi.OData
         {
             if (actionContext != null)
             {
-                string query = actionContext.Request.RequestUri.Query;
-                EntitySet entitySet = actionContext.Request.ResolveEntitySet();
-                ODataRequestOptions odataRequestOptions = actionContext.Request.ReadODataRequestOptions();
+                HttpRequestMessage request = actionContext.Request;
+
+                string query = request.RequestUri.Query;
+                EntitySet entitySet = request.ResolveEntitySet();
+                ODataRequestOptions odataRequestOptions = request.ReadODataRequestOptions();
                 IODataQueryOptionsValidator validator = ODataQueryOptionsValidator.GetValidator(odataRequestOptions.Version);
 
                 var queryOptions = new ODataQueryOptions(query, entitySet, validator);
@@ -62,7 +63,7 @@ namespace Net.Http.WebApi.OData
                 SetValue(actionContext, queryOptions);
             }
 
-            return s_completedTask;
+            return TaskEx.CompletedTask;
         }
     }
 }

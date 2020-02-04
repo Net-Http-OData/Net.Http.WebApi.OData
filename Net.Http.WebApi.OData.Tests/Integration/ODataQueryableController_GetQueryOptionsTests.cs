@@ -7,11 +7,11 @@ using Xunit;
 
 namespace Net.Http.WebApi.OData.Tests.Integration
 {
-    public class GetQueryOptionsTests : IntegrationTest
+    public class ODataQueryableController_GetQueryOptionsTests : IntegrationTest
     {
         private readonly HttpResponseMessage _httpResponseMessage;
 
-        public GetQueryOptionsTests()
+        public ODataQueryableController_GetQueryOptionsTests()
         {
             _httpResponseMessage = HttpClient.GetAsync("http://server/odata/Employees").Result;
         }

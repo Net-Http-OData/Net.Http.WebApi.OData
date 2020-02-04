@@ -49,12 +49,10 @@ namespace Net.Http.WebApi.OData.Metadata
                 }
             }
 
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(s_metadataXml, Encoding.UTF8, "application/xml"),
             };
-
-            return response;
         }
     }
 }

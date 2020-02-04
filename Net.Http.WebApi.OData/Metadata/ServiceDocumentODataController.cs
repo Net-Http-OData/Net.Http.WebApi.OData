@@ -11,7 +11,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Web.Http;
 using Net.Http.OData;
 using Net.Http.OData.Metadata;

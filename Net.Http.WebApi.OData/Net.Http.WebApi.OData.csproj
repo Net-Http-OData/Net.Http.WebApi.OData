@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
+    <LangVersion>7.3</LangVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Net.Http.WebApi.OData.snk</AssemblyOriginatorKeyFile>
     <Version>5.0.0</Version>
@@ -12,7 +13,7 @@
     <PackageTags>OData Parser WebApi ASP.NET</PackageTags>
     <PackageReleaseNotes>See https://github.com/Net-Http-OData/Net.Http.WebApi.OData/releases for a summary of changes made in this release of the package.</PackageReleaseNotes>
     <NeutralLanguage>en-GB</NeutralLanguage>
-    <RepositoryUrl>https://github.com/Net-Http-OData/Net.Http.WebApi.OData/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Net-Http-OData/Net.Http.WebApi.OData</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
@@ -31,16 +32,13 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
-  </ItemGroup>
-
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Net.Http.OData" Version="5.0.0-preview20200131.1" />
+    <PackageReference Include="Net.Http.OData" Version="5.0.0-preview20200204.1" />
     <PackageReference Include="SecurityCodeScan" Version="3.4.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
