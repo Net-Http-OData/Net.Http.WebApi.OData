@@ -78,24 +78,6 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void NextLink_WithNoQueryOptions()
-        {
-            TestHelper.EnsureEDM();
-
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Customers");
-
-            var queryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
-                EntityDataModel.Current.EntitySets["Customers"],
-                Mock.Of<IODataQueryOptionsValidator>());
-
-            Assert.Equal(
-                "http://services.odata.org/OData/Customers?$skip=75",
-                httpRequestMessage.NextLink(queryOptions, 50, 25));
-        }
-
-        [Fact]
-        [Trait("Category", "Unit")]
         public void ResolveODataContext_ReturnsContext_IfMetadataIsFull()
         {
             var httpRequestMessage = new HttpRequestMessage(
