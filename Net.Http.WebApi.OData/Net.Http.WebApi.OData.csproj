@@ -10,7 +10,7 @@
     <Description>A .NET 4.5 library which uses Net.Http.OData with an implementation for ASP.NET WebApi</Description>
     <Copyright>Copyright 2012 - 2020 Project Contributors</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageTags>OData Parser WebApi ASP.NET</PackageTags>
+    <PackageTags>OData Parser ASP.NET WebApi</PackageTags>
     <PackageReleaseNotes>See https://github.com/Net-Http-OData/Net.Http.WebApi.OData/releases for a summary of changes made in this release of the package.</PackageReleaseNotes>
     <NeutralLanguage>en-GB</NeutralLanguage>
     <RepositoryUrl>https://github.com/Net-Http-OData/Net.Http.WebApi.OData</RepositoryUrl>
