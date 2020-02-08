@@ -7,7 +7,7 @@
     <AssemblyOriginatorKeyFile>..\Net.Http.WebApi.OData.snk</AssemblyOriginatorKeyFile>
     <Version>5.0.0</Version>
     <Authors>Trevor Pilley and Project Contributors</Authors>
-    <Description>A .NET 4.5 library which uses Net.Http.OData with an implementation for ASP.NET WebApi</Description>
+    <Description>A .NET 4.5 library which uses Net.Http.OData with an implementation for ASP.NET WebApi.</Description>
     <Copyright>Copyright 2012 - 2020 Project Contributors</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>OData Parser ASP.NET WebApi</PackageTags>
