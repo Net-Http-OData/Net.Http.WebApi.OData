@@ -40,7 +40,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             string result = await _httpResponseMessage.Content.ReadAsStringAsync();
 
             Assert.Equal(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" + XDocument.Parse(@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""4.0"">
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" + XDocument.Parse($@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""{ODataVersion.MaxVersion}"">
   <edmx:DataServices>
     <Schema xmlns=""http://docs.oasis-open.org/odata/ns/edm"" Namespace=""NorthwindModel"">
       <EnumType Name=""AccessLevel"" UnderlyingType=""Edm.Int32"" IsFlags=""True"">

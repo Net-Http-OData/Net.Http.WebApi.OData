@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Xml.Linq;
+using Net.Http.OData;
 using Net.Http.OData.Metadata;
 using Net.Http.OData.Model;
 
@@ -42,7 +43,7 @@ namespace Net.Http.WebApi.OData.Metadata
             {
                 using (var stringWriter = new Utf8StringWriter())
                 {
-                    XDocument metadataDocument = MetadataProvider.Create(EntityDataModel.Current);
+                    XDocument metadataDocument = MetadataProvider.Create(EntityDataModel.Current, ODataServiceOptions.Default);
                     metadataDocument.Save(stringWriter);
 
                     s_metadataXml = stringWriter.ToString();
