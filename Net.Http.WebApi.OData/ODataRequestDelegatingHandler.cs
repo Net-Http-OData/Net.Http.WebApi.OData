@@ -101,7 +101,7 @@ namespace Net.Http.WebApi.OData
                                 return ODataMetadataLevel.Minimal;
 
                             case "full":
-                                return ODataMetadataLevel.Full;
+                                throw new ODataException(HttpStatusCode.BadRequest, $"{ODataMetadataLevelExtensions.HeaderName} 'full' is not supported by this service, please use 'none' or 'minimal'");
 
                             default:
                                 throw new ODataException(HttpStatusCode.BadRequest, $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the Accept header must be 'none', 'minimal' or 'full'");

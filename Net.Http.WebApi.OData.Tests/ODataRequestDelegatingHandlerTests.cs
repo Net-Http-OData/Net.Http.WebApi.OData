@@ -37,6 +37,26 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
+        public void SendAsync_ReturnsODataErrorContent_ForFullMetadataLevel()
+        {
+            var httpConfiguration = new HttpConfiguration();
+
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+            httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, httpConfiguration);
+            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            var handler = new ODataRequestDelegatingHandler();
+            var invoker = new HttpMessageInvoker(handler);
+            HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
+            var odataErrorContent = (ODataErrorContent)((ObjectContent)httpResponseMessage.Content).Value;
+
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+            Assert.Equal("400", odataErrorContent.Error.Code);
+            Assert.Equal("odata.metadata 'full' is not supported by this service, please use 'none' or 'minimal'", odataErrorContent.Error.Message);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
         public void SendAsync_ReturnsODataErrorContent_ForInvalidIsolationLevel()
         {
             var httpConfiguration = new HttpConfiguration();
@@ -126,7 +146,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
                 httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, httpConfiguration);
-                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=full");
+                httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataIsolation, "Snapshot");
                 httpRequestMessage.Headers.Add(ODataHeaderNames.ODataVersion, "4.0");
 
@@ -158,9 +178,9 @@ namespace Net.Http.WebApi.OData.Tests
 
             [Fact]
             [Trait("Category", "Unit")]
-            public void ODataRequestOptions_MetadataLevel_IsSetTo_Full()
+            public void ODataRequestOptions_MetadataLevel_IsSetTo_None()
             {
-                Assert.Equal(ODataMetadataLevel.Full, _odataRequestOptions.MetadataLevel);
+                Assert.Equal(ODataMetadataLevel.None, _odataRequestOptions.MetadataLevel);
             }
 
             [Fact]
@@ -184,7 +204,7 @@ namespace Net.Http.WebApi.OData.Tests
                 NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
-                Assert.Equal("full", metadataParameter.Value);
+                Assert.Equal("none", metadataParameter.Value);
             }
 
             [Fact]
