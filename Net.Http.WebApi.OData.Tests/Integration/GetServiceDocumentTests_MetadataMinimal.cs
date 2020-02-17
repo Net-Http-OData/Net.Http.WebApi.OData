@@ -7,11 +7,11 @@ using Xunit;
 
 namespace Net.Http.WebApi.OData.Tests.Integration
 {
-    public class GetServiceDocumentTests : IntegrationTest
+    public class GetServiceDocumentTests_MetadataMinimal : IntegrationTest
     {
         private readonly HttpResponseMessage _httpResponseMessage;
 
-        public GetServiceDocumentTests()
+        public GetServiceDocumentTests_MetadataMinimal()
         {
             _httpResponseMessage = HttpClient.GetAsync("http://server/odata").Result;
         }

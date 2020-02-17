@@ -97,7 +97,8 @@
     <Compile Include="HttpRequestMessageExtensionsTests.cs" />
     <Compile Include="Integration\EmployeeController.cs" />
     <Compile Include="Integration\GetMetadataTests.cs" />
-    <Compile Include="Integration\GetServiceDocumentTests.cs" />
+    <Compile Include="Integration\GetServiceDocumentTests_MetadataMinimal.cs" />
+    <Compile Include="Integration\GetServiceDocumentTests_MetadataNone.cs" />
     <Compile Include="Integration\IntegrationTest.cs" />
     <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataMinimal.cs" />
     <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataNone.cs" />

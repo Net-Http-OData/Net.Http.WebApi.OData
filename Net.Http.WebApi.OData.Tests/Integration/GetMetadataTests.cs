@@ -28,7 +28,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         [Trait("Category", "Integration")]
         public void Contains_Header_ODataVersion()
         {
-            Assert.Equal(ODataVersion.OData40.ToString(), _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
         }
 
         [Fact]
