@@ -135,6 +135,42 @@ namespace Net.Http.WebApi.OData.Tests
             Assert.Equal("If specified, the OData-Version header must be a valid OData version supported by this service between version 4.0 and 4.0", odataErrorContent.Error.Message);
         }
 
+        public class WhenCalling_SendAsync_AndTheResponseHasNoContent
+        {
+            private readonly HttpResponseMessage _httpResponseMessage;
+
+            public WhenCalling_SendAsync_AndTheResponseHasNoContent()
+            {
+                var httpConfiguration = new HttpConfiguration();
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, httpConfiguration);
+
+                var handler = new ODataRequestDelegatingHandler
+                {
+                    InnerHandler = new MockHttpMessageHandler(includeContentInResponse: false)
+                };
+
+                var invoker = new HttpMessageInvoker(handler);
+                _httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
+            }
+
+            [Fact]
+            [Trait("Category", "Unit")]
+            public void TheMetadataLevelContentTypeParameterIsSetInTheResponse()
+            {
+                Assert.Null(_httpResponseMessage.Content);
+            }
+
+            [Fact]
+            [Trait("Category", "Unit")]
+            public void TheODataVersionHeaderIsSetInTheResponse()
+            {
+                Assert.True(_httpResponseMessage.Headers.Contains(ODataHeaderNames.ODataVersion));
+                Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            }
+        }
+
         public class WhenCalling_SendAsync_WithAnODataUri_AndAllRequestOptionsInRequest
         {
             private readonly HttpResponseMessage _httpResponseMessage;
@@ -342,9 +378,21 @@ namespace Net.Http.WebApi.OData.Tests
 
         private class MockHttpMessageHandler : HttpMessageHandler
         {
+            private readonly bool _includeContentInResponse;
+
+            public MockHttpMessageHandler(bool includeContentInResponse = true)
+            {
+                _includeContentInResponse = includeContentInResponse;
+            }
+
             protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
             {
-                return Task.FromResult(new HttpResponseMessage { Content = new StringContent("data") });
+                if (_includeContentInResponse)
+                {
+                    return Task.FromResult(new HttpResponseMessage { Content = new StringContent("data") });
+                }
+
+                return Task.FromResult(new HttpResponseMessage());
             }
         }
     }

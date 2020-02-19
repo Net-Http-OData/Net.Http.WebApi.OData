@@ -55,7 +55,7 @@ namespace Net.Http.WebApi.OData
             {
                 if (!request.IsODataMetadataRequest())
                 {
-                    response.Content.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
+                    response.Content?.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
                 }
 
                 response.Headers.Add(ODataHeaderNames.ODataVersion, requestOptions.Version.ToString());
