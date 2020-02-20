@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using Moq;
@@ -472,80 +469,6 @@ namespace Net.Http.WebApi.OData.Tests
             Assert.Equal("http://services.odata.org/OData/Products('Milk')", contextUri.ToString());
         }
 
-        public class CreateODataErrorResponse_WithHttpStatusCode_AndMessage
-        {
-            private readonly HttpResponseMessage _httpResponseMessage;
-
-            public CreateODataErrorResponse_WithHttpStatusCode_AndMessage()
-            {
-                var httpRequestMessage = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri("http://services.odata.org/OData/Products?$select=Foo"));
-                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
-                _httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "Path segment not supported: 'Foo'.");
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheContentIsSet()
-            {
-                Assert.IsType<ObjectContent<ODataErrorContent>>(_httpResponseMessage.Content);
-                Assert.IsType<ODataErrorContent>(((ObjectContent<ODataErrorContent>)_httpResponseMessage.Content).Value);
-
-                var errorContent = (ODataErrorContent)((ObjectContent<ODataErrorContent>)_httpResponseMessage.Content).Value;
-
-                Assert.NotNull(errorContent.Error);
-                Assert.Equal("400", errorContent.Error.Code);
-                Assert.Equal("Path segment not supported: 'Foo'.", errorContent.Error.Message);
-                Assert.Null(errorContent.Error.Target);
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheStatusCodeIsBadRequest()
-            {
-                Assert.Equal(HttpStatusCode.BadRequest, _httpResponseMessage.StatusCode);
-            }
-        }
-
-        public class CreateODataErrorResponse_WithHttpStatusCode_Message_AndTarget
-        {
-            private readonly HttpResponseMessage _httpResponseMessage;
-
-            public CreateODataErrorResponse_WithHttpStatusCode_Message_AndTarget()
-            {
-                var httpRequestMessage = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri("http://services.odata.org/OData/Products?$select=Foo"));
-                httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
-                _httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(HttpStatusCode.BadRequest, "Path segment not supported: 'Foo'.", "query");
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheContentIsSet()
-            {
-                Assert.IsType<ObjectContent<ODataErrorContent>>(_httpResponseMessage.Content);
-                Assert.IsType<ODataErrorContent>(((ObjectContent<ODataErrorContent>)_httpResponseMessage.Content).Value);
-
-                var errorContent = (ODataErrorContent)((ObjectContent<ODataErrorContent>)_httpResponseMessage.Content).Value;
-
-                Assert.NotNull(errorContent.Error);
-                Assert.Equal("400", errorContent.Error.Code);
-                Assert.Equal("Path segment not supported: 'Foo'.", errorContent.Error.Message);
-                Assert.Equal("query", errorContent.Error.Target);
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheStatusCodeIsBadRequest()
-            {
-                Assert.Equal(HttpStatusCode.BadRequest, _httpResponseMessage.StatusCode);
-            }
-        }
-
         public class CreateODataErrorResponse_WithODataException
         {
             private readonly HttpResponseMessage _httpResponseMessage;
@@ -580,85 +503,6 @@ namespace Net.Http.WebApi.OData.Tests
             public void TheStatusCodeIsNotImplemented()
             {
                 Assert.Equal(HttpStatusCode.NotImplemented, _httpResponseMessage.StatusCode);
-            }
-        }
-
-        public class CreateODataResponse_String_WithNonNullValue
-        {
-            private readonly HttpResponseMessage _httpResponseMessage;
-
-            public CreateODataResponse_String_WithNonNullValue()
-            {
-                var httpRequestMessage = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri("http://services.odata.org/OData/Products('Milk')/Code/$value"));
-
-                _httpResponseMessage = httpRequestMessage.CreateODataResponse("MLK");
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public async Task TheContentIsSet()
-            {
-                Assert.Equal("MLK", await ((StringContent)_httpResponseMessage.Content).ReadAsStringAsync());
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheContentIsStringContent()
-            {
-                Assert.IsType<StringContent>(_httpResponseMessage.Content);
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheContentTypeIsTextPlain()
-            {
-                Assert.Equal("text/plain", _httpResponseMessage.Content.Headers.ContentType.MediaType);
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheMetadataLevelContentTypeParameterIsNotSet()
-            {
-                NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
-
-                Assert.Null(metadataParameter);
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheStatusCodeIsOk()
-            {
-                Assert.Equal(HttpStatusCode.OK, _httpResponseMessage.StatusCode);
-            }
-        }
-
-        public class CreateODataResponse_String_WithNullValue
-        {
-            private readonly HttpResponseMessage _httpResponseMessage;
-
-            public CreateODataResponse_String_WithNullValue()
-            {
-                var httpRequestMessage = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri("http://services.odata.org/OData/Products('Milk')/Code/$value"));
-
-                _httpResponseMessage = httpRequestMessage.CreateODataResponse(default(string));
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheContentIsNull()
-            {
-                Assert.Null(_httpResponseMessage.Content);
-            }
-
-            [Fact]
-            [Trait("Category", "Unit")]
-            public void TheStatusCodeIsNoContent()
-            {
-                Assert.Equal(HttpStatusCode.NoContent, _httpResponseMessage.StatusCode);
             }
         }
     }

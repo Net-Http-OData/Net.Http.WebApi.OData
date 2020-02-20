@@ -10,7 +10,6 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
@@ -25,7 +24,7 @@ namespace Net.Http.WebApi.OData.Metadata
     /// An API controller which exposes the OData service metadata.
     /// </summary>
     [RoutePrefix("odata")]
-    public sealed class ODataMetadataController : ApiController
+    public sealed class ODataMetadataController : ODataController
     {
         private static string s_metadataXml;
 
@@ -35,9 +34,7 @@ namespace Net.Http.WebApi.OData.Metadata
         /// <returns>The <see cref="HttpResponseMessage"/> which contains the service metadata.</returns>
         [HttpGet]
         [Route("$metadata")]
-#pragma warning disable CA1822 // Mark members as static
-        public HttpResponseMessage Get()
-#pragma warning restore CA1822 // Mark members as static
+        public IHttpActionResult Get()
         {
             if (s_metadataXml is null)
             {
@@ -50,10 +47,7 @@ namespace Net.Http.WebApi.OData.Metadata
                 }
             }
 
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(s_metadataXml, Encoding.UTF8, "application/xml"),
-            };
+            return Content(s_metadataXml, "application/xml", Encoding.UTF8);
         }
     }
 }

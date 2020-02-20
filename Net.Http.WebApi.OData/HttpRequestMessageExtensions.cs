@@ -12,7 +12,6 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Globalization;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using Net.Http.OData;
@@ -26,64 +25,6 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     public static class HttpRequestMessageExtensions
     {
-        /// <summary>
-        /// Creates the OData error response from the specified request with the specified status code and message text.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to the error.</param>
-        /// <param name="statusCode">The <see cref="HttpStatusCode"/> to use for the response.</param>
-        /// <param name="message">The message to return in the error detail.</param>
-        /// <returns>An <see cref="HttpResponseMessage"/> representing the OData error.</returns>
-        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message)
-            => CreateODataErrorResponse(request, statusCode, message, null);
-
-        /// <summary>
-        /// Creates the OData error response from the specified request with the specified status code and message text.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to the error.</param>
-        /// <param name="statusCode">The <see cref="HttpStatusCode"/> to use for the response.</param>
-        /// <param name="message">The message to return in the error detail.</param>
-        /// <param name="target">The target of the error.</param>
-        /// <returns>An <see cref="HttpResponseMessage"/> representing the OData error.</returns>
-        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, string target)
-            => request.CreateResponse(statusCode, ODataErrorContent.Create((int)statusCode, message, target));
-
-        /// <summary>
-        /// Creates the OData error response from the specified exception.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to the error.</param>
-        /// <param name="exception">The <see cref="ODataException"/> indicating the error.</param>
-        /// <returns>An <see cref="HttpResponseMessage"/> representing the OData error.</returns>
-        public static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, ODataException exception)
-            => request.CreateResponse(exception.StatusCode, ODataErrorContent.Create(exception));
-
-        /// <summary>
-        /// Creates the OData response message from the specified request.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to this response message.</param>
-        /// <param name="statusCode">The HTTP response status code.</param>
-        /// <param name="value">The string content of the HTTP response message.</param>
-        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
-        public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string value)
-        {
-            HttpResponseMessage response = request.CreateResponse(statusCode);
-
-            if (value != null)
-            {
-                response.Content = new StringContent(value);
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Creates the OData response message from the specified request.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to this response message.</param>
-        /// <param name="value">The string content of the HTTP response message.</param>
-        /// <returns>An initialized System.Net.Http.HttpResponseMessage wired up to the associated System.Net.Http.HttpRequestMessage.</returns>
-        public static HttpResponseMessage CreateODataResponse(this HttpRequestMessage request, string value)
-            => CreateODataResponse(request, value is null ? HttpStatusCode.NoContent : HttpStatusCode.OK, value);
-
         /// <summary>
         /// Gets a value indicating whether the request is an OData Metadata request.
         /// </summary>
@@ -363,5 +304,14 @@ namespace Net.Http.WebApi.OData
                 entitySet,
                 entityKey);
         }
+
+        /// <summary>
+        /// Creates the OData error response from the specified exception.
+        /// </summary>
+        /// <param name="request">The HTTP request which led to the error.</param>
+        /// <param name="exception">The <see cref="ODataException"/> indicating the error.</param>
+        /// <returns>An <see cref="HttpResponseMessage"/> representing the OData error.</returns>
+        internal static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, ODataException exception)
+            => request.CreateResponse(exception.StatusCode, ODataErrorContent.Create(exception));
     }
 }

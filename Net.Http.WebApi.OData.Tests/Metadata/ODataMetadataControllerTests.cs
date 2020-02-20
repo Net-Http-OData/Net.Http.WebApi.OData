@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using System.Xml.Linq;
@@ -13,7 +11,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
     {
         [Fact]
         [Trait("Category", "Unit")]
-        public async Task GetReturnsCsdlXmlDocument()
+        public void GetReturnsCsdlXmlDocument()
         {
             TestHelper.EnsureEDM();
 
@@ -23,11 +21,13 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
             };
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-            HttpResponseMessage response = controller.Get();
+            IHttpActionResult response = controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.IsType<ContentResult>(response);
 
-            string result = await ((StringContent)response.Content).ReadAsStringAsync();
+            var contentResult = (ContentResult)response;
+
+            string result = contentResult.Content;
 
             Assert.NotNull(result);
 
