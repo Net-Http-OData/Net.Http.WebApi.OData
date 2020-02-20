@@ -40,7 +40,7 @@ namespace Net.Http.WebApi.OData.Metadata
             {
                 using (var stringWriter = new Utf8StringWriter())
                 {
-                    XDocument metadataDocument = MetadataProvider.Create(EntityDataModel.Current, ODataServiceOptions.Default);
+                    XDocument metadataDocument = XmlMetadataProvider.Create(EntityDataModel.Current, ODataServiceOptions.Default);
                     metadataDocument.Save(stringWriter);
 
                     s_metadataXml = stringWriter.ToString();
