@@ -40,5 +40,24 @@ namespace Net.Http.WebApi.OData
         /// <returns>An <see cref="ODataErrorContentResult"/>.</returns>
         protected virtual ODataErrorContentResult ODataError(HttpStatusCode statusCode, ODataErrorContent errorContent)
             => new ODataErrorContentResult(statusCode, errorContent, this);
+
+        /// <summary>
+        /// Creates an <see cref="ODataErrorContentResult"/> with the specified content.
+        /// </summary>
+        /// <param name="statusCode">The <see cref="HttpStatusCode"/> to use for the response.</param>
+        /// <param name="message">The message to use in the response.</param>
+        /// <returns>An <see cref="ODataErrorContentResult"/>.</returns>
+        protected virtual ODataErrorContentResult ODataError(HttpStatusCode statusCode, string message)
+            => ODataError(statusCode, message, null);
+
+        /// <summary>
+        /// Creates an <see cref="ODataErrorContentResult"/> with the specified content.
+        /// </summary>
+        /// <param name="statusCode">The <see cref="HttpStatusCode"/> to use for the response.</param>
+        /// <param name="message">The message to use in the response.</param>
+        /// <param name="target">The target of the error.</param>
+        /// <returns>An <see cref="ODataErrorContentResult"/>.</returns>
+        protected virtual ODataErrorContentResult ODataError(HttpStatusCode statusCode, string message, string target)
+            => new ODataErrorContentResult(statusCode, ODataErrorContent.Create((int)statusCode, message, target), this);
     }
 }
