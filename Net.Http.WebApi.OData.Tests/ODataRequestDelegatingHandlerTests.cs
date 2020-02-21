@@ -37,6 +37,26 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
+        public void SendAsync_ReturnsODataErrorContent_ForApplicationXml()
+        {
+            var httpConfiguration = new HttpConfiguration();
+
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/Products");
+            httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, httpConfiguration);
+            httpRequestMessage.Headers.Add("Accept", "application/xml");
+
+            var handler = new ODataRequestDelegatingHandler();
+            var invoker = new HttpMessageInvoker(handler);
+            HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
+            var odataErrorContent = (ODataErrorContent)((ObjectContent)httpResponseMessage.Content).Value;
+
+            Assert.Equal(HttpStatusCode.UnsupportedMediaType, httpResponseMessage.StatusCode);
+            Assert.Equal("415", odataErrorContent.Error.Code);
+            Assert.Equal("A supported MIME type could not be found that matches the acceptable MIME types for the request. The supported type(s) 'application/json;odata.metadata=none, application/json;odata.metadata=minimal, application/json, text/plain' do not match any of the acceptable MIME types 'application/xml'.", odataErrorContent.Error.Message);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
         public void SendAsync_ReturnsODataErrorContent_ForFullMetadataLevel()
         {
             var httpConfiguration = new HttpConfiguration();

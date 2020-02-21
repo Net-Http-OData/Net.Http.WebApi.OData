@@ -26,6 +26,8 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     public sealed class ODataRequestDelegatingHandler : DelegatingHandler
     {
+        private static readonly List<string> s_allowedMediaTypes = new List<string> { "application/json", "text/plain" };
+
         /// <inheritdoc/>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
@@ -88,6 +90,13 @@ namespace Net.Http.WebApi.OData
         {
             foreach (MediaTypeWithQualityHeaderValue header in request.Headers.Accept)
             {
+                if (!s_allowedMediaTypes.Contains(header.MediaType))
+                {
+                    throw new ODataException(
+                        HttpStatusCode.UnsupportedMediaType,
+                        $"A supported MIME type could not be found that matches the acceptable MIME types for the request. The supported type(s) 'application/json;odata.metadata=none, application/json;odata.metadata=minimal, application/json, text/plain' do not match any of the acceptable MIME types '{header.MediaType}'.");
+                }
+
                 foreach (NameValueHeaderValue parameter in header.Parameters)
                 {
                     if (parameter.Name == ODataMetadataLevelExtensions.HeaderName)

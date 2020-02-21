@@ -11,6 +11,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Net.Http.Formatting;
 using global::Net.Http.OData.Model;
 using global::Net.Http.OData.Query;
 using global::Net.Http.WebApi.OData;
@@ -54,6 +55,8 @@ namespace System.Web.Http
             }
 
             configuration.Filters.Add(new ODataExceptionFilterAttribute());
+
+            configuration.Formatters.JsonFormatter.AddQueryStringMapping("$format", "json", "application/json");
 
             configuration.MessageHandlers.Add(new ODataRequestDelegatingHandler());
 
