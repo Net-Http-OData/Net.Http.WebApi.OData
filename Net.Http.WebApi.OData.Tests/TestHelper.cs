@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Hosting;
+using Net.Http.OData;
 using Net.Http.OData.Model;
 using NorthwindModel;
 
@@ -6,15 +10,32 @@ namespace Net.Http.WebApi.OData.Tests
 {
     internal static class TestHelper
     {
+        /// <summary>
+        /// Creates a <see cref="HttpRequestMessage"/> for the URI 'https://services.odata.org/{path}'.
+        /// </summary>
+        /// <param name="path">The path for the request URI.</param>
+        /// <param name="metadataLevel">The metadata level to use (defaults to minimal if not specified).</param>
+        /// <returns>The HttpRequestMessage</returns>
+        internal static HttpRequestMessage CreateHttpRequestMessage(string path, ODataMetadataLevel metadataLevel = ODataMetadataLevel.Minimal)
+        {
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri("https://services.odata.org" + path));
+            httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            httpRequestMessage.Properties.Add(
+                typeof(ODataRequestOptions).FullName,
+                new ODataRequestOptions(new Uri("https://services.odata.org/OData/"), ODataIsolationLevel.None, metadataLevel, ODataVersion.OData40));
+
+            return httpRequestMessage;
+        }
+
         internal static void EnsureEDM()
         {
-            var entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase);
-            entityDataModelBuilder.RegisterEntitySet<Category>("Categories", x => x.Name, Capabilities.Insertable | Capabilities.Updatable | Capabilities.Deletable);
-            entityDataModelBuilder.RegisterEntitySet<Customer>("Customers", x => x.CompanyName, Capabilities.Updatable);
-            entityDataModelBuilder.RegisterEntitySet<Employee>("Employees", x => x.Id);
-            entityDataModelBuilder.RegisterEntitySet<Manager>("Managers", x => x.Id);
-            entityDataModelBuilder.RegisterEntitySet<Order>("Orders", x => x.OrderId, Capabilities.Insertable | Capabilities.Updatable);
-            entityDataModelBuilder.RegisterEntitySet<Product>("Products", x => x.ProductId, Capabilities.Insertable | Capabilities.Updatable);
+            EntityDataModelBuilder entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase)
+                .RegisterEntitySet<Category>("Categories", x => x.Name, Capabilities.Insertable | Capabilities.Updatable | Capabilities.Deletable)
+                .RegisterEntitySet<Customer>("Customers", x => x.CompanyName, Capabilities.Updatable)
+                .RegisterEntitySet<Employee>("Employees", x => x.Id)
+                .RegisterEntitySet<Manager>("Managers", x => x.Id)
+                .RegisterEntitySet<Order>("Orders", x => x.OrderId, Capabilities.Insertable | Capabilities.Updatable)
+                .RegisterEntitySet<Product>("Products", x => x.ProductId, Capabilities.Insertable | Capabilities.Updatable);
 
             entityDataModelBuilder.BuildModel();
         }
