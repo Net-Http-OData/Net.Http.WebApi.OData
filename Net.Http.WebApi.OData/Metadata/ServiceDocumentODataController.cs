@@ -33,10 +33,10 @@ namespace Net.Http.WebApi.OData.Metadata
         public IHttpActionResult Get()
         {
             ODataRequestOptions requestOptions = Request.ReadODataRequestOptions();
-            string contextUri = Request.ResolveODataContext();
+            string odataContext = Request.ResolveODataContext();
             IEnumerable<ServiceDocumentItem> serviceDocumentItems = ServiceDocumentProvider.Create(EntityDataModel.Current, requestOptions);
 
-            var serviceDocumentResponse = new ODataResponseContent(serviceDocumentItems, contextUri);
+            var serviceDocumentResponse = new ODataResponseContent(serviceDocumentItems, odataContext);
 
             return Ok(serviceDocumentResponse);
         }
