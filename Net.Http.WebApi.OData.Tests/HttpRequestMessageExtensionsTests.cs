@@ -432,7 +432,7 @@ namespace Net.Http.WebApi.OData.Tests
             {
                 HttpRequestMessage httpRequestMessage = TestHelper.CreateHttpRequestMessage("/OData/Products?$select=Foo");
 
-                _httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(new ODataException(HttpStatusCode.NotImplemented, "$search query option not supported.", "query"));
+                _httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(new ODataException("$search query option not supported.", HttpStatusCode.NotImplemented, "query"));
             }
 
             [Fact]
