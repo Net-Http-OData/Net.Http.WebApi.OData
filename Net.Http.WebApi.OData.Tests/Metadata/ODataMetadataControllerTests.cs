@@ -18,17 +18,17 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
                 Request = TestHelper.CreateHttpRequestMessage("/OData/$metadata")
             };
 
-            IHttpActionResult response = controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            Assert.IsType<ContentResult>(response);
+            Assert.IsType<ContentResult>(result);
 
-            var contentResult = (ContentResult)response;
+            var contentResult = (ContentResult)result;
 
-            string result = contentResult.Content;
+            string content = contentResult.Content;
 
-            Assert.NotNull(result);
+            Assert.NotNull(content);
 
-            var resultXml = XDocument.Parse(result);
+            var resultXml = XDocument.Parse(content);
 
             Assert.Equal("Edmx", resultXml.Root.Name.LocalName);
         }
