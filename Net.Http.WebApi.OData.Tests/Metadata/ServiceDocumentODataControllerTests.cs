@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Hosting;
+﻿using System.Web.Http;
 using System.Web.Http.Results;
 using Net.Http.OData;
 using Net.Http.WebApi.OData.Metadata;
@@ -20,25 +17,26 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ServiceDocumentODataController
             {
-                Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/")
+                Request = TestHelper.CreateHttpRequestMessage("/OData", ODataMetadataLevel.Full)
             };
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Full, ODataVersion.OData40));
 
-            var response = (OkNegotiatedContentResult<ODataResponseContent>)controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            var result = response.Content;
+            Assert.IsType<OkNegotiatedContentResult<ODataResponseContent>>(result);
 
-            Assert.NotNull(result.Context);
-            Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
+            var okResult = (OkNegotiatedContentResult<ODataResponseContent>)result;
 
-            Assert.Null(result.Count);
-            Assert.Null(result.NextLink);
+            ODataResponseContent odataResponseContent = okResult.Content;
 
-            string serviceDocument = JsonConvert.SerializeObject(result);
+            Assert.Equal("https://services.odata.org/OData/$metadata", odataResponseContent.Context);
+            Assert.Null(odataResponseContent.Count);
+            Assert.Null(odataResponseContent.NextLink);
+            Assert.NotNull(odataResponseContent.Value);
+
+            string serviceDocument = JsonConvert.SerializeObject(odataResponseContent);
 
             Assert.Equal(
-                "{\"@odata.context\":\"http://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
+                "{\"@odata.context\":\"https://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
                 serviceDocument);
         }
 
@@ -50,25 +48,26 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ServiceDocumentODataController
             {
-                Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/")
+                Request = TestHelper.CreateHttpRequestMessage("/OData", ODataMetadataLevel.Minimal)
             };
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.Minimal, ODataVersion.OData40));
 
-            var response = (OkNegotiatedContentResult<ODataResponseContent>)controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            var result = response.Content;
+            Assert.IsType<OkNegotiatedContentResult<ODataResponseContent>>(result);
 
-            Assert.NotNull(result.Context);
-            Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
+            var okResult = (OkNegotiatedContentResult<ODataResponseContent>)result;
 
-            Assert.Null(result.Count);
-            Assert.Null(result.NextLink);
+            ODataResponseContent odataResponseContent = okResult.Content;
 
-            string serviceDocument = JsonConvert.SerializeObject(result);
+            Assert.Equal("https://services.odata.org/OData/$metadata", odataResponseContent.Context);
+            Assert.Null(odataResponseContent.Count);
+            Assert.Null(odataResponseContent.NextLink);
+            Assert.NotNull(odataResponseContent.Value);
+
+            string serviceDocument = JsonConvert.SerializeObject(odataResponseContent);
 
             Assert.Equal(
-                "{\"@odata.context\":\"http://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
+                "{\"@odata.context\":\"https://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
                 serviceDocument);
         }
 
@@ -80,23 +79,26 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ServiceDocumentODataController
             {
-                Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/")
+                Request = TestHelper.CreateHttpRequestMessage("/OData", ODataMetadataLevel.None)
             };
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            controller.Request.Properties.Add(typeof(ODataRequestOptions).FullName, new ODataRequestOptions(new Uri("http://services.odata.org/OData/"), ODataIsolationLevel.None, ODataMetadataLevel.None, ODataVersion.OData40));
 
-            var response = (OkNegotiatedContentResult<ODataResponseContent>)controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            var result = response.Content;
+            Assert.IsType<OkNegotiatedContentResult<ODataResponseContent>>(result);
 
-            Assert.Null(result.Context);
-            Assert.Null(result.Count);
-            Assert.Null(result.NextLink);
+            var okResult = (OkNegotiatedContentResult<ODataResponseContent>)result;
 
-            string serviceDocument = JsonConvert.SerializeObject(result);
+            ODataResponseContent odataResponseContent = okResult.Content;
+
+            Assert.Null(odataResponseContent.Context);
+            Assert.Null(odataResponseContent.Count);
+            Assert.Null(odataResponseContent.NextLink);
+            Assert.NotNull(odataResponseContent.Value);
+
+            string serviceDocument = JsonConvert.SerializeObject(odataResponseContent);
 
             Assert.Equal(
-                "{\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Products\"}]}",
+                "{\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"https://services.odata.org/OData/Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"https://services.odata.org/OData/Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"https://services.odata.org/OData/Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"https://services.odata.org/OData/Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"https://services.odata.org/OData/Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"https://services.odata.org/OData/Products\"}]}",
                 serviceDocument);
         }
     }

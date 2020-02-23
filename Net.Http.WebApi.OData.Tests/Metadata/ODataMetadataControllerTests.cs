@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Hosting;
+﻿using System.Web.Http;
 using System.Xml.Linq;
 using Net.Http.WebApi.OData.Metadata;
 using Xunit;
@@ -17,9 +15,8 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ODataMetadataController
             {
-                Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/$metadata")
+                Request = TestHelper.CreateHttpRequestMessage("/OData/$metadata")
             };
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
             IHttpActionResult response = controller.Get();
 
