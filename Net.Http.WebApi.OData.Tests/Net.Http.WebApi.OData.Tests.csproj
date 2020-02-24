@@ -113,6 +113,7 @@
     <Compile Include="NorthwindModel\Order.cs" />
     <Compile Include="NorthwindModel\OrderDetail.cs" />
     <Compile Include="NorthwindModel\Product.cs" />
+    <Compile Include="ODataMetadataLevelExtensionsTests.cs" />
     <Compile Include="ODataQueryOptionsHttpParameterBindingTests.cs" />
     <Compile Include="ODataRequestDelegatingHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
