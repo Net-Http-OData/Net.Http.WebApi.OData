@@ -18,7 +18,7 @@ namespace Net.Http.WebApi.OData.Tests
                 {
                     ControllerContext = new HttpControllerContext
                     {
-                        Request = TestHelper.CreateHttpRequestMessage("/OData/Products"),
+                        Request = TestHelper.CreateODataHttpRequestMessage("/OData/Products"),
                     }
                 },
                 Exception = new ArgumentNullException("Name"),
@@ -39,7 +39,7 @@ namespace Net.Http.WebApi.OData.Tests
                 {
                     ControllerContext = new HttpControllerContext
                     {
-                        Request = TestHelper.CreateHttpRequestMessage("/OData/Products?$select=Foo"),
+                        Request = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=Foo"),
                     }
                 },
                 Exception = new ODataException("The type 'NorthwindModel.Product' does not contain a property named 'Foo'", HttpStatusCode.BadRequest),

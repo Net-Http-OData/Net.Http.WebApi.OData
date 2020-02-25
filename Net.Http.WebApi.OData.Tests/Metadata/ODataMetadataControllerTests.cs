@@ -15,7 +15,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ODataMetadataController
             {
-                Request = TestHelper.CreateHttpRequestMessage("/OData/$metadata")
+                Request = TestHelper.CreateODataHttpRequestMessage("/OData/$metadata")
             };
 
             IHttpActionResult result = controller.Get();
