@@ -37,13 +37,14 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
 
+            Assert.Equal(HttpStatusCode.UnsupportedMediaType, httpResponseMessage.StatusCode);
+
             Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
 
             var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
-            Assert.Equal(HttpStatusCode.UnsupportedMediaType, httpResponseMessage.StatusCode);
             Assert.Equal("415", odataErrorContent.Error.Code);
             Assert.Equal("A supported MIME type could not be found that matches the acceptable MIME types for the request. The supported type(s) 'application/json;odata.metadata=none, application/json;odata.metadata=minimal, application/json, text/plain' do not match any of the acceptable MIME types 'application/xml'.", odataErrorContent.Error.Message);
         }
@@ -59,13 +60,14 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
 
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+
             Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
 
             var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
             Assert.Equal("odata.metadata 'full' is not supported by this service, please use 'none' or 'minimal'.", odataErrorContent.Error.Message);
         }
@@ -81,13 +83,14 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
 
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+
             Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
 
             var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
             Assert.Equal("If specified, the OData-Isolation must be 'Snapshot'.", odataErrorContent.Error.Message);
         }
@@ -103,13 +106,14 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
 
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+
             Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
 
             var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
             Assert.Equal("If specified, the OData-MaxVersion header must be a valid OData version supported by this service between version 4.0 and 4.0.", odataErrorContent.Error.Message);
         }
@@ -125,13 +129,14 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
 
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+
             Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
 
             var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
             Assert.Equal("If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'.", odataErrorContent.Error.Message);
         }
@@ -147,13 +152,14 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
 
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+
             Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
 
             var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
             Assert.Equal("If specified, the OData-Version header must be a valid OData version supported by this service between version 4.0 and 4.0.", odataErrorContent.Error.Message);
         }
