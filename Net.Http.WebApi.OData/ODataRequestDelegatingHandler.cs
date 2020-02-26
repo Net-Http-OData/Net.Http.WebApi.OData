@@ -81,7 +81,7 @@ namespace Net.Http.WebApi.OData
                 }
 
                 throw new ODataException(
-                    $"If specified, the {ODataHeaderNames.ODataIsolation} must be 'Snapshot'",
+                    $"If specified, the {ODataHeaderNames.ODataIsolation} must be 'Snapshot'.",
                     HttpStatusCode.BadRequest);
             }
 
@@ -113,12 +113,12 @@ namespace Net.Http.WebApi.OData
 
                             case "full":
                                 throw new ODataException(
-                                    $"{ODataMetadataLevelExtensions.HeaderName} 'full' is not supported by this service, please use 'none' or 'minimal'",
+                                    $"{ODataMetadataLevelExtensions.HeaderName} 'full' is not supported by this service, please use 'none' or 'minimal'.",
                                     HttpStatusCode.BadRequest);
 
                             default:
                                 throw new ODataException(
-                                    $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the Accept header must be 'none', 'minimal' or 'full'",
+                                    $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the Accept header must be 'none', 'minimal' or 'full'.",
                                     HttpStatusCode.BadRequest);
                         }
                     }
@@ -141,7 +141,7 @@ namespace Net.Http.WebApi.OData
                 else
                 {
                     throw new ODataException(
-                        $"If specified, the {ODataHeaderNames.ODataVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}",
+                        $"If specified, the {ODataHeaderNames.ODataVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}.",
                         HttpStatusCode.BadRequest);
                 }
             }
@@ -157,7 +157,7 @@ namespace Net.Http.WebApi.OData
                 else
                 {
                     throw new ODataException(
-                        $"If specified, the {ODataHeaderNames.ODataMaxVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}",
+                        $"If specified, the {ODataHeaderNames.ODataMaxVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}.",
                         HttpStatusCode.BadRequest);
                 }
             }

@@ -67,7 +67,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
-            Assert.Equal("odata.metadata 'full' is not supported by this service, please use 'none' or 'minimal'", odataErrorContent.Error.Message);
+            Assert.Equal("odata.metadata 'full' is not supported by this service, please use 'none' or 'minimal'.", odataErrorContent.Error.Message);
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
-            Assert.Equal("If specified, the OData-Isolation must be 'Snapshot'", odataErrorContent.Error.Message);
+            Assert.Equal("If specified, the OData-Isolation must be 'Snapshot'.", odataErrorContent.Error.Message);
         }
 
         [Fact]
@@ -111,7 +111,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
-            Assert.Equal("If specified, the OData-MaxVersion header must be a valid OData version supported by this service between version 4.0 and 4.0", odataErrorContent.Error.Message);
+            Assert.Equal("If specified, the OData-MaxVersion header must be a valid OData version supported by this service between version 4.0 and 4.0.", odataErrorContent.Error.Message);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
-            Assert.Equal("If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'", odataErrorContent.Error.Message);
+            Assert.Equal("If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'.", odataErrorContent.Error.Message);
         }
 
         [Fact]
@@ -155,7 +155,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
             Assert.Equal("400", odataErrorContent.Error.Code);
-            Assert.Equal("If specified, the OData-Version header must be a valid OData version supported by this service between version 4.0 and 4.0", odataErrorContent.Error.Message);
+            Assert.Equal("If specified, the OData-Version header must be a valid OData version supported by this service between version 4.0 and 4.0.", odataErrorContent.Error.Message);
         }
 
         public class WhenCalling_SendAsync_AndTheResponseHasNoContent
