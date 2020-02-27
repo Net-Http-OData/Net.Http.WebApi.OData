@@ -38,7 +38,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Net.Http.OData" Version="5.0.0-preview20200226.2" />
+    <PackageReference Include="Net.Http.OData" Version="5.0.0-preview20200227.1" />
     <PackageReference Include="SecurityCodeScan" Version="3.4.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

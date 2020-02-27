@@ -17,12 +17,16 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         [Route("")]
         public IHttpActionResult Get(ODataQueryOptions queryOptions)
         {
-            IEnumerable<Employee> value = Enumerable.Empty<Employee>();
             string odataContext = Request.ResolveODataContext(queryOptions.EntitySet, queryOptions.Select);
+            IEnumerable<Employee> value = Enumerable.Empty<Employee>();
 
-            var responseContent = new ODataResponseContent(value, odataContext);
+            var odataResponseContent = new ODataResponseContent
+            {
+                Context = odataContext,
+                Value = value,
+            };
 
-            return Ok(responseContent);
+            return Ok(odataResponseContent);
         }
     }
 }
