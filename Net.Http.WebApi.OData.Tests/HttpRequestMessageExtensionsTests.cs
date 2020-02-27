@@ -59,7 +59,7 @@ namespace Net.Http.WebApi.OData.Tests
             TestHelper.EnsureEDM();
 
             HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(
-                "/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25");
+                "/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25");
 
             ODataQueryOptions queryOptions = new ODataQueryOptions(
                 httpRequestMessage.RequestUri.Query,
@@ -67,7 +67,7 @@ namespace Net.Http.WebApi.OData.Tests
                 Mock.Of<IODataQueryOptionsValidator>());
 
             Assert.Equal(
-                "https://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price$top=25",
+                "https://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25",
                 httpRequestMessage.NextLink(queryOptions, 50, 25));
         }
 
