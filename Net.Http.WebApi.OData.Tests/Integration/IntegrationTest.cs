@@ -2,6 +2,8 @@
 using System.Net.Http;
 using System.Web.Http;
 using Net.Http.OData.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using NorthwindModel;
 
 namespace Net.Http.WebApi.OData.Tests
@@ -14,6 +16,10 @@ namespace Net.Http.WebApi.OData.Tests
         protected IntegrationTest()
         {
             _httpConfiguration = new HttpConfiguration();
+
+            _httpConfiguration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            _httpConfiguration.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+
             _httpConfiguration.UseOData(entityDataModelBuilder =>
             {
                 entityDataModelBuilder

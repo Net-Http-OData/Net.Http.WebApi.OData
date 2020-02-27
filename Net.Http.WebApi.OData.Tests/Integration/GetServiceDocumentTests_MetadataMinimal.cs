@@ -46,7 +46,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             string result = await _httpResponseMessage.Content.ReadAsStringAsync();
 
             Assert.Equal(
-                "{\"@odata.context\":\"http://server/odata/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
+                "{\"@odata.context\":\"http://server/odata/$metadata\",\"value\":[{\"kind\":\"EntitySet\",\"name\":\"Categories\",\"url\":\"Categories\"},{\"kind\":\"EntitySet\",\"name\":\"Customers\",\"url\":\"Customers\"},{\"kind\":\"EntitySet\",\"name\":\"Employees\",\"url\":\"Employees\"},{\"kind\":\"EntitySet\",\"name\":\"Managers\",\"url\":\"Managers\"},{\"kind\":\"EntitySet\",\"name\":\"Orders\",\"url\":\"Orders\"},{\"kind\":\"EntitySet\",\"name\":\"Products\",\"url\":\"Products\"}]}",
                 result);
         }
 
