@@ -21,7 +21,8 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage httpResponseMessage = invoker.SendAsync(httpRequestMessage, CancellationToken.None).Result;
 
-            NameValueHeaderValue metadataParameter = httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+            NameValueHeaderValue metadataParameter =
+                httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
             Assert.Null(metadataParameter);
         }
@@ -179,7 +180,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             [Fact]
             [Trait("Category", "Unit")]
-            public void TheMetadataLevelContentTypeParameterIsSetInTheResponse()
+            public void TheMetadataLevelContentTypeParameterIsNotSetInTheResponse()
             {
                 Assert.Null(_httpResponseMessage.Content);
             }
@@ -238,7 +239,7 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_Version_IsSetTo_4_0()
             {
-                Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.Version);
+                Assert.Equal(ODataVersion.OData40, _odataRequestOptions.Version);
             }
 
             [Fact]
@@ -252,7 +253,8 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsSetInTheResponse()
             {
-                NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+                NameValueHeaderValue metadataParameter =
+                    _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("none", metadataParameter.Value);
@@ -323,7 +325,8 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsSetInTheResponse()
             {
-                NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+                NameValueHeaderValue metadataParameter =
+                    _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("minimal", metadataParameter.Value);
@@ -364,7 +367,8 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsNotSet()
             {
-                NameValueHeaderValue metadataParameter = _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+                NameValueHeaderValue metadataParameter =
+                    _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.Null(metadataParameter);
             }
