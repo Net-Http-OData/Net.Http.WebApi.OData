@@ -217,7 +217,7 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_DataServiceRoot_IsSet()
             {
-                Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.DataServiceRoot.ToString());
+                Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.ServiceRootUri.ToString());
             }
 
             [Fact]
@@ -288,7 +288,7 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_DataServiceRoot_IsSet()
             {
-                Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.DataServiceRoot.ToString());
+                Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.ServiceRootUri.ToString());
             }
 
             [Fact]
