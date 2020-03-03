@@ -246,32 +246,31 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         <Annotation Term=""Org.OData.Capabilities.V1.BatchContinueOnErrorSupported"" Bool=""false"" />
         <Annotation Term=""Org.OData.Capabilities.V1.FilterFunctions"">
           <Collection>
-            <String>cast</String>
-            <String>isof</String>
-            <String>endswith</String>
-            <String>startswith</String>
+            <String>concat</String>
             <String>contains</String>
+            <String>endswith</String>
+            <String>indexof</String>
+            <String>length</String>
+            <String>startswith</String>
+            <String>substring</String>
             <String>tolower</String>
             <String>toupper</String>
             <String>trim</String>
-            <String>length</String>
-            <String>indexof</String>
-            <String>replace</String>
-            <String>substring</String>
-            <String>concat</String>
-            <String>year</String>
-            <String>month</String>
             <String>day</String>
-            <String>hour</String>
-            <String>minute</String>
-            <String>second</String>
             <String>fractionalseconds</String>
-            <String>now</String>
-            <String>mindatetime</String>
+            <String>hour</String>
             <String>maxdatetime</String>
-            <String>round</String>
+            <String>mindatetime</String>
+            <String>minute</String>
+            <String>month</String>
+            <String>now</String>
+            <String>second</String>
+            <String>year</String>
             <String>ceiling</String>
             <String>floor</String>
+            <String>round</String>
+            <String>cast</String>
+            <String>isof</String>
           </Collection>
         </Annotation>
       </Annotations>

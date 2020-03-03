@@ -312,6 +312,6 @@ namespace Net.Http.WebApi.OData
         /// <param name="exception">The <see cref="ODataException"/> indicating the error.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> representing the OData error.</returns>
         internal static HttpResponseMessage CreateODataErrorResponse(this HttpRequestMessage request, ODataException exception)
-            => request.CreateResponse(exception.StatusCode, ODataErrorContent.Create(exception));
+            => request.CreateResponse(exception.StatusCode, exception.ToODataErrorContent());
     }
 }
