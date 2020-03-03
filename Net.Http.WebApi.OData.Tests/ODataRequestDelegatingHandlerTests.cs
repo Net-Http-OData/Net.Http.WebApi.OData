@@ -367,10 +367,7 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsNotSet()
             {
-                NameValueHeaderValue metadataParameter =
-                    _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
-
-                Assert.Null(metadataParameter);
+            	Assert.DoesNotContain(_httpResponseMessage.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
             }
 
             [Fact]
