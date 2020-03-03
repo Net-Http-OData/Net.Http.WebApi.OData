@@ -52,7 +52,7 @@ namespace Net.Http.WebApi.OData
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-            if (request?.IsODataRequest() == true)
+            if (requestOptions != null)
             {
                 if (!request.IsODataMetadataRequest())
                 {
