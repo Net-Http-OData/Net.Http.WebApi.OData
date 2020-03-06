@@ -25,7 +25,13 @@ namespace Net.Http.WebApi.OData
     /// </summary>
     public sealed class ODataRequestDelegatingHandler : DelegatingHandler
     {
-        private static readonly List<string> s_allowedMediaTypes = new List<string> { "application/json", "text/plain" };
+        private readonly ODataServiceOptions _odataServiceOptions;
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ODataRequestDelegatingHandler"/> class.
+        /// </summary>
+        /// <param name="odataServiceOptions">The <see cref="ODataServiceOptions"/> for the service.</param>
+        public ODataRequestDelegatingHandler(ODataServiceOptions odataServiceOptions) => _odataServiceOptions = odataServiceOptions;
 
         /// <inheritdoc/>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -59,7 +65,7 @@ namespace Net.Http.WebApi.OData
                     response.Content?.Headers.ContentType.Parameters.Add(requestOptions.MetadataLevel.ToNameValueHeaderValue());
                 }
 
-                response.Headers.Add(ODataHeaderNames.ODataVersion, requestOptions.Version.ToString());
+                response.Headers.Add(ODataResponseHeaderNames.ODataVersion, requestOptions.Version.ToString());
             }
 
             return response;
@@ -68,28 +74,39 @@ namespace Net.Http.WebApi.OData
         private static string ReadHeaderValue(HttpRequestMessage request, string name)
             => request.Headers.TryGetValues(name, out IEnumerable<string> values) ? values.FirstOrDefault() : default;
 
-        private static ODataIsolationLevel ReadIsolationLevel(HttpRequestMessage request)
+        private ODataIsolationLevel ReadIsolationLevel(HttpRequestMessage request)
         {
-            string headerValue = ReadHeaderValue(request, ODataHeaderNames.ODataIsolation);
+            ODataIsolationLevel odataIsolationLevel = ODataIsolationLevel.None;
+
+            string headerValue = ReadHeaderValue(request, ODataRequestHeaderNames.ODataIsolation);
 
             if (headerValue != null)
             {
                 if (headerValue == "Snapshot")
                 {
-                    return ODataIsolationLevel.Snapshot;
+                    odataIsolationLevel = ODataIsolationLevel.Snapshot;
                 }
-
-                throw ODataException.BadRequest($"If specified, the {ODataHeaderNames.ODataIsolation} must be 'Snapshot'.");
+                else
+                {
+                    throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataIsolation} must be 'Snapshot'.");
+                }
             }
 
-            return ODataIsolationLevel.None;
+            if (!_odataServiceOptions.SupportedIsolationLevels.Contains(odataIsolationLevel))
+            {
+                throw ODataException.PreconditionFailed($"{ODataRequestHeaderNames.ODataIsolation} '{headerValue}' is not supported by this service.");
+            }
+
+            return odataIsolationLevel;
         }
 
-        private static ODataMetadataLevel ReadMetadataLevel(HttpRequestMessage request)
+        private ODataMetadataLevel ReadMetadataLevel(HttpRequestMessage request)
         {
+            ODataMetadataLevel odataMetadataLevel = ODataMetadataLevel.Minimal;
+
             foreach (MediaTypeWithQualityHeaderValue header in request.Headers.Accept)
             {
-                if (!s_allowedMediaTypes.Contains(header.MediaType))
+                if (!_odataServiceOptions.SupportedMediaTypes.Contains(header.MediaType))
                 {
                     throw ODataException.UnsupportedMediaType(
                         $"A supported MIME type could not be found that matches the acceptable MIME types for the request. The supported type(s) 'application/json;odata.metadata=none, application/json;odata.metadata=minimal, application/json, text/plain' do not match any of the acceptable MIME types '{header.MediaType}'.");
@@ -102,14 +119,16 @@ namespace Net.Http.WebApi.OData
                         switch (parameter.Value)
                         {
                             case "none":
-                                return ODataMetadataLevel.None;
+                                odataMetadataLevel = ODataMetadataLevel.None;
+                                break;
 
                             case "minimal":
-                                return ODataMetadataLevel.Minimal;
+                                odataMetadataLevel = ODataMetadataLevel.Minimal;
+                                break;
 
                             case "full":
-                                throw ODataException.BadRequest(
-                                    $"{ODataMetadataLevelExtensions.HeaderName} 'full' is not supported by this service, please use 'none' or 'minimal'.");
+                                odataMetadataLevel = ODataMetadataLevel.Full;
+                                break;
 
                             default:
                                 throw ODataException.BadRequest(
@@ -119,38 +138,31 @@ namespace Net.Http.WebApi.OData
                 }
             }
 
-            return ODataMetadataLevel.Minimal;
-        }
-
-        private static ODataVersion ReadODataVersion(HttpRequestMessage request)
-        {
-            string headerValue = ReadHeaderValue(request, ODataHeaderNames.ODataVersion);
-
-            if (headerValue != null)
+            if (!_odataServiceOptions.SupportedMetadataLevels.Contains(odataMetadataLevel))
             {
-                if (ODataVersion.TryParse(headerValue, out ODataVersion odataVersion) && odataVersion >= ODataVersion.MinVersion && odataVersion <= ODataVersion.MaxVersion)
-                {
-                    return odataVersion;
-                }
-                else
-                {
-                    throw ODataException.BadRequest(
-                        $"If specified, the {ODataHeaderNames.ODataVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}.");
-                }
+                throw ODataException.BadRequest(
+#pragma warning disable CA1308 // Normalize strings to uppercase
+                    $"{ODataMetadataLevelExtensions.HeaderName} '{odataMetadataLevel.ToNameValueHeaderValue().Value}' is not supported by this service, the metadata levels supported by this service are '{string.Join(", ", _odataServiceOptions.SupportedMetadataLevels.Select(x => x.ToString().ToLowerInvariant()))}'.");
+#pragma warning restore CA1308 // Normalize strings to uppercase
             }
 
-            headerValue = ReadHeaderValue(request, ODataHeaderNames.ODataMaxVersion);
+            return odataMetadataLevel;
+        }
+
+        private ODataVersion ReadODataVersion(HttpRequestMessage request)
+        {
+            string headerValue = ReadHeaderValue(request, ODataRequestHeaderNames.ODataMaxVersion);
 
             if (headerValue != null)
             {
-                if (ODataVersion.TryParse(headerValue, out ODataVersion odataVersion) && odataVersion >= ODataVersion.MinVersion && odataVersion <= ODataVersion.MaxVersion)
+                if (ODataVersion.TryParse(headerValue, out ODataVersion odataVersion) && odataVersion >= _odataServiceOptions.MinVersion && odataVersion <= _odataServiceOptions.MaxVersion)
                 {
                     return odataVersion;
                 }
                 else
                 {
                     throw ODataException.BadRequest(
-                        $"If specified, the {ODataHeaderNames.ODataMaxVersion} header must be a valid OData version supported by this service between version {ODataVersion.MinVersion} and {ODataVersion.MaxVersion}.");
+                        $"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version supported by this service between version {_odataServiceOptions.MinVersion} and {_odataServiceOptions.MaxVersion}.");
                 }
             }
 

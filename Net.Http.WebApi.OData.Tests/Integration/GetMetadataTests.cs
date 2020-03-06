@@ -28,7 +28,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         [Trait("Category", "Integration")]
         public void Contains_Header_ODataVersion()
         {
-            Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
         }
 
         [Fact]
@@ -256,6 +256,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             <String>tolower</String>
             <String>toupper</String>
             <String>trim</String>
+            <String>date</String>
             <String>day</String>
             <String>fractionalseconds</String>
             <String>hour</String>
@@ -265,6 +266,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             <String>month</String>
             <String>now</String>
             <String>second</String>
+            <String>totaloffsetminutes</String>
             <String>year</String>
             <String>ceiling</String>
             <String>floor</String>

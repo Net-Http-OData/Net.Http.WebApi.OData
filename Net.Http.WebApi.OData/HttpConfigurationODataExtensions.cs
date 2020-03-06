@@ -15,6 +15,7 @@ using System.Net.Http.Formatting;
 using global::Net.Http.OData.Model;
 using global::Net.Http.OData.Query;
 using global::Net.Http.WebApi.OData;
+using Net.Http.OData;
 
 namespace System.Web.Http
 {
@@ -58,7 +59,13 @@ namespace System.Web.Http
 
             configuration.Formatters.JsonFormatter.AddQueryStringMapping("$format", "json", "application/json");
 
-            configuration.MessageHandlers.Add(new ODataRequestDelegatingHandler());
+            ODataServiceOptions.Current = new ODataServiceOptions(
+                ODataVersion.MinVersion,
+                ODataVersion.MaxVersion,
+                new[] { ODataIsolationLevel.None },
+                new[] { "application/json", "text/plain" });
+
+            configuration.MessageHandlers.Add(new ODataRequestDelegatingHandler(ODataServiceOptions.Current));
 
             configuration.ParameterBindingRules.Add(p => p.ParameterType == typeof(ODataQueryOptions) ? new ODataQueryOptionsHttpParameterBinding(p) : null);
 
