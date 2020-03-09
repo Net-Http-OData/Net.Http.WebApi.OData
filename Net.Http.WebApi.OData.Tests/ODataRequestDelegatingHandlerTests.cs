@@ -183,9 +183,7 @@ namespace Net.Http.WebApi.OData.Tests
             [Fact]
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsNotSetInTheResponse()
-            {
-                Assert.Null(_httpResponseMessage.Content);
-            }
+                => Assert.Null(_httpResponseMessage.Content);
 
             [Fact]
             [Trait("Category", "Unit")]
@@ -226,44 +224,32 @@ namespace Net.Http.WebApi.OData.Tests
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_DataServiceRoot_IsSet()
-            {
-                Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.ServiceRootUri.ToString());
-            }
+                => Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.ServiceRootUri.ToString());
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_IsolationLevel_IsSetTo_Snapshot()
-            {
-                Assert.Equal(ODataIsolationLevel.Snapshot, _odataRequestOptions.IsolationLevel);
-            }
+                => Assert.Equal(ODataIsolationLevel.Snapshot, _odataRequestOptions.IsolationLevel);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_MaxVersion_IsSetTo_4_0()
-            {
-                Assert.Equal(ODataVersion.OData40, _odataRequestOptions.ODataMaxVersion);
-            }
+                => Assert.Equal(ODataVersion.OData40, _odataRequestOptions.ODataMaxVersion);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_MetadataLevel_IsSetTo_None()
-            {
-                Assert.Equal(ODataMetadataLevel.None, _odataRequestOptions.MetadataLevel);
-            }
+                => Assert.Equal(ODataMetadataLevel.None, _odataRequestOptions.MetadataLevel);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_Version_IsSetTo_4_0()
-            {
-                Assert.Equal(ODataVersion.OData40, _odataRequestOptions.ODataVersion);
-            }
+                => Assert.Equal(ODataVersion.OData40, _odataRequestOptions.ODataVersion);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void RequestParameters_ContainsODataRequestOptions()
-            {
-                Assert.NotNull(_odataRequestOptions);
-            }
+                => Assert.NotNull(_odataRequestOptions);
 
             [Fact]
             [Trait("Category", "Unit")]
@@ -305,44 +291,32 @@ namespace Net.Http.WebApi.OData.Tests
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_DataServiceRoot_IsSet()
-            {
-                Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.ServiceRootUri.ToString());
-            }
+                => Assert.Equal("https://services.odata.org/OData/", _odataRequestOptions.ServiceRootUri.ToString());
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_IsolationLevel_DefaultsTo_None()
-            {
-                Assert.Equal(ODataIsolationLevel.None, _odataRequestOptions.IsolationLevel);
-            }
+                => Assert.Equal(ODataIsolationLevel.None, _odataRequestOptions.IsolationLevel);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_MaxVersion_DefaultsTo_MaxVersion()
-            {
-                Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.ODataMaxVersion);
-            }
+                => Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.ODataMaxVersion);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_MetadataLevel_DefaultsTo_Minimal()
-            {
-                Assert.Equal(ODataMetadataLevel.Minimal, _odataRequestOptions.MetadataLevel);
-            }
+                => Assert.Equal(ODataMetadataLevel.Minimal, _odataRequestOptions.MetadataLevel);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_Version_DefaultsTo_MaxVersion()
-            {
-                Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.ODataVersion);
-            }
+                => Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.ODataVersion);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void RequestParameters_ContainsODataRequestOptions()
-            {
-                Assert.NotNull(_odataRequestOptions);
-            }
+                => Assert.NotNull(_odataRequestOptions);
 
             [Fact]
             [Trait("Category", "Unit")]
@@ -366,8 +340,8 @@ namespace Net.Http.WebApi.OData.Tests
 
         public class WhenCalling_SendAsync_WithoutAnODataUri
         {
-            private readonly HttpRequestMessage _request;
             private readonly HttpResponseMessage _httpResponseMessage;
+            private readonly HttpRequestMessage _request;
 
             public WhenCalling_SendAsync_WithoutAnODataUri()
             {
@@ -389,16 +363,12 @@ namespace Net.Http.WebApi.OData.Tests
             [Fact]
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsNotSet()
-            {
-                Assert.DoesNotContain(_httpResponseMessage.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
-            }
+                => Assert.DoesNotContain(_httpResponseMessage.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void TheODataVersionHeaderIsNotSet()
-            {
-                Assert.False(_httpResponseMessage.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
-            }
+                => Assert.False(_httpResponseMessage.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
         }
 
         private class MockHttpMessageHandler : HttpMessageHandler
@@ -406,9 +376,7 @@ namespace Net.Http.WebApi.OData.Tests
             private readonly bool _includeContentInResponse;
 
             public MockHttpMessageHandler(bool includeContentInResponse = true)
-            {
-                _includeContentInResponse = includeContentInResponse;
-            }
+                => _includeContentInResponse = includeContentInResponse;
 
             protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
             {

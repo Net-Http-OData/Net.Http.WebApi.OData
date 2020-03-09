@@ -10,8 +10,8 @@ namespace Net.Http.WebApi.OData.Tests
 {
     public abstract class IntegrationTest : IDisposable
     {
-        private HttpConfiguration _httpConfiguration;
-        private HttpServer _httpServer;
+        private readonly HttpConfiguration _httpConfiguration;
+        private readonly HttpServer _httpServer;
 
         protected IntegrationTest()
         {
@@ -34,6 +34,7 @@ namespace Net.Http.WebApi.OData.Tests
             _httpConfiguration.MapHttpAttributeRoutes();
 
             _httpServer = new HttpServer(_httpConfiguration);
+
             HttpClient = new HttpClient(_httpServer);
             HttpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         }

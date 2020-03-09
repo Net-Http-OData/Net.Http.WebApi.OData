@@ -13,23 +13,17 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         private readonly HttpResponseMessage _httpResponseMessage;
 
         public GetMetadataTests()
-        {
-            _httpResponseMessage = HttpClient.GetAsync("http://server/odata/$metadata").Result;
-        }
+            => _httpResponseMessage = HttpClient.GetAsync("http://server/odata/$metadata").Result;
 
         [Fact]
         [Trait("Category", "Integration")]
         public void Contains_Header_ContentType_ApplicationXml()
-        {
-            Assert.Equal("application/xml", _httpResponseMessage.Content.Headers.ContentType.MediaType);
-        }
+            => Assert.Equal("application/xml", _httpResponseMessage.Content.Headers.ContentType.MediaType);
 
         [Fact]
         [Trait("Category", "Integration")]
         public void Contains_Header_ODataVersion()
-        {
-            Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
-        }
+            => Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
 
         [Fact]
         [Trait("Category", "Integration")]
@@ -286,15 +280,11 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         [Fact]
         [Trait("Category", "Integration")]
         public void Not_Contains_Header_ContentType_Parameter_ODataMetadata()
-        {
-            Assert.DoesNotContain(_httpResponseMessage.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
-        }
+            => Assert.DoesNotContain(_httpResponseMessage.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
         [Fact]
         [Trait("Category", "Integration")]
         public void StatusCode_OK()
-        {
-            Assert.Equal(HttpStatusCode.OK, _httpResponseMessage.StatusCode);
-        }
+            => Assert.Equal(HttpStatusCode.OK, _httpResponseMessage.StatusCode);
     }
 }
