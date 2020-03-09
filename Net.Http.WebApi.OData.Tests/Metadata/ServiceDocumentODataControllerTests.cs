@@ -16,7 +16,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ServiceDocumentODataController
             {
-                Request = TestHelper.CreateODataHttpRequestMessage("/OData", ODataMetadataLevel.Full)
+                Request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.Full)
             };
 
             IHttpActionResult result = controller.Get();
@@ -41,7 +41,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ServiceDocumentODataController
             {
-                Request = TestHelper.CreateODataHttpRequestMessage("/OData", ODataMetadataLevel.Minimal)
+                Request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.Minimal)
             };
 
             IHttpActionResult result = controller.Get();
@@ -66,7 +66,7 @@ namespace Net.Http.WebApi.OData.Tests.Metadata
 
             var controller = new ServiceDocumentODataController
             {
-                Request = TestHelper.CreateODataHttpRequestMessage("/OData", ODataMetadataLevel.None)
+                Request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.None)
             };
 
             IHttpActionResult result = controller.Get();

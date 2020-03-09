@@ -16,18 +16,18 @@ namespace Net.Http.WebApi.OData.Tests
         [Trait("Category", "Unit")]
         public void IsODataMetadataRequest_False(string path)
         {
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(path);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest(path);
 
-            Assert.False(httpRequestMessage.IsODataMetadataRequest());
+            Assert.False(request.IsODataMetadataRequest());
         }
 
         [Fact]
         [Trait("Category", "Unit")]
         public void IsODataMetadataRequest_True()
         {
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/odata/$metadata");
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/odata/$metadata");
 
-            Assert.True(httpRequestMessage.IsODataMetadataRequest());
+            Assert.True(request.IsODataMetadataRequest());
         }
 
         [Theory]
@@ -36,9 +36,9 @@ namespace Net.Http.WebApi.OData.Tests
         [Trait("Category", "Unit")]
         public void IsODataRequest_False(string path)
         {
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(path);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest(path);
 
-            Assert.False(httpRequestMessage.IsODataRequest());
+            Assert.False(request.IsODataRequest());
         }
 
         [Theory]
@@ -47,18 +47,18 @@ namespace Net.Http.WebApi.OData.Tests
         [Trait("Category", "Unit")]
         public void IsODataRequest_True(string path)
         {
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(path);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest(path);
 
-            Assert.True(httpRequestMessage.IsODataRequest());
+            Assert.True(request.IsODataRequest());
         }
 
         [Fact]
         [Trait("Category", "Unit")]
         public void ResolveODataContext_ReturnsContext_IfMetadataIsFull()
         {
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData", ODataMetadataLevel.Full);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.Full);
 
-            string odataContext = httpRequestMessage.ResolveODataContext();
+            string odataContext = request.ResolveODataContext();
 
             Assert.Equal("https://services.odata.org/OData/$metadata", odataContext);
         }
@@ -67,9 +67,9 @@ namespace Net.Http.WebApi.OData.Tests
         [Trait("Category", "Unit")]
         public void ResolveODataContext_ReturnsContext_IfMetadataIsMinimal()
         {
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData", ODataMetadataLevel.Minimal);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.Minimal);
 
-            string odataContext = httpRequestMessage.ResolveODataContext();
+            string odataContext = request.ResolveODataContext();
 
             Assert.Equal("https://services.odata.org/OData/$metadata", odataContext);
         }
@@ -78,9 +78,9 @@ namespace Net.Http.WebApi.OData.Tests
         [Trait("Category", "Unit")]
         public void ResolveODataContext_ReturnsNull_IfMetadataIsNone()
         {
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData", ODataMetadataLevel.None);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.None);
 
-            string odataContext = httpRequestMessage.ResolveODataContext();
+            string odataContext = request.ResolveODataContext();
 
             Assert.Null(odataContext);
         }
@@ -91,9 +91,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products('Milk')", ODataMetadataLevel.Full);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products('Milk')", ODataMetadataLevel.Full);
 
-            string odataContext = httpRequestMessage.ResolveODataContext<string>(EntityDataModel.Current.EntitySets["Products"]);
+            string odataContext = request.ResolveODataContext<string>(EntityDataModel.Current.EntitySets["Products"]);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products/$entity", odataContext);
         }
@@ -104,9 +104,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products('Milk')", ODataMetadataLevel.Minimal);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products('Milk')", ODataMetadataLevel.Minimal);
 
-            string odataContext = httpRequestMessage.ResolveODataContext<string>(EntityDataModel.Current.EntitySets["Products"]);
+            string odataContext = request.ResolveODataContext<string>(EntityDataModel.Current.EntitySets["Products"]);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products/$entity", odataContext);
         }
@@ -117,9 +117,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products('Milk')", ODataMetadataLevel.None);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products('Milk')", ODataMetadataLevel.None);
 
-            string odataContext = httpRequestMessage.ResolveODataContext<string>(EntityDataModel.Current.EntitySets["Products"]);
+            string odataContext = request.ResolveODataContext<string>(EntityDataModel.Current.EntitySets["Products"]);
 
             Assert.Null(odataContext);
         }
@@ -130,9 +130,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Orders(12345)/Name", ODataMetadataLevel.Full);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Orders(12345)/Name", ODataMetadataLevel.Full);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Orders(12345)/Name", odataContext);
         }
@@ -143,9 +143,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Orders(12345)/Name", ODataMetadataLevel.Minimal);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Orders(12345)/Name", ODataMetadataLevel.Minimal);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Orders(12345)/Name", odataContext);
         }
@@ -156,9 +156,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Orders(12345)/Name", ODataMetadataLevel.None);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Orders(12345)/Name", ODataMetadataLevel.None);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Orders"], 12345, "Name");
 
             Assert.Null(odataContext);
         }
@@ -169,9 +169,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products('Milk')/Name", ODataMetadataLevel.Full);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products('Milk')/Name", ODataMetadataLevel.Full);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products('Milk')/Name", odataContext);
         }
@@ -182,9 +182,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products('Milk')/Name", ODataMetadataLevel.Minimal);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products('Milk')/Name", ODataMetadataLevel.Minimal);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products('Milk')/Name", odataContext);
         }
@@ -195,9 +195,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products('Milk')/Name", ODataMetadataLevel.None);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products('Milk')/Name", ODataMetadataLevel.None);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"], "Milk", "Name");
 
             Assert.Null(odataContext);
         }
@@ -208,9 +208,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products", ODataMetadataLevel.Full);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products", ODataMetadataLevel.Full);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"]);
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"]);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products", odataContext);
         }
@@ -221,9 +221,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products", ODataMetadataLevel.Minimal);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products", ODataMetadataLevel.Minimal);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"]);
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"]);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products", odataContext);
         }
@@ -234,9 +234,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products", ODataMetadataLevel.None);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products", ODataMetadataLevel.None);
 
-            string odataContext = httpRequestMessage.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"]);
+            string odataContext = request.ResolveODataContext(EntityDataModel.Current.EntitySets["Products"]);
 
             Assert.Null(odataContext);
         }
@@ -247,16 +247,16 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=*", ODataMetadataLevel.Full);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=*", ODataMetadataLevel.Full);
 
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
             ODataQueryOptions odataQueryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 entitySet,
                 Mock.Of<IODataQueryOptionsValidator>());
 
-            string odataContext = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
+            string odataContext = request.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products(*)", odataContext);
         }
@@ -267,16 +267,16 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=*", ODataMetadataLevel.Minimal);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=*", ODataMetadataLevel.Minimal);
 
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
             ODataQueryOptions odataQueryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 entitySet,
                 Mock.Of<IODataQueryOptionsValidator>());
 
-            string odataContext = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
+            string odataContext = request.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products(*)", odataContext);
         }
@@ -287,16 +287,16 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=*", ODataMetadataLevel.None);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=*", ODataMetadataLevel.None);
 
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
             ODataQueryOptions odataQueryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 entitySet,
                 Mock.Of<IODataQueryOptionsValidator>());
 
-            string odataContext = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
+            string odataContext = request.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
             Assert.Null(odataContext);
         }
@@ -307,16 +307,16 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=Name,Price", ODataMetadataLevel.Full);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=Name,Price", ODataMetadataLevel.Full);
 
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
             ODataQueryOptions odataQueryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 entitySet,
                 Mock.Of<IODataQueryOptionsValidator>());
 
-            string odataContext = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
+            string odataContext = request.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products(Name,Price)", odataContext);
         }
@@ -327,16 +327,16 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=Name,Price", ODataMetadataLevel.Minimal);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=Name,Price", ODataMetadataLevel.Minimal);
 
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
             ODataQueryOptions odataQueryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 entitySet,
                 Mock.Of<IODataQueryOptionsValidator>());
 
-            string odataContext = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
+            string odataContext = request.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
             Assert.Equal("https://services.odata.org/OData/$metadata#Products(Name,Price)", odataContext);
         }
@@ -347,16 +347,16 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=Name,Price", ODataMetadataLevel.None);
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=Name,Price", ODataMetadataLevel.None);
 
             EntitySet entitySet = EntityDataModel.Current.EntitySets["Products"];
 
             ODataQueryOptions odataQueryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 entitySet,
                 Mock.Of<IODataQueryOptionsValidator>());
 
-            string odataContext = httpRequestMessage.ResolveODataContext(entitySet, odataQueryOptions.Select);
+            string odataContext = request.ResolveODataContext(entitySet, odataQueryOptions.Select);
 
             Assert.Null(odataContext);
         }
@@ -367,9 +367,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Orders");
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Orders");
 
-            string odataContext = httpRequestMessage.ResolveODataId(EntityDataModel.Current.EntitySets["Orders"], 12345);
+            string odataContext = request.ResolveODataId(EntityDataModel.Current.EntitySets["Orders"], 12345);
 
             Assert.Equal("https://services.odata.org/OData/Orders(12345)", odataContext);
         }
@@ -380,9 +380,9 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products");
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products");
 
-            string odataContext = httpRequestMessage.ResolveODataId(EntityDataModel.Current.EntitySets["Products"], "Milk");
+            string odataContext = request.ResolveODataId(EntityDataModel.Current.EntitySets["Products"], "Milk");
 
             Assert.Equal("https://services.odata.org/OData/Products('Milk')", odataContext);
         }
@@ -393,17 +393,17 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest(
                 "/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25");
 
             ODataQueryOptions queryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 EntityDataModel.Current.EntitySets["Products"],
                 Mock.Of<IODataQueryOptionsValidator>());
 
             Assert.Equal(
                 "https://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25",
-                httpRequestMessage.ResolveODataNextLink(queryOptions, 50, 25));
+                request.ResolveODataNextLink(queryOptions, 50, 25));
         }
 
         [Fact]
@@ -412,16 +412,16 @@ namespace Net.Http.WebApi.OData.Tests
         {
             TestHelper.EnsureEDM();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$top=25");
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$top=25");
 
             ODataQueryOptions queryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
+                request.RequestUri.Query,
                 EntityDataModel.Current.EntitySets["Products"],
                 Mock.Of<IODataQueryOptionsValidator>());
 
             Assert.Equal(
                 "https://services.odata.org/OData/Products?$skip=25&$top=25",
-                httpRequestMessage.ResolveODataNextLink(queryOptions, 0, 25));
+                request.ResolveODataNextLink(queryOptions, 0, 25));
         }
 
         public class CreateODataErrorResponse_WithODataException
@@ -430,9 +430,9 @@ namespace Net.Http.WebApi.OData.Tests
 
             public CreateODataErrorResponse_WithODataException()
             {
-                HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$select=Foo");
+                HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=Foo");
 
-                _httpResponseMessage = httpRequestMessage.CreateODataErrorResponse(new ODataException("$search query option not supported.", HttpStatusCode.NotImplemented, "query"));
+                _httpResponseMessage = request.CreateODataErrorResponse(new ODataException("$search query option not supported.", HttpStatusCode.NotImplemented, "query"));
             }
 
             [Fact]

@@ -20,9 +20,9 @@ namespace Net.Http.WebApi.OData.Tests
 
             var httpConfiguration = new HttpConfiguration();
 
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$count=true");
+            HttpRequestMessage request = TestHelper.CreateODataHttpRequest("/OData/Products?$count=true");
 
-            var controllerContext = new HttpControllerContext(httpConfiguration, new Mock<IHttpRouteData>().Object, httpRequestMessage);
+            var controllerContext = new HttpControllerContext(httpConfiguration, new Mock<IHttpRouteData>().Object, request);
 
             var actionContext = new HttpActionContext(controllerContext, Mock.Of<HttpActionDescriptor>());
 

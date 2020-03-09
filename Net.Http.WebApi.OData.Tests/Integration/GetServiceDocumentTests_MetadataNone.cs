@@ -13,10 +13,10 @@ namespace Net.Http.WebApi.OData.Tests.Integration
 
         public GetServiceDocumentTests_MetadataNone()
         {
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://server/odata");
-            httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://server/odata");
+            request.Headers.Add("Accept", "application/json;odata.metadata=none");
 
-            _httpResponseMessage = HttpClient.SendAsync(httpRequestMessage).Result;
+            _httpResponseMessage = HttpClient.SendAsync(request).Result;
         }
 
         [Fact]

@@ -22,13 +22,13 @@ namespace Net.Http.WebApi.OData.Tests
         /// </summary>
         /// <param name="path">The path for the request URI.</param>
         /// <returns>The HttpRequestMessage without ODataRequestOptions.</returns>
-        internal static HttpRequestMessage CreateHttpRequestMessage(string path)
+        internal static HttpRequestMessage CreateHttpRequest(string path)
         {
-            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri("https://services.odata.org" + path));
-            httpRequestMessage.Headers.Add("Accept", "application/json");
-            httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://services.odata.org" + path));
+            request.Headers.Add("Accept", "application/json");
+            request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-            return httpRequestMessage;
+            return request;
         }
 
         /// <summary>
@@ -37,14 +37,14 @@ namespace Net.Http.WebApi.OData.Tests
         /// <param name="path">The path for the request URI.</param>
         /// <param name="metadataLevel">The metadata level to use (defaults to minimal if not specified).</param>
         /// <returns>The HttpRequestMessage with ODataRequestOptions.</returns>
-        internal static HttpRequestMessage CreateODataHttpRequestMessage(string path, ODataMetadataLevel metadataLevel = ODataMetadataLevel.Minimal)
+        internal static HttpRequestMessage CreateODataHttpRequest(string path, ODataMetadataLevel metadataLevel = ODataMetadataLevel.Minimal)
         {
-            HttpRequestMessage httpRequestMessage = CreateHttpRequestMessage(path);
-            httpRequestMessage.Properties.Add(
+            HttpRequestMessage request = CreateHttpRequest(path);
+            request.Properties.Add(
                 typeof(ODataRequestOptions).FullName,
                 new ODataRequestOptions(new Uri("https://services.odata.org/OData/"), ODataIsolationLevel.None, metadataLevel, ODataVersion.OData40, ODataVersion.OData40));
 
-            return httpRequestMessage;
+            return request;
         }
 
         internal static void EnsureEDM()
