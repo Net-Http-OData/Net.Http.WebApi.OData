@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         [Route("")]
         public IHttpActionResult Get(ODataQueryOptions queryOptions)
         {
-            string odataContext = Request.ResolveODataContext(queryOptions.EntitySet, queryOptions.Select);
+            string odataContext = Request.ODataContext(queryOptions.EntitySet, queryOptions.Select);
             IEnumerable<Employee> value = Enumerable.Empty<Employee>();
 
             var odataResponseContent = new ODataResponseContent

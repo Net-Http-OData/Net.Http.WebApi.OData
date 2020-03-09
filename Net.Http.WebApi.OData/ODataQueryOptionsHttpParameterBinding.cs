@@ -54,8 +54,8 @@ namespace Net.Http.WebApi.OData
                 HttpRequestMessage request = actionContext.Request;
 
                 string query = request.RequestUri.Query;
-                EntitySet entitySet = request.ResolveEntitySet();
-                ODataRequestOptions odataRequestOptions = request.ReadODataRequestOptions();
+                EntitySet entitySet = request.ODataEntitySet();
+                ODataRequestOptions odataRequestOptions = request.ODataRequestOptions();
                 IODataQueryOptionsValidator validator = ODataQueryOptionsValidator.GetValidator(odataRequestOptions.ODataVersion);
 
                 var queryOptions = new ODataQueryOptions(query, entitySet, validator);

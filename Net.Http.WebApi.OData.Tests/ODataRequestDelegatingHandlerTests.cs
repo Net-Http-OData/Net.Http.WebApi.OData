@@ -19,10 +19,10 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
 
             NameValueHeaderValue metadataParameter =
-                httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+                responseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
             Assert.Null(metadataParameter);
         }
@@ -37,13 +37,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
 
-            Assert.Equal(HttpStatusCode.UnsupportedMediaType, httpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.UnsupportedMediaType, responseMessage.StatusCode);
 
-            Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
 
-            var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
@@ -60,13 +60,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
-            Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
 
-            var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
@@ -84,13 +84,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
-            Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
 
-            var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
@@ -107,13 +107,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
-            Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
 
-            var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
@@ -130,13 +130,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
 
-            Assert.Equal(HttpStatusCode.PreconditionFailed, httpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.PreconditionFailed, responseMessage.StatusCode);
 
-            Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
 
-            var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
@@ -153,13 +153,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
 
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
-            Assert.IsType<ObjectContent<ODataErrorContent>>(httpResponseMessage.Content);
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
 
-            var objectContent = (ObjectContent<ODataErrorContent>)httpResponseMessage.Content;
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
@@ -169,7 +169,7 @@ namespace Net.Http.WebApi.OData.Tests
 
         public class WhenCalling_SendAsync_AndTheResponseHasNoContent
         {
-            private readonly HttpResponseMessage _httpResponseMessage;
+            private readonly HttpResponseMessage _response;
 
             public WhenCalling_SendAsync_AndTheResponseHasNoContent()
             {
@@ -177,27 +177,27 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler(includeContentInResponse: false) });
 
-                _httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+                _response = invoker.SendAsync(request, CancellationToken.None).Result;
             }
 
             [Fact]
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsNotSetInTheResponse()
-                => Assert.Null(_httpResponseMessage.Content);
+                => Assert.Null(_response.Content);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void TheODataVersionHeaderIsSetInTheResponse()
             {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
-                Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
+                Assert.True(_response.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
+                Assert.Equal(ODataVersion.MaxVersion.ToString(), _response.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
             }
         }
 
         public class WhenCalling_SendAsync_WithAnODataUri_AndAllRequestOptionsInRequest
         {
-            private readonly HttpResponseMessage _httpResponseMessage;
             private readonly ODataRequestOptions _odataRequestOptions;
+            private readonly HttpResponseMessage _response;
 
             public WhenCalling_SendAsync_WithAnODataUri_AndAllRequestOptionsInRequest()
             {
@@ -215,7 +215,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(odataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-                _httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+                _response = invoker.SendAsync(request, CancellationToken.None).Result;
 
                 request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out object odataRequestOptions);
                 _odataRequestOptions = odataRequestOptions as ODataRequestOptions;
@@ -256,7 +256,7 @@ namespace Net.Http.WebApi.OData.Tests
             public void TheMetadataLevelContentTypeParameterIsSetInTheResponse()
             {
                 NameValueHeaderValue metadataParameter =
-                    _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+                    _response.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("none", metadataParameter.Value);
@@ -266,15 +266,15 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void TheODataVersionHeaderIsSetInTheResponse()
             {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
-                Assert.Equal(ODataVersion.OData40.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
+                Assert.True(_response.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
+                Assert.Equal(ODataVersion.OData40.ToString(), _response.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
             }
         }
 
         public class WhenCalling_SendAsync_WithAnODataUri_AndNoRequestOptionsInRequest
         {
-            private readonly HttpResponseMessage _httpResponseMessage;
             private readonly ODataRequestOptions _odataRequestOptions;
+            private readonly HttpResponseMessage _response;
 
             public WhenCalling_SendAsync_WithAnODataUri_AndNoRequestOptionsInRequest()
             {
@@ -282,7 +282,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-                _httpResponseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+                _response = invoker.SendAsync(request, CancellationToken.None).Result;
 
                 request.Properties.TryGetValue(typeof(ODataRequestOptions).FullName, out object odataRequestOptions);
                 _odataRequestOptions = odataRequestOptions as ODataRequestOptions;
@@ -323,7 +323,7 @@ namespace Net.Http.WebApi.OData.Tests
             public void TheMetadataLevelContentTypeParameterIsSetInTheResponse()
             {
                 NameValueHeaderValue metadataParameter =
-                    _httpResponseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+                    _response.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
                 Assert.NotNull(metadataParameter);
                 Assert.Equal("minimal", metadataParameter.Value);
@@ -333,15 +333,15 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void TheODataVersionHeaderIsSetInTheResponse()
             {
-                Assert.True(_httpResponseMessage.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
-                Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
+                Assert.True(_response.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
+                Assert.Equal(ODataVersion.MaxVersion.ToString(), _response.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
             }
         }
 
         public class WhenCalling_SendAsync_WithoutAnODataUri
         {
-            private readonly HttpResponseMessage _httpResponseMessage;
             private readonly HttpRequestMessage _request;
+            private readonly HttpResponseMessage _response;
 
             public WhenCalling_SendAsync_WithoutAnODataUri()
             {
@@ -349,7 +349,7 @@ namespace Net.Http.WebApi.OData.Tests
 
                 var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-                _httpResponseMessage = invoker.SendAsync(_request, CancellationToken.None).Result;
+                _response = invoker.SendAsync(_request, CancellationToken.None).Result;
             }
 
             [Fact]
@@ -363,12 +363,12 @@ namespace Net.Http.WebApi.OData.Tests
             [Fact]
             [Trait("Category", "Unit")]
             public void TheMetadataLevelContentTypeParameterIsNotSet()
-                => Assert.DoesNotContain(_httpResponseMessage.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+                => Assert.DoesNotContain(_response.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
             [Fact]
             [Trait("Category", "Unit")]
             public void TheODataVersionHeaderIsNotSet()
-                => Assert.False(_httpResponseMessage.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
+                => Assert.False(_response.Headers.Contains(ODataResponseHeaderNames.ODataVersion));
         }
 
         private class MockHttpMessageHandler : HttpMessageHandler

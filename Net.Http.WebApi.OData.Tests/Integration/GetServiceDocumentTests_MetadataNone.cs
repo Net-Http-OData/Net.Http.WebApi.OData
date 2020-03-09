@@ -9,38 +9,38 @@ namespace Net.Http.WebApi.OData.Tests.Integration
 {
     public class GetServiceDocumentTests_MetadataNone : IntegrationTest
     {
-        private readonly HttpResponseMessage _httpResponseMessage;
+        private readonly HttpResponseMessage _response;
 
         public GetServiceDocumentTests_MetadataNone()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "http://server/odata");
             request.Headers.Add("Accept", "application/json;odata.metadata=none");
 
-            _httpResponseMessage = HttpClient.SendAsync(request).Result;
+            _response = HttpClient.SendAsync(request).Result;
         }
 
         [Fact]
         [Trait("Category", "Integration")]
         public void Contains_Header_ContentType_ApplicationJson()
-            => Assert.Equal("application/json", _httpResponseMessage.Content.Headers.ContentType.MediaType);
+            => Assert.Equal("application/json", _response.Content.Headers.ContentType.MediaType);
 
         [Fact]
         [Trait("Category", "Integration")]
         public void Contains_Header_ContentType_Parameter_ODataMetadata()
-            => Assert.Equal("none", _httpResponseMessage.Content.Headers.ContentType.Parameters.Single(x => x.Name == ODataMetadataLevelExtensions.HeaderName).Value);
+            => Assert.Equal("none", _response.Content.Headers.ContentType.Parameters.Single(x => x.Name == ODataMetadataLevelExtensions.HeaderName).Value);
 
         [Fact]
         [Trait("Category", "Integration")]
         public void Contains_Header_ODataVersion()
-            => Assert.Equal(ODataVersion.OData40.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
+            => Assert.Equal(ODataVersion.OData40.ToString(), _response.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
 
         [Fact]
         [Trait("Category", "Integration")]
         public async Task Contains_ODataResponseContent()
         {
-            Assert.NotNull(_httpResponseMessage.Content);
+            Assert.NotNull(_response.Content);
 
-            string result = await _httpResponseMessage.Content.ReadAsStringAsync();
+            string result = await _response.Content.ReadAsStringAsync();
 
             Assert.Equal(
                 "{\"value\":[{\"kind\":\"EntitySet\",\"name\":\"Categories\",\"url\":\"http://server/odata/Categories\"},{\"kind\":\"EntitySet\",\"name\":\"Customers\",\"url\":\"http://server/odata/Customers\"},{\"kind\":\"EntitySet\",\"name\":\"Employees\",\"url\":\"http://server/odata/Employees\"},{\"kind\":\"EntitySet\",\"name\":\"Managers\",\"url\":\"http://server/odata/Managers\"},{\"kind\":\"EntitySet\",\"name\":\"Orders\",\"url\":\"http://server/odata/Orders\"},{\"kind\":\"EntitySet\",\"name\":\"Products\",\"url\":\"http://server/odata/Products\"}]}",
@@ -50,6 +50,6 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         [Fact]
         [Trait("Category", "Integration")]
         public void StatusCode_OK()
-            => Assert.Equal(HttpStatusCode.OK, _httpResponseMessage.StatusCode);
+            => Assert.Equal(HttpStatusCode.OK, _response.StatusCode);
     }
 }

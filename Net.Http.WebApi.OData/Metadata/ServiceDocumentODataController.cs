@@ -32,8 +32,8 @@ namespace Net.Http.WebApi.OData.Metadata
         [Route("")]
         public IHttpActionResult Get()
         {
-            string odataContext = Request.ResolveODataContext();
-            ODataRequestOptions odataRequestOptions = Request.ReadODataRequestOptions();
+            string odataContext = Request.ODataContext();
+            ODataRequestOptions odataRequestOptions = Request.ODataRequestOptions();
             IEnumerable<ServiceDocumentItem> serviceDocumentItems = ServiceDocumentProvider.Create(EntityDataModel.Current, odataRequestOptions);
 
             var odataResponseContent = new ODataResponseContent

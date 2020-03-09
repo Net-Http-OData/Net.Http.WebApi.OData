@@ -24,7 +24,7 @@ namespace Net.Http.WebApi.OData.Tests
         /// <returns>The HttpRequestMessage without ODataRequestOptions.</returns>
         internal static HttpRequestMessage CreateHttpRequest(string path)
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://services.odata.org" + path));
+            var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://services.odata.org" + path));
             request.Headers.Add("Accept", "application/json");
             request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 

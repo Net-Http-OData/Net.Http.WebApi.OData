@@ -10,28 +10,28 @@ namespace Net.Http.WebApi.OData.Tests.Integration
 {
     public class GetMetadataTests : IntegrationTest
     {
-        private readonly HttpResponseMessage _httpResponseMessage;
+        private readonly HttpResponseMessage _response;
 
         public GetMetadataTests()
-            => _httpResponseMessage = HttpClient.GetAsync("http://server/odata/$metadata").Result;
+            => _response = HttpClient.GetAsync("http://server/odata/$metadata").Result;
 
         [Fact]
         [Trait("Category", "Integration")]
         public void Contains_Header_ContentType_ApplicationXml()
-            => Assert.Equal("application/xml", _httpResponseMessage.Content.Headers.ContentType.MediaType);
+            => Assert.Equal("application/xml", _response.Content.Headers.ContentType.MediaType);
 
         [Fact]
         [Trait("Category", "Integration")]
         public void Contains_Header_ODataVersion()
-            => Assert.Equal(ODataVersion.MaxVersion.ToString(), _httpResponseMessage.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
+            => Assert.Equal(ODataVersion.MaxVersion.ToString(), _response.Headers.GetValues(ODataResponseHeaderNames.ODataVersion).Single());
 
         [Fact]
         [Trait("Category", "Integration")]
         public async Task Contains_ODataResponseContent()
         {
-            Assert.NotNull(_httpResponseMessage.Content);
+            Assert.NotNull(_response.Content);
 
-            string result = await _httpResponseMessage.Content.ReadAsStringAsync();
+            string result = await _response.Content.ReadAsStringAsync();
 
             Assert.Equal(
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" + XDocument.Parse($@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""{ODataVersion.MaxVersion}"">
@@ -280,11 +280,11 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         [Fact]
         [Trait("Category", "Integration")]
         public void Not_Contains_Header_ContentType_Parameter_ODataMetadata()
-            => Assert.DoesNotContain(_httpResponseMessage.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
+            => Assert.DoesNotContain(_response.Content.Headers.ContentType.Parameters, x => x.Name == ODataMetadataLevelExtensions.HeaderName);
 
         [Fact]
         [Trait("Category", "Integration")]
         public void StatusCode_OK()
-            => Assert.Equal(HttpStatusCode.OK, _httpResponseMessage.StatusCode);
+            => Assert.Equal(HttpStatusCode.OK, _response.StatusCode);
     }
 }

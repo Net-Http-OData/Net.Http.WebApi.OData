@@ -42,34 +42,18 @@ namespace Net.Http.WebApi.OData
             => request?.RequestUri.LocalPath.IndexOf("odata", StringComparison.OrdinalIgnoreCase) > 0;
 
         /// <summary>
-        /// Reads the OData request options.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to this OData request.</param>
-        /// <returns>The OData request options for the request.</returns>
-        public static ODataRequestOptions ReadODataRequestOptions(this HttpRequestMessage request)
-            => request?.Properties[typeof(ODataRequestOptions).FullName] as ODataRequestOptions;
-
-        /// <summary>
-        /// Resolves the <see cref="EntitySet"/> for the OData request.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to this OData request.</param>
-        /// <returns>The EntitySet the OData request relates to.</returns>
-        public static EntitySet ResolveEntitySet(this HttpRequestMessage request)
-            => EntityDataModel.Current.EntitySetForPath(request?.RequestUri.LocalPath);
-
-        /// <summary>
         /// Resolves the @odata.context for the specified request.
         /// </summary>
         /// <param name="request">The HTTP request which led to this OData request.</param>
         /// <returns>A <see cref="string"/> containing the @odata.context, or null if the metadata for the request is none.</returns>
-        public static string ResolveODataContext(this HttpRequestMessage request)
+        public static string ODataContext(this HttpRequestMessage request)
         {
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ODataRequestOptions();
 
             return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
@@ -84,14 +68,14 @@ namespace Net.Http.WebApi.OData
         /// <param name="request">The HTTP request which led to this OData request.</param>
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <returns>A <see cref="string"/> containing the @odata.context, or null if the metadata for the request is none.</returns>
-        public static string ResolveODataContext(this HttpRequestMessage request, EntitySet entitySet)
+        public static string ODataContext(this HttpRequestMessage request, EntitySet entitySet)
         {
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ODataRequestOptions();
 
             return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
@@ -108,14 +92,14 @@ namespace Net.Http.WebApi.OData
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <param name="selectQueryOption">The select query option.</param>
         /// <returns>A <see cref="string"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static string ResolveODataContext(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectQueryOption)
+        public static string ODataContext(this HttpRequestMessage request, EntitySet entitySet, SelectExpandQueryOption selectQueryOption)
         {
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ODataRequestOptions();
 
             return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
@@ -133,14 +117,14 @@ namespace Net.Http.WebApi.OData
         /// <param name="entitySet">The EntitySet used in the request.</param>
         /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <returns>A <see cref="string"/> containing the @odata.context, or null if the metadata for the request is none.</returns>
-        public static string ResolveODataContext<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet)
+        public static string ODataContext<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet)
         {
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ODataRequestOptions();
 
             return ODataUtility.ODataContext<TEntityKey>(
                 requestOptions.MetadataLevel,
@@ -159,14 +143,14 @@ namespace Net.Http.WebApi.OData
         /// <param name="propertyName">The name of the property.</param>
         /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <returns>A <see cref="string"/> containing the @odata.context URI, or null if the metadata for the request is none.</returns>
-        public static string ResolveODataContext<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey, string propertyName)
+        public static string ODataContext<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey, string propertyName)
         {
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            ODataRequestOptions requestOptions = request.ReadODataRequestOptions();
+            ODataRequestOptions requestOptions = request.ODataRequestOptions();
 
             return ODataUtility.ODataContext(
                 requestOptions.MetadataLevel,
@@ -179,6 +163,14 @@ namespace Net.Http.WebApi.OData
         }
 
         /// <summary>
+        /// Resolves the <see cref="EntitySet"/> for the OData request.
+        /// </summary>
+        /// <param name="request">The HTTP request which led to this OData request.</param>
+        /// <returns>The EntitySet the OData request relates to.</returns>
+        public static EntitySet ODataEntitySet(this HttpRequestMessage request)
+            => EntityDataModel.Current.EntitySetForPath(request?.RequestUri.LocalPath);
+
+        /// <summary>
         /// Resolves the @odata.id for the specified request and Entity Set.
         /// </summary>
         /// <param name="request">The HTTP request which led to this OData request.</param>
@@ -186,7 +178,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="entityKey">The Entity Key for the item in the EntitySet.</param>
         /// <typeparam name="TEntityKey">The type of entity key.</typeparam>
         /// <returns>A <see cref="string"/> containing the address of the Entity with the specified Entity Key.</returns>
-        public static string ResolveODataId<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
+        public static string ODataId<TEntityKey>(this HttpRequestMessage request, EntitySet entitySet, TEntityKey entityKey)
         {
             if (request is null)
             {
@@ -209,7 +201,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="skip">The skip.</param>
         /// <param name="resultsPerPage">The results per page.</param>
         /// <returns>The next link for a paged OData query.</returns>
-        public static string ResolveODataNextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
+        public static string ODataNextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
         {
             if (request is null)
             {
@@ -270,6 +262,14 @@ namespace Net.Http.WebApi.OData
 
             return uriBuilder.ToString();
         }
+
+        /// <summary>
+        /// Reads the OData request options.
+        /// </summary>
+        /// <param name="request">The HTTP request which led to this OData request.</param>
+        /// <returns>The OData request options for the request.</returns>
+        public static ODataRequestOptions ODataRequestOptions(this HttpRequestMessage request)
+            => request?.Properties[typeof(ODataRequestOptions).FullName] as ODataRequestOptions;
 
         /// <summary>
         /// Creates the OData error response from the specified exception.
