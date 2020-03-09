@@ -82,7 +82,7 @@ namespace Net.Http.WebApi.OData
         private static string ReadHeaderValue(HttpRequestMessage request, string name)
             => request.Headers.TryGetValues(name, out IEnumerable<string> values) ? values.FirstOrDefault() : default;
 
-        private ODataIsolationLevel ReadIsolationLevel(HttpRequestMessage request)
+        private static ODataIsolationLevel ReadIsolationLevel(HttpRequestMessage request)
         {
             string headerValue = ReadHeaderValue(request, ODataRequestHeaderNames.ODataIsolation);
 
@@ -99,7 +99,7 @@ namespace Net.Http.WebApi.OData
             return ODataIsolationLevel.None;
         }
 
-        private ODataMetadataLevel ReadMetadataLevel(HttpRequestMessage request)
+        private static ODataMetadataLevel ReadMetadataLevel(HttpRequestMessage request)
         {
             foreach (MediaTypeWithQualityHeaderValue header in request.Headers.Accept)
             {

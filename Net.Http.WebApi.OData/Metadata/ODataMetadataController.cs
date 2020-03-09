@@ -10,7 +10,6 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Xml.Linq;
@@ -29,9 +28,9 @@ namespace Net.Http.WebApi.OData.Metadata
         private static string s_metadataXml;
 
         /// <summary>
-        /// Gets the <see cref="HttpResponseMessage"/> which contains the service metadata.
+        /// Gets the <see cref="IHttpActionResult"/> which contains the service metadata.
         /// </summary>
-        /// <returns>The <see cref="HttpResponseMessage"/> which contains the service metadata.</returns>
+        /// <returns>The <see cref="IHttpActionResult"/> which contains the service metadata.</returns>
         [HttpGet]
         [Route("$metadata")]
         public IHttpActionResult Get()

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="HttpRequestMessageExtensions.cs" company="Project Contributors">
+// <copyright file="ODataHttpRequestMessageExtensions.cs" company="Project Contributors">
 // Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,9 +21,9 @@ using Net.Http.OData.Query;
 namespace Net.Http.WebApi.OData
 {
     /// <summary>
-    /// Extensions for the <see cref="HttpRequestMessage"/> class.
+    /// OData extensions for the <see cref="HttpRequestMessage"/> class.
     /// </summary>
-    public static class HttpRequestMessageExtensions
+    public static class ODataHttpRequestMessageExtensions
     {
         /// <summary>
         /// Gets a value indicating whether the request is an OData Metadata request.
@@ -73,76 +73,6 @@ namespace Net.Http.WebApi.OData
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Gets the @odata.nextLink for a paged OData query.
-        /// </summary>
-        /// <param name="request">The HTTP request which led to this OData request.</param>
-        /// <param name="queryOptions">The query options.</param>
-        /// <param name="skip">The skip.</param>
-        /// <param name="resultsPerPage">The results per page.</param>
-        /// <returns>The next link for a paged OData query.</returns>
-        public static string NextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
-        {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            if (queryOptions is null)
-            {
-                throw new ArgumentNullException(nameof(queryOptions));
-            }
-
-            StringBuilder uriBuilder = new StringBuilder()
-                .Append(request.RequestUri.Scheme)
-                .Append(Uri.SchemeDelimiter)
-                .Append(request.RequestUri.Authority)
-                .Append(request.RequestUri.LocalPath)
-                .Append("?$skip=").Append((skip + resultsPerPage).ToString(CultureInfo.InvariantCulture));
-
-            if (queryOptions.RawValues.Count != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.Count);
-            }
-
-            if (queryOptions.RawValues.Expand != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.Expand);
-            }
-
-            if (queryOptions.RawValues.Filter != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.Filter);
-            }
-
-            if (queryOptions.RawValues.Format != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.Format);
-            }
-
-            if (queryOptions.RawValues.OrderBy != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.OrderBy);
-            }
-
-            if (queryOptions.RawValues.Search != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.Search);
-            }
-
-            if (queryOptions.RawValues.Select != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.Select);
-            }
-
-            if (queryOptions.RawValues.Top != null)
-            {
-                uriBuilder.Append('&').Append(queryOptions.RawValues.Top);
-            }
-
-            return uriBuilder.ToString();
         }
 
         /// <summary>
@@ -303,6 +233,76 @@ namespace Net.Http.WebApi.OData
                 request.RequestUri.LocalPath,
                 entitySet,
                 entityKey);
+        }
+
+        /// <summary>
+        /// Resolves the @odata.nextLink for the specified request and <see cref="ODataQueryOptions"/>.
+        /// </summary>
+        /// <param name="request">The HTTP request which led to this OData request.</param>
+        /// <param name="queryOptions">The query options.</param>
+        /// <param name="skip">The skip.</param>
+        /// <param name="resultsPerPage">The results per page.</param>
+        /// <returns>The next link for a paged OData query.</returns>
+        public static string ResolveODataNextLink(this HttpRequestMessage request, ODataQueryOptions queryOptions, int skip, int resultsPerPage)
+        {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (queryOptions is null)
+            {
+                throw new ArgumentNullException(nameof(queryOptions));
+            }
+
+            StringBuilder uriBuilder = new StringBuilder()
+                .Append(request.RequestUri.Scheme)
+                .Append(Uri.SchemeDelimiter)
+                .Append(request.RequestUri.Authority)
+                .Append(request.RequestUri.LocalPath)
+                .Append("?$skip=").Append((skip + resultsPerPage).ToString(CultureInfo.InvariantCulture));
+
+            if (queryOptions.RawValues.Count != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Count);
+            }
+
+            if (queryOptions.RawValues.Expand != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Expand);
+            }
+
+            if (queryOptions.RawValues.Filter != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Filter);
+            }
+
+            if (queryOptions.RawValues.Format != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Format);
+            }
+
+            if (queryOptions.RawValues.OrderBy != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.OrderBy);
+            }
+
+            if (queryOptions.RawValues.Search != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Search);
+            }
+
+            if (queryOptions.RawValues.Select != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Select);
+            }
+
+            if (queryOptions.RawValues.Top != null)
+            {
+                uriBuilder.Append('&').Append(queryOptions.RawValues.Top);
+            }
+
+            return uriBuilder.ToString();
         }
 
         /// <summary>

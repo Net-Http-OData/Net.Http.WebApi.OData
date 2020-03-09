@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="HttpConfigurationODataExtensions.cs" company="Project Contributors">
+// <copyright file="ODataHttpConfigurationExtensions.cs" company="Project Contributors">
 // Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,22 +12,22 @@
 // -----------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Net.Http.Formatting;
-using global::Net.Http.OData.Model;
-using global::Net.Http.OData.Query;
-using global::Net.Http.WebApi.OData;
 using Net.Http.OData;
+using Net.Http.OData.Model;
+using Net.Http.OData.Query;
+using Net.Http.WebApi.OData;
 
 namespace System.Web.Http
 {
     /// <summary>
-    /// Contains extension methods for the <see cref="HttpConfiguration"/> class.
+    /// Extension methods for <see cref="HttpConfiguration"/> to add OData.
     /// </summary>
-    public static class HttpConfigurationODataExtensions
+    public static class ODataHttpConfigurationExtensions
     {
         /// <summary>
-        /// Use OData services with the specified Entity Data Model with <see cref="StringComparer"/>.OrdinalIgnoreCase for the model name matching.
+        /// Adds OData services with the specified Entity Data Model with <see cref="StringComparer"/>.OrdinalIgnoreCase for the model name matching.
         /// </summary>
-        /// <param name="configuration">The server configuration.</param>
+        /// <param name="configuration">The <see cref="HttpConfiguration"/>.</param>
         /// <param name="entityDataModelBuilderCallback">The call-back to configure the Entity Data Model.</param>
         public static void UseOData(
             this HttpConfiguration configuration,
@@ -35,9 +35,9 @@ namespace System.Web.Http
             => UseOData(configuration, entityDataModelBuilderCallback, StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
-        /// Use OData services with the specified Entity Data Model.
+        /// Adds OData services with the specified Entity Data Model and equality comparer for the model name matching.
         /// </summary>
-        /// <param name="configuration">The server configuration.</param>
+        /// <param name="configuration">The <see cref="HttpConfiguration"/>.</param>
         /// <param name="entityDataModelBuilderCallback">The call-back to configure the Entity Data Model.</param>
         /// <param name="entitySetNameComparer">The comparer to use for the entty set name matching.</param>
         public static void UseOData(
@@ -55,10 +55,6 @@ namespace System.Web.Http
                 throw new ArgumentNullException(nameof(entityDataModelBuilderCallback));
             }
 
-            configuration.Filters.Add(new ODataExceptionFilterAttribute());
-
-            configuration.Formatters.JsonFormatter.AddQueryStringMapping("$format", "json", "application/json");
-
             ODataServiceOptions.Current = new ODataServiceOptions(
                 ODataVersion.MinVersion,
                 ODataVersion.MaxVersion,
@@ -66,6 +62,10 @@ namespace System.Web.Http
                 new[] { "application/json", "text/plain" });
 
             configuration.MessageHandlers.Add(new ODataRequestDelegatingHandler(ODataServiceOptions.Current));
+
+            configuration.Filters.Add(new ODataExceptionFilterAttribute());
+
+            configuration.Formatters.JsonFormatter.AddQueryStringMapping("$format", "json", "application/json");
 
             configuration.ParameterBindingRules.Add(p => p.ParameterType == typeof(ODataQueryOptions) ? new ODataQueryOptionsHttpParameterBinding(p) : null);
 

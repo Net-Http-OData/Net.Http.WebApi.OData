@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Net.Http.WebApi.OData.Tests
 {
-    public class HttpConfigurationODataExtensionsTests
+    public class ODataHttpConfigurationExtensionsTests
     {
         [Fact]
         [Trait("Category", "Unit")]

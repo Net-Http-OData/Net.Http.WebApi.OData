@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Net.Http.WebApi.OData.Tests
 {
-    public class HttpRequestMessageExtensionsTests
+    public class ODataHttpRequestMessageExtensionsTests
     {
         [Theory]
         [InlineData("/OData")]
@@ -50,43 +50,6 @@ namespace Net.Http.WebApi.OData.Tests
             HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(path);
 
             Assert.True(httpRequestMessage.IsODataRequest());
-        }
-
-        [Fact]
-        [Trait("Category", "Unit")]
-        public void NextLink_WithAllQueryOptions()
-        {
-            TestHelper.EnsureEDM();
-
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(
-                "/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25");
-
-            ODataQueryOptions queryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
-                EntityDataModel.Current.EntitySets["Products"],
-                Mock.Of<IODataQueryOptionsValidator>());
-
-            Assert.Equal(
-                "https://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25",
-                httpRequestMessage.NextLink(queryOptions, 50, 25));
-        }
-
-        [Fact]
-        [Trait("Category", "Unit")]
-        public void NextLink_WithTopQueryOption()
-        {
-            TestHelper.EnsureEDM();
-
-            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$top=25");
-
-            ODataQueryOptions queryOptions = new ODataQueryOptions(
-                httpRequestMessage.RequestUri.Query,
-                EntityDataModel.Current.EntitySets["Products"],
-                Mock.Of<IODataQueryOptionsValidator>());
-
-            Assert.Equal(
-                "https://services.odata.org/OData/Products?$skip=25&$top=25",
-                httpRequestMessage.NextLink(queryOptions, 0, 25));
         }
 
         [Fact]
@@ -422,6 +385,43 @@ namespace Net.Http.WebApi.OData.Tests
             string odataContext = httpRequestMessage.ResolveODataId(EntityDataModel.Current.EntitySets["Products"], "Milk");
 
             Assert.Equal("https://services.odata.org/OData/Products('Milk')", odataContext);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ResolveODataNextLink_WithAllQueryOptions()
+        {
+            TestHelper.EnsureEDM();
+
+            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage(
+                "/OData/Products?$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25");
+
+            ODataQueryOptions queryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                EntityDataModel.Current.EntitySets["Products"],
+                Mock.Of<IODataQueryOptionsValidator>());
+
+            Assert.Equal(
+                "https://services.odata.org/OData/Products?$skip=75&$count=true&$expand=Category&$filter=Name eq 'Milk'&$format=json&$orderby=Name&$search=blue OR green&$select=Name,Price&$top=25",
+                httpRequestMessage.ResolveODataNextLink(queryOptions, 50, 25));
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ResolveODataNextLink_WithTopQueryOption()
+        {
+            TestHelper.EnsureEDM();
+
+            HttpRequestMessage httpRequestMessage = TestHelper.CreateODataHttpRequestMessage("/OData/Products?$top=25");
+
+            ODataQueryOptions queryOptions = new ODataQueryOptions(
+                httpRequestMessage.RequestUri.Query,
+                EntityDataModel.Current.EntitySets["Products"],
+                Mock.Of<IODataQueryOptionsValidator>());
+
+            Assert.Equal(
+                "https://services.odata.org/OData/Products?$skip=25&$top=25",
+                httpRequestMessage.ResolveODataNextLink(queryOptions, 0, 25));
         }
 
         public class CreateODataErrorResponse_WithODataException

@@ -93,8 +93,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
-    <Compile Include="HttpRequestMessageExtensionsTests.cs" />
     <Compile Include="Integration\EmployeeController.cs" />
     <Compile Include="Integration\GetMetadataTests.cs" />
     <Compile Include="Integration\GetServiceDocumentTests_MetadataMinimal.cs" />
@@ -114,6 +112,8 @@
     <Compile Include="NorthwindModel\OrderDetail.cs" />
     <Compile Include="NorthwindModel\Product.cs" />
     <Compile Include="ODataExceptionFilterAttributeTests.cs" />
+    <Compile Include="ODataHttpConfigurationExtensionsTests.cs" />
+    <Compile Include="ODataHttpRequestMessageExtensionsTests.cs" />
     <Compile Include="ODataMetadataLevelExtensionsTests.cs" />
     <Compile Include="ODataQueryOptionsHttpParameterBindingTests.cs" />
     <Compile Include="ODataRequestDelegatingHandlerTests.cs" />
