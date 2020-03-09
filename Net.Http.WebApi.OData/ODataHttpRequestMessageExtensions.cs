@@ -31,24 +31,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="request">The HTTP request for the current request.</param>
         /// <returns>True if the request is an OData Metadata request, otherwise false.</returns>
         public static bool IsODataMetadataRequest(this HttpRequestMessage request)
-        {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            Uri uri = request.RequestUri;
-
-            for (int i = 0; i < uri.Segments.Length; i++)
-            {
-                if (uri.Segments[i].StartsWith("$metadata", StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+            => request?.RequestUri.LocalPath.IndexOf("$metadata", StringComparison.OrdinalIgnoreCase) > 0;
 
         /// <summary>
         /// Gets a value indicating whether the request is an OData request.
@@ -56,24 +39,7 @@ namespace Net.Http.WebApi.OData
         /// <param name="request">The HTTP request for the current request.</param>
         /// <returns>True if the request is an OData request, otherwise false.</returns>
         public static bool IsODataRequest(this HttpRequestMessage request)
-        {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            Uri uri = request.RequestUri;
-
-            for (int i = 0; i < uri.Segments.Length; i++)
-            {
-                if (uri.Segments[i].StartsWith("odata", StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+            => request?.RequestUri.LocalPath.IndexOf("odata", StringComparison.OrdinalIgnoreCase) > 0;
 
         /// <summary>
         /// Reads the OData request options.
