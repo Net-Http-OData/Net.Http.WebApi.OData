@@ -5,6 +5,8 @@ namespace NorthwindModel
 {
     public class Order
     {
+        public DateTimeOffset Date { get; set; }
+
         public decimal Freight { get; set; }
 
         public IList<OrderDetail> OrderDetails { get; set; }

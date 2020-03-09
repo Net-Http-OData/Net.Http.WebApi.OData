@@ -100,6 +100,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         <Key>
           <PropertyRef Name=""OrderId"" />
         </Key>
+        <Property Name=""Date"" Type=""Edm.DateTimeOffset"" Nullable=""false"" />
         <Property Name=""Freight"" Type=""Edm.Decimal"" Nullable=""false"" />
         <Property Name=""OrderDetails"" Type=""Collection(NorthwindModel.OrderDetail)"" />
         <Property Name=""OrderId"" Type=""Edm.Int64"" Nullable=""false"" />
