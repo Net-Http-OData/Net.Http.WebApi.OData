@@ -32,6 +32,7 @@ namespace Net.Http.WebApi.OData.Tests
         public void SendAsync_ReturnsODataErrorContent_ForApplicationXml()
         {
             HttpRequestMessage httpRequestMessage = TestHelper.CreateHttpRequestMessage("/OData/Products");
+            httpRequestMessage.Headers.Accept.Clear();
             httpRequestMessage.Headers.Add("Accept", "application/xml");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
@@ -78,6 +79,7 @@ namespace Net.Http.WebApi.OData.Tests
         public void SendAsync_ReturnsODataErrorContent_ForInvalidMaxVersion()
         {
             HttpRequestMessage httpRequestMessage = TestHelper.CreateHttpRequestMessage("/OData/Products");
+            httpRequestMessage.Headers.Add(ODataRequestHeaderNames.ODataVersion, "4.0");
             httpRequestMessage.Headers.Add(ODataRequestHeaderNames.ODataMaxVersion, "3.0");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
@@ -93,7 +95,7 @@ namespace Net.Http.WebApi.OData.Tests
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
             Assert.Equal("400", odataErrorContent.Error.Code);
-            Assert.Equal("If specified, the OData-MaxVersion header must be a valid OData version supported by this service between version 4.0 and 4.0.", odataErrorContent.Error.Message);
+            Assert.Equal("The OData version '3.0' specified in the OData-MaxVersion header indicating the maximum acceptable version of the response must be a valid OData version supported by this service between version '4.0' and '4.0'.", odataErrorContent.Error.Message);
         }
 
         [Fact]
@@ -205,6 +207,7 @@ namespace Net.Http.WebApi.OData.Tests
                 httpRequestMessage.Headers.Add("Accept", "application/json;odata.metadata=none");
                 httpRequestMessage.Headers.Add(ODataRequestHeaderNames.ODataIsolation, "Snapshot");
                 httpRequestMessage.Headers.Add(ODataRequestHeaderNames.ODataMaxVersion, "4.0");
+                httpRequestMessage.Headers.Add(ODataRequestHeaderNames.ODataVersion, "4.0");
 
                 var odataServiceOptions = new ODataServiceOptions(
                     ODataVersion.MinVersion,
@@ -236,6 +239,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             [Fact]
             [Trait("Category", "Unit")]
+            public void ODataRequestOptions_MaxVersion_IsSetTo_4_0()
+            {
+                Assert.Equal(ODataVersion.OData40, _odataRequestOptions.ODataMaxVersion);
+            }
+
+            [Fact]
+            [Trait("Category", "Unit")]
             public void ODataRequestOptions_MetadataLevel_IsSetTo_None()
             {
                 Assert.Equal(ODataMetadataLevel.None, _odataRequestOptions.MetadataLevel);
@@ -245,7 +255,7 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_Version_IsSetTo_4_0()
             {
-                Assert.Equal(ODataVersion.OData40, _odataRequestOptions.Version);
+                Assert.Equal(ODataVersion.OData40, _odataRequestOptions.ODataVersion);
             }
 
             [Fact]
@@ -308,6 +318,13 @@ namespace Net.Http.WebApi.OData.Tests
 
             [Fact]
             [Trait("Category", "Unit")]
+            public void ODataRequestOptions_MaxVersion_DefaultsTo_MaxVersion()
+            {
+                Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.ODataMaxVersion);
+            }
+
+            [Fact]
+            [Trait("Category", "Unit")]
             public void ODataRequestOptions_MetadataLevel_DefaultsTo_Minimal()
             {
                 Assert.Equal(ODataMetadataLevel.Minimal, _odataRequestOptions.MetadataLevel);
@@ -317,7 +334,7 @@ namespace Net.Http.WebApi.OData.Tests
             [Trait("Category", "Unit")]
             public void ODataRequestOptions_Version_DefaultsTo_MaxVersion()
             {
-                Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.Version);
+                Assert.Equal(ODataVersion.MaxVersion, _odataRequestOptions.ODataVersion);
             }
 
             [Fact]

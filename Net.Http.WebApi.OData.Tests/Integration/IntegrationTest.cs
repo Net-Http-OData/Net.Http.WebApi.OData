@@ -35,6 +35,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             _httpServer = new HttpServer(_httpConfiguration);
             HttpClient = new HttpClient(_httpServer);
+            HttpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         }
 
         protected HttpClient HttpClient { get; }

@@ -56,7 +56,7 @@ namespace Net.Http.WebApi.OData
                 string query = request.RequestUri.Query;
                 EntitySet entitySet = request.ResolveEntitySet();
                 ODataRequestOptions odataRequestOptions = request.ReadODataRequestOptions();
-                IODataQueryOptionsValidator validator = ODataQueryOptionsValidator.GetValidator(odataRequestOptions.Version);
+                IODataQueryOptionsValidator validator = ODataQueryOptionsValidator.GetValidator(odataRequestOptions.ODataVersion);
 
                 var queryOptions = new ODataQueryOptions(query, entitySet, validator);
 

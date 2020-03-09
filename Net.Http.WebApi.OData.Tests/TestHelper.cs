@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using Net.Http.OData;
@@ -25,6 +26,7 @@ namespace Net.Http.WebApi.OData.Tests
         internal static HttpRequestMessage CreateHttpRequestMessage(string path)
         {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri("https://services.odata.org" + path));
+            httpRequestMessage.Headers.Add("Accept", "application/json");
             httpRequestMessage.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
             return httpRequestMessage;
@@ -41,7 +43,7 @@ namespace Net.Http.WebApi.OData.Tests
             HttpRequestMessage httpRequestMessage = CreateHttpRequestMessage(path);
             httpRequestMessage.Properties.Add(
                 typeof(ODataRequestOptions).FullName,
-                new ODataRequestOptions(new Uri("https://services.odata.org/OData/"), ODataIsolationLevel.None, metadataLevel, ODataVersion.OData40));
+                new ODataRequestOptions(new Uri("https://services.odata.org/OData/"), ODataIsolationLevel.None, metadataLevel, ODataVersion.OData40, ODataVersion.OData40));
 
             return httpRequestMessage;
         }
