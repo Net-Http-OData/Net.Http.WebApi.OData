@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NorthwindModel;
 
-namespace Net.Http.WebApi.OData.Tests
+namespace Net.Http.WebApi.OData.Tests.Integration
 {
     public abstract class IntegrationTest : IDisposable
     {
