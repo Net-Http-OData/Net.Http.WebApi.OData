@@ -10,12 +10,14 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Net.Http.OData;
 
 namespace Net.Http.WebApi.OData
@@ -101,6 +103,31 @@ namespace Net.Http.WebApi.OData
 
         private static ODataMetadataLevel ReadMetadataLevel(HttpRequestMessage request)
         {
+            if (!string.IsNullOrWhiteSpace(request.RequestUri.Query))
+            {
+                string formatQuery = HttpUtility.ParseQueryString(request.RequestUri.Query).Get("$format");
+                int idx = formatQuery.IndexOf("odata.metadata=", StringComparison.Ordinal) + 15;
+
+                if (idx > 0)
+                {
+                    switch (formatQuery.Substring(idx, formatQuery.Length - idx))
+                    {
+                        case "none":
+                            return ODataMetadataLevel.None;
+
+                        case "minimal":
+                            return ODataMetadataLevel.Minimal;
+
+                        case "full":
+                            return ODataMetadataLevel.Full;
+
+                        default:
+                            throw ODataException.BadRequest(
+                                $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the $format query option must be 'none', 'minimal' or 'full'.");
+                    }
+                }
+            }
+
             foreach (MediaTypeWithQualityHeaderValue header in request.Headers.Accept)
             {
                 foreach (NameValueHeaderValue parameter in header.Parameters)

@@ -97,9 +97,11 @@
     <Compile Include="Integration\GetMetadataTests.cs" />
     <Compile Include="Integration\GetServiceDocumentTests_MetadataMinimal.cs" />
     <Compile Include="Integration\GetServiceDocumentTests_MetadataNone.cs" />
+    <Compile Include="Integration\GetServiceDocumentTests_MetadataNone_FormatPrecedenceOverAccept.cs" />
     <Compile Include="Integration\IntegrationTest.cs" />
     <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataMinimal.cs" />
     <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataNone.cs" />
+    <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataNone_FormatPrecedenceOverAccept.cs" />
     <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
     <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
     <Compile Include="NorthwindModel\AccessLevel.cs" />

@@ -100,7 +100,7 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForInvalidMetadataLevel()
+        public void SendAsync_ReturnsODataErrorContent_ForInvalidMetadataLevel_InAccept()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Add("Accept", "application/json;odata.metadata=all");
@@ -119,6 +119,28 @@ namespace Net.Http.WebApi.OData.Tests
 
             Assert.Equal("400", odataErrorContent.Error.Code);
             Assert.Equal("If specified, the odata.metadata value in the Accept header must be 'none', 'minimal' or 'full'.", odataErrorContent.Error.Message);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void SendAsync_ReturnsODataErrorContent_ForInvalidMetadataLevel_InFormatQueryOption()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=application/json;odata.metadata=all");
+
+            var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
+
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+
+            Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
+
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
+
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
+
+            var odataErrorContent = (ODataErrorContent)objectContent.Value;
+
+            Assert.Equal("400", odataErrorContent.Error.Code);
+            Assert.Equal("If specified, the odata.metadata value in the $format query option must be 'none', 'minimal' or 'full'.", odataErrorContent.Error.Message);
         }
 
         [Fact]
@@ -146,10 +168,32 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForMetadataLevelFull()
+        public void SendAsync_ReturnsODataErrorContent_ForMetadataLevelFull_InAccept()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
+
+            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+
+            Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
+
+            Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
+
+            var objectContent = (ObjectContent<ODataErrorContent>)responseMessage.Content;
+
+            var odataErrorContent = (ODataErrorContent)objectContent.Value;
+
+            Assert.Equal("400", odataErrorContent.Error.Code);
+            Assert.Equal("odata.metadata 'full' is not supported by this service, the metadata levels supported by this service are 'none, minimal'.", odataErrorContent.Error.Message);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void SendAsync_ReturnsODataErrorContent_ForMetadataLevelFull_InFormatQueryOption()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=application/json;odata.metadata=full");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
