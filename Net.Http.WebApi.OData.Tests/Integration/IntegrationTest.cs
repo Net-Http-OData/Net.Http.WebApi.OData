@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Web.Http;
+using Net.Http.OData;
 using Net.Http.OData.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -37,6 +38,8 @@ namespace Net.Http.WebApi.OData.Tests.Integration
 
             HttpClient = new HttpClient(_httpServer);
             HttpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+            HttpClient.DefaultRequestHeaders.Add(ODataRequestHeaderNames.ODataVersion, "4.0");
+            HttpClient.DefaultRequestHeaders.Add(ODataRequestHeaderNames.ODataMaxVersion, "4.0");
         }
 
         protected HttpClient HttpClient { get; }
@@ -44,6 +47,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         public void Dispose()
         {
             HttpClient.Dispose();
+
             _httpServer.Dispose();
             _httpConfiguration.Dispose();
         }
