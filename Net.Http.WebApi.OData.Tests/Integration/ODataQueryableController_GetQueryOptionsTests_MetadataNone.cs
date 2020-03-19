@@ -13,7 +13,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
 
         public ODataQueryableController_GetQueryOptionsTests_MetadataNone()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://server/odata/Employees");
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://server/odata/Employees?$select=Forename,Surname");
             request.Headers.Add("Accept", "application/json;odata.metadata=none");
 
             _response = HttpClient.SendAsync(request).Result;

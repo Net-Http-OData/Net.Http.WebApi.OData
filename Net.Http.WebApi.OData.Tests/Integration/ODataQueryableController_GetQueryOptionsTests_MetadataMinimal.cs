@@ -12,7 +12,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         private readonly HttpResponseMessage _response;
 
         public ODataQueryableController_GetQueryOptionsTests()
-            => _response = HttpClient.GetAsync("http://server/odata/Employees").Result;
+            => _response = HttpClient.GetAsync("http://server/odata/Employees?$select=Forename,Surname").Result;
 
         [Fact]
         [Trait("Category", "Integration")]
@@ -38,7 +38,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             string result = await _response.Content.ReadAsStringAsync();
 
             Assert.Equal(
-                "{\"@odata.context\":\"http://server/odata/$metadata#Employees\",\"value\":[]}",
+                "{\"@odata.context\":\"http://server/odata/$metadata#Employees(Forename,Surname)\",\"value\":[]}",
                 result);
         }
 
