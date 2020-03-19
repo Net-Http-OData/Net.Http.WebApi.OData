@@ -305,26 +305,29 @@ namespace Net.Http.WebApi.OData
         {
             if (!string.IsNullOrWhiteSpace(request.RequestUri.Query))
             {
-                string[] formatQueryParameters = HttpUtility.ParseQueryString(request.RequestUri.Query).Get("$format").Split(';');
+                string formatQueryParameters = HttpUtility.ParseQueryString(request.RequestUri.Query).Get("$format");
 
-                foreach (string formatQuery in formatQueryParameters)
+                if (!string.IsNullOrWhiteSpace(formatQueryParameters))
                 {
-                    if (formatQuery.StartsWith("odata.metadata=", StringComparison.Ordinal))
+                    foreach (string formatQuery in formatQueryParameters.Split(';'))
                     {
-                        switch (formatQuery)
+                        if (formatQuery.StartsWith("odata.metadata=", StringComparison.Ordinal))
                         {
-                            case "odata.metadata=none":
-                                return ODataMetadataLevel.None;
+                            switch (formatQuery)
+                            {
+                                case "odata.metadata=none":
+                                    return ODataMetadataLevel.None;
 
-                            case "odata.metadata=minimal":
-                                return ODataMetadataLevel.Minimal;
+                                case "odata.metadata=minimal":
+                                    return ODataMetadataLevel.Minimal;
 
-                            case "odata.metadata=full":
-                                return ODataMetadataLevel.Full;
+                                case "odata.metadata=full":
+                                    return ODataMetadataLevel.Full;
 
-                            default:
-                                throw ODataException.BadRequest(
-                                    $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the $format query option must be 'none', 'minimal' or 'full'.");
+                                default:
+                                    throw ODataException.BadRequest(
+                                        $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the $format query option must be 'none', 'minimal' or 'full'.");
+                            }
                         }
                     }
                 }
