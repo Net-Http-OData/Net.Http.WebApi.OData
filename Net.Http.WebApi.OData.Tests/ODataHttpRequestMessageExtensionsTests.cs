@@ -424,6 +424,200 @@ namespace Net.Http.WebApi.OData.Tests
                 request.ODataNextLink(queryOptions, 0, 25));
         }
 
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadIsolationLevel_None()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+
+            Assert.Equal(ODataIsolationLevel.None, request.ReadIsolationLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadIsolationLevel_Snapshot()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Add(ODataRequestHeaderNames.ODataIsolation, "Snapshot");
+
+            Assert.Equal(ODataIsolationLevel.Snapshot, request.ReadIsolationLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadIsolationLevel_Throws_ODataException_ForInvalidIsolationLevel()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Add(ODataRequestHeaderNames.ODataIsolation, "ReadCommitted");
+
+            ODataException exception = Assert.Throws<ODataException>(() => request.ReadIsolationLevel());
+
+            Assert.Equal($"If specified, the {ODataRequestHeaderNames.ODataIsolation} must be 'Snapshot'.", exception.Message);
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FavoursFormatOverAccept()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=json;odata.metadata=none");
+            request.Headers.Accept.Clear();
+            request.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            Assert.Equal(ODataMetadataLevel.None, request.ReadMetadataLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromAccept_Full()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Accept.Clear();
+            request.Headers.Add("Accept", "application/json;odata.metadata=full");
+
+            Assert.Equal(ODataMetadataLevel.Full, request.ReadMetadataLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromAccept_Minimal()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Accept.Clear();
+            request.Headers.Add("Accept", "application/json;odata.metadata=minimal");
+
+            Assert.Equal(ODataMetadataLevel.Minimal, request.ReadMetadataLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromAccept_None()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Accept.Clear();
+            request.Headers.Add("Accept", "application/json;odata.metadata=none");
+
+            Assert.Equal(ODataMetadataLevel.None, request.ReadMetadataLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromAccept_Throws_ODataException_ForInvalidMetadataLevel()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Accept.Clear();
+            request.Headers.Add("Accept", "application/json;odata.metadata=all");
+
+            ODataException exception = Assert.Throws<ODataException>(() => request.ReadMetadataLevel());
+
+            Assert.Equal($"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the Accept header must be 'none', 'minimal' or 'full'.", exception.Message);
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromFormat_Full()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=json;odata.metadata=full");
+
+            Assert.Equal(ODataMetadataLevel.Full, request.ReadMetadataLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromFormat_Minimal()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=json;odata.metadata=minimal");
+
+            Assert.Equal(ODataMetadataLevel.Minimal, request.ReadMetadataLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromFormat_None()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=json;odata.metadata=none");
+
+            Assert.Equal(ODataMetadataLevel.None, request.ReadMetadataLevel());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadMetadataLevel_FromFormat_Throws_ODataException_ForInvalidMetadataLevel()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=json;odata.metadata=all");
+
+            ODataException exception = Assert.Throws<ODataException>(() => request.ReadMetadataLevel());
+
+            Assert.Equal($"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the $format query option must be 'none', 'minimal' or 'full'.", exception.Message);
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadODataMaxVersion_ReturnsODataVersion_FromODataMaxVersionHeader()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Add(ODataRequestHeaderNames.ODataMaxVersion, "3.0");
+
+            Assert.Equal(ODataVersion.Parse("3.0"), request.ReadODataMaxVersion());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadODataMaxVersion_ReturnsODataVersionMaxVersion_IfODataMaxVersionHeaderNotPresent()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+
+            Assert.Equal(ODataVersion.MaxVersion, request.ReadODataMaxVersion());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadODataMaxVersion_Throws_ODataException_ForInvalidVersionFormat()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Add(ODataRequestHeaderNames.ODataMaxVersion, "MAX");
+
+            ODataException exception = Assert.Throws<ODataException>(() => request.ReadODataMaxVersion());
+
+            Assert.Equal($"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version.", exception.Message);
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadODataVersion_ReturnsODataVersion_FromODataMaxVersionHeader_IfODataVersionHeaderNotPresent()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Add(ODataRequestHeaderNames.ODataMaxVersion, "3.0");
+
+            Assert.Equal(ODataVersion.Parse("3.0"), request.ReadODataVersion());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadODataVersion_ReturnsODataVersion_FromODataVersionHeader()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Add(ODataRequestHeaderNames.ODataVersion, "3.0");
+
+            Assert.Equal(ODataVersion.Parse("3.0"), request.ReadODataVersion());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void ReadODataVersion_Throws_ODataException_ForInvalidVersionFormat()
+        {
+            HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
+            request.Headers.Add(ODataRequestHeaderNames.ODataMaxVersion, "MIN");
+
+            ODataException exception = Assert.Throws<ODataException>(() => request.ReadODataVersion());
+
+            Assert.Equal($"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version.", exception.Message);
+            Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
+        }
+
         public class CreateODataErrorResponse_WithODataException
         {
             private readonly HttpResponseMessage _response;

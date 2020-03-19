@@ -10,14 +10,10 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using Net.Http.OData;
 
 namespace Net.Http.WebApi.OData
@@ -33,7 +29,8 @@ namespace Net.Http.WebApi.OData
         /// Initialises a new instance of the <see cref="ODataRequestDelegatingHandler"/> class.
         /// </summary>
         /// <param name="odataServiceOptions">The <see cref="ODataServiceOptions"/> for the service.</param>
-        public ODataRequestDelegatingHandler(ODataServiceOptions odataServiceOptions) => _odataServiceOptions = odataServiceOptions;
+        public ODataRequestDelegatingHandler(ODataServiceOptions odataServiceOptions)
+            => _odataServiceOptions = odataServiceOptions;
 
         /// <inheritdoc/>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -51,10 +48,10 @@ namespace Net.Http.WebApi.OData
 
                     requestOptions = new ODataRequestOptions(
                         ODataUtility.ODataServiceRootUri(request.RequestUri.Scheme, request.RequestUri.Host, request.RequestUri.LocalPath),
-                        ReadIsolationLevel(request),
-                        ReadMetadataLevel(request),
-                        ReadODataVersion(request),
-                        ReadODataMaxVersion(request));
+                        request.ReadIsolationLevel(),
+                        request.ReadMetadataLevel(),
+                        request.ReadODataVersion(),
+                        request.ReadODataMaxVersion());
 
                     _odataServiceOptions.Validate(requestOptions);
 
@@ -79,117 +76,6 @@ namespace Net.Http.WebApi.OData
             }
 
             return response;
-        }
-
-        private static string ReadHeaderValue(HttpRequestMessage request, string name)
-            => request.Headers.TryGetValues(name, out IEnumerable<string> values) ? values.FirstOrDefault() : default;
-
-        private static ODataIsolationLevel ReadIsolationLevel(HttpRequestMessage request)
-        {
-            string headerValue = ReadHeaderValue(request, ODataRequestHeaderNames.ODataIsolation);
-
-            if (headerValue != null)
-            {
-                if (headerValue == "Snapshot")
-                {
-                    return ODataIsolationLevel.Snapshot;
-                }
-
-                throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataIsolation} must be 'Snapshot'.");
-            }
-
-            return ODataIsolationLevel.None;
-        }
-
-        private static ODataMetadataLevel ReadMetadataLevel(HttpRequestMessage request)
-        {
-            if (!string.IsNullOrWhiteSpace(request.RequestUri.Query))
-            {
-                string formatQuery = HttpUtility.ParseQueryString(request.RequestUri.Query).Get("$format");
-                int idx = formatQuery.IndexOf("odata.metadata=", StringComparison.Ordinal) + 15;
-
-                if (idx > 0)
-                {
-                    switch (formatQuery.Substring(idx, formatQuery.Length - idx))
-                    {
-                        case "none":
-                            return ODataMetadataLevel.None;
-
-                        case "minimal":
-                            return ODataMetadataLevel.Minimal;
-
-                        case "full":
-                            return ODataMetadataLevel.Full;
-
-                        default:
-                            throw ODataException.BadRequest(
-                                $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the $format query option must be 'none', 'minimal' or 'full'.");
-                    }
-                }
-            }
-
-            foreach (MediaTypeWithQualityHeaderValue header in request.Headers.Accept)
-            {
-                foreach (NameValueHeaderValue parameter in header.Parameters)
-                {
-                    if (parameter.Name == ODataMetadataLevelExtensions.HeaderName)
-                    {
-                        switch (parameter.Value)
-                        {
-                            case "none":
-                                return ODataMetadataLevel.None;
-
-                            case "minimal":
-                                return ODataMetadataLevel.Minimal;
-
-                            case "full":
-                                return ODataMetadataLevel.Full;
-
-                            default:
-                                throw ODataException.BadRequest(
-                                    $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the Accept header must be 'none', 'minimal' or 'full'.");
-                        }
-                    }
-                }
-            }
-
-            return ODataMetadataLevel.Minimal;
-        }
-
-        private ODataVersion ReadODataMaxVersion(HttpRequestMessage request)
-        {
-            string headerValue = ReadHeaderValue(request, ODataRequestHeaderNames.ODataMaxVersion);
-
-            if (headerValue != null)
-            {
-                if (ODataVersion.TryParse(headerValue, out ODataVersion odataVersion))
-                {
-                    return odataVersion;
-                }
-
-                throw ODataException.BadRequest(
-                    $"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version supported by this service between version {_odataServiceOptions.MinVersion} and {_odataServiceOptions.MaxVersion}.");
-            }
-
-            return ODataVersion.MaxVersion;
-        }
-
-        private ODataVersion ReadODataVersion(HttpRequestMessage request)
-        {
-            string headerValue = ReadHeaderValue(request, ODataRequestHeaderNames.ODataVersion);
-
-            if (headerValue != null)
-            {
-                if (ODataVersion.TryParse(headerValue, out ODataVersion odataVersion))
-                {
-                    return odataVersion;
-                }
-
-                throw ODataException.BadRequest(
-                    $"If specified, the {ODataRequestHeaderNames.ODataVersion} header must be a valid OData version supported by this service between version {_odataServiceOptions.MinVersion} and {_odataServiceOptions.MaxVersion}.");
-            }
-
-            return ReadODataMaxVersion(request);
         }
     }
 }
