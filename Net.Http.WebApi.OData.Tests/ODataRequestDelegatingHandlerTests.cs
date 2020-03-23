@@ -13,13 +13,13 @@ namespace Net.Http.WebApi.OData.Tests
     {
         [Fact]
         [Trait("Category", "Unit")]
-        public void DoesNotAdd_MetadataLevel_ForMetadataRequest()
+        public async Task SendAsync_DoesNotAdd_MetadataLevel_ForMetadataRequest()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/$metadata");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             NameValueHeaderValue metadataParameter =
                 responseMessage.Content.Headers.ContentType.Parameters.SingleOrDefault(x => x.Name == ODataMetadataLevelExtensions.HeaderName);
@@ -29,7 +29,7 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForApplicationXml()
+        public async Task SendAsync_ReturnsODataErrorContent_ForApplicationXml()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Accept.Clear();
@@ -37,7 +37,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.UnsupportedMediaType, responseMessage.StatusCode);
 
@@ -53,14 +53,14 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForInvalidIsolationLevel()
+        public async Task SendAsync_ReturnsODataErrorContent_ForInvalidIsolationLevel()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Add(ODataRequestHeaderNames.ODataIsolation, "ReadCommitted");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
@@ -76,7 +76,7 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForInvalidMaxVersion()
+        public async Task SendAsync_ReturnsODataErrorContent_ForInvalidMaxVersion()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Add(ODataRequestHeaderNames.ODataVersion, "4.0");
@@ -84,7 +84,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
@@ -100,14 +100,14 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForInvalidMetadataLevel_InAccept()
+        public async Task SendAsync_ReturnsODataErrorContent_ForInvalidMetadataLevel_InAccept()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Add("Accept", "application/json;odata.metadata=all");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
@@ -123,13 +123,13 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForInvalidMetadataLevel_InFormatQueryOption()
+        public async Task SendAsync_ReturnsODataErrorContent_ForInvalidMetadataLevel_InFormatQueryOption()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=application/json;odata.metadata=all");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
@@ -145,14 +145,14 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForIsolationSnapshot()
+        public async Task SendAsync_ReturnsODataErrorContent_ForIsolationSnapshot()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Add(ODataRequestHeaderNames.ODataIsolation, "Snapshot");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.PreconditionFailed, responseMessage.StatusCode);
 
@@ -168,14 +168,14 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForMetadataLevelFull_InAccept()
+        public async Task SendAsync_ReturnsODataErrorContent_ForMetadataLevelFull_InAccept()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products");
             request.Headers.Add("Accept", "application/json;odata.metadata=full");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
@@ -191,13 +191,13 @@ namespace Net.Http.WebApi.OData.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void SendAsync_ReturnsODataErrorContent_ForMetadataLevelFull_InFormatQueryOption()
+        public async Task SendAsync_ReturnsODataErrorContent_ForMetadataLevelFull_InFormatQueryOption()
         {
             HttpRequestMessage request = TestHelper.CreateHttpRequest("/OData/Products?$format=application/json;odata.metadata=full");
 
             var invoker = new HttpMessageInvoker(new ODataRequestDelegatingHandler(TestHelper.ODataServiceOptions) { InnerHandler = new MockHttpMessageHandler() });
 
-            HttpResponseMessage responseMessage = invoker.SendAsync(request, CancellationToken.None).Result;
+            HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
             Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
 
