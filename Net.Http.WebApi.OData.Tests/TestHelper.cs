@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using Net.Http.OData;
 using Net.Http.OData.Model;
+using Net.Http.OData.Query.Parsers;
 using NorthwindModel;
 
 namespace Net.Http.WebApi.OData.Tests
@@ -50,6 +52,8 @@ namespace Net.Http.WebApi.OData.Tests
         internal static void EnsureEDM()
         {
             ODataServiceOptions.Current = ODataServiceOptions;
+
+            ParserSettings.DateTimeStyles = DateTimeStyles.AssumeUniversal;
 
             EntityDataModelBuilder entityDataModelBuilder = new EntityDataModelBuilder(StringComparer.OrdinalIgnoreCase)
                 .RegisterEntitySet<Category>("Categories", x => x.Name, Capabilities.Insertable | Capabilities.Updatable | Capabilities.Deletable)

@@ -31,6 +31,27 @@ namespace Net.Http.WebApi.OData.Tests
         }
 
         [Fact]
+        public void OnException_DoesNotSet_Response_If_Exception_IsNull()
+        {
+            var actionExecutedContext = new HttpActionExecutedContext
+            {
+                ActionContext = new HttpActionContext
+                {
+                    ControllerContext = new HttpControllerContext
+                    {
+                        Request = TestHelper.CreateODataHttpRequest("/OData/Products"),
+                    }
+                },
+                Exception = null,
+            };
+
+            var exceptionFilter = new ODataExceptionFilterAttribute();
+            exceptionFilter.OnException(actionExecutedContext);
+
+            Assert.Null(actionExecutedContext.Response);
+        }
+
+        [Fact]
         public void OnException_Sets_Response_If_Exception_Is_ODataException()
         {
             var actionExecutedContext = new HttpActionExecutedContext
