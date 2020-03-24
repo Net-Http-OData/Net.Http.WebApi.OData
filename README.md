@@ -44,8 +44,11 @@ Note that when you register an Entity Set, you also specify the name of the Enti
 In your controller(s), define a Get method which accepts a single parameter of ODataQueryOptions:
 
 ```csharp
-public class MyController : ODataController
+[RoutePrefix("odata/Products")]
+public class ProductsController : ODataController
 {
+    [HttpGet]
+    [Route("")]
     public IHttpActionResult Get(ODataQueryOptions queryOptions)
     {
         // Implement query logic.
