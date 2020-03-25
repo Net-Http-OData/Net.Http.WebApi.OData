@@ -1,19 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.props" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.props')" />
+  <Import Project="..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.props" Condition="Exists('..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.props')" />
+  <Import Project="..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0BDC1EA9-0521-49C7-A0DF-199395419476}</ProjectGuid>
+    <ProjectGuid>{04742EE0-284F-4E32-9D53-A5A9F81D96BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Net.Http.WebApi.OData.Tests</RootNamespace>
     <AssemblyName>Net.Http.WebApi.OData.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <LangVersion>7.3</LangVersion>
+    <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -44,104 +46,81 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeCoverage.16.5.0\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
+    </Reference>
     <Reference Include="Moq, Version=4.13.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.13.1\lib\net45\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Net.Http.OData, Version=5.0.0.0, Culture=neutral, PublicKeyToken=74e1ef70f5770817, processorArchitecture=MSIL">
+      <HintPath>..\packages\Net.Http.OData.5.0.0\lib\net45\Net.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.XML" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
+    <Reference Include="xunit.assert, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.4.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+    <Reference Include="xunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.4.1\lib\net452\xunit.core.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+    <Reference Include="xunit.execution.desktop, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.execution.2.4.1\lib\net452\xunit.execution.desktop.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\EntityDataModelTests.cs" />
+    <Compile Include="Integration\EmployeeController.cs" />
+    <Compile Include="Integration\GetMetadataTests.cs" />
+    <Compile Include="Integration\GetServiceDocumentTests_MetadataMinimal.cs" />
+    <Compile Include="Integration\GetServiceDocumentTests_MetadataNone.cs" />
+    <Compile Include="Integration\GetServiceDocumentTests_MetadataNone_FormatPrecedenceOverAccept.cs" />
+    <Compile Include="Integration\IntegrationTest.cs" />
+    <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataMinimal.cs" />
+    <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataNone.cs" />
+    <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataNone_FormatPrecedenceOverAccept.cs" />
+    <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
+    <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
     <Compile Include="NorthwindModel\AccessLevel.cs" />
     <Compile Include="NorthwindModel\Category.cs" />
     <Compile Include="NorthwindModel\Colour.cs" />
     <Compile Include="NorthwindModel\Customer.cs" />
     <Compile Include="NorthwindModel\Employee.cs" />
-    <Compile Include="HttpConfigurationODataExtensionsTests.cs" />
-    <Compile Include="HttpRequestMessageExtensionsTests.cs" />
     <Compile Include="NorthwindModel\Manager.cs" />
-    <Compile Include="Metadata\MetadataProviderTests.cs" />
-    <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
-    <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
-    <Compile Include="Model\EdmComplexTypeTests.cs" />
-    <Compile Include="Model\EdmPrimitiveTypeTests.cs" />
-    <Compile Include="Model\EdmPropertyTests.cs" />
-    <Compile Include="Model\EdmTypeCacheTests.cs" />
-    <Compile Include="Model\EntityDataModelBuilderTests.cs" />
-    <Compile Include="ODataVersionHeaderValidationAttributeTests.cs" />
     <Compile Include="NorthwindModel\Order.cs" />
-    <Compile Include="ODataResponseContentSerializationTests.cs" />
-    <Compile Include="ODataResponseContentTests.cs" />
     <Compile Include="NorthwindModel\OrderDetail.cs" />
     <Compile Include="NorthwindModel\Product.cs" />
+    <Compile Include="ODataExceptionFilterAttributeTests.cs" />
+    <Compile Include="ODataHttpConfigurationExtensionsTests.cs" />
+    <Compile Include="ODataHttpRequestMessageExtensionsTests.cs" />
+    <Compile Include="ODataMetadataLevelExtensionsTests.cs" />
+    <Compile Include="ODataQueryOptionsHttpParameterBindingTests.cs" />
+    <Compile Include="ODataRequestDelegatingHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\Expressions\BinaryOperatorNodeTests.cs" />
-    <Compile Include="Query\Expressions\ConstantNodeTests.cs" />
-    <Compile Include="Query\Expressions\FunctionCallNodeTests.cs" />
-    <Compile Include="Query\Expressions\PropertyAccessNodeTests.cs" />
-    <Compile Include="Query\Expressions\UnaryOperatorNodeTests.cs" />
-    <Compile Include="Query\FilterQueryOptionTests.cs" />
-    <Compile Include="Query\FormatQueryOptionTests.cs" />
-    <Compile Include="Query\ODataQueryOptionsExtensionsTests.cs" />
-    <Compile Include="Query\ODataQueryOptionsTests.cs" />
-    <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
-    <Compile Include="Query\OrderByPropertyTests.cs" />
-    <Compile Include="Query\OrderByQueryOptionTests.cs" />
-    <Compile Include="Query\Parsers\BinaryOperatorKindParserTests.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests_ComplexExpressions.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleFunction.cs" />
-    <Compile Include="Query\Parsers\FilterExpressionParserTests_SingleProperty.cs" />
-    <Compile Include="Query\Parsers\UnaryOperatorKindParserTests.cs" />
-    <Compile Include="Query\SelectExpandQueryOptionTests.cs" />
-    <Compile Include="Query\Validators\ExpandQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\FilterQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\FormatQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\CountQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\ODataValidationSettingsTests.cs" />
-    <Compile Include="Query\Validators\OrderByQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\SearchQueryValidatorTests.cs" />
-    <Compile Include="Query\Validators\SelectQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\SkipQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\SkipTokenQueryOptionValidatorTests.cs" />
-    <Compile Include="Query\Validators\TopQueryOptionValidatorTests.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="UriExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Net.Http.WebApi.OData.snk">
@@ -152,18 +131,27 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj">
-      <Project>{67fbeb32-944e-4022-8b80-5589762b2b05}</Project>
+      <Project>{f39bccfd-2271-4a91-a80a-888a9d8b8374}</Project>
       <Name>Net.Http.WebApi.OData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.props'))" />
+    <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.targets'))" />
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.targets'))" />
   </Target>
+  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
+  <Import Project="..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.targets" Condition="Exists('..\packages\Microsoft.CodeCoverage.16.5.0\build\netstandard1.0\Microsoft.CodeCoverage.targets')" />
+  <Import Project="..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.targets" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.16.5.0\build\net40\Microsoft.NET.Test.Sdk.targets')" />
 </Project>

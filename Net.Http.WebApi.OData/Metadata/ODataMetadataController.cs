@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataMetadataController.cs" company="Project Contributors">
-// Copyright 2012 - 2019 Project Contributors
+// Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,50 +10,48 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System.Text;
+using System.Web.Http;
+using System.Xml.Linq;
+using Net.Http.OData;
+using Net.Http.OData.Metadata;
+using Net.Http.OData.Model;
+
 namespace Net.Http.WebApi.OData.Metadata
 {
-    using System.Net;
-    using System.Net.Http;
-    using System.Text;
-    using System.Web.Http;
-    using Net.Http.WebApi.OData.Model;
-
     /// <summary>
     /// An API controller which exposes the OData service metadata.
     /// </summary>
     [RoutePrefix("odata")]
-    public sealed class ODataMetadataController : ApiController
+    public sealed class ODataMetadataController : ODataController
     {
-        private static string metadataXml;
+        private static string s_metadataXml;
 
         /// <summary>
-        /// Gets the <see cref="HttpResponseMessage"/> which contains the service metadata.
+        /// Gets the <see cref="IHttpActionResult"/> which contains the service metadata.
         /// </summary>
-        /// <returns>The <see cref="HttpResponseMessage"/> which contains the service metadata.</returns>
+        /// <returns>The <see cref="IHttpActionResult"/> which contains the service metadata.</returns>
         [HttpGet]
         [Route("$metadata")]
-#pragma warning disable CA1822 // Mark members as static
-        public HttpResponseMessage Get()
-#pragma warning restore CA1822 // Mark members as static
+        public IHttpActionResult Get()
         {
-            if (metadataXml is null)
+            EnsureMetadata();
+
+            return Content(s_metadataXml, "application/xml", Encoding.UTF8);
+        }
+
+        private static void EnsureMetadata()
+        {
+            if (s_metadataXml is null)
             {
                 using (var stringWriter = new Utf8StringWriter())
                 {
-                    var metadataDocument = MetadataProvider.Create(EntityDataModel.Current);
+                    XDocument metadataDocument = XmlMetadataProvider.Create(EntityDataModel.Current, ODataServiceOptions.Current);
                     metadataDocument.Save(stringWriter);
 
-                    metadataXml = stringWriter.ToString();
+                    s_metadataXml = stringWriter.ToString();
                 }
             }
-
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(metadataXml, Encoding.UTF8, "application/xml"),
-            };
-            response.Headers.Add(ODataHeaderNames.ODataVersion, ODataHeaderValues.ODataVersionString);
-
-            return response;
         }
     }
 }

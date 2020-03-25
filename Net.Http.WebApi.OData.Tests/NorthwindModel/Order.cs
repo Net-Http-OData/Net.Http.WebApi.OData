@@ -1,10 +1,12 @@
-﻿namespace NorthwindModel
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace NorthwindModel
+{
     public class Order
     {
+        public DateTimeOffset Date { get; set; }
+
         public decimal Freight { get; set; }
 
         public IList<OrderDetail> OrderDetails { get; set; }

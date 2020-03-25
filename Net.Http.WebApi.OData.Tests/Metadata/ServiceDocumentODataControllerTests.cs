@@ -1,98 +1,86 @@
-﻿namespace Net.Http.WebApi.OData.Tests.Metadata
-{
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using System.Web.Http.Hosting;
-    using Net.Http.WebApi.OData.Metadata;
-    using Newtonsoft.Json;
-    using Xunit;
+﻿using System.Web.Http;
+using System.Web.Http.Results;
+using Net.Http.OData;
+using Net.Http.WebApi.OData.Metadata;
+using Xunit;
 
+namespace Net.Http.WebApi.OData.Tests.Metadata
+{
     public class ServiceDocumentODataControllerTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public void WhenFullMetadataIsRequested_TheEntitySetUrlIsRelative_AndTheContextUriIsSet()
         {
             TestHelper.EnsureEDM();
 
-            var controller = new ServiceDocumentODataController();
-            controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/");
-            controller.Request.Headers.Add("Accept", "application/json;odata.metadata=full");
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            var controller = new ServiceDocumentODataController
+            {
+                Request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.Full)
+            };
 
-            var response = controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.IsType<OkNegotiatedContentResult<ODataResponseContent>>(result);
 
-            var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
+            var okResult = (OkNegotiatedContentResult<ODataResponseContent>)result;
 
-            Assert.NotNull(result.Context);
-            Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
+            ODataResponseContent odataResponseContent = okResult.Content;
 
-            Assert.Null(result.Count);
-            Assert.Null(result.NextLink);
-
-            var serviceDocument = JsonConvert.SerializeObject(result);
-
-            Assert.Equal(
-                "{\"@odata.context\":\"http://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
-                serviceDocument);
+            Assert.Equal("https://services.odata.org/OData/$metadata", odataResponseContent.Context);
+            Assert.Null(odataResponseContent.Count);
+            Assert.Null(odataResponseContent.NextLink);
+            Assert.NotNull(odataResponseContent.Value);
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void WhenMinimalMetadataIsRequested_TheEntitySetUrlIsRelative_AndTheContextUriIsSet()
         {
             TestHelper.EnsureEDM();
 
-            var controller = new ServiceDocumentODataController();
-            controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/");
-            controller.Request.Headers.Add("Accept", "application/json;odata.metadata=minimal");
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            var controller = new ServiceDocumentODataController
+            {
+                Request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.Minimal)
+            };
 
-            var response = controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.IsType<OkNegotiatedContentResult<ODataResponseContent>>(result);
 
-            var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
+            var okResult = (OkNegotiatedContentResult<ODataResponseContent>)result;
 
-            Assert.NotNull(result.Context);
-            Assert.Equal("http://services.odata.org/OData/$metadata", result.Context.ToString());
+            ODataResponseContent odataResponseContent = okResult.Content;
 
-            Assert.Null(result.Count);
-            Assert.Null(result.NextLink);
-
-            var serviceDocument = JsonConvert.SerializeObject(result);
-
-            Assert.Equal(
-                "{\"@odata.context\":\"http://services.odata.org/OData/$metadata\",\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"Products\"}]}",
-                serviceDocument);
+            Assert.Equal("https://services.odata.org/OData/$metadata", odataResponseContent.Context);
+            Assert.Null(odataResponseContent.Count);
+            Assert.Null(odataResponseContent.NextLink);
+            Assert.NotNull(odataResponseContent.Value);
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void WhenNoMetadataIsRequested_TheEntitySetUrlIsFullUrl_AndTheContextUriIsNotSet()
         {
             TestHelper.EnsureEDM();
 
-            var controller = new ServiceDocumentODataController();
-            controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/");
-            controller.Request.Headers.Add("Accept", "application/json;odata.metadata=none");
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            var controller = new ServiceDocumentODataController
+            {
+                Request = TestHelper.CreateODataHttpRequest("/OData", ODataMetadataLevel.None)
+            };
 
-            var response = controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.IsType<OkNegotiatedContentResult<ODataResponseContent>>(result);
 
-            var result = (ODataResponseContent)((ObjectContent<ODataResponseContent>)response.Content).Value;
+            var okResult = (OkNegotiatedContentResult<ODataResponseContent>)result;
 
-            Assert.Null(result.Context);
-            Assert.Null(result.Count);
-            Assert.Null(result.NextLink);
+            ODataResponseContent odataResponseContent = okResult.Content;
 
-            var serviceDocument = JsonConvert.SerializeObject(result);
-
-            Assert.Equal(
-                "{\"value\":[{\"name\":\"Categories\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Categories\"},{\"name\":\"Customers\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Customers\"},{\"name\":\"Employees\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Employees\"},{\"name\":\"Managers\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Managers\"},{\"name\":\"Orders\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Orders\"},{\"name\":\"Products\",\"kind\":\"EntitySet\",\"url\":\"http://services.odata.org/OData/Products\"}]}",
-                serviceDocument);
+            Assert.Null(odataResponseContent.Context);
+            Assert.Null(odataResponseContent.Count);
+            Assert.Null(odataResponseContent.NextLink);
+            Assert.NotNull(odataResponseContent.Value);
         }
     }
 }

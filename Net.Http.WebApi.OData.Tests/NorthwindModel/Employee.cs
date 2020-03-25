@@ -1,8 +1,8 @@
-﻿namespace NorthwindModel
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
+namespace NorthwindModel
+{
     public class Employee
     {
         public AccessLevel AccessLevel { get; set; }

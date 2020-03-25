@@ -1,7 +1,7 @@
-﻿namespace NorthwindModel
-{
-    using System;
+﻿using System;
 
+namespace NorthwindModel
+{
     public class Product
     {
         public Category Category { get; set; }

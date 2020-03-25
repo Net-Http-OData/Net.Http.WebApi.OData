@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ODataExceptionFilterAttribute.cs" company="Project Contributors">
-// Copyright 2012 - 2019 Project Contributors
+// Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,15 +10,15 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Web.Http.Filters;
+using Net.Http.OData;
+
 namespace Net.Http.WebApi.OData
 {
-    using System;
-    using System.Web.Http.Filters;
-
     /// <summary>
     /// An <see cref="ExceptionFilterAttribute"/> which returns the correct response for an <see cref="ODataException"/>.
     /// </summary>
-    /// <seealso cref="System.Web.Http.Filters.ExceptionFilterAttribute" />
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public sealed class ODataExceptionFilterAttribute : ExceptionFilterAttribute
     {

@@ -1,34 +1,36 @@
-﻿namespace Net.Http.WebApi.OData.Tests.Metadata
-{
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-    using System.Web.Http.Hosting;
-    using Net.Http.WebApi.OData.Metadata;
-    using Xunit;
+﻿using System.Web.Http;
+using System.Xml.Linq;
+using Net.Http.WebApi.OData.Metadata;
+using Xunit;
 
+namespace Net.Http.WebApi.OData.Tests.Metadata
+{
     public class ODataMetadataControllerTests
     {
         [Fact]
-        public async Task GetReturnsCsdlXmlDocument()
+        [Trait("Category", "Unit")]
+        public void GetReturnsCsdlXmlDocument()
         {
             TestHelper.EnsureEDM();
 
-            var controller = new ODataMetadataController();
-            controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://services.odata.org/OData/$metadata");
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            var controller = new ODataMetadataController
+            {
+                Request = TestHelper.CreateODataHttpRequest("/OData/$metadata")
+            };
 
-            var response = controller.Get();
+            IHttpActionResult result = controller.Get();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.True(response.Headers.Contains(ODataHeaderNames.ODataVersion));
-            Assert.Equal(ODataHeaderValues.ODataVersionString, response.Headers.GetValues(ODataHeaderNames.ODataVersion).Single());
+            Assert.IsType<ContentResult>(result);
 
-            var result = await ((StringContent)response.Content).ReadAsStringAsync();
+            var contentResult = (ContentResult)result;
 
-            Assert.NotNull(result);
+            string content = contentResult.Content;
+
+            Assert.NotNull(content);
+
+            var resultXml = XDocument.Parse(content);
+
+            Assert.Equal("Edmx", resultXml.Root.Name.LocalName);
         }
     }
 }

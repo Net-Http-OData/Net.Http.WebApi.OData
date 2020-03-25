@@ -1,7 +1,7 @@
-﻿namespace NorthwindModel
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace NorthwindModel
+{
     public class Manager : Employee
     {
         public decimal AnnualBudget { get; set; }

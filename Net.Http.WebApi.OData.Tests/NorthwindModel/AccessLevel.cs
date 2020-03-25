@@ -1,7 +1,7 @@
-﻿namespace NorthwindModel
-{
-    using System;
+﻿using System;
 
+namespace NorthwindModel
+{
     [Flags]
     public enum AccessLevel
     {
