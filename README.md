@@ -1,14 +1,13 @@
-Net.Http.WebApi.OData
-=====================
+# Net.Http.WebApi.OData
+
+Net.Http.WebApi.OData is a .NET 4.5 library which uses [Net.Http.OData](https://github.com/Net-Http-OData/Net.Http.OData) with an implementation for ASP.NET WebApi.
 
 ![Nuget](https://img.shields.io/nuget/dt/Net.Http.WebApi.OData)
 
 |Branch|Status|
-|-------|------|
+|------|------|
 |/develop|![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Net-Http-OData/Net.Http.WebApi.OData/develop) [![Build Status](https://dev.azure.com/trevorpilley/Net.Http.OData/_apis/build/status/Net-Http-OData.Net.Http.WebApi.OData?branchName=develop)](https://dev.azure.com/trevorpilley/Net.Http.OData/_build/latest?definitionId=25&branchName=develop) ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Net.Http.WebApi.OData)|
 |/master|![GitHub last commit](https://img.shields.io/github/last-commit/Net-Http-OData/Net.Http.WebApi.OData/master) [![Build Status](https://dev.azure.com/trevorpilley/Net.Http.OData/_apis/build/status/Net-Http-OData.Net.Http.WebApi.OData?branchName=master)](https://dev.azure.com/trevorpilley/Net.Http.OData/_build/latest?definitionId=25&branchName=master) ![Nuget](https://img.shields.io/nuget/v/Net.Http.WebApi.OData) ![GitHub Release Date](https://img.shields.io/github/release-date/Net-Http-OData/Net.Http.WebApi.OData)|
-
-Net.Http.WebApi.OData is a .NET 4.5 library which uses [Net.Http.OData](https://github.com/Net-Http-OData/Net.Http.OData) with an implementation for ASP.NET WebApi.
 
 ## Installation
 
