@@ -1,4 +1,4 @@
-# Net.Http.WebApi.OData
+﻿# Net.Http.WebApi.OData
 
 Net.Http.WebApi.OData is a .NET 4.5 library which uses [Net.Http.OData](https://github.com/Net-Http-OData/Net.Http.OData) with an implementation for ASP.NET WebApi.
 
