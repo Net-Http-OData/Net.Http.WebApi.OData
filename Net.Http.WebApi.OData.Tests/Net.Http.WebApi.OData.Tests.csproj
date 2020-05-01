@@ -50,8 +50,8 @@
     <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeCoverage.16.6.1\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.13.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.13.1\lib\net45\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.14.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.14.1\lib\net45\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Net.Http.OData, Version=5.0.1.0, Culture=neutral, PublicKeyToken=74e1ef70f5770817, processorArchitecture=MSIL">
       <HintPath>..\packages\Net.Http.OData.5.0.1\lib\net45\Net.Http.OData.dll</HintPath>
