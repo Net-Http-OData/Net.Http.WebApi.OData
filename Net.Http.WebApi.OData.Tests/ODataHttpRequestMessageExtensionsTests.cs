@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Net.Http;
 using Moq;
 using Net.Http.OData;
@@ -643,6 +644,10 @@ namespace Net.Http.WebApi.OData.Tests
                 Assert.Equal("$search query option not supported.", errorContent.Error.Message);
                 Assert.Equal("query", errorContent.Error.Target);
             }
+
+            [Fact]
+            [Trait("Category", "Unit")]
+            public void TheContentLanguageHeaderIsSet() => Assert.Equal("en-GB", _response.Content.Headers.ContentLanguage.Single());
 
             [Fact]
             [Trait("Category", "Unit")]

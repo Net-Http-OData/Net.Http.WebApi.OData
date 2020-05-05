@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -34,16 +35,16 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             string result = await _response.Content.ReadAsStringAsync();
 
             Assert.Equal(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" + XDocument.Parse($@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""{ODataVersion.MaxVersion}"">
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + Environment.NewLine + XDocument.Parse($@"<edmx:Edmx xmlns:edmx=""http://docs.oasis-open.org/odata/ns/edmx"" Version=""{ODataVersion.MaxVersion}"">
   <edmx:DataServices>
     <Schema xmlns=""http://docs.oasis-open.org/odata/ns/edm"" Namespace=""NorthwindModel"">
-      <EnumType Name=""AccessLevel"" UnderlyingType=""Edm.Int32"" IsFlags=""True"">
+      <EnumType Name=""AccessLevel"" UnderlyingType=""Edm.Int32"" IsFlags=""true"">
         <Member Name=""None"" Value=""0"" />
         <Member Name=""Read"" Value=""1"" />
         <Member Name=""Write"" Value=""2"" />
         <Member Name=""Delete"" Value=""4"" />
       </EnumType>
-      <EnumType Name=""Colour"" UnderlyingType=""Edm.Int32"" IsFlags=""False"">
+      <EnumType Name=""Colour"" UnderlyingType=""Edm.Int32"" IsFlags=""false"">
         <Member Name=""Green"" Value=""1"" />
         <Member Name=""Blue"" Value=""2"" />
         <Member Name=""Red"" Value=""3"" />
@@ -120,17 +121,17 @@ namespace Net.Http.WebApi.OData.Tests.Integration
           <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Categories"" />
           <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
             <Record>
-              <PropertyValue Property=""Insertable"" Bool=""True"" />
+              <PropertyValue Property=""Insertable"" Bool=""true"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.UpdateRestrictions"">
             <Record>
-              <PropertyValue Property=""Updatable"" Bool=""True"" />
+              <PropertyValue Property=""Updatable"" Bool=""true"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.DeleteRestrictions"">
             <Record>
-              <PropertyValue Property=""Deletable"" Bool=""True"" />
+              <PropertyValue Property=""Deletable"" Bool=""true"" />
             </Record>
           </Annotation>
         </EntitySet>
@@ -138,17 +139,17 @@ namespace Net.Http.WebApi.OData.Tests.Integration
           <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Customers"" />
           <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
             <Record>
-              <PropertyValue Property=""Insertable"" Bool=""False"" />
+              <PropertyValue Property=""Insertable"" Bool=""false"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.UpdateRestrictions"">
             <Record>
-              <PropertyValue Property=""Updatable"" Bool=""True"" />
+              <PropertyValue Property=""Updatable"" Bool=""true"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.DeleteRestrictions"">
             <Record>
-              <PropertyValue Property=""Deletable"" Bool=""False"" />
+              <PropertyValue Property=""Deletable"" Bool=""false"" />
             </Record>
           </Annotation>
         </EntitySet>
@@ -156,17 +157,17 @@ namespace Net.Http.WebApi.OData.Tests.Integration
           <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Employees"" />
           <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
             <Record>
-              <PropertyValue Property=""Insertable"" Bool=""False"" />
+              <PropertyValue Property=""Insertable"" Bool=""false"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.UpdateRestrictions"">
             <Record>
-              <PropertyValue Property=""Updatable"" Bool=""False"" />
+              <PropertyValue Property=""Updatable"" Bool=""false"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.DeleteRestrictions"">
             <Record>
-              <PropertyValue Property=""Deletable"" Bool=""False"" />
+              <PropertyValue Property=""Deletable"" Bool=""false"" />
             </Record>
           </Annotation>
         </EntitySet>
@@ -174,17 +175,17 @@ namespace Net.Http.WebApi.OData.Tests.Integration
           <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Managers"" />
           <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
             <Record>
-              <PropertyValue Property=""Insertable"" Bool=""False"" />
+              <PropertyValue Property=""Insertable"" Bool=""false"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.UpdateRestrictions"">
             <Record>
-              <PropertyValue Property=""Updatable"" Bool=""False"" />
+              <PropertyValue Property=""Updatable"" Bool=""false"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.DeleteRestrictions"">
             <Record>
-              <PropertyValue Property=""Deletable"" Bool=""False"" />
+              <PropertyValue Property=""Deletable"" Bool=""false"" />
             </Record>
           </Annotation>
         </EntitySet>
@@ -192,17 +193,17 @@ namespace Net.Http.WebApi.OData.Tests.Integration
           <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Orders"" />
           <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
             <Record>
-              <PropertyValue Property=""Insertable"" Bool=""True"" />
+              <PropertyValue Property=""Insertable"" Bool=""true"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.UpdateRestrictions"">
             <Record>
-              <PropertyValue Property=""Updatable"" Bool=""True"" />
+              <PropertyValue Property=""Updatable"" Bool=""true"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.DeleteRestrictions"">
             <Record>
-              <PropertyValue Property=""Deletable"" Bool=""True"" />
+              <PropertyValue Property=""Deletable"" Bool=""true"" />
             </Record>
           </Annotation>
         </EntitySet>
@@ -210,24 +211,22 @@ namespace Net.Http.WebApi.OData.Tests.Integration
           <Annotation Term=""Org.OData.Core.V1.ResourcePath"" String=""Products"" />
           <Annotation Term=""Org.OData.Capabilities.V1.InsertRestrictions"">
             <Record>
-              <PropertyValue Property=""Insertable"" Bool=""True"" />
+              <PropertyValue Property=""Insertable"" Bool=""true"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.UpdateRestrictions"">
             <Record>
-              <PropertyValue Property=""Updatable"" Bool=""True"" />
+              <PropertyValue Property=""Updatable"" Bool=""true"" />
             </Record>
           </Annotation>
           <Annotation Term=""Org.OData.Capabilities.V1.DeleteRestrictions"">
             <Record>
-              <PropertyValue Property=""Deletable"" Bool=""True"" />
+              <PropertyValue Property=""Deletable"" Bool=""true"" />
             </Record>
           </Annotation>
         </EntitySet>
       </EntityContainer>
       <Annotations Target=""NorthwindModel.DefaultContainer"">
-        <Annotation Term=""Org.OData.Capabilities.V1.DereferenceableIDs"" Bool=""true"" />
-        <Annotation Term=""Org.OData.Capabilities.V1.ConventionalIDs"" Bool=""true"" />
         <Annotation Term=""Org.OData.Capabilities.V1.ConformanceLevel"">
           <EnumMember>Org.OData.Capabilities.V1.ConformanceLevelType/Minimal</EnumMember>
         </Annotation>
@@ -237,8 +236,20 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             <String>application/json;odata.metadata=minimal</String>
           </Collection>
         </Annotation>
+        <Annotation Term=""Org.OData.Capabilities.V1.SupportedMetadataFormats"">
+          <Collection>
+            <String>application/json</String>
+            <String>text/plain</String>
+          </Collection>
+        </Annotation>
         <Annotation Term=""Org.OData.Capabilities.V1.AsynchronousRequestsSupported"" Bool=""false"" />
         <Annotation Term=""Org.OData.Capabilities.V1.BatchContinueOnErrorSupported"" Bool=""false"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.CrossJoinSupported"" Bool=""false"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.IndexableByKey"" Bool=""true"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.TopSupported"" Bool=""true"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.SkipSupported"" Bool=""true"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.ComputeSupported"" Bool=""false"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.BatchSupported"" Bool=""false"" />
         <Annotation Term=""Org.OData.Capabilities.V1.FilterFunctions"">
           <Collection>
             <String>concat</String>
@@ -270,6 +281,10 @@ namespace Net.Http.WebApi.OData.Tests.Integration
             <String>isof</String>
           </Collection>
         </Annotation>
+        <Annotation Term=""Org.OData.Capabilities.V1.KeyAsSegmentSupported"" Bool=""false"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.QuerySegmentSupported"" Bool=""false"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.AnnotationValuesInQuerySupported"" Bool=""false"" />
+        <Annotation Term=""Org.OData.Capabilities.V1.MediaLocationUpdateSupported"" Bool=""false"" />
       </Annotations>
     </Schema>
   </edmx:DataServices>

@@ -35,6 +35,8 @@ namespace Net.Http.WebApi.OData.Metadata
         [Route("$metadata")]
         public IHttpActionResult Get()
         {
+            // TODO: check content type and if not blank or application/xml return 406 NOT ACCEPTABLE?
+
             EnsureMetadata();
 
             return Content(s_metadataXml, "application/xml", Encoding.UTF8);

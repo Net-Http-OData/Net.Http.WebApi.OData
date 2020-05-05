@@ -39,7 +39,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             HttpResponseMessage responseMessage = await invoker.SendAsync(request, CancellationToken.None);
 
-            Assert.Equal(HttpStatusCode.UnsupportedMediaType, responseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.NotAcceptable, responseMessage.StatusCode);
 
             Assert.IsType<ObjectContent<ODataErrorContent>>(responseMessage.Content);
 
@@ -47,7 +47,7 @@ namespace Net.Http.WebApi.OData.Tests
 
             var odataErrorContent = (ODataErrorContent)objectContent.Value;
 
-            Assert.Equal("415", odataErrorContent.Error.Code);
+            Assert.Equal("406", odataErrorContent.Error.Code);
             Assert.Equal("A supported MIME type could not be found that matches the acceptable MIME types for the request. The supported type(s) 'application/json;odata.metadata=none, application/json;odata.metadata=minimal, application/json, text/plain' do not match any of the acceptable MIME types 'application/xml'.", odataErrorContent.Error.Message);
         }
 

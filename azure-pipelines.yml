@@ -1,8 +1,9 @@
-trigger:
+﻿trigger:
   branches:
     include:
       - master
       - develop
+      - hotfix*
   paths:
     exclude:
       - .editorconfig
