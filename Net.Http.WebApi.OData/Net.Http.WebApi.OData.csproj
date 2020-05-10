@@ -5,7 +5,7 @@
     <LangVersion>7.3</LangVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Net.Http.WebApi.OData.snk</AssemblyOriginatorKeyFile>
-    <Version>5.0.1</Version>
+    <Version>5.1.0</Version>
     <Authors>Trevor Pilley and Project Contributors</Authors>
     <Description>A .NET 4.5 library which uses Net.Http.OData with an implementation for ASP.NET WebApi.</Description>
     <Copyright>Copyright 2012 - 2020 Project Contributors</Copyright>
@@ -39,7 +39,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Net.Http.OData" Version="5.0.1" />
+    <PackageReference Include="Net.Http.OData" Version="5.1.0" />
     <PackageReference Include="SecurityCodeScan" Version="3.5.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
