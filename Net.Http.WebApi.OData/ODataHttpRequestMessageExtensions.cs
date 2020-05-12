@@ -300,7 +300,7 @@ namespace Net.Http.WebApi.OData
                     return ODataIsolationLevel.Snapshot;
                 }
 
-                throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataIsolation} must be 'Snapshot'.");
+                throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataIsolation} must be 'Snapshot'.", ODataRequestHeaderNames.ODataIsolation);
             }
 
             return ODataIsolationLevel.None;
@@ -331,7 +331,8 @@ namespace Net.Http.WebApi.OData
 
                                 default:
                                     throw ODataException.BadRequest(
-                                        $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the $format query option must be 'none', 'minimal' or 'full'.");
+                                        $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the $format query option must be 'none', 'minimal' or 'full'.",
+                                        ODataMetadataLevelExtensions.HeaderName);
                             }
                         }
                     }
@@ -357,7 +358,8 @@ namespace Net.Http.WebApi.OData
 
                             default:
                                 throw ODataException.BadRequest(
-                                    $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the Accept header must be 'none', 'minimal' or 'full'.");
+                                    $"If specified, the {ODataMetadataLevelExtensions.HeaderName} value in the Accept header must be 'none', 'minimal' or 'full'.",
+                                    ODataMetadataLevelExtensions.HeaderName);
                         }
                     }
                 }
@@ -377,7 +379,7 @@ namespace Net.Http.WebApi.OData
                     return odataVersion;
                 }
 
-                throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version.");
+                throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version.", ODataRequestHeaderNames.ODataMaxVersion);
             }
 
             return ODataVersion.MaxVersion;
@@ -394,7 +396,7 @@ namespace Net.Http.WebApi.OData
                     return odataVersion;
                 }
 
-                throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version.");
+                throw ODataException.BadRequest($"If specified, the {ODataRequestHeaderNames.ODataMaxVersion} header must be a valid OData version.", ODataRequestHeaderNames.ODataMaxVersion);
             }
 
             return ReadODataMaxVersion(request);
