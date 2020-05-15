@@ -1,6 +1,6 @@
 ﻿# Net.Http.WebApi.OData
 
-Net.Http.WebApi.OData is a .NET 4.5 library which uses [Net.Http.OData](https://github.com/Net-Http-OData/Net.Http.OData) with an implementation for ASP.NET WebApi.
+Net.Http.WebApi.OData is a .NET 4.7.2 library which uses [Net.Http.OData](https://github.com/Net-Http-OData/Net.Http.OData) with an implementation for ASP.NET WebApi.
 
 ![Nuget](https://img.shields.io/nuget/dt/Net.Http.WebApi.OData)
 
@@ -74,7 +74,7 @@ The library supports OData 4.0 query syntax, for a full list of supported featur
 
 The NuGet Package contains binaries compiled against:
 
-* .NET Framework 4.5
+* .NET Framework 4.7.2
   * Microsoft.AspNet.WebApi.Core 5.2.7
   * Net.Http.OData 5.0.0
 

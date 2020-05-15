@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <LangVersion>7.3</LangVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Net.Http.WebApi.OData.snk</AssemblyOriginatorKeyFile>
-    <Version>5.1.0</Version>
+    <Version>6.0.0</Version>
     <Authors>Trevor Pilley and Project Contributors</Authors>
-    <Description>A .NET 4.5 library which uses Net.Http.OData with an implementation for ASP.NET WebApi.</Description>
+    <Description>A .NET 4.7.2 library which uses Net.Http.OData with an implementation for ASP.NET WebApi.</Description>
     <Copyright>Copyright 2012 - 2020 Project Contributors</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>OData Parser ASP.NET WebApi</PackageTags>
@@ -17,15 +17,15 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
