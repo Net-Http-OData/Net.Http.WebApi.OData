@@ -1,4 +1,4 @@
-﻿namespace NorthwindModel
+﻿namespace Sample.Model
 {
     public enum Colour
     {

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Sample.Model.Manager">
+    <Position X="0.5" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>SampleModel\Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample.Model.Employee">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABACABAAAAAAAEAAAAABAIQABAAABBAAAAAAAgAAAAA=</HashCode>
+      <FileName>SampleModel\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample.Model.Category">
+    <Position X="7.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SampleModel\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample.Model.Customer">
+    <Position X="5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAAAAAACAIIAAgAAAAAAIAAAACEAAAIAAAAAA=</HashCode>
+      <FileName>SampleModel\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample.Model.Order">
+    <Position X="11.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAABAAAAAAAAAADAAAAAAAAAEAAABAAAAAAAAAAA=</HashCode>
+      <FileName>SampleModel\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample.Model.OrderDetail">
+    <Position X="11.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAgAAAAAA=</HashCode>
+      <FileName>SampleModel\OrderDetail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sample.Model.Product">
+    <Position X="9.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAAAAQAoAAAAAAAAAAQAAAAAAAEAAAAAABAACAA=</HashCode>
+      <FileName>SampleModel\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Sample.Model.AccessLevel">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAEAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>SampleModel\AccessLevel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sample.Model.Colour">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>SampleModel\Colour.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,24 +1,28 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace NorthwindModel
+namespace Sample.Model
 {
     public class Product
     {
+        [Required]
         public Category Category { get; set; }
 
         public Colour Colour { get; set; }
 
-        public bool Deleted { get; set; }
-
+        [Required]
         public string Description { get; set; }
 
+        public bool Discontinued { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         public decimal Price { get; set; }
 
         public int ProductId { get; set; }
 
-        public int Rating { get; set; }
+        public float Rating { get; set; }
 
         public DateTime ReleaseDate { get; set; }
     }

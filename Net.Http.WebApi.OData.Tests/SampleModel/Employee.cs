@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace NorthwindModel
+namespace Sample.Model
 {
     public class Employee
     {

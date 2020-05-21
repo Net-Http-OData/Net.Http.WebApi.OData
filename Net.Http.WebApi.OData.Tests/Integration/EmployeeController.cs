@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.Http;
 using Net.Http.OData;
 using Net.Http.OData.Query;
-using NorthwindModel;
+using Sample.Model;
 
 namespace Net.Http.WebApi.OData.Tests.Integration
 {

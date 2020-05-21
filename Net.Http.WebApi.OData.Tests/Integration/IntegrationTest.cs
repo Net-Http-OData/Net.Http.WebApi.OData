@@ -5,7 +5,7 @@ using Net.Http.OData;
 using Net.Http.OData.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using NorthwindModel;
+using Sample.Model;
 
 namespace Net.Http.WebApi.OData.Tests.Integration
 {

@@ -104,15 +104,6 @@
     <Compile Include="Integration\ODataQueryableController_GetQueryOptionsTests_MetadataNone_FormatPrecedenceOverAccept.cs" />
     <Compile Include="Metadata\ODataMetadataControllerTests.cs" />
     <Compile Include="Metadata\ServiceDocumentODataControllerTests.cs" />
-    <Compile Include="NorthwindModel\AccessLevel.cs" />
-    <Compile Include="NorthwindModel\Category.cs" />
-    <Compile Include="NorthwindModel\Colour.cs" />
-    <Compile Include="NorthwindModel\Customer.cs" />
-    <Compile Include="NorthwindModel\Employee.cs" />
-    <Compile Include="NorthwindModel\Manager.cs" />
-    <Compile Include="NorthwindModel\Order.cs" />
-    <Compile Include="NorthwindModel\OrderDetail.cs" />
-    <Compile Include="NorthwindModel\Product.cs" />
     <Compile Include="ODataExceptionFilterAttributeTests.cs" />
     <Compile Include="ODataHttpConfigurationExtensionsTests.cs" />
     <Compile Include="ODataHttpRequestMessageExtensionsTests.cs" />
@@ -120,6 +111,15 @@
     <Compile Include="ODataQueryOptionsHttpParameterBindingTests.cs" />
     <Compile Include="ODataRequestDelegatingHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleModel\AccessLevel.cs" />
+    <Compile Include="SampleModel\Category.cs" />
+    <Compile Include="SampleModel\Colour.cs" />
+    <Compile Include="SampleModel\Customer.cs" />
+    <Compile Include="SampleModel\Employee.cs" />
+    <Compile Include="SampleModel\Manager.cs" />
+    <Compile Include="SampleModel\Order.cs" />
+    <Compile Include="SampleModel\OrderDetail.cs" />
+    <Compile Include="SampleModel\Product.cs" />
     <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +128,7 @@
     </None>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="SampleModel\_SampleModel.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj">

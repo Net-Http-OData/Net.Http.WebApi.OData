@@ -63,7 +63,7 @@ namespace Net.Http.WebApi.OData.Tests
                         Request = TestHelper.CreateODataHttpRequest("/OData/Products?$select=Foo"),
                     }
                 },
-                Exception = new ODataException("The type 'NorthwindModel.Product' does not contain a property named 'Foo'", HttpStatusCode.BadRequest),
+                Exception = new ODataException("The type 'Sample.Model.Product' does not contain a property named 'Foo'", HttpStatusCode.BadRequest),
             };
 
             var exceptionFilter = new ODataExceptionFilterAttribute();

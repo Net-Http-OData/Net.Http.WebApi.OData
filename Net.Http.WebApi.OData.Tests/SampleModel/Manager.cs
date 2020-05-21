@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NorthwindModel
+namespace Sample.Model
 {
     public class Manager : Employee
     {

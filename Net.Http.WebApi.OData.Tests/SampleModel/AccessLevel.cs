@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NorthwindModel
+namespace Sample.Model
 {
     [Flags]
     public enum AccessLevel

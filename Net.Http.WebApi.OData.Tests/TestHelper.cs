@@ -6,7 +6,7 @@ using System.Web.Http.Hosting;
 using Net.Http.OData;
 using Net.Http.OData.Model;
 using Net.Http.OData.Query.Parsers;
-using NorthwindModel;
+using Sample.Model;
 
 namespace Net.Http.WebApi.OData.Tests
 {

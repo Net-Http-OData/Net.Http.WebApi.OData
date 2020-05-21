@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace NorthwindModel
+namespace Sample.Model
 {
     public class Order
     {
+        [Required]
+        public Customer Customer { get; set; }
+
         public DateTimeOffset Date { get; set; }
 
         public decimal Freight { get; set; }
@@ -13,6 +17,7 @@ namespace NorthwindModel
 
         public long OrderId { get; set; }
 
+        [Required]
         public string ShipCountry { get; set; }
 
         public Guid TransactionId { get; set; }
