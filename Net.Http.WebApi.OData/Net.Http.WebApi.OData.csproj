@@ -40,11 +40,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Net.Http.OData" Version="5.1.0" />
-    <PackageReference Include="SecurityCodeScan" Version="3.5.2">
+    <PackageReference Include="SecurityCodeScan" Version="3.5.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.6.1.17183">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.7.0.17535">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
