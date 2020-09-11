@@ -63,7 +63,7 @@ namespace Net.Http.WebApi.OData
                 SetValue(actionContext, queryOptions);
             }
 
-            return TaskEx.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }
