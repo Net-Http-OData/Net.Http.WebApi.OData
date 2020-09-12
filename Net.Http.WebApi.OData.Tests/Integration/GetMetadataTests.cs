@@ -109,6 +109,7 @@ namespace Net.Http.WebApi.OData.Tests.Integration
         <Property Name=""OrderDetails"" Type=""Collection(Sample.Model.OrderDetail)"" />
         <Property Name=""OrderId"" Type=""Edm.Int64"" Nullable=""false"" />
         <Property Name=""ShipCountry"" Type=""Edm.String"" Nullable=""false"" />
+        <Property Name=""ShippingWeight"" Type=""Edm.Double"" Nullable=""false"" />
         <Property Name=""TransactionId"" Type=""Edm.Guid"" Nullable=""false"" />
         <NavigationProperty Name=""Customer"" Type=""Sample.Model.Customer"" />
       </EntityType>

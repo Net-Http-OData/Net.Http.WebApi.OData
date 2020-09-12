@@ -20,6 +20,8 @@ namespace Sample.Model
         [Required]
         public string ShipCountry { get; set; }
 
+        public double ShippingWeight { get; set; }
+
         public Guid TransactionId { get; set; }
     }
 }
