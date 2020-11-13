@@ -39,7 +39,7 @@ jobs:
       run: msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ env.PROJECT_CONFIGURATION }}
 
     - name: VSTest
-      run: vstest.console.exe /Platform:x64 '.\{{ env.TEST_PROJECT }}\bin\${{ env.PROJECT_CONFIGURATION }}\{{ env.TEST_PROJECT }}.dll'
+      run: vstest.console.exe /Platform:x64 '.\${{ env.TEST_PROJECT }}\bin\${{ env.PROJECT_CONFIGURATION }}\${{ env.TEST_PROJECT }}.dll'
 
     - name: dotnet pack (pre-release)
       if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
