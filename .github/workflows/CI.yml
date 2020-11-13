@@ -46,14 +46,14 @@ jobs:
       run: |
         $date = Get-Date -Format "yyyyMMdd"
         $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
-        dotnet pack ${{ env.PROJECT_PATH }} -p:PackageVersion="$projVersion-preview$date.${{ github.run_id }}"
+        dotnet pack ${{ env.PROJECT_PATH }} --configuration ${{ env.PROJECT_CONFIGURATION }} -p:PackageVersion="$projVersion-preview$date.${{ github.run_id }}"
       shell: pwsh
 
     - name: dotnet pack
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
-        dotnet pack ${{ env.PROJECT_PATH }} -p:PackageVersion="$projVersion"
+        dotnet pack ${{ env.PROJECT_PATH }} --configuration ${{ env.PROJECT_CONFIGURATION }} -p:PackageVersion="$projVersion"
       shell: pwsh
 
 #    - name: dotnet nuget push
