@@ -4,6 +4,7 @@ on:
   pull_request:
 
 env:
+  PROJECT_PATH: '.\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj'
   SOLUTION_NAME: Net.Http.WebApi.OData.sln
 
 jobs:
@@ -32,20 +33,20 @@ jobs:
     - name: VSTest
       run: vstest.console.exe /Platform:x64 '.\Net.Http.WebApi.OData.Tests\bin\Release\Net.Http.WebApi.OData.Tests.dll'
 
-#    - name: dotnet pack (pre-release)
-#      if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
-#      run: |
-#        $date = Get-Date -Format "yyyyMMdd"
-#        $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
-#        dotnet pack --no-build -p:PackageVersion="$projVersion-preview$date.${{ github.run_id }}"
-#      shell: pwsh
+    - name: dotnet pack (pre-release)
+      if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+      run: |
+        $date = Get-Date -Format "yyyyMMdd"
+        $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
+        dotnet pack --no-build -p:PackageVersion="$projVersion-preview$date.${{ github.run_id }}"
+      shell: pwsh
 
-#    - name: dotnet pack
-#      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-#      run: |
-#        $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
-#        dotnet pack --no-build -p:PackageVersion="$projVersion"
-#      shell: pwsh
+    - name: dotnet pack
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: |
+        $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
+        dotnet pack --no-build -p:PackageVersion="$projVersion"
+      shell: pwsh
 
 #    - name: dotnet nuget push
 #      if: github.event_name == 'push' && (github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master')
