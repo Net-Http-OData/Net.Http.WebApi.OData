@@ -4,8 +4,16 @@ on:
   pull_request:
 
 env:
+  # Stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Do not extract XML documentation files from nuget packages
+  NUGET_XMLDOC_MODE: skip
+  PROJECT_CONFIGURATION: Release
   PROJECT_PATH: '.\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj'
   SOLUTION_NAME: Net.Http.WebApi.OData.sln
+  TEST_PROJECT: Net.Http.WebApi.OData.Tests
 
 jobs:
   build:
@@ -28,24 +36,24 @@ jobs:
       run: nuget restore ${{ env.SOLUTION_NAME }}
 
     - name: MSBuild
-      run: msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=Release
+      run: msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ env.PROJECT_CONFIGURATION }}
 
     - name: VSTest
-      run: vstest.console.exe /Platform:x64 '.\Net.Http.WebApi.OData.Tests\bin\Release\Net.Http.WebApi.OData.Tests.dll'
+      run: vstest.console.exe /Platform:x64 '.\{{ env.TEST_PROJECT }}\bin\${{ env.PROJECT_CONFIGURATION }}\{{ env.TEST_PROJECT }}.dll'
 
     - name: dotnet pack (pre-release)
       if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
       run: |
         $date = Get-Date -Format "yyyyMMdd"
         $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
-        dotnet pack --no-build -p:PackageVersion="$projVersion-preview$date.${{ github.run_id }}"
+        dotnet pack --no-build --configuration ${{ env.PROJECT_CONFIGURATION }} -p:PackageVersion="$projVersion-preview$date.${{ github.run_id }}"
       shell: pwsh
 
     - name: dotnet pack
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         $projVersion = ([xml](Get-Content ${{ env.PROJECT_PATH }})) | Select-Xml -XPath "//Project/PropertyGroup[1]/Version"
-        dotnet pack --no-build -p:PackageVersion="$projVersion"
+        dotnet pack --no-build --configuration ${{ env.PROJECT_CONFIGURATION }} -p:PackageVersion="$projVersion"
       shell: pwsh
 
 #    - name: dotnet nuget push
